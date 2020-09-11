@@ -2,11 +2,11 @@
 
 Multi-run - run multiple executable
 
-https://github.com/atlassian/bazel-tools/tree/master/multirun
+[Multi-Run](https://github.com/atlassian/bazel-tools/tree/master/multirun)
 
 Alias - short name of the target
 
-https://youtu.be/1KbfkOWO-DY?t=3125
+[YouTube](https://youtu.be/1KbfkOWO-DY?t=3125)
 
 Watch mode `yarn add -D @bazel/ibazel`
 
@@ -15,4 +15,9 @@ Watch mode `yarn add -D @bazel/ibazel`
 Probably I can use underscore to identify macros for easy spotting.
 
 How to structure repository?
-https://medium.com/@luisvieira_gmr/building-large-scale-react-applications-in-a-monorepo-91cd4637c131
+[building-large-scale-react-applications-in-a-monorepo](https://medium.com/@luisvieira_gmr/building-large-scale-react-applications-in-a-monorepo-91cd4637c131)
+
+[package.json#scripts](https://docs.bazel.build/versions/master/build-javascript.html#step-4-linting)
+
+[github.com/dataform-co/dataform/blob/master/protos/BUILD](https://github.com/dataform-co/dataform/blob/master/protos/BUILD)
+[dataform.co/blog/typescript-monorepo-with-bazel](https://dataform.co/blog/typescript-monorepo-with-bazel)
