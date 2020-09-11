@@ -1,64 +1,29 @@
-load("@npm//http-server:index.bzl", "http_server")
-load("@npm//sass:index.bzl", "sass")
-load("@npm//typescript:index.bzl", "tsc")
-load("@npm//webpack-cli:index.bzl", webpack = "webpack_cli")
+# https://github.com/bazelbuild/rules_nodejs/blob/c5d09095ba4653b4cd5837360e13ff2b105ba3be/examples/react_webpack/BUILD.bazel
 
-sass(
-    name = "styles",
-    outs = ["styles.css"],
-    args = [
-        "$(location styles.scss)",
-        "$(location styles.css)",
-    ],
-    data = ["styles.scss"],
+# load("@npm_bazel_typescript//:defs.bzl", "ts_library")
+load("@npm//@bazel/typescript:index.bzl", "ts_library")
+package(default_visibility=["//visibility:public"])
+
+# ts_library(
+#     name = "my_code",
+#     srcs = glob(["*.ts"]),
+#     deps = ["//path/to/other:library"],
+# )
+
+ts_library(
+  name = "module",
+  srcs = ["src/module.ts"],
+  # node_modules = "//:node_modules",
+  # compiler = "//:@bazel/typescript/tsc_wrapped",
 )
 
-tsc(
-    name = "compile",
-    outs = ["index.js"],
-    args = [
-        "$(location index.tsx)",
-        "$(location types.d.ts)",
-        "--outDir",
-        "$@",
-        "--lib",
-        "es2015,dom",
-        "--jsx",
-        "react",
-    ],
-    data = [
-        "index.tsx",
-        "types.d.ts",
-        "@npm//@types",
-        "@npm//csstype",
-    ],
-)
-
-webpack(
-    name = "bundle",
-    outs = ["app.bundle.js"],
-    args = [
-        "$(location index.js)",
-        "--config",
-        "$(location webpack.config.js)",
-        "-o",
-        "$(location app.bundle.js)",
-    ],
-    data = [
-        "index.js",
-        "styles.css",
-        "webpack.config.js",
-        "@npm//css-loader",
-        "@npm//style-loader",
-    ],
-)
-
-# Note, on Windows you need `--enable_runfiles`
-http_server(
-    name = "server",
-    data = [
-        "app.bundle.js",
-        "index.html",
-    ],
-    templated_args = ["."],
+ts_library(
+  name = "index",
+  srcs = ["src/index.ts"],
+  deps = [
+    "@npm//@types/node",
+    ":module"
+  ]
+  # node_modules = "//:node_modules",
+  # compiler = "//:@bazel/typescript/tsc_wrapped",
 )

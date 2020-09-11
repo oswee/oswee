@@ -2,9 +2,16 @@
 # ----------------------------------------------------------------------
 
 dist/
-.yarn/cache
-.yarn/unplugged
-.yarn/build-state.yml
+
+# YARN
+# ----------------------------------------------------------------------
+# https://yarnpkg.com/advanced/qa#which-files-should-be-gitignored
+
+.yarn/*
+!.yarn/releases
+!.yarn/plugins
+!.yarn/sdks
+!.yarn/versions
 .pnp.*
 
 

@@ -17,5 +17,5 @@ Run `bazel run //api/wss:wss -- -a :9090` to run the WSS binary
 
 `yarn install`
 
-https://yarnpkg.com/advanced/editor-sdks#vscode
+[yarnpkg.com/advanced/editor-sdks#vscode](https://yarnpkg.com/advanced/editor-sdks#vscode)
 `yarn dlx @yarnpkg/pnpify --sdk vscode`

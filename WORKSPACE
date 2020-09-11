@@ -85,27 +85,6 @@ rules_proto_dependencies()
 rules_proto_toolchains()
 
 http_archive(
-    name = "build_bazel_rules_nodejs",
-    sha256 = "10fffa29f687aa4d8eb6dfe8731ab5beb63811ab00981fc84a93899641fd4af1",
-    urls = ["https://github.com/bazelbuild/rules_nodejs/releases/download/2.0.3/rules_nodejs-2.0.3.tar.gz"],
-)
-
-load("@build_bazel_rules_nodejs//:index.bzl", "node_repositories")
-
-http_archive(
-    name = "rules_typescript_proto",
-    sha256 = "51c7c5995f5de89ea1bbd64d956fd589f1c03357ab6768032930fadc2570f6a8",
-    strip_prefix = "rules_typescript_proto-0.0.5",
-    urls = [
-        "https://github.com/Dig-Doug/rules_typescript_proto/archive/0.0.5.tar.gz",
-    ],
-)
-
-load("@rules_typescript_proto//:index.bzl", "rules_typescript_proto_dependencies")
-
-rules_typescript_proto_dependencies()
-
-http_archive(
     name = "bazel_gomock",
     sha256 = "4baf3389ca48c30d8b072a027923c91c45915ab8061e39e7a0c62706332e096e",
     strip_prefix = "bazel_gomock-1.2",
@@ -120,17 +99,67 @@ buildifier_dependencies()
 
 go_register_toolchains(nogo = "@io_bazel_rules_go//:tools_nogo")
 
+
+
+###########################################
+# Npm Install and Typescript Sass support #
+###########################################
+
+# Fetch rules_nodejs
+# (you can check https://github.com/bazelbuild/rules_nodejs for a newer release than this)
 http_archive(
     name = "build_bazel_rules_nodejs",
-    sha256 = "1447312c8570e8916da0f5f415186e7098cdd4ce48e04b8e864f793c766959c3",
-    urls = ["https://github.com/bazelbuild/rules_nodejs/releases/download/0.38.2/rules_nodejs-0.38.2.tar.gz"],
+    sha256 = "10fffa29f687aa4d8eb6dfe8731ab5beb63811ab00981fc84a93899641fd4af1",
+    urls = ["https://github.com/bazelbuild/rules_nodejs/releases/download/2.0.3/rules_nodejs-2.0.3.tar.gz"],
 )
 
-load("@build_bazel_rules_nodejs//:index.bzl", "yarn_install")
+# Setup the NodeJS toolchain
+load("@build_bazel_rules_nodejs//:index.bzl", "check_bazel_version", "node_repositories", "yarn_install")
+
+# The minimum bazel version to use with this repo is v3.5.0.
+check_bazel_version("3.5.0")
+
+# Setup Bazel managed npm dependencies with the `yarn_install` rule.
+# The name of this rule should be set to `npm` so that `ts_library`
+# can find your npm dependencies by default in the `@npm` workspace. You may
+# also use the `npm_install` rule with a `package-lock.json` file if you prefer.
+# See https://github.com/bazelbuild/rules_nodejs#dependencies for more info.
+http_archive(
+    name = "rules_typescript_proto",
+    sha256 = "51c7c5995f5de89ea1bbd64d956fd589f1c03357ab6768032930fadc2570f6a8",
+    strip_prefix = "rules_typescript_proto-0.0.5",
+    urls = [
+        "https://github.com/Dig-Doug/rules_typescript_proto/archive/0.0.5.tar.gz",
+    ],
+)
+
+load("@rules_typescript_proto//:index.bzl", "rules_typescript_proto_dependencies")
+
+rules_typescript_proto_dependencies()
+
+
+node_repositories(
+    # node_version = "14.10.0",
+    # package_json = ["//:package.json"],
+    # yarn_version = "2.2.2",
+)
 
 yarn_install(
     # Name this npm so that Bazel Label references look like @npm//package
     name = "npm",
     package_json = "//:package.json",
+    symlink_node_modules = False,
     yarn_lock = "//:yarn.lock",
 )
+
+# Install all Bazel dependencies needed for npm packages that supply Bazel rules
+# Note, this will probably break in a future rules_nodejs release.
+# It causes all builds to fetch npm packages even if not needed (eg. only building go code)
+load("@npm//:install_bazel_dependencies.bzl", "install_bazel_dependencies")
+
+install_bazel_dependencies(suppress_warning = True)
+
+# Setup TypeScript toolchain
+# load("@npm_bazel_typescript//:index.bzl", "ts_setup_workspace")
+
+# ts_setup_workspace()

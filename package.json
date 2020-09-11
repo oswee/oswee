@@ -14,10 +14,6 @@
     "apps/*/*"
   ],
   "main": "dist/index.js",
-  "engines": {
-    "node": ">=14.10.0",
-    "yarn": ">=2.2.2"
-  },
   "repository": {
     "type": "git",
     "url": "https://github.com/oswee/prime.git"
@@ -30,14 +26,10 @@
     "bazel:lint": "yarn bazel:format --lint=warn",
     "bazel:lint-fix": "yarn bazel:format --lint=fix"
   },
-  "dependenciesMeta": {
-    "webpack-dev-server": {
-      "unplugged": true
-    }
-  },
   "devDependencies": {
     "@bazel/buildifier": "^3.4.0",
     "@bazel/ibazel": "^0.13.1",
+    "@bazel/typescript": "^2.2.0",
     "@commitlint/config-conventional": "latest",
     "@types/node": "latest",
     "@types/webpack": "latest",
