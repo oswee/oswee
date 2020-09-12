@@ -1,0 +1,21 @@
+{
+  "name": "@oswee/components",
+  "description": "Oswee components for Angular",
+  "version": "{{VERSION}}",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/oswee/prime"
+  },
+  "keywords": [
+    "oswee",
+    "components"
+  ],
+  "license": "Apache-2.0",
+  "homepage": "https://github.com/oswee/prime",
+  "bugs": {
+    "url": "https://github.com/oswee/prime/issues"
+  },
+  "dependencies": {
+    "tslib": "^2.0.0"
+  }
+}
