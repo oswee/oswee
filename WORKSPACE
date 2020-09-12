@@ -1,3 +1,18 @@
+# The nodejs rules
+RULES_NODEJS_VERSION = "2.2.0"
+
+RULES_NODEJS_SHA256 = "4952ef879704ab4ad6729a29007e7094aef213ea79e9f2e94cbe1c9a753e63ef"
+
+# Rules for compiling sass
+RULES_SASS_VERSION = "1.26.3"
+
+RULES_SASS_SHA256 = "9dcfba04e4af896626f4760d866f895ea4291bc30bf7287887cefcf4707b6a62"
+
+# # Bazel toolchain needed for remote execution
+# BAZEL_TOOLCHAIN_VERSION = "3.5.0"
+
+# BAZEL_TOOLCHAIN_SHA256 = "89a053218639b1c5e3589a859bb310e0a402dedbe4ee369560e66026ae5ef1f2"
+
 workspace(
     name = "oswee",
     # Let the Bazel manage all NPM packages
@@ -110,23 +125,27 @@ go_register_toolchains(nogo = "@io_bazel_rules_go//:tools_nogo")
 # (you can check https://github.com/bazelbuild/rules_nodejs for a newer release than this)
 http_archive(
     name = "build_bazel_rules_nodejs",
-    sha256 = "4952ef879704ab4ad6729a29007e7094aef213ea79e9f2e94cbe1c9a753e63ef",
-    urls = ["https://github.com/bazelbuild/rules_nodejs/releases/download/2.2.0/rules_nodejs-2.2.0.tar.gz"],
+    sha256 = RULES_NODEJS_SHA256,
+    url = "https://github.com/bazelbuild/rules_nodejs/releases/download/%s/rules_nodejs-%s.tar.gz" % (RULES_NODEJS_VERSION, RULES_NODEJS_VERSION),
+)
+
+http_archive(
+    name = "io_bazel_rules_sass",
+    sha256 = RULES_SASS_SHA256,
+    strip_prefix = "rules_sass-%s" % RULES_SASS_VERSION,
+    urls = [
+        "https://github.com/bazelbuild/rules_sass/archive/%s.zip" % RULES_SASS_VERSION,
+        "https://mirror.bazel.build/github.com/bazelbuild/rules_sass/archive/%s.zip" % RULES_SASS_VERSION,
+    ],
 )
 
 # Setup the NodeJS toolchain
-load("@build_bazel_rules_nodejs//:index.bzl", "yarn_install")
+load("@build_bazel_rules_nodejs//:index.bzl", "check_bazel_version", "yarn_install")
 
 # The minimum bazel version to use with this repo is v3.5.0.
-# check_bazel_version(
-#   message = """
-#     You no longer need to install Bazel on your machine.
-#     Angular has a dependency on the @bazel/bazel package which supplies it.
-#     Try running `yarn bazel` instead.
-#         (If you did run that, check that you've got a fresh `yarn install`)
-#   """,
-#   minimum_bazel_version = "3.5.0",
-# )
+check_bazel_version(
+  minimum_bazel_version = "3.5.0",
+)
 
 # Setup Bazel managed npm dependencies with the `yarn_install` rule.
 # The name of this rule should be set to `npm` so that `ts_library`
@@ -168,17 +187,28 @@ load("@build_bazel_rules_nodejs//:index.bzl", "yarn_install")
 yarn_install(
   name = "npm", # Name this npm so that Bazel Label references look like @npm//package
   package_json = "//:package.json",
-  # symlink_node_modules = True, # Expose installed packages for the IDE and the developer. See managed_directories.
+  symlink_node_modules = True, # Expose installed packages for the IDE and the developer. See managed_directories.
   yarn_lock = "//:yarn.lock",
 )
 
 # Install all Bazel dependencies needed for npm packages that supply Bazel rules
 # Note, this will probably break in a future rules_nodejs release.
 # It causes all builds to fetch npm packages even if not needed (eg. only building go code)
-# load("@npm//:install_bazel_dependencies.bzl", "install_bazel_dependencies")
+load("@npm//:install_bazel_dependencies.bzl", "install_bazel_dependencies")
 
-# install_bazel_dependencies(suppress_warning = True)
+install_bazel_dependencies(suppress_warning = True)
 # install_bazel_dependencies()
+
+# Setup the rules_sass toolchain
+load("@io_bazel_rules_sass//sass:sass_repositories.bzl", "sass_repositories")
+
+sass_repositories()
+
+# Fetch required transitive dependencies. This is an optional step because you
+# can always fetch the required NodeJS transitive dependency on your own.
+load("@io_bazel_rules_sass//:package.bzl", "rules_sass_dependencies")
+
+rules_sass_dependencies()
 
 # Setup TypeScript toolchain
 # load("@npm_bazel_typescript//:index.bzl", "ts_setup_workspace")

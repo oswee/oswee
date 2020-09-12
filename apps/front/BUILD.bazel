@@ -1,7 +1,7 @@
 # https://github.com/bazelbuild/rules_nodejs/blob/c5d09095ba4653b4cd5837360e13ff2b105ba3be/examples/react_webpack/BUILD.bazel
 
 # load("@npm_bazel_typescript//:defs.bzl", "ts_library")
-load("@npm//@bazel/typescript:index.bzl", "ts_library")
+load("@npm//@bazel/typescript:index.bzl", "ts_config", "ts_library")
 # load("//packages/typescript:index.bzl", "ts_library") # If typescript is located locally in packages/typescript directory
 package(default_visibility=["//visibility:public"])
 
@@ -34,9 +34,9 @@ package(default_visibility=["//visibility:public"])
 ts_library(
   name = "src",
   srcs = glob([
-    "**/*.ts",
+    "src/**/*.ts",
   ]), # get everything down in the project
-  tsconfig = "//:tsconfig.json",
+  tsconfig = "tsconfig_lib",
   # These dependencies need to be available to the ts_library as it compiles
   # deps = [
   #   "@npm//@types/node", # Some bith of the source code relies on these libraries
@@ -49,4 +49,13 @@ filegroup(
   name = "es6_src",
   srcs = [":src"],
   output_group = "es6_sources", # "prodmode"
+)
+
+ts_config(
+    name = "tsconfig_lib",
+    src = "tsconfig.lib.json",
+    deps = [
+        "tsconfig.json",
+        "//libs/components:tsconfig",
+    ],
 )

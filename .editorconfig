@@ -17,3 +17,6 @@ trim_trailing_whitespace = true
 [*.md]
 insert_final_newline = false
 trim_trailing_whitespace = false
+
+# [{BUILD.bazel,*.bzl, WORKSPACE}]
+# indent_size = 4

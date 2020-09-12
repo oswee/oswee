@@ -1,5 +1,5 @@
 {
-  "name": "oswee-prime",
+  "name": "@oswee/prime",
   "version": "0.0.0",
   "private": true,
   "description": "Bazel monorepo test setup",
@@ -10,6 +10,17 @@
     "lit element",
     "boilerplate"
   ],
+  "browserslist": [
+    "last 1 year",
+    "chrome >= 51",
+    "firefox >= 54",
+    "edge >= 15",
+    "safari >= 10",
+    "last 2 and_chr version"
+  ],
+  "engines": {
+    "node": ">=12.10"
+  },
   "workspaces": [
     "apps/*/*"
   ],
@@ -41,5 +52,13 @@
     "pnp-webpack-plugin": "latest",
     "prettier": "^2.1.1",
     "typescript": "^4.0.2"
+  },
+  "dependencies": {
+    "lit-element": "^2.4.0",
+    "stylelint": "^13.7.1",
+    "stylelint-config-prettier": "^8.0.2",
+    "stylelint-prettier": "^1.1.2",
+    "stylelint-scss": "^3.18.0",
+    "xmlbuilder": "^15.1.1"
   }
 }

@@ -1,6 +1,8 @@
 load("@bazel_gazelle//:def.bzl", "gazelle")
 load("@com_github_bazelbuild_buildtools//buildifier:def.bzl", "buildifier")
 
+package(default_visibility = ["//:__subpackages__"])
+
 # Expose these files for the other Bazel downstream rules to use
 # https://bazelbuild.github.io/rules_nodejs/TypeScript.html
 # ts_library and ng_module use the `//:tsconfig.json` target
@@ -8,7 +10,10 @@ load("@com_github_bazelbuild_buildtools//buildifier:def.bzl", "buildifier")
 # attribute.
 exports_files(
   [
-    "tsconfig.json",
+    "tsconfig.base.json",
+    # Stylelint and prettier config are neeeded for style linting
+    ".stylelintrc",
+    ".prettierrc.js",
     "package.json",
   ],
   visibility = ["//visibility:public"],
