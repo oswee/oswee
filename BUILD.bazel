@@ -1,8 +1,18 @@
 load("@bazel_gazelle//:def.bzl", "gazelle")
 load("@com_github_bazelbuild_buildtools//buildifier:def.bzl", "buildifier")
 
+# Expose these files for the other Bazel downstream rules to use
 # https://bazelbuild.github.io/rules_nodejs/TypeScript.html
-exports_files(["tsconfig.json"], visibility = ["//visibility:public"])
+# ts_library and ng_module use the `//:tsconfig.json` target
+# by default. This alias allows omitting explicit tsconfig
+# attribute.
+exports_files(
+  [
+    "tsconfig.json",
+    "package.json",
+  ],
+  visibility = ["//visibility:public"],
+)
 
 # gazelle:exclude third_party
 # gazelle:build_file_name BUILD,BUILD.bazel
