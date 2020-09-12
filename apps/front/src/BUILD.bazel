@@ -1,0 +1,52 @@
+# https://github.com/bazelbuild/rules_nodejs/blob/c5d09095ba4653b4cd5837360e13ff2b105ba3be/examples/react_webpack/BUILD.bazel
+
+# load("@npm_bazel_typescript//:defs.bzl", "ts_library")
+load("@npm//@bazel/typescript:index.bzl", "ts_library")
+# load("//packages/typescript:index.bzl", "ts_library") # If typescript is located locally in packages/typescript directory
+package(default_visibility=["//visibility:public"])
+
+# ts_library(
+#     name = "my_code",
+#     srcs = glob(["*.ts"]),
+#     deps = ["//path/to/other:library"],
+# )
+
+# # ts_library is tailored in a way that works for the most of the Google internal projest
+# # and is considered to be goof to use.
+# ts_library(
+#   name = "module",
+#   srcs = ["module.ts"],
+#   # node_modules = "//:node_modules",
+#   # compiler = "//:@bazel/typescript/tsc_wrapped",
+# )
+
+# ts_library(
+#   name = "index",
+#   srcs = ["index.ts"],
+#   deps = [
+#     ":module"
+#   ]
+#   # node_modules = "//:node_modules",
+#   # compiler = "//:@bazel/typescript/tsc_wrapped",
+# )
+
+# Default output of the ts_library is the *.d.ts files
+ts_library(
+  name = "src",
+  srcs = glob([
+    "**/*.ts",
+  ]), # get everything down in the project
+  tsconfig = "//:tsconfig.json",
+  # These dependencies need to be available to the ts_library as it compiles
+  # deps = [
+  #   "@npm//@types/node", # Some bith of the source code relies on these libraries
+  #   "@npm//tslib",
+  # ],
+)
+
+# Alternate the default output of the ts_library (additional output)
+filegroup(
+  name = "es6_src",
+  srcs = [":src"],
+  output_group = "es6_sources", # "prodmode"
+)

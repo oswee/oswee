@@ -21,3 +21,5 @@ How to structure repository?
 
 [github.com/dataform-co/dataform/blob/master/protos/BUILD](https://github.com/dataform-co/dataform/blob/master/protos/BUILD)
 [dataform.co/blog/typescript-monorepo-with-bazel](https://dataform.co/blog/typescript-monorepo-with-bazel)
+
+[A User's Guide to Bazel](http://gensoft.pasteur.fr/docs/bazel/0.3.0/bazel-user-manual.html)
