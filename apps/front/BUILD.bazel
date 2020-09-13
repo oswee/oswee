@@ -21,7 +21,7 @@ ts_library(
     name = "compile",
     srcs = [
         "src/index.ts",
-        "types.d.ts",
+        "src/types.d.ts",
     ],
     module_name = "@oswee/front",
     module_root = "src",
