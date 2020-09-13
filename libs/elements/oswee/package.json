@@ -1,4 +1,3 @@
-
 {
   "name": "@oswee/elements",
   "description": "Oswee elements based on web-components",
@@ -9,7 +8,7 @@
   },
   "keywords": [
     "oswee",
-    "components"
+    "elements"
   ],
   "license": "Apache-2.0",
   "homepage": "https://github.com/oswee/prime",

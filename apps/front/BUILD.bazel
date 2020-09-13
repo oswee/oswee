@@ -1,54 +1,87 @@
-# https://github.com/bazelbuild/rules_nodejs/blob/c5d09095ba4653b4cd5837360e13ff2b105ba3be/examples/react_webpack/BUILD.bazel
-
-# load("@npm_bazel_typescript//:defs.bzl", "ts_library")
+# load("@npm//http-server:index.bzl", "http_server")
+# load("@npm_bazel_typescript//:index.bzl", "ts_library")
 load("@npm//@bazel/typescript:index.bzl", "ts_config", "ts_library")
-# load("//packages/typescript:index.bzl", "ts_library") # If typescript is located locally in packages/typescript directory
-package(default_visibility=["//visibility:public"])
+load("@npm//live-server:index.bzl", "live_server")
+load("@npm//sass:index.bzl", "sass")
+# load("@npm//typescript:index.bzl", "tsc")
+load("@npm//webpack-cli:index.bzl", webpack = "webpack_cli")
 
-# ts_library(
-#     name = "my_code",
-#     srcs = glob(["*.ts"]),
-#     deps = ["//path/to/other:library"],
-# )
+# package(default_visibility = ["//visibility:public"])
+package(default_visibility = ["//apps/front:__subpackages__"])
 
-# # ts_library is tailored in a way that works for the most of the Google internal projest
-# # and is considered to be goof to use.
-# ts_library(
-#   name = "module",
-#   srcs = ["module.ts"],
-#   # node_modules = "//:node_modules",
-#   # compiler = "//:@bazel/typescript/tsc_wrapped",
-# )
-
-# ts_library(
-#   name = "index",
-#   srcs = ["index.ts"],
-#   deps = [
-#     ":module"
-#   ]
-#   # node_modules = "//:node_modules",
-#   # compiler = "//:@bazel/typescript/tsc_wrapped",
-# )
-
-# Default output of the ts_library is the *.d.ts files
-ts_library(
-  name = "src",
-  srcs = glob([
-    "src/**/*.ts",
-  ]), # get everything down in the project
-  tsconfig = "tsconfig_lib",
-  # These dependencies need to be available to the ts_library as it compiles
-  # deps = [
-  #   "@npm//@types/node", # Some bith of the source code relies on these libraries
-  #   "@npm//tslib",
-  # ],
+sass(
+    name = "styles",
+    outs = ["styles.css"],
+    args = [
+        "$(location styles.scss)",
+        "$(location styles.css)",
+    ],
+    data = ["styles.scss"],
 )
 
-# Alternate the default output of the ts_library (additional output)
+# https://bazelbuild.github.io/rules_nodejs/TypeScript.html
+ts_library(
+    name = "compile",
+    srcs = [
+        "src/index.ts",
+        "types.d.ts",
+    ],
+    module_name = "@oswee/front",
+    module_root = "src",
+    tsconfig = "tsconfig_lib",
+    deps = [
+        "@npm//@types/node",
+        "@npm//csstype",
+    ],
+)
+
 filegroup(
-  name = "es6_src",
-  srcs = [":src"],
-  output_group = "es6_sources", # "prodmode"
+    name = "index.js",
+    srcs = ["compile"],
+    # Change to es6_sources to get the 'prodmode' JS
+    output_group = "es6_sources",
+)
+
+webpack(
+    name = "bundle",
+    outs = ["app.bundle.js"],
+    args = [
+        "$(location //:index.js)",
+        "--config",
+        "$(location webpack.config.js)",
+        "-o",
+        "$@",
+        "--mode",
+        "development",
+        "--hot",
+    ],
+    data = [
+        "index.js",
+        "styles.css",
+        "webpack.config.js",
+        "@npm//:node_modules",
+        # "@npm//css-loader",
+        # "@npm//style-loader",
+    ],
+)
+
+# Note, on Windows you need `--enable_runfiles`
+# http_server(
+#     name = "server",
+#     data = [
+#         "app.bundle.js",
+#         "template.html",
+#     ],
+#     templated_args = ["."],
+# )
+
+live_server(
+    name = "server",
+    data = [
+        "app.bundle.js",
+        "index.html",
+    ],
+    templated_args = ["."],
 )
 
 ts_config(
