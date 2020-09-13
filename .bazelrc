@@ -1,3 +1,7 @@
+#build --explain ./bazel-explain.txt
+#build --verbose_failures --define=DEBUG=1
+#build --verbose_explanations
+
 # --repository_cache for fetched externals
 # --disk_cache for build artifacts
 
@@ -5,3 +9,5 @@ build --repository_cache=~/.cache/bazel-repo
 fetch --repository_cache=~/.cache/bazel-repo
 query --repository_cache=~/.cache/bazel-repo
 build --disk_cache=~/.cache/bazel-disk
+
+build --color=yes

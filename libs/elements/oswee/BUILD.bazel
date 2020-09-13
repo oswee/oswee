@@ -1,6 +1,6 @@
 load("@npm//@bazel/typescript:index.bzl", "ts_config")
 
-package(default_visibility = ["//visibility:public"])
+package(default_visibility = ["//oswee:__subpackages__"])
 
 ts_config(
     name = "tsconfig",
