@@ -22,7 +22,7 @@
     "node": ">=12.10"
   },
   "workspaces": [
-    "apps/*/*"
+    "apps/front"
   ],
   "repository": {
     "type": "git",
@@ -54,7 +54,9 @@
     "typescript": "^4.0.2"
   },
   "dependencies": {
+    "csstype": "^3.0.3",
     "lit-element": "^2.4.0",
+    "live-server": "^1.2.1",
     "stylelint": "^13.7.1",
     "stylelint-config-prettier": "^8.0.2",
     "stylelint-prettier": "^1.1.2",
