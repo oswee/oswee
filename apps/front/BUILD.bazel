@@ -1,13 +1,10 @@
-# load("@npm//http-server:index.bzl", "http_server")
-# load("@npm_bazel_typescript//:index.bzl", "ts_library")
 load("@npm//@bazel/typescript:index.bzl", "ts_config", "ts_library")
+# load("@npm//typescript:index.bzl", "tsc")
+# load("@npm_bazel_typescript//:index.bzl", "ts_library")
+# load("@npm//http-server:index.bzl", "http_server")
 load("@npm//live-server:index.bzl", "live_server")
 load("@npm//sass:index.bzl", "sass")
-# load("@npm//typescript:index.bzl", "tsc")
 load("@npm//webpack-cli:index.bzl", webpack = "webpack_cli")
-
-# package(default_visibility = ["//visibility:public"])
-package(default_visibility = ["//apps/front:__subpackages__"])
 
 sass(
     name = "styles",
