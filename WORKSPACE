@@ -123,6 +123,8 @@ go_register_toolchains(nogo = "@io_bazel_rules_go//:tools_nogo")
 
 # Fetch rules_nodejs
 # (you can check https://github.com/bazelbuild/rules_nodejs for a newer release than this)
+# NOTE: this rule installs nodejs, npm, and yarn, but does NOT install
+# your npm dependencies. You must still run the package manager.
 http_archive(
     name = "build_bazel_rules_nodejs",
     sha256 = RULES_NODEJS_SHA256,
@@ -194,9 +196,9 @@ yarn_install(
 # Install all Bazel dependencies needed for npm packages that supply Bazel rules
 # Note, this will probably break in a future rules_nodejs release.
 # It causes all builds to fetch npm packages even if not needed (eg. only building go code)
-load("@npm//:install_bazel_dependencies.bzl", "install_bazel_dependencies")
+# load("@npm//:install_bazel_dependencies.bzl", "install_bazel_dependencies")
 
-install_bazel_dependencies(suppress_warning = True)
+# install_bazel_dependencies(suppress_warning = True)
 # install_bazel_dependencies()
 
 # Setup the rules_sass toolchain
