@@ -21,9 +21,6 @@
   "engines": {
     "node": ">=12.10"
   },
-  "workspaces": [
-    "apps/front"
-  ],
   "repository": {
     "type": "git",
     "url": "https://github.com/oswee/prime.git"
@@ -55,6 +52,7 @@
   },
   "dependencies": {
     "csstype": "^3.0.3",
+    "http-server": "^0.12.3",
     "lit-element": "^2.4.0",
     "live-server": "^1.2.1",
     "stylelint": "^13.7.1",

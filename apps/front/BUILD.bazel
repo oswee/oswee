@@ -1,29 +1,33 @@
 load("@npm//@bazel/typescript:index.bzl", "ts_config", "ts_library")
 # load("@npm//typescript:index.bzl", "tsc")
 # load("@npm_bazel_typescript//:index.bzl", "ts_library")
-# load("@npm//http-server:index.bzl", "http_server")
-load("@npm//live-server:index.bzl", "live_server")
-load("@npm//sass:index.bzl", "sass")
-load("@npm//webpack-cli:index.bzl", webpack = "webpack_cli")
+load("@npm//http-server:index.bzl", "http_server")
+# load("@npm//live-server:index.bzl", "live_server")
+# load("@npm//sass:index.bzl", "sass")
+# load("@npm//webpack-cli:index.bzl", webpack = "webpack_cli")
 
-sass(
-    name = "styles",
-    outs = ["styles.css"],
-    args = [
-        "$(location styles.scss)",
-        "$(location styles.css)",
-    ],
-    data = ["styles.scss"],
-)
+# package(default_visibility = ["//apps/front:__subpackages__"])
+
+# sass(
+#     name = "styles",
+#     outs = ["styles.css"],
+#     args = [
+#         "$(location src/styles.scss)",
+#         "$(location src/styles.css)",
+#         ],
+#     data = ["styles.scss"],
+# )
 
 # https://bazelbuild.github.io/rules_nodejs/TypeScript.html
 ts_library(
     name = "compile",
-    srcs = [
-        "src/index.ts",
-        "src/types.d.ts",
-    ],
     module_name = "@oswee/front",
+    srcs = glob(
+        include = ["src/**/*.ts"],
+        exclude = [
+            "src/**/*.spec.ts",
+        ],
+    ),
     module_root = "src",
     tsconfig = "tsconfig_lib",
     deps = [
@@ -32,54 +36,55 @@ ts_library(
     ],
 )
 
-filegroup(
-    name = "index.js",
-    srcs = ["compile"],
-    # Change to es6_sources to get the 'prodmode' JS
-    output_group = "es6_sources",
-)
+# filegroup(
+#     name = "index_bundle",
+#     srcs = ["compile"],
+#     # Change to es6_sources to get the 'prodmode' JS
+#     output_group = "es6_sources",
+# )
 
-webpack(
-    name = "bundle",
-    outs = ["app.bundle.js"],
-    args = [
-        "$(location //:index.js)",
-        "--config",
-        "$(location webpack.config.js)",
-        "-o",
-        "$@",
-        "--mode",
-        "development",
-        "--hot",
-    ],
-    data = [
-        "index.js",
-        "styles.css",
-        "webpack.config.js",
-        "@npm//:node_modules",
-        # "@npm//css-loader",
-        # "@npm//style-loader",
-    ],
-)
+# webpack(
+#     name = "bundle",
+#     outs = ["app.bundle.js"],
+#     args = [
+#         "$(location //apps/front:index_bundle)",
+#         "--config",
+#         "$(location webpack.config.js)",
+#         "-o",
+#         "$@",
+#         "--mode",
+#         "development",
+#         "--hot",
+#     ],
+#     data = [
+#         "index.js",
+#         "styles.css",
+#         "webpack.config.js",
+#         "@npm//:node_modules",
+#         # "@npm//css-loader",
+#         # "@npm//style-loader",
+#     ],
+# )
 
 # Note, on Windows you need `--enable_runfiles`
-# http_server(
+http_server(
+    name = "server",
+    data = [
+        # "compile",
+        "src/template.html",
+    ],
+    args = ["."],
+    # templated_args = ["."],
+)
+
+# live_server(
 #     name = "server",
 #     data = [
 #         "app.bundle.js",
-#         "template.html",
+#         "index.html",
 #     ],
 #     templated_args = ["."],
 # )
-
-live_server(
-    name = "server",
-    data = [
-        "app.bundle.js",
-        "index.html",
-    ],
-    templated_args = ["."],
-)
 
 ts_config(
     name = "tsconfig_lib",

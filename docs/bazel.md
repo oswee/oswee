@@ -25,3 +25,11 @@ How to structure repository?
 [A User's Guide to Bazel](http://gensoft.pasteur.fr/docs/bazel/0.3.0/bazel-user-manual.html)
 
 [`bazel clean --expunge`](https://github.com/bazelbuild/rules_nodejs/issues/1220#issuecomment-537106667)
+
+Run single build rule
+
+`bazel build //apps/front:server`
+
+"Server" is a target name in the `//apps/front/BUILD.bazel`
+
+To run front app use `bazel run //apps/front:server`
