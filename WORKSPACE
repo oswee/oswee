@@ -118,7 +118,7 @@ go_register_toolchains(nogo = "@io_bazel_rules_go//:tools_nogo")
 
 
 ###########################################
-# Npm Install and Typescript Sass support #
+# Npm Install and Typescript support      #
 ###########################################
 
 # Fetch rules_nodejs
@@ -129,16 +129,6 @@ http_archive(
     name = "build_bazel_rules_nodejs",
     sha256 = RULES_NODEJS_SHA256,
     url = "https://github.com/bazelbuild/rules_nodejs/releases/download/%s/rules_nodejs-%s.tar.gz" % (RULES_NODEJS_VERSION, RULES_NODEJS_VERSION),
-)
-
-http_archive(
-    name = "io_bazel_rules_sass",
-    sha256 = RULES_SASS_SHA256,
-    strip_prefix = "rules_sass-%s" % RULES_SASS_VERSION,
-    urls = [
-        "https://github.com/bazelbuild/rules_sass/archive/%s.zip" % RULES_SASS_VERSION,
-        "https://mirror.bazel.build/github.com/bazelbuild/rules_sass/archive/%s.zip" % RULES_SASS_VERSION,
-    ],
 )
 
 # Setup the NodeJS toolchain
@@ -201,18 +191,31 @@ yarn_install(
 # install_bazel_dependencies(suppress_warning = True)
 # install_bazel_dependencies()
 
-# Setup the rules_sass toolchain
-load("@io_bazel_rules_sass//sass:sass_repositories.bzl", "sass_repositories")
-
-sass_repositories()
-
-# Fetch required transitive dependencies. This is an optional step because you
-# can always fetch the required NodeJS transitive dependency on your own.
-load("@io_bazel_rules_sass//:package.bzl", "rules_sass_dependencies")
-
-rules_sass_dependencies()
-
 # Setup TypeScript toolchain
 # load("@npm_bazel_typescript//:index.bzl", "ts_setup_workspace")
 
 # ts_setup_workspace()
+
+###########################################
+# SASS Toolchain                          #
+###########################################
+
+http_archive(
+    name = "io_bazel_rules_sass",
+    sha256 = RULES_SASS_SHA256,
+    strip_prefix = "rules_sass-%s" % RULES_SASS_VERSION,
+    urls = [
+        "https://github.com/bazelbuild/rules_sass/archive/%s.zip" % RULES_SASS_VERSION,
+        "https://mirror.bazel.build/github.com/bazelbuild/rules_sass/archive/%s.zip" % RULES_SASS_VERSION,
+    ],
+)
+
+# Fetch required transitive dependencies. This is an optional step because you
+# can always fetch the required NodeJS transitive dependency on your own.
+# load("@io_bazel_rules_sass//:package.bzl", "rules_sass_dependencies")
+# rules_sass_dependencies()
+
+# Setup the rules_sass toolchain
+load("@io_bazel_rules_sass//sass:sass_repositories.bzl", "sass_repositories")
+sass_repositories()
+

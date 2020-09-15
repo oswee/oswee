@@ -76,10 +76,11 @@ http_server(
     args = [
         ".",
         "--port=3000",
-        "-a=127.0.0.1",
+        # "-a=127.0.0.1",
         "--ssl",
         "--cert=/home/dzintars/.tls/oswee.com/fullchain.pem",
-        "--key=/home/dzintars/.tls/oswee.com/privkey.pem"
+        "--key=/home/dzintars/.tls/oswee.com/privkey.pem",
+        "--log-ip"
     ],
     # templated_args = ["."],
 )

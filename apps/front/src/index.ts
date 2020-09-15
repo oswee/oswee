@@ -6,3 +6,5 @@ function printUser(user: User) {
 }
 
 printUser(new User('testUser'))
+
+console.log('Hello Bazel!')
