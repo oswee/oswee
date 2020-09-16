@@ -1,38 +1,23 @@
 load("@npm//@bazel/typescript:index.bzl", "ts_config", "ts_library")
-# load("@npm//typescript:index.bzl", "tsc")
-# load("@npm_bazel_typescript//:index.bzl", "ts_library")
 load("@npm//http-server:index.bzl", "http_server")
-# load("@npm//live-server:index.bzl", "live_server")
-load("@npm//sass:index.bzl", "sass")
 load("@npm//webpack-cli:index.bzl", webpack = "webpack_cli")
 
 # package(default_visibility = ["//apps/front:__subpackages__"])
-
-sass(
-    name = "styles",
-    outs = ["styles.css"],
-    args = [
-        "$(location src/styles.scss)",
-        "$(location src/styles.css)",
-        ],
-    data = ["styles.scss"],
-)
 
 # https://bazelbuild.github.io/rules_nodejs/TypeScript.html
 ts_library(
     name = "compile",
     module_name = "@oswee/front",
     srcs = glob(
-        include = ["src/**/*.ts"],
-        exclude = [
-            "src/**/*.spec.ts",
-        ],
+      include = ["src/**/*.ts"],
+      exclude = [
+        "src/**/*.spec.ts",
+      ],
     ),
     module_root = "src",
     tsconfig = "tsconfig_lib",
     deps = [
         "@npm//@types/node",
-        "@npm//csstype",
     ],
 )
 
@@ -47,23 +32,23 @@ webpack(
     name = "bundle",
     outs = ["app.bundle.js"],
     args = [
-        "$(location //apps/front:index_bundle)",
-        "--config",
-        "$(location webpack.config.js)",
-        "-o",
-        "$@",
-        "--mode",
-        "development",
-        "--hot",
+      "$(locations //apps/front:index_bundle)",
+      "--config",
+      "$(location webpack.config.js)",
+      "-o",
+      "$@",
+      "--mode",
+      "development",
+      "--hot",
     ],
     data = [
-        "index.js",
-        "styles.css",
-        "webpack.config.js",
-        "@npm//:node_modules",
-        # "@npm//css-loader",
-        # "@npm//style-loader",
-    ],
+      ":index_bundle",
+      "//apps/front/src/scss:styles",
+      "webpack.config.js",
+      "@npm//:node_modules",
+      # "@npm//css-loader",
+      # "@npm//style-loader",
+  ],
 )
 
 # Note, on Windows you need `--enable_runfiles`
@@ -84,15 +69,6 @@ http_server(
     ],
     # templated_args = ["."],
 )
-
-# live_server(
-#     name = "server",
-#     data = [
-#         "app.bundle.js",
-#         "index.html",
-#     ],
-#     templated_args = ["."],
-# )
 
 ts_config(
     name = "tsconfig_lib",

@@ -1,5 +1,5 @@
 import { User } from './module'
-import './scss/main.scss'
+import './scss/main.css'
 
 function printUser(user: User) {
   console.log(`the user is ${user.name}`)

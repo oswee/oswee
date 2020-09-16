@@ -43,12 +43,15 @@
     "@typescript-eslint/parser": "^4.1.0",
     "@yarnpkg/pnpify": "latest",
     "commitlint": "latest",
+    "css-loader": "^4.3.0",
     "eslint": "latest",
     "husky": "latest",
     "lint-staged": "latest",
     "pnp-webpack-plugin": "latest",
     "prettier": "^2.1.1",
-    "typescript": "^4.0.2"
+    "style-loader": "^1.2.1",
+    "typescript": "^4.0.2",
+    "webpack": "^4.44.1"
   },
   "dependencies": {
     "csstype": "^3.0.3",

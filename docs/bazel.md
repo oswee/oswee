@@ -33,3 +33,9 @@ Run single build rule
 "Server" is a target name in the `//apps/front/BUILD.bazel`
 
 To run front app use `bazel run //apps/front:server`
+
+To reference the rule from the same package use `:rule_name_from_the_same_package`
+
+To reference the rule from the another package use `//path/from/the/workspace/root/to/the/project/package:rule_name_from_the_another_package`
+
+If the rule name is the same as package name, for example `//foo/bar:bar` then it is preferred to use shorthand version of `//foo/bar`
