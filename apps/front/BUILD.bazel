@@ -1,4 +1,4 @@
-load("@npm//@bazel/typescript:index.bzl", "ts_config", "ts_library")
+load("@npm//@bazel/typescript:index.bzl", "ts_config", "ts_library", "ts_devserver")
 load("@npm//http-server:index.bzl", "http_server")
 load("@npm//webpack-cli:index.bzl", webpack = "webpack_cli")
 
@@ -77,4 +77,16 @@ ts_config(
         "tsconfig.json",
         "//libs/components:tsconfig",
     ],
+)
+
+ts_devserver(
+    name = "serve",
+    # entry_module = "bazel_ts_example/App",
+    port = 3000,
+    # This is the path we'll request from the browser, see index.html
+    serving_path = "/app.bundle.js",
+    # The devserver can serve our static files too
+    static_files = ["src/template.html"],
+    # We'll collect all the devmode JS sources from these TypeScript libraries
+    deps = [":bundle"],
 )
