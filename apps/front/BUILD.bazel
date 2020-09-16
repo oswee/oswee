@@ -18,6 +18,7 @@ ts_library(
     tsconfig = "tsconfig_lib",
     deps = [
         "@npm//@types/node",
+        "//libs/elements/oswee/avatar:compile"
     ],
 )
 

@@ -34,6 +34,7 @@ export class UiAvatarElement extends LitElement {
 
   connectedCallback(): void {
     super.connectedCallback()
+    console.log('Avatar element connected!')
     this.addEventListener('click', this.onButtonClick)
   }
 
