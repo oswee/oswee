@@ -39,6 +39,7 @@
     "@bazel/typescript": "^2.2.0",
     "@commitlint/config-conventional": "latest",
     "@types/node": "latest",
+    "@types/webpack": "^4.41.22",
     "@typescript-eslint/eslint-plugin": "^4.1.0",
     "@typescript-eslint/parser": "^4.1.0",
     "@yarnpkg/pnpify": "latest",

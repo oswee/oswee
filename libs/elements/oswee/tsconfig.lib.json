@@ -1,11 +1,11 @@
 {
   "extends": "./tsconfig.json",
   "compilerOptions": {
-    "outDir": "../../dist/out-tsc",
+    "outDir": "../../../dist/out-tsc",
     "baseUrl": ".",
     "rootDirs": [
       ".",
-      "../../dist/app/front"
+      "../../../dist/libs/elements/oswee"
     ],
     "target": "es2015",
     "declaration": true,

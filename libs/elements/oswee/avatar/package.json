@@ -1,14 +1,14 @@
 {
-  "name": "@html-sandbox/ui-avatar",
+  "name": "@oswee/prime-ui-avatar",
   "description": "Oswee test npm package of Lit Element component",
-  "version": "",
+  "version": "0.0.0",
   "repository": {
     "type": "git",
     "url": "https://github.com/oswee/prime"
   },
   "keywords": [
     "oswee",
-    "components"
+    "elements"
   ],
   "license": "Apache-2.0",
   "homepage": "https://github.com/oswee/prime",
