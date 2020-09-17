@@ -1,0 +1,98 @@
+load("@npm//@bazel/typescript:index.bzl", "ts_config", "ts_library", "ts_devserver")
+load("@npm//http-server:index.bzl", "http_server")
+load("@npm//webpack-cli:index.bzl", webpack = "webpack_cli")
+
+# package(default_visibility = ["//apps/front:__subpackages__"])
+package(default_visibility = ["//visibility:public"])
+
+# https://bazelbuild.github.io/rules_nodejs/TypeScript.html
+ts_library(
+    name = "compile",
+    module_name = "@oswee/front",
+    srcs = glob(
+      include = ["src/**/*.ts"],
+      exclude = [
+        "src/**/*.spec.ts",
+      ],
+    ),
+    module_root = "src",
+    tsconfig = "tsconfig_lib",
+    deps = [
+        "@npm//@types/node",
+        "//libs/elements/oswee/avatar"
+    ],
+)
+
+filegroup(
+    name = "index_bundle",
+    srcs = glob(
+        include = ["src/**"]
+        ),
+    # srcs = ["compile", "//libs/elements/oswee/avatar"],
+    # Change to es6_sources to get the 'prodmode' JS
+    output_group = "es6_sources",
+)
+
+webpack(
+    name = "bundle",
+    # outs = ["app.bundle.js"],
+    output_dir = True,
+    args = [
+      # "$(location :index_bundle)",
+      "--config=$(location webpack.config.js)",
+      "--output-path",
+      "$(@D)",
+      "--mode=development",
+      # "--hot",
+    ],
+    data = [
+      ":index_bundle",
+      # "//apps/front/src/scss:styles",
+      "//libs/elements/oswee/avatar",
+      "webpack.config.js",
+      "@npm//:node_modules",
+      # "@npm//css-loader",
+      # "@npm//style-loader",
+  ],
+)
+
+# Note, on Windows you need `--enable_runfiles`
+http_server(
+    name = "server",
+    data = [
+        "compile",
+        "src/index.html",
+    ],
+    args = [
+        ".",
+        "--port=3000",
+        # "-a=127.0.0.1",
+        "--ssl",
+        "--cert=/home/dzintars/.tls/oswee.com/fullchain.pem",
+        "--key=/home/dzintars/.tls/oswee.com/privkey.pem",
+        "--log-ip"
+    ],
+    # templated_args = ["."],
+)
+
+ts_config(
+    name = "tsconfig_lib",
+    src = "tsconfig.lib.json",
+    deps = [
+        "tsconfig.json",
+        "//libs/elements/oswee:tsconfig",
+    ],
+)
+
+ts_devserver(
+    name = "devserver",
+    # entry_module = "index.html",
+    port = 3000,
+    # This is the path we'll request from the browser, see index.html
+    serving_path = "/app.bundle.js",
+    # The devserver can serve our static files too
+    # static_files = ["src/index.html", "src/favicon.ico"],
+    # We'll collect all the devmode JS sources from these TypeScript libraries
+    deps = [":bundle"],
+)
+
