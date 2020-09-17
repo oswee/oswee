@@ -3,12 +3,20 @@
   "compilerOptions": {
     "outDir": "../../dist/out-tsc",
     "baseUrl": ".",
-    "rootDirs": [".", "../../dist/libs/components"],
+    "rootDirs": [
+      ".",
+      "../../dist/app/front"
+    ],
     "target": "es2015",
     "declaration": true,
     "inlineSources": true,
     "types": [],
-    "lib": ["dom", "es2018"]
+    "lib": [
+      "dom",
+      "es2018"
+    ]
   },
-  "include": ["**/*.ts"]
+  "include": [
+    "**/*.ts"
+  ]
 }

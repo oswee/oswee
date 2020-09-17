@@ -1,10 +1,10 @@
 load("//tools/bazel_rules:index.bzl", "stylelint")
 load("@npm//@bazel/typescript:index.bzl", "ts_config", "ts_library")
 
-package(default_visibility = ["//elements/oswee:__subpackages__"])
+package(default_visibility = ["//visibility:public"])
 
 ts_library(
-    name = "compile",
+    name = "avatar",
     srcs = glob(
         include = ["src/**/*.ts"],
         exclude = [
@@ -36,6 +36,6 @@ ts_config(
     src = "tsconfig.lib.json",
     deps = [
         "tsconfig.json",
-        "//libs/components:tsconfig",
+        "//libs/elements/oswee:tsconfig",
     ],
 )

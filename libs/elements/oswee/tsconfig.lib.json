@@ -2,13 +2,15 @@
   "extends": "./tsconfig.json",
   "compilerOptions": {
     "outDir": "../../../dist/out-tsc",
-    "allowSyntheticDefaultImports": true,
+    "baseUrl": ".",
+    "rootDirs": [
+      ".",
+      "../../../dist/libs/elements/oswee"
+    ],
     "target": "es2015",
     "declaration": true,
-    "moduleResolution": "node",
-    "types": [
-      "node"
-    ],
+    "inlineSources": true,
+    "types": [],
     "lib": [
       "dom",
       "es2018"
@@ -16,8 +18,5 @@
   },
   "include": [
     "**/*.ts"
-  ],
-  "exclude": [
-    "**/*.spec.ts"
   ]
 }
