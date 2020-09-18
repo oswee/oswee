@@ -5,7 +5,10 @@ package(default_visibility = ["//:__subpackages__"])
 ts_library(
     name = "keycodes",
     srcs = glob(
-        include = ["src/**/*.ts", "index.ts"],
+        include = [
+            "src/**/*.ts",
+            "index.ts",
+        ],
         exclude = [
             "src/**/*.spec.ts",
             "src/test-setup.ts",

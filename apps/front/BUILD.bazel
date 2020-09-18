@@ -1,16 +1,35 @@
-load("@npm//webpack-dev-server:index.bzl", server = "webpack_dev_server")
+load("@npm//@bazel/typescript:index.bzl", "ts_project")
+load("@npm//webpack-dev-server:index.bzl", "webpack_dev_server")
 
-server(
-    name = "server",
+ts_project(
+    name = "compile",
+    tsconfig = "tsconfig.json",
+    deps = [
+        "@npm//@types",
+        "@npm//csstype",
+    ],
+    srcs = [
+        "src/index.ts",
+        "src/module.ts",
+    ],
+)
+
+webpack_dev_server(
+    name = "dev_server",
     args = [
         "--hot",
         " --watch-poll",
-        "--config webpack.config.js"
+        "--config webpack.config.js",
     ],
     data = [
+        ":compile",
         "src/index.html",
-        "src/index.ts",
         "tsconfig.json",
-        "webpack.config.js"
+        "webpack.config.js",
+        "@npm//:node_modules",
+    ],
+    tags = [
+        "ibazel_notify_changes",
     ],
 )
+

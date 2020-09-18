@@ -6,7 +6,7 @@ sass_binary(
     name = "styles",
     src = "main.scss",
     deps = [
-         "//libs/shared/styles:colors",
-         # "//shared:fonts",
+        "//libs/shared/styles:colors",
+        # "//shared:fonts",
     ],
 )
