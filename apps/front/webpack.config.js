@@ -1,6 +1,7 @@
 const path = require("path");
 const webpack = require("webpack");
 const fs = require("fs");
+const HtmlWebpackPlugin = require("html-webpack-plugin");
 
 module.exports = (env, argv) => {
     const config = {
@@ -28,7 +29,7 @@ module.exports = (env, argv) => {
             child_process: "empty"
         },
         devServer: {
-            port: 9110,
+            port: 3000,
             open: false,
             publicPath: "/",
             contentBase: path.resolve("./app"),
@@ -46,7 +47,15 @@ module.exports = (env, argv) => {
         plugins: [
             new webpack.optimize.LimitChunkCountPlugin({
                 maxChunks: 1
-            })
+            }),
+            new HtmlWebpackPlugin({
+                // template: './src/template.html',
+                template: path.resolve(__dirname, 'src', 'template.html'),
+                // favicon: path.resolve(__dirname, 'src/assets', 'favicon.ico'),
+
+                // favicon: './src/assets/favicon.ico',
+                filename: './index.html',
+            }),
         ],
         module: {
             rules: [

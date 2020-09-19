@@ -1,5 +1,5 @@
 import { User } from './module'
-// import './scss/main.css'
+import 'oswee/apps/front/src/scss/main.css'
 // import {UiAvatarElement} from '@html-sandbox/ui-avatar-test'
 // import '@oswee/elements/avatar'
 // import '@oswee/elements/avatar'

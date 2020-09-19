@@ -46,6 +46,7 @@
     "css-loader": "^4.3.0",
     "csstype": "^3.0.3",
     "eslint": "latest",
+    "html-webpack-plugin": "^4.4.1",
     "http-server": "^0.12.3",
     "husky": "latest",
     "import-local": "^3.0.2",

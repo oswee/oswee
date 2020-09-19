@@ -48,6 +48,9 @@ webpack_dev_server(
         ":sass",
         ":webpack.config.js",
         "@npm//webpack-cli",
+        "@npm//html-webpack-plugin",
+        "src/template.html",
+        "//apps/front/src/scss:styles",
     ],
     tags = [
         # "ibazel_notify_changes",
