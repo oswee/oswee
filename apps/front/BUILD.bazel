@@ -1,35 +1,83 @@
-load("@npm//@bazel/typescript:index.bzl", "ts_project")
+load("//tools:ts_library.bzl", "ts_library")
+load("@build_bazel_rules_nodejs//:index.bzl", "npm_package_bin")
+load("@io_bazel_rules_sass//:defs.bzl", "multi_sass_binary")
 load("@npm//webpack-dev-server:index.bzl", "webpack_dev_server")
+load("@npm//webpack:index.bzl", "webpack")
 
-ts_project(
-    name = "compile",
-    tsconfig = "tsconfig.json",
+package(default_visibility = ["//visibility:public"])
+
+filegroup(
+    name = "assets",
+    srcs = glob([
+        "src/**/*.html",
+        "src/public/**/*.*",
+    ]),
+)
+
+multi_sass_binary(
+    name = "sass",
+    srcs = glob(["src/**/*.scss"]),
+    output_style = "expanded",
+    sourcemap = False,
+)
+
+ts_library(
+    name = "app",
+    srcs = glob(
+        [
+            "src/**/*.ts",
+        ],
+        exclude = ["webpack.ts"],
+    ),
+    data = [":sass"],
     deps = [
-        "@npm//@types",
-        "@npm//csstype",
-    ],
-    srcs = [
-        "src/index.ts",
-        "src/module.ts",
+        "@npm//@types/node",
     ],
 )
 
 webpack_dev_server(
-    name = "dev_server",
+    name = "devserver",
     args = [
-        "--hot",
-        " --watch-poll",
-        "--config webpack.config.js",
+        "--config=apps/front/webpack.config.js",
+        "--output=./app.bundle.js",
+        "--history-api-fallback",
     ],
     data = [
-        ":compile",
-        "src/index.html",
-        "tsconfig.json",
-        "webpack.config.js",
-        "@npm//:node_modules",
+        ":app",
+        ":assets",
+        ":sass",
+        ":webpack.config.js",
+        "@npm//webpack-cli",
     ],
     tags = [
-        "ibazel_notify_changes",
+        # "ibazel_notify_changes",
     ],
 )
 
+webpack(
+    name = "bundler",
+    data = [
+        ":app",
+        ":assets",
+        ":sass",
+        ":webpack.config.js",
+        "@npm//webpack-cli",
+    ],
+)
+
+npm_package_bin(
+    name = "bundle",
+    outs = [
+        "app.bundle.js",
+    ],
+    args = [
+        "--config=app/webpack.config.js",
+        "--output=$(location app.bundle.js)",
+    ],
+    data = [
+        ":webpack.config.js",
+        "@npm//css-loader",
+        "@npm//style-loader",
+    ],
+    tool = ":bundler",
+)

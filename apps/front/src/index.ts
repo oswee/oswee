@@ -2,7 +2,7 @@ import { User } from './module'
 // import './scss/main.css'
 // import {UiAvatarElement} from '@html-sandbox/ui-avatar-test'
 // import '@oswee/elements/avatar'
-import '@oswee/elements/avatar'
+// import '@oswee/elements/avatar'
 // import {UiAvatarElement} from '../../../libs/elements/oswee/avatar/src/index'
 
 const el: HTMLDivElement = document.createElement('div')
