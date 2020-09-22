@@ -83,7 +83,7 @@ nodejs_binary(
         "ibazel_notify_changes",
     ],
     templated_args = [
-        "--output=./app.bundle.js",
+        "--output=./[hash].bundle.js",
         "--entry=oswee/apps/front/src/index",
         "--mode=development",
         "--config=oswee/apps/front/webpack.dev.js"

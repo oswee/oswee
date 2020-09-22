@@ -1,5 +1,5 @@
-import * as webpack from 'webpack'
 import * as webpackDevServer from 'webpack-dev-server'
+import * as webpack from 'webpack'
 
 import { getArgv, getConfig } from 'oswee/tools/webpack'
 
@@ -33,10 +33,9 @@ const singleSimultaneousCompiler: webpack.Compiler = new Proxy(compiler, {
 })
 
 const devServerOptions: webpackDevServer.Configuration = {
-  port: 8080,
+  port: 3000,
   lazy: true,
-  // filename: config.output.filename,
-  filename: 'webpack.dev.ts',
+  filename: config.output.filename,
   // This is called once, while the devserver starts.
   after: (app, server: any) => {
     // Listen to STDIN, which is written to by ibazel to tell it to reload
