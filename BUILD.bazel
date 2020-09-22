@@ -10,10 +10,10 @@ package(default_visibility = ["//:__subpackages__"])
 # attribute.
 exports_files(
     [
-        "tsconfig.base.json",
+        # "tsconfig.base.json",
         "tsconfig.json",
         # Stylelint and prettier config are neeeded for style linting
-        ".stylelintrc",
+        ".stylelintrc.json",
         ".prettierrc.js",
         "package.json",
     ],

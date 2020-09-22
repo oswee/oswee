@@ -1,5 +1,5 @@
 {
-  "extends": "../../../../.stylelintrc",
+  "extends": "../../../../.stylelintrc.json",
   "rules": {
     "no-missing-end-of-source-newline": false
   }

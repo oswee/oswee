@@ -4,9 +4,18 @@
     "outDir": "../../../dist/out-tsc",
     "module": "CommonJS",
     "allowJs": true,
-    "types": ["jest", "node"],
+    "types": [
+      "jest",
+      "node"
+    ],
     "target": "es2015",
-    "lib": ["dom", "es2018"]
+    "lib": [
+      "dom",
+      "es2018"
+    ]
   },
-  "include": ["**/*.spec.ts", "**/*.d.ts"]
+  "include": [
+    "**/*.spec.ts",
+    "**/*.d.ts"
+  ]
 }

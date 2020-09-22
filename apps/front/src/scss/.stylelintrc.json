@@ -1,0 +1,8 @@
+{
+  "extends": [
+    "../../../../.stylelintrc.json"
+  ],
+  "rules": {
+    "selector-class-pattern": null
+  }
+}

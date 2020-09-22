@@ -1,6 +1,7 @@
-load("//tools/bazel_rules:index.bzl", "stylelint")
 load("@npm//@bazel/typescript:index.bzl", "ts_config", "ts_library")
+load("//tools/bazel_rules:index.bzl", "stylelint")
 
+# package(default_visibility = ["//libs/elements/oswee:__subpackages__"])
 package(default_visibility = ["//visibility:public"])
 
 ts_library(
@@ -12,12 +13,10 @@ ts_library(
             "src/test-setup.ts",
         ],
     ),
-    module_name = "@oswee/elements/avatar",
+    # module_name = "@oswee/elements/avatar",
     module_root = "src",
-    tsconfig = "tsconfig_lib",
+    # tsconfig = "tsconfig_lib",
     deps = [
-        # "//libs/shared/design-tokens",
-        # "//libs/shared/keycodes",
         "@npm//lit-element",
         "@npm//lit-html",
         "@npm//tslib",
@@ -28,7 +27,7 @@ stylelint(
     name = "stylelint",
     srcs = glob(["**/*.scss"]),
     allow_empty_input = True,
-    config = ":.stylelintrc",
+    config = ":.stylelintrc.json",
 )
 
 ts_config(

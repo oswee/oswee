@@ -13,7 +13,7 @@ def stylelint_macro(
         name: The name of the rule
         srcs: List of files that should be linted
         allow_empty_input: the process exits without throwing an error when glob pattern matches no files.
-        config: Additional configuration file if no provided will fallback to the //:.stylelintrc
+        config: Additional configuration file if no provided will fallback to the //:.stylelintrc.json
         **kwargs: remaining args to pass to the stylelint_test rule
     """
 
@@ -22,7 +22,7 @@ def stylelint_macro(
     if config:
         srcs.append(config)
     else:
-        config = "//:.stylelintrc"
+        config = "//:.stylelintrc.json"
 
     # append the config file
     args.append("--config $(location %s)" % config)

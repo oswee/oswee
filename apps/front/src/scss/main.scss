@@ -1,7 +1,11 @@
-// @import "../../../../libs/shared/styles/colors"
-$my-color: red;
+// @import "../../../../libs/shared/styles/colors";
+@import "libs/shared/styles/colors";
+
+$my-color: green;
 
 h1 {
-  font-size: 1rem;
-  color: $my-color;
+  --color-success-10: hsla(100, 100%, 38%, 1);
+  font-size: 4rem;
+  // color: var(--color-success-10, #{$example-blue}, #{$my-color}, red);
+  color: #{$example-blue};
 }

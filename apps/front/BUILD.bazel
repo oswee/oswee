@@ -1,8 +1,9 @@
-load("//tools:ts_library.bzl", "ts_library")
-load("@build_bazel_rules_nodejs//:index.bzl", "npm_package_bin")
+load("@build_bazel_rules_nodejs//:index.bzl", "nodejs_binary", "npm_package_bin")
 load("@io_bazel_rules_sass//:defs.bzl", "multi_sass_binary")
-load("@npm//webpack-dev-server:index.bzl", "webpack_dev_server")
+load("@npm//@bazel/typescript:index.bzl", "ts_config")
 load("@npm//webpack:index.bzl", "webpack")
+load("@npm//webpack-dev-server:index.bzl", "webpack_dev_server")
+load("//tools:ts_library.bzl", "ts_library")
 
 package(default_visibility = ["//visibility:public"])
 
@@ -11,14 +12,66 @@ filegroup(
     srcs = glob([
         "src/**/*.html",
         "src/public/**/*.*",
+        "src/assets/**/*.*",
     ]),
 )
 
 multi_sass_binary(
     name = "sass",
-    srcs = glob(["src/**/*.scss"]),
+    srcs = glob([
+        "src/scss/**/*.scss"
+        ]),
     output_style = "expanded",
     sourcemap = False,
+)
+
+ts_library(
+  name = "example",
+  srcs = glob(["**/*.ts", "**/*.tsx"], exclude = ["webpack.*.ts"]),
+  data = ["//apps/front/src/scss"],
+  deps = [
+      "@npm//@types/node",
+      "@oswee//libs/elements/oswee/avatar",
+      "@npm//lit-element",
+      "@npm//lit-html",
+  ]
+)
+# The "bundler" is thought of as an application, and has it's own deps.
+# This effectively webpack + webpack.config.js.
+ts_library(
+    name = "config",
+    srcs = ["webpack.dev.ts"],
+    deps = [
+        "//tools/webpack",
+        "@npm//@types/node",
+        "@npm//@types/webpack",
+        "@npm//css-loader",
+        "@npm//style-loader",
+        "@npm//umd-compat-loader",
+        "@npm//webpack",
+        # "@npm//@types/html-webpack-plugin",
+        # "@npm//html-webpack-plugin",
+    ],
+)
+
+nodejs_binary(
+    name = "devserverx",
+    data = [
+        ":example",
+        ":config",
+        ":src/template.html",
+        "//tools/webpack"
+    ],
+    entry_point = "//tools/webpack:devserver.ts",
+    tags = [
+        "ibazel_notify_changes",
+    ],
+    templated_args = [
+        "--output=./app.bundle.js",
+        "--entry=oswee/apps/front/src/index",
+        "--mode=development",
+        "--config=oswee/apps/front/webpack.dev.js"
+    ],
 )
 
 ts_library(
@@ -27,10 +80,16 @@ ts_library(
         [
             "src/**/*.ts",
         ],
-        exclude = ["webpack.ts"],
+        exclude = ["webpack.*.ts"],
     ),
-    data = [":sass"],
+    data = [
+        # ":sass",
+        "@oswee//apps/front/src/scss",
+        "@oswee//libs/elements/oswee/avatar",
+      ],
+    tsconfig = ":tsconfig.json",
     deps = [
+        "@oswee//libs/elements/oswee/avatar",
         "@npm//@types/node",
     ],
 )
@@ -38,19 +97,19 @@ ts_library(
 webpack_dev_server(
     name = "devserver",
     args = [
-        "--config=apps/front/webpack.config.js",
-        "--output=./app.bundle.js",
+        "--config=apps/front/webpack.dev.ts",
+        "--output=./[contenthash].bundle.js",
         "--history-api-fallback",
     ],
     data = [
+        "src/template.html",
         ":app",
         ":assets",
         ":sass",
-        ":webpack.config.js",
-        "@npm//webpack-cli",
+        ":webpack.dev.ts",
         "@npm//html-webpack-plugin",
-        "src/template.html",
-        "//apps/front/src/scss:styles",
+        "@npm//webpack-cli",
+        "@oswee//libs/elements/oswee/avatar",
     ],
     tags = [
         # "ibazel_notify_changes",
@@ -59,12 +118,19 @@ webpack_dev_server(
 
 webpack(
     name = "bundler",
+    args = [
+        "--config=apps/front/webpack.dev.ts",
+        "--output=./[contenthash].bundle.js",
+    ],
     data = [
         ":app",
         ":assets",
         ":sass",
-        ":webpack.config.js",
+        ":webpack.dev.ts",
+        "@oswee//apps/front/src/scss",
+        "@npm//html-webpack-plugin",
         "@npm//webpack-cli",
+        "@oswee//libs/elements/oswee/avatar",
     ],
 )
 
@@ -83,4 +149,12 @@ npm_package_bin(
         "@npm//style-loader",
     ],
     tool = ":bundler",
+)
+
+ts_config(
+    name = "tsconfig_app",
+    src = "tsconfig.app.json",
+    deps = [
+        "tsconfig.json",
+    ],
 )

@@ -1,12 +1,19 @@
+load("@io_bazel_rules_sass//:defs.bzl", "sass_binary")
+load("//tools/bazel_rules:index.bzl", "stylelint")
+
 package(default_visibility = ["//visibility:public"])
 
-load("@io_bazel_rules_sass//:defs.bzl", "sass_binary")
-
 sass_binary(
-    name = "styles",
+    name = "scss",
     src = "main.scss",
     deps = [
-        "//libs/shared/styles:colors",
+        "@oswee//libs/shared/styles:colors",
         # "//shared:fonts",
     ],
+)
+
+stylelint(
+    name = "stylelint",
+    srcs = glob(["**/*.scss"]),
+    config = ":.stylelintrc",
 )
