@@ -9,12 +9,12 @@ ts_library(
         "@npm//@types/node",
         "@npm//@types/webpack",
         "@npm//@types/webpack-dev-server",
+        "@npm//@types/html-webpack-plugin",
         "@npm//@types/yargs",
         "@npm//webpack",
         "@npm//webpack-dev-server",
-        "@npm//yargs",
-        "@npm//@types/html-webpack-plugin",
         "@npm//html-webpack-plugin",
+        "@npm//yargs",
     ],
 )
 

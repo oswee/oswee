@@ -1,6 +1,6 @@
 import { BazelResolverPlugin, IBazelWebpackOptions } from 'oswee/tools/webpack'
 import * as path from 'path'
-// import HtmlWebpackPlugin from 'html-webpack-plugin'
+import * as HtmlWebpackPlugin from 'html-webpack-plugin'
 
 module.exports = (env: any, argv: IBazelWebpackOptions) => ({
   mode: argv.mode,
@@ -20,7 +20,7 @@ module.exports = (env: any, argv: IBazelWebpackOptions) => ({
   },
   devtool: 'source-map',
   devServer: {
-    port: 8080,
+    port: 3000,
     open: false,
     publicPath: '/',
     contentBase: path.resolve('./apps/front/src'),
@@ -28,14 +28,13 @@ module.exports = (env: any, argv: IBazelWebpackOptions) => ({
       colors: true,
     },
   },
-  // plugins: [
-  //   new HtmlWebpackPlugin({
-  //     template: './src/template.html',
-  //     // template: path.resolve(__dirname, 'src', 'template.html'),
-  //     favicon: './src/assets/favicon.ico',
-  //     filename: './index.html',
-  //   }),
-  // ],
+  plugins: [
+    new HtmlWebpackPlugin({
+      template: 'apps/front/src/template.html',
+      favicon: 'apps/front/src/assets/favicon.ico',
+      filename: './index.html',
+    }),
+  ],
   resolve: {
     extensions: ['.ts', '.tsx', '.js', '.jsx', '.json', '.css'],
     // This makes sure we can resolve modules in bazel, but only works in runfiles.

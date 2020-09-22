@@ -1,4 +1,4 @@
-import { User } from './module'
+import { User } from './ui'
 
 // import 'oswee/apps/front/src/scss/main.css'
 import './scss/main.css'

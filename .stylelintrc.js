@@ -1,4 +1,4 @@
-{
+module.exports = {
   "plugins": ["stylelint-prettier", "stylelint-scss"],
   "extends": ["stylelint-prettier/recommended"],
   "rules": {
@@ -58,8 +58,8 @@
     "declaration-block-semicolon-newline-before": "never-multi-line",
     "declaration-block-semicolon-newline-after": "always-multi-line",
     "declaration-property-value-blacklist": [
-      { "/.*/": ["initial"] },
-      { "message": "The `initial` value is not supported in IE." }
+      {"/.*/": ["initial"]},
+      {"message": "The `initial` value is not supported in IE."}
     ],
 
     "block-closing-brace-newline-after": [
@@ -91,9 +91,10 @@
     "no-missing-end-of-source-newline": true,
     "no-eol-whitespace": true,
     "max-line-length": 80,
-    "linebreaks": ["unix", {
-      "message": "Line endings should be LF. Configure your IDE"
-    }],
+    // "linebreaks": ["unix", {
+    //   "message": "Line endings should be LF. Configure your IDE"
+    // }],
+    "linebreaks": "unix",
     "selector-class-pattern": [
       "^_?(dt-|ba-|cdk-|design-tokens-ui-|fluid-)",
       {
@@ -132,4 +133,4 @@
     "scss/operator-no-unspaced": true,
     "scss/selector-no-redundant-nesting-selector": true
   }
-}
+};

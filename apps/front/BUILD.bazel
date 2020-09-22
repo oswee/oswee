@@ -16,6 +16,14 @@ filegroup(
     ]),
 )
 
+filegroup(
+    name = "public",
+    srcs = glob([
+        "src/template.html",
+        "src/assets/favicon.ico",
+        ])
+    )
+
 multi_sass_binary(
     name = "sass",
     srcs = glob([
@@ -28,7 +36,10 @@ multi_sass_binary(
 ts_library(
   name = "example",
   srcs = glob(["**/*.ts", "**/*.tsx"], exclude = ["webpack.*.ts"]),
-  data = ["//apps/front/src/scss"],
+  data = [
+      "//apps/front/src/scss",
+      # ":src/template.html",
+      ],
   deps = [
       "@npm//@types/node",
       "@oswee//libs/elements/oswee/avatar",
@@ -41,6 +52,9 @@ ts_library(
 ts_library(
     name = "config",
     srcs = ["webpack.dev.ts"],
+    # data = [
+    #     ":src/template.html",
+    #     ],
     deps = [
         "//tools/webpack",
         "@npm//@types/node",
@@ -49,18 +63,20 @@ ts_library(
         "@npm//style-loader",
         "@npm//umd-compat-loader",
         "@npm//webpack",
-        # "@npm//@types/html-webpack-plugin",
-        # "@npm//html-webpack-plugin",
+        "@npm//@types/html-webpack-plugin",
+        "@npm//html-webpack-plugin",
     ],
 )
 
 nodejs_binary(
     name = "devserverx",
     data = [
+        ":public",
         ":example",
         ":config",
-        ":src/template.html",
-        "//tools/webpack"
+        # "src/template.html",
+        "src/assets/favicon.ico",
+        "//tools/webpack",
     ],
     entry_point = "//tools/webpack:devserver.ts",
     tags = [
