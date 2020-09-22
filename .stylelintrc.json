@@ -91,7 +91,9 @@
     "no-missing-end-of-source-newline": true,
     "no-eol-whitespace": true,
     "max-line-length": 80,
-    "linebreaks": "unix",
+    "linebreaks": ["unix", {
+      "message": "Line endings should be LF. Configure your IDE"
+    }],
     "selector-class-pattern": [
       "^_?(dt-|ba-|cdk-|design-tokens-ui-|fluid-)",
       {

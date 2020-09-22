@@ -9,14 +9,15 @@ package(default_visibility = ["//:__subpackages__"])
 # by default. This alias allows omitting explicit tsconfig
 # attribute.
 exports_files(
-  [
-    "tsconfig.base.json",
-    # Stylelint and prettier config are neeeded for style linting
-    ".stylelintrc",
-    ".prettierrc.js",
-    "package.json",
-  ],
-  visibility = ["//visibility:public"],
+    [
+        # "tsconfig.base.json",
+        "tsconfig.json",
+        # Stylelint and prettier config are neeeded for style linting
+        ".stylelintrc.json",
+        ".prettierrc.js",
+        "package.json",
+    ],
+    visibility = ["//visibility:public"],
 )
 
 # gazelle:exclude third_party

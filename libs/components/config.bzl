@@ -1,5 +1,5 @@
 COMPONENTS = [
-    "avatar"
+    "avatar",
 ]
 
 # List of all entry point target of the barista components

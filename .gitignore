@@ -33,7 +33,9 @@ bower_components/
 .vimrc
 .nvimrc
 
+# Bazel
 bazel-*
+# .bazelrc
 
 # Ignore npm/yarn debug log
 npm-debug.log
