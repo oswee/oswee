@@ -6,7 +6,7 @@
         "*"
       ]
     },
-    "module": "commonjs",
+    "module": "CommonJS",
     "noImplicitAny": true,
     "noImplicitThis": true,
     "preserveConstEnums": true,
@@ -15,10 +15,10 @@
     "sourceMap": true,
     "skipLibCheck": true,
     "experimentalDecorators": true,
-    "jsx": "react",
     "lib": [
-      "es2017",
-      "dom"
+      "ES2017",
+      "DOM",
+      "DOM.Iterable"
     ]
   },
   "exclude": [
