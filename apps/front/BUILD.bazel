@@ -7,14 +7,14 @@ load("//tools:ts_library.bzl", "ts_library")
 
 package(default_visibility = ["//visibility:public"])
 
-filegroup(
-    name = "assets",
-    srcs = glob([
-        "src/**/*.html",
-        "src/public/**/*.*",
-        "src/assets/**/*.*",
-    ]),
-)
+# filegroup(
+#     name = "assets",
+#     srcs = glob([
+#         "src/**/*.html",
+#         "src/public/**/*.*",
+#         "src/assets/**/*.*",
+#     ]),
+# )
 
 filegroup(
     name = "public",
@@ -24,25 +24,24 @@ filegroup(
         ])
     )
 
-multi_sass_binary(
-    name = "sass",
-    srcs = glob([
-        "src/scss/**/*.scss"
-        ]),
-    output_style = "expanded",
-    sourcemap = False,
-)
+# multi_sass_binary(
+#     name = "sass",
+#     srcs = glob([
+#         "src/scss/**/*.scss"
+#         ]),
+#     output_style = "expanded",
+#     sourcemap = False,
+# )
 
 ts_library(
   name = "example",
   srcs = glob(["**/*.ts", "**/*.tsx"], exclude = ["webpack.*.ts"]),
   data = [
       "//apps/front/src/scss",
-      # ":src/template.html",
       ],
   deps = [
-      "@npm//@types/node",
       "@oswee//libs/elements/oswee/avatar",
+      "@npm//@types/node",
       "@npm//lit-element",
       "@npm//lit-html",
   ]
@@ -52,9 +51,6 @@ ts_library(
 ts_library(
     name = "config",
     srcs = ["webpack.dev.ts"],
-    # data = [
-    #     ":src/template.html",
-    #     ],
     deps = [
         "//tools/webpack",
         "@npm//@types/node",
@@ -69,12 +65,11 @@ ts_library(
 )
 
 nodejs_binary(
-    name = "devserverx",
+    name = "devserver",
     data = [
         ":public",
         ":example",
         ":config",
-        # "src/template.html",
         "src/assets/favicon.ico",
         "//tools/webpack",
     ],
@@ -90,87 +85,87 @@ nodejs_binary(
     ],
 )
 
-ts_library(
-    name = "app",
-    srcs = glob(
-        [
-            "src/**/*.ts",
-        ],
-        exclude = ["webpack.*.ts"],
-    ),
-    data = [
-        # ":sass",
-        "@oswee//apps/front/src/scss",
-        "@oswee//libs/elements/oswee/avatar",
-      ],
-    tsconfig = ":tsconfig.json",
-    deps = [
-        "@oswee//libs/elements/oswee/avatar",
-        "@npm//@types/node",
-    ],
-)
+# ts_library(
+#     name = "app",
+#     srcs = glob(
+#         [
+#             "src/**/*.ts",
+#         ],
+#         exclude = ["webpack.*.ts"],
+#     ),
+#     data = [
+#         # ":sass",
+#         "@oswee//apps/front/src/scss",
+#         "@oswee//libs/elements/oswee/avatar",
+#       ],
+#     tsconfig = ":tsconfig.json",
+#     deps = [
+#         "@oswee//libs/elements/oswee/avatar",
+#         "@npm//@types/node",
+#     ],
+# )
 
-webpack_dev_server(
-    name = "devserver",
-    args = [
-        "--config=apps/front/webpack.dev.ts",
-        "--output=./[contenthash].bundle.js",
-        "--history-api-fallback",
-    ],
-    data = [
-        "src/template.html",
-        ":app",
-        ":assets",
-        ":sass",
-        ":webpack.dev.ts",
-        "@npm//html-webpack-plugin",
-        "@npm//webpack-cli",
-        "@oswee//libs/elements/oswee/avatar",
-    ],
-    tags = [
-        # "ibazel_notify_changes",
-    ],
-)
+# webpack_dev_server(
+#     name = "devserver",
+#     args = [
+#         "--config=apps/front/webpack.dev.ts",
+#         "--output=./[contenthash].bundle.js",
+#         "--history-api-fallback",
+#     ],
+#     data = [
+#         "src/template.html",
+#         ":app",
+#         ":assets",
+#         ":sass",
+#         ":webpack.dev.ts",
+#         "@npm//html-webpack-plugin",
+#         "@npm//webpack-cli",
+#         "@oswee//libs/elements/oswee/avatar",
+#     ],
+#     tags = [
+#         # "ibazel_notify_changes",
+#     ],
+# )
 
-webpack(
-    name = "bundler",
-    args = [
-        "--config=apps/front/webpack.dev.ts",
-        "--output=./[contenthash].bundle.js",
-    ],
-    data = [
-        ":app",
-        ":assets",
-        ":sass",
-        ":webpack.dev.ts",
-        "@oswee//apps/front/src/scss",
-        "@npm//html-webpack-plugin",
-        "@npm//webpack-cli",
-        "@oswee//libs/elements/oswee/avatar",
-    ],
-)
+# webpack(
+#     name = "bundler",
+#     args = [
+#         "--config=apps/front/webpack.dev.ts",
+#         "--output=./[contenthash].bundle.js",
+#     ],
+#     data = [
+#         ":app",
+#         ":assets",
+#         ":sass",
+#         ":webpack.dev.ts",
+#         "@oswee//apps/front/src/scss",
+#         "@npm//html-webpack-plugin",
+#         "@npm//webpack-cli",
+#         "@oswee//libs/elements/oswee/avatar",
+#     ],
+# )
 
-npm_package_bin(
-    name = "bundle",
-    outs = [
-        "app.bundle.js",
-    ],
-    args = [
-        "--config=app/webpack.config.js",
-        "--output=$(location app.bundle.js)",
-    ],
-    data = [
-        ":webpack.config.js",
-        "@npm//css-loader",
-        "@npm//style-loader",
-    ],
-    tool = ":bundler",
-)
+# npm_package_bin(
+#     name = "bundle",
+#     outs = [
+#         "app.bundle.js",
+#     ],
+#     args = [
+#         "--config=app/webpack.config.js",
+#         "--output=$(location app.bundle.js)",
+#     ],
+#     data = [
+#         ":webpack.config.js",
+#         "@npm//css-loader",
+#         "@npm//style-loader",
+#     ],
+#     tool = ":bundler",
+# )
 
-ts_config(
-    name = "tsconfig_app",
-    src = "tsconfig.app.json",
-    deps = [
-        "tsconfig.json",
-    ],
-)
+# ts_config(
+#     name = "tsconfig_app",
+#     src = "tsconfig.app.json",
+#     deps = [
+#         "tsconfig.json",
+#     ],
+# )

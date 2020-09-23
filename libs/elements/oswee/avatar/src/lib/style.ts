@@ -10,7 +10,7 @@ export default css`
     align-items: center;
     justify-content: center;
     flex-shrink: 0;
-    color: red;
+    color: green;
   }
 
   img {
