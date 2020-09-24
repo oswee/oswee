@@ -1,6 +1,6 @@
 // import { customElement, property } from 'lit-element'
 import { AppNavigationElement } from '../../components/app-navigation'
-import { connect } from '../../../utils/connect'
+import { connect } from 'oswee/libs/connect'
 import {
   store,
   RootState,
