@@ -1,20 +1,16 @@
-import { ModulesState } from './models'
-
-export enum ModuleTypes {
-  GET = 'MODULE_GET',
-  GET_SUCCESS = 'MODULE_GET_SUCCESS',
-}
+import { IState } from './models'
+import { Types } from './constants'
 
 // ACTIONS
 interface Get {
-  readonly type: ModuleTypes.GET
+  readonly type: Types.GET
   readonly meta: object
   readonly payload: object
 }
 
 interface GetSuccess {
-  readonly type: ModuleTypes.GET_SUCCESS
-  readonly payload: ModulesState
+  readonly type: Types.GET_SUCCESS
+  readonly payload: IState
 }
 
-export type ModuleActionTypes = Get | GetSuccess
+export type ActionTypes = Get | GetSuccess

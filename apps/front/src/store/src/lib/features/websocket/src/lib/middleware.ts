@@ -1,20 +1,21 @@
 import { websocketConnected, websocketDisconnected } from './actions'
-import { WebsocketTypes, WebsocketActionTypes } from './types'
+import { ActionTypes } from './types'
+import { Types } from './constants'
 import * as jspb from 'google-protobuf'
 
 let websocket: WebSocket = null
 
 const websocketMiddleware = ({ dispatch }) => next => {
-  return (action: WebsocketActionTypes) => {
+  return (action: ActionTypes) => {
     switch (action.type) {
-      case WebsocketTypes.CONNECT:
+      case Types.CONNECT:
         if (websocket !== null) {
           websocket.close()
         }
         websocket = new WebSocket(action.payload.url)
         websocket.onopen = (): void => dispatch(websocketConnected())
         break
-      case WebsocketTypes.CONNECTED:
+      case Types.CONNECTED:
         websocket.onmessage = (event): void => {
           // console.log(event.data)
           /**
@@ -32,7 +33,7 @@ const websocketMiddleware = ({ dispatch }) => next => {
         websocket.onerror = (error): void => console.log(`WS Error: ${error} `)
         websocket.onclose = (): void => dispatch(websocketDisconnected())
         break
-      case WebsocketTypes.SEND: {
+      case Types.SEND: {
         const message = {
           type: action.payload.type,
           payload: action.payload.payload,
@@ -43,9 +44,9 @@ const websocketMiddleware = ({ dispatch }) => next => {
       }
       /**
        * Testing RPC style message format. Eventually this action will replace
-       * WebsocketTypes.SEND.
+       * Types.SEND.
        */
-      case WebsocketTypes.SEND_RPC: {
+      case Types.SEND_RPC: {
         const message = {
           service: action.payload.service,
           rpc: action.payload.rpc,
@@ -55,13 +56,13 @@ const websocketMiddleware = ({ dispatch }) => next => {
         websocket.send(JSON.stringify(message))
         break
       }
-      case WebsocketTypes.DISCONNECT:
+      case Types.DISCONNECT:
         if (websocket !== null) {
           websocket.close()
         }
         websocket = null
         break
-      case WebsocketTypes.DISCONNECTED:
+      case Types.DISCONNECTED:
         // TODO: Retry connection if configured
         break
       default:

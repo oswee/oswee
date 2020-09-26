@@ -1,46 +1,47 @@
-import { AccountTypes, AccountActionTypes } from './types'
+import { ActionTypes } from './types'
+import { Types } from './constants'
 import { Account } from './models'
 
-export const selectAccount = (uuid: string): AccountActionTypes => ({
-  type: AccountTypes.SELECT,
+export const selectAccount = (uuid: string): ActionTypes => ({
+  type: Types.SELECT,
   uuid,
 })
 
-export const fetchAccountList = (): AccountActionTypes => ({
-  type: AccountTypes.LIST_FETCH,
+export const fetchAccountList = (): ActionTypes => ({
+  type: Types.LIST_FETCH,
 })
 
-export const fetchAccountListRequest = (): AccountActionTypes => ({
-  type: AccountTypes.LIST_FETCH_REQUEST,
+export const fetchAccountListRequest = (): ActionTypes => ({
+  type: Types.LIST_FETCH_REQUEST,
 })
 
-export const fetchAccountListSuccess = (accounts: Account[]): AccountActionTypes => ({
-  type: AccountTypes.LIST_FETCH_SUCCESS,
+export const fetchAccountListSuccess = (accounts: Account[]): ActionTypes => ({
+  type: Types.LIST_FETCH_SUCCESS,
   accounts,
 })
 
-export const fetchAccountListFailure = (error: Error): AccountActionTypes => ({
-  type: AccountTypes.LIST_FETCH_FAILURE,
+export const fetchAccountListFailure = (error: Error): ActionTypes => ({
+  type: Types.LIST_FETCH_FAILURE,
   error,
 })
 
-export const fetchAccount = (uuid: string): AccountActionTypes => ({
-  type: AccountTypes.FETCH,
+export const fetchAccount = (uuid: string): ActionTypes => ({
+  type: Types.FETCH,
   uuid,
 })
 
-export const fetchAccountRequest = (uuid: string): AccountActionTypes => ({
-  type: AccountTypes.FETCH_REQUEST,
+export const fetchAccountRequest = (uuid: string): ActionTypes => ({
+  type: Types.FETCH_REQUEST,
   uuid,
 })
 
-export const fetchAccountSuccess = (account: Account): AccountActionTypes => ({
-  type: AccountTypes.FETCH_SUCCESS,
+export const fetchAccountSuccess = (account: Account): ActionTypes => ({
+  type: Types.FETCH_SUCCESS,
   account,
 })
 
-export const fetchAccountFailure = (uuid: string, error: Error): AccountActionTypes => ({
-  type: AccountTypes.FETCH_FAILURE,
+export const fetchAccountFailure = (uuid: string, error: Error): ActionTypes => ({
+  type: Types.FETCH_FAILURE,
   uuid,
   error,
 })

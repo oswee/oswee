@@ -1,12 +1,13 @@
-import { SigninTypes, SigninActionTypes } from './types'
+import { ActionTypes } from './types'
+import { Types } from './constants'
 // import { Signin } from './models'
 
-export const displaySignin = (): SigninActionTypes => ({
-  type: SigninTypes.DISPLAY,
+export const displaySignin = (): ActionTypes => ({
+  type: Types.DISPLAY,
   meta: { websocket: true },
 })
 
-export const displaySigninSuccess = (): SigninActionTypes => ({
-  type: SigninTypes.DISPLAYED,
+export const displaySigninSuccess = (): ActionTypes => ({
+  type: Types.DISPLAYED,
   meta: { websocket: true },
 })

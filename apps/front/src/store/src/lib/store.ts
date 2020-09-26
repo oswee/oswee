@@ -5,7 +5,7 @@ import { middleware } from './middleware'
 import { rootReducer } from './reducer'
 import { initialState } from './storage'
 import { startSagas } from './sagas'
-import { startRouting } from './src/features/routing/middleware'
+import { startRouting } from './features/routing/src/lib/middleware'
 import { startReselect } from './reselect'
 
 const composeEnhancers = composeWithDevTools({ actionsBlacklist: [], trace: true })

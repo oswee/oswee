@@ -1,70 +1,71 @@
-import { ApplicationTypes, ApplicationActionTypes } from './types'
+import { ActionTypes } from './types'
+import { Types } from './constants'
 import { Application, ApplicationsX } from './models'
 
-export const selectApplication = (id: string): ApplicationActionTypes => ({
-  type: ApplicationTypes.SELECT,
+export const selectApplication = (id: string): ActionTypes => ({
+  type: Types.SELECT,
   id,
   meta: { websocket: true },
 })
 
-export const fetchApplicationList = (): ApplicationActionTypes => ({
-  type: ApplicationTypes.LIST_FETCH,
+export const fetchApplicationList = (): ActionTypes => ({
+  type: Types.LIST_FETCH,
 })
 
-export const fetchApplicationListRequest = (): ApplicationActionTypes => ({
-  type: ApplicationTypes.LIST_FETCH_REQUEST,
+export const fetchApplicationListRequest = (): ActionTypes => ({
+  type: Types.LIST_FETCH_REQUEST,
 })
 
-export const fetchApplicationListSuccess = (applications: Application[]): ApplicationActionTypes => ({
-  type: ApplicationTypes.LIST_FETCH_SUCCESS,
+export const fetchApplicationListSuccess = (applications: Application[]): ActionTypes => ({
+  type: Types.LIST_FETCH_SUCCESS,
   applications,
 })
 
-export const fetchApplicationListFailure = (error: Error): ApplicationActionTypes => ({
-  type: ApplicationTypes.LIST_FETCH_FAILURE,
+export const fetchApplicationListFailure = (error: Error): ActionTypes => ({
+  type: Types.LIST_FETCH_FAILURE,
   error,
 })
 
-export const fetchApplication = (id: string): ApplicationActionTypes => ({
-  type: ApplicationTypes.FETCH,
+export const fetchApplication = (id: string): ActionTypes => ({
+  type: Types.FETCH,
   id,
 })
 
-export const fetchApplicationRequest = (id: string): ApplicationActionTypes => ({
-  type: ApplicationTypes.FETCH_REQUEST,
+export const fetchApplicationRequest = (id: string): ActionTypes => ({
+  type: Types.FETCH_REQUEST,
   id,
 })
 
-export const fetchApplicationSuccess = (application: Application): ApplicationActionTypes => ({
-  type: ApplicationTypes.FETCH_SUCCESS,
+export const fetchApplicationSuccess = (application: Application): ActionTypes => ({
+  type: Types.FETCH_SUCCESS,
   application,
 })
 
-export const fetchApplicationFailure = (id: string, error: Error): ApplicationActionTypes => ({
-  type: ApplicationTypes.FETCH_FAILURE,
+export const fetchApplicationFailure = (id: string, error: Error): ActionTypes => ({
+  type: Types.FETCH_FAILURE,
   id,
   error,
 })
 
-export const startApplication = (id: string): ApplicationActionTypes => ({
-  type: ApplicationTypes.START,
+export const startApplication = (id: string): ActionTypes => ({
+  type: Types.START,
   payload: {
     id,
   },
 })
 
-export const getApplications = (): ApplicationActionTypes => ({
-  type: ApplicationTypes.GET,
+export const getApplications = (): ActionTypes => ({
+  type: Types.GET,
   payload: { stakeholder: '54322' },
   meta: { websocket: true },
 })
 
-export const getApplicationsSuccess = (payload: ApplicationsX): ApplicationActionTypes => ({
-  type: ApplicationTypes.GET_SUCCESS,
+export const getApplicationsSuccess = (payload: ApplicationsX): ActionTypes => ({
+  type: Types.GET_SUCCESS,
   payload,
 })
 
-export const listApplicationsResponse = (payload: ApplicationsX): ApplicationActionTypes => ({
-  type: ApplicationTypes.ListApplicationsResponse,
+export const listApplicationsResponse = (payload: ApplicationsX): ActionTypes => ({
+  type: Types.ListApplicationsResponse,
   payload,
 })

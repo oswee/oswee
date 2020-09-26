@@ -1,12 +1,12 @@
 import { createSelector } from 'reselect'
-import { RootState } from '../../../reducer'
-import { ThemeState } from './reducer'
+import { RootState } from 'Types'
+import { IState } from './reducer'
 
-const getState = (state: RootState): ThemeState => state.theme
+const getState = (state: RootState): IState => state.theme
 
 // TODO: Refactor namespace
 //eslint-disable-next-line @typescript-eslint/no-namespace
-export namespace ThemeSelectors {
+export namespace Selectors {
   // export const getTheme = createSelector([getState], state => state.active.theme)
   export const getTheme = createSelector([getState], state => {
     return state.active === 'dark' ? state.dark : state.light

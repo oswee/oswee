@@ -1,5 +1,5 @@
 import { push, replace, go, goBack, goForward } from 'oswee/libs/router/src/index'
-import { ActionsUnion } from '../../../../actions'
+import { ActionsUnion } from 'oswee/libs/action/src/index'
 
 export const RoutingActions = {
   push,

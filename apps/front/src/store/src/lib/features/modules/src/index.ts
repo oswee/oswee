@@ -1,6 +1,6 @@
 // import * as ModuleSelectors from './selectors'
 
-export * from './lib/actions'
-export * from './lib/models'
-export { ModuleSelectors } from './lib/selectors'
+export * as ModulesActions from './lib/actions'
+export { IState as ModulesState } from './lib/models'
+export { Selectors as ModulesSelectors } from './lib/selectors'
 // export { ModuleSelectors }

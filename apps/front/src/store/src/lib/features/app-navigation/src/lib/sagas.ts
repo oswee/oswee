@@ -1,5 +1,5 @@
 import { put, takeLatest, take, call, delay } from 'redux-saga/effects'
-import { AppNavigationTypes } from './constants'
+import { Types } from './constants'
 import { ModxActions } from './actions'
 import { WebsocketActions } from '../websocket'
 import { ListModulesRequest } from '@dzintars/npm-test-pkg'
@@ -22,7 +22,7 @@ function* workerSaga(action) {
 }
 
 function* watcherSaga() {
-  yield takeLatest(AppNavigationTypes.LOADED, workerSaga)
+  yield takeLatest(Types.LOADED, workerSaga)
 }
 
 export default [watcherSaga]

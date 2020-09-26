@@ -4,7 +4,7 @@ export interface Module {
   readonly permalink: string
 }
 
-export interface ModulesState {
+export interface IState {
   readonly entities: { [id: string]: Module }
   readonly ids: string[]
   readonly highlightedModule: string

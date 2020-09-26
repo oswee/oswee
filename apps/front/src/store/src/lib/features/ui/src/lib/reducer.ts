@@ -1,9 +1,10 @@
-import { UiTypes, UiActionTypes } from './types'
-import { UiState } from './models'
+import { ActionTypes } from './types'
+import { Types } from './constants'
+import { IState } from './models'
 
-export { UiState }
+export { IState }
 
-const initialState: UiState = {
+const initialState: IState = {
   isActionCenterDisplayed: true,
   isAccountWidgetDisplayed: false,
   application: {
@@ -11,27 +12,27 @@ const initialState: UiState = {
   },
 }
 
-export default (state: UiState = initialState, action: UiActionTypes): UiState => {
+export default (state: IState = initialState, action: ActionTypes): IState => {
   switch (action.type) {
-    case UiTypes.ACCOUNT_WIDGET_TOGGLE:
+    case Types.ACCOUNT_WIDGET_TOGGLE:
       return { ...state, isAccountWidgetDisplayed: !state.isAccountWidgetDisplayed }
 
-    case UiTypes.ACCOUNT_WIDGET_DISPLAY:
+    case Types.ACCOUNT_WIDGET_DISPLAY:
       return { ...state, isAccountWidgetDisplayed: true }
 
-    case UiTypes.ACTION_CENTER_TOGGLE:
+    case Types.ACTION_CENTER_TOGGLE:
       return { ...state, isActionCenterDisplayed: !state.isActionCenterDisplayed }
 
-    case UiTypes.ACTION_CENTER_DISPLAY:
+    case Types.ACTION_CENTER_DISPLAY:
       return { ...state, isActionCenterDisplayed: true }
 
-    case UiTypes.ACTION_CENTER_DISPLAYED:
+    case Types.ACTION_CENTER_DISPLAYED:
       return { ...state, isActionCenterDisplayed: true }
 
-    case UiTypes.ACTION_CENTER_HIDE:
+    case Types.ACTION_CENTER_HIDE:
       return { ...state, isActionCenterDisplayed: false }
 
-    case UiTypes.ACTION_CENTER_HIDDEN:
+    case Types.ACTION_CENTER_HIDDEN:
       return { ...state, isActionCenterDisplayed: false }
 
     default:

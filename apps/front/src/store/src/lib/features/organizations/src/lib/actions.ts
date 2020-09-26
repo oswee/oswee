@@ -1,55 +1,56 @@
-import { OrganizationTypes, OrganizationActionTypes } from './types'
+import { ActionTypes } from './types'
+import { Types } from './constants'
 import { Organization } from './models'
 
-export const selectOrganization = (uuid: string): OrganizationActionTypes =>
+export const selectOrganization = (uuid: string): ActionTypes =>
   ({
-    type: OrganizationTypes.SELECT,
+    type: Types.SELECT,
     uuid,
   } as const)
 
-export const fetchOrganizationList = (): OrganizationActionTypes =>
+export const fetchOrganizationList = (): ActionTypes =>
   ({
-    type: OrganizationTypes.LIST_FETCH,
+    type: Types.LIST_FETCH,
   } as const)
 
-export const fetchOrganizationListRequest = (): OrganizationActionTypes =>
+export const fetchOrganizationListRequest = (): ActionTypes =>
   ({
-    type: OrganizationTypes.LIST_FETCH_REQUEST,
+    type: Types.LIST_FETCH_REQUEST,
   } as const)
 
-export const fetchOrganizationListSuccess = (organizations: Organization[]): OrganizationActionTypes =>
+export const fetchOrganizationListSuccess = (organizations: Organization[]): ActionTypes =>
   ({
-    type: OrganizationTypes.LIST_FETCH_SUCCESS,
+    type: Types.LIST_FETCH_SUCCESS,
     organizations,
   } as const)
 
-export const fetchOrganizationListFailure = (error: Error): OrganizationActionTypes =>
+export const fetchOrganizationListFailure = (error: Error): ActionTypes =>
   ({
-    type: OrganizationTypes.LIST_FETCH_FAILURE,
+    type: Types.LIST_FETCH_FAILURE,
     error,
   } as const)
 
-export const fetchOrganization = (uuid: string): OrganizationActionTypes =>
+export const fetchOrganization = (uuid: string): ActionTypes =>
   ({
-    type: OrganizationTypes.FETCH,
+    type: Types.FETCH,
     uuid,
   } as const)
 
-export const fetchOrganizationRequest = (uuid: string): OrganizationActionTypes =>
+export const fetchOrganizationRequest = (uuid: string): ActionTypes =>
   ({
-    type: OrganizationTypes.FETCH_REQUEST,
+    type: Types.FETCH_REQUEST,
     uuid,
   } as const)
 
-export const fetchOrganizationSuccess = (organization: Organization): OrganizationActionTypes =>
+export const fetchOrganizationSuccess = (organization: Organization): ActionTypes =>
   ({
-    type: OrganizationTypes.FETCH_SUCCESS,
+    type: Types.FETCH_SUCCESS,
     organization,
   } as const)
 
-export const fetchOrganizationFailure = (uuid: string, error: Error): OrganizationActionTypes =>
+export const fetchOrganizationFailure = (uuid: string, error: Error): ActionTypes =>
   ({
-    type: OrganizationTypes.FETCH_FAILURE,
+    type: Types.FETCH_FAILURE,
     uuid,
     error,
   } as const)

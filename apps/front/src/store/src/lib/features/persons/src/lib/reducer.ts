@@ -1,9 +1,10 @@
-import { PersonTypes, PersonActionTypes } from './types'
-import { PersonsState } from './models'
+import { ActionTypes } from './types'
+import { Types } from './constants'
+import { IState } from './models'
 
-export { PersonsState }
+export { IState }
 
-const initialState: PersonsState = {
+const initialState: IState = {
   entities: {},
   ids: [],
   fetching: false,
@@ -11,15 +12,15 @@ const initialState: PersonsState = {
   error: null,
 }
 
-export default (state: PersonsState = initialState, action: PersonActionTypes): PersonsState => {
+export default (state: IState = initialState, action: ActionTypes): IState => {
   switch (action.type) {
-    case PersonTypes.SELECT:
+    case Types.SELECT:
       return { ...state, selected: action.uuid }
 
-    case PersonTypes.LIST_FETCH_REQUEST:
+    case Types.LIST_FETCH_REQUEST:
       return { ...state, fetching: true, error: null }
 
-    case PersonTypes.LIST_FETCH_SUCCESS:
+    case Types.LIST_FETCH_SUCCESS:
       return {
         ...state,
         fetching: false,
@@ -33,13 +34,13 @@ export default (state: PersonsState = initialState, action: PersonActionTypes): 
         ids: action.persons.map(person => person.uuid),
       }
 
-    case PersonTypes.LIST_FETCH_FAILURE:
+    case Types.LIST_FETCH_FAILURE:
       return { ...state, fetching: false, error: action.error }
 
-    case PersonTypes.FETCH_REQUEST:
+    case Types.FETCH_REQUEST:
       return { ...state, fetching: true, error: null }
 
-    case PersonTypes.FETCH_SUCCESS:
+    case Types.FETCH_SUCCESS:
       return {
         ...state,
         fetching: false,
@@ -49,7 +50,7 @@ export default (state: PersonsState = initialState, action: PersonActionTypes): 
         },
       }
 
-    case PersonTypes.FETCH_FAILURE:
+    case Types.FETCH_FAILURE:
       return { ...state, fetching: false, error: action.error }
 
     default:

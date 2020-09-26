@@ -22,7 +22,7 @@ export interface User {
   }
 }
 
-export interface UserState {
+export interface IState {
   entities: { [id: number]: User }
   ids: number[]
   fetching: boolean

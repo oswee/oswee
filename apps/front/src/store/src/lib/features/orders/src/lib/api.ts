@@ -1,4 +1,4 @@
-const URL = `${window.MyApp.localApi}/orders`
+const URL = `https://api.oswee.com/orders`
 
 function* fetchOrders() {
   const response = yield fetch(URL, {

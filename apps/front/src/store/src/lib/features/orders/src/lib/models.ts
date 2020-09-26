@@ -5,7 +5,7 @@ export interface Order {
   readonly permalink: string
 }
 
-export interface OrdersState {
+export interface IState {
   readonly entities: { [uuid: string]: Order }
   readonly ids: string[]
   readonly fetching: boolean

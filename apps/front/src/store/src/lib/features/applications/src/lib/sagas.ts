@@ -1,7 +1,7 @@
-import { call, put, select, takeLatest } from 'redux-saga/effects'
-import { ApplicationTypes } from './types'
-import { getApplications } from './actions'
-import { WebsocketActions } from '../websocket'
+import { takeLatest } from 'redux-saga/effects'
+import { Types } from './constants'
+// import { getApplications } from './actions'
+// import { WebsocketActions } from '../websocket'
 // import { fetchApplicationListRequest, fetchApplicationListSuccess, fetchApplicationListFailure } from './actions'
 // import { ApplicationSelectors } from './selectors'
 // import { Application } from './models'
@@ -16,7 +16,7 @@ import { WebsocketActions } from '../websocket'
 // }
 
 // function* selectApplicationListener() {
-//   yield takeLatest(ApplicationTypes.SELECT, selectApplicationSaga)
+//   yield takeLatest(Types.SELECT, selectApplicationSaga)
 // }
 
 // const getPage = state => state.applications.page
@@ -44,7 +44,7 @@ import { WebsocketActions } from '../websocket'
 // }
 
 // function* fetchApplicationListListener() {
-//   yield takeLatest(ApplicationTypes.LIST_FETCH, fetchApplicationListSaga)
+//   yield takeLatest(Types.LIST_FETCH, fetchApplicationListSaga)
 // }
 
 function* testSaga() {
@@ -53,7 +53,7 @@ function* testSaga() {
 }
 
 function* loadModules() {
-  yield takeLatest(ApplicationTypes.START, testSaga)
+  yield takeLatest(Types.START, testSaga)
 }
 
 // export async function fetchApplication(id: string) {
@@ -77,7 +77,7 @@ function* loadModules() {
 // }
 
 // function* fetchApplicationListener() {
-//   yield takeLatest(ApplicationTypes.FETCH, fetchApplicationSaga)
+//   yield takeLatest(Types.FETCH, fetchApplicationSaga)
 // }
 
 // export default [selectApplicationListener, fetchApplicationListListener, fetchApplicationListener]

@@ -1,7 +1,8 @@
-import { UserActions, UserTypes } from './actions'
-import { UserState } from './model'
+import { Actions } from './actions'
+import { Types } from './constants'
+import { IState } from './model'
 
-const initialState: UserState = {
+const initialState: IState = {
   entities: {},
   ids: [],
   fetching: false,
@@ -9,17 +10,17 @@ const initialState: UserState = {
   error: null,
 }
 
-export { UserState }
+export { IState }
 
-export default (state: UserState = initialState, action: UserActions): UserState => {
+export default (state: IState = initialState, action: Actions): IState => {
   switch (action.type) {
-    case UserTypes.USER_SELECT:
+    case Types.USER_SELECT:
       return { ...state, selected: action.payload.id }
 
-    case UserTypes.USER_LIST_FETCH_REQUEST:
+    case Types.USER_LIST_FETCH_REQUEST:
       return { ...state, fetching: true, error: null }
 
-    case UserTypes.USER_LIST_FETCH_SUCCESS:
+    case Types.USER_LIST_FETCH_SUCCESS:
       return {
         ...state,
         fetching: false,
@@ -33,13 +34,13 @@ export default (state: UserState = initialState, action: UserActions): UserState
         ids: action.payload.users.map(user => user.id),
       }
 
-    case UserTypes.USER_LIST_FETCH_FAILURE:
+    case Types.USER_LIST_FETCH_FAILURE:
       return { ...state, fetching: false, error: action.payload.error }
 
-    case UserTypes.USER_FETCH_REQUEST:
+    case Types.USER_FETCH_REQUEST:
       return { ...state, fetching: true, error: null }
 
-    case UserTypes.USER_FETCH_SUCCESS:
+    case Types.USER_FETCH_SUCCESS:
       return {
         ...state,
         fetching: false,
@@ -49,7 +50,7 @@ export default (state: UserState = initialState, action: UserActions): UserState
         },
       }
 
-    case UserTypes.USER_FETCH_FAILURE:
+    case Types.USER_FETCH_FAILURE:
       return { ...state, fetching: false, error: action.payload.error }
 
     default:

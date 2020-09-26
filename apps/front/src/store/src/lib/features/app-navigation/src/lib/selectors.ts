@@ -1,10 +1,10 @@
 import { createSelector } from 'reselect'
-import { RootState } from '../../reducer'
-import { ApplicationsState } from '../applications'
-import { AppNavigationState } from './reducer'
+import { RootState } from 'Types'
+import { IState as ApplicationsState } from 'oswee/front/src/store/src/lib/applications'
+import { IState } from './reducer'
 
 // INPUT/BASE SELECTORS
-const getState = (state: RootState): AppNavigationState => state.appModules
+const getState = (state: RootState): IState => state.appModules
 const getApplicationState = (state: RootState): ApplicationsState => state.applications
 
 // MEMOIZED SELECTORS
@@ -50,7 +50,7 @@ const selectCurrentApplicationPermalink = createSelector(
  * Not using TS namespaces because ESLint recommendations and requires
  * `eslint-disable-next-line @typescript-eslint/no-namespace`
  */
-export const AppNavigationSelectors = {
+export const Selectors = {
   selectFetchState,
   selectSelectedModuleId,
   selectAllIds,

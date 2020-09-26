@@ -11,7 +11,7 @@ export type AppModules = Readonly<{
   ids: string[]
 }>
 
-export type AppNavigationState = Readonly<{
+export type IState = Readonly<{
   entities: { [id: string]: Module }
   ids: string[]
   fetching: boolean

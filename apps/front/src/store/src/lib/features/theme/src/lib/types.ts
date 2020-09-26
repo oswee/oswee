@@ -1,11 +1,9 @@
-export enum ThemeTypes {
-  SWITCH = 'THEME_SWITCH',
-}
+import { Types } from './constants'
 
 interface SwitchThemeAction {
-  readonly type: ThemeTypes.SWITCH
+  readonly type: Types.SWITCH
   readonly meta: object
   readonly payload: object
 }
 
-export type ThemeActionTypes = SwitchThemeAction
+export type ActionTypes = SwitchThemeAction

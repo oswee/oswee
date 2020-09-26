@@ -2,12 +2,15 @@
   "compilerOptions": {
     "baseUrl": ".",
     "paths": {
+      "*": [
+        "apps/front/src/store/src/types/*"
+      ],
       "oswee/*": [
         "*"
       ]
     },
     "module": "CommonJS",
-    "noImplicitAny": true,
+    "noImplicitAny": false,
     "noImplicitThis": true,
     "preserveConstEnums": true,
     "removeComments": true,
@@ -15,8 +18,9 @@
     "sourceMap": true,
     "skipLibCheck": true,
     "experimentalDecorators": true,
+    "importHelpers": true,
     "lib": [
-      "ES2017",
+      "ES2018",
       "DOM",
       "DOM.Iterable"
     ]

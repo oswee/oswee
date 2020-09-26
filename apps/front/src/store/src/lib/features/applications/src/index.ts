@@ -1,3 +1,3 @@
-export * from './lib/actions'
-export * from './lib/models'
-export { ApplicationSelectors } from './lib/selectors'
+export * as ApplicationsActions from './lib/actions'
+export { IState as ApplicationsState } from './lib/models'
+export { Selectors as ApplicationsSelectors } from './lib/selectors'

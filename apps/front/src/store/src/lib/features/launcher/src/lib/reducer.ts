@@ -1,27 +1,28 @@
-import { LauncherTypes, LauncherActionTypes } from './types'
-import { LauncherState } from './models'
+import { ActionTypes } from './types'
+import { IState } from './models'
+import { Types } from './constants'
 
-export { LauncherState }
+export { IState }
 
-const initialState: LauncherState = {
+const initialState: IState = {
   isLauncherDisplayed: false,
 }
 
-export default (state: LauncherState = initialState, action: LauncherActionTypes): LauncherState => {
+export default (state: IState = initialState, action: ActionTypes): IState => {
   switch (action.type) {
-    case LauncherTypes.TOGGLE:
+    case Types.TOGGLE:
       return { ...state, isLauncherDisplayed: !state.isLauncherDisplayed }
 
-    case LauncherTypes.DISPLAY:
+    case Types.DISPLAY:
       return { ...state, isLauncherDisplayed: true }
 
-    case LauncherTypes.DISPLAYED:
+    case Types.DISPLAYED:
       return { ...state, isLauncherDisplayed: true }
 
-    case LauncherTypes.HIDE:
+    case Types.HIDE:
       return { ...state, isLauncherDisplayed: false }
 
-    case LauncherTypes.HIDDEN:
+    case Types.HIDDEN:
       return { ...state, isLauncherDisplayed: false }
     default:
       return state

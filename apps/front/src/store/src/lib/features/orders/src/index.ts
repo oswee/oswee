@@ -1,3 +1,3 @@
-export * from './lib/actions'
-export * from './lib/models'
-export * from './lib/selectors'
+export * as OrdersActions from './lib/actions'
+export { IState as OrdersState } from './lib/models'
+export * as OrdersSelectors from './lib/selectors'

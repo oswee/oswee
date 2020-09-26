@@ -1,11 +1,11 @@
 import { createSelector } from 'reselect'
 
-import { RootState } from '../../../reducer'
+import { RootState } from 'Types'
 
 const getState = (state: RootState) => state.users
 
 //eslint-disable-next-line @typescript-eslint/no-namespace
-export namespace UserSelectors {
+export namespace Selectors {
   export const selected = createSelector([getState], state => state.selected)
 
   export const entities = createSelector([getState], state => state.entities)

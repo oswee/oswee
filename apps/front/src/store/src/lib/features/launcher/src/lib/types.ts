@@ -1,30 +1,23 @@
+import { Types } from './constants'
 // import { LauncherState } from './models'
 
-export enum LauncherTypes {
-  TOGGLE = 'LAUNCHER_TOGGLE',
-  DISPLAY = 'LAUNCHER_DISPLAY',
-  DISPLAYED = 'LAUNCHER_DISPLAYED',
-  HIDE = 'LAUNCHER_HIDE',
-  HIDDEN = 'LAUNCHER_HIDDEN',
-}
-
 interface ToggleLauncherAction {
-  readonly type: LauncherTypes.TOGGLE
+  readonly type: Types.TOGGLE
 }
 interface DisplayLauncherAction {
-  readonly type: LauncherTypes.DISPLAY
+  readonly type: Types.DISPLAY
 }
 interface HideLauncherAction {
-  readonly type: LauncherTypes.HIDE
+  readonly type: Types.HIDE
 }
 interface LauncherDisplayedAction {
-  readonly type: LauncherTypes.DISPLAYED
+  readonly type: Types.DISPLAYED
 }
 interface LauncherHiddenAction {
-  readonly type: LauncherTypes.HIDDEN
+  readonly type: Types.HIDDEN
 }
 
-export type LauncherActionTypes =
+export type ActionTypes =
   | ToggleLauncherAction
   | DisplayLauncherAction
   | LauncherDisplayedAction

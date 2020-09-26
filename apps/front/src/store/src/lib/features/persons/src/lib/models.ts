@@ -5,7 +5,7 @@ export interface Person {
   readonly permalink: string
 }
 
-export interface PersonsState {
+export interface IState {
   readonly entities: { [uuid: string]: Person }
   readonly ids: string[]
   readonly fetching: boolean

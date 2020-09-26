@@ -5,7 +5,7 @@ export interface Account {
   readonly permalink: string
 }
 
-export interface AccountsState {
+export interface IState {
   readonly entities: { [uuid: string]: Account }
   readonly ids: string[]
   readonly fetching: boolean

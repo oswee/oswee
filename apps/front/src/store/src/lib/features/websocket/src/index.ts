@@ -1,3 +1,3 @@
-export * from './lib/actions'
-export * from './lib/models'
-export * from './lib/selectors'
+export * as WebsocketActions from './lib/actions'
+export { IState as WebsocketState } from './lib/models'
+export * as WebsocketSelectors from './lib/selectors'

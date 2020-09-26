@@ -1,39 +1,26 @@
-import { createAction, ActionsUnion } from '../../../../actions'
+import { createAction, ActionsUnion } from 'oswee/libs/action/src/index'
 import { User } from './model'
+import { Types } from './constants'
 
-export enum UserTypes {
-  USER_SELECT = 'USER_SELECT',
+export const Actions = {
+  selectUser: (id: number) => createAction(Types.USER_SELECT, { id }),
 
-  USER_LIST_FETCH = 'USER_LIST_FETCH',
-  USER_LIST_FETCH_REQUEST = 'USER_LIST_FETCH_REQUEST',
-  USER_LIST_FETCH_SUCCESS = 'USER_LIST_FETCH_SUCCESS',
-  USER_LIST_FETCH_FAILURE = 'USER_LIST_FETCH_FAILURE',
+  fetchUserList: () => createAction(Types.USER_LIST_FETCH),
 
-  USER_FETCH = 'USER_FETCH',
-  USER_FETCH_REQUEST = 'USER_FETCH_REQUEST',
-  USER_FETCH_SUCCESS = 'USER_FETCH_SUCCESS',
-  USER_FETCH_FAILURE = 'USER_FETCH_FAILURE',
-}
+  fetchUserListRequest: () => createAction(Types.USER_LIST_FETCH_REQUEST),
 
-export const UserActions = {
-  selectUser: (id: number) => createAction(UserTypes.USER_SELECT, { id }),
+  fetchUserListSuccess: (users: User[]) => createAction(Types.USER_LIST_FETCH_SUCCESS, { users }),
 
-  fetchUserList: () => createAction(UserTypes.USER_LIST_FETCH),
+  fetchUserListFailure: (error: Error) => createAction(Types.USER_LIST_FETCH_FAILURE, { error }),
 
-  fetchUserListRequest: () => createAction(UserTypes.USER_LIST_FETCH_REQUEST),
+  fetchUser: (id: number) => createAction(Types.USER_FETCH, { id }),
 
-  fetchUserListSuccess: (users: User[]) => createAction(UserTypes.USER_LIST_FETCH_SUCCESS, { users }),
+  fetchUserRequest: (id: number) => createAction(Types.USER_FETCH_REQUEST, { id }),
 
-  fetchUserListFailure: (error: Error) => createAction(UserTypes.USER_LIST_FETCH_FAILURE, { error }),
-
-  fetchUser: (id: number) => createAction(UserTypes.USER_FETCH, { id }),
-
-  fetchUserRequest: (id: number) => createAction(UserTypes.USER_FETCH_REQUEST, { id }),
-
-  fetchUserSuccess: (user: User) => createAction(UserTypes.USER_FETCH_SUCCESS, { user }),
+  fetchUserSuccess: (user: User) => createAction(Types.USER_FETCH_SUCCESS, { user }),
 
   fetchUserFailure: (id: number, error: Error) =>
-    createAction(UserTypes.USER_FETCH_FAILURE, {
+    createAction(Types.USER_FETCH_FAILURE, {
       id,
       error,
       name: error.name,
@@ -42,4 +29,4 @@ export const UserActions = {
     }),
 }
 
-export type UserActions = ActionsUnion<typeof UserActions>
+export type Actions = ActionsUnion<typeof Actions>

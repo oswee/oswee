@@ -1,5 +1,3 @@
-import * as SystemSelectors from './lib/selectors'
-
-export * from './lib/actions'
-export * from './lib/models'
-export * from './lib/selectors'
+export * as SystemActions from './lib/actions'
+export { IState as SystemState } from './lib/models'
+export * as SystemSelectors from './lib/selectors'

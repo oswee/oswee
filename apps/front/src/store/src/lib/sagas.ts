@@ -2,12 +2,12 @@ import createSagaMiddleware from 'redux-saga'
 import { all, spawn, call } from 'redux-saga/effects'
 
 // HYGEN.IO: INJECT IMPORT HERE
-import route from './src/features/routing/sagas'
-import system from './src/features/system/sagas'
-import launcher from './src/features/launcher/sagas'
-import applications from './src/features/applications/sagas'
-import appModules from './src/features/app-navigation/sagas'
-// import organizations from './modules/organizations/sagas'
+import route from './features/routing/src/lib/sagas'
+import system from './features/system/src/lib/sagas'
+import launcher from './features/launcher/src/lib/sagas'
+import applications from './features/applications/src/lib/sagas'
+import appModules from './features/app-navigation/src/lib/sagas'
+// import organizations from './modules/organizations/src/lib/sagas'
 
 export const rootSagas = {
   // HYGEN.IO: INJECT ROOT SAGA HERE

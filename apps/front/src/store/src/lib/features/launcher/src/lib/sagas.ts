@@ -1,5 +1,5 @@
 import { put, takeLatest, take, call, delay } from 'redux-saga/effects'
-import { LauncherTypes } from './types'
+import { Types } from './constants'
 import { LauncherActions } from './actions'
 import { WebsocketActions } from '../websocket'
 
@@ -13,7 +13,7 @@ function* workerSaga(action) {
 }
 
 function* watcherSaga() {
-  yield takeLatest(LauncherTypes.DISPLAY, workerSaga)
+  yield takeLatest(Types.DISPLAY, workerSaga)
 }
 
 export default [watcherSaga]

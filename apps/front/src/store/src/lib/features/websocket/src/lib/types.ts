@@ -1,53 +1,51 @@
-export enum WebsocketTypes {
-  CONNECT = 'WEBSOCKET__CONNECT',
-  CONNECTING = 'WEBSOCKET__CONNECTING',
-  CONNECTED = 'WEBSOCKET__CONNECTED',
-  SEND = 'WEBSOCKET__SEND',
-  SEND_RPC = 'WEBSOCKET__SEND_RPC',
-  DISCONNECT = 'WEBSOCKET__DISCONNECT',
-  DISCONNECTED = 'WEBSOCKET__DISCONNECTED',
-  ERROR = 'WEBSOCKET__ERROR',
-}
+import { Types } from './constants'
 
 interface Connect {
-  readonly type: WebsocketTypes.CONNECT
+  readonly type: Types.CONNECT
   readonly payload: {
     url: string
   }
 }
+
 interface Connecting {
-  readonly type: WebsocketTypes.CONNECTING
+  readonly type: Types.CONNECTING
 }
+
 interface Connected {
-  readonly type: WebsocketTypes.CONNECTED
+  readonly type: Types.CONNECTED
 }
+
 interface Send {
-  readonly type: WebsocketTypes.SEND
+  readonly type: Types.SEND
   readonly payload: {
     type: string
     payload?: object
   }
 }
+
 interface SendRpc {
-  readonly type: WebsocketTypes.SEND_RPC
+  readonly type: Types.SEND_RPC
   readonly payload: {
     service: string
     rpc: string
     message?: object
   }
 }
+
 interface Disconnect {
-  readonly type: WebsocketTypes.DISCONNECT
+  readonly type: Types.DISCONNECT
 }
+
 interface Disconnected {
-  readonly type: WebsocketTypes.DISCONNECTED
+  readonly type: Types.DISCONNECTED
 }
+
 interface Error {
-  readonly type: WebsocketTypes.ERROR
+  readonly type: Types.ERROR
   readonly payload: {
     error: string
     message: string
   }
 }
 
-export type WebsocketActionTypes = Connect | Connecting | Connected | Send | SendRpc | Disconnect | Disconnected | Error
+export type ActionTypes = Connect | Connecting | Connected | Send | SendRpc | Disconnect | Disconnected | Error

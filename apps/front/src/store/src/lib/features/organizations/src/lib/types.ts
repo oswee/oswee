@@ -1,3 +1,4 @@
+import { Types } from './constants'
 import { Organization } from './models'
 // https://www.youtube.com/watch?v=da3ygw2zJAw&t=341s
 // import {
@@ -12,57 +13,43 @@ import { Organization } from './models'
 //   fetchOrganizationFailure,
 // } from './actions'
 
-export enum OrganizationTypes {
-  SELECT = 'ORGANIZATION_SELECT',
-
-  LIST_FETCH = 'ORGANIZATION_LIST_FETCH',
-  LIST_FETCH_REQUEST = 'ORGANIZATION_LIST_FETCH_REQUEST',
-  LIST_FETCH_SUCCESS = 'ORGANIZATION_LIST_FETCH_SUCCESS',
-  LIST_FETCH_FAILURE = 'ORGANIZATION_LIST_FETCH_FAILURE',
-
-  FETCH = 'ORGANIZATION_FETCH',
-  FETCH_REQUEST = 'ORGANIZATION_FETCH_REQUEST',
-  FETCH_SUCCESS = 'ORGANIZATION_FETCH_SUCCESS',
-  FETCH_FAILURE = 'ORGANIZATION_FETCH_FAILURE',
-}
-
 interface Select {
-  readonly type: OrganizationTypes.SELECT
+  readonly type: Types.SELECT
   readonly uuid: string
 }
 interface ListFetch {
-  readonly type: OrganizationTypes.LIST_FETCH
+  readonly type: Types.LIST_FETCH
 }
 interface ListFetchRequest {
-  readonly type: OrganizationTypes.LIST_FETCH_REQUEST
+  readonly type: Types.LIST_FETCH_REQUEST
 }
 interface ListFetchSuccess {
-  readonly type: OrganizationTypes.LIST_FETCH_SUCCESS
+  readonly type: Types.LIST_FETCH_SUCCESS
   readonly organizations: Organization[]
 }
 interface ListFetchFailure {
-  readonly type: OrganizationTypes.LIST_FETCH_FAILURE
+  readonly type: Types.LIST_FETCH_FAILURE
   readonly error: Error
 }
 interface Fetch {
-  readonly type: OrganizationTypes.FETCH
+  readonly type: Types.FETCH
   readonly uuid: string
 }
 interface FetchRequest {
-  readonly type: OrganizationTypes.FETCH_REQUEST
+  readonly type: Types.FETCH_REQUEST
   readonly uuid: string
 }
 interface FetchSuccess {
-  readonly type: OrganizationTypes.FETCH_SUCCESS
+  readonly type: Types.FETCH_SUCCESS
   readonly organization: Organization
 }
 interface FetchFailure {
-  readonly type: OrganizationTypes.FETCH_FAILURE
+  readonly type: Types.FETCH_FAILURE
   readonly uuid: string
   readonly error: Error
 }
 
-export type OrganizationActionTypes =
+export type ActionTypes =
   | Select
   | ListFetch
   | ListFetchRequest

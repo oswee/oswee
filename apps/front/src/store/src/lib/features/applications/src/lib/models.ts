@@ -8,7 +8,7 @@ export interface Application {
   readonly lastModule: string
 }
 
-export interface ApplicationsState {
+export interface IState {
   readonly entities: { [id: string]: Application }
   readonly ids: string[]
   readonly fetching: boolean

@@ -1,2 +1,2 @@
-export * from './lib/actions'
-export * from './lib/selectors'
+export * as UiActions from './lib/actions'
+export * as UiSelectors from './lib/selectors'

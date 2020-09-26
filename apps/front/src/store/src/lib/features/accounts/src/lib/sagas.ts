@@ -1,5 +1,5 @@
 import { call, put, takeLatest } from 'redux-saga/effects'
-import { AccountTypes } from './types'
+import { Types } from './constants'
 import { fetchAccountListRequest, fetchAccountListSuccess, fetchAccountListFailure } from './actions'
 import { API } from './api'
 
@@ -15,7 +15,7 @@ function* fetchAccountListSaga(action) {
 }
 
 function* fetchAccountListListener() {
-  yield takeLatest(AccountTypes.LIST_FETCH, fetchAccountListSaga)
+  yield takeLatest(Types.LIST_FETCH, fetchAccountListSaga)
 }
 
 export default [fetchAccountListListener]

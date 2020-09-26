@@ -1,11 +1,11 @@
-import { AppNavigationTypes } from './constants'
+import { Types } from './constants'
 import { AppNavigationActionTypes } from './types'
-import { AppNavigationState } from './models'
+import { IState } from './models'
 import { ListModulesResponse as ListModulesResponseRpc, Module } from '@dzintars/npm-test-pkg'
 
-export { AppNavigationState }
+export { IState }
 
-const initialState: AppNavigationState = {
+const initialState: IState = {
   entities: {},
   ids: [],
   fetching: false,
@@ -14,18 +14,18 @@ const initialState: AppNavigationState = {
   error: null,
 }
 
-export default (state: AppNavigationState = initialState, action: AppNavigationActionTypes): AppNavigationState => {
+export default (state: IState = initialState, action: AppNavigationActionTypes): IState => {
   switch (action.type) {
-    // case AppNavigationTypes.SELECT_MODULE:
+    // case Types.SELECT_MODULE:
     //   return {
     //     ...state,
     //     selected: action.payload.id,
     //   }
 
-    // case AppNavigationTypes.LIST_FETCH_MODULES_REQUEST:
+    // case Types.LIST_FETCH_MODULES_REQUEST:
     //   return { ...state, fetching: true, error: null }
 
-    // case AppNavigationTypes.LIST_FETCH_MODULES_SUCCESS:
+    // case Types.LIST_FETCH_MODULES_SUCCESS:
     //   return {
     //     ...state,
     //     fetching: false,
@@ -35,7 +35,7 @@ export default (state: AppNavigationState = initialState, action: AppNavigationA
     //     ids: action.payload.ids,
     //   }
 
-    // case AppNavigationTypes.LIST_MODULES_RESPONSE:
+    // case Types.LIST_MODULES_RESPONSE:
     //   return {
     //     ...state,
     //     entities: {
@@ -43,7 +43,7 @@ export default (state: AppNavigationState = initialState, action: AppNavigationA
     //     },
     //     ids: action.payload.ids,
     //   }
-    case AppNavigationTypes.ListModulesResponse:
+    case Types.ListModulesResponse:
       // const m: ListModulesResponseRpc.AsObject = action.payload
       // const r = new ListModulesResponseRpc()
 

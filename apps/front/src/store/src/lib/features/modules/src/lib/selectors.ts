@@ -1,5 +1,5 @@
 import { createSelector, createStructuredSelector } from 'reselect'
-import { RootState } from '../../../reducer'
+import { RootState } from 'Types'
 
 // INPUT/BASE/ORIGIN SELECTORS
 const getState = (state: RootState) => state.modules
@@ -51,7 +51,7 @@ const selectModuleSummary = createStructuredSelector({
   title: selectModuleName,
 })
 
-export const ModuleSelectors = {
+export const Selectors = {
   selectFetchState,
   selectSelectedModuleId,
   selectAllModuleIds,

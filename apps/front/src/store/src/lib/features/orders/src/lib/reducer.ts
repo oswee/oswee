@@ -1,9 +1,10 @@
-import { OrderTypes, OrderActionTypes } from './types'
-import { OrdersState } from './models'
+import { ActionTypes } from './types'
+import { Types } from './constants'
+import { IState } from './models'
 
-export { OrdersState }
+export { IState }
 
-const initialState: OrdersState = {
+const initialState: IState = {
   entities: {},
   ids: [],
   fetching: false,
@@ -11,15 +12,15 @@ const initialState: OrdersState = {
   error: null,
 }
 
-export default (state: OrdersState = initialState, action: OrderActionTypes): OrdersState => {
+export default (state: IState = initialState, action: ActionTypes): IState => {
   switch (action.type) {
-    case OrderTypes.SELECT:
+    case Types.SELECT:
       return { ...state, selected: action.uuid }
 
-    case OrderTypes.LIST_FETCH_REQUEST:
+    case Types.LIST_FETCH_REQUEST:
       return { ...state, fetching: true, error: null }
 
-    case OrderTypes.LIST_FETCH_SUCCESS:
+    case Types.LIST_FETCH_SUCCESS:
       return {
         ...state,
         fetching: false,
@@ -33,13 +34,13 @@ export default (state: OrdersState = initialState, action: OrderActionTypes): Or
         ids: action.orders.map(order => order.uuid),
       }
 
-    case OrderTypes.LIST_FETCH_FAILURE:
+    case Types.LIST_FETCH_FAILURE:
       return { ...state, fetching: false, error: action.error }
 
-    case OrderTypes.FETCH_REQUEST:
+    case Types.FETCH_REQUEST:
       return { ...state, fetching: true, error: null }
 
-    case OrderTypes.FETCH_SUCCESS:
+    case Types.FETCH_SUCCESS:
       return {
         ...state,
         fetching: false,
@@ -49,7 +50,7 @@ export default (state: OrdersState = initialState, action: OrderActionTypes): Or
         },
       }
 
-    case OrderTypes.FETCH_FAILURE:
+    case Types.FETCH_FAILURE:
       return { ...state, fetching: false, error: action.error }
 
     default:

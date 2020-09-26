@@ -1,6 +1,6 @@
 import { put, takeLatest, take, call, delay } from 'redux-saga/effects'
 
-import { SystemTypes } from './types'
+import { Types } from './constants'
 import { SystemActions } from './actions'
 import { websocketSend } from '../websocket'
 
@@ -12,7 +12,7 @@ function* workerSaga(action: ReturnType<typeof SystemActions.select>) {
 
 function* watcherSaga() {
   // yield takeLatest(SystemTypes.SELECT, workerSaga)
-  yield takeLatest(SystemTypes.LOADED, workerSaga)
+  yield takeLatest(Types.LOADED, workerSaga)
 }
 
 export default [watcherSaga]

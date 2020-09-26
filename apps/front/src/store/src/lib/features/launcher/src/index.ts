@@ -1,3 +1,3 @@
-export * from './lib/actions'
-export * from './lib/models'
-export { LauncherSelectors } from './lib/selectors'
+export * as LauncherActions from './lib/actions'
+export { IState as LauncherState } from './lib/models'
+export { Selectors as LauncherSelectors } from './lib/selectors'

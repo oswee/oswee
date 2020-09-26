@@ -1,17 +1,18 @@
 // import { createAction, ActionsUnion } from '../../actions'
-import { SystemTypes, SystemActionTypes } from './types'
+import { ActionTypes } from './types'
+import { Types } from './constants'
 // import { SystemState } from './models'
 
 // ACTION CREATORS
-const select = (id: string): SystemActionTypes => ({
-  type: SystemTypes.SELECT,
+const select = (id: string): ActionTypes => ({
+  type: Types.SELECT,
   payload: {
     id,
   },
 })
 
-const loaded = (): SystemActionTypes => ({
-  type: SystemTypes.LOADED,
+const loaded = (): ActionTypes => ({
+  type: Types.LOADED,
 })
 
 export const SystemActions = {

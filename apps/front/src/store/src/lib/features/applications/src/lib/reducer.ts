@@ -1,9 +1,10 @@
-import { ApplicationTypes, ApplicationActionTypes } from './types'
-import { ApplicationsState } from './models'
+import { Types } from './constants'
+import { ActionTypes } from './types'
+import { IState } from './models'
 
-export { ApplicationsState }
+export { IState }
 
-const initialState: ApplicationsState = {
+const initialState: IState = {
   entities: {
     1: {
       id: '1',
@@ -44,9 +45,9 @@ const initialState: ApplicationsState = {
   currentApplication: '',
 }
 
-export default (state: ApplicationsState = initialState, action: ApplicationActionTypes): ApplicationsState => {
+export default (state: IState = initialState, action: ActionTypes): IState => {
   switch (action.type) {
-    case ApplicationTypes.SELECT:
+    case Types.SELECT:
       return {
         ...state,
         selected: {
@@ -56,10 +57,10 @@ export default (state: ApplicationsState = initialState, action: ApplicationActi
         },
       }
 
-    case ApplicationTypes.LIST_FETCH_REQUEST:
+    case Types.LIST_FETCH_REQUEST:
       return { ...state, fetching: true, error: null }
 
-    case ApplicationTypes.LIST_FETCH_SUCCESS:
+    case Types.LIST_FETCH_SUCCESS:
       return {
         ...state,
         fetching: false,
@@ -73,13 +74,13 @@ export default (state: ApplicationsState = initialState, action: ApplicationActi
         ids: action.applications.map(app => app.id),
       }
 
-    case ApplicationTypes.LIST_FETCH_FAILURE:
+    case Types.LIST_FETCH_FAILURE:
       return { ...state, fetching: false, error: action.error }
 
-    case ApplicationTypes.FETCH_REQUEST:
+    case Types.FETCH_REQUEST:
       return { ...state, fetching: true, error: null }
 
-    case ApplicationTypes.FETCH_SUCCESS:
+    case Types.FETCH_SUCCESS:
       return {
         ...state,
         fetching: false,
@@ -89,19 +90,19 @@ export default (state: ApplicationsState = initialState, action: ApplicationActi
         },
       }
 
-    case ApplicationTypes.START:
+    case Types.START:
       return {
         ...state,
         currentApplication: action.payload.id,
       }
 
-    case ApplicationTypes.GET:
+    case Types.GET:
       return {
         ...state,
         fetching: true,
       }
 
-    case ApplicationTypes.GET_SUCCESS:
+    case Types.GET_SUCCESS:
       // console.log('APP_GET_OK', action.payload)
       return {
         ...state,
@@ -113,7 +114,7 @@ export default (state: ApplicationsState = initialState, action: ApplicationActi
         ids: action.payload.ids,
       }
 
-    // case ApplicationTypes.LIST_APPLICATIONS_RESPONSE:
+    // case Types.LIST_APPLICATIONS_RESPONSE:
     //   // console.log('APP_GET_OK', action.payload)
     //   return {
     //     ...state,
@@ -125,7 +126,7 @@ export default (state: ApplicationsState = initialState, action: ApplicationActi
     //     ids: action.payload.ids,
     //   }
 
-    case ApplicationTypes.ListApplicationsResponse:
+    case Types.ListApplicationsResponse:
       // console.log('APP_GET_OK', action.payload)
       return {
         ...state,
@@ -137,7 +138,7 @@ export default (state: ApplicationsState = initialState, action: ApplicationActi
         ids: action.payload.ids,
       }
 
-    case ApplicationTypes.FETCH_FAILURE:
+    case Types.FETCH_FAILURE:
       return { ...state, fetching: false, error: action.error }
 
     default:

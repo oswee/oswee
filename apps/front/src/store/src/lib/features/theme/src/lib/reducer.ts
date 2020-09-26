@@ -1,9 +1,10 @@
-import { ThemeTypes, ThemeActionTypes } from './types'
-import { ThemeState } from './models'
+import { ActionTypes } from './types'
+import { Types } from './constants'
+import { IState } from './models'
 
-export { ThemeState }
+export { IState }
 
-const initialState: ThemeState = {
+const initialState: IState = {
   active: 'light',
   light: {
     '--root-layout-background-color': 'hsla(0, 0%, 100%, 1)',
@@ -25,9 +26,9 @@ const initialState: ThemeState = {
   },
 }
 
-export default (state: ThemeState = initialState, action: ThemeActionTypes): ThemeState => {
+export default (state: IState = initialState, action: ActionTypes): IState => {
   switch (action.type) {
-    case ThemeTypes.SWITCH:
+    case Types.SWITCH:
       // TODO: Conditional (ternary) operator
       if (state.active === 'light') {
         return {

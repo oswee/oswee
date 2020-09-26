@@ -1,18 +1,19 @@
-import { SystemTypes, SystemActionTypes } from './types'
-import { SystemState } from './models'
+import { ActionTypes } from './types'
+import { Types } from './constants'
+import { IState } from './models'
 
-export { SystemState }
+export { IState }
 
-const initialState: SystemState = {
+const initialState: IState = {
   entities: {},
   ids: [],
   selected: '',
   error: null,
 }
 
-export default (state: SystemState = initialState, action: SystemActionTypes): SystemState => {
+export default (state: IState = initialState, action: ActionTypes): IState => {
   switch (action.type) {
-    case SystemTypes.SELECT:
+    case Types.SELECT:
       return {
         ...state,
         selected: action.payload.id,

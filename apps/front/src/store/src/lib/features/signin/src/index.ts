@@ -1,3 +1,3 @@
-export * from './lib/actions'
-export * from './lib/models'
-export * from './lib/selectors'
+export * as SigninActions from './lib/actions'
+export { IState as SigninState } from './lib/models'
+export * as SigninSelectors from './lib/selectors'

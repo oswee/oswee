@@ -1,9 +1,10 @@
-import { ModuleTypes, ModuleActionTypes } from './types'
-import { ModulesState } from './models'
+import { ActionTypes } from './types'
+import { Types } from './constants'
+import { IState } from './models'
 
-export { ModulesState }
+export { IState }
 
-const initialState: ModulesState = {
+const initialState: IState = {
   entities: {},
   ids: [],
   highlightedModule: '',
@@ -15,14 +16,14 @@ const initialState: ModulesState = {
   },
 }
 
-export default (state: ModulesState = initialState, action: ModuleActionTypes): ModulesState => {
+export default (state: IState = initialState, action: ActionTypes): IState => {
   switch (action.type) {
-    case ModuleTypes.GET:
+    case Types.GET:
       return {
         ...state,
         fetching: true,
       }
-    case ModuleTypes.GET_SUCCESS:
+    case Types.GET_SUCCESS:
       return {
         ...state,
         entities: {

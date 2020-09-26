@@ -1,33 +1,34 @@
-import { createAction, ActionsUnion } from '../../../../actions'
-import { LauncherTypes, LauncherActionTypes } from './types'
+import { createAction, ActionsUnion } from 'oswee/libs/action/src/index'
+import { ActionTypes } from './types'
+import { Types } from './constants'
 
 // ACTION CREATORS
-const toggleLauncher = (): LauncherActionTypes => ({
-  type: LauncherTypes.TOGGLE,
+const toggleLauncher = (): ActionTypes => ({
+  type: Types.TOGGLE,
 })
 
-const displayLauncher = (): LauncherActionTypes => ({
-  type: LauncherTypes.DISPLAY,
+const displayLauncher = (): ActionTypes => ({
+  type: Types.DISPLAY,
 })
 
-const hideLauncher = (): LauncherActionTypes => ({
-  type: LauncherTypes.HIDE,
+const hideLauncher = (): ActionTypes => ({
+  type: Types.HIDE,
 })
 
-const launcherDisplayed = (): LauncherActionTypes => ({
-  type: LauncherTypes.DISPLAYED,
+const launcherDisplayed = (): ActionTypes => ({
+  type: Types.DISPLAYED,
 })
 
-const launcherHidden = (): LauncherActionTypes => ({
-  type: LauncherTypes.HIDDEN,
+const launcherHidden = (): ActionTypes => ({
+  type: Types.HIDDEN,
 })
 
 export const LauncherActions = {
-  toggleLauncher: () => createAction(LauncherTypes.TOGGLE, {}),
-  displayLauncher: () => createAction(LauncherTypes.DISPLAY, {}),
-  hideLauncher: () => createAction(LauncherTypes.HIDE, {}),
-  launcherDisplayed: () => createAction(LauncherTypes.DISPLAYED, {}),
-  launcherHidden: () => createAction(LauncherTypes.HIDDEN, {}),
+  toggleLauncher: () => createAction(Types.TOGGLE, {}),
+  displayLauncher: () => createAction(Types.DISPLAY, {}),
+  hideLauncher: () => createAction(Types.HIDE, {}),
+  launcherDisplayed: () => createAction(Types.DISPLAYED, {}),
+  launcherHidden: () => createAction(Types.HIDDEN, {}),
 }
 
 export type LauncherActions = ActionsUnion<typeof LauncherActions>

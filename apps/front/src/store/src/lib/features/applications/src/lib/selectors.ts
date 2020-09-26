@@ -1,5 +1,5 @@
 import { createSelector } from 'reselect'
-import { RootState } from '../../../reducer'
+import { RootState } from 'Types'
 
 // INPUT/BASE SELECTORS
 const getState = (state: RootState) => state.applications
@@ -33,7 +33,7 @@ const selectSelectedApplication = createSelector([getState], state => state.sele
 
 const selectDefaultApplicationModule = createSelector([selectApplicationById], application => application.defaultModule)
 
-export const ApplicationSelectors = {
+export const Selectors = {
   selectFetchState,
   selectSelectedApplicationId,
   selectAllApplicationIds,

@@ -2,16 +2,16 @@ import { Store } from 'redux'
 import * as ReselectTools from 'reselect-tools'
 
 // HYGEN.IO: INJECT IMPORT HERE
-import { WebsocketSelectors } from './src/features/websocket'
-import { RoutingSelectors } from './src/features/routing'
-import { SystemSelectors } from './src/features/system'
-import { UiSelectors } from './src/features/ui'
-import { LauncherSelectors } from './src/features/launcher'
-import { ThemeSelectors } from './src/features/theme'
-import { UserSelectors } from './src/features/users'
-import { ApplicationSelectors } from './src/features/applications'
-import { ModuleSelectors } from './src/features/modules'
-import { OrganizationSelectors } from './src/features/organizations'
+import { WebsocketSelectors } from './features/websocket/src'
+import { RoutingSelectors } from './features/routing/src'
+import { SystemSelectors } from './features/system/src'
+import { UiSelectors } from './features/ui/src'
+import { LauncherSelectors } from './features/launcher/src'
+import { ThemeSelectors } from './features/theme/src'
+import { UsersSelectors } from './features/users/src'
+import { ApplicationsSelectors } from './features/applications/src'
+import { ModulesSelectors } from './features/modules/src'
+import { OrganizationsSelectors } from './features/organizations/src'
 
 export const startReselect = (store: Store) => {
   ReselectTools.getStateWith(() => store.getState())
@@ -22,8 +22,8 @@ export const startReselect = (store: Store) => {
   ReselectTools.registerSelectors(UiSelectors)
   ReselectTools.registerSelectors(LauncherSelectors)
   ReselectTools.registerSelectors(ThemeSelectors)
-  ReselectTools.registerSelectors(UserSelectors)
-  ReselectTools.registerSelectors(ApplicationSelectors)
-  ReselectTools.registerSelectors(ModuleSelectors)
-  ReselectTools.registerSelectors(OrganizationSelectors)
+  ReselectTools.registerSelectors(UsersSelectors)
+  ReselectTools.registerSelectors(ApplicationsSelectors)
+  ReselectTools.registerSelectors(ModulesSelectors)
+  ReselectTools.registerSelectors(OrganizationsSelectors)
 }

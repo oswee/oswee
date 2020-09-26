@@ -1,4 +1,4 @@
-export enum AppNavigationTypes {
+export enum Types {
   SELECT_MODULE = 'APP_NAVIGATION__SELECT_MODULE',
 
   LIST_FETCH_MODULES = 'APP_NAVIGATION__LIST_FETCH_MODULES',

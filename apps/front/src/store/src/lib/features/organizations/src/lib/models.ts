@@ -3,7 +3,7 @@ export interface Organization {
   readonly title: string
 }
 
-export interface OrganizationsState {
+export interface IState {
   readonly entities: { [uuid: string]: Organization }
   readonly ids: string[]
   readonly fetching: boolean

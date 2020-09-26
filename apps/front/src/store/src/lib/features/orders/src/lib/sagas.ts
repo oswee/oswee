@@ -1,5 +1,5 @@
 import { call, put, takeLatest } from 'redux-saga/effects'
-import { OrderTypes } from './types'
+import { Types } from './constants'
 import { fetchOrderListRequest, fetchOrderListSuccess, fetchOrderListFailure } from './actions'
 import { API } from './api'
 
@@ -15,7 +15,7 @@ function* fetchOrderListSaga(action) {
 }
 
 function* fetchOrderListListener() {
-  yield takeLatest(OrderTypes.LIST_FETCH, fetchOrderListSaga)
+  yield takeLatest(Types.LIST_FETCH, fetchOrderListSaga)
 }
 
 export default [fetchOrderListListener]

@@ -1,3 +1,3 @@
-export interface LauncherState {
+export interface IState {
   readonly isLauncherDisplayed: boolean
 }

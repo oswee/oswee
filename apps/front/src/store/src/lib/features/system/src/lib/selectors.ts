@@ -1,13 +1,13 @@
 import { createSelector } from 'reselect'
-import { RootState } from '../../../reducer'
-import { SystemState } from './models'
+import { RootState } from 'Types'
+import { IState } from './models'
 
 // INPUT/BASE SELECTORS
-const getState = (state: RootState): SystemState => state.system
+const getState = (state: RootState): IState => state.system
 
 // MEMOIZED SELECTORS
 const selectFetchState = createSelector([getState], state => state.selected)
 
-export const SystemSelectors = {
+export const Selectors = {
   selectFetchState,
 }

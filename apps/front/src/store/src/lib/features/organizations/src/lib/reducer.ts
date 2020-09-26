@@ -1,9 +1,10 @@
-import { OrganizationTypes, OrganizationActionTypes } from './types'
-import { OrganizationsState } from './models'
+import { ActionTypes } from './types'
+import { Types } from './constants'
+import { IState } from './models'
 
-export { OrganizationsState }
+export { IState }
 
-const initialState: OrganizationsState = {
+const initialState: IState = {
   entities: {},
   ids: [],
   fetching: false,
@@ -11,15 +12,15 @@ const initialState: OrganizationsState = {
   error: null,
 }
 
-export default (state: OrganizationsState = initialState, action: OrganizationActionTypes): OrganizationsState => {
+export default (state: IState = initialState, action: ActionTypes): IState => {
   switch (action.type) {
-    case OrganizationTypes.SELECT:
+    case Types.SELECT:
       return { ...state, selected: action.uuid }
 
-    case OrganizationTypes.LIST_FETCH_REQUEST:
+    case Types.LIST_FETCH_REQUEST:
       return { ...state, fetching: true, error: null }
 
-    case OrganizationTypes.LIST_FETCH_SUCCESS:
+    case Types.LIST_FETCH_SUCCESS:
       return {
         ...state,
         fetching: false,
@@ -33,13 +34,13 @@ export default (state: OrganizationsState = initialState, action: OrganizationAc
         ids: action.organizations.map(organization => organization.uuid),
       }
 
-    case OrganizationTypes.LIST_FETCH_FAILURE:
+    case Types.LIST_FETCH_FAILURE:
       return { ...state, fetching: false, error: action.error }
 
-    case OrganizationTypes.FETCH_REQUEST:
+    case Types.FETCH_REQUEST:
       return { ...state, fetching: true, error: null }
 
-    case OrganizationTypes.FETCH_SUCCESS:
+    case Types.FETCH_SUCCESS:
       return {
         ...state,
         fetching: false,
@@ -49,7 +50,7 @@ export default (state: OrganizationsState = initialState, action: OrganizationAc
         },
       }
 
-    case OrganizationTypes.FETCH_FAILURE:
+    case Types.FETCH_FAILURE:
       return { ...state, fetching: false, error: action.error }
 
     default:

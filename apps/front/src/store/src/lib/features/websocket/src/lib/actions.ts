@@ -1,19 +1,21 @@
-import { WebsocketTypes, WebsocketActionTypes } from './types'
-import { ActionWithPayload } from '../../../../actions'
+import { ActionTypes } from './types'
+import { Types } from './constants'
 
-export const websocketConnect = (url: string): WebsocketActionTypes => ({
-  type: WebsocketTypes.CONNECT,
+// import {ActionWithPayload} from 'oswee/libs/action/src/index'
+
+export const websocketConnect = (url: string): ActionTypes => ({
+  type: Types.CONNECT,
   payload: {
     url,
   },
 })
 
-export const websocketConnecting = (): WebsocketActionTypes => ({
-  type: WebsocketTypes.CONNECTING,
+export const websocketConnecting = (): ActionTypes => ({
+  type: Types.CONNECTING,
 })
 
-export const websocketConnected = (): WebsocketActionTypes => ({
-  type: WebsocketTypes.CONNECTED,
+export const websocketConnected = (): ActionTypes => ({
+  type: Types.CONNECTED,
 })
 
 /**
@@ -26,20 +28,20 @@ export const websocketConnected = (): WebsocketActionTypes => ({
  * @param payload - Message payload
  * @returns Does not return anything
  */
-export const websocketSend = (type: string, payload: object): WebsocketActionTypes => ({
-  type: WebsocketTypes.SEND,
+export const websocketSend = (type: string, payload: object): ActionTypes => ({
+  type: Types.SEND,
   payload: {
     type,
     payload,
   },
 })
 
-export const websocketDisconnect = (): WebsocketActionTypes => ({
-  type: WebsocketTypes.DISCONNECT,
+export const websocketDisconnect = (): ActionTypes => ({
+  type: Types.DISCONNECT,
 })
 
-export const websocketDisconnected = (): WebsocketActionTypes => ({
-  type: WebsocketTypes.DISCONNECTED,
+export const websocketDisconnected = (): ActionTypes => ({
+  type: Types.DISCONNECTED,
 })
 
 /**
@@ -53,8 +55,8 @@ export const websocketDisconnected = (): WebsocketActionTypes => ({
  * @param message - Message payload
  * @returns Does not return anything
  */
-export const sendRpc = (service: string, rpc: string, message: object): WebsocketActionTypes => ({
-  type: WebsocketTypes.SEND_RPC,
+export const sendRpc = (service: string, rpc: string, message: object): ActionTypes => ({
+  type: Types.SEND_RPC,
   payload: {
     service,
     rpc,
@@ -65,7 +67,7 @@ export const sendRpc = (service: string, rpc: string, message: object): Websocke
 /**
  * TODO: Experimenting with namespaces
  */
-export const WebsocketActions = {
+export const Actions = {
   Connect: websocketConnect,
   Connecting: websocketConnecting,
   Connected: websocketConnected,

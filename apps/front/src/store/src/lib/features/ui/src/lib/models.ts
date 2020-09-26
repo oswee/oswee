@@ -1,4 +1,4 @@
-export interface UiState {
+export interface IState {
   readonly isActionCenterDisplayed: boolean
   readonly isAccountWidgetDisplayed: boolean
   readonly application: {

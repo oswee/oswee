@@ -1,11 +1,11 @@
 import { createSelector } from 'reselect'
-import { RootState } from '../../../reducer'
+import { RootState } from 'Types'
 
 const getState = (state: RootState) => state.applications
 
 // TODO: Refactor namespace
 //eslint-disable-next-line @typescript-eslint/no-namespace
-export namespace ApplicationSelectors {
+export namespace Selectors {
   export const selected = createSelector([getState], state => state.selected)
   export const defaultApplication = createSelector([getState], state => state.defaultApplication)
 

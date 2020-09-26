@@ -7,6 +7,15 @@ load("//tools:ts_library.bzl", "ts_library")
 
 package(default_visibility = ["//visibility:public"])
 
+exports_files(
+    [
+        # "tsconfig.base.json",
+        # "tsconfig.json",
+        # "package.json",
+        "src/types.d.ts",
+    ],
+    visibility = ["//visibility:public"],
+)
 # filegroup(
 #     name = "assets",
 #     srcs = glob([

@@ -1,9 +1,10 @@
-import { AccountTypes, AccountActionTypes } from './types'
-import { AccountsState } from './models'
+import { ActionTypes } from './types'
+import { Types } from './constants'
+import { IState } from './models'
 
-export { AccountsState }
+export { IState }
 
-const initialState: AccountsState = {
+const initialState: IState = {
   entities: {},
   ids: [],
   fetching: false,
@@ -11,21 +12,21 @@ const initialState: AccountsState = {
   error: null,
 }
 
-export default (state: AccountsState = initialState, action: AccountActionTypes): AccountsState => {
+export default (state: IState = initialState, action: ActionTypes): IState => {
   switch (action.type) {
-    case AccountTypes.SELECT:
+    case Types.SELECT:
       return { ...state, selected: action.uuid }
 
-    case AccountTypes.LIST_FETCH_REQUEST:
+    case Types.LIST_FETCH_REQUEST:
       return { ...state, fetching: true, error: null }
 
-    case AccountTypes.LIST_FETCH_SUCCESS:
+    case Types.LIST_FETCH_SUCCESS:
       return {
         ...state,
         fetching: false,
         entities: {
           ...state.entities,
-          ...action.accounts.reduce((map, account) => {
+          ...action.accounts.reduce((map, account): any => {
             map[account.uuid] = account
             return map
           }, {}),
@@ -33,13 +34,13 @@ export default (state: AccountsState = initialState, action: AccountActionTypes)
         ids: action.accounts.map(account => account.uuid),
       }
 
-    case AccountTypes.LIST_FETCH_FAILURE:
+    case Types.LIST_FETCH_FAILURE:
       return { ...state, fetching: false, error: action.error }
 
-    case AccountTypes.FETCH_REQUEST:
+    case Types.FETCH_REQUEST:
       return { ...state, fetching: true, error: null }
 
-    case AccountTypes.FETCH_SUCCESS:
+    case Types.FETCH_SUCCESS:
       return {
         ...state,
         fetching: false,
@@ -49,7 +50,7 @@ export default (state: AccountsState = initialState, action: AccountActionTypes)
         },
       }
 
-    case AccountTypes.FETCH_FAILURE:
+    case Types.FETCH_FAILURE:
       return { ...state, fetching: false, error: action.error }
 
     default:

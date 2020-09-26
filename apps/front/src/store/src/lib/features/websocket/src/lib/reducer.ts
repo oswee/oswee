@@ -1,26 +1,27 @@
-import { WebsocketTypes, WebsocketActionTypes } from './types'
-import { WebsocketState } from './models'
+import { Types } from './constants'
+import { ActionTypes } from './types'
+import { IState } from './models'
 
-export { WebsocketState }
+export { IState }
 
-export const websocketState: WebsocketState = {
-  state: WebsocketTypes.DISCONNECTED,
+export const initialState: IState = {
+  state: Types.DISCONNECTED,
   connected: false,
 }
 
-export default (state: WebsocketState = websocketState, action: WebsocketActionTypes): WebsocketState => {
+export default (state: IState = initialState, action: ActionTypes): IState => {
   switch (action.type) {
-    case WebsocketTypes.CONNECT:
+    case Types.CONNECT:
       return { ...state, state: action.type }
-    case WebsocketTypes.CONNECTING:
+    case Types.CONNECTING:
       return { ...state, state: action.type }
-    case WebsocketTypes.CONNECTED:
+    case Types.CONNECTED:
       return { ...state, state: action.type, connected: true }
-    case WebsocketTypes.SEND:
+    case Types.SEND:
       return { ...state, state: action.type }
-    case WebsocketTypes.DISCONNECT:
+    case Types.DISCONNECT:
       return { ...state, state: action.type }
-    case WebsocketTypes.DISCONNECTED:
+    case Types.DISCONNECTED:
       return { ...state, state: action.type, connected: false }
 
     default:

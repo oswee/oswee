@@ -1,19 +1,15 @@
-import { SystemState } from './models'
-
-export enum SystemTypes {
-  SELECT = 'SYSTEM__SELECT',
-  LOADED = 'SYSTEM__LOADED',
-}
+import { Types } from './constants'
+import { IState } from './models'
 
 interface Select {
-  readonly type: SystemTypes.SELECT
+  readonly type: Types.SELECT
   readonly payload: {
     id: string
   }
 }
 
 interface Loaded {
-  readonly type: SystemTypes.LOADED
+  readonly type: Types.LOADED
 }
 
-export type SystemActionTypes = Select | Loaded
+export type ActionTypes = Select | Loaded

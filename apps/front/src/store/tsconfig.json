@@ -1,0 +1,23 @@
+{
+  "extends": "../../../../tsconfig.json",
+  "compilerOptions": {
+    "types": [
+      "node",
+      "Types"
+    ],
+    "paths": {
+      "*": [
+        "./src/types/*"
+      ]
+    }
+  },
+  "include": [
+    "src/types/**/*.ts"
+  ],
+  "files": [],
+  "references": [
+    {
+      "path": "./src/lib/features/websocket/tsconfig.json"
+    }
+  ]
+}
