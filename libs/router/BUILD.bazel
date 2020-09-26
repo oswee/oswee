@@ -1,0 +1,31 @@
+load("@npm//@bazel/typescript:index.bzl", "ts_config", "ts_library")
+
+package(default_visibility = ["//visibility:public"])
+
+ts_library(
+    name = "router",
+    srcs = glob(
+        include = ["src/**/*.ts"],
+        exclude = [
+            "src/**/*.spec.ts",
+            "src/test-setup.ts",
+        ],
+    ),
+    # module_name = "@oswee/elements/avatar",
+    module_root = "src",
+    # tsconfig = "tsconfig_lib",
+    deps = [
+        "@npm//query-string",
+        "@npm//history",
+        "@npm//tslib",
+    ],
+)
+
+ts_config(
+    name = "tsconfig_lib",
+    src = "tsconfig.lib.json",
+    deps = [
+        "tsconfig.json",
+        # "//libs/elements/oswee:tsconfig",
+    ],
+)

@@ -1,0 +1,36 @@
+
+load("@npm//@bazel/typescript:index.bzl", "ts_config", "ts_library")
+
+package(default_visibility = ["//visibility:public"])
+
+ts_library(
+    name = "store",
+    srcs = glob(
+        include = ["src/**/*.ts"],
+        exclude = [
+            "src/**/*.spec.ts",
+            "src/test-setup.ts",
+        ],
+    ),
+    # module_name = "@oswee/elements/avatar",
+    module_root = "src",
+    tsconfig = "tsconfig",
+    deps = [
+        "@oswee//libs/router:router",
+        "@oswee//apps/front/src/store/src/lib/features/websocket:websocket",
+        "@npm//redux",
+        "@npm//redux-saga",
+        "@npm//universal-router",
+        "@npm//reselect",
+        "@npm//history",
+        "@npm//tslib",
+    ],
+)
+
+ts_config(
+    name = "tsconfig",
+    src = "tsconfig.json",
+    deps = [
+        "//:tsconfig.json",
+    ],
+)
