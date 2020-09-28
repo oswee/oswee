@@ -1,3 +1,8 @@
+import { connect } from '@oswee/libs/connect'
+
+export * from './lib/store'
+export * from './lib/reducer'
+
 export * from './lib/features/websocket/src'
 export * from './lib/features/routing/src'
 export * from './lib/features/system/src'
@@ -9,8 +14,3 @@ export * from './lib/features/applications/src'
 export * from './lib/features/modules/src'
 export * from './lib/features/organizations/src'
 export * from './lib/features/app-navigation/src'
-
-export * from './lib/store'
-export * from './lib/reducer'
-
-import { connect } from 'oswee/libs/connect/index'

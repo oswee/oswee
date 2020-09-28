@@ -1,7 +1,8 @@
+// / <reference path="../../../../types/index.d.ts"/>
 import { createSelector } from 'reselect'
-// import {RootState} from 'oswee/apps/front/src/store/src/lib/reducer'
-// import {RootState} from 'oswee/apps/front/src/store/src/types'
-import { RootState } from 'Types'
+import { RootState } from '../../../../reducer' // Original import
+// import { RootState } from 'MyTypes'
+// import { RootState } from '../../../../../types'
 import { IState } from './reducer'
 
 const getState = (state: RootState): IState => state.websocket

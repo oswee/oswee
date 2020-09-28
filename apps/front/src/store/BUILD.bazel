@@ -3,6 +3,15 @@ load("@npm//@bazel/typescript:index.bzl", "ts_config", "ts_library")
 
 package(default_visibility = ["//visibility:public"])
 
+exports_files(
+    [
+        "types/index.d.ts",
+        "src/reducer.ts",
+        # "tsconfig.json",
+    ],
+    visibility = ["//visibility:public"],
+)
+
 ts_library(
     name = "store",
     srcs = glob(

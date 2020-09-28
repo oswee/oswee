@@ -14,9 +14,9 @@ ts_library(
     ),
     # module_name = "@oswee/elements/avatar",
     module_root = "src",
-    # tsconfig = "tsconfig_lib",
+    tsconfig = "tsconfig",
     deps = [
-        # "@oswee//apps/front/src/store:store",
+        # "@oswee//apps/front/src/store:store", # Circular dependency
         "@oswee//libs/router:router",
         "@npm//google-protobuf",
         "@npm//redux",
@@ -26,15 +26,17 @@ ts_library(
         "@npm//history",
         "@npm//tslib",
     ],
-    data = [
-        "@oswee//apps/front:src/types.d.ts",
-        ]
+    # data = [
+    #     # "@oswee//apps/front/src/store:types/index.d.ts",
+    #     "@oswee//apps/front/src/store:src/reducer.ts",
+    # ]
 )
 
 ts_config(
-    name = "tsconfig_lib",
+    name = "tsconfig",
     src = "tsconfig.lib.json",
     deps = [
         "tsconfig.json",
+        "//:tsconfig.root.json",
     ],
 )

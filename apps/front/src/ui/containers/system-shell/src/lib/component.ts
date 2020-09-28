@@ -1,5 +1,5 @@
 import { LitElement, customElement, property, TemplateResult, CSSResultArray } from 'lit-element'
-import { connect } from 'oswee/libs/connect'
+import { connect } from 'oswee/libs/connect/src'
 import {
   store,
   RootState,

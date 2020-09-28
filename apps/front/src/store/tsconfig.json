@@ -1,19 +1,9 @@
 {
-  "extends": "../../../../tsconfig.json",
+  "extends": "../../../../tsconfig.root.json",
   "compilerOptions": {
-    "types": [
-      "node",
-      "Types"
-    ],
-    "paths": {
-      "*": [
-        "./src/types/*"
-      ]
-    }
+    "types": ["node", "Types"]
   },
-  "include": [
-    "src/types/**/*.ts"
-  ],
+  "include": ["types/*.d.ts"],
   "files": [],
   "references": [
     {

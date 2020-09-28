@@ -13,7 +13,7 @@ ts_library(
     ),
     # module_name = "@oswee/elements/avatar",
     module_root = "src",
-    # tsconfig = "tsconfig_lib",
+    tsconfig = "tsconfig",
     deps = [
         "@npm//query-string",
         "@npm//history",
@@ -22,10 +22,10 @@ ts_library(
 )
 
 ts_config(
-    name = "tsconfig_lib",
+    name = "tsconfig",
     src = "tsconfig.lib.json",
     deps = [
         "tsconfig.json",
-        # "//libs/elements/oswee:tsconfig",
+        "//:tsconfig.root.json",
     ],
 )

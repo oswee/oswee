@@ -1,7 +1,7 @@
 import { Types } from './constants'
-import { AppNavigationActionTypes } from './types'
+import { ActionTypes } from './types'
 import { IState } from './models'
-import { ListModulesResponse as ListModulesResponseRpc, Module } from '@dzintars/npm-test-pkg'
+// import { ListModulesResponse as ListModulesResponseRpc, Module } from '@dzintars/npm-test-pkg'
 
 export { IState }
 
@@ -14,7 +14,7 @@ const initialState: IState = {
   error: null,
 }
 
-export default (state: IState = initialState, action: AppNavigationActionTypes): IState => {
+export default (state: IState = initialState, action: ActionTypes): IState => {
   switch (action.type) {
     // case Types.SELECT_MODULE:
     //   return {

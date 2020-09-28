@@ -1,5 +1,5 @@
 import { Types } from './constants'
-import { AppModule, AppModules } from './models'
+import { AppModules } from './models'
 import { ListModulesResponse as ListModulesResponseRpc } from '@dzintars/npm-test-pkg'
 
 interface Loaded {
@@ -26,4 +26,4 @@ interface ListModulesRpcResponse {
   readonly payload: ListModulesResponseRpc.AsObject
 }
 
-export type AppNavigationActionTypes = ListModulesRequest | ListModulesResponse | Loaded | ListModulesRpcResponse
+export type ActionTypes = ListModulesRequest | ListModulesResponse | Loaded | ListModulesRpcResponse

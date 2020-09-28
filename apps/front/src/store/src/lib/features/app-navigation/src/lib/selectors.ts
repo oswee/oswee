@@ -1,6 +1,6 @@
 import { createSelector } from 'reselect'
 import { RootState } from 'Types'
-import { IState as ApplicationsState } from 'oswee/front/src/store/src/lib/applications'
+import { ApplicationsState } from '@oswee/features/applications'
 import { IState } from './reducer'
 
 // INPUT/BASE SELECTORS

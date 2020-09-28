@@ -1,7 +1,6 @@
 {
   "extends": "./tsconfig.json",
   "compilerOptions": {
-    "outDir": "../../../../../../../../dist/redux/websocket",
     "allowSyntheticDefaultImports": true,
     "target": "ES6",
     "module": "es2015",

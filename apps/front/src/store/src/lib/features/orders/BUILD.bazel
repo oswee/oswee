@@ -4,7 +4,7 @@ load("@npm//@bazel/typescript:index.bzl", "ts_config", "ts_library")
 package(default_visibility = ["//visibility:public"])
 
 ts_library(
-    name = "compile",
+    name = "orders",
     srcs = glob(
         include = ["src/**/*.ts"],
         exclude = [
@@ -16,7 +16,7 @@ ts_library(
     module_root = "src",
     # tsconfig = "tsconfig_lib",
     deps = [
-        "@oswee//libs/router:compilex",
+        "@oswee//libs/router:router",
         "@npm//redux",
         "@npm//redux-saga",
         "@npm//universal-router",

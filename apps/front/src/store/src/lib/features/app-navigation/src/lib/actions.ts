@@ -2,7 +2,7 @@ import { createAction, ActionsUnion } from 'oswee/libs/action/src/index'
 import { Types } from './constants'
 import { AppNavigationActionTypes } from './types'
 import { AppModule, AppModules } from './models'
-import { ApplicationActionTypes, ApplicationTypes } from '../applications/types'
+// import { ApplicationActionTypes, ApplicationTypes } from '../applications/types'
 // import { ListModulesResponse as ListModulesResponseRpc } from '@dzintars/npm-test-pkg'
 
 // ACTION CREATORS

@@ -1,9 +1,7 @@
 {
-  "extends": "../../../../tsconfig.json",
+  "extends": "../../../../../../../../tsconfig.root.json",
   "compilerOptions": {
-    "types": [
-      "node"
-    ]
+    "types": ["node"]
   },
   "include": [],
   "files": [],

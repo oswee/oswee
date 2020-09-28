@@ -1,6 +1,6 @@
 // import { customElement, property } from 'lit-element'
 import { AppNavigationElement } from '../../components/app-navigation'
-import { connect } from 'oswee/libs/connect'
+import { connect } from 'oswee/libs/connect/src'
 import {
   store,
   RootState,
@@ -9,7 +9,7 @@ import {
   AppNavigationSelectors,
   RoutingSelectors,
   AppNavigationActions,
-} from '../../../store'
+} from 'oswee/apps/front/src/store/src/index'
 
 // @customElement('app-navigation-connected')
 export class AppNavigationConnectedElement extends connect(store, AppNavigationElement) {

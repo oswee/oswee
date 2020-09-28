@@ -1,6 +1,13 @@
-import { SystemShellElement } from '../../../../../ui/containers/system-shell/src/index'
-import { connect } from 'oswee/libs/connect'
-import { store, RootState, WebsocketSelectors, LauncherActions, LauncherSelectors, ThemeSelectors } from '../../..'
+import { SystemShellElement } from '@oswee/containers/system-shell'
+import { connect } from 'oswee/libs/connect/src'
+import {
+  store,
+  RootState,
+  WebsocketSelectors,
+  LauncherActions,
+  LauncherSelectors,
+  ThemeSelectors,
+} from 'oswee/apps/front/src/store/src/index'
 
 export class SystemShellConnectedElement extends connect(store, SystemShellElement) {
   mapState(state: RootState) {
