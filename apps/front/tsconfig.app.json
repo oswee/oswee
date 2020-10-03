@@ -4,8 +4,6 @@
     "outDir": "dist",
     "types": []
   },
-  "include": [
-    "typings"
-  ],
+  "include": [],
   "files": []
 }

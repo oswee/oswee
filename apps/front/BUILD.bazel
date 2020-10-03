@@ -7,8 +7,8 @@ package(default_visibility = ["//visibility:public"])
 filegroup(
     name = "public",
     srcs = glob([
-        "src/template.html",
-        "src/assets/favicon.ico",
+        "src/public/template.html",
+        "src/public/favicon.ico",
     ]),
 )
 
@@ -56,7 +56,7 @@ ts_library(
 nodejs_binary(
     name = "devserver",
     data = [
-        "src/assets/favicon.ico",
+        "src/public/favicon.ico",
         ":config",
         ":example",
         ":public",
@@ -78,7 +78,7 @@ ts_config(
     name = "tsconfig",
     src = "tsconfig.app.json",
     deps = [
-        ":tsconfig.json",
         "//:tsconfig.base.json",
+        ":tsconfig.json",
     ],
 )

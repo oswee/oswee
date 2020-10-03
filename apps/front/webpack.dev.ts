@@ -50,8 +50,8 @@ module.exports = (env: any, argv: IBazelWebpackOptions) => ({
   },
   plugins: [
     new HtmlWebpackPlugin({
-      template: 'apps/front/src/template.html',
-      favicon: 'apps/front/src/assets/favicon.ico',
+      template: 'apps/front/src/public/template.html',
+      favicon: 'apps/front/src/public/favicon.ico',
       filename: './index.html',
     }),
     new webpack.HotModuleReplacementPlugin({

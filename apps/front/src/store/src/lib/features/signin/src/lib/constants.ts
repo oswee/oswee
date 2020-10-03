@@ -1,4 +1,0 @@
-export enum Types {
-  DISPLAY = 'SIGNIN_DISPLAY',
-  DISPLAYED = 'SIGNIN_DISPLAYED',
-}
