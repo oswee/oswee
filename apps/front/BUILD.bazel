@@ -29,7 +29,7 @@ ts_library(
         "@npm//@types/node",
         "@npm//history",
         "@npm//lit-element",
-        "@npm//lit-html",
+        # "@npm//lit-html",
         "@oswee//libs/elements/oswee/avatar",
         # "@oswee//libs/router",
     ],

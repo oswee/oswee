@@ -47,6 +47,22 @@ module.exports = (env: any, argv: IBazelWebpackOptions) => ({
     stats: {
       colors: true,
     },
+    after: (_, socket) => {
+      // Listen to STDIN, which is written to by ibazel to tell it to reload.
+      // Must check the message so we only bundle after a successful build completes.
+      process.stdin.on('data', data => {
+        if (!String(data).includes('IBAZEL_BUILD_COMPLETED SUCCESS')) {
+          return
+        }
+        socket.sockWrite(socket.sockets, 'content-changed')
+      })
+    },
+  },
+  resolve: {
+    extensions: ['.ts', '.js', '.json', '.css'],
+    // This makes sure we can resolve modules in bazel, but only works in runfiles.
+    // TODO: Copy rollup_bundle node_modules linking example so we can remove this.
+    plugins: [new BazelResolverPlugin()],
   },
   plugins: [
     new HtmlWebpackPlugin({
@@ -58,12 +74,6 @@ module.exports = (env: any, argv: IBazelWebpackOptions) => ({
       // Options...
     }),
   ],
-  resolve: {
-    extensions: ['.ts', '.js', '.json', '.css'],
-    // This makes sure we can resolve modules in bazel, but only works in runfiles.
-    // TODO: Copy rollup_bundle node_modules linking example so we can remove this.
-    plugins: [new BazelResolverPlugin()],
-  },
   module: {
     rules: [
       {
