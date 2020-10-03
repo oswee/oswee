@@ -1,8 +1,8 @@
-import { BazelResolverPlugin, IBazelWebpackOptions } from 'oswee/tools/webpack'
-import * as webpack from 'webpack'
-import * as path from 'path'
-import * as HtmlWebpackPlugin from 'html-webpack-plugin'
-import * as fs from 'fs'
+import { BazelResolverPlugin, IBazelWebpackOptions } from '@oswee/tools/webpack/src'
+import webpack from 'webpack'
+import path from 'path'
+import HtmlWebpackPlugin from 'html-webpack-plugin'
+import fs from 'fs'
 
 module.exports = (env: any, argv: IBazelWebpackOptions) => ({
   mode: argv.mode,
@@ -59,7 +59,7 @@ module.exports = (env: any, argv: IBazelWebpackOptions) => ({
     }),
   ],
   resolve: {
-    extensions: ['.ts', '.tsx', '.js', '.jsx', '.json', '.css'],
+    extensions: ['.ts', '.js', '.json', '.css'],
     // This makes sure we can resolve modules in bazel, but only works in runfiles.
     // TODO: Copy rollup_bundle node_modules linking example so we can remove this.
     plugins: [new BazelResolverPlugin()],
@@ -78,11 +78,6 @@ module.exports = (env: any, argv: IBazelWebpackOptions) => ({
             },
           },
         ],
-      },
-      {
-        test: /\.jsx?$/,
-        exclude: /node_modules/,
-        use: [{ loader: require.resolve('umd-compat-loader') }],
       },
     ],
   },

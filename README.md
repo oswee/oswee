@@ -17,5 +17,9 @@ Run `bazel run //api/wss:wss -- -a :9090` to run the WSS binary
 
 `yarn install`
 
+## Random personal notes
+
 [yarnpkg.com/advanced/editor-sdks#vscode](https://yarnpkg.com/advanced/editor-sdks#vscode)
 `yarn dlx @yarnpkg/pnpify --sdk vscode`
+
+Bazel does not play well with PnP ATM, but there are some open issues.

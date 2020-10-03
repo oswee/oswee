@@ -1,4 +1,3 @@
-
 load("@npm//@bazel/typescript:index.bzl", "ts_config", "ts_library")
 
 package(default_visibility = ["//visibility:public"])
@@ -17,7 +16,7 @@ ts_library(
     tsconfig = "tsconfig",
     deps = [
         # "@oswee//apps/front/src/store:store", # Circular dependency
-        "@oswee//libs/router:router",
+        "@oswee//libs/router",
         "@npm//google-protobuf",
         "@npm//redux",
         "@npm//redux-saga",

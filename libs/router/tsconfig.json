@@ -1,11 +1,16 @@
 {
-  "extends": "../../tsconfig.root.json",
+  "extends": "../../tsconfig.base.json",
   "compilerOptions": {
-    "types": ["node", "jest"],
+    "types": [
+      "node",
+      "jest"
+    ],
     "downlevelIteration": true
   },
   "include": [],
-  "exclude": ["src/schematics/*/files"],
+  "exclude": [
+    "src/schematics/*/files"
+  ],
   "files": [],
   "references": [
     {

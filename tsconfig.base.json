@@ -1,0 +1,26 @@
+{
+  "compilerOptions": {
+    "baseUrl": "./",
+    "module": "CommonJS",
+    "target": "ES2019",
+    "lib": ["ES2019", "DOM", "DOM.iterable"],
+    "esModuleInterop": true,
+    "noImplicitAny": false,
+    "noImplicitThis": true,
+    "importHelpers": true,
+    "preserveConstEnums": true,
+    "removeComments": true,
+    "skipLibCheck": true,
+    "experimentalDecorators": true,
+    "allowSyntheticDefaultImports": true,
+    "paths": {
+      // "@oswee/*": ["*", "bazel-bin/*", "bazel-genfiles/*"],
+      "@oswee/front/assets/*": ["apps/front/src/assets/*"],
+      "@oswee/tools/*": ["tools/*/src"],
+      "@oswee/libs/*": ["libs/*/src"],
+      "@oswee/containers/*": ["apps/front/src/ui/containers/*/src"],
+      "@oswee/features/*": ["apps/front/src/store/src/lib/features/*/src"]
+    }
+  },
+  "exclude": ["bazel-*", "node_modules"]
+}

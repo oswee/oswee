@@ -1,5 +1,5 @@
 import { LitElement, customElement, property, TemplateResult, CSSResultArray } from 'lit-element'
-import { connect } from 'oswee/libs/connect/src'
+import { connect } from '@oswee/libs/connect/src'
 import {
   store,
   RootState,
@@ -9,8 +9,8 @@ import {
   SystemActions,
   ThemeSelectors,
   websocketConnect,
-} from '../../../store'
-import { Theme } from '../../../assets/style'
+} from '../../../../../store/src'
+import { Theme } from '../../../../../assets/style'
 import template from './template'
 import style from './style'
 // import { EventPathIncludes } from '../../../utils'

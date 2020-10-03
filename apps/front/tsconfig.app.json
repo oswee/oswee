@@ -1,9 +1,11 @@
 {
   "extends": "./tsconfig.json",
   "compilerOptions": {
-    "outDir": "../../dist/out-tsc",
+    "outDir": "dist",
     "types": []
   },
-  "include": ["typings"],
-  "files": ["src/main.ts", "src/polyfills.ts"]
+  "include": [
+    "typings"
+  ],
+  "files": []
 }

@@ -1,4 +1,3 @@
-
 load("@npm//@bazel/typescript:index.bzl", "ts_config", "ts_library")
 
 package(default_visibility = ["//visibility:public"])
@@ -8,7 +7,7 @@ ts_library(
     srcs = glob(
         include = [
             "src/**/*.ts",
-            ],
+        ],
         exclude = [
             "src/**/*.spec.ts",
             "src/test-setup.ts",
@@ -18,15 +17,15 @@ ts_library(
     module_root = "src",
     # tsconfig = "tsconfig_lib",
     deps = [
-        "@oswee//apps/front/src/store:store",
-        "@oswee//libs/router:router",
-        "@oswee//libs/action:action",
+        "@npm//history",
         "@npm//redux",
         "@npm//redux-saga",
-        "@npm//universal-router",
         "@npm//reselect",
-        "@npm//history",
         "@npm//tslib",
+        "@npm//universal-router",
+        "@oswee//apps/front/src/store",
+        "@oswee//libs/action",
+        "@oswee//libs/router",
     ],
 )
 

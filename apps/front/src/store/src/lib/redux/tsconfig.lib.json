@@ -1,0 +1,18 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "target": "ES2019",
+    "module": "ES2020",
+    "sourceMap": true,
+    "inlineSources": true,
+    "strict": true,
+    "strictNullChecks": false,
+    "noEmitHelpers": true,
+    "lib": [
+      "ES2019"
+    ]
+  },
+  "include": [
+    "src/**/*.ts"
+  ]
+}

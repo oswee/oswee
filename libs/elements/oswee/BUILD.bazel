@@ -6,6 +6,6 @@ ts_config(
     name = "tsconfig",
     src = "tsconfig.json",
     deps = [
-        # "//:tsconfig.base.json",
+        "//:tsconfig.base.json",
     ],
 )

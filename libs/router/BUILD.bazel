@@ -15,8 +15,8 @@ ts_library(
     module_root = "src",
     tsconfig = "tsconfig",
     deps = [
-        "@npm//query-string",
         "@npm//history",
+        "@npm//query-string",
         "@npm//tslib",
     ],
 )
@@ -26,6 +26,6 @@ ts_config(
     src = "tsconfig.lib.json",
     deps = [
         "tsconfig.json",
-        "//:tsconfig.root.json",
+        "//:tsconfig.base.json",
     ],
 )

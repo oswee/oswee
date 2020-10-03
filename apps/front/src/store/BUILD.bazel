@@ -1,4 +1,3 @@
-
 load("@npm//@bazel/typescript:index.bzl", "ts_config", "ts_library")
 
 package(default_visibility = ["//visibility:public"])
@@ -25,14 +24,14 @@ ts_library(
     module_root = "src",
     tsconfig = "tsconfig",
     deps = [
-        "@oswee//libs/router:router",
-        "@oswee//apps/front/src/store/src/lib/features/websocket:websocket",
+        "@npm//history",
         "@npm//redux",
         "@npm//redux-saga",
-        "@npm//universal-router",
         "@npm//reselect",
-        "@npm//history",
         "@npm//tslib",
+        "@npm//universal-router",
+        "@oswee//apps/front/src/store/src/lib/features/websocket",
+        "@oswee//libs/router",
     ],
 )
 
@@ -41,5 +40,6 @@ ts_config(
     src = "tsconfig.json",
     deps = [
         "//:tsconfig.json",
+        "@oswee//:tsconfig.base.json",
     ],
 )

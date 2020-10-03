@@ -1,5 +1,5 @@
 {
-  "name": "@oswee/elements",
+  "name": "@oswee/redux",
   "description": "Oswee elements based on web-components",
   "version": "",
   "repository": {
@@ -8,7 +8,7 @@
   },
   "keywords": [
     "oswee",
-    "elements"
+    "redux"
   ],
   "license": "Apache-2.0",
   "homepage": "https://github.com/oswee/prime",
@@ -16,8 +16,8 @@
     "url": "https://github.com/oswee/prime/issues"
   },
   "dependencies": {
-    "lit-element": "",
-    "lit-html": ""
+    "redux": "",
+    "redux-saga": ""
   },
   "peerDependencies": {}
 }

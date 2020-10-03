@@ -1,5 +1,4 @@
-
-load("@npm//@bazel/typescript:index.bzl", "ts_config", "ts_library")
+load("@npm//@bazel/typescript:index.bzl", "ts_library")
 load("//tools/bazel_rules:index.bzl", "stylelint")
 
 package(default_visibility = ["//visibility:public"])

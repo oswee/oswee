@@ -1,3 +1,4 @@
+load("//tools:ts_library.bzl", "ts_library")
 load("@bazel_gazelle//:def.bzl", "gazelle")
 load("@com_github_bazelbuild_buildtools//buildifier:def.bzl", "buildifier")
 
@@ -10,8 +11,7 @@ package(default_visibility = ["//:__subpackages__"])
 # attribute.
 exports_files(
     [
-        "tsconfig.root.json",
-        # "tsconfig.json",
+        "tsconfig.base.json",
         # Stylelint and prettier config are neeeded for style linting
         ".stylelintrc.js",
         ".prettierrc.js",
@@ -34,4 +34,13 @@ buildifier(
 buildifier(
     name = "buildifier_check",
     mode = "check",
+)
+
+
+# TODO: This is only here in order to workaround a bug in the way bazel resolves
+# workspace imports when in nested repositories, and can be removed once that is fixed.
+ts_library(
+    name = "modules-fix",
+    srcs = [],
+    module_name = "@oswee",
 )
