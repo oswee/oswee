@@ -1,6 +1,7 @@
 import { html, TemplateResult } from 'lit-element'
 import { SystemShellElement } from './component'
+import './components/order/src'
 
 export default function template(this: SystemShellElement): TemplateResult {
-  return html`<h2>Component</h2>`
+  return html` <dynamic-order></dynamic-order> `
 }

@@ -15,18 +15,19 @@ ts_library(
     ),
     data = [
     ],
-    # module_name = "@oswee/elements/avatar",
+    module_name = "@oswee/libs/action",
     module_root = "src",
-    # tsconfig = "tsconfig_lib",
+    tsconfig = "tsconfig",
     deps = [
       "@npm//redux"
     ],
 )
 
 ts_config(
-    name = "tsconfig_lib",
-    src = "tsconfig.lib.json",
+    name = "tsconfig",
+    src = "tsconfig.json",
     deps = [
+        "//:tsconfig.base.json",
         "tsconfig.json",
     ],
 )

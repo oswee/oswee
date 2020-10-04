@@ -22,16 +22,20 @@ ts_library(
         exclude = ["webpack.dev.ts"],
     ),
     data = [
-        ":tsconfig",
+        # ":tsconfig",
         "//apps/front/src/scss",
     ],
     deps = [
+      # "//:modules-fix",
+        "//libs/action:action",
         "@npm//@types/node",
         "@npm//history",
         "@npm//lit-element",
-        # "@npm//lit-html",
-        "@oswee//libs/elements/oswee/avatar",
-        # "@oswee//libs/router",
+        "@npm//lit-html",
+        "@npm//redux-dynamic-modules-core",
+        # "@oswee//libs/elements/oswee/avatar",
+        # "@oswee//libs/connect",
+        "@npm//tslib",
     ],
 )
 
@@ -60,9 +64,9 @@ nodejs_binary(
         ":config",
         ":example",
         ":public",
-        "//tools/webpack",
+        "@oswee//tools/webpack",
     ],
-    entry_point = "//tools/webpack:src/devserver.ts",
+    entry_point = "@oswee//tools/webpack:src/devserver.ts",
     tags = [
         "ibazel_notify_changes",
     ],
