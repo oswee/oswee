@@ -1,36 +1,48 @@
 # Update these references to your orginzations repos
-sourceUrl = "https://github.com/redux-saga/redux-saga.git"
-destinationUrl = "git@github.com:dzintars/prime.git"
+originUrl = "https://github.com/redux-saga/redux-saga.git"
+targetUrl = "git@github.com:dzintars/prime.git"
 
 core.workflow(
     name = "default",
+    mode = "SQUASH",
+
     origin = git.origin(
-        url = sourceUrl,
+        url = originUrl,
         ref = "master",
     ),
 
     # Change path to the folder you want to publish publicly
     origin_files = glob(
-      ["**"],
-      exclude = [
-        ".changeset",
-        ".github",
-      ]
+      include = [
+        "**"
+        ],
+      # exclude = [
+      #   ".changeset",
+      #   ".github",
+      #   ]
     ),
 
     destination = git.destination(
-        url = destinationUrl,
-        fetch = "dynamic-clean",
-        push = "dynamic-clean",
+        url = targetUrl,
+        fetch = "copybara",
+        push = "copybara",
     ),
+
+    # destination = git.destination(
+    #     url = "file://third_party/js/com.github/redux-saga",
+    #     fetch = "copybara",
+    #     push = "copybara",
+    # ),
 
     destination_files = glob(
         # Copy all files from the root
-        ["**"],
+        include = ["third_party/js/com.github/redux-saga/**"],
         #  Don't remove a copy.bara.sky file if it exists.
         exclude = [
-            # "third_party/js/com.github/redux-saga/copy.bara.sky",
-            "**",
+            "third_party/js/com.github/redux-saga/copy.bara.sky",
+            "third_party/js/com.github/redux-saga/patches/**",
+            "third_party/js/com.github/redux-saga/.changeset",
+            "third_party/js/com.github/redux-saga/.github",
         ],
     ),
 
@@ -47,5 +59,5 @@ core.workflow(
 
         # Copy all files from the root into third_party/....
         core.move("", "third_party/js/com.github/redux-saga"),
-      ],
+    ],
 )
