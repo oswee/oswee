@@ -1,6 +1,7 @@
 {
   "compilerOptions": {
     "baseUrl": ".",
+    "rootDir": ".",
     "module": "CommonJS",
     "target": "ES2019",
     "lib": ["ES2019", "DOM", "DOM.iterable"],
@@ -13,6 +14,7 @@
     "skipLibCheck": true,
     "experimentalDecorators": true,
     "allowSyntheticDefaultImports": true,
+    "typeRoots": ["node_modules/@types"],
     "paths": {
       "@oswee/*": ["*", "bazel-bin/*", "bazel-genfiles/*"],
       "@oswee/front/assets/*": ["apps/front/src/assets/*"],

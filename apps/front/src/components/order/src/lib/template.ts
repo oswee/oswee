@@ -3,19 +3,46 @@ import { DynamicModuleLoader } from 'redux-dynamic-modules'
 import { repeat } from 'lit-html/directives/repeat'
 import { DynamicOrderElement } from './component'
 import { StringMap } from '@oswee/libs/action'
-import { connect } from '@oswee/libs/connect'
-import { IOrderAwareState } from '../../../../modules/orders/contracts'
-import { getUserPreferences } from '../../../../modules/settings/selectors'
-import { SettingActions } from '../../../../modules/settings/actions'
+// import {connect} from '@oswee/libs/connect'
 
-const toppings = ['Cheese', 'Onion', 'Pineapple']
-
-interface IOrderProps {
-  userPreferences: StringMap<string | boolean>
-  setPreferences: (preferences: StringMap<string | boolean>) => void
+/**
+ * Template for the toppings checkbox used in the Order
+ */
+interface IToppingCheckboxProps {
+  name: string
+  orderProps: IOrderProps
 }
 
+const ToppingCheckbox = (props: IToppingCheckboxProps) => {
+  const { name, orderProps } = props
+  const checked = !!orderProps.userPreferences[name]
+  const onChange = () => {
+    console.log('Checkbox')
+    // orderProps.setPreferences({
+    //   // Toggle the name property to true/false
+    //   [name]: !checked,
+    // })
+  }
+  return html`
+    <div>
+      <input type="checkbox" id=${name} checked=${checked} @change=${onChange} name=${name} />
+      {name}
+    </div>
+  `
+}
+
+export interface IOrderProps {
+  userPreferences: StringMap<string | boolean>
+  // setPreferences: (preferences: StringMap<string | boolean>) => void
+}
+
+/**
+ * Component template to list toppings
+ * @param props - Test
+ * @return {string} Returns template with list of checkboxes
+ */
 const Order = (props: IOrderProps) => {
+  const toppings = ['Cheese', 'Onion', 'Pineapple']
   return html`
     <div>Order</div>
     <ul>
@@ -28,35 +55,6 @@ const Order = (props: IOrderProps) => {
   `
 }
 
-interface IToppingCheckboxProps {
-  name: string
-  orderProps: IOrderProps
-}
-
-const ToppingCheckbox = (props: IToppingCheckboxProps) => {
-  const { orderProps, name } = props
-  const checked = !!orderProps.userPreferences[name]
-  const onChange = () => {
-    orderProps.setPreferences({
-      [name]: !checked,
-    })
-  }
-  return html`
-    <div>
-      <input type="checkbox" id=${name} checked=${checked} @change=${onChange} name=${name} />
-      {name}
-    </div>
-  `
-}
-
-const mapStateToProps = (state: IOrderAwareState) => {
-  return {
-    userPreferences: getUserPreferences(state),
-  }
-}
-
-const ConnectedOrder = connect(mapStateToProps, SettingActions, Order)
-
 export default function template(this: DynamicOrderElement): TemplateResult {
-  return html` <p>Test</p> `
+  return html` <h2>Order</h2> `
 }

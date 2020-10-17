@@ -1,4 +1,5 @@
 import { takeEvery, call, put, select } from 'redux-saga/effects'
+// import { effects } from 'redux-saga'
 import { SettingActions, SettingsActionTypes } from './actions'
 import { ISettingsAwareState, ISettingsState } from './contracts'
 

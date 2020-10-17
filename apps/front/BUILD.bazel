@@ -22,7 +22,7 @@ ts_library(
         exclude = ["webpack.dev.ts"],
     ),
     data = [
-        # ":tsconfig",
+        ":tsconfig",
         "//apps/front/src/scss",
     ],
     deps = [
@@ -33,8 +33,12 @@ ts_library(
         "@npm//lit-element",
         "@npm//lit-html",
         "@npm//redux-dynamic-modules-core",
+        "@npm//redux-dynamic-modules-saga",
+        "@npm//redux-dynamic-modules",
         # "@oswee//libs/elements/oswee/avatar",
-        # "@oswee//libs/connect",
+        "@oswee//libs/connect",
+        "@npm//immer",
+        "@npm//redux-saga",
         "@npm//tslib",
     ],
 )
