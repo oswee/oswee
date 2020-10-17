@@ -16,16 +16,16 @@ core.workflow(
       include = [
         "**"
         ],
-      # exclude = [
-      #   ".changeset",
-      #   ".github",
-      #   ]
+      exclude = [
+        ".changeset/**",
+        ".github/**",
+        ]
     ),
 
     destination = git.destination(
         url = targetUrl,
-        fetch = "copybara",
-        push = "copybara",
+        fetch = "copybara-1",
+        push = "copybara-1",
     ),
 
     # destination = git.destination(
@@ -41,8 +41,8 @@ core.workflow(
         exclude = [
             "third_party/js/com.github/redux-saga/copy.bara.sky",
             "third_party/js/com.github/redux-saga/patches/**",
-            "third_party/js/com.github/redux-saga/.changeset",
-            "third_party/js/com.github/redux-saga/.github",
+            # "third_party/js/com.github/redux-saga/.changeset",
+            # "third_party/js/com.github/redux-saga/.github",
         ],
     ),
 
