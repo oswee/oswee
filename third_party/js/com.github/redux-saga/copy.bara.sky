@@ -10,7 +10,13 @@ core.workflow(
     ),
 
     # Change path to the folder you want to publish publicly
-    origin_files = glob(["**"]),
+    origin_files = glob(
+      ["**"],
+      exclude = [
+        ".changeset",
+        ".github",
+      ]
+    ),
 
     destination = git.destination(
         url = destinationUrl,
@@ -24,8 +30,6 @@ core.workflow(
         #  Don't remove a copy.bara.sky file if it exists.
         exclude = [
             "third_party/js/com.github/redux-saga/copy.bara.sky",
-            "third_party/js/com.github/redux-saga/.changeset",
-            "third_party/js/com.github/redux-saga/.github",
         ],
     ),
 
