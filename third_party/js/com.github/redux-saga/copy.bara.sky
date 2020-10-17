@@ -29,7 +29,8 @@ core.workflow(
         ["**"],
         #  Don't remove a copy.bara.sky file if it exists.
         exclude = [
-            "third_party/js/com.github/redux-saga/copy.bara.sky",
+            # "third_party/js/com.github/redux-saga/copy.bara.sky",
+            "**",
         ],
     ),
 
