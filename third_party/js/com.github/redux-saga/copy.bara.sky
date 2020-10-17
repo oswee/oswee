@@ -1,0 +1,46 @@
+# Update these references to your orginzations repos
+sourceUrl = "https://github.com/redux-saga/redux-saga.git"
+destinationUrl = "git@github.com:dzintars/prime.git"
+
+core.workflow(
+    name = "default",
+    origin = git.origin(
+        url = sourceUrl,
+        ref = "master",
+    ),
+
+    # Change path to the folder you want to publish publicly
+    origin_files = glob(["**"]),
+
+    destination = git.destination(
+        url = destinationUrl,
+        fetch = "dynamic-clean",
+        push = "dynamic-clean",
+    ),
+
+    destination_files = glob(
+        # Copy all files from the root
+        ["**"],
+        #  Don't remove a copy.bara.sky file if it exists.
+        exclude = [
+            "third_party/js/com.github/redux-saga/copy.bara.sky",
+            "third_party/js/com.github/redux-saga/.changeset",
+            "third_party/js/com.github/redux-saga/.github",
+        ],
+    ),
+
+    authoring = authoring.pass_thru("dzintars <dzintars.klavins@gmail.com>"),
+
+    # Change the path here to the folder you want to publish publicly
+    transformations = [
+        # Rename files or folders?
+        # core.replace(
+        #   before = "//third_party/bazel/bashunit",
+        #   after = "//another/path:bashunit",
+        #   paths = glob(["**/BUILD"]),
+        # ),
+
+        # Copy all files from the root into third_party/....
+        core.move("", "third_party/js/com.github/redux-saga"),
+      ],
+)
