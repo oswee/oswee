@@ -1,4 +1,4 @@
-import { BazelResolverPlugin, IBazelWebpackOptions } from '@oswee/tools/webpack/src'
+import { BazelResolverPlugin, IBazelWebpackOptions } from '@oswee/tools/webpack'
 import webpack from 'webpack'
 import path from 'path'
 import HtmlWebpackPlugin from 'html-webpack-plugin'
@@ -6,6 +6,7 @@ import fs from 'fs'
 
 module.exports = (env: any, argv: IBazelWebpackOptions) => ({
   mode: argv.mode,
+  target: 'web',
   entry: [argv.entry],
   output: {
     path: path.dirname(path.resolve(argv.output)),

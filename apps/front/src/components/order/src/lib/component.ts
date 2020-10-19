@@ -1,14 +1,14 @@
 import { LitElement, customElement, property, TemplateResult, CSSResultArray, html } from 'lit-element'
-import { createStore, IModuleStore } from 'redux-dynamic-modules-core'
+// import { createStore, IModuleStore } from 'redux-dynamic-modules-core'
 import { IOrderAwareState } from '../../../../modules/orders/contracts'
-import { OrderModules } from '../../../../modules/orders/module'
+// import { OrderModules } from '../../../../modules/orders/module'
 import { getUserPreferences } from '../../../../modules/settings/selectors'
-import { SettingActions } from '../../../../modules/settings/actions'
+// import { SettingActions } from '../../../../modules/settings/actions'
 import { connect } from '@oswee/libs/connect'
+import { StringMap } from '@oswee/libs/action'
 import template, { IOrderProps } from './template'
 import style from './style'
 import { store } from '../../../../store'
-import { StringMap } from '@oswee/libs/action'
 
 @customElement('dynamic-order')
 // export class MyComponentElement extends connect(mapStateToProps, LitElement) {

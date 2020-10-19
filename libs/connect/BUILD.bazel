@@ -1,4 +1,4 @@
-load("@npm//@bazel/typescript:index.bzl", "ts_config", "ts_library")
+load("@npm//@bazel/typescript:index.bzl", "ts_config", "ts_library", "ts_project")
 
 package(default_visibility = ["//visibility:public"])
 
@@ -13,8 +13,6 @@ ts_library(
             "src/test-setup.ts",
         ],
     ),
-    data = [
-    ],
     module_name = "@oswee/libs/connect",
     module_root = "src",
     tsconfig = "tsconfig",
@@ -22,6 +20,23 @@ ts_library(
       "@npm//redux"
     ],
 )
+
+# ts_project(
+#     name = "connect",
+#     srcs = glob(
+#         include = [
+#             "src/**/*.ts",
+#         ],
+#         exclude = [
+#             "src/**/*.spec.ts",
+#             "src/test-setup.ts",
+#         ],
+#     ),
+#     tsconfig = ":tsconfig",
+#     deps = [
+#       "@npm//redux"
+#     ],
+# )
 
 ts_config(
     name = "tsconfig",

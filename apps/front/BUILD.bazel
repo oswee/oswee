@@ -1,5 +1,5 @@
 load("@build_bazel_rules_nodejs//:index.bzl", "nodejs_binary")
-load("@npm//@bazel/typescript:index.bzl", "ts_config")
+load("@npm//@bazel/typescript:index.bzl", "ts_config", "ts_project")
 load("//tools:ts_library.bzl", "ts_library")
 
 package(default_visibility = ["//visibility:public"])
@@ -12,7 +12,6 @@ filegroup(
     ]),
 )
 
-# TODO: Whu this rule is deppendent on existance of root's //tsconfig.json??? Try to remove it and see how it fails.
 ts_library(
     name = "example",
     srcs = glob(
@@ -22,21 +21,22 @@ ts_library(
         exclude = ["webpack.dev.ts"],
     ),
     data = [
-        ":tsconfig",
+        # ":tsconfig",
         "//apps/front/src/scss",
     ],
+    tsconfig = ":tsconfig",
+    # extends = ["//:tsconfig.base.json"],
+    # extends = [":tsconfig"],
     deps = [
-      # "//:modules-fix",
-        "//libs/action:action",
+        "//libs/action",
+        "//libs/connect",
         "@npm//@types/node",
         "@npm//history",
         "@npm//lit-element",
         "@npm//lit-html",
         "@npm//redux-dynamic-modules-core",
         "@npm//redux-dynamic-modules-saga",
-        "@npm//redux-dynamic-modules",
-        # "@oswee//libs/elements/oswee/avatar",
-        "@oswee//libs/connect",
+        # "@npm//redux-dynamic-modules",
         "@npm//immer",
         "@npm//redux-saga",
         "@npm//tslib",
@@ -48,8 +48,9 @@ ts_library(
 ts_library(
     name = "config",
     srcs = ["webpack.dev.ts"],
+    tsconfig = ":tsconfig",
     deps = [
-        "@oswee//tools/webpack",
+        "//tools/webpack",
         "@npm//@types/html-webpack-plugin",
         "@npm//@types/node",
         "@npm//@types/webpack",
@@ -87,6 +88,6 @@ ts_config(
     src = "tsconfig.app.json",
     deps = [
         "//:tsconfig.base.json",
-        ":tsconfig.json",
+        "tsconfig.json",
     ],
 )

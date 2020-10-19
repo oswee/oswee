@@ -2,10 +2,8 @@
   "extends": "../../tsconfig.base.json",
   "compilerOptions": {
     "module": "CommonJS",
-    "types": [
-      "node"
-    ]
+    "types": ["node"]
   },
-  "include": [],
+  "include": ["src/**/*.ts"],
   "files": []
 }

@@ -13,8 +13,6 @@ ts_library(
             "src/test-setup.ts",
         ],
     ),
-    data = [
-    ],
     module_name = "@oswee/libs/action",
     module_root = "src",
     tsconfig = "tsconfig",

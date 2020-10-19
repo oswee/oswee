@@ -24,15 +24,9 @@ core.workflow(
 
     destination = git.destination(
         url = targetUrl,
-        fetch = "copybara-1",
-        push = "copybara-1",
+        fetch = "copybara-2",
+        push = "copybara-2",
     ),
-
-    # destination = git.destination(
-    #     url = "file://third_party/js/com.github/redux-saga",
-    #     fetch = "copybara",
-    #     push = "copybara",
-    # ),
 
     destination_files = glob(
         # Copy all files from the root
@@ -41,8 +35,6 @@ core.workflow(
         exclude = [
             "third_party/js/com.github/redux-saga/copy.bara.sky",
             "third_party/js/com.github/redux-saga/patches/**",
-            # "third_party/js/com.github/redux-saga/.changeset",
-            # "third_party/js/com.github/redux-saga/.github",
         ],
     ),
 

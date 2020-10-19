@@ -1,5 +1,5 @@
 import { html, TemplateResult } from 'lit-element'
-import { DynamicModuleLoader } from 'redux-dynamic-modules'
+// import { DynamicModuleLoader } from 'redux-dynamic-modules'
 import { repeat } from 'lit-html/directives/repeat'
 import { DynamicOrderElement } from './component'
 import { StringMap } from '@oswee/libs/action'
