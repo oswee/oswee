@@ -1,4 +1,4 @@
-import './scss/main.css'
+import './sass/main.css'
 import './component'
 import './store'
 

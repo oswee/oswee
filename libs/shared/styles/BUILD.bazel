@@ -6,8 +6,3 @@ sass_library(
     name = "colors",
     srcs = ["_colors.scss"],
 )
-
-# sass_library(
-#     name = "fonts",
-#     srcs = ["_fonts.scss"],
-# )

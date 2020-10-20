@@ -1,19 +1,12 @@
+load("//tools:ts_library.bzl", "ts_library")
 load("@build_bazel_rules_nodejs//:index.bzl", "nodejs_binary")
 load("@npm//@bazel/typescript:index.bzl", "ts_config", "ts_project")
-load("//tools:ts_library.bzl", "ts_library")
+load("@npm//@bazel/rollup:index.bzl", "rollup_bundle")
 
 package(default_visibility = ["//visibility:public"])
 
-filegroup(
-    name = "public",
-    srcs = glob([
-        "src/public/template.html",
-        "src/public/favicon.ico",
-    ]),
-)
-
 ts_library(
-    name = "example",
+    name = "src",
     srcs = glob(
         [
             "src/**/*.ts",
@@ -21,25 +14,50 @@ ts_library(
         exclude = ["webpack.dev.ts"],
     ),
     data = [
-        # ":tsconfig",
-        "//apps/front/src/scss",
+        "//apps/front/src/sass",
     ],
     tsconfig = ":tsconfig",
-    # extends = ["//:tsconfig.base.json"],
-    # extends = [":tsconfig"],
     deps = [
         "//libs/action",
         "//libs/connect",
-        "@npm//@types/node",
-        "@npm//history",
+        "//apps/front/src/sass:css_typings",
+        # "@npm1//@types/node",
+        # "@npm1//history",
         "@npm//lit-element",
         "@npm//lit-html",
+        "@npm//redux-saga",
         "@npm//redux-dynamic-modules-core",
         "@npm//redux-dynamic-modules-saga",
-        # "@npm//redux-dynamic-modules",
         "@npm//immer",
-        "@npm//redux-saga",
         "@npm//tslib",
+    ],
+)
+
+nodejs_binary(
+    name = "rollup_more_mem",
+    data = ["@npm1//rollup:rollup"],
+    entry_point = "@npm1//:node_modules/rollup/dist/bin/rollup",
+    templated_args = [
+        "--nobazel_patch_module_resolver",
+        "--node_options=--max-old-space-size=1024",
+    ],
+)
+
+# Combine the individual modules into a single file
+rollup_bundle(
+    name = "bundle",
+    entry_point = "src/test.ts", # https://bazelbuild.github.io/rules_nodejs/Rollup.html#rollup_bundle-entry_point
+    config_file = "rollup.config.ts",
+    rollup_bin = ":rollup_more_mem", ## Default is 2048
+    format = "esm",
+    deps = [
+      ":tst",
+      # "//apps/front/src/sass",
+      "@npm1//@rollup/plugin-node-resolve",
+      "@npm1//@rollup/plugin-commonjs",
+      "@npm1//rollup-plugin-typescript2",
+      "@npm1//rollup-plugin-sourcemaps",
+      "@npm1//@rollup/plugin-json",
     ],
 )
 
@@ -62,12 +80,21 @@ ts_library(
     ],
 )
 
+filegroup(
+    name = "public",
+    srcs = glob([
+        "src/public/template.html",
+        "src/public/favicon.ico",
+    ]),
+)
+
 nodejs_binary(
     name = "devserver",
     data = [
         "src/public/favicon.ico",
         ":config",
-        ":example",
+        ":src",
+        # ":bundle",
         ":public",
         "@oswee//tools/webpack",
     ],

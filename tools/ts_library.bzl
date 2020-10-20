@@ -1,3 +1,5 @@
+# ORIGIN: https://github.com/dataform-co/dataform/blob/master/tools/ts_library.bzl
+
 # load("@npm_bazel_typescript//:index.bzl", native_ts_library = "ts_library")
 load("@npm//@bazel/typescript:index.bzl", native_ts_library = "ts_library")
 
@@ -5,7 +7,7 @@ def ts_library(**kwargs):
     native_ts_library(
         devmode_target = "es2017",
         prodmode_target = "es2017",
-        devmode_module = "commonjs",
+        devmode_module = "commonjs", # commonjs
         prodmode_module = "esnext",
         **kwargs
     )

@@ -23,7 +23,15 @@
       "@oswee/libs/*": ["libs/*/src"],
       "@oswee/containers/*": ["apps/front/src/ui/containers/*/src"],
       "@oswee/features/*": ["apps/front/src/store/src/lib/features/*/src"]
-    }
+    },
+    "plugins": [
+      {
+        "alwaysShowRuleFailuresAsWarnings": false,
+        "ignoreDefinitionFiles": true,
+        "disableNoUnusedVariableRule": false,
+        "suppressWhileTypeErrorsPresent": false
+      }
+    ]
   },
   "exclude": ["bazel-*", "node_modules"]
 }

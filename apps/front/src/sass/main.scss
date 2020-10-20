@@ -1,0 +1,9 @@
+@import 'libs/shared/styles/colors';
+
+$my-color: green;
+
+h1 {
+  --color-success-10: hsla(100, 100%, 38%, 1);
+  font-size: 4rem;
+  color: #{$example-blue};
+}

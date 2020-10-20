@@ -1,7 +1,8 @@
-load("@npm//@bazel/typescript:index.bzl", "ts_config", "ts_library", "ts_project")
+load("@npm//@bazel/typescript:index.bzl", "ts_config", "ts_library")
 
 package(default_visibility = ["//visibility:public"])
 
+# Build the TypeScript files
 ts_library(
     name = "connect",
     srcs = glob(
@@ -15,28 +16,13 @@ ts_library(
     ),
     module_name = "@oswee/libs/connect",
     module_root = "src",
+    devmode_module = "esnext",
+    devmode_target = "esnext",
     tsconfig = "tsconfig",
     deps = [
       "@npm//redux"
     ],
 )
-
-# ts_project(
-#     name = "connect",
-#     srcs = glob(
-#         include = [
-#             "src/**/*.ts",
-#         ],
-#         exclude = [
-#             "src/**/*.spec.ts",
-#             "src/test-setup.ts",
-#         ],
-#     ),
-#     tsconfig = ":tsconfig",
-#     deps = [
-#       "@npm//redux"
-#     ],
-# )
 
 ts_config(
     name = "tsconfig",

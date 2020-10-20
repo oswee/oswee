@@ -2,10 +2,6 @@
   "extends": "../../tsconfig.base.json",
   "compilerOptions": {
     "outDir": "../../dist/out-tsc",
-    // "module": "ESnext",
-    "baseUrl": ".",
-    // "rootDirs": [".", "../../dist/libs/action"],
-    // "declaration": false,
     "types": []
   },
   "files": [],

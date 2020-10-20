@@ -10,16 +10,8 @@
     "lit element",
     "boilerplate"
   ],
-  "browserslist": [
-    "last 1 year",
-    "chrome >= 51",
-    "firefox >= 54",
-    "edge >= 15",
-    "safari >= 10",
-    "last 2 and_chr version"
-  ],
   "engines": {
-    "node": ">=12.10"
+    "node": ">=12.13.0"
   },
   "repository": {
     "type": "git",
@@ -34,11 +26,15 @@
     "bazel:lint-fix": "yarn bazel:format --lint=fix",
     "start": "webpack-dev-server --config ./webpack.dev.ts"
   },
-  "devDependencies": {
+  "dependencies": {
     "@bazel/buildifier": "^3.5.0",
     "@bazel/ibazel": "^0.13.2",
+    "@bazel/rollup": "^2.2.2",
     "@bazel/typescript": "^2.2.0",
     "@commitlint/config-conventional": "latest",
+    "@rollup/plugin-commonjs": "^15.1.0",
+    "@rollup/plugin-node-resolve": "^9.0.0",
+    "@rollup/plugin-json": "4.1.0",
     "@types/html-webpack-plugin": "^3.2.3",
     "@types/node": "latest",
     "@types/redux": "^3.6.0",
@@ -59,6 +55,9 @@
     "prettier": "^2.1.1",
     "redux-devtools-extension": "^2.13.8",
     "reselect-tools": "^0.0.7",
+    "rollup": "^2.32.0",
+    "rollup-plugin-sourcemaps": "^0.6.3",
+    "rollup-plugin-typescript2": "^0.28.0",
     "sass": "^1.26.10",
     "style-loader": "^1.2.1",
     "stylelint": "^13.7.1",
@@ -66,15 +65,14 @@
     "stylelint-prettier": "^1.1.2",
     "stylelint-scss": "^3.18.0",
     "tslib": "^2.0.1",
+    "typed-css-modules": "^0.6.4",
     "typescript": "^4.0.3",
     "umd-compat-loader": "^2.1.2",
     "webpack": "^4.44.1",
     "webpack-cli": "^3.3.12",
     "webpack-dev-server": "^3.11.0",
     "webpack-merge": "^5.1.4",
-    "xmlbuilder": "^15.1.1"
-  },
-  "dependencies": {
+    "xmlbuilder": "^15.1.1",
     "google-protobuf": "^3.13.0",
     "history": "^5.0.0",
     "immer": "^7.0.9",

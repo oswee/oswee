@@ -1,12 +1,7 @@
 {
   "extends": "../../tsconfig.base.json",
   "compilerOptions": {
-    "outDir": "../../dist/out-tsc",
-    "module": "CommonJS",
-    "baseUrl": ".",
-    // "rootDirs": [".", "../../dist/libs/connect"],
-    // "declaration": false,
-    "types": []
+    "outDir": "../../dist/out-tsc"
   },
   "files": [],
   "include": ["src/**/*.ts"]

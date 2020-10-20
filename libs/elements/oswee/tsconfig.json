@@ -12,12 +12,9 @@
     "trace": true
   },
   "compilerOptions": {
-    "types": [
-      "node",
-      "jest"
-    ]
+    "types": ["node", "jest"]
   },
-  "include": [],
+  "include": ["src/**/*"],
   "files": [],
   "references": [
     {
