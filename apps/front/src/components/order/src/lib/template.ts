@@ -1,9 +1,8 @@
 import { html, TemplateResult } from 'lit-element'
-// import { DynamicModuleLoader } from 'redux-dynamic-modules'
 import { repeat } from 'lit-html/directives/repeat'
 import { DynamicOrderElement } from './component'
 import { StringMap } from '@oswee/libs/action'
-// import {connect} from '@oswee/libs/connect'
+import { SettingActions } from '../../../../modules/settings/actions'
 
 export interface IOrderProps {
   userPreferences: StringMap<string | boolean>
@@ -18,7 +17,7 @@ export interface IOrderProps {
 const Order = (props: IOrderProps) => {
   const toppings = ['Cheese', 'Onion', 'Pineapple']
   return html`
-    <div>Order toppings</div>
+    <div>Order</div>
     <ul>
       ${repeat(
         toppings,
@@ -41,11 +40,12 @@ const ToppingCheckbox = (props: IToppingCheckboxProps) => {
   const { name, orderProps } = props
   const checked = !!orderProps.userPreferences[name]
   const onChange = () => {
-    console.log('Checkbox click')
+    console.log('Checkbox click:', orderProps.setPreferences)
     orderProps.setPreferences({
       // Toggle the name property to true/false
       [name]: !checked,
     })
+    console.log('setPreferences:', orderProps.setPreferences)
   }
   return html`
     <div>
@@ -56,5 +56,10 @@ const ToppingCheckbox = (props: IToppingCheckboxProps) => {
 }
 
 export default function template(this: DynamicOrderElement): TemplateResult {
-  return html` ${Order(this.orderProps)} `
+  return html`
+    ${Order({
+      userPreferences: this.userPreferences,
+      setPreferences: SettingActions.setPreferences,
+    })}
+  `
 }

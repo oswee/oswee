@@ -16,6 +16,7 @@ export function* settingsRootSaga() {
 function* loadPreferences() {
   // Load the current state
   const settingsStr = yield effects.call([localStorage, localStorage.getItem], 'userPreferences')
+  console.log('Saga')
   if (settingsStr) {
     const settings = JSON.parse(settingsStr)
     yield effects.put(SettingActions.setPreferences(settings))
