@@ -1,7 +1,7 @@
 import { LitElement, customElement, property, TemplateResult, CSSResultArray, html } from 'lit-element'
 // import { createStore, IModuleStore } from 'redux-dynamic-modules-core'
 import { IOrderAwareState } from '../../../../modules/orders/contracts'
-// import { OrderModules } from '../../../../modules/orders/module'
+import { OrderModules } from '../../../../modules/orders/module'
 import { getUserPreferences } from '../../../../modules/settings/selectors'
 // import { SettingActions } from '../../../../modules/settings/actions'
 import { connect } from '@oswee/libs/connect'
@@ -13,28 +13,39 @@ import { store } from '../../../../store'
 @customElement('dynamic-order')
 // export class MyComponentElement extends connect(mapStateToProps, LitElement) {
 export class DynamicOrderElement extends connect(store, LitElement) {
-  @property() userPreferences: StringMap<string | boolean>
-  // @property() orderProps: IOrderProps = {
-  //   userPreferences: this.userPreferences,
-  // }
+  @property({ type: Object }) userPreferences: StringMap<string | boolean>
+  @property({ type: Object }) orderProps: IOrderProps = {
+    // { [key: string]: T }
+    userPreferences: { ['Cheese']: true },
+    setPreferences: p => ['Cheese', false],
+  }
 
   constructor() {
     super()
-    // this.store = createStore({})
+    console.log('Constructor hit!')
+    store.addModules(OrderModules)
   }
+
+  connectedCallback() {
+    super.connectedCallback()
+    // Mount the OrderModules
+    console.log('Connected')
+  }
+
+  // orderProps = <IOrderProps>{
+  //   userPreferences: this.userPreferences,
+  //   setPreferences:
+  // }
 
   /**
    * Get the state of userPreferences
    */
   mapState(state: IOrderAwareState) {
+    console.log(getUserPreferences(state))
     return {
       userPreferences: getUserPreferences(state),
     }
   }
-
-  // orderProps = <IOrderProps>{
-  //   userPreferences: this.userPreferencess,
-  // }
 
   // ConnectedOrder = connect(this.mapStateToProps, SettingActions, Order)
 
@@ -48,11 +59,6 @@ export class DynamicOrderElement extends connect(store, LitElement) {
   //   <ConnectedOrder />{" "}
   //   < /DynamicModuleLoader>
   // )
-
-  connectedCallback(): void {
-    super.connectedCallback()
-    // Mount the OrderModules
-  }
 
   protected render(): TemplateResult {
     return template.call(this)

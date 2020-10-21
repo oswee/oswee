@@ -1,6 +1,6 @@
 import { LitElement, customElement, property, TemplateResult, CSSResultArray } from 'lit-element'
-import { createStore, IModuleStore } from 'redux-dynamic-modules-core'
-import { getSagaExtension } from 'redux-dynamic-modules-saga'
+// import { createStore, IModuleStore } from 'redux-dynamic-modules-core'
+// import { getSagaExtension } from 'redux-dynamic-modules-saga'
 // import { connect } from '@oswee/libs/connect'
 import template from './template'
 import style from './style'
