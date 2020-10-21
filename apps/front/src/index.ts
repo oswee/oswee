@@ -1,6 +1,6 @@
 import './sass/main.css'
-import './component'
+import './components/app-shell/src'
 import './store'
 
-const systemShell: HTMLElement = document.createElement('system-shell')
+const systemShell: HTMLElement = document.createElement('app-shell')
 document.body.appendChild(systemShell)

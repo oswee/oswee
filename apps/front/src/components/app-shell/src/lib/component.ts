@@ -5,9 +5,9 @@ import { getSagaExtension } from 'redux-dynamic-modules-saga'
 import template from './template'
 import style from './style'
 
-@customElement('system-shell')
+@customElement('app-shell')
 // export class SystemShellElement extends connect(store, LitElement) {
-export class SystemShellElement extends LitElement {
+export class AppShellElement extends LitElement {
   // private store: IModuleStore<any>
   // @property({ type: IModuleStore<any> }) store;
   constructor() {
