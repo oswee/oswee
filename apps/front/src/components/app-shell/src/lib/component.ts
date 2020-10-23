@@ -2,46 +2,27 @@ import { LitElement, customElement, property, TemplateResult, CSSResultArray } f
 import template from './template'
 import style from './style'
 
-// import { connect } from '@oswee/libs/connect'
-// import { store } from '../../../../store'
-// import { OrderModules } from '../../../../modules/orders/module'
-
-// import { offline } from '@redux-offline/redux-offline'
-// import offlineConfig from '@redux-offline/redux-offline/lib/defaults'
-// import { createStore, IModuleStore } from 'redux-dynamic-modules-core'
-// Saga extension allows us to use Saga middleware in the module store.
-// import { getSagaExtension } from 'redux-dynamic-modules-saga'
-// Thunk extension allows us to use Thunk middleware in the module store.
-// import { getThunkExtension } from 'redux-dynamic-modules-thunk'
-
 @customElement('app-shell')
 // export class AppShellElement extends connect(store, LitElement) {
 export class AppShellElement extends LitElement {
-  // @property({ type: Object }) store: IModuleStore<any>
-  // @property({ type: Object }) state: {}
+  @property({ type: Boolean }) hackerNews = false
+  @property({ type: Boolean }) weather = false
 
-  // constructor() {
-  //   super()
+  onHackerNewsToggled = () => {
+    console.log('News click:')
+    this.hackerNews = !this.hackerNews
+  }
 
-  //   // define the initial state where none of the widgets are visible
-  //   this.state = {
-  //     hackerNews: false,
-  //     weather: false,
-  //   }
+  onWeatherToggled = () => {
+    console.log('Weather click:')
+    this.weather = !this.weather
+  }
 
-  //   /**
-  //    * configure the store and load the thunk and saga extension
-  //    * The extensions are optional and you can choose extension based on the middleware you use
-  //    * You can also build your own extensions for any other middleware e.g. redux-observable
-  //    */
-  //   this.store = createStore({
-  //     // enhancements: [offline(offlineConfig)],
-  //     extensions: [getThunkExtension(), getSagaExtension()],
-  //   })
-  // }
-
-  connectedCallback(): void {
-    super.connectedCallback()
+  getWeather() {
+    if (!this.weather) {
+      return null
+    }
+    import('../../../../widgets/weather/index')
   }
 
   protected render(): TemplateResult {
