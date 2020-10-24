@@ -1,11 +1,12 @@
 import { LitElement, customElement, property, TemplateResult, CSSResultArray } from 'lit-element'
 
 import { connect } from '@oswee/libs/connect'
-import { store } from '../../../store'
+import { store } from '../../../store/index'
 import template from './template'
 import style from './style'
 
-import { getWeatherModule } from '../redux/weather-module'
+// Redux dynamic module
+import { getWeatherModule } from '@oswee/packages/weather'
 
 @customElement('weather-com')
 export class WeatherComElement extends connect(store, LitElement) {
@@ -14,11 +15,11 @@ export class WeatherComElement extends connect(store, LitElement) {
   @property() temperature: number
   @property() description: any
 
-  constructor() {
-    super()
-    console.log('Constructor hit!')
-    store.addModule(getWeatherModule())
-  }
+  // constructor() {
+  //   super()
+  //   console.log('Constructor hit!')
+  //   // store.addModule(getWeatherModule())
+  // }
 
   mapState(state) {
     if (!state.weatherState || !state.weatherState.weather) {
@@ -27,11 +28,23 @@ export class WeatherComElement extends connect(store, LitElement) {
       }
     }
     return {
-      loading: false,
+      loading: false, // Why this?
       name: state.weatherState.weather.name,
       temperature: Math.round(state.weatherState.weather.main.temp - 273),
       description: state.weatherState.weather.weather[0].description,
     }
+  }
+
+  connectedCallback() {
+    super.connectedCallback()
+    // Inject the redux module when component gets mounted
+    store.addModule(getWeatherModule())
+  }
+
+  disconnectedCallback() {
+    super.disconnectedCallback()
+    // Reject the redux module when component gets unmounted
+    store.dispose()
   }
 
   protected render(): TemplateResult {

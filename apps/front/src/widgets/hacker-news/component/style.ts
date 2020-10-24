@@ -4,12 +4,18 @@ export default css`
   :host([hidden]) {
     display: none;
   }
+
   :host {
     display: block;
-    border: 3px solid green;
   }
-  ui-avatar {
-    color: red;
-    font-size: 2rem;
+
+  .news-root {
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+  }
+
+  .news-link {
+    margin-top: 2px;
   }
 `

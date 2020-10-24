@@ -1,5 +1,5 @@
 import produce from 'immer'
-import { WeatherLoaded } from './weather-actions'
+import { WeatherLoaded } from './actions'
 
 export const weatherReducer = (state, action) => {
   return produce(state || {}, draft => {

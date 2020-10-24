@@ -2,8 +2,12 @@
 
 $my-color: green;
 
+body {
+  padding: 0;
+  margin: 0;
+}
 h1 {
   --color-success-10: hsla(100, 100%, 38%, 1);
   font-size: 4rem;
-  color: #{$example-blue};
+  color: #{$example-red};
 }

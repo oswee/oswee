@@ -20,6 +20,8 @@ ts_library(
     deps = [
         "//libs/action",
         "//libs/connect",
+        "//libs/elements/oswee/avatar",
+        "//packages/weather",
         "//apps/front/src/sass:css_typings",
         # "@npm1//@types/node",
         # "@npm1//history",
@@ -105,7 +107,8 @@ nodejs_binary(
         "ibazel_notify_changes",
     ],
     templated_args = [
-        "--output=./[hash].bundle.js",
+        # "--output=./[hash].bundle.js",
+        "--output=./bundle.js",
         "--entry=oswee/apps/front/src/index",
         "--mode=development",
         "--config=oswee/apps/front/webpack.dev.js",

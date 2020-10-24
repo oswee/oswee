@@ -1,0 +1,34 @@
+load("@npm//@bazel/typescript:index.bzl", "ts_config", "ts_library")
+
+package(default_visibility = ["//visibility:public"])
+
+ts_library(
+    name = "weather",
+    srcs = glob(
+        include = [
+            "src/**/*.ts",
+        ],
+        exclude = [
+            "src/**/*.spec.ts",
+            "src/test-setup.ts",
+        ],
+    ),
+    module_name = "@oswee/packages/weather",
+    module_root = "src",
+    devmode_module = "esnext",
+    devmode_target = "esnext",
+    tsconfig = "tsconfig",
+    deps = [
+      "@npm//redux-saga",
+      "@npm//immer",
+    ],
+)
+
+ts_config(
+    name = "tsconfig",
+    src = "tsconfig.json",
+    deps = [
+        "//:tsconfig.base.json",
+        "tsconfig.json",
+    ],
+)

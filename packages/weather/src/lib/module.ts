@@ -1,5 +1,5 @@
-import { weatherReducer } from './weather-reducer'
-import { weatherSaga } from './weather-saga'
+import { weatherReducer } from './reducer'
+import { weatherSaga } from './saga'
 
 export function getWeatherModule() {
   return {

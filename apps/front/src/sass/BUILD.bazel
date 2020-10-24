@@ -8,7 +8,7 @@ sass_binary(
     name = "sass",
     src = "main.scss",
     deps = [
-        "@oswee//libs/shared/styles:colors",
+        "//libs/shared/styles:colors",
     ],
     sourcemap = False,
 )

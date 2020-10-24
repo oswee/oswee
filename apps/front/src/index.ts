@@ -4,4 +4,5 @@ import './components/app-shell/src'
 export * from './store'
 
 const appShell: HTMLElement = document.createElement('app-shell')
+appShell.setAttribute('noshadow', '')
 document.body.appendChild(appShell)

@@ -18,12 +18,12 @@ export class AppShellElement extends LitElement {
     this.weather = !this.weather
   }
 
-  getWeather() {
-    if (!this.weather) {
-      return null
-    }
-    import('../../../../widgets/weather/index')
-  }
+  // getWeather() {
+  //   if (!this.weather) {
+  //     return null
+  //   }
+  //   import('../../../../widgets/weather/index')
+  // }
 
   protected render(): TemplateResult {
     return template.call(this)
@@ -31,5 +31,8 @@ export class AppShellElement extends LitElement {
 
   public static get styles(): CSSResultArray {
     return [style]
+  }
+  createRenderRoot(): Element | ShadowRoot {
+    return this.hasAttribute('noshadow') ? this : super.createRenderRoot()
   }
 }
