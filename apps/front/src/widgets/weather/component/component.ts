@@ -6,7 +6,7 @@ import template from './template'
 import style from './style'
 
 // Redux dynamic module
-import { getWeatherModule } from '@oswee/packages/weather'
+import { getWeatherModule, WeatherSelectors } from '@oswee/packages/weather'
 
 @customElement('weather-com')
 export class WeatherComElement extends connect(store, LitElement) {
@@ -21,25 +21,41 @@ export class WeatherComElement extends connect(store, LitElement) {
   //   // store.addModule(getWeatherModule())
   // }
 
+  connectedCallback() {
+    super.connectedCallback()
+    // Inject the redux module when component gets mounted
+    store.addModule(getWeatherModule())
+  }
+
   mapState(state) {
-    if (!state.weatherState || !state.weatherState.weather) {
+    if (!WeatherSelectors.selectState(state) || !WeatherSelectors.selectWeather(state)) {
       return {
         loading: true,
       }
     }
     return {
-      loading: false, // Why this?
       name: state.weatherState.weather.name,
       temperature: Math.round(state.weatherState.weather.main.temp - 273),
       description: state.weatherState.weather.weather[0].description,
     }
   }
 
-  connectedCallback() {
-    super.connectedCallback()
-    // Inject the redux module when component gets mounted
-    store.addModule(getWeatherModule())
-  }
+  _weather = null
+  // getWeather() {
+  //   if (!this.state.weather) {
+  //     return null
+  //   }
+  //   if (this._weather) {
+  //     return this._weather
+  //   }
+
+  //   const LoadableWeather = Loadable({
+  //     loader: () => import('./widgets/weather'),
+  //     loading: () => <div>Loading Scripts...</div>,
+  //   })
+  //   this._weather = <LoadableWeather />
+  //   return this._weather
+  // }
 
   disconnectedCallback() {
     super.disconnectedCallback()
