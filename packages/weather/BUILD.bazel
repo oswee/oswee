@@ -19,9 +19,12 @@ ts_library(
     devmode_target = "esnext",
     tsconfig = "tsconfig",
     deps = [
+      "//libs/action",
+      "@npm//redux-dynamic-modules-core",
+      "@npm//redux-dynamic-modules-saga",
       "@npm//redux-saga",
       "@npm//immer",
-      "@npm//reselect"
+      "@npm//reselect",
     ],
 )
 

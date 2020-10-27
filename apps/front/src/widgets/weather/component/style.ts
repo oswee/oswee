@@ -6,6 +6,7 @@ export default css`
   }
   :host {
     display: block;
+    border: 3px solid red;
   }
   .weather-root {
     display: flex;

@@ -1,4 +1,10 @@
-import { LitElement, customElement, property, TemplateResult, CSSResultArray } from 'lit-element'
+import {
+  LitElement,
+  customElement,
+  property,
+  TemplateResult,
+  CSSResultArray,
+} from 'lit-element'
 
 import { connect } from '@oswee/libs/connect'
 import { store } from '../../../store/index'
@@ -6,61 +12,57 @@ import template from './template'
 import style from './style'
 
 // Redux dynamic module
-import { getWeatherModule, WeatherSelectors } from '@oswee/packages/weather'
+import {
+  WeatherModule,
+  WeatherSelectors,
+  IWeatherAwareState,
+} from '@oswee/packages/weather'
 
 @customElement('weather-com')
 export class WeatherComElement extends connect(store, LitElement) {
-  @property({ type: Boolean }) loading: boolean
-  @property() name: any
-  @property() temperature: number
-  @property() description: any
+  @property({ type: Boolean }) loading: boolean = true
+  @property({ type: String }) name: string = ''
+  @property({ type: Number }) temperature: number = 0
+  @property({ type: String }) description: string = ''
 
   // constructor() {
   //   super()
   //   console.log('Constructor hit!')
-  //   // store.addModule(getWeatherModule())
+  //   store.addModule(getWeatherModule())
   // }
 
   connectedCallback() {
     super.connectedCallback()
     // Inject the redux module when component gets mounted
-    store.addModule(getWeatherModule())
+    store.addModules([WeatherModule])
+    // store.dispatch(WeatherActions.weatherLoaded({}))
+    // console.log('Redux mounted')
   }
 
-  mapState(state) {
-    if (!WeatherSelectors.selectState(state) || !WeatherSelectors.selectWeather(state)) {
+  mapState(state: IWeatherAwareState) {
+    if (
+      !WeatherSelectors.selectState(state) ||
+      !WeatherSelectors.selectWeather(state)
+    ) {
       return {
         loading: true,
       }
     }
     return {
-      name: state.weatherState.weather.name,
-      temperature: Math.round(state.weatherState.weather.main.temp - 273),
-      description: state.weatherState.weather.weather[0].description,
+      loading: false,
+      name: WeatherSelectors.selectName(state),
+      temperature: Math.round(WeatherSelectors.selectTemperature(state) - 273),
+      description: WeatherSelectors.selectDescription(state),
     }
   }
 
-  _weather = null
-  // getWeather() {
-  //   if (!this.state.weather) {
-  //     return null
-  //   }
-  //   if (this._weather) {
-  //     return this._weather
-  //   }
-
-  //   const LoadableWeather = Loadable({
-  //     loader: () => import('./widgets/weather'),
-  //     loading: () => <div>Loading Scripts...</div>,
-  //   })
-  //   this._weather = <LoadableWeather />
-  //   return this._weather
+  // updated() {
+  //   console.log('Updated:', this.name)
   // }
 
   disconnectedCallback() {
     super.disconnectedCallback()
-    // Reject the redux module when component gets unmounted
-    store.dispose()
+    // store.dispose() //  Removes ALL of the modules added to the store and dispose of the object
   }
 
   protected render(): TemplateResult {

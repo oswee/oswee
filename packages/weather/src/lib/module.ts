@@ -1,17 +1,19 @@
 import { weatherReducer } from './reducer'
-import { weatherSaga } from './saga'
+import { watcherSaga } from './sagas'
+import * as effects from 'redux-saga/effects'
+import { ISagaModule } from 'redux-dynamic-modules-saga'
+import { IWeatherAwareState } from './contracts'
 
-export function getWeatherModule() {
-  return {
-    // Unique id of the module
-    id: 'weather',
-    // Maps the Store key to the reducer
-    reducerMap: {
-      weatherState: weatherReducer,
-    },
-    // This module uses redux-saga middleware
-    // This property will be be used by the SagaExtension
-    // to run sagas for the moduleD
-    sagas: [weatherSaga],
-  }
+export const WeatherModule: ISagaModule<IWeatherAwareState> = {
+  // Unique id of the module
+  id: 'weather',
+  // Maps the Store key to the reducer
+  reducerMap: {
+    weatherState: weatherReducer,
+  } as any,
+  // initialActions: [SettingActions.loadPreferences()],
+  // This module uses redux-saga middleware
+  // This property will be be used by the SagaExtension
+  // to run sagas for the moduleD
+  sagas: [watcherSaga],
 }

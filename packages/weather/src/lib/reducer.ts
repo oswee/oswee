@@ -1,18 +1,36 @@
-import produce from 'immer'
-import { WeatherLoaded } from './actions'
-// import { WeatherState } from './models'
+// import produce from 'immer'
+import { WeatherTypes } from './constants'
+import { WeatherActionTypes } from './types'
+import { IWeatherState } from './contracts'
 
-export const weatherReducer = (state, action) => {
-  return produce(state || {}, draft => {
-    switch (action.type) {
-      case WeatherLoaded: {
-        draft.weather = action.payload
-        break
-      }
+const initialState: IWeatherState = {
+  weather: {
+    weather: [
+      {
+        description: '',
+      },
+    ],
+    main: {
+      temp: undefined,
+    },
+    name: '',
+  },
+}
 
-      default: {
-        //do nothing
+export const weatherReducer = (
+  state: IWeatherState = initialState,
+  action: WeatherActionTypes,
+): IWeatherState => {
+  switch (action.type) {
+    case WeatherTypes.LOADED: {
+      console.log('Reducer:', action.payload)
+      return {
+        ...state,
+        weather: action.payload,
       }
     }
-  })
+
+    default:
+      return state
+  }
 }

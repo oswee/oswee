@@ -2,9 +2,6 @@ import { html, TemplateResult } from 'lit-element'
 import { AppShellElement } from './component'
 import '@oswee/elements/avatar'
 
-import('../../../../widgets/weather/index')
-// import('../../../../widgets/hacker-news/index')
-
 export default function template(this: AppShellElement): TemplateResult {
   return html` <div className="App">
     <ui-avatar text="Xz"></ui-avatar>
@@ -15,7 +12,11 @@ export default function template(this: AppShellElement): TemplateResult {
       <input type="checkbox" @change="${this.onWeatherToggled}" />
       <label>Weather</label>
     </div>
-    ${this.weather ? html`<weather-com></weather-com>` : html`<div>Loading Scripts...</div>`}
-    <!-- ${this.hackerNews ? html`<hacker-news></hacker-news>` : html`<div>Loading Scripts...</div>`} -->
+    <div class="widgets">
+      <!-- <div class="widgets">${this.renderContent()}</div> -->
+      ${!this.state.weather
+        ? html`<div>Loading Scripts...</div>`
+        : html`<weather-com></weather-com>`}
+    </div>
   </div>`
 }
