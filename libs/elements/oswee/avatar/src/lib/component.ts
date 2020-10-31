@@ -1,4 +1,10 @@
-import { LitElement, customElement, property, TemplateResult, CSSResultArray } from 'lit-element'
+import {
+  LitElement,
+  customElement,
+  property,
+  TemplateResult,
+  CSSResultArray,
+} from 'lit-element'
 import template from './template'
 import style from './style'
 
@@ -34,7 +40,7 @@ export class UiAvatarElement extends LitElement {
 
   connectedCallback(): void {
     super.connectedCallback()
-    console.log('Avatar element connected!')
+    // console.log('Avatar element connected!')
     this.addEventListener('click', this.onButtonClick)
   }
 

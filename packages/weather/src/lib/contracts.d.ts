@@ -1,11 +1,11 @@
 import { StringMap } from '@oswee/libs/action'
 
-export interface IWeatherAwareState {
-  weatherState: IWeatherState
+export interface IWeatherRootState {
+  readonly weatherState: IWeatherState
 }
 
 export interface IWeatherState {
-  weather: {
+  readonly weather: {
     weather: [
       {
         description: string
@@ -17,3 +17,7 @@ export interface IWeatherState {
     name: string
   }
 }
+
+// export interface IWeatherState {
+//   readonly weather: StringMap<string | boolean>
+// }

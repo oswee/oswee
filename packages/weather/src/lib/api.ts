@@ -7,6 +7,7 @@ const fetchWeather = async () => {
     method: 'GET',
   })
   const data = await response.json()
+  // console.log('API:', data)
   if (response.status >= 400) {
     throw new Error(data)
   }

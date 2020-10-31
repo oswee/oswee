@@ -5,9 +5,8 @@ import { fetchWeather } from './api'
 
 function* workerSaga() {
   try {
-    // console.log('Payload', action)
     const data = yield effects.call(fetchWeather)
-    console.log('Saga data:', data)
+    console.log('Data:', data)
     yield effects.put(WeatherActions.weatherLoaded(data))
   } catch (error) {
     console.log('Error in the worker saga:', error.toString())

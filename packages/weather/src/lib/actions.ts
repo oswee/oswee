@@ -1,7 +1,8 @@
 import { WeatherTypes } from './constants'
 import { ActionsUnion, createAction, StringMap } from '@oswee/libs/action'
+import { IWeatherRootState, IWeatherState } from './contracts'
 
-export const WeatherLoaded = 'weather/weatherLoaded'
+// export const WeatherLoaded = 'weather/weatherLoaded'
 
 // export const weatherLoaded = (payload: WeatherState): WeatherActionTypes => {
 //   return {
@@ -14,9 +15,11 @@ export const WeatherLoaded = 'weather/weatherLoaded'
 //   weatherLoaded,
 // }
 
+// StringMap<string | boolean>
+
 export const WeatherActions = {
-  weatherLoaded: (payload: StringMap<string | boolean>) =>
-    createAction(WeatherTypes.LOADED, payload),
+  weatherLoaded: (weather: IWeatherState) =>
+    createAction(WeatherTypes.LOADED, weather),
 }
 
 // we leverage TypeScript token merging, so our consumer can use `Actions` for both runtime and compile time types 💪

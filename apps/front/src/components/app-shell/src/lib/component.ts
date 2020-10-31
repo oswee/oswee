@@ -27,13 +27,18 @@ export class AppShellElement extends LitElement {
     }
   }
 
-  connectedCallback() {
-    super.connectedCallback()
-    import('../../../../widgets/weather')
+  // connectedCallback() {
+  //   super.connectedCallback()
+  //   import(/*webpackChunkName: "weather" */ '../../../../widgets/weather')
+  // }
+
+  firstUpdated() {
+    import(/*webpackChunkName: "weather" */ '../../../../widgets/weather')
   }
 
   onHackerNewsToggled = () => {
     this.state.hackerNews = !this.state.hackerNews
+    this.requestUpdate()
   }
 
   onWeatherToggled = () => {
@@ -42,21 +47,35 @@ export class AppShellElement extends LitElement {
   }
 
   renderContent = () => {
-    return (
-      // this.getHackerNews()
-      this.getWeather()
-    )
+    return html`
+      ${this.state.hackerNews ? this.getHackerNews() : ''}
+      ${this.state.weather ? this.getWeather() : ''}
+    `
+  }
+
+  _hackerNews = null
+  getHackerNews() {
+    // console.log('test', this.state.hackerNews)
+    if (!this.state.hackerNews) {
+      return null
+    }
+    if (this._hackerNews) {
+      return this._hackerNews
+    }
+    this._hackerNews = this.state.hackerNews
+      ? html`<div>Hacker News</div>`
+      : html`<div>Loading Scripts...</div>`
+    return this._hackerNews
   }
 
   _weather = null
   getWeather() {
-    // console.log('getWeather click', this._weather)
-    // if (!this.state.weather) {
-    //   return null
-    // }
-    // if (this._weather) {
-    //   return this._weather
-    // }
+    if (!this.state.weather) {
+      return null
+    }
+    if (this._weather) {
+      return this._weather
+    }
 
     // import('../../../../widgets/weather')
     // const LoadableWeather = Loadable({

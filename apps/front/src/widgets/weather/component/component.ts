@@ -15,15 +15,15 @@ import style from './style'
 import {
   WeatherModule,
   WeatherSelectors,
-  IWeatherAwareState,
+  IWeatherRootState,
 } from '@oswee/packages/weather'
 
 @customElement('weather-com')
 export class WeatherComElement extends connect(store, LitElement) {
-  @property({ type: Boolean }) loading: boolean = true
-  @property({ type: String }) name: string = ''
-  @property({ type: Number }) temperature: number = 0
-  @property({ type: String }) description: string = ''
+  @property({ type: Boolean }) loading: boolean
+  @property({ type: String }) name: string
+  @property({ type: Number }) temperature: number
+  @property({ type: String }) description: string
 
   // constructor() {
   //   super()
@@ -39,7 +39,9 @@ export class WeatherComElement extends connect(store, LitElement) {
     // console.log('Redux mounted')
   }
 
-  mapState(state: IWeatherAwareState) {
+  mapState(state) {
+    // console.log('1', !WeatherSelectors.selectState(state))
+    // console.log('2', !WeatherSelectors.selectWeather(state))
     if (
       !WeatherSelectors.selectState(state) ||
       !WeatherSelectors.selectWeather(state)

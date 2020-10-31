@@ -2,9 +2,9 @@ import { weatherReducer } from './reducer'
 import { watcherSaga } from './sagas'
 import * as effects from 'redux-saga/effects'
 import { ISagaModule } from 'redux-dynamic-modules-saga'
-import { IWeatherAwareState } from './contracts'
+import { IWeatherRootState } from './contracts'
 
-export const WeatherModule: ISagaModule<IWeatherAwareState> = {
+export const WeatherModule: ISagaModule<IWeatherRootState> = {
   // Unique id of the module
   id: 'weather',
   // Maps the Store key to the reducer

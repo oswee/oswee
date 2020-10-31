@@ -1,31 +1,49 @@
 import * as reselect from 'reselect'
-import { IWeatherAwareState, IWeatherState } from './contracts'
+import { IWeatherRootState, IWeatherState } from './contracts'
 
 // INPUT/BASE SELECTORS
-const getState = (state: IWeatherAwareState): IWeatherAwareState => {
-  // console.log('getState:', state)
-  return state
-}
+/**
+ *
+ * @param state Takes RootState as an argument
+ */
+const getState = (state): IWeatherRootState => state
 
 // MEMOIZED SELECTORS
+
+/**
+ * Whats the point of using memoizaton of i have no any arguments there?
+ */
 const selectState = reselect.createSelector([getState], state => {
-  // console.log('selectState:', state)
-  return state
-})
-const selectWeather = reselect.createSelector([selectState], state => {
-  // console.log('selectWeather:', state.weatherState)
+  console.log('SelectState:', state)
   return state.weatherState
 })
-const selectName = reselect.createSelector(
-  [selectWeather],
-  state => state.weather.name,
-)
+
+const selectWeather = reselect.createSelector([selectState], state => {
+  console.log('SelectWeather:', state.weather)
+  return state.weather
+})
+
+// const selectState = (state): IWeatherRootState => {
+//   console.log('selectState:', state)
+//   return state
+// }
+
+// const selectWeather = (state) => {
+//   console.log('selectWeather:', state)
+//   return state
+// }
+
+const selectName = reselect.createSelector([selectWeather], state => {
+  return state.name
+})
+
 const selectTemperature = reselect.createSelector(
   [selectWeather],
-  state => state.weather.main.temp,
+  state => state.main.temp,
 )
+
 const selectDescription = reselect.createSelector([selectWeather], state => {
-  return state.weather.weather[0].description
+  return state.weather[0].description
 })
 
 export const WeatherSelectors = {

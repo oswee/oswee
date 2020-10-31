@@ -1,7 +1,8 @@
-// import produce from 'immer'
+import produce from 'immer'
 import { WeatherTypes } from './constants'
 import { WeatherActionTypes } from './types'
 import { IWeatherState } from './contracts'
+import { WeatherActionsUnion } from './actions'
 
 const initialState: IWeatherState = {
   weather: {
@@ -11,19 +12,31 @@ const initialState: IWeatherState = {
       },
     ],
     main: {
-      temp: undefined,
+      temp: 0,
     },
-    name: '',
+    name: 'Antarctica',
   },
 }
 
+// const initialState = {
+//   weather: [
+//     {
+//       description: '',
+//     },
+//   ],
+//   main: {
+//     temp: 0,
+//   },
+//   name: 'Antarctica',
+// }
+
 export const weatherReducer = (
   state: IWeatherState = initialState,
-  action: WeatherActionTypes,
-): IWeatherState => {
+  action: WeatherActionsUnion,
+) => {
   switch (action.type) {
     case WeatherTypes.LOADED: {
-      console.log('Reducer:', action.payload)
+      console.log(action)
       return {
         ...state,
         weather: action.payload,
@@ -34,3 +47,23 @@ export const weatherReducer = (
       return state
   }
 }
+
+// export function weatherReducer(
+//   state: IWeatherState,
+//   action: WeatherActionsUnion,
+// ): IWeatherState {
+//   return produce(state || initialState, (draft: IWeatherState) => {
+//     switch (action.type) {
+//       case WeatherTypes.LOADED: {
+//         const { weather } = action.payload
+//         for (const key in weather) {
+//           /*eslint no-prototype-builtins: "off"*/
+//           if (weather.hasOwnProperty(key)) {
+//             draft.weather[key] = weather[key]
+//           }
+//         }
+//         break
+//       }
+//     }
+//   })
+// }
