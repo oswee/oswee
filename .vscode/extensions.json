@@ -1,0 +1,18 @@
+{
+  "recommendations": [
+    "esbenp.prettier-vscode",
+    "dbaeumer.vscode-eslint",
+    "editorconfig.editorconfig",
+    "streetsidesoftware.code-spell-checker",
+    "davidanson.vscode-markdownlint",
+    "arcanis.vscode-zipfs",
+    "bierner.lit-html",
+    "mf.vscode-styled-components",
+    "formulahendry.auto-rename-tag",
+    "sainoba.px-to-rem"
+  ],
+  "unwantedRecommendations": [
+    "hookyqr.beautify",
+    "dbaeumer.jshint"
+  ]
+}
