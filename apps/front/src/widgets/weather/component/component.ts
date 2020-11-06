@@ -51,7 +51,7 @@ export class WeatherComElement extends connect(store, LitElement) {
       }
     }
     return {
-      loading: false,
+      // loading: false,
       name: WeatherSelectors.selectName(state),
       temperature: Math.round(WeatherSelectors.selectTemperature(state) - 273),
       description: WeatherSelectors.selectDescription(state),
