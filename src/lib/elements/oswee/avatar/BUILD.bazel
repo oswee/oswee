@@ -1,0 +1,43 @@
+load("@npm//@bazel/typescript:index.bzl", "ts_config", "ts_library")
+load("//tools/bazel_rules:index.bzl", "stylelint")
+
+# package(default_visibility = ["//libs/elements/oswee:__subpackages__"])
+package(default_visibility = ["//visibility:public"])
+
+ts_library(
+    name = "avatar",
+    srcs = glob(
+        include = ["src/**/*.ts"],
+        exclude = [
+            "src/**/*.spec.ts",
+            "src/test-setup.ts",
+        ],
+    ),
+    module_name = "@oswee/elements/avatar",
+    module_root = "src",
+    devmode_module = "esnext",
+    devmode_target = "esnext",
+    tsconfig = "tsconfig_lib",
+    deps = [
+        "@npm//lit-element",
+        "@npm//lit-html",
+        "@npm//tslib",
+    ],
+)
+
+stylelint(
+    name = "stylelint",
+    srcs = glob(["**/*.scss"]),
+    allow_empty_input = True,
+    config = ":.stylelintrc.json",
+)
+
+ts_config(
+    name = "tsconfig_lib",
+    src = "tsconfig.lib.json",
+    deps = [
+        ":tsconfig.json",
+        "//:tsconfig.base.json",
+        "//lib/elements/oswee:tsconfig",
+    ],
+)

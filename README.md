@@ -26,11 +26,12 @@ These tools should be installed locally in order to execute
 - NodeJS >=14
 - Yarn
 - TLS certificates should be valid and configured in the DNS/Proxy
+- Github Personal Access `GITHUB_NPM_PAT` env. variable/token should be added to the `~/.zshenv` to be able to read and write private/public NPM packages.
 
 ### Other relevant things
 
-plus: I have HAProxy configured at the edge which does the A+ perimeter security.
-plus: I have custom CloudFlare DNS setup
+I have HAProxy configured at the edge which does the A+ perimeter security.
+I have custom CloudFlare DNS setup
 
 ## How to use
 

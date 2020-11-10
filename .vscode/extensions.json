@@ -9,7 +9,8 @@
     "bierner.lit-html",
     "mf.vscode-styled-components",
     "formulahendry.auto-rename-tag",
-    "sainoba.px-to-rem"
+    "sainoba.px-to-rem",
+    "bazelbuild.vscode-bazel"
   ],
   "unwantedRecommendations": [
     "hookyqr.beautify",
