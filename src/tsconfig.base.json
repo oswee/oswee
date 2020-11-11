@@ -40,8 +40,8 @@
       "@oswee/elements/*": [
         "lib/elements/oswee/*/src"
       ],
-      "@oswee/pkg/*": [
-        "pkg/*/src"
+      "@oswee/packages/*": [
+        "packages/*/src"
       ],
       "@oswee/platform/web/assets/*": [
         "platform/web/src/assets/*"

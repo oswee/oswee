@@ -3,29 +3,28 @@ load("@npm//@bazel/typescript:index.bzl", "ts_config", "ts_library")
 package(default_visibility = ["//visibility:public"])
 
 ts_library(
-    name = "store",
+    name = "websocket",
     srcs = glob(
         include = [
             "src/**/*.ts",
         ],
         exclude = [
             "src/**/*.spec.ts",
+            "src/test-setup.ts",
         ],
     ),
-    module_name = "@oswee/pkg/store",
+    module_name = "@oswee/packages/websocket",
     module_root = "src",
     devmode_module = "esnext",
     devmode_target = "esnext",
     tsconfig = "tsconfig",
     deps = [
-      # "//lib/action",
-      "//pkg/websocket",
-      "@npm//redux",
+      "//lib/action",
       "@npm//redux-dynamic-modules-core",
       "@npm//redux-dynamic-modules-saga",
-      # "@npm//redux-saga",
-      # "@npm//immer",
-      # "@npm//reselect",
+      "@npm//redux-saga",
+      "@npm//immer",
+      "@npm//reselect",
     ],
 )
 

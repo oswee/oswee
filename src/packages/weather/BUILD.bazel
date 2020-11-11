@@ -13,7 +13,7 @@ ts_library(
             "src/test-setup.ts",
         ],
     ),
-    module_name = "@oswee/pkg/weather",
+    module_name = "@oswee/packages/weather",
     module_root = "src",
     devmode_module = "esnext",
     devmode_target = "esnext",
