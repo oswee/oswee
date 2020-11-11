@@ -4,16 +4,19 @@ This is sandbox monorepository to test Bazel in action
 
 ## Stack
 
-- Bazel         : Whole repository is managed with Bazel
-- Go            : Back-end services will be  written in Go
-- TypeScript    : Front-end apps will be written in TypeScript
-- Protobuf      : Protobufs are used to set the API contracts
-- gRPC          : gRPC used for the inter-service communication
-- Yarn          : Just a package manager
-- Copybara      : To copy/migrate repositories or parts of that
-- WebSockets    : Primary communication protocol to enable true real-time user experience (REST currently is not considered as an option)
-- Kafka         : Message broker
-- SASS (SMACSS) : If not style un TS, then SASS is used.
+- Bazel                   : Whole repository is managed with Bazel
+- Go                      : Back-end services will be  written in Go
+- TypeScript              : Front-end apps will be written in TypeScript
+- LitElement              : WebComponents library (alternative of React, Angular, Vue)
+- Redux                   : State management
+- Redux Dynamic Modules   : To avoid cyclic dependencies and enable code splitting
+- Protobuf                : Protobufs are used to set the API contracts
+- gRPC                    : gRPC used for the inter-service communication
+- Yarn                    : Just a package manager
+- Copybara                : To copy/migrate repositories or parts of that
+- WebSockets              : Primary communication protocol to enable true real-time user experience (REST currently is not considered as an option)
+- Kafka                   : Message broker
+- SASS (SMACSS)           : If not style un TS, then SASS is used.
 
 ## General TO DO
 
