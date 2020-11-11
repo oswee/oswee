@@ -2,6 +2,10 @@
 
 This is sandbox monorepository to test Bazel in action
 
+![Golang](https://img.shields.io/badge/-Golang-blue?style=flat-square&logo=go&logoColor=white)
+[![bazel](https://img.shields.io/badge/build%20with-bazel-43A047.svg)](https://bazel.build/)
+![Typescript](https://img.shields.io/badge/-Typescript-blue?style=flat-square&logo=typescript&logoColor=white)
+
 ## Stack
 
 - Bazel                   : Whole repository is managed with Bazel
