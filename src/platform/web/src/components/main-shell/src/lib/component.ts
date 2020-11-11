@@ -6,13 +6,17 @@ import {
   CSSResultArray,
   html,
 } from 'lit-element'
+import { connect } from '@oswee/lib/connect'
+import { store } from '@oswee/pkg/store'
+import { WebsocketActions, IConnectPayload } from '@oswee/pkg/websocket'
 import template from './template'
 import style from './style'
 import { Layout } from '@oswee/lib/shared/style'
+import { WebsocketModule } from '@oswee/pkg/websocket'
 
 @customElement('main-shell')
-// export class MainShellElement extends connect(store, LitElement) {
-export class MainShellElement extends LitElement {
+export class MainShellElement extends connect(store, LitElement) {
+  // export class MainShellElement extends LitElement {
   @property({ type: Object }) state: {
     hackerNews: boolean
     weather: boolean
@@ -30,14 +34,18 @@ export class MainShellElement extends LitElement {
     }
   }
 
-  // connectedCallback() {
-  //   super.connectedCallback()
-  //   import(/*webpackChunkName: "weather" */ '../../../../widgets/weather')
-  // }
+  connectedCallback() {
+    super.connectedCallback()
+    store.addModules([WebsocketModule])
+  }
 
   firstUpdated() {
     import(/*webpackChunkName: "weather" */ '../../../../widgets/weather')
-    import(/*webpackChunkName: "websocket" */ '@oswee/pkg/websocket')
+    // import(/*webpackChunkName: "websocket" */ '@oswee/pkg/websocket')
+    const payload: IConnectPayload = {
+      url: 'wss://api.oswee.com',
+    }
+    store.dispatch(WebsocketActions.websocketConnect(payload))
   }
 
   onHackerNewsToggled = () => {

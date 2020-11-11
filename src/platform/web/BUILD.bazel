@@ -24,6 +24,7 @@ ts_library(
         "//lib/elements/oswee/avatar",
         "//pkg/weather",
         "//pkg/websocket",
+        "//pkg/store",
         "//platform/web/src/sass:css_typings",
         # "@npm1//@types/node",
         # "@npm1//history",

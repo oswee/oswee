@@ -15,7 +15,7 @@ import { connect } from '@oswee/lib/connect'
 import { StringMap } from '@oswee/lib/action'
 import template, { IOrderProps } from './template'
 import style from './style'
-import { store } from '../../../../store'
+import { store } from '@oswee/pkg/store'
 
 @customElement('dynamic-order')
 // export class MyComponentElement extends connect(mapStateToProps, LitElement) {

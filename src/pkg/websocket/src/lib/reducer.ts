@@ -17,8 +17,16 @@ export const websocketReducer = (
     case WebsocketTypes.CONNECT: {
       return {
         ...state,
-        weather: {
+        websocket: {
           state: WebsocketTypes.CONNECTING,
+        },
+      }
+    }
+    case WebsocketTypes.CONNECTED: {
+      return {
+        ...state,
+        websocket: {
+          state: WebsocketTypes.CONNECTED,
         },
       }
     }

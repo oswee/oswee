@@ -7,7 +7,7 @@ import {
 } from 'lit-element'
 
 import { connect } from '@oswee/lib/connect'
-import { store } from '../../../store/index'
+import { store } from '@oswee/pkg/store'
 import template from './template'
 import style from './style'
 
@@ -17,7 +17,6 @@ import {
   WeatherSelectors,
   IWeatherRootState,
 } from '@oswee/pkg/weather'
-import { WebsocketModule } from '@oswee/pkg/websocket'
 
 @customElement('weather-com')
 export class WeatherComElement extends connect(store, LitElement) {
@@ -35,7 +34,7 @@ export class WeatherComElement extends connect(store, LitElement) {
   connectedCallback() {
     super.connectedCallback()
     // Inject the redux module when component gets mounted
-    store.addModules([WeatherModule, WebsocketModule])
+    store.addModules([WeatherModule])
     // store.dispatch(WeatherActions.weatherLoaded({}))
     // console.log('Redux mounted')
   }

@@ -11,7 +11,7 @@ go_library(
         "rpc_jsonenums.go",
         "service_jsonenums.go",
     ],
-    importpath = "github.com/oswee/api/api/wss",
+    importpath = "github.com/dzintars/prime/oswee/gateway/gateway",
     visibility = ["//visibility:private"],
     deps = [
         "//protobuf/oswee/modules/v1:go_default_library",
@@ -20,7 +20,7 @@ go_library(
 )
 
 go_binary(
-    name = "wss",
+    name = "gateway",
     embed = [":go_default_library"],
     visibility = ["//visibility:public"],
 )

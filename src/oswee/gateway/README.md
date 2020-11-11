@@ -62,3 +62,5 @@ https://www.hascode.com/2016/10/writing-a-websocket-chat-in-go/comment-page-1/#c
 `go generate` to generate jsonenums
 
 `go run *.go -addr :9090` to run the server
+
+or `» bazel run //oswee/gateway -- -a :9090`

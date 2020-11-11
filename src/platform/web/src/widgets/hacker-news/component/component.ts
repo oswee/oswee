@@ -7,7 +7,7 @@ import {
 } from 'lit-element'
 import { getHackerNewsModule } from '../redux/hacker-news-module'
 import { connect } from '@oswee/lib/connect'
-import { store } from '../../../store'
+import { store } from '@oswee/pkg/store'
 import template from './template'
 import style from './style'
 

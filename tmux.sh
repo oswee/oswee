@@ -1,6 +1,5 @@
 #!/bin/sh
 SESSION=Prime
-# set -- $(stty size) # $1 = rows $2 = columns
 
 if ! tmux has-session -t ="$SESSION" 2>/dev/null; then
 
@@ -12,7 +11,8 @@ if ! tmux has-session -t ="$SESSION" 2>/dev/null; then
   tmux select-window -t $SESSION:1
   tmux send-keys 'vim -S workspace.vim' Enter
   tmux split-window -h -p 30
-  tmux send-keys 'ibazel run //platforms/web:devserver'
+  tmux send-keys 'cd src' Enter
+  tmux send-keys 'ibazel run //platform/web:devserver'
   tmux split-window -v -p 30
   tmux select-pane -t 1
 
@@ -24,7 +24,8 @@ if ! tmux has-session -t ="$SESSION" 2>/dev/null; then
   tmux select-pane -t 1
 
   tmux select-window -t $SESSION:4
-  tmux send-keys 'bazel run //api/wss'
+  tmux send-keys 'cd src' Enter
+  tmux send-keys 'bazel run //oswee/gateway -- -a :9090'
 
   tmux select-window -t $SESSION:1
 fi

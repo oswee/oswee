@@ -14,6 +14,11 @@ export const WebsocketMiddleware = ({ dispatch }) => (next: any) => {
         websocket.onopen = (): void =>
           dispatch(WebsocketActions.websocketConnected())
         break
+      case WebsocketTypes.CONNECTED:
+        websocket.onerror = (error): void => console.log(`WS Erros: ${error} `)
+        websocket.onclose = (): void =>
+          dispatch(WebsocketActions.websocketDisconnected())
+        break
       default:
         break
     }
