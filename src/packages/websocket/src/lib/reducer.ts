@@ -18,7 +18,15 @@ export const websocketReducer = (
       return {
         ...state,
         websocket: {
-          state: WebsocketTypes.CONNECTING,
+          state: action.type,
+        },
+      }
+    }
+    case WebsocketTypes.CONNECTING: {
+      return {
+        ...state,
+        websocket: {
+          state: action.type,
         },
       }
     }
@@ -26,7 +34,23 @@ export const websocketReducer = (
       return {
         ...state,
         websocket: {
-          state: WebsocketTypes.CONNECTED,
+          state: action.type,
+        },
+      }
+    }
+    case WebsocketTypes.DISCONNECT: {
+      return {
+        ...state,
+        websocket: {
+          state: action.type,
+        },
+      }
+    }
+    case WebsocketTypes.DISCONNECTED: {
+      return {
+        ...state,
+        websocket: {
+          state: action.type,
         },
       }
     }
