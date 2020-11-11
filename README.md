@@ -2,6 +2,8 @@
 
 This is sandbox monorepository to test Bazel in action
 
+[![lerna](https://img.shields.io/badge/build%20with-bazel-43A047.svg)](https://bazel.build/)
+
 ## Stack
 
 - Bazel                   : Whole repository is managed with Bazel
