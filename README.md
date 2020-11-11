@@ -2,25 +2,27 @@
 
 This is sandbox monorepository to test Bazel in action
 
+[![GitHub @dzintars](https://img.shields.io/github/followers/dzintars?label=follow&style=social)](https://github.com/dzintars)
+
 ![Golang](https://img.shields.io/badge/-Golang-blue?style=flat-square&logo=go&logoColor=white)
-[![bazel](https://img.shields.io/badge/build%20with-bazel-43A047.svg)](https://bazel.build/)
 ![Typescript](https://img.shields.io/badge/-Typescript-blue?style=flat-square&logo=typescript&logoColor=white)
+[![bazel](https://img.shields.io/badge/build%20with-bazel-43A047.svg)](https://bazel.build/)
 
 ## Stack
 
-- Bazel                   : Whole repository is managed with Bazel
-- Go                      : Back-end services will be  written in Go
-- TypeScript              : Front-end apps will be written in TypeScript
-- LitElement              : WebComponents library (alternative of React, Angular, Vue)
-- Redux                   : State management
-- Redux Dynamic Modules   : To avoid cyclic dependencies and enable code splitting
-- Protobuf                : Protobufs are used to set the API contracts
-- gRPC                    : gRPC used for the inter-service communication
-- Yarn                    : Just a package manager
-- Copybara                : To copy/migrate repositories or parts of that
-- WebSockets              : Primary communication protocol to enable true real-time user experience (REST currently is not considered as an option)
-- Kafka                   : Message broker
-- SASS (SMACSS)           : If not style un TS, then SASS is used.
+- **Bazel** : Whole repository is managed with Bazel
+- **Go** : Back-end services will be written in Go
+- **TypeScript** : Front-end apps will be written in TypeScript
+- **LitElement** : WebComponents library (alternative of React, Angular, Vue)
+- **Redux** : State management
+- **Redux Dynamic Modules** : To avoid cyclic dependencies and enable code splitting
+- **Protobuf** : Protobufs are used to set the API contracts
+- **gRPC** : gRPC used for the inter-service communication
+- **Yarn** : Just a package manager
+- **Copybara** : To copy/migrate repositories or parts of that
+- **WebSockets** : Primary communication protocol to enable true real-time user experience (REST currently is not considered as an option)
+- **Kafka** : Message broker
+- **SASS** (SMACSS) : If not style un TS, then SASS is used.
 
 ## General TO DO
 

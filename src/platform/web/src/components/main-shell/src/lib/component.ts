@@ -12,6 +12,8 @@ import {
   WebsocketActions,
   IConnectPayload,
   WebsocketModule,
+  WebsocketSelectors,
+  WebsocketTypes,
 } from '@oswee/packages/websocket'
 import template from './template'
 import style from './style'
@@ -25,21 +27,24 @@ export class MainShellElement extends connect(store, LitElement) {
     weather: boolean
     modules: boolean
   }
+  @property({ type: String }) socketState: string
 
   constructor() {
     super()
 
+    store.addModules([WebsocketModule])
     // define the initial state where none of the widgets are visible
     this.state = {
       hackerNews: false,
       weather: false,
       modules: false,
     }
+    this.socketState = WebsocketTypes.DISCONNECTED
   }
 
   connectedCallback() {
     super.connectedCallback()
-    store.addModules([WebsocketModule])
+    // store.addModules([WebsocketModule])
   }
 
   firstUpdated() {
@@ -49,6 +54,12 @@ export class MainShellElement extends connect(store, LitElement) {
       url: 'wss://api.oswee.com',
     }
     store.dispatch(WebsocketActions.websocketConnect(payload))
+  }
+
+  mapState(state) {
+    return {
+      socketState: WebsocketSelectors.selectConnectionState(state),
+    }
   }
 
   onHackerNewsToggled = () => {

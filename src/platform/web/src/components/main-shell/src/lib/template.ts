@@ -1,5 +1,6 @@
 import { html, TemplateResult } from 'lit-element'
 import { MainShellElement } from './component'
+import { WebsocketTypes } from '@oswee/packages/websocket'
 
 export default function template(this: MainShellElement): TemplateResult {
   return html`
@@ -17,6 +18,7 @@ export default function template(this: MainShellElement): TemplateResult {
         <div class="widgets">${this.renderContent()}</div>
       </div>
     </div>
+    <div>${this.socketState}</div>
   `
 }
 

@@ -10,7 +10,6 @@ ts_library(
         ],
         exclude = [
             "src/**/*.spec.ts",
-            "src/test-setup.ts",
         ],
     ),
     module_name = "@oswee/packages/websocket",
