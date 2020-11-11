@@ -39,11 +39,11 @@ I have custom CloudFlare DNS setup
 
 `bazel build '...'` to build everything
 
-`bazel run //api/wss:wss -- -a :9090` to run the WSS binary with extra flags
+`bazel run //oswee/gateway:wss -- -a :9090` to run the WSS binary with extra flags
 
-`ibazel run //apps/front:devserver` to run the My personal public dev server.
+`ibazel run //platform/web:devserver` to run my personal public dev server of user facing app.
 
-NPM packages should be installed manually
+In some cases NPM packages should be installed manually, otherwise Bazel will take care of that.
 
 `yarn install`
 
