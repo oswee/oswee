@@ -29,7 +29,7 @@ node_modules/
 bower_components/
 
 # IDE specific (Visual Studio Code)
-.vscode
+# .vscode
 .vimrc
 .nvimrc
 

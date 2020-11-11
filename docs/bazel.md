@@ -39,3 +39,12 @@ To reference the rule from the same package use `:rule_name_from_the_same_packag
 To reference the rule from the another package use `//path/from/the/workspace/root/to/the/project/package:rule_name_from_the_another_package`
 
 If the rule name is the same as package name, for example `//foo/bar:bar` then it is preferred to use shorthand version of `//foo/bar`
+
+## Installation
+
+Install Bazelisk as `bazel`
+
+```sh
+sudo wget -O /usr/local/bin/bazel https://github.com/bazelbuild/bazelisk/releases/latest/download/bazelisk-linux-amd64
+sudo chmod +x /usr/local/bin/bazel
+```

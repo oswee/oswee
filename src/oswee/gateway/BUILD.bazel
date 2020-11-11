@@ -1,0 +1,26 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_binary", "go_library")
+
+go_library(
+    name = "go_default_library",
+    srcs = [
+        "application.go",
+        "channel.go",
+        "client.go",
+        "main.go",
+        "module.go",
+        "rpc_jsonenums.go",
+        "service_jsonenums.go",
+    ],
+    importpath = "github.com/dzintars/prime/oswee/gateway/gateway",
+    visibility = ["//visibility:private"],
+    deps = [
+        "//protobuf/oswee/modules/v1:go_default_library",
+        "@com_github_gorilla_websocket//:go_default_library",
+    ],
+)
+
+go_binary(
+    name = "gateway",
+    embed = [":go_default_library"],
+    visibility = ["//visibility:public"],
+)

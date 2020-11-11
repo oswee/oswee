@@ -1,0 +1,129 @@
+load("//tools:ts_library.bzl", "ts_library")
+load("@build_bazel_rules_nodejs//:index.bzl", "nodejs_binary")
+load("@npm//@bazel/typescript:index.bzl", "ts_config", "ts_project")
+load("@npm//@bazel/rollup:index.bzl", "rollup_bundle")
+
+package(default_visibility = ["//visibility:public"])
+
+ts_library(
+    name = "src",
+    srcs = glob(
+        [
+            "src/**/*.ts",
+        ],
+        exclude = ["webpack.dev.ts"],
+    ),
+    data = [
+        "//platform/web/src/sass",
+    ],
+    tsconfig = ":tsconfig",
+    deps = [
+        "//lib/action",
+        "//lib/connect",
+        "//lib/shared/style",
+        "//lib/elements/oswee/avatar",
+        "//pkg/weather",
+        "//pkg/websocket",
+        "//pkg/store",
+        "//platform/web/src/sass:css_typings",
+        # "@npm1//@types/node",
+        # "@npm1//history",
+        "@npm//lit-element",
+        "@npm//lit-html",
+        "@npm//redux",
+        "@npm//redux-saga",
+        "@npm//redux-thunk",
+        "@npm//redux-dynamic-modules-core",
+        "@npm//redux-dynamic-modules-saga",
+        "@npm//redux-dynamic-modules-thunk",
+        "@npm//immer",
+        "@npm//tslib",
+    ],
+)
+
+nodejs_binary(
+    name = "rollup_more_mem",
+    data = ["@npm1//rollup:rollup"],
+    entry_point = "@npm1//:node_modules/rollup/dist/bin/rollup",
+    templated_args = [
+        "--nobazel_patch_module_resolver",
+        "--node_options=--max-old-space-size=1024",
+    ],
+)
+
+# Combine the individual modules into a single file
+rollup_bundle(
+    name = "bundle",
+    entry_point = "src/test.ts", # https://bazelbuild.github.io/rules_nodejs/Rollup.html#rollup_bundle-entry_point
+    config_file = "rollup.config.ts",
+    rollup_bin = ":rollup_more_mem", ## Default is 2048
+    format = "esm",
+    deps = [
+      ":tst",
+      # "//apps/front/src/sass",
+      "@npm1//@rollup/plugin-node-resolve",
+      "@npm1//@rollup/plugin-commonjs",
+      "@npm1//rollup-plugin-typescript2",
+      "@npm1//rollup-plugin-sourcemaps",
+      "@npm1//@rollup/plugin-json",
+    ],
+)
+
+# The "bundler" is thought of as an application, and has it's own deps.
+# This effectively webpack + webpack.config.js.
+ts_library(
+    name = "config",
+    srcs = ["webpack.dev.ts"],
+    tsconfig = ":tsconfig",
+    deps = [
+        "//tools/webpack",
+        "@npm//@types/html-webpack-plugin",
+        "@npm//@types/node",
+        "@npm//@types/webpack",
+        "@npm//css-loader",
+        "@npm//html-webpack-plugin",
+        "@npm//style-loader",
+        "@npm//umd-compat-loader",
+        "@npm//webpack",
+    ],
+)
+
+filegroup(
+    name = "public",
+    srcs = glob([
+        "src/public/template.html",
+        "src/public/favicon.ico",
+    ]),
+)
+
+nodejs_binary(
+    name = "devserver",
+    data = [
+        "src/public/favicon.ico",
+        ":config",
+        ":src",
+        # ":bundle",
+        ":public",
+        "@oswee//tools/webpack",
+    ],
+    entry_point = "@oswee//tools/webpack:src/devserver.ts",
+    tags = [
+        "ibazel_notify_changes",
+    ],
+    templated_args = [
+        # "--output=./[hash].bundle.js",
+        "--output=./bundle.js",
+        "--entry=oswee/platform/web/src/index",
+        "--mode=development",
+        "--config=oswee/platform/web/webpack.dev.js",
+    ],
+)
+
+ts_config(
+    name = "tsconfig",
+    src = "tsconfig.app.json",
+    deps = [
+        "//:tsconfig.base.json",
+        "tsconfig.json",
+    ],
+)

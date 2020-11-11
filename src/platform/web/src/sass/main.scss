@@ -1,0 +1,21 @@
+@import 'lib/shared/styles/colors';
+
+$my-color: green;
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+body {
+  overflow: hidden;
+  height: 100vh;
+  width: 100vw;
+}
+
+h1 {
+  --color-success-10: hsla(100, 100%, 38%, 1);
+  font-size: 4rem;
+  color: var(--color-success-10, #{$example-red}, orange);
+}

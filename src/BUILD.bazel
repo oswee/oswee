@@ -1,0 +1,62 @@
+load("//tools:ts_library.bzl", "ts_library")
+load("@bazel_gazelle//:def.bzl", "gazelle")
+load("@com_github_bazelbuild_buildtools//buildifier:def.bzl", "buildifier")
+
+package(default_visibility = ["//:__subpackages__"])
+
+# Expose these files for the other Bazel downstream rules to use
+# https://bazelbuild.github.io/rules_nodejs/TypeScript.html
+# ts_library and ng_module use the `//:tsconfig.json` target
+# by default. This alias allows omitting explicit tsconfig
+# attribute.
+exports_files(
+    [
+      "tsconfig.json",
+      "tsconfig.base.json",
+      # Stylelint and prettier config are neeeded for style linting
+      ".stylelintrc.js",
+      ".prettierrc.js",
+      "package.json",
+    ],
+    visibility = ["//visibility:public"],
+)
+
+# gazelle:exclude third_party
+# gazelle:build_file_name BUILD,BUILD.bazel
+# gazelle:prefix github.com/oswee/api
+gazelle(
+    name = "gazelle",
+)
+
+buildifier(
+    name = "buildifier",
+)
+
+buildifier(
+    name = "buildifier_check",
+    mode = "check",
+)
+
+
+# TODO: This is only here in order to workaround a bug in the way bazel resolves
+# workspace imports when in nested repositories, and can be removed once that is fixed.
+ts_library(
+    name = "modules-fix",
+    srcs = [],
+    module_name = "@oswee",
+)
+
+# filegroup(
+#     name = "node_modules",
+#     srcs = glob([
+#         "node_modules/@bazel/**",
+#         "node_modules/@types/**",
+#         "node_modules/typescript/**",
+#         "node_modules/tsutils/**",
+#         "node_modules/tslib/**",
+#         "node_modules/long/**",
+#         "node_modules/protobufjs/**",
+#         "node_modules/bytebuffer/**",
+#         "node_modules/rollup-plugin-commonjs/**",
+#     ]),
+# )

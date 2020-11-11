@@ -1,1 +1,0 @@
-import './containers/system-shell'

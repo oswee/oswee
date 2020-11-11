@@ -1,0 +1,27 @@
+{
+  "extends": "../../../tsconfig.base.json",
+  "angularCompilerOptions": {
+    "annotateForClosureCompiler": true,
+    "skipTemplateCodegen": true,
+    "strictMetadataEmit": true,
+    "fullTemplateTypeCheck": true,
+    "strictInjectionParameters": true,
+    "enableResourceInlining": true,
+    "enableSummariesForJit": true,
+    "enableIvy": false,
+    "trace": true
+  },
+  "compilerOptions": {
+    "types": ["node", "jest"]
+  },
+  "include": ["src/**/*"],
+  "files": [],
+  "references": [
+    {
+      "path": "./tsconfig.lib.json"
+    },
+    {
+      "path": "./avatar/tsconfig.json"
+    }
+  ]
+}

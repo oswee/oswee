@@ -1,0 +1,31 @@
+syntax = "proto3";
+
+package oswee.module.v1;
+
+option go_package = "github.com/dzintars/prime/src/protobuf/oswee/modules/v1;modules";
+
+// import "google/protobuf/timestamp.proto";
+import "google/api/annotations.proto";
+
+service ModuleService {
+  rpc ListModules(ListModulesRequest) returns (ListModulesResponse){
+		option (google.api.http) = {
+			get: "/v1/modules"
+		};
+	}
+}
+
+message Module {
+	string id = 1;
+	string title = 2;
+  string permalink = 3;
+}
+
+message ListModulesRequest {
+  string parent = 1;
+}
+
+message ListModulesResponse {
+  map<string, Module> entities = 1;
+  repeated string ids = 2;
+}
