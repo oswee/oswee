@@ -7,7 +7,7 @@ import {
 } from 'lit-element'
 
 import { connect } from '@oswee/lib/connect'
-import { store } from '@oswee/pkg/store'
+import { store } from '@oswee/packages/store'
 import template from './template'
 import style from './style'
 
@@ -16,7 +16,7 @@ import {
   WeatherModule,
   WeatherSelectors,
   IWeatherRootState,
-} from '@oswee/pkg/weather'
+} from '@oswee/packages/weather'
 
 @customElement('weather-com')
 export class WeatherComElement extends connect(store, LitElement) {

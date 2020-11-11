@@ -7,12 +7,15 @@ import {
   html,
 } from 'lit-element'
 import { connect } from '@oswee/lib/connect'
-import { store } from '@oswee/pkg/store'
-import { WebsocketActions, IConnectPayload } from '@oswee/pkg/websocket'
+import { store } from '@oswee/packages/store'
+import {
+  WebsocketActions,
+  IConnectPayload,
+  WebsocketModule,
+} from '@oswee/packages/websocket'
 import template from './template'
 import style from './style'
 import { Layout } from '@oswee/lib/shared/style'
-import { WebsocketModule } from '@oswee/pkg/websocket'
 
 @customElement('main-shell')
 export class MainShellElement extends connect(store, LitElement) {
