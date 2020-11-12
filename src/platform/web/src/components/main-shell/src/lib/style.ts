@@ -11,8 +11,8 @@ export default css`
     height: 100%;
     width: 100%;
   }
-  ui-avatar {
-    color: red;
-    font-size: 2rem;
+  .App {
+    padding: 10px;
+    margin: 10px;
   }
 `

@@ -15,12 +15,12 @@ const getState = (state): IWebsocketRootState => state
  * Whats the point of using memoizaton of i have no any arguments there?
  */
 const selectState = reselect.createSelector([getState], state => {
-  console.log('SelectState:', state)
+  // console.log('SelectState:', state)
   return state.websocketState
 })
 
 const selectWebsocket = reselect.createSelector([selectState], state => {
-  console.log('SelectWebsocket:', state)
+  // console.log('SelectWebsocket:', state.websocket)
   return state.websocket
 })
 
