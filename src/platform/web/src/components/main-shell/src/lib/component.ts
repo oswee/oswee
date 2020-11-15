@@ -15,9 +15,10 @@ import {
   WebsocketSelectors,
   WebsocketTypes,
 } from '@oswee/packages/websocket'
+import { RoutingModule } from '@oswee/packages/routing'
 import template from './template'
 import style from './style'
-import { Layout } from '@oswee/lib/shared/style'
+import { Layout, Typography, Colors } from '@oswee/lib/shared/style'
 
 @customElement('main-shell')
 export class MainShellElement extends connect(store, LitElement) {
@@ -32,7 +33,7 @@ export class MainShellElement extends connect(store, LitElement) {
   constructor() {
     super()
 
-    store.addModules([WebsocketModule])
+    store.addModules([WebsocketModule, RoutingModule])
     // define the initial state where none of the widgets are visible
     this.state = {
       hackerNews: false,
@@ -123,7 +124,7 @@ export class MainShellElement extends connect(store, LitElement) {
   }
 
   public static get styles(): CSSResultArray {
-    return [Layout, style]
+    return [Layout, Typography, Colors, style]
   }
   createRenderRoot(): Element | ShadowRoot {
     return this.hasAttribute('noshadow') ? this : super.createRenderRoot()

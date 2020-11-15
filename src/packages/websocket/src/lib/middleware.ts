@@ -19,7 +19,7 @@ export const WebsocketMiddleware = ({ dispatch }) => (next: any) => {
         websocket.onmessage = (event): void => {
           console.log(event)
         }
-        websocket.onerror = (error): void => console.log(`WS Erros: ${error} `)
+        websocket.onerror = (error): void => console.log(`WS Error: ${error} `)
         websocket.onclose = (): void =>
           dispatch(WebsocketActions.websocketDisconnected())
         break
