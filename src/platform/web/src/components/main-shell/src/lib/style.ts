@@ -7,12 +7,14 @@ export default css`
   :host {
     display: block;
     box-sizing: border-box;
-    border: 3px solid green;
     height: 100%;
     width: 100%;
   }
-  ui-avatar {
-    color: red;
-    font-size: 2rem;
+  .App {
+    padding: 10px;
+    margin: 10px;
+  }
+  ui-taskbar {
+    background-color: var(--color-base-20, green);
   }
 `

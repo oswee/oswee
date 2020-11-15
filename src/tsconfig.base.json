@@ -28,6 +28,9 @@
         "bazel-bin/*",
         "bazel-genfiles/*"
       ],
+      "@oswee/components/*": [
+        "components/*/src"
+      ],
       "@oswee/lib/*": [
         "lib/*/src"
       ],
