@@ -19,7 +19,7 @@ const singleSimultaneousCompiler: webpack.Compiler = new Proxy(compiler, {
       return target[p]
     }
     // Wrap the run() function in some code that blocks until any previous run completes.
-    return async (callback: webpack.ICompiler.Handler) => {
+    return async callback => {
       while (running) {
         await new Promise(resolve => setTimeout(() => resolve(), 100))
       }
@@ -40,12 +40,17 @@ const devServerOptions: webpackDevServer.Configuration = {
   after: (app, server: any) => {
     // Listen to STDIN, which is written to by ibazel to tell it to reload
     // only after all dependent ts_library rules have finished compiling.
-    process.stdin.on('data', () => server.sockWrite(server.sockets, 'content-changed'))
+    process.stdin.on('data', () =>
+      server.sockWrite(server.sockets, 'content-changed'),
+    )
   },
   ...config.devServer,
 }
 
-const server = new webpackDevServer(singleSimultaneousCompiler, devServerOptions)
+const server = new webpackDevServer(
+  singleSimultaneousCompiler,
+  devServerOptions,
+)
 
 server.listen(devServerOptions.port, '127.0.0.1', () => {
   console.log(`Starting server on http://localhost:${devServerOptions.port}`)

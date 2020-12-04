@@ -1,13 +1,13 @@
-import { BazelResolverPlugin, IBazelWebpackOptions } from '@oswee/tools/webpack'
+// import { BazelResolverPlugin, IBazelWebpackOptions } from '@oswee/tools/webpack'
 import webpack from 'webpack'
 import path from 'path'
 import HtmlWebpackPlugin from 'html-webpack-plugin'
 import fs from 'fs'
 
-module.exports = (env: any, argv: IBazelWebpackOptions) => ({
-  mode: argv.mode,
+module.exports = (env: any, argv: any) => ({
+  mode: argv.mode || 'development',
   target: 'web',
-  entry: [argv.entry],
+  entry: [path.resolve(process.env.RUNFILES, 'oswee/platform/web/src/index')],
   output: {
     path: path.dirname(path.resolve(argv.output)),
     filename: path.basename(argv.output),
@@ -16,10 +16,14 @@ module.exports = (env: any, argv: IBazelWebpackOptions) => ({
     minimize: argv.mode === 'production',
   },
   watchOptions: {
-    ignored: [/node_modules/],
+    ignored: ['/node_modules/'],
   },
   stats: {
     warnings: true,
+  },
+  node: {
+    fs: 'empty',
+    child_process: 'empty',
   },
   devtool: 'source-map',
   devServer: {
@@ -44,7 +48,7 @@ module.exports = (env: any, argv: IBazelWebpackOptions) => ({
     sockPath: '/sockjs-node',
     sockPort: 443,
     publicPath: '/',
-    contentBase: path.resolve('./platform/web/src'),
+    contentBase: path.resolve('./platform/web/src/index'),
     stats: {
       colors: true,
     },
@@ -63,12 +67,15 @@ module.exports = (env: any, argv: IBazelWebpackOptions) => ({
     extensions: ['.ts', '.js', '.json', '.css'],
     // This makes sure we can resolve modules in bazel, but only works in runfiles.
     // TODO: Copy rollup_bundle node_modules linking example so we can remove this.
-    plugins: [new BazelResolverPlugin()],
+    // plugins: [new BazelResolverPlugin()],
+    alias: {
+      '@oswee': path.resolve(process.env.RUNFILES, 'oswee'),
+    },
   },
   plugins: [
     new HtmlWebpackPlugin({
-      template: 'platform/web/src/public/template.html',
-      favicon: 'platform/web/src/public/favicon.ico',
+      template: './platform/web/src/public/template.html',
+      favicon: './platform/web/src/public/favicon.ico',
       filename: './index.html',
     }),
     new webpack.HotModuleReplacementPlugin({
@@ -79,14 +86,11 @@ module.exports = (env: any, argv: IBazelWebpackOptions) => ({
     rules: [
       {
         test: /\.css$/,
-        exclude: /node_modules/,
+        exclude: ['/node_modules/'],
         use: [
           { loader: require.resolve('style-loader') },
           {
             loader: require.resolve('css-loader'),
-            query: {
-              modules: true,
-            },
           },
         ],
       },

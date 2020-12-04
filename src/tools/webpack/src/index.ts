@@ -6,19 +6,31 @@ export class BazelResolverPlugin {
   public apply(resolver: any): any {
     resolver
       .getHook('resolve')
-      .tapAsync(BazelResolverPlugin.name, (request: { request: string }, resolveContext: any, callback: any) => {
-        const newRequest = { ...request }
-        if (!request.request.startsWith('.') && !request.request.startsWith('/')) {
-          // Use the bazel require.resolve functionality to work out the path for this import.
-          try {
-            newRequest.request = require.resolve(request.request)
-          } catch (e) {
-            // If bazel can't find it, it might still resolve normally.
+      .tapAsync(
+        BazelResolverPlugin.name,
+        (request: { request: string }, resolveContext: any, callback: any) => {
+          const newRequest = { ...request }
+          if (
+            !request.request.startsWith('.') &&
+            !request.request.startsWith('/')
+          ) {
+            // Use the bazel require.resolve functionality to work out the path for this import.
+            try {
+              newRequest.request = require.resolve(request.request)
+            } catch (e) {
+              // If bazel can't find it, it might still resolve normally.
+            }
           }
-        }
-        const target = resolver.ensureHook('parsedResolve')
-        return resolver.doResolve(target, newRequest, null, resolveContext, callback)
-      })
+          const target = resolver.ensureHook('parsedResolve')
+          return resolver.doResolve(
+            target,
+            newRequest,
+            null,
+            resolveContext,
+            callback,
+          )
+        },
+      )
   }
 }
 
@@ -46,7 +58,10 @@ export function getArgv(): any {
 export function getConfig(argv: ReturnType<typeof getArgv>): any {
   const configRaw:
     | IBazelWebpackConfiguration
-    | ((env: any, argv: IBazelWebpackOptions) => IBazelWebpackConfiguration) = require(argv.config)
+    | ((
+        env: any,
+        argv: IBazelWebpackOptions,
+      ) => IBazelWebpackConfiguration) = require(argv.config)
 
   return typeof configRaw === 'function'
     ? configRaw({}, { ...argv, mode: (argv.mode as any) || 'development' })

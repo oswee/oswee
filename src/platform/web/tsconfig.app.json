@@ -1,18 +1,8 @@
 {
   "extends": "./tsconfig.json",
   "compilerOptions": {
-    "outDir": "../../dist/out-tsc",
-    "types": [
-      "node"
-    ],
-    "esModuleInterop": true,
-    "module": "esnext"
+    "outDir": "../../dist/out-tsc"
   },
-  "files": [
-    "src/index.ts"
-  ],
-  "include": [
-    "**/*.d.ts",
-    "src/**/*.ts"
-  ]
+  "files": ["src/index.ts"],
+  "include": ["**/*.d.ts", "src/**/*.ts"]
 }

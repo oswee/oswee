@@ -1,7 +1,6 @@
 load("//tools:ts_library.bzl", "ts_library")
 load("@build_bazel_rules_nodejs//:index.bzl", "nodejs_binary")
 load("@npm//@bazel/typescript:index.bzl", "ts_config", "ts_project")
-load("@npm//@bazel/rollup:index.bzl", "rollup_bundle")
 
 package(default_visibility = ["//visibility:public"])
 
@@ -47,34 +46,6 @@ ts_library(
     ],
 )
 
-nodejs_binary(
-    name = "rollup_more_mem",
-    data = ["@npm1//rollup:rollup"],
-    entry_point = "@npm1//:node_modules/rollup/dist/bin/rollup",
-    templated_args = [
-        "--nobazel_patch_module_resolver",
-        "--node_options=--max-old-space-size=1024",
-    ],
-)
-
-# Combine the individual modules into a single file
-rollup_bundle(
-    name = "bundle",
-    entry_point = "src/test.ts", # https://bazelbuild.github.io/rules_nodejs/Rollup.html#rollup_bundle-entry_point
-    config_file = "rollup.config.ts",
-    rollup_bin = ":rollup_more_mem", ## Default is 2048
-    format = "esm",
-    deps = [
-      ":tst",
-      # "//apps/front/src/sass",
-      "@npm1//@rollup/plugin-node-resolve",
-      "@npm1//@rollup/plugin-commonjs",
-      "@npm1//rollup-plugin-typescript2",
-      "@npm1//rollup-plugin-sourcemaps",
-      "@npm1//@rollup/plugin-json",
-    ],
-)
-
 # The "bundler" is thought of as an application, and has it's own deps.
 # This effectively webpack + webpack.config.js.
 ts_library(
@@ -86,11 +57,11 @@ ts_library(
         "@npm//@types/html-webpack-plugin",
         "@npm//@types/node",
         "@npm//@types/webpack",
-        "@npm//css-loader",
+        "@npm//webpack",
         "@npm//html-webpack-plugin",
+        "@npm//css-loader",
         "@npm//style-loader",
         "@npm//umd-compat-loader",
-        "@npm//webpack",
     ],
 )
 
@@ -105,23 +76,43 @@ filegroup(
 nodejs_binary(
     name = "devserver",
     data = [
-        "src/public/favicon.ico",
+        "//tools/webpack",
         ":config",
         ":src",
-        # ":bundle",
         ":public",
-        "@oswee//tools/webpack",
+        "src/public/favicon.ico",
     ],
-    entry_point = "@oswee//tools/webpack:src/devserver.ts",
+    entry_point = "//tools/webpack:src/devserver.ts",
     tags = [
         "ibazel_notify_changes",
     ],
     templated_args = [
         # "--output=./[hash].bundle.js",
         "--output=./bundle.js",
-        "--entry=oswee/platform/web/src/index",
+        "--entry=./platform/web/src/index",
         "--mode=development",
         "--config=oswee/platform/web/webpack.dev.js",
+    ],
+)
+
+load("@npm//webpack-dev-server:index.bzl", "webpack_dev_server")
+
+webpack_dev_server(
+    name = "devserverx",
+    args = [
+        "--config=./platform/web/webpack.dev.js",
+        "--output=./bundle.js",
+        "--history-api-fallback",
+    ],
+    data = [
+        ":src",
+        ":public",
+        ":config",
+        # "webpack.dev.ts",
+        "@npm//webpack-cli",
+    ],
+    tags = [
+        "ibazel_notify_changes",
     ],
 )
 
@@ -131,5 +122,13 @@ ts_config(
     deps = [
         "//:tsconfig.base.json",
         "tsconfig.json",
+    ],
+)
+
+ts_config(
+    name = "tsconfig-wp",
+    src = "tsconfig.webpack.json",
+    deps = [
+        "//:tsconfig.base.json",
     ],
 )

@@ -11,7 +11,7 @@
     "boilerplate"
   ],
   "engines": {
-    "node": ">=12.13.0"
+    "node": ">=14.13.0"
   },
   "repository": {
     "type": "git",
@@ -24,7 +24,7 @@
     "bazel:format": "find . -type f \\( -name \"*.bzl\" -or -name WORKSPACE -or -name BUILD -or -name BUILD.bazel \\) ! -path \"*/node_modules/*\" | xargs buildifier -v --warnings=attr-cfg,attr-license,attr-non-empty,attr-output-default,attr-single-file,constant-glob,ctx-actions,ctx-args,depset-iteration,depset-union,dict-concatenation,duplicated-name,filetype,git-repository,http-archive,integer-division,load,load-on-top,native-build,native-package,out-of-order-load,output-group,package-name,package-on-top,positional-args,redefined-variable,repository-name,same-origin-load,string-iteration,unsorted-dict-items,unused-variable",
     "bazel:lint": "yarn bazel:format --lint=warn",
     "bazel:lint-fix": "yarn bazel:format --lint=fix",
-    "start": "webpack-dev-server --config ./webpack.dev.ts"
+    "start": "webpack serve --config ./platform/web/webpack.dev.ts"
   },
   "dependencies": {
     "@bazel/buildifier": "^3.5.0",
@@ -37,17 +37,17 @@
     "@rollup/plugin-json": "4.1.0",
     "@rollup/plugin-node-resolve": "^9.0.0",
     "@types/history": "^4.7.8",
-    "@types/html-webpack-plugin": "^3.2.3",
-    "@types/node": "latest",
+    "@types/html-webpack-plugin": "^3.2.4",
+    "@types/node": "^14.14.7",
     "@types/redux": "^3.6.0",
     "@types/redux-first-routing": "^0.3.0",
-    "@types/webpack": "^4.41.22",
+    "@types/webpack": "^4.41.25",
     "@types/webpack-dev-server": "^3.11.0",
     "@types/yargs": "^15.0.5",
     "@typescript-eslint/eslint-plugin": "^4.1.0",
     "@typescript-eslint/parser": "^4.1.0",
     "commitlint": "latest",
-    "css-loader": "^4.3.0",
+    "css-loader": "^5.0.1",
     "csstype": "^3.0.3",
     "eslint": "latest",
     "google-protobuf": "^3.13.0",
@@ -75,7 +75,7 @@
     "rollup-plugin-sourcemaps": "^0.6.3",
     "rollup-plugin-typescript2": "^0.28.0",
     "sass": "^1.26.10",
-    "style-loader": "^1.2.1",
+    "style-loader": "^2.0.0",
     "stylelint": "^13.7.1",
     "stylelint-config-prettier": "^8.0.2",
     "stylelint-prettier": "^1.1.2",
@@ -85,8 +85,8 @@
     "typescript": "^4.0.3",
     "umd-compat-loader": "^2.1.2",
     "universal-router": "^9.0.1",
-    "webpack": "^4.44.1",
-    "webpack-cli": "^3.3.12",
+    "webpack": "4.44.2",
+    "webpack-cli": "3",
     "webpack-dev-server": "^3.11.0",
     "webpack-merge": "^5.1.4",
     "xmlbuilder": "^15.1.1"

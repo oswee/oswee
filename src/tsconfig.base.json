@@ -5,11 +5,7 @@
     "rootDir": ".",
     "module": "CommonJS",
     "target": "ES2019",
-    "lib": [
-      "ES2019",
-      "DOM",
-      "DOM.iterable"
-    ],
+    "lib": ["ES2019", "DOM", "DOM.iterable"],
     "esModuleInterop": true,
     "noImplicitAny": false,
     "noImplicitThis": true,
@@ -19,42 +15,18 @@
     "skipLibCheck": true,
     "experimentalDecorators": true,
     "allowSyntheticDefaultImports": true,
-    "typeRoots": [
-      "node_modules/@types"
-    ],
+    "typeRoots": ["node_modules/@types"],
     "paths": {
-      "@oswee/*": [
-        "*",
-        "bazel-bin/*",
-        "bazel-genfiles/*"
-      ],
-      "@oswee/components/*": [
-        "components/*/src"
-      ],
-      "@oswee/lib/*": [
-        "lib/*/src"
-      ],
-      "@oswee/lib/shared/*": [
-        "lib/shared/*/src"
-      ],
-      "@oswee/tools/*": [
-        "tools/*/src"
-      ],
-      "@oswee/elements/*": [
-        "lib/elements/oswee/*/src"
-      ],
-      "@oswee/packages/*": [
-        "packages/*/src"
-      ],
-      "@oswee/platform/web/assets/*": [
-        "platform/web/src/assets/*"
-      ],
-      "@oswee/container/*": [
-        "platform/web/src/ui/containers/*/src"
-      ],
-      "@oswee/feature/*": [
-        "platform/web/src/store/src/lib/features/*/src"
-      ]
+      "@oswee/*": ["*", "bazel-bin/*", "bazel-genfiles/*"],
+      "@oswee/components/*": ["components/*/src"],
+      "@oswee/lib/*": ["lib/*/src"],
+      "@oswee/lib/shared/*": ["lib/shared/*/src"],
+      "@oswee/tools/*": ["tools/*/src"],
+      "@oswee/elements/*": ["lib/elements/oswee/*/src"],
+      "@oswee/packages/*": ["packages/*/src"],
+      "@oswee/platform/web/assets/*": ["platform/web/src/assets/*"],
+      "@oswee/container/*": ["platform/web/src/ui/containers/*/src"],
+      "@oswee/feature/*": ["platform/web/src/store/src/lib/features/*/src"]
     },
     "plugins": [
       {
@@ -65,8 +37,5 @@
       }
     ]
   },
-  "exclude": [
-    "bazel-*",
-    "node_modules"
-  ]
+  "exclude": ["bazel-*", "node_modules"]
 }

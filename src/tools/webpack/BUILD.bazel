@@ -7,6 +7,8 @@ ts_library(
     name = "webpack",
     module_name = "@oswee/tools/webpack",
     module_root = "src",
+    devmode_module = "esnext",
+    devmode_target = "esnext",
     srcs = glob(["src/**/*.ts"]),
     tsconfig = "tsconfig",
     deps = [

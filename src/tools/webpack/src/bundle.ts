@@ -6,7 +6,9 @@ const argv = getArgv()
 const config = getConfig(argv)
 
 const compiler = webpack(config)
+
 let exitCode: 0 | 1 = 0
+
 compiler.run((err, stats) => {
   if (err) {
     console.error(err.stack || err)
