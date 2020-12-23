@@ -11,7 +11,7 @@ if ! tmux has-session -t ="$SESSION" 2>/dev/null; then
   tmux new-window -t $SESSION:6 -n 'Infra'
 
   tmux select-window -t $SESSION:1
-  tmux send-keys 'vim -S workspace.vim' Enter
+  tmux send-keys 'vim .' Enter
   tmux split-window -h -p 30
   tmux send-keys 'cd src; clear' Enter
   tmux send-keys 'ibazel run //platform/web:devserver'
