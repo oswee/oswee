@@ -9,6 +9,7 @@ import (
 	v1 "github.com/oswee/prime/protobuf/oswee/modules/v1"
 )
 
+// random comment to test husky
 // https://play.google.com/books/reader?id=Er0pIQAAAEAJ&pg=GBS.PA641
 
 // client represents a single chatting user
