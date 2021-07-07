@@ -1,0 +1,38 @@
+load("@io_bazel_rules_sass//:defs.bzl", "sass_binary", "multi_sass_binary")
+# load("@io_bazel_rules_sass//sass:sass.bzl", "sass_binary", "sass_library")
+load("//tools/bazel_rules:index.bzl", "stylelint")
+load("//tools:css_typings.bzl", "css_typings")
+
+package(default_visibility = ["//visibility:public"])
+
+sass_binary(
+    name = "sass",
+    src = "main.scss",
+    deps = [
+        "//lib/shared/styles:colors",
+    ],
+    sourcemap = False,
+)
+
+# multi_sass_binary(
+#     name = "sass",
+#     srcs = glob(["**/*.scss"]),
+#     deps = [
+#       "@oswee//libs/shared/styles:colors",
+#     ],
+#     output_style = "expanded",
+#     sourcemap = False,
+# )
+
+css_typings(
+    name = "css_typings",
+    srcs = [
+        ":sass",
+    ],
+)
+
+stylelint(
+    name = "stylelint",
+    srcs = glob(["**/*.scss"]),
+    config = ".stylelintrc.js",
+)
