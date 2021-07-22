@@ -1,0 +1,29 @@
+load("@npm//@bazel/typescript:index.bzl", "ts_config", "ts_library")
+
+package(default_visibility = ["//visibility:public"])
+
+ts_library(
+    name = "saga",
+    srcs = glob(
+        include = ["src/**/*.ts"],
+        exclude = [
+            "src/**/*.spec.ts",
+            "src/test-setup.ts",
+        ],
+    ),
+    module_root = "src",
+    tsconfig = "tsconfig",
+    deps = [
+        "@npm//redux-saga",
+        "@npm//tslib",
+    ],
+)
+
+ts_config(
+    name = "tsconfig",
+    src = "tsconfig.lib.json",
+    deps = [
+        "tsconfig.json",
+        "//:tsconfig.base.json",
+    ],
+)

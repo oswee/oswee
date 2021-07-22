@@ -1,3 +1,4 @@
+load("//tools:ts_library.bzl", "ts_library")
 load("@bazel_gazelle//:def.bzl", "gazelle")
 load("@com_github_bazelbuild_buildtools//buildifier:def.bzl", "buildifier")
 
@@ -10,11 +11,12 @@ package(default_visibility = ["//:__subpackages__"])
 # attribute.
 exports_files(
     [
-        "tsconfig.base.json",
-        # Stylelint and prettier config are neeeded for style linting
-        ".stylelintrc",
-        ".prettierrc.js",
-        "package.json",
+      "tsconfig.json",
+      "tsconfig.base.json",
+      # Stylelint and prettier config are neeeded for style linting
+      ".stylelintrc.js",
+      ".prettierrc.js",
+      "package.json",
     ],
     visibility = ["//visibility:public"],
 )
@@ -34,3 +36,27 @@ buildifier(
     name = "buildifier_check",
     mode = "check",
 )
+
+
+# TODO: This is only here in order to workaround a bug in the way bazel resolves
+# workspace imports when in nested repositories, and can be removed once that is fixed.
+ts_library(
+    name = "modules-fix",
+    srcs = [],
+    module_name = "@oswee",
+)
+
+# filegroup(
+#     name = "node_modules",
+#     srcs = glob([
+#         "node_modules/@bazel/**",
+#         "node_modules/@types/**",
+#         "node_modules/typescript/**",
+#         "node_modules/tsutils/**",
+#         "node_modules/tslib/**",
+#         "node_modules/long/**",
+#         "node_modules/protobufjs/**",
+#         "node_modules/bytebuffer/**",
+#         "node_modules/rollup-plugin-commonjs/**",
+#     ]),
+# )

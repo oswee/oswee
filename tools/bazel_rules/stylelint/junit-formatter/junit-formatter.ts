@@ -12,7 +12,12 @@ export function junitFormatter(stylelintResults: LintResult[]): string {
 
 /** Creates an XML out of the provided object structure */
 export function createXML(testSuites: ParsedSuite[]): string {
-  const xmlRoot = create('testsuites', { encoding: 'utf-8' }).att('package', 'stylelint.rules')
+  const xmlRoot = create('testsuites', { encoding: 'utf-8' }).att(
+    'package',
+    'stylelint.rules',
+  )
 
-  return testSuites.length > 0 ? xmlRoot.element(testSuites).end({ pretty: true }) : xmlRoot.end({ pretty: true })
+  return testSuites.length > 0
+    ? xmlRoot.element(testSuites).end({ pretty: true })
+    : xmlRoot.end({ pretty: true })
 }

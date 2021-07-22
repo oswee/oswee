@@ -11,7 +11,9 @@ export function parseSuite(testSuite: LintResult): ParsedSuite {
   const name = relative(join(dir, workspace), testSuite.source)
   const failuresCount = testSuite.warnings.length
   const testCases = testSuite.errored
-    ? testSuite.warnings.map((testCase: Warning) => parseFailedCase(testCase, name))
+    ? testSuite.warnings.map((testCase: Warning) =>
+        parseFailedCase(testCase, name),
+      )
     : { '@name': 'stylelint.passed' }
 
   return {

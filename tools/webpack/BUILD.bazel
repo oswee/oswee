@@ -1,0 +1,52 @@
+load("@build_bazel_rules_nodejs//:index.bzl", "nodejs_binary")
+load("@npm//@bazel/typescript:index.bzl", "ts_config", "ts_library")
+
+package(default_visibility = ["//visibility:public"])
+
+ts_library(
+    name = "webpack",
+    module_name = "@oswee/tools/webpack",
+    module_root = "src",
+    devmode_module = "esnext",
+    devmode_target = "esnext",
+    srcs = glob(["src/**/*.ts"]),
+    tsconfig = "tsconfig",
+    deps = [
+        "@npm//@types/html-webpack-plugin",
+        "@npm//@types/node",
+        "@npm//@types/webpack",
+        "@npm//@types/webpack-dev-server",
+        "@npm//@types/yargs",
+        "@npm//html-webpack-plugin",
+        "@npm//webpack",
+        "@npm//webpack-dev-server",
+        "@npm//yargs",
+        "@npm//tslib",
+    ],
+)
+
+# TODO: Package these up in a macro?
+
+nodejs_binary(
+    name = "devserver",
+    data = [
+        ":webpack",
+    ],
+    entry_point = ":src/devserver.ts",
+)
+
+nodejs_binary(
+    name = "bundle",
+    data = [
+        ":webpack",
+    ],
+    entry_point = ":src/bundle.ts",
+)
+
+ts_config(
+    name = "tsconfig",
+    src = "tsconfig.json",
+    deps = [
+        "//:tsconfig.base.json",
+    ],
+)
