@@ -74,7 +74,7 @@ spec:
         # privileged: true
         readOnlyRootFilesystem: false
       volumeMounts:
-        - mountPath: /conf/stack:Z
+        - mountPath: /quay-registry/conf/stack:Z
           name: quay-config
         - mountPath: /datastorage:Z
           name: quay-storage
@@ -82,17 +82,17 @@ spec:
   volumes:
     - name: postgres-data
       hostPath:
-        path: /tmp/containers/github.com/dzintars/prime/volumes/postgres/data
+        path: /home/dzintars/containers/github.com/dzintars/prime/volumes/postgres/data
         type: Directory
     - name: redis-data
       hostPath:
-        path: /tmp/containers/github.com/dzintars/prime/volumes/redis/data
+        path: /home/dzintars/containers/github.com/dzintars/prime/volumes/redis/data
         type: Directory
     - name: quay-config
       hostPath:
-        path: /tmp/containers/github.com/dzintars/prime/volumes/quay/data/config
+        path: /home/dzintars/containers/github.com/dzintars/prime/volumes/quay/data/config
         type: Directory
     - name: quay-storage
       hostPath:
-        path: /tmp/containers/github.com/dzintars/prime/volumes/quay/data/storage
+        path: /home/dzintars/containers/github.com/dzintars/prime/volumes/quay/data/storage
         type: Directory
