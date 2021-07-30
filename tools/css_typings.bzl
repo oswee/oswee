@@ -8,7 +8,7 @@ def _impl(ctx):
         patterns = [f.path]
         if not f.root.path == "":
             patterns = [f.short_path, f.root.path + ("/" + ctx.label.workspace_root if ctx.label.workspace_root else "")]
-        out_dir =  out.root.path + ("/" + ctx.label.workspace_root if ctx.label.workspace_root else "")
+        out_dir = out.root.path + ("/" + ctx.label.workspace_root if ctx.label.workspace_root else "")
         ctx.actions.run(
             inputs = [f],
             outputs = [out],

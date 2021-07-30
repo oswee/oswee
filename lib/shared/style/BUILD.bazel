@@ -12,10 +12,10 @@ ts_library(
             "src/**/*.spec.ts",
         ],
     ),
-    module_name = "@oswee/lib/shared/style",
-    module_root = "src",
     devmode_module = "esnext",
     devmode_target = "esnext",
+    module_name = "@oswee/lib/shared/style",
+    module_root = "src",
     tsconfig = "tsconfig_lib",
     deps = [
         "@npm//lit",

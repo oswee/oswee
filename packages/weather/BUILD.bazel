@@ -13,18 +13,18 @@ ts_library(
             "src/test-setup.ts",
         ],
     ),
-    module_name = "@oswee/packages/weather",
-    module_root = "src",
     devmode_module = "esnext",
     devmode_target = "esnext",
+    module_name = "@oswee/packages/weather",
+    module_root = "src",
     tsconfig = "tsconfig",
     deps = [
-      "//lib/action",
-      "@npm//redux-dynamic-modules-core",
-      "@npm//redux-dynamic-modules-saga",
-      "@npm//redux-saga",
-      "@npm//immer",
-      "@npm//reselect",
+        "//lib/action",
+        "@npm//immer",
+        "@npm//redux-dynamic-modules-core",
+        "@npm//redux-dynamic-modules-saga",
+        "@npm//redux-saga",
+        "@npm//reselect",
     ],
 )
 
@@ -32,7 +32,7 @@ ts_config(
     name = "tsconfig",
     src = "tsconfig.json",
     deps = [
-        "//:tsconfig.base.json",
         "tsconfig.json",
+        "//:tsconfig.base.json",
     ],
 )

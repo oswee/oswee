@@ -16,10 +16,10 @@ ts_library(
 
 nodejs_binary(
     name = "bin",
-    templated_args = ["--node_options=--require=source-map-support/register"],
     data = [
         ":json-merge",
         "@npm//source-map-support",
     ],
     entry_point = ":index.ts",
+    templated_args = ["--node_options=--require=source-map-support/register"],
 )
