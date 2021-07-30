@@ -89,7 +89,7 @@
     "yargs": "^17.0.1"
   },
   "devDependencies": {
-    "@bazel/worker": "4.0.0-beta.0",
+    "@bazel/worker": "^3.7.0",
     "@commitlint/config-conventional": "^12.1.4",
     "commitlint": "^12.1.4",
     "husky": "^7.0.1",

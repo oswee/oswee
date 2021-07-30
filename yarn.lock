@@ -240,10 +240,10 @@
     source-map-support "0.5.9"
     tsutils "2.27.2"
 
-"@bazel/worker@4.0.0-beta.0":
-  version "4.0.0-beta.0"
-  resolved "https://registry.yarnpkg.com/@bazel/worker/-/worker-4.0.0-beta.0.tgz#d0ed3919a6d194d3aac1c28d87fc53d7f7415427"
-  integrity sha512-TUj0mt4MvYy30Fay/4J3hm2LBf3LONI8GaZFUjvbjo4KDvJTwDltk9nygbmS04y6iVjU5/e8TEUj/BFT0LqhZQ==
+"@bazel/worker@^3.7.0":
+  version "3.7.0"
+  resolved "https://registry.yarnpkg.com/@bazel/worker/-/worker-3.7.0.tgz#e427ecb0d5f8f830c16f510a6155aec251169141"
+  integrity sha512-NtZKkXqfVPY3wNDNGDyh5NqyXgJmgv9oqt7cmB5lfSLvp4zqbIGC4hsTTiqwmKCqKoF8LOn6CfqOx1S+uqJNnQ==
   dependencies:
     protobufjs "6.8.8"
 
