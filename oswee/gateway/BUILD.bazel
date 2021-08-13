@@ -44,6 +44,10 @@ go_image(
         "//protobuf/oswee/modules/v1:go_default_library",
         "@com_github_gorilla_websocket//:go_default_library",
     ],
+    visibility = ["//visibility:public"],
+    goarch = "amd64",
+    goos = "linux",
+    pure = "on",
 )
 
 k8s_deploy(
