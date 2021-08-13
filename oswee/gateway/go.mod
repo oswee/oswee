@@ -1,4 +1,4 @@
-module github.com/dzintars/wss
+module github.com/oswee/prime/oswee/gateway
 
 go 1.13
 
