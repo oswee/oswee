@@ -87,16 +87,16 @@ k8s_object(
 k8s_objects(
     name = "all",
     objects = [
-      ":namespace",
-      ":secret",
-      ":registry-key-secret",
-    ]
+        ":namespace",
+        ":secret",
+        ":registry-key-secret",
+    ],
 )
 
 k8s_deploy(
-  name = "dev",
-  template = "k8s/deployment.yaml",
-  images = {
-    "server:latest": "//oswee/gateway:server"
-  },
+    name = "dev",
+    images = {
+        "server:latest": "//oswee/gateway:server",
+    },
+    template = "k8s/deployment.yaml",
 )
