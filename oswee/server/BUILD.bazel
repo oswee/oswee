@@ -1,0 +1,24 @@
+load("@io_bazel_rules_docker//go:image.bzl", "go_image")
+load("@k8s_deploy//:defaults.bzl", "k8s_deploy")
+
+go_image(
+    name = "server",
+    srcs = [
+        "main.go",
+    ],
+    goarch = "amd64",
+    goos = "linux",
+    importpath = "github.com/oswee/prime/oswee/server",
+    pure = "on",
+    visibility = ["//visibility:public"],
+    deps = [],
+)
+
+k8s_deploy(
+    name = "staging",
+    images = {
+        "webserver:latest": ":server",
+    },
+    template = ":deployment.yaml",
+)
+
