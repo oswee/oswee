@@ -9,18 +9,11 @@ spec:
   containers:
     - name: postgres
       image: docker.io/postgres:latest
-      # resources:
-      #   requests:
-      #     cpu: 1
-      #     memory: 1Gi
-      #   limits:
-      #     cpu: 2
-      #     memory: 2Gi
       env:
-        - name: POSTGRES_PASSWORD
-          value: password
         - name: POSTGRES_USER
           value: dzintars
+        - name: POSTGRES_PASSWORD
+          value: password
         - name: POSTGRES_DB
           value: quay
       ports:
@@ -36,14 +29,10 @@ spec:
           name: postgres-data
 
     - name: redis
-      image: docker.io/redis:latest
-      # resources:
-      #   requests:
-      #     cpu: 1
-      #     memory: 1Gi
-      #   limits:
-      #     cpu: 2
-      #     memory: 2Gi
+      image: registry.redhat.io/rhel8/redis-5:1
+      env:
+        - name: REDIS_PASSWORD
+          value: strongpassword
       ports:
         - containerPort: 6379
           hostPort: 6379
@@ -56,28 +45,21 @@ spec:
         - mountPath: /var/lib/redis/data:Z
           name: redis-data
 
-    - name: registry
-      image: quay.io/projectquay/quay:latest
-      # resources:
-      #   requests:
-      #     cpu: 1
-      #     memory: 1Gi
-      #   limits:
-      #     cpu: 2
-      #     memory: 2Gi
-      ports:
-        - containerPort: 8080
-          hostPort: 9981
-          protocol: TCP
-      securityContext:
-        allowPrivilegeEscalation: false
-        # privileged: true
-        readOnlyRootFilesystem: false
-      volumeMounts:
-        - mountPath: /quay-registry/conf/stack:Z
-          name: quay-config
-        - mountPath: /datastorage:Z
-          name: quay-storage
+    # - name: registry
+    #   image: quay.io/projectquay/quay:latest
+    #   ports:
+    #     - containerPort: 8080
+    #       hostPort: 9981
+    #       protocol: TCP
+    #   securityContext:
+    #     allowPrivilegeEscalation: false
+    #     # privileged: true
+    #     readOnlyRootFilesystem: false
+    #   volumeMounts:
+    #     - mountPath: /conf/stack:Z
+    #       name: quay-config
+    #     - mountPath: /datastorage:Z
+    #       name: quay-storage
 
   volumes:
     - name: postgres-data
