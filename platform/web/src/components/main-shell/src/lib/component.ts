@@ -51,7 +51,7 @@ export class MainShellElement extends connect(store, LitElement) {
     store.dispatch(WebsocketActions.websocketConnect(payload))
   }
 
-  mapState(state) {
+  mapState(state: any) {
     return {
       socketState: WebsocketSelectors.selectConnectionState(state),
     }
