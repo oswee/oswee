@@ -19,7 +19,7 @@ spec:
         image: server:latest
         imagePullPolicy: Always
         ports:
-        - containerPort: 9
+        - containerPort: 9090
 
 ---
 apiVersion: v1
