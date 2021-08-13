@@ -2,9 +2,9 @@ workspace(
     name = "oswee",
     # Let the Bazel manage all NPM packages
     managed_directories = {
-      "@npm": ["node_modules"],
-      "@npm1": ["platform/web/node_modules"],
-      },
+        "@npm": ["node_modules"],
+        "@npm1": ["platform/web/node_modules"],
+    },
 )
 
 # Use `sha256sum` tool to get SHA-256 checksum `sha256sum ~/Downloads/yarn-v1.22.10.tar.gz`
@@ -120,6 +120,60 @@ container_deps()
 
 # pip_deps()
 
+###########################################
+# Kubernetes                              #
+###########################################
+
+http_archive(
+    name = "io_bazel_rules_k8s",
+    sha256 = "51f0977294699cd547e139ceff2396c32588575588678d2054da167691a227ef",
+    strip_prefix = "rules_k8s-0.6",
+    urls = ["https://github.com/bazelbuild/rules_k8s/archive/v0.6.tar.gz"],
+)
+
+load("@io_bazel_rules_k8s//k8s:k8s.bzl", "k8s_defaults", "k8s_repositories")
+
+k8s_repositories()
+
+load("@io_bazel_rules_k8s//k8s:k8s_go_deps.bzl", k8s_go_deps = "deps")
+
+k8s_go_deps()
+
+_CLUSTER = "minikube"
+
+_CONTEXT = _CLUSTER
+
+_NAMESPACE = "prime"
+
+k8s_defaults(
+    name = "k8s_object",
+    cluster = _CLUSTER,
+    context = _CONTEXT,
+    image_chroot = "registry.oswee.com/oswee",
+    namespace = _NAMESPACE,
+)
+
+k8s_defaults(
+    name = "k8s_deploy",
+    cluster = _CLUSTER,
+    context = _CONTEXT,
+    image_chroot = "registry.oswee.com/oswee",
+    kind = "deployment",
+    namespace = _NAMESPACE,
+)
+
+[k8s_defaults(
+    name = "k8s_" + kind,
+    cluster = _CLUSTER,
+    context = _CONTEXT,
+    kind = kind,
+    namespace = _NAMESPACE,
+) for kind in [
+    "service",
+    "crd",
+    "todo",
+]]
+
 load("@io_bazel_rules_docker//go:image.bzl", _go_image_repos = "repositories")
 
 _go_image_repos()
@@ -141,6 +195,7 @@ rules_proto_dependencies()
 rules_proto_toolchains()
 
 bazel_gomock_commit = "fde78c91cf1783cc1e33ba278922ba67a6ee2a84"
+
 http_archive(
     name = "bazel_gomock",
     sha256 = "692421b0c5e04ae4bc0bfff42fb1ce8671fe68daee2b8d8ea94657bb1fcddc0a",
@@ -180,22 +235,29 @@ check_bazel_version(
 
 # Bazel will use it's default NodeJS version and will not rely on the NodeJS version installed on the machine
 node_repositories(
-  # name = "nodejs", # This is build in name, included in this comment for the clarity
-  node_version = NODEJS_VERSION,
-  yarn_version = YARN_VERSION,
-  # OPTIONAL
-  node_repositories = {
-    "%s-linux_amd64" % NODEJS_VERSION: ("node-v%s-linux-x64.tar.xz" % NODEJS_VERSION, "node-v%s-linux-x64" % NODEJS_VERSION, "%s" % NODEJS_SHA256),
-  },
-  yarn_repositories = {
-    "%s" % YARN_VERSION: ("yarn-v%s.tar.gz" % YARN_VERSION, "yarn-v%s" % YARN_VERSION, "%s" % YARN_SHA256),
-  },
-  # node_urls = ["https://nodejs.org/dist/v16.4.1/node-v16.4.1-linux-x64.tar.xz"],
-  # yarn_urls = ["https://github.com/yarnpkg/yarn/releases/download/v1.22.10/yarn-v1.22.10.tar.gz"],
-  package_json = ["//:package.json"],
-  preserve_symlinks = True,
+    # OPTIONAL
+    node_repositories = {
+        "%s-linux_amd64" % NODEJS_VERSION: (
+            "node-v%s-linux-x64.tar.xz" % NODEJS_VERSION,
+            "node-v%s-linux-x64" % NODEJS_VERSION,
+            "%s" % NODEJS_SHA256,
+        ),
+    },
+    # name = "nodejs", # This is build in name, included in this comment for the clarity
+    node_version = NODEJS_VERSION,
+    # node_urls = ["https://nodejs.org/dist/v16.4.1/node-v16.4.1-linux-x64.tar.xz"],
+    # yarn_urls = ["https://github.com/yarnpkg/yarn/releases/download/v1.22.10/yarn-v1.22.10.tar.gz"],
+    package_json = ["//:package.json"],
+    preserve_symlinks = True,
+    yarn_repositories = {
+        "%s" % YARN_VERSION: (
+            "yarn-v%s.tar.gz" % YARN_VERSION,
+            "yarn-v%s" % YARN_VERSION,
+            "%s" % YARN_SHA256,
+        ),
+    },
+    yarn_version = YARN_VERSION,
 )
-
 
 # Setup Bazel managed npm dependencies with the `yarn_install` rule.
 # The name of this rule should be set to `npm` so that `ts_library`
@@ -274,9 +336,10 @@ http_archive(
 # Fetch required transitive dependencies. This is an optional step because you
 # can always fetch the required NodeJS transitive dependency on your own.
 load("@io_bazel_rules_sass//:package.bzl", "rules_sass_dependencies")
+
 rules_sass_dependencies()
 
 # Setup the rules_sass toolchain
 load("@io_bazel_rules_sass//sass:sass_repositories.bzl", "sass_repositories")
-sass_repositories()
 
+sass_repositories()

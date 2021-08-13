@@ -5,11 +5,11 @@ package(default_visibility = ["//visibility:public"])
 
 ts_library(
     name = "webpack",
-    module_name = "@oswee/tools/webpack",
-    module_root = "src",
+    srcs = glob(["src/**/*.ts"]),
     devmode_module = "esnext",
     devmode_target = "esnext",
-    srcs = glob(["src/**/*.ts"]),
+    module_name = "@oswee/tools/webpack",
+    module_root = "src",
     tsconfig = "tsconfig",
     deps = [
         "@npm//@types/html-webpack-plugin",
@@ -18,10 +18,10 @@ ts_library(
         "@npm//@types/webpack-dev-server",
         "@npm//@types/yargs",
         "@npm//html-webpack-plugin",
+        "@npm//tslib",
         "@npm//webpack",
         "@npm//webpack-dev-server",
         "@npm//yargs",
-        "@npm//tslib",
     ],
 )
 

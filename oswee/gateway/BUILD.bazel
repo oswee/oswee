@@ -1,4 +1,7 @@
 load("@io_bazel_rules_go//go:def.bzl", "go_binary", "go_library")
+load("@io_bazel_rules_docker//go:image.bzl", "go_image")
+load("@k8s_deploy//:defaults.bzl", "k8s_deploy")
+load("@io_bazel_rules_k8s//k8s:object.bzl", "k8s_object")
 
 go_library(
     name = "go_default_library",
@@ -22,5 +25,42 @@ go_library(
 go_binary(
     name = "gateway",
     embed = [":go_default_library"],
+    visibility = ["//visibility:public"],
+)
+
+go_image(
+    name = "server",
+    srcs = [
+        "application.go",
+        "channel.go",
+        "client.go",
+        "main.go",
+        "module.go",
+        "rpc_jsonenums.go",
+        "service_jsonenums.go",
+    ],
+    importpath = "github.com/dzintars/prime/oswee/gateway/gateway",
+    deps = [
+        "//protobuf/oswee/modules/v1:go_default_library",
+        "@com_github_gorilla_websocket//:go_default_library",
+    ],
+    visibility = ["//visibility:public"],
+    goarch = "amd64",
+    goos = "linux",
+    pure = "on",
+)
+
+k8s_deploy(
+    name = "staging",
+    images = {
+        "hello-http-image:latest": ":server",
+    },
+    template = "//oswee/gateway:deployment.yaml",
+)
+
+k8s_object(
+    name = "namespace",
+    cluster = "minikube",
+    template = "//k8s/namespace.yaml",
     visibility = ["//visibility:public"],
 )

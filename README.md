@@ -8,6 +8,16 @@ This is sandbox monorepository to test Bazel in action
 [![Typescript](https://img.shields.io/badge/-Typescript-blue?style=flat-square&logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
 [![bazel](https://img.shields.io/badge/build%20with-bazel-43A047.svg)](https://bazel.build/)
 
+## Project status
+
+Until this message is removed, the status is WIP.
+Currently i am discoverig integration with Kubernetes. Ultimate goal
+is to let Bazel manage all image production and container provisioning. For
+local development it seems that i will utilize Minikube. For image registry -
+Project Quay. Secrets will be managed by Hashicorp Vault. While all these pieces
+are tested to work in some combinations, i am still failing to get it nicely done
+for entire project. But i see how it can be done and i am slowly moving there.
+
 ## Stack
 
 - **Bazel** : Whole repository is managed with Bazel
@@ -49,6 +59,7 @@ These tools should be installed locally in order to execute
 - Yarn
 - TLS certificates should be valid and configured in the DNS/Proxy
 - Github Personal Access `GITHUB_NPM_PAT` env. variable/token should be added to the `~/.zshenv` to be able to read and write private/public NPM packages.
+- Minikube for local development
 
 ### Other relevant things
 

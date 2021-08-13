@@ -12,14 +12,14 @@ ts_library(
             "src/**/*.spec.ts",
         ],
     ),
-    module_name = "@oswee/components/ui-statusbar",
-    module_root = "src",
     devmode_module = "esnext",
     devmode_target = "esnext",
+    module_name = "@oswee/components/ui-statusbar",
+    module_root = "src",
     tsconfig = "tsconfig",
     deps = [
-      "@npm//lit-element",
-      "@npm//tslib",
+        "@npm//lit-element",
+        "@npm//tslib",
     ],
 )
 
@@ -27,7 +27,7 @@ ts_config(
     name = "tsconfig",
     src = "tsconfig.json",
     deps = [
-        "//:tsconfig.base.json",
         "tsconfig.json",
+        "//:tsconfig.base.json",
     ],
 )

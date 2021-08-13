@@ -56,11 +56,11 @@ ts_library(
         "@npm//@types/html-webpack-plugin",
         "@npm//@types/node",
         "@npm//@types/webpack",
-        "@npm//webpack",
-        "@npm//html-webpack-plugin",
         "@npm//css-loader",
+        "@npm//html-webpack-plugin",
         "@npm//style-loader",
         "@npm//umd-compat-loader",
+        "@npm//webpack",
     ],
 )
 
@@ -75,11 +75,11 @@ filegroup(
 nodejs_binary(
     name = "devserver",
     data = [
-        "//tools/webpack",
-        ":config",
-        ":src",
-        ":public",
         "src/public/favicon.ico",
+        ":config",
+        ":public",
+        ":src",
+        "//tools/webpack",
     ],
     entry_point = "//tools/webpack:src/devserver.ts",
     tags = [
@@ -119,8 +119,8 @@ ts_config(
     name = "tsconfig",
     src = "tsconfig.app.json",
     deps = [
-        "//:tsconfig.base.json",
         "tsconfig.json",
+        "//:tsconfig.base.json",
     ],
 )
 
