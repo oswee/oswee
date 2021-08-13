@@ -3,6 +3,7 @@ load("@bazel_gazelle//:def.bzl", "gazelle")
 load("@com_github_bazelbuild_buildtools//buildifier:def.bzl", "buildifier")
 load("@io_bazel_rules_k8s//k8s:object.bzl", "k8s_object")
 load("@io_bazel_rules_k8s//k8s:objects.bzl", "k8s_objects")
+load("@k8s_deploy//:defaults.bzl", "k8s_deploy")
 
 package(default_visibility = ["//:__subpackages__"])
 
@@ -76,10 +77,26 @@ k8s_object(
     visibility = ["//visibility:public"],
 )
 
+k8s_object(
+    name = "registry-key-secret",
+    cluster = "minikube",
+    template = "k8s/registry-key-secret.yaml",
+    visibility = ["//visibility:public"],
+)
+
 k8s_objects(
     name = "all",
     objects = [
       ":namespace",
       ":secret",
+      ":registry-key-secret",
     ]
+)
+
+k8s_deploy(
+  name = "dev",
+  template = "k8s/deployment.yaml",
+  images = {
+    "server:latest": "//oswee/gateway:server"
+  },
 )
