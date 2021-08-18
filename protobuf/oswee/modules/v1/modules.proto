@@ -9,15 +9,15 @@ import "google/api/annotations.proto";
 
 service ModuleService {
   rpc ListModules(ListModulesRequest) returns (ListModulesResponse){
-		option (google.api.http) = {
-			get: "/v1/modules"
-		};
-	}
+    option (google.api.http) = {
+      get: "/v1/modules"
+    };
+  }
 }
 
 message Module {
-	string id = 1;
-	string title = 2;
+  string id = 1;
+  string title = 2;
   string permalink = 3;
 }
 
@@ -29,3 +29,4 @@ message ListModulesResponse {
   map<string, Module> entities = 1;
   repeated string ids = 2;
 }
+

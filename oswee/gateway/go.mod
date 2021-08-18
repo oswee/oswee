@@ -8,6 +8,9 @@ require (
 	github.com/gorilla/websocket v1.4.1
 	github.com/matryer/goblueprints v2.0.0+incompatible // indirect
 	github.com/oswee/api v0.4.0
-	golang.org/x/net v0.0.0-20200301022130-244492dfa37a // indirect
-	golang.org/x/tools v0.0.0-20200309202150-20ab64c0d93f // indirect
+	github.com/yuin/goldmark v1.4.0 // indirect
+	golang.org/x/mod v0.5.0 // indirect
+	golang.org/x/net v0.0.0-20210813160813-60bc85c4be6d // indirect
+	golang.org/x/sys v0.0.0-20210809222454-d867a43fc93e // indirect
+	golang.org/x/tools v0.1.5 // indirect
 )

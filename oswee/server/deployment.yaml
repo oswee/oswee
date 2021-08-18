@@ -2,6 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: web-server
+  namespace: prime
 spec:
   replicas: 1
   selector:
@@ -13,24 +14,35 @@ spec:
         app: web-server
     spec:
       imagePullSecrets:
-      - name: my-registry-key
+        - name: my-registry-key
       containers:
-      - name: hello-webserver
-        image: webserver:latest
-        imagePullPolicy: Always
-        ports:
-        - containerPort: 8080
+        - name: hello-webserver
+          image: webserver:latest
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 443
+          volumeMounts:
+            - mountPath: '/data'
+              name: my-pv-storage
+          args:
+            - '-d=/data'
+            - '-p=443'
+      volumes:
+        - name: my-pv-storage
+          persistentVolumeClaim:
+            claimName: my-pv-claim
 
+# /var/lib/containers/storage/volumes/minikube/_data/hostpath-provisioner/prime/my-pv-claim/test.txt
 ---
 apiVersion: v1
 kind: Service
 metadata:
   name: web-server
+  namespace: prime
 spec:
   selector:
     app: web-server
-  type: NodePort
   ports:
-  - name: http
-    port: 8080
-    nodePort: 31062
+    - protocol: TCP
+      port: 443
+      targetPort: 443

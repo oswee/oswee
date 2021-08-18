@@ -65,17 +65,17 @@ type Envelope struct {
 
 // // UILauncherDisplayPayload ...
 // type UILauncherDisplayPayload struct {
-// 	Stakeholder string `json:"stakeholder,omitempty"`
+//  Stakeholder string `json:"stakeholder,omitempty"`
 // }
 
 // // UILauncherHidePayload ...
 // type UILauncherHidePayload struct {
-// 	Stakeholder string `json:"stakeholder,omitempty"`
+//  Stakeholder string `json:"stakeholder,omitempty"`
 // }
 
 // // ThemeSwitch ...
 // type ThemeSwitch struct {
-// 	Theme string `json:"theme,omitempty"`
+//  Theme string `json:"theme,omitempty"`
 // }
 
 // // ApplicationGetPayload ...
@@ -95,7 +95,7 @@ type Envelope struct {
 
 // // AppNavigationListModulesRequestPayload ...
 // type AppNavigationListModulesRequestPayload struct {
-// 	ID string `json:"id,omitempty"`
+//  ID string `json:"id,omitempty"`
 // }
 
 // ListApplicationsRequestPayload ...
@@ -168,46 +168,46 @@ func (c *client) read() {
 		}
 		switch m.(type) {
 		// case *UILauncherDisplayPayload:
-		// 	c.channel.forward <- &evt
+		//  c.channel.forward <- &evt
 		// case *UILauncherHidePayload:
-		// 	c.channel.forward <- &evt
+		//  c.channel.forward <- &evt
 		// case *ThemeSwitch:
-		// 	c.channel.forward <- &evt
+		//  c.channel.forward <- &evt
 		// case *ApplicationGetPayload:
-		// 	c.channel.forward <- &Event{
-		// 		Type:    APPLICATION__GET_SUCCESS,
-		// 		Payload: &Apps,
-		// 	}
+		//  c.channel.forward <- &Event{
+		//    Type:    APPLICATION__GET_SUCCESS,
+		//    Payload: &Apps,
+		//  }
 		// case *ApplicationGetSuccessPayload:
-		// 	c.channel.forward <- &evt
+		//  c.channel.forward <- &evt
 		// case *ModuleGetPayload:
-		// 	c.channel.forward <- &Event{
-		// 		Type:    MODULE_GET_SUCCESS,
-		// 		Payload: &modules,
-		// 	}
+		//  c.channel.forward <- &Event{
+		//    Type:    MODULE_GET_SUCCESS,
+		//    Payload: &modules,
+		//  }
 		// case *AppNavigationListFetchModulesPayload:
-		// 	c.channel.forward <- &Event{
-		// 		Type:    APP_NAVIGATION__LIST_FETCH_MODULES_SUCCESS,
-		// 		Payload: &modules,
-		// 	}
+		//  c.channel.forward <- &Event{
+		//    Type:    APP_NAVIGATION__LIST_FETCH_MODULES_SUCCESS,
+		//    Payload: &modules,
+		//  }
 		// case *AppNavigationListModulesRequestPayload:
-		// 	// https://blog.golang.org/json
-		// 	// TODO: Use protobuf stubs for message declarations
-		// 	type Msg struct {
-		// 		Type    Kind `json:"type"`
-		// 		Payload struct {
-		// 			ID string `json:"id,omitempty"`
-		// 		} `json:"payload,omitempty"`
-		// 	}
-		// 	var ms Msg
-		// 	if err := json.Unmarshal([]byte(msg), &ms); err != nil {
-		// 		log.Fatal("Event:", err, msg)
-		// 	}
-		// 	// fmt.Println("Type:", ms.Payload.ID)
-		// 	c.channel.forward <- &Event{
-		// 		Type:    APP_NAVIGATION__LIST_MODULES_RESPONSE,
-		// 		Payload: modules.GetAppModules(ms.Payload.ID),
-		// 	}
+		//  // https://blog.golang.org/json
+		//  // TODO: Use protobuf stubs for message declarations
+		//  type Msg struct {
+		//    Type    Kind `json:"type"`
+		//    Payload struct {
+		//      ID string `json:"id,omitempty"`
+		//    } `json:"payload,omitempty"`
+		//  }
+		//  var ms Msg
+		//  if err := json.Unmarshal([]byte(msg), &ms); err != nil {
+		//    log.Fatal("Event:", err, msg)
+		//  }
+		//  // fmt.Println("Type:", ms.Payload.ID)
+		//  c.channel.forward <- &Event{
+		//    Type:    APP_NAVIGATION__LIST_MODULES_RESPONSE,
+		//    Payload: modules.GetAppModules(ms.Payload.ID),
+		//  }
 		case *ListApplicationsRequestPayload:
 			c.channel.forward <- &Envelope{
 				Service: ApplicationsService,

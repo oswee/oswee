@@ -1,10 +1,19 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_binary")
 load("@io_bazel_rules_docker//go:image.bzl", "go_image")
+load("@io_bazel_rules_k8s//k8s:object.bzl", "k8s_object")
+load("@io_bazel_rules_k8s//k8s:objects.bzl", "k8s_objects")
 load("@k8s_deploy//:defaults.bzl", "k8s_deploy")
+
+go_binary(
+    name = "binary",
+    srcs = ["src/main.go"],
+    visibility = ["//visibility:public"],
+)
 
 go_image(
     name = "server",
     srcs = [
-        "main.go",
+        "src/main.go",
     ],
     goarch = "amd64",
     goos = "linux",
@@ -14,11 +23,34 @@ go_image(
     deps = [],
 )
 
+k8s_object(
+    name = "pvc",
+    cluster = "minikube",
+    template = "pvc.yaml",
+    visibility = ["//visibility:public"],
+)
+
+k8s_object(
+    name = "ingress",
+    cluster = "minikube",
+    template = "ingress.yaml",
+    visibility = ["//visibility:public"],
+)
+
 k8s_deploy(
-    name = "staging",
+    name = "deployment",
     images = {
         "webserver:latest": ":server",
     },
     template = ":deployment.yaml",
 )
 
+k8s_objects(
+    name = "all",
+    objects = [
+      "//:all",
+        ":pvc",
+        ":ingress",
+        ":deployment",
+    ],
+)
