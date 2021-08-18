@@ -105,6 +105,17 @@ http_archive(
     urls = ["https://github.com/bazelbuild/rules_docker/releases/download/v0.17.0/rules_docker-v0.17.0.tar.gz"],
 )
 
+load("@io_bazel_rules_docker//toolchains/docker:toolchain.bzl", docker_toolchain_configure = "toolchain_configure")
+
+# Override the default docker toolchain configuration.
+docker_toolchain_configure(
+    name = "docker_config",
+    docker_flags = [
+        "--log-level=info",
+    ],
+    docker_path = "/usr/bin/podman",
+)
+
 load(
     "@io_bazel_rules_docker//repositories:repositories.bzl",
     container_repositories = "repositories",
