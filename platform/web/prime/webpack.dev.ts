@@ -26,7 +26,7 @@ const devServer = {
   sockPath: '/sockjs-node',
   sockPort: 443,
   publicPath: '/',
-  contentBase: path.resolve('./platform/web/src/index'),
+  contentBase: path.resolve('./platform/web/prime/src/index'),
   stats: {
     colors: true,
   },
