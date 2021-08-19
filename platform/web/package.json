@@ -6,6 +6,7 @@
   "author": "Dzintars Klavins",
   "license": "ISC",
   "homepage": "https://github.com/oswee/prime#readme",
+  "type": "module",
   "keywords": [
     "lit element",
     "boilerplate"
