@@ -13,8 +13,16 @@ workspace(
 
 load("@bazel_tools//tools/build_defs/repo:http.bzl", "http_archive")
 
+# Waz iz zas??? TODO{{{
+
+load("@com_github_bazelbuild_buildtools//buildifier:deps.bzl", "buildifier_dependencies")
+buildifier_dependencies()
+
+go_register_toolchains(nogo = "@io_bazel_rules_go//:tools_nogo")
+#}}}
+
 # =========================================
-# Skylib
+# Skylib{{{
 # =========================================
 
 http_archive(
@@ -31,9 +39,10 @@ bazel_skylib_workspace()
 
 load("@bazel_skylib//lib:versions.bzl", "versions")
 versions.check(minimum_bazel_version = "4.1.0")
+#}}}
 
 # =========================================
-# Go
+# Go{{{
 # =========================================
 
 http_archive(
@@ -49,9 +58,10 @@ load("@io_bazel_rules_go//go:deps.bzl", "go_register_toolchains", "go_rules_depe
 go_rules_dependencies()
 # Version of Go
 go_register_toolchains(version = "1.16.2")
+# }}}
 
 # =========================================
-# Gazelle
+# Gazelle{{{
 # =========================================
 
 http_archive(
@@ -72,9 +82,10 @@ go_repositories()
 
 load("@io_bazel_rules_go//extras:embed_data_deps.bzl", "go_embed_data_dependencies")
 go_embed_data_dependencies()
+# }}}
 
 # =========================================
-# Rules Docker
+# Rules Docker{{{
 # =========================================
 
 http_archive(
@@ -103,9 +114,10 @@ container_deps()
 
 # load("@io_bazel_rules_docker//repositories:pip_repositories.bzl", "pip_deps")
 # pip_deps()
+# }}}
 
 # =========================================
-# Rules Kubernetes
+# Rules Kubernetes{{{
 # =========================================
 
 http_archive(
@@ -156,9 +168,10 @@ k8s_defaults(
 
 load("@io_bazel_rules_docker//go:image.bzl", _go_image_repos = "repositories")
 _go_image_repos()
+# }}}
 
 # =========================================
-# Rules Protocol Buffers
+# Rules Protocol Buffers{{{
 # =========================================
 
 http_archive(
@@ -174,9 +187,10 @@ http_archive(
 load("@rules_proto//proto:repositories.bzl", "rules_proto_dependencies", "rules_proto_toolchains")
 rules_proto_dependencies()
 rules_proto_toolchains()
+# }}}
 
 # =========================================
-# Rules Go Mock
+# Rules Go Mock{{{
 # =========================================
 
 bazel_gomock_commit = "fde78c91cf1783cc1e33ba278922ba67a6ee2a84"
@@ -189,18 +203,10 @@ http_archive(
         "https://github.com/jmhodges/bazel_gomock/archive/{v}.tar.gz".format(v = bazel_gomock_commit),
     ],
 )
+# }}}
 
 # =========================================
-# Waz iz zas??? TODO
-# =========================================
-
-load("@com_github_bazelbuild_buildtools//buildifier:deps.bzl", "buildifier_dependencies")
-buildifier_dependencies()
-
-go_register_toolchains(nogo = "@io_bazel_rules_go//:tools_nogo")
-
-# =========================================
-# Rules NodeJS
+# Rules NodeJS{{{
 # =========================================
 
 NODEJS_VERSION = "16.4.1"
@@ -274,9 +280,10 @@ yarn_install(
     package_json = "//platform/web/prime:package.json",
     yarn_lock = "//platform/web/prime:yarn.lock",
 )
+# }}}
 
 # =========================================
-# Rules TypeScript Protocol Buffers
+# Rules TypeScript Protocol Buffers{{{
 # =========================================
 
 http_archive(
@@ -305,9 +312,10 @@ rules_typescript_proto_dependencies()
 # load("@npm_bazel_typescript//:setup.bzl", "ts_setup_workspace")
 # load("@npm_bazel_typescript//:defs.bzl", "ts_setup_workspace")
 # ts_setup_workspace()
+# }}}
 
 # =========================================
-# Rules SASS
+# Rules SASS{{{
 # =========================================
 
 RULES_SASS_VERSION = "1.35.1"
@@ -331,3 +339,5 @@ rules_sass_dependencies()
 # Setup the rules_sass toolchain
 load("@io_bazel_rules_sass//sass:sass_repositories.bzl", "sass_repositories")
 sass_repositories()
+# }}}
+
