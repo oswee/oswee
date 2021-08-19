@@ -7,41 +7,15 @@ workspace(
     },
 )
 
-# Use `sha256sum` tool to get SHA-256 checksum `sha256sum ~/Downloads/yarn-v1.22.10.tar.gz`
-# NODEJS_VERSION = "14.14.0"
-# NODEJS_VERSION = "15.2.1"
-# NODEJS_VERSION = "14.13.0"
-NODEJS_VERSION = "16.4.1"
-
-# NODEJS_SHA256 = "8ba22704fee4ad33c7e514ec508272a9502efcee5e608b8218164394c69cf2cd"
-# NODEJS_SHA256 = "a13dc3282312f8e862b02e5aacd93a7dffe5b01d55f60f3a6042b10523b5d7b3"
-# NODEJS_SHA256 = "8dbf2869033b315de8369405bc3cd5a19fb11afc824fe616640e2743a9a84cc4"
-NODEJS_SHA256 = "3c73b58051a4435d605f9842e582a252e100d5ff62e0a30e3961cab71e8477b1"
-
-YARN_VERSION = "1.22.10"
-
-YARN_SHA256 = "7e433d4a77e2c79e6a7ae4866782608a8e8bcad3ec6783580577c59538381a6e"
-
-# The nodejs rules
-# RULES_NODEJS_VERSION = "2.2.2"
-RULES_NODEJS_VERSION = "3.7.0"
-
-# RULES_NODEJS_SHA256 = "f2194102720e662dbf193546585d705e645314319554c6ce7e47d8b59f459e9c"
-RULES_NODEJS_SHA256 = "8f5f192ba02319254aaf2cdcca00ec12eaafeb979a80a1e946773c520ae0a2c9"
-
-# Rules for compiling sass
-# RULES_SASS_VERSION = "1.27.0"
-RULES_SASS_VERSION = "1.35.1"
-
-# RULES_SASS_SHA256 = "54deaac36b736b3d716133383f1bbd9320ac82d76563d143cfffb1c06af7f701"
-RULES_SASS_SHA256 = "86f734253cb2480acab150f37eb6c5952f33ed463182f77eedf2e41ba2fe2e8f"
-
 # # Bazel toolchain needed for remote execution
 # BAZEL_TOOLCHAIN_VERSION = "3.5.0"
-
 # BAZEL_TOOLCHAIN_SHA256 = "89a053218639b1c5e3589a859bb310e0a402dedbe4ee369560e66026ae5ef1f2"
 
 load("@bazel_tools//tools/build_defs/repo:http.bzl", "http_archive")
+
+# =========================================
+# Skylib
+# =========================================
 
 http_archive(
     name = "bazel_skylib",
@@ -53,12 +27,14 @@ http_archive(
 )
 
 load("@bazel_skylib//:workspace.bzl", "bazel_skylib_workspace")
-
 bazel_skylib_workspace()
 
 load("@bazel_skylib//lib:versions.bzl", "versions")
-
 versions.check(minimum_bazel_version = "4.1.0")
+
+# =========================================
+# Go
+# =========================================
 
 http_archive(
     name = "io_bazel_rules_go",
@@ -70,11 +46,13 @@ http_archive(
 )
 
 load("@io_bazel_rules_go//go:deps.bzl", "go_register_toolchains", "go_rules_dependencies")
-
 go_rules_dependencies()
-
 # Version of Go
 go_register_toolchains(version = "1.16.2")
+
+# =========================================
+# Gazelle
+# =========================================
 
 http_archive(
     name = "bazel_gazelle",
@@ -86,17 +64,18 @@ http_archive(
 )
 
 load("@bazel_gazelle//:deps.bzl", "gazelle_dependencies")
-
 gazelle_dependencies()
 
 load("//:repositories.bzl", "go_repositories")
-
 # gazelle:repository_macro repositories.bzl%go_repositories
 go_repositories()
 
 load("@io_bazel_rules_go//extras:embed_data_deps.bzl", "go_embed_data_dependencies")
-
 go_embed_data_dependencies()
+
+# =========================================
+# Rules Docker
+# =========================================
 
 http_archive(
     name = "io_bazel_rules_docker",
@@ -116,24 +95,18 @@ docker_toolchain_configure(
     docker_path = "/usr/bin/podman",
 )
 
-load(
-    "@io_bazel_rules_docker//repositories:repositories.bzl",
-    container_repositories = "repositories",
-)
-
+load("@io_bazel_rules_docker//repositories:repositories.bzl", container_repositories = "repositories")
 container_repositories()
 
 load("@io_bazel_rules_docker//repositories:deps.bzl", container_deps = "deps")
-
 container_deps()
 
 # load("@io_bazel_rules_docker//repositories:pip_repositories.bzl", "pip_deps")
-
 # pip_deps()
 
-###########################################
-# Kubernetes                              #
-###########################################
+# =========================================
+# Rules Kubernetes
+# =========================================
 
 http_archive(
     name = "io_bazel_rules_k8s",
@@ -143,17 +116,13 @@ http_archive(
 )
 
 load("@io_bazel_rules_k8s//k8s:k8s.bzl", "k8s_defaults", "k8s_repositories")
-
 k8s_repositories()
 
 load("@io_bazel_rules_k8s//k8s:k8s_go_deps.bzl", k8s_go_deps = "deps")
-
 k8s_go_deps()
 
 _CLUSTER = "minikube"
-
 _CONTEXT = _CLUSTER
-
 _NAMESPACE = "prime"
 
 k8s_defaults(
@@ -186,8 +155,11 @@ k8s_defaults(
 ]]
 
 load("@io_bazel_rules_docker//go:image.bzl", _go_image_repos = "repositories")
-
 _go_image_repos()
+
+# =========================================
+# Rules Protocol Buffers
+# =========================================
 
 http_archive(
     name = "rules_proto",
@@ -200,10 +172,12 @@ http_archive(
 )
 
 load("@rules_proto//proto:repositories.bzl", "rules_proto_dependencies", "rules_proto_toolchains")
-
 rules_proto_dependencies()
-
 rules_proto_toolchains()
+
+# =========================================
+# Rules Go Mock
+# =========================================
 
 bazel_gomock_commit = "fde78c91cf1783cc1e33ba278922ba67a6ee2a84"
 
@@ -216,18 +190,29 @@ http_archive(
     ],
 )
 
-load("@com_github_bazelbuild_buildtools//buildifier:deps.bzl", "buildifier_dependencies")
+# =========================================
+# Waz iz zas??? TODO
+# =========================================
 
+load("@com_github_bazelbuild_buildtools//buildifier:deps.bzl", "buildifier_dependencies")
 buildifier_dependencies()
 
 go_register_toolchains(nogo = "@io_bazel_rules_go//:tools_nogo")
 
-###########################################
-# Npm Install and Typescript support      #
-###########################################
+# =========================================
+# Rules NodeJS
+# =========================================
 
-# Fetch rules_nodejs
-# (you can check https://github.com/bazelbuild/rules_nodejs for a newer release than this)
+NODEJS_VERSION = "16.4.1"
+NODEJS_SHA256 = "3c73b58051a4435d605f9842e582a252e100d5ff62e0a30e3961cab71e8477b1"
+
+YARN_VERSION = "1.22.10"
+YARN_SHA256 = "7e433d4a77e2c79e6a7ae4866782608a8e8bcad3ec6783580577c59538381a6e"
+
+# The nodejs rules
+RULES_NODEJS_VERSION = "3.7.0"
+RULES_NODEJS_SHA256 = "8f5f192ba02319254aaf2cdcca00ec12eaafeb979a80a1e946773c520ae0a2c9"
+
 # NOTE: this rule installs nodejs, npm, and yarn, but does NOT install
 # your npm dependencies. You must still run the package manager.
 http_archive(
@@ -236,14 +221,9 @@ http_archive(
     url = "https://github.com/bazelbuild/rules_nodejs/releases/download/%s/rules_nodejs-%s.tar.gz" % (RULES_NODEJS_VERSION, RULES_NODEJS_VERSION),
 )
 
-# Setup the NodeJS toolchain
 load("@build_bazel_rules_nodejs//:index.bzl", "check_bazel_version", "node_repositories", "yarn_install")
-
 # The minimum bazel version to use with this repo is v4.1.0.
-check_bazel_version(
-    minimum_bazel_version = "4.1.0",
-)
-
+check_bazel_version(minimum_bazel_version = "4.1.0")
 # Bazel will use it's default NodeJS version and will not rely on the NodeJS version installed on the machine
 node_repositories(
     # OPTIONAL
@@ -291,13 +271,13 @@ yarn_install(
     name = "npm1",
     # always_hide_bazel_files = True,
     # symlink_node_modules = True,
-    package_json = "//platform/web:package.json",
-    yarn_lock = "//platform/web:yarn.lock",
+    package_json = "//platform/web/prime:package.json",
+    yarn_lock = "//platform/web/prime:yarn.lock",
 )
 
-###########################################
-# TypeScript Proto Toolchain              #
-###########################################
+# =========================================
+# Rules TypeScript Protocol Buffers
+# =========================================
 
 http_archive(
     name = "rules_typescript_proto",
@@ -309,30 +289,29 @@ http_archive(
 )
 
 load("@rules_typescript_proto//:index.bzl", "rules_typescript_proto_dependencies")
-
 rules_typescript_proto_dependencies()
 
 # Install all Bazel dependencies needed for npm packages that supply Bazel rules
 # Note, this will probably break in a future rules_nodejs release.
 # It causes all builds to fetch npm packages even if not needed (eg. only building go code)
 # load("@npm//:install_bazel_dependencies.bzl", "install_bazel_dependencies")
-
 # install_bazel_dependencies(suppress_warning = True)
 
 # load("@npm1//:install_bazel_dependencies.bzl", "install_bazel_dependencies")
-
 # install_bazel_dependencies(suppress_warning = True)
 
 # Setup TypeScript toolchain
 # load("@build_bazel_rules_typescript//:defs.bzl", "ts_setup_workspace")
 # load("@npm_bazel_typescript//:setup.bzl", "ts_setup_workspace")
 # load("@npm_bazel_typescript//:defs.bzl", "ts_setup_workspace")
-
 # ts_setup_workspace()
 
-###########################################
-# SASS Toolchain                          #
-###########################################
+# =========================================
+# Rules SASS
+# =========================================
+
+RULES_SASS_VERSION = "1.35.1"
+RULES_SASS_SHA256 = "86f734253cb2480acab150f37eb6c5952f33ed463182f77eedf2e41ba2fe2e8f"
 
 http_archive(
     name = "io_bazel_rules_sass",
@@ -347,10 +326,8 @@ http_archive(
 # Fetch required transitive dependencies. This is an optional step because you
 # can always fetch the required NodeJS transitive dependency on your own.
 load("@io_bazel_rules_sass//:package.bzl", "rules_sass_dependencies")
-
 rules_sass_dependencies()
 
 # Setup the rules_sass toolchain
 load("@io_bazel_rules_sass//sass:sass_repositories.bzl", "sass_repositories")
-
 sass_repositories()
