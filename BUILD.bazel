@@ -17,7 +17,7 @@ exports_files(
         "tsconfig.json",
         "tsconfig.base.json",
         # Stylelint and prettier config are neeeded for style linting
-        ".stylelintrc.js",
+        ".stylelintrc.ts",
         ".prettierrc.js",
         "package.json",
     ],
