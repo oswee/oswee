@@ -1,19 +1,19 @@
 workspace(
     name = "oswee",
-    # Let the Bazel manage all NPM packages
     managed_directories = {
         "@npm": ["node_modules"],
-        "@npm1": ["platform/web/node_modules"],
+        "@npm1": ["platform/web/prime/node_modules"],
     },
 )
+
+load("@bazel_tools//tools/build_defs/repo:http.bzl", "http_archive")
+
+# Waz iz zas TODO{{{
+# ==============================================
 
 # # Bazel toolchain needed for remote execution
 # BAZEL_TOOLCHAIN_VERSION = "3.5.0"
 # BAZEL_TOOLCHAIN_SHA256 = "89a053218639b1c5e3589a859bb310e0a402dedbe4ee369560e66026ae5ef1f2"
-
-load("@bazel_tools//tools/build_defs/repo:http.bzl", "http_archive")
-
-# Waz iz zas??? TODO{{{
 
 load("@com_github_bazelbuild_buildtools//buildifier:deps.bzl", "buildifier_dependencies")
 buildifier_dependencies()
@@ -21,9 +21,8 @@ buildifier_dependencies()
 go_register_toolchains(nogo = "@io_bazel_rules_go//:tools_nogo")
 #}}}
 
-# =========================================
 # Skylib{{{
-# =========================================
+# ==============================================
 
 http_archive(
     name = "bazel_skylib",
@@ -41,9 +40,8 @@ load("@bazel_skylib//lib:versions.bzl", "versions")
 versions.check(minimum_bazel_version = "4.1.0")
 #}}}
 
-# =========================================
 # Go{{{
-# =========================================
+# ==============================================
 
 http_archive(
     name = "io_bazel_rules_go",
@@ -60,9 +58,8 @@ go_rules_dependencies()
 go_register_toolchains(version = "1.16.2")
 # }}}
 
-# =========================================
 # Gazelle{{{
-# =========================================
+# ==============================================
 
 http_archive(
     name = "bazel_gazelle",
@@ -84,9 +81,8 @@ load("@io_bazel_rules_go//extras:embed_data_deps.bzl", "go_embed_data_dependenci
 go_embed_data_dependencies()
 # }}}
 
-# =========================================
 # Rules Docker{{{
-# =========================================
+# ==============================================
 
 http_archive(
     name = "io_bazel_rules_docker",
@@ -116,9 +112,8 @@ container_deps()
 # pip_deps()
 # }}}
 
-# =========================================
 # Rules Kubernetes{{{
-# =========================================
+# ==============================================
 
 http_archive(
     name = "io_bazel_rules_k8s",
@@ -170,9 +165,8 @@ load("@io_bazel_rules_docker//go:image.bzl", _go_image_repos = "repositories")
 _go_image_repos()
 # }}}
 
-# =========================================
 # Rules Protocol Buffers{{{
-# =========================================
+# ==============================================
 
 http_archive(
     name = "rules_proto",
@@ -189,9 +183,8 @@ rules_proto_dependencies()
 rules_proto_toolchains()
 # }}}
 
-# =========================================
 # Rules Go Mock{{{
-# =========================================
+# ==============================================
 
 bazel_gomock_commit = "fde78c91cf1783cc1e33ba278922ba67a6ee2a84"
 
@@ -205,9 +198,8 @@ http_archive(
 )
 # }}}
 
-# =========================================
 # Rules NodeJS{{{
-# =========================================
+# ==============================================
 
 NODEJS_VERSION = "16.4.1"
 NODEJS_SHA256 = "3c73b58051a4435d605f9842e582a252e100d5ff62e0a30e3961cab71e8477b1"
@@ -282,9 +274,8 @@ yarn_install(
 )
 # }}}
 
-# =========================================
 # Rules TypeScript Protocol Buffers{{{
-# =========================================
+# ==============================================
 
 http_archive(
     name = "rules_typescript_proto",
@@ -314,9 +305,8 @@ rules_typescript_proto_dependencies()
 # ts_setup_workspace()
 # }}}
 
-# =========================================
 # Rules SASS{{{
-# =========================================
+# ==============================================
 
 RULES_SASS_VERSION = "1.35.1"
 RULES_SASS_SHA256 = "86f734253cb2480acab150f37eb6c5952f33ed463182f77eedf2e41ba2fe2e8f"
