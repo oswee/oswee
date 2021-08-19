@@ -68,6 +68,8 @@ I have custom CloudFlare DNS setup
 
 ## How to use
 
+UPDATE: These instructions most likely is broken ATM
+
 `bazel run //:gazelle` to generate BUILD rules for Go
 
 `bazel build '...'` to build everything
@@ -79,10 +81,3 @@ I have custom CloudFlare DNS setup
 In some cases NPM packages should be installed manually, otherwise Bazel will take care of that.
 
 `yarn install`
-
-## Random personal notes
-
-[yarnpkg.com/advanced/editor-sdks#vscode](https://yarnpkg.com/advanced/editor-sdks#vscode)
-`yarn dlx @yarnpkg/pnpify --sdk vscode`
-
-Bazel does not play well with PnP ATM, but there are some open issues.

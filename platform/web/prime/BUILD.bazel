@@ -4,6 +4,14 @@ load("@npm//@bazel/typescript:index.bzl", "ts_config", "ts_project")
 
 package(default_visibility = ["//visibility:public"])
 
+filegroup(
+    name = "public",
+    srcs = glob([
+        "src/public/template.html",
+        "src/public/favicon.ico",
+    ]),
+)
+
 ts_library(
     name = "src",
     srcs = glob(
@@ -13,9 +21,9 @@ ts_library(
         exclude = ["webpack.dev.ts"],
     ),
     data = [
-        "//platform/web/src/sass",
+        "//platform/web/prime/src/sass",
     ],
-    # module_name = "@oswee/platform/web",
+    # module_name = "@oswee/platform/web/prime",
     # module_root = "src",
     # devmode_module = "esnext",
     # devmode_target = "esnext",
@@ -30,7 +38,7 @@ ts_library(
         "//packages/websocket",
         "//packages/routing",
         "//packages/store",
-        "//platform/web/src/sass:css_typings",
+        "//platform/web/prime/src/sass:css_typings",
         # "@npm1//@types/node",
         # "@npm1//history",
         "@npm//lit",
@@ -64,14 +72,6 @@ ts_library(
     ],
 )
 
-filegroup(
-    name = "public",
-    srcs = glob([
-        "src/public/template.html",
-        "src/public/favicon.ico",
-    ]),
-)
-
 nodejs_binary(
     name = "devserver",
     data = [
@@ -88,9 +88,9 @@ nodejs_binary(
     templated_args = [
         # "--output=./[hash].bundle.js",
         "--output=./bundle.js",
-        "--entry=./platform/web/src/index",
+        "--entry=./platform/web/prime/src/index",
         "--mode=development",
-        "--config=oswee/platform/web/webpack.dev.js",
+        "--config=oswee/platform/web/prime/webpack.dev.js",
     ],
 )
 
@@ -99,7 +99,7 @@ load("@npm//webpack-dev-server:index.bzl", "webpack_dev_server")
 webpack_dev_server(
     name = "devserverx",
     args = [
-        "--config=./platform/web/webpack.dev.js",
+        "--config=./platform/web/prime/webpack.dev.js",
         "--output=./bundle.js",
         "--history-api-fallback",
     ],

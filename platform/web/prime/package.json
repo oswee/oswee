@@ -1,11 +1,12 @@
 {
-  "name": "@oswee/front",
+  "name": "@oswee/prime",
   "version": "0.0.0",
   "private": true,
   "description": "Bazel managed front-end application",
   "author": "Dzintars Klavins",
   "license": "ISC",
   "homepage": "https://github.com/oswee/prime#readme",
+  "type": "module",
   "keywords": [
     "lit element",
     "boilerplate"

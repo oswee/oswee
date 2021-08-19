@@ -41,6 +41,8 @@ func main() {
 		Handler:      nil,
 	}
 
+	log.Printf("Serving %s on HTTP port: %s\n", *directory, srv.Addr)
+
 	err := srv.ListenAndServeTLS(
 		"/home/dzintars/.tls/oswee.com/fullchain.pem",
 		"/home/dzintars/.tls/oswee.com/privkey.pem",
@@ -49,7 +51,4 @@ func main() {
 	if err != nil {
 		log.Fatalf("server failed to start: %v", err)
 	}
-
-	// log.Printf("Serving %s on HTTP port: %s\n", *directory, *port)
-	// log.Fatal(http.ListenAndServe(":"+*port, nil))
 }
