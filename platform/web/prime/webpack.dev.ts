@@ -45,7 +45,9 @@ const devServer = {
 const config: Configuration & { devServer: typeof devServer } = {
   mode: 'development',
   target: 'web',
-  entry: [path.resolve(process.env.RUNFILES, 'oswee/platform/web/src/index')],
+  entry: [
+    path.resolve(process.env.RUNFILES, 'oswee/platform/web/prime/src/index'),
+  ],
   output: {
     path: path.dirname(path.resolve('./bundle.js')),
     filename: path.basename('./bundel.js'),
@@ -74,8 +76,8 @@ const config: Configuration & { devServer: typeof devServer } = {
   },
   plugins: [
     new HtmlWebpackPlugin({
-      template: './platform/web/src/public/template.html',
-      favicon: './platform/web/src/public/favicon.ico',
+      template: './platform/web/prime/src/public/template.html',
+      favicon: './platform/web/prime/src/public/favicon.ico',
       filename: './index.html',
     }),
     new HotModuleReplacementPlugin({
