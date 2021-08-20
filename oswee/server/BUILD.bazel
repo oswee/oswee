@@ -48,7 +48,7 @@ k8s_deploy(
 k8s_objects(
     name = "all",
     objects = [
-      "//:all",
+        "//:all",
         ":pvc",
         ":ingress",
         ":deployment",

@@ -3,19 +3,19 @@ load("//tools:ts_library.bzl", "ts_library")
 package(default_visibility = ["//visibility:public"])
 
 ts_library(
-  name = "src",
-  srcs = glob(
-    [
-      "src/**/*.ts",
-    ],
-  ),
-  tsconfig = ":tsconfig",
+    name = "src",
+    srcs = glob(
+        [
+            "src/**/*.ts",
+        ],
+    ),
+    tsconfig = ":tsconfig",
 )
 
 ts_config(
-  name = "tsconfig",
-  src = "tsconfig.app.json",
-  deps = [
-    "//:tsconfig.base.json",
-  ],
+    name = "tsconfig",
+    src = "tsconfig.app.json",
+    deps = [
+        "//:tsconfig.base.json",
+    ],
 )

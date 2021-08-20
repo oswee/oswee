@@ -63,4 +63,3 @@ k8s_object(
     template = "//k8s/namespace.yaml",
     visibility = ["//visibility:public"],
 )
-

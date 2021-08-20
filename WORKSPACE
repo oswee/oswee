@@ -8,19 +8,6 @@ workspace(
 
 load("@bazel_tools//tools/build_defs/repo:http.bzl", "http_archive")
 
-# Waz iz zas TODO{{{
-# ==============================================
-
-# # Bazel toolchain needed for remote execution
-# BAZEL_TOOLCHAIN_VERSION = "3.5.0"
-# BAZEL_TOOLCHAIN_SHA256 = "89a053218639b1c5e3589a859bb310e0a402dedbe4ee369560e66026ae5ef1f2"
-
-load("@com_github_bazelbuild_buildtools//buildifier:deps.bzl", "buildifier_dependencies")
-buildifier_dependencies()
-
-go_register_toolchains(nogo = "@io_bazel_rules_go//:tools_nogo")
-#}}}
-
 # Skylib{{{
 # ==============================================
 
@@ -34,9 +21,11 @@ http_archive(
 )
 
 load("@bazel_skylib//:workspace.bzl", "bazel_skylib_workspace")
+
 bazel_skylib_workspace()
 
 load("@bazel_skylib//lib:versions.bzl", "versions")
+
 versions.check(minimum_bazel_version = "4.1.0")
 #}}}
 
@@ -53,7 +42,9 @@ http_archive(
 )
 
 load("@io_bazel_rules_go//go:deps.bzl", "go_register_toolchains", "go_rules_dependencies")
+
 go_rules_dependencies()
+
 go_register_toolchains(version = "1.16.5")
 # }}}
 
@@ -70,15 +61,32 @@ http_archive(
 )
 
 load("@bazel_gazelle//:deps.bzl", "gazelle_dependencies")
+
 gazelle_dependencies()
 
 load("//:repositories.bzl", "go_repositories")
+
 # gazelle:repository_macro repositories.bzl%go_repositories
 go_repositories()
 
 load("@io_bazel_rules_go//extras:embed_data_deps.bzl", "go_embed_data_dependencies")
+
 go_embed_data_dependencies()
 # }}}
+
+# Waz iz zas TODO{{{
+# ==============================================
+
+# # Bazel toolchain needed for remote execution
+# BAZEL_TOOLCHAIN_VERSION = "3.5.0"
+# BAZEL_TOOLCHAIN_SHA256 = "89a053218639b1c5e3589a859bb310e0a402dedbe4ee369560e66026ae5ef1f2"
+
+load("@com_github_bazelbuild_buildtools//buildifier:deps.bzl", "buildifier_dependencies")
+
+buildifier_dependencies()
+
+go_register_toolchains(nogo = "@io_bazel_rules_go//:tools_nogo")
+#}}}
 
 # Rules Docker{{{
 # ==============================================
@@ -102,9 +110,11 @@ docker_toolchain_configure(
 )
 
 load("@io_bazel_rules_docker//repositories:repositories.bzl", container_repositories = "repositories")
+
 container_repositories()
 
 load("@io_bazel_rules_docker//repositories:deps.bzl", container_deps = "deps")
+
 container_deps()
 
 # load("@io_bazel_rules_docker//repositories:pip_repositories.bzl", "pip_deps")
@@ -122,13 +132,17 @@ http_archive(
 )
 
 load("@io_bazel_rules_k8s//k8s:k8s.bzl", "k8s_defaults", "k8s_repositories")
+
 k8s_repositories()
 
 load("@io_bazel_rules_k8s//k8s:k8s_go_deps.bzl", k8s_go_deps = "deps")
+
 k8s_go_deps()
 
 _CLUSTER = "minikube"
+
 _CONTEXT = _CLUSTER
+
 _NAMESPACE = "prime"
 
 k8s_defaults(
@@ -161,6 +175,7 @@ k8s_defaults(
 ]]
 
 load("@io_bazel_rules_docker//go:image.bzl", _go_image_repos = "repositories")
+
 _go_image_repos()
 # }}}
 
@@ -178,7 +193,9 @@ http_archive(
 )
 
 load("@rules_proto//proto:repositories.bzl", "rules_proto_dependencies", "rules_proto_toolchains")
+
 rules_proto_dependencies()
+
 rules_proto_toolchains()
 # }}}
 
@@ -201,13 +218,16 @@ http_archive(
 # ==============================================
 
 NODEJS_VERSION = "16.4.1"
+
 NODEJS_SHA256 = "3c73b58051a4435d605f9842e582a252e100d5ff62e0a30e3961cab71e8477b1"
 
 YARN_VERSION = "1.22.10"
+
 YARN_SHA256 = "7e433d4a77e2c79e6a7ae4866782608a8e8bcad3ec6783580577c59538381a6e"
 
 # The nodejs rules
 RULES_NODEJS_VERSION = "3.7.0"
+
 RULES_NODEJS_SHA256 = "8f5f192ba02319254aaf2cdcca00ec12eaafeb979a80a1e946773c520ae0a2c9"
 
 # NOTE: this rule installs nodejs, npm, and yarn, but does NOT install
@@ -219,8 +239,10 @@ http_archive(
 )
 
 load("@build_bazel_rules_nodejs//:index.bzl", "check_bazel_version", "node_repositories", "yarn_install")
+
 # The minimum bazel version to use with this repo is v4.1.0.
 check_bazel_version(minimum_bazel_version = "4.1.0")
+
 # Bazel will use it's default NodeJS version and will not rely on the NodeJS version installed on the machine
 node_repositories(
     # OPTIONAL
@@ -286,6 +308,7 @@ http_archive(
 )
 
 load("@rules_typescript_proto//:index.bzl", "rules_typescript_proto_dependencies")
+
 rules_typescript_proto_dependencies()
 
 # Install all Bazel dependencies needed for npm packages that supply Bazel rules
@@ -308,6 +331,7 @@ rules_typescript_proto_dependencies()
 # ==============================================
 
 RULES_SASS_VERSION = "1.35.1"
+
 RULES_SASS_SHA256 = "86f734253cb2480acab150f37eb6c5952f33ed463182f77eedf2e41ba2fe2e8f"
 
 http_archive(
@@ -323,10 +347,11 @@ http_archive(
 # Fetch required transitive dependencies. This is an optional step because you
 # can always fetch the required NodeJS transitive dependency on your own.
 load("@io_bazel_rules_sass//:package.bzl", "rules_sass_dependencies")
+
 rules_sass_dependencies()
 
 # Setup the rules_sass toolchain
 load("@io_bazel_rules_sass//sass:sass_repositories.bzl", "sass_repositories")
+
 sass_repositories()
 # }}}
-
