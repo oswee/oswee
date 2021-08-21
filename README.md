@@ -65,8 +65,8 @@ Critical requirements:
 Recommended requirements:
 
 - TLS certificates should be valid and configured in the DNS/Proxy
-- Github Personal Access `GITHUB_NPM_PAT` env. variable/token should be added to the `~/.zshenv` to be able to read and
-  write private/public NPM packages.
+- ~~Github Personal Access `GITHUB_NPM_PAT` env. variable/token should be added to the `~/.zshenv` to be able to read and
+  write private/public NPM packages~~
 - Quay image registry for `rules_k8s` to publish image artifacts (can be used Minikubes built-in registry)
 - Minikube for local development
 - /etc/hosts DNS entries
