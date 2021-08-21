@@ -10,7 +10,7 @@ load("@bazel_tools//tools/build_defs/repo:http.bzl", "http_archive")
 load("//defs:config.bzl", "NODEJS_SHA256", "NODEJS_VERSION", "RULES_NODEJS_SHA256", "RULES_NODEJS_VERSION", "RULES_SASS_SHA256", "RULES_SASS_VERSION", "YARN_SHA256", "YARN_VERSION")
 
 # Skylib{{{
-# ==============================================
+# ----------------------------------------------
 
 http_archive(
     name = "bazel_skylib",
@@ -31,7 +31,8 @@ versions.check(minimum_bazel_version = "4.1.0")
 #}}}
 
 # Go{{{
-# ==============================================
+# ----------------------------------------------
+# Check the go_rules and Gazelle version compitability at https://github.com/bazelbuild/bazel-gazelle#id5
 
 http_archive(
     name = "io_bazel_rules_go",
@@ -52,7 +53,6 @@ http_archive(
 )
 
 load("@bazel_gazelle//:deps.bzl", "gazelle_dependencies")
-# load("@io_bazel_rules_go//extras:embed_data_deps.bzl", "go_embed_data_dependencies")
 load("@io_bazel_rules_go//go:deps.bzl", "go_register_toolchains", "go_rules_dependencies")
 
 go_rules_dependencies()
@@ -63,14 +63,11 @@ gazelle_dependencies()
 
 load("//:deps.bzl", "go_dependencies")
 
-# gazelle:repository_macro deps.bzl%go_dependencies
 go_dependencies()
-
-# go_embed_data_dependencies()
 # }}}
 
 # Rules Docker{{{
-# ==============================================
+# ----------------------------------------------
 
 http_archive(
     name = "io_bazel_rules_docker",
@@ -101,7 +98,7 @@ container_deps()
 # }}}
 
 # Rules Kubernetes{{{
-# ==============================================
+# ----------------------------------------------
 
 http_archive(
     name = "io_bazel_rules_k8s",
@@ -159,7 +156,7 @@ _go_image_repos()
 # }}}
 
 # Rules Protocol Buffers{{{
-# ==============================================
+# ----------------------------------------------
 
 http_archive(
     name = "rules_proto",
@@ -179,7 +176,7 @@ rules_proto_toolchains()
 # }}}
 
 # Rules Go Mock{{{
-# ==============================================
+# ----------------------------------------------
 
 bazel_gomock_commit = "fde78c91cf1783cc1e33ba278922ba67a6ee2a84"
 
@@ -194,7 +191,7 @@ http_archive(
 # }}}
 
 # Waz iz zas TODO{{{
-# ==============================================
+# ----------------------------------------------
 
 # # Bazel toolchain needed for remote execution
 # BAZEL_TOOLCHAIN_VERSION = "3.5.0"
@@ -217,7 +214,7 @@ go_register_toolchains(nogo = "@io_bazel_rules_go//:tools_nogo")
 #}}}
 
 # Rules NodeJS{{{
-# ==============================================
+# ----------------------------------------------
 
 http_archive(
     name = "build_bazel_rules_nodejs",
@@ -283,7 +280,7 @@ yarn_install(
 # }}}
 
 # Rules TypeScript Protocol Buffers{{{
-# ==============================================
+# ----------------------------------------------
 
 http_archive(
     name = "rules_typescript_proto",
@@ -315,7 +312,7 @@ rules_typescript_proto_dependencies()
 # }}}
 
 # Rules SASS{{{
-# ==============================================
+# ----------------------------------------------
 
 http_archive(
     name = "io_bazel_rules_sass",
