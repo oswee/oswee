@@ -1,9 +1,8 @@
-# Prime
+# [WIP] Prime
 
 This is sandbox monorepository to test Bazel in action
 
-[![GitHub
-@dzintars](https://img.shields.io/github/followers/dzintars?label=follow&style=social)](https://github.com/dzintars)
+[![GitHub@dzintars](https://img.shields.io/github/followers/dzintars?label=follow&style=social)](https://github.com/dzintars)
 
 [![Golang](https://img.shields.io/badge/-Golang-blue?style=flat-square&logo=go&logoColor=white)](https://golang.org/)
 [![Typescript](https://img.shields.io/badge/-Typescript-blue?style=flat-square&logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
@@ -98,3 +97,5 @@ Run Bazel in watch mode: `yarn ibazel run //platform/web:devserver`
 
 - You [should not](https://github.com/bazelbuild/rules_go#can-i-still-use-the-go-command) run `go` tool from this repository.
   All Go and Protobuf dependencies should be handled by Gazelle.
+  All Go and Protobuf dependencies should be handled by Gazelle. All Go and Protobuf dependencies should be handled by Gazelle.
+  Gazelle.All Go and Protobuf dependencies should be handled by Gazelle. All Go and Protobuf dependencies should be handled by Gazelle.
