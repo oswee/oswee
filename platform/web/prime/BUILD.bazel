@@ -1,14 +1,14 @@
-load("//tools:ts_library.bzl", "ts_library")
 load("@build_bazel_rules_nodejs//:index.bzl", "nodejs_binary")
-load("@npm//@bazel/typescript:index.bzl", "ts_config", "ts_project")
+load("@npm//@bazel/typescript:index.bzl", "ts_config")
+load("@npm//webpack-dev-server:index.bzl", "webpack_dev_server")
+load("//tools:ts_library.bzl", "ts_library")
 
 package(default_visibility = ["//visibility:public"])
 
 filegroup(
     name = "public",
     srcs = glob([
-        "src/public/template.html",
-        "src/public/favicon.ico",
+        "src/public/*",
     ]),
 )
 
@@ -93,8 +93,6 @@ nodejs_binary(
         "--config=oswee/platform/web/prime/webpack.dev.js",
     ],
 )
-
-load("@npm//webpack-dev-server:index.bzl", "webpack_dev_server")
 
 webpack_dev_server(
     name = "devserverx",

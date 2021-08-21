@@ -9,8 +9,8 @@ import (
 )
 
 func main() {
-	port := flag.String("p", "8080", "port to serve on")
-	directory := flag.String("d", ".", "the directory of static file to host")
+	port := flag.String("p", ":9443", "port to serve on")
+	directory := flag.String("d", "/home/dzintars/test-data", "the directory of static file to host")
 	flag.Parse()
 
 	http.Handle("/", http.FileServer(http.Dir(*directory)))

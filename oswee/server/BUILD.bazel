@@ -1,25 +1,23 @@
-load("@io_bazel_rules_go//go:def.bzl", "go_binary")
 load("@io_bazel_rules_docker//go:image.bzl", "go_image")
+load("@io_bazel_rules_go//go:def.bzl", "go_binary", "go_library")
 load("@io_bazel_rules_k8s//k8s:object.bzl", "k8s_object")
 load("@io_bazel_rules_k8s//k8s:objects.bzl", "k8s_objects")
 load("@k8s_deploy//:defaults.bzl", "k8s_deploy")
 
 go_binary(
     name = "binary",
-    srcs = ["src/main.go"],
-    visibility = ["//visibility:public"],
+    srcs = ["main.go"],
 )
 
 go_image(
     name = "server",
     srcs = [
-        "src/main.go",
+        "main.go",
     ],
     goarch = "amd64",
     goos = "linux",
     importpath = "github.com/oswee/prime/oswee/server",
     pure = "on",
-    visibility = ["//visibility:public"],
     deps = [],
 )
 
@@ -27,14 +25,12 @@ k8s_object(
     name = "pvc",
     cluster = "minikube",
     template = "pvc.yaml",
-    visibility = ["//visibility:public"],
 )
 
 k8s_object(
     name = "ingress",
     cluster = "minikube",
     template = "ingress.yaml",
-    visibility = ["//visibility:public"],
 )
 
 k8s_deploy(
@@ -48,9 +44,16 @@ k8s_deploy(
 k8s_objects(
     name = "all",
     objects = [
-      "//:all",
+        "//k8s:all",
         ":pvc",
         ":ingress",
         ":deployment",
     ],
+)
+
+go_library(
+    name = "server_lib",
+    srcs = ["main.go"],
+    importpath = "github.com/oswee/prime/oswee/server",
+    visibility = ["//visibility:private"],
 )

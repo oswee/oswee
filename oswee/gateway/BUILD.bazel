@@ -1,10 +1,9 @@
-load("@io_bazel_rules_go//go:def.bzl", "go_binary", "go_library")
 load("@io_bazel_rules_docker//go:image.bzl", "go_image")
+load("@io_bazel_rules_go//go:def.bzl", "go_binary", "go_library")
 load("@k8s_deploy//:defaults.bzl", "k8s_deploy")
-load("@io_bazel_rules_k8s//k8s:object.bzl", "k8s_object")
 
 go_library(
-    name = "go_default_library",
+    name = "src",
     srcs = [
         "application.go",
         "channel.go",
@@ -14,17 +13,12 @@ go_library(
         "rpc_jsonenums.go",
         "service_jsonenums.go",
     ],
-    importpath = "github.com/dzintars/prime/oswee/gateway/gateway",
+    importpath = "github.com/oswee/prime/oswee/gateway",
     visibility = ["//visibility:private"],
     deps = [
-        "//protobuf/oswee/modules/v1:go_default_library",
-        "@com_github_gorilla_websocket//:go_default_library",
+        "//protobuf/oswee/modules/v1:modules",
+        "@com_github_gorilla_websocket//:websocket",
     ],
-)
-
-go_binary(
-    name = "gateway",
-    visibility = ["//visibility:public"],
 )
 
 go_image(
@@ -40,27 +34,26 @@ go_image(
     ],
     goarch = "amd64",
     goos = "linux",
-    importpath = "github.com/dzintars/prime/oswee/gateway/gateway",
+    importpath = "github.com/dzintars/prime/oswee/gateway",
     pure = "on",
     visibility = ["//visibility:public"],
     deps = [
-        "//protobuf/oswee/modules/v1:go_default_library",
+        "//protobuf/oswee/modules/v1:modules",
         "@com_github_gorilla_websocket//:go_default_library",
     ],
 )
 
 k8s_deploy(
-    name = "staging",
+    name = "dev",
     images = {
-        "hello-http-image:latest": ":server",
+        "server:latest": ":server",
     },
-    template = "//oswee/gateway:deployment.yaml",
-)
-
-k8s_object(
-    name = "namespace",
-    cluster = "minikube",
-    template = "//k8s/namespace.yaml",
+    template = "deployment.yaml",
     visibility = ["//visibility:public"],
 )
 
+go_binary(
+    name = "gateway",
+    embed = [":src"],
+    visibility = ["//visibility:public"],
+)

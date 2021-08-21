@@ -1,6 +1,7 @@
+load("@build_bazel_rules_nodejs//:index.bzl", "nodejs_binary")
+
 # ORIGIN: https://github.com/dataform-co/dataform/blob/master/tools/gen-package-json/BUILD
 load("//tools:ts_library.bzl", "ts_library")
-load("@build_bazel_rules_nodejs//:index.bzl", "nodejs_binary")
 
 package(default_visibility = ["//visibility:public"])
 

@@ -1,8 +1,8 @@
-load("@io_bazel_rules_sass//:defs.bzl", "multi_sass_binary", "sass_binary")
+load("@io_bazel_rules_sass//:defs.bzl", "sass_binary")
+load("//tools:css_typings.bzl", "css_typings")
 
 # load("@io_bazel_rules_sass//sass:sass.bzl", "sass_binary", "sass_library")
 load("//tools/bazel_rules:index.bzl", "stylelint")
-load("//tools:css_typings.bzl", "css_typings")
 
 package(default_visibility = ["//visibility:public"])
 

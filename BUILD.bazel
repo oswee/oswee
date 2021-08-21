@@ -1,11 +1,24 @@
-load("//tools:ts_library.bzl", "ts_library")
 load("@bazel_gazelle//:def.bzl", "gazelle")
 load("@com_github_bazelbuild_buildtools//buildifier:def.bzl", "buildifier")
-load("@io_bazel_rules_k8s//k8s:object.bzl", "k8s_object")
-load("@io_bazel_rules_k8s//k8s:objects.bzl", "k8s_objects")
-load("@k8s_deploy//:defaults.bzl", "k8s_deploy")
+# load("//tools:ts_library.bzl", "ts_library")
 
 package(default_visibility = ["//:__subpackages__"])
+
+# gazelle:exclude node_modules
+# gazelle:build_file_name BUILD.bazel,BUILD
+# gazelle:prefix github.com/oswee/prime
+gazelle(
+    name = "gazelle",
+)
+
+buildifier(
+    name = "buildifier",
+)
+
+buildifier(
+    name = "buildifier_check",
+    mode = "check",
+)
 
 # Expose these files for the other Bazel downstream rules to use
 # https://bazelbuild.github.io/rules_nodejs/TypeScript.html
@@ -24,79 +37,10 @@ exports_files(
     visibility = ["//visibility:public"],
 )
 
-# gazelle:exclude third_party
-# gazelle:build_file_name BUILD,BUILD.bazel
-# gazelle:prefix github.com/oswee/api
-gazelle(
-    name = "gazelle",
-)
-
-buildifier(
-    name = "buildifier",
-)
-
-buildifier(
-    name = "buildifier_check",
-    mode = "check",
-)
-
 # TODO: This is only here in order to workaround a bug in the way bazel resolves
 # workspace imports when in nested repositories, and can be removed once that is fixed.
-ts_library(
-    name = "modules-fix",
-    srcs = [],
-    module_name = "@oswee",
-)
-
-# filegroup(
-#     name = "node_modules",
-#     srcs = glob([
-#         "node_modules/@bazel/**",
-#         "node_modules/@types/**",
-#         "node_modules/typescript/**",
-#         "node_modules/tsutils/**",
-#         "node_modules/tslib/**",
-#         "node_modules/long/**",
-#         "node_modules/protobufjs/**",
-#         "node_modules/bytebuffer/**",
-#         "node_modules/rollup-plugin-commonjs/**",
-#     ]),
+# ts_library(
+#     name = "modules-fix",
+#     srcs = [],
+#     module_name = "@oswee",
 # )
-
-k8s_object(
-    name = "namespace",
-    cluster = "minikube",
-    template = "k8s/namespace.yaml",
-    visibility = ["//visibility:public"],
-)
-
-k8s_object(
-    name = "secret",
-    cluster = "minikube",
-    template = "k8s/secret.yaml",
-    visibility = ["//visibility:public"],
-)
-
-k8s_object(
-    name = "registry-key-secret",
-    cluster = "minikube",
-    template = "k8s/registry-key-secret.yaml",
-    visibility = ["//visibility:public"],
-)
-
-k8s_objects(
-    name = "all",
-    objects = [
-        ":namespace",
-        ":secret",
-        ":registry-key-secret",
-    ],
-)
-
-k8s_deploy(
-    name = "dev",
-    images = {
-        "server:latest": "//oswee/gateway:server",
-    },
-    template = "k8s/deployment.yaml",
-)
