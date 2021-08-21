@@ -1,0 +1,18 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_library")
+
+go_library(
+    name = "server",
+    srcs = [
+        "handlers.go",
+        "routes.go",
+        "server.go",
+    ],
+    importpath = "github.com/oswee/prime/pkg/server",
+    visibility = ["//visibility:public"],
+    deps = [
+        "@com_github_dzintars_bazel//pkg/logger:go_default_library",
+        "@com_github_dzintars_bazel//pkg/middleware:go_default_library",
+        "@com_github_gorilla_mux//:mux",
+        "@com_github_lpar_gzipped//:go_default_library",
+    ],
+)

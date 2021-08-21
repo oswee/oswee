@@ -20,7 +20,7 @@ go_proto_library(
 )
 
 go_library(
-    name = "go_default_library",
+    name = "modules",
     embed = [":modules_go_proto"],
     importpath = "github.com/oswee/prime/protobuf/oswee/modules/v1",
     visibility = ["//visibility:public"],

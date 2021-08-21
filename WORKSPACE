@@ -7,6 +7,7 @@ workspace(
 )
 
 load("@bazel_tools//tools/build_defs/repo:http.bzl", "http_archive")
+load("//defs:config.bzl", "NODEJS_SHA256", "NODEJS_VERSION", "RULES_NODEJS_SHA256", "RULES_NODEJS_VERSION", "RULES_SASS_SHA256", "RULES_SASS_VERSION", "YARN_SHA256", "YARN_VERSION")
 
 # Skylib{{{
 # ==============================================
@@ -41,16 +42,6 @@ http_archive(
     ],
 )
 
-load("@io_bazel_rules_go//go:deps.bzl", "go_register_toolchains", "go_rules_dependencies")
-
-go_rules_dependencies()
-
-go_register_toolchains(version = "1.16.5")
-# }}}
-
-# Gazelle{{{
-# ==============================================
-
 http_archive(
     name = "bazel_gazelle",
     sha256 = "62ca106be173579c0a167deb23358fdfe71ffa1e4cfdddf5582af26520f1c66f",
@@ -61,32 +52,22 @@ http_archive(
 )
 
 load("@bazel_gazelle//:deps.bzl", "gazelle_dependencies")
+# load("@io_bazel_rules_go//extras:embed_data_deps.bzl", "go_embed_data_dependencies")
+load("@io_bazel_rules_go//go:deps.bzl", "go_register_toolchains", "go_rules_dependencies")
+
+go_rules_dependencies()
+
+go_register_toolchains(version = "1.16.6")
 
 gazelle_dependencies()
 
-load("//:repositories.bzl", "go_repositories")
+load("//:deps.bzl", "go_dependencies")
 
-# gazelle:repository_macro repositories.bzl%go_repositories
-go_repositories()
+# gazelle:repository_macro deps.bzl%go_dependencies
+go_dependencies()
 
-load("@io_bazel_rules_go//extras:embed_data_deps.bzl", "go_embed_data_dependencies")
-
-go_embed_data_dependencies()
+# go_embed_data_dependencies()
 # }}}
-
-# Waz iz zas TODO{{{
-# ==============================================
-
-# # Bazel toolchain needed for remote execution
-# BAZEL_TOOLCHAIN_VERSION = "3.5.0"
-# BAZEL_TOOLCHAIN_SHA256 = "89a053218639b1c5e3589a859bb310e0a402dedbe4ee369560e66026ae5ef1f2"
-
-load("@com_github_bazelbuild_buildtools//buildifier:deps.bzl", "buildifier_dependencies")
-
-buildifier_dependencies()
-
-go_register_toolchains(nogo = "@io_bazel_rules_go//:tools_nogo")
-#}}}
 
 # Rules Docker{{{
 # ==============================================
@@ -117,8 +98,6 @@ load("@io_bazel_rules_docker//repositories:deps.bzl", container_deps = "deps")
 
 container_deps()
 
-# load("@io_bazel_rules_docker//repositories:pip_repositories.bzl", "pip_deps")
-# pip_deps()
 # }}}
 
 # Rules Kubernetes{{{
@@ -214,24 +193,32 @@ http_archive(
 )
 # }}}
 
+# Waz iz zas TODO{{{
+# ==============================================
+
+# # Bazel toolchain needed for remote execution
+# BAZEL_TOOLCHAIN_VERSION = "3.5.0"
+# BAZEL_TOOLCHAIN_SHA256 = "89a053218639b1c5e3589a859bb310e0a402dedbe4ee369560e66026ae5ef1f2"
+# http_archive(
+#     name = "bazel_toolchains",
+#     sha256 = BAZEL_TOOLCHAIN_SHA256,
+#     strip_prefix = "bazel-toolchains-%s" % BAZEL_TOOLCHAIN_VERSION,
+#     urls = [
+#         "https://mirror.bazel.build/github.com/bazelbuild/bazel-toolchains/releases/download/%s/bazel-toolchains-%s.tar.gz" % (BAZEL_TOOLCHAIN_VERSION, BAZEL_TOOLCHAIN_VERSION),
+#         "https://github.com/bazelbuild/bazel-toolchains/releases/download/%s/bazel-toolchains-%s.tar.gz" % (BAZEL_TOOLCHAIN_VERSION, BAZEL_TOOLCHAIN_VERSION),
+#     ],
+# )
+
+load("@com_github_bazelbuild_buildtools//buildifier:deps.bzl", "buildifier_dependencies")
+
+buildifier_dependencies()
+
+go_register_toolchains(nogo = "@io_bazel_rules_go//:tools_nogo")
+#}}}
+
 # Rules NodeJS{{{
 # ==============================================
 
-NODEJS_VERSION = "16.4.1"
-
-NODEJS_SHA256 = "3c73b58051a4435d605f9842e582a252e100d5ff62e0a30e3961cab71e8477b1"
-
-YARN_VERSION = "1.22.10"
-
-YARN_SHA256 = "7e433d4a77e2c79e6a7ae4866782608a8e8bcad3ec6783580577c59538381a6e"
-
-# The nodejs rules
-RULES_NODEJS_VERSION = "3.7.0"
-
-RULES_NODEJS_SHA256 = "8f5f192ba02319254aaf2cdcca00ec12eaafeb979a80a1e946773c520ae0a2c9"
-
-# NOTE: this rule installs nodejs, npm, and yarn, but does NOT install
-# your npm dependencies. You must still run the package manager.
 http_archive(
     name = "build_bazel_rules_nodejs",
     sha256 = RULES_NODEJS_SHA256,
@@ -288,10 +275,10 @@ yarn_install(
 
 yarn_install(
     name = "npm1",
-    # always_hide_bazel_files = True,
-    # symlink_node_modules = True,
     package_json = "//platform/web/prime:package.json",
     yarn_lock = "//platform/web/prime:yarn.lock",
+    # always_hide_bazel_files = True,
+    # symlink_node_modules = True,
 )
 # }}}
 
@@ -329,10 +316,6 @@ rules_typescript_proto_dependencies()
 
 # Rules SASS{{{
 # ==============================================
-
-RULES_SASS_VERSION = "1.35.1"
-
-RULES_SASS_SHA256 = "86f734253cb2480acab150f37eb6c5952f33ed463182f77eedf2e41ba2fe2e8f"
 
 http_archive(
     name = "io_bazel_rules_sass",

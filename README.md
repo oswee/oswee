@@ -82,7 +82,7 @@ UPDATE: These instructions most likely is broken ATM
 
 Check the `package.json#scripts` for the available commands.
 
-Generate BUILD rules for Go: `yarn bazel run //:gazelle`
+Generate BUILD rules for Go: `yarn run gazelle`
 
 Build everything: `yarn bazel build '...'`
 

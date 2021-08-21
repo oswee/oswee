@@ -39,8 +39,8 @@ def _impl(ctx):
 css_typings = rule(
     implementation = _impl,
     attrs = {
-        "srcs": attr.label_list(doc = "css files", allow_files = [".css"]),
         "packages": attr.string_list(),
+        "srcs": attr.label_list(doc = "css files", allow_files = [".css"]),
         "_tool": attr.label(
             executable = True,
             cfg = "host",
