@@ -3,10 +3,20 @@ load("@io_bazel_rules_go//go:def.bzl", "go_binary", "go_library")
 load("@io_bazel_rules_k8s//k8s:object.bzl", "k8s_object")
 load("@io_bazel_rules_k8s//k8s:objects.bzl", "k8s_objects")
 load("@k8s_deploy//:defaults.bzl", "k8s_deploy")
+load("@io_bazel_rules_docker//container:container.bzl", "container_image")
+
+go_library(
+    name = "server_lib",
+    srcs = ["main.go"],
+    importpath = "github.com/oswee/prime/oswee/server",
+    visibility = ["//visibility:private"],
+)
 
 go_binary(
     name = "binary",
-    srcs = ["main.go"],
+    embed = [":server_lib"],
+    pure = "on",
+    visibility = ["//visibility:private"],
 )
 
 go_image(
@@ -19,6 +29,21 @@ go_image(
     importpath = "github.com/oswee/prime/oswee/server",
     pure = "on",
     deps = [],
+)
+
+container_image(
+    name = "image",
+    base = "@alpine_linux_amd64//image",
+    files = [
+      ":binary",
+      "index.html",
+      "favicon.ico",
+      "manifest.json",
+      "styles.css",
+    ],
+    entrypoint = ["/binary"],
+    ports = [":9443"],
+    volumes = ["/data"],
 )
 
 k8s_object(
@@ -51,9 +76,3 @@ k8s_objects(
     ],
 )
 
-go_library(
-    name = "server_lib",
-    srcs = ["main.go"],
-    importpath = "github.com/oswee/prime/oswee/server",
-    visibility = ["//visibility:private"],
-)

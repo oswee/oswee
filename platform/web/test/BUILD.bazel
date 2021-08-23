@@ -2,6 +2,30 @@ load("//tools:ts_library.bzl", "ts_library")
 
 package(default_visibility = ["//visibility:public"])
 
+filegroup(
+    name = "src",
+    srcs = glob([
+        "favicon.ico",
+        "index.html",
+        "index.ts",
+        "manifest.json",
+        "style.css",
+    ]),
+    visibility = ["//visibility:public"],
+)
+
+exports_files(
+    [
+      "favicon.ico",
+      "index.html",
+      "index.ts",
+      "manifest.json",
+      "style.css",
+      "manifest.json",
+    ],
+    visibility = ["//visibility:public"],
+)
+
 ts_library(
     name = "src",
     srcs = glob(

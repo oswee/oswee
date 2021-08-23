@@ -1,9 +1,8 @@
-# Prime
+# [WIP] Prime
 
 This is sandbox monorepository to test Bazel in action
 
-[![GitHub
-@dzintars](https://img.shields.io/github/followers/dzintars?label=follow&style=social)](https://github.com/dzintars)
+[![GitHub@dzintars](https://img.shields.io/github/followers/dzintars?label=follow&style=social)](https://github.com/dzintars)
 
 [![Golang](https://img.shields.io/badge/-Golang-blue?style=flat-square&logo=go&logoColor=white)](https://golang.org/)
 [![Typescript](https://img.shields.io/badge/-Typescript-blue?style=flat-square&logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
@@ -65,8 +64,8 @@ Critical requirements:
 Recommended requirements:
 
 - TLS certificates should be valid and configured in the DNS/Proxy
-- Github Personal Access `GITHUB_NPM_PAT` env. variable/token should be added to the `~/.zshenv` to be able to read and
-  write private/public NPM packages.
+- ~~Github Personal Access `GITHUB_NPM_PAT` env. variable/token should be added to the `~/.zshenv` to be able to read and
+  write private/public NPM packages~~
 - Quay image registry for `rules_k8s` to publish image artifacts (can be used Minikubes built-in registry)
 - Minikube for local development
 - /etc/hosts DNS entries
@@ -98,3 +97,5 @@ Run Bazel in watch mode: `yarn ibazel run //platform/web:devserver`
 
 - You [should not](https://github.com/bazelbuild/rules_go#can-i-still-use-the-go-command) run `go` tool from this repository.
   All Go and Protobuf dependencies should be handled by Gazelle.
+  All Go and Protobuf dependencies should be handled by Gazelle. All Go and Protobuf dependencies should be handled by Gazelle.
+  Gazelle.All Go and Protobuf dependencies should be handled by Gazelle. All Go and Protobuf dependencies should be handled by Gazelle.
