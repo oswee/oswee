@@ -10,7 +10,7 @@ import (
 
 func main() {
 	port := flag.String("p", ":9443", "port to serve on")
-	directory := flag.String("d", "/home/dzintars/test-data", "the directory of static file to host")
+	directory := flag.String("d", ".", "the directory of static file to host")
 	flag.Parse()
 
 	http.Handle("/", http.FileServer(http.Dir(*directory)))
@@ -44,8 +44,8 @@ func main() {
 	log.Printf("Serving %s on HTTP port: %s\n", *directory, srv.Addr)
 
 	err := srv.ListenAndServeTLS(
-		"/home/dzintars/.tls/oswee.com/fullchain.pem",
-		"/home/dzintars/.tls/oswee.com/privkey.pem",
+		"/data/fullchain.pem",
+		"/data/privkey.pem",
 	)
 
 	if err != nil {
