@@ -7,7 +7,13 @@ workspace(
 )
 
 load("@bazel_tools//tools/build_defs/repo:http.bzl", "http_archive")
-load("//defs:config.bzl", "NODEJS_SHA256", "NODEJS_VERSION", "RULES_NODEJS_SHA256", "RULES_NODEJS_VERSION", "RULES_SASS_SHA256", "RULES_SASS_VERSION", "YARN_SHA256", "YARN_VERSION")
+load("//defs:config.bzl",
+  "NODEJS_SHA256", "NODEJS_VERSION",
+  "RULES_NODEJS_SHA256", "RULES_NODEJS_VERSION",
+  "RULES_SASS_SHA256", "RULES_SASS_VERSION",
+  "YARN_SHA256", "YARN_VERSION",
+  "CONTAINER_REGISTRY",
+)
 
 # Skylib{{{
 # ----------------------------------------------

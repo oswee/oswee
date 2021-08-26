@@ -45,21 +45,24 @@ spec:
         - mountPath: /var/lib/redis/data:Z
           name: redis-data
 
-    # - name: registry
-    #   image: quay.io/projectquay/quay:latest
-    #   ports:
-    #     - containerPort: 8080
-    #       hostPort: 9981
-    #       protocol: TCP
-    #   securityContext:
-    #     allowPrivilegeEscalation: false
-    #     # privileged: true
-    #     readOnlyRootFilesystem: false
-    #   volumeMounts:
-    #     - mountPath: /conf/stack:Z
-    #       name: quay-config
-    #     - mountPath: /datastorage:Z
-    #       name: quay-storage
+    - name: registry
+      image: quay.io/projectquay/quay:latest
+      ports:
+        - containerPort: 8080
+          hostPort: 9981
+          protocol: TCP
+        - containerPort: 8443
+          hostPort: 8443
+          protocol: TCP
+      securityContext:
+        allowPrivilegeEscalation: false
+        # privileged: true
+        readOnlyRootFilesystem: false
+      volumeMounts:
+        - mountPath: /quay-registry/conf/stack:Z
+          name: quay-config
+        - mountPath: /datastorage:Z
+          name: quay-storage
 
   volumes:
     - name: postgres-data

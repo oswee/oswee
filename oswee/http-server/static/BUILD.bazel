@@ -1,0 +1,10 @@
+filegroup(
+    name = "static",
+    srcs = [
+      "src/index.html",
+      "src/favicon.ico",
+      "src/manifest.json",
+      "src/styles.css",
+    ],
+    visibility = ["//visibility:public"],
+)

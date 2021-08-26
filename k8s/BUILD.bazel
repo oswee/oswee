@@ -14,9 +14,21 @@ k8s_object(
 )
 
 k8s_object(
-    name = "registry-key-secret",
+    name = "registry_key_secret",
     cluster = "minikube",
     template = "src/registry-key-secret.yaml",
+)
+
+k8s_object(
+    name = "persistent_volume",
+    cluster = "minikube",
+    template = "src/pv.yaml",
+)
+
+k8s_object(
+    name = "metallb_config_map",
+    cluster = "minikube",
+    template = "src/metallb-config-map.yaml",
 )
 
 k8s_objects(
@@ -24,7 +36,9 @@ k8s_objects(
     objects = [
         ":namespace",
         ":secret",
-        ":registry-key-secret",
+        ":registry_key_secret",
+        ":persistent_volume",
+        ":metallb_config_map",
     ],
     visibility = ["//visibility:public"],
 )

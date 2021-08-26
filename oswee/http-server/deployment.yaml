@@ -1,0 +1,27 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: http-server
+  namespace: prime
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: http-server
+  template:
+    metadata:
+      labels:
+        app: http-server
+    spec:
+      imagePullSecrets:
+        - name: my-registry-key
+      containers:
+        - name: http-server
+          image: http-server:dzintars
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 80
+          args:
+            - '-d=/'
+            - '-p=80'

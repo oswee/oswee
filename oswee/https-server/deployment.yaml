@@ -1,3 +1,4 @@
+---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -24,6 +25,8 @@ spec:
           volumeMounts:
             - mountPath: '/data'
               name: my-pv-storage
+            - mountPath: '/tls'
+              name: tls
           args:
             - '-d=/data'
             - '-p=443'
@@ -31,18 +34,6 @@ spec:
         - name: my-pv-storage
           persistentVolumeClaim:
             claimName: my-pv-claim
-
-# /var/lib/containers/storage/volumes/minikube/_data/hostpath-provisioner/prime/my-pv-claim/test.txt
----
-apiVersion: v1
-kind: Service
-metadata:
-  name: web-server
-  namespace: prime
-spec:
-  selector:
-    app: web-server
-  ports:
-    - protocol: TCP
-      port: 443
-      targetPort: 443
+        - name: tls
+          secret:
+            secretName: my-tls-secret
