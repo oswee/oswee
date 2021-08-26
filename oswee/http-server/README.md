@@ -11,8 +11,8 @@ Requirements
 - Get the External IP of istioingress `kubectl get svc -n istio-system istio-ingressgateway`
 - Add that addrress to the `sudo vim /etc/hosts` like `192.168.100.210 server.apps.ocp.oswee.com`
 - Create the namespace `yarn bazel run //k8s:all.apply`
-  ~~- Obtain TLS Certificate. I am using the real one, so it is not listed in the source files~~
-  ~~- Manually create TLS Secret `kubectl create secret tls my-tls-secret --namespace prime --key ~/.tls/oswee.com/privkey.pem --cert ~/.tls/oswee.com/cert.pem`~~
+- ~~Obtain TLS Certificate. I am using the real one, so it is not listed in the source files~~
+- ~~Manually create TLS Secret `kubectl create secret tls my-tls-secret --namespace prime --key ~/.tls/oswee.com/privkey.pem --cert ~/.tls/oswee.com/cert.pem`~~
 - Run the deployment `yarn bazel run //oswee/http-server:all.apply`
 - Forward the Kiali port `kubectl port-forward svc/kiali -n istio-system 20001:20001 &`
 - Run the Kubernetes dashboard `minikube dashboard`
