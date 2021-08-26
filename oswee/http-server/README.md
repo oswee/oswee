@@ -45,4 +45,3 @@ Things to keep in mind:
   Not sure which is the right way. I think one of the goals of Envoy was to simplify TLS distribution so that developers do not need to inject certs int their code.
   Not sure. Could be totally wrong. Also there are thing like Spiffe, which tries to automate application and k8s node attestation. Term - Zerro Trust. Basically this
   requires a lot of research.
-  requires a lot of research.requires a lot of research.
