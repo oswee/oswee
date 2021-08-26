@@ -4,9 +4,10 @@ This is sandbox monorepository to test Bazel in action
 
 [![GitHub@dzintars](https://img.shields.io/github/followers/dzintars?label=follow&style=social)](https://github.com/dzintars)
 
+[![Bazel](https://img.shields.io/badge/-Bazel-419B45?style=flat&logo=data:image/svg%2bxml;base64,PHN2ZyB3aWR0aD0iNDQ4IiBoZWlnaHQ9IjQ0OCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cGF0aCBkPSJNLjcwNyAxMTJMMTEyIC43MDcgMjIzLjI5MyAxMTIgMTEyIDIyMy4yOTMuNzA3IDExMnpNMTExLjUgMzM0Ljc5M2wtMTExLTExMVYxMTMuMjA3bDExMSAxMTF2MTEwLjU4NnpNMjI0LjcwNyAxMTJMMzM2IC43MDcgNDQ3LjI5MyAxMTIgMzM2IDIyMy4yOTMgMjI0LjcwNyAxMTJ6TTMzNi41IDIyNC4yMDdsMTExLTExMXYxMTAuNTg2bC0xMTEgMTExVjIyNC4yMDd6TTExMi43MDcgMjI0TDIyNCAxMTIuNzA3IDMzNS4yOTMgMjI0IDIyNCAzMzUuMjkzIDExMi43MDcgMjI0ek0xMTIuNSAyMjUuMjA3bDExMSAxMTF2MTEwLjU4NmwtMTExLTExMVYyMjUuMjA3ek0yMjQuNSA0NDYuNzkzVjMzNi4yMDdsMTExLTExMXYxMTAuNTg2bC0xMTEgMTExeiIgZmlsbD0iI2ZmZiIgc3Ryb2tlPSIjNDE5QjQ1Ii8%2BPC9zdmc%2B)](https://bazel.build/)
+[![Kubernetes](https://img.shields.io/badge/-Kubernetes-316CE6?style=flat-square&logo=kubernetes&logoColor=white)](https://kubernetes.io)
 [![Golang](https://img.shields.io/badge/-Golang-blue?style=flat-square&logo=go&logoColor=white)](https://golang.org/)
 [![Typescript](https://img.shields.io/badge/-Typescript-blue?style=flat-square&logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
-[![bazel](https://img.shields.io/badge/build%20with-bazel-43A047.svg)](https://bazel.build/)
 
 ## Project status
 
@@ -97,5 +98,3 @@ Run Bazel in watch mode: `yarn ibazel run //platform/web:devserver`
 
 - You [should not](https://github.com/bazelbuild/rules_go#can-i-still-use-the-go-command) run `go` tool from this repository.
   All Go and Protobuf dependencies should be handled by Gazelle.
-  All Go and Protobuf dependencies should be handled by Gazelle. All Go and Protobuf dependencies should be handled by Gazelle.
-  Gazelle.All Go and Protobuf dependencies should be handled by Gazelle. All Go and Protobuf dependencies should be handled by Gazelle.

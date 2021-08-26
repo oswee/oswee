@@ -11,8 +11,8 @@ Requirements
 - Get the External IP of istioingress `kubectl get svc -n istio-system istio-ingressgateway`
 - Add that addrress to the `sudo vim /etc/hosts` like `192.168.100.210 server.apps.ocp.oswee.com`
 - Create the namespace `yarn bazel run //k8s:all.apply`
-  ~~- Obtain TLS Certificate. I am using the real one, so it is not listed in the source files~~
-  ~~- Manually create TLS Secret `kubectl create secret tls my-tls-secret --namespace prime --key ~/.tls/oswee.com/privkey.pem --cert ~/.tls/oswee.com/cert.pem`~~
+- ~~Obtain TLS Certificate. I am using the real one, so it is not listed in the source files~~
+- ~~Manually create TLS Secret `kubectl create secret tls my-tls-secret --namespace prime --key ~/.tls/oswee.com/privkey.pem --cert ~/.tls/oswee.com/cert.pem`~~
 - Run the deployment `yarn bazel run //oswee/http-server:all.apply`
 - Forward the Kiali port `kubectl port-forward svc/kiali -n istio-system 20001:20001 &`
 - Run the Kubernetes dashboard `minikube dashboard`
@@ -45,4 +45,3 @@ Things to keep in mind:
   Not sure which is the right way. I think one of the goals of Envoy was to simplify TLS distribution so that developers do not need to inject certs int their code.
   Not sure. Could be totally wrong. Also there are thing like Spiffe, which tries to automate application and k8s node attestation. Term - Zerro Trust. Basically this
   requires a lot of research.
-  requires a lot of research.requires a lot of research.
