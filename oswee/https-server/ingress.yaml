@@ -1,0 +1,23 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: webserver-ingress
+  namespace: prime
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /$1
+spec:
+  tls:
+    - hosts:
+        - server.apps.ocp.oswee.com
+      secretName: my-tls-secret
+  rules:
+    - host: server.apps.ocp.oswee.com
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: web-server-service
+                port:
+                  number: 443
