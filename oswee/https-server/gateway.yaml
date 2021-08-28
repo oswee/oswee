@@ -2,15 +2,26 @@
 apiVersion: networking.istio.io/v1alpha3
 kind: Gateway
 metadata:
-  name: web-server-gateway
+  name: http-server-gateway
   namespace: prime
 spec:
   selector:
     istio: ingressgateway
   servers:
     - port:
-        number: 443
-        name: https
-        protocol: TLS
+        number: 80
+        name: http
+        protocol: HTTP
       hosts:
-        - 'server.apps.ocp.oswee.com'
+        - server.apps.ocp.oswee.com
+      # tls:
+      #   httpRedirect: true
+    # - port:
+      #   number: 443
+      #   name: https-443
+      #   protocol: https
+      # hosts:
+      #   - server.apps.ocp.oswee.com
+      # tls:
+      #   mode: SIMPLE
+      #   credentialName: my-tls-secret

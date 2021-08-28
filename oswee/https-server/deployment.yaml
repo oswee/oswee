@@ -2,38 +2,26 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: web-server
+  name: http-server
   namespace: prime
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: web-server
+      app: http-server
   template:
     metadata:
       labels:
-        app: web-server
+        app: http-server
     spec:
       imagePullSecrets:
         - name: my-registry-key
       containers:
-        - name: hello-webserver
-          image: webserver:latest
+        - name: http-server
+          image: http-server:dzintars
           imagePullPolicy: Always
           ports:
-            - containerPort: 443
-          volumeMounts:
-            - mountPath: '/data'
-              name: my-pv-storage
-            - mountPath: '/tls'
-              name: tls
+            - containerPort: 80
           args:
-            - '-d=/data'
-            - '-p=443'
-      volumes:
-        - name: my-pv-storage
-          persistentVolumeClaim:
-            claimName: my-pv-claim
-        - name: tls
-          secret:
-            secretName: my-tls-secret
+            - '-d=/'
+            - '-p=80'
