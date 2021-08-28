@@ -9,7 +9,7 @@ load("//defs:config.bzl", "CONTAINER_REGISTRY")
 go_library(
     name = "server_lib",
     srcs = ["main.go"],
-    importpath = "github.com/oswee/prime/oswee/http-server",
+    importpath = "github.com/oswee/prime/oswee/https-server",
     visibility = ["//visibility:private"],
 )
 
@@ -27,7 +27,7 @@ go_image(
     ],
     goarch = "amd64",
     goos = "linux",
-    importpath = "github.com/oswee/prime/oswee/http-server",
+    importpath = "github.com/oswee/prime/oswee/https-server",
     pure = "on",
     deps = [],
 )
@@ -38,7 +38,7 @@ container_image(
     # Files are coppied at the / and so should be served from there.
     files = [
       ":binary",
-      "//oswee/http-server/static:static",
+      "//oswee/https-server/static:static",
     ],
     entrypoint = ["/binary"],
     ports = [":80"],
@@ -49,7 +49,7 @@ container_push(
     format = "Docker",
     image = ":container_image",
     registry = CONTAINER_REGISTRY,
-    repository = "oswee/http-server",
+    repository = "oswee/https-server",
     tag = "{BUILD_USER}",
 )
 
@@ -74,7 +74,7 @@ k8s_object(
 k8s_deploy(
     name = "deployment",
     images = {
-        "http-server:dzintars": ":container_image",
+        "https-server:dzintars": ":container_image",
     },
     template = ":deployment.yaml",
 )
