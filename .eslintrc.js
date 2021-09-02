@@ -39,5 +39,5 @@ module.exports = {
     '@typescript-eslint/explicit-module-boundary-types': 'off',
     '@typescript-eslint/no-var-requires': 'off',
   },
-  overrides: [{files: ['*.spec.ts'], globals: {chai: 'readonly'}}],
-};
+  overrides: [{ files: ['*.spec.ts'], globals: { chai: 'readonly' } }],
+}
