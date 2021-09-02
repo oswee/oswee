@@ -1,15 +1,15 @@
+load("@io_bazel_rules_docker//container:container.bzl", "container_image", "container_push")
 load("@io_bazel_rules_docker//go:image.bzl", "go_image")
 load("@io_bazel_rules_go//go:def.bzl", "go_binary", "go_library")
 load("@io_bazel_rules_k8s//k8s:object.bzl", "k8s_object")
 load("@io_bazel_rules_k8s//k8s:objects.bzl", "k8s_objects")
 load("@k8s_deploy//:defaults.bzl", "k8s_deploy")
-load("@io_bazel_rules_docker//container:container.bzl", "container_image", "container_push")
 load("//defs:config.bzl", "CONTAINER_REGISTRY")
 
 go_library(
     name = "server_lib",
     srcs = ["main.go"],
-    importpath = "github.com/oswee/prime/oswee/server",
+    importpath = "github.com/oswee/prime/oswee/https-server",
     visibility = ["//visibility:private"],
 )
 
@@ -27,7 +27,7 @@ go_image(
     ],
     goarch = "amd64",
     goos = "linux",
-    importpath = "github.com/oswee/prime/oswee/server",
+    importpath = "github.com/oswee/prime/oswee/https-server",
     pure = "on",
     deps = [],
 )
@@ -35,16 +35,14 @@ go_image(
 container_image(
     name = "container_image",
     base = ":go_image_base",
-    files = [
-      ":binary",
-      "index.html",
-      "favicon.ico",
-      "manifest.json",
-      "styles.css",
-    ],
     entrypoint = ["/binary"],
-    ports = [":443"],
-    volumes = ["/data"],
+    # Files are coppied at the / and so should be served from there.
+    files = [
+        ":binary",
+        "//platform/web/prime:prime.js",
+        "//oswee/https-server/static",
+    ],
+    ports = [":80"],
 )
 
 container_push(
@@ -52,14 +50,8 @@ container_push(
     format = "Docker",
     image = ":container_image",
     registry = CONTAINER_REGISTRY,
-    repository = "oswee/server",
+    repository = "oswee/https-server",
     tag = "{BUILD_USER}",
-)
-
-k8s_object(
-    name = "pvc",
-    cluster = "minikube",
-    template = "pvc.yaml",
 )
 
 k8s_object(
@@ -80,16 +72,10 @@ k8s_object(
     template = "service.yaml",
 )
 
-k8s_object(
-    name = "ingress",
-    cluster = "minikube",
-    template = "ingress.yaml",
-)
-
 k8s_deploy(
     name = "deployment",
     images = {
-        "webserver:latest": ":container_image",
+        "https-server:dzintars": ":container_image",
     },
     template = ":deployment.yaml",
 )
@@ -97,10 +83,9 @@ k8s_deploy(
 k8s_objects(
     name = "all",
     objects = [
-        ":pvc",
-        # ":service",
-        # ":ingress",
         ":deployment",
+        ":service",
+        ":virtual_service",
+        ":gateway",
     ],
 )
-

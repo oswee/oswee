@@ -2,7 +2,7 @@
 apiVersion: networking.istio.io/v1alpha3
 kind: Gateway
 metadata:
-  name: web-server-gateway
+  name: https-server-gateway
   namespace: prime
 spec:
   selector:
@@ -11,6 +11,9 @@ spec:
     - port:
         number: 443
         name: https
-        protocol: TLS
+        protocol: HTTPS
+      tls:
+        mode: SIMPLE
+        credentialName: httpbin-credential
       hosts:
-        - 'server.apps.ocp.oswee.com'
+        - server.apps.ocp.oswee.com

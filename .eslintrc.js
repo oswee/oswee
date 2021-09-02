@@ -35,8 +35,9 @@ module.exports = {
     // '@typescript-eslint/camelcase': 'off',
     // '@typescript-eslint/array-type': 'off',
     // '@typescript-eslint/no-object-literal-type-assertion': 'off',
+    '@typescript-eslint/no-unused-vars': 'error',
     '@typescript-eslint/explicit-module-boundary-types': 'off',
     '@typescript-eslint/no-var-requires': 'off',
   },
-  overrides: [{files: ['*.spec.ts'], globals: {chai: 'readonly'}}],
-};
+  overrides: [{ files: ['*.spec.ts'], globals: { chai: 'readonly' } }],
+}

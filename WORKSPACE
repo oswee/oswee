@@ -6,13 +6,19 @@ workspace(
     },
 )
 
+# buildifier: disable=load-on-top
 load("@bazel_tools//tools/build_defs/repo:http.bzl", "http_archive")
-load("//defs:config.bzl",
-  "NODEJS_SHA256", "NODEJS_VERSION",
-  "RULES_NODEJS_SHA256", "RULES_NODEJS_VERSION",
-  "RULES_SASS_SHA256", "RULES_SASS_VERSION",
-  "YARN_SHA256", "YARN_VERSION",
-  "CONTAINER_REGISTRY",
+load(
+    "//defs:config.bzl",
+    "CONTAINER_REGISTRY",
+    "NODEJS_SHA256",
+    "NODEJS_VERSION",
+    "RULES_NODEJS_SHA256",
+    "RULES_NODEJS_VERSION",
+    "RULES_SASS_SHA256",
+    "RULES_SASS_VERSION",
+    "YARN_SHA256",
+    "YARN_VERSION",
 )
 
 # Skylib{{{
@@ -139,7 +145,7 @@ k8s_defaults(
     name = "k8s_object",
     cluster = _CLUSTER,
     context = _CONTEXT,
-    image_chroot = "registry.oswee.com/oswee",
+    image_chroot = CONTAINER_REGISTRY + "/oswee",
     namespace = _NAMESPACE,
 )
 
@@ -147,7 +153,7 @@ k8s_defaults(
     name = "k8s_deploy",
     cluster = _CLUSTER,
     context = _CONTEXT,
-    image_chroot = "registry.oswee.com/oswee",
+    image_chroot = CONTAINER_REGISTRY + "/oswee",
     kind = "deployment",
     namespace = _NAMESPACE,
 )

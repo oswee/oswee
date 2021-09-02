@@ -1,9 +1,5 @@
-import {
-  LitElement,
-  customElement,
-  TemplateResult,
-  CSSResultArray,
-} from 'lit-element'
+import { LitElement, TemplateResult, CSSResultArray } from 'lit'
+import { customElement } from 'lit/decorators.js'
 import template from './template'
 import style from './style'
 

@@ -9,7 +9,7 @@ import (
 )
 
 func main() {
-	port := flag.String("p", "443", "port to serve on")
+	port := flag.String("p", "80", "port to serve on")
 	directory := flag.String("d", ".", "the directory of static file to host")
 	flag.Parse()
 
@@ -43,20 +43,14 @@ func main() {
 
 	log.Printf("Serving %s on HTTP port: %s\n", *directory, srv.Addr)
 
-	err := srv.ListenAndServeTLS(
-		"/tls/tls.crt",
-		"/tls/tls.key",
-	)
+	err := srv.ListenAndServe()
+
+	// err := srv.ListenAndServeTLS(
+	// 	"/tls/tls.crt",
+	// 	"/tls/tls.key",
+	// )
 
 	if err != nil {
 		log.Fatalf("server failed to start: %v", err)
 	}
-}
-
-func healthHandler(w http.ResponseWriter, r *http.Request) {
-	w.WriteHeader(http.StatusOK)
-}
-
-func readinessHandler(w http.ResponseWriter, r *http.Request) {
-	w.WriteHeader(http.StatusOK)
 }

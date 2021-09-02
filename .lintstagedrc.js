@@ -1,8 +1,8 @@
 'use strict';
 
 module.exports = {
-  '*.{ts,html,md}': ['prettier --write'],
-  '*.ts': ['eslint --fix'],
+  '*.{ts,html,md}': ['npx --no-install prettier --write'],
+  '*.ts': ['eslint_d --fix'],
   // '.*{rc,.json}': ['jsonlint  --in-place'],
 }
 
