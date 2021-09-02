@@ -9,11 +9,7 @@ package(default_visibility = ["//visibility:public"])
 filegroup(
     name = "files",
     srcs = glob([
-        "favicon.ico",
-        "index.html",
-        "index.ts",
-        "manifest.json",
-        "style.css",
+        "./*",
     ]),
     visibility = ["//visibility:public"],
 )
