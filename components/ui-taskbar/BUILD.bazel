@@ -18,7 +18,7 @@ ts_library(
     module_root = "src",
     tsconfig = "tsconfig",
     deps = [
-        "@npm//lit-element",
+        "@npm//lit",
         "@npm//tslib",
     ],
 )

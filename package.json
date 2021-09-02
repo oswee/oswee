@@ -39,7 +39,6 @@
     "immer": "^9.0.5",
     "import-local": "^3.0.2",
     "lit": "^2.0.0-rc.2",
-    "lit-element": "^2.4.0",
     "query-string": "^7.0.1",
     "redux": "^4.1.0",
     "redux-devtools-extension": "^2.13.9",
