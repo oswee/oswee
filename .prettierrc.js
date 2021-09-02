@@ -12,8 +12,15 @@ module.exports = {
   overrides: [
     {
       files: ['.stylelintrc'],
-      options: { parser: 'json' },
+      options: {
+        parser: 'json',
+      },
     },
-    { files: '*.ts.lint', options: { parser: 'typescript' } },
+    {
+      files: '*.ts.lint',
+      options: {
+        parser: 'typescript',
+      },
+    },
   ],
 }
