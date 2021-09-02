@@ -1,0 +1,70 @@
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: quay
+  labels:
+    app: quay
+spec:
+  restartPolicy: Always
+  containers:
+    - name: postgres
+      image: docker.io/postgres:latest
+      env:
+        - name: POSTGRES_USER
+          value: quayuser
+        - name: POSTGRES_PASSWORD
+          value: quaypass
+        - name: POSTGRES_DB
+          value: quay
+      ports:
+        - containerPort: 5432
+          hostPort: 5432
+          protocol: TCP
+      securityContext:
+        allowPrivilegeEscalation: false
+        # privileged: true
+        readOnlyRootFilesystem: false
+      volumeMounts:
+        - mountPath: /var/lib/postgresql/data:Z
+          name: postgres-data
+
+    - name: redis
+      image: registry.redhat.io/rhel8/redis-5:1
+      env:
+        - name: REDIS_PASSWORD
+          value: strongpassword
+      ports:
+        - containerPort: 6379
+          hostPort: 6379
+          protocol: TCP
+      securityContext:
+        allowPrivilegeEscalation: false
+        # privileged: true
+        readOnlyRootFilesystem: false
+      volumeMounts:
+        - mountPath: /var/lib/redis/data:Z
+          name: redis-data
+
+    - name: config
+      image: quay.io/projectquay/quay:latest
+      ports:
+        - containerPort: 8080
+          hostPort: 9981
+          protocol: TCP
+        - containerPort: 8443
+          hostPort: 7443
+          protocol: TCP
+      args:
+        - 'config'
+        - 'secret'
+
+  volumes:
+    - name: postgres-data
+      hostPath:
+        path: /home/dzintars/containers/github.com/dzintars/prime/volumes/postgres/data
+        type: Directory
+    - name: redis-data
+      hostPath:
+        path: /home/dzintars/containers/github.com/dzintars/prime/volumes/redis/data
+        type: Directory
