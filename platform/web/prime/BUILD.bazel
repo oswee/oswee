@@ -1,3 +1,7 @@
+"""
+test
+"""
+
 load("@build_bazel_rules_nodejs//:index.bzl", "nodejs_binary")
 load("@npm//@bazel/typescript:index.bzl", "ts_config")
 load("@npm//webpack-dev-server:index.bzl", "webpack_dev_server")
