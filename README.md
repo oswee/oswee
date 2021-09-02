@@ -93,6 +93,10 @@ Run some binary with flags: `yarn bazel run //oswee/gateway:gateway -- -a :9090`
 
 Run Bazel in watch mode: `yarn ibazel run //platform/web:devserver`
 
+### Potential issues
+
+- If the `yarn bazel run......` stuck, check the Image Registry is is fully functional
+
 ## DONT's
 
 - You [should not](https://github.com/bazelbuild/rules_go#can-i-still-use-the-go-command) run `go` tool from this repository.
