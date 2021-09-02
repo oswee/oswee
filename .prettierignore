@@ -2,6 +2,7 @@ node_modules
 **/dist
 **/.vscode
 **/.yarn/
+bazel-*/
 
 # Ignore CHANGELOG.md files to avoid issues with automated release job
 CHANGELOG.md
