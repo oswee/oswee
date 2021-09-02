@@ -9,19 +9,11 @@ spec:
     istio: ingressgateway
   servers:
     - port:
-        number: 80
-        name: http
-        protocol: HTTP
+        number: 443
+        name: https
+        protocol: HTTPS
+      tls:
+        mode: SIMPLE
+        credentialName: httpbin-credential
       hosts:
         - server.apps.ocp.oswee.com
-      # tls:
-      #   httpRedirect: true
-    # - port:
-      #   number: 443
-      #   name: https-443
-      #   protocol: https
-      # hosts:
-      #   - server.apps.ocp.oswee.com
-      # tls:
-      #   mode: SIMPLE
-      #   credentialName: my-tls-secret

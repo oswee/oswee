@@ -19,9 +19,9 @@ spec:
       containers:
         - name: https-server
           image: https-server:dzintars
-          imagePullPolicy: Always
+          imagePullPolicy: Always  # Because i am not handling labeling
           ports:
-            - containerPort: 80
+            - containerPort: 8080
           args:
             - '-d=/'
-            - '-p=80'
+            - '-p=8080'

@@ -6,7 +6,7 @@ metadata:
   namespace: prime
 spec:
   hosts:
-    - server.apps.ocp.oswee.com
+    - 'server.apps.ocp.oswee.com'
   gateways:
     - https-server-gateway
   http:
@@ -15,6 +15,7 @@ spec:
             prefix: /
       route:
         - destination:
+            port:
+              number: 8000 # Port of the service
+            # host: https-server-service.prime.svc.cluster.local
             host: https-server-service
-            # port:
-            #   number: 80
