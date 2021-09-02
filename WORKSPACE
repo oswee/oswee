@@ -139,7 +139,7 @@ k8s_defaults(
     name = "k8s_object",
     cluster = _CLUSTER,
     context = _CONTEXT,
-    image_chroot = "registry.oswee.com/oswee",
+    image_chroot = CONTAINER_REGISTRY + "/oswee",
     namespace = _NAMESPACE,
 )
 
@@ -147,7 +147,7 @@ k8s_defaults(
     name = "k8s_deploy",
     cluster = _CLUSTER,
     context = _CONTEXT,
-    image_chroot = "registry.oswee.com/oswee",
+    image_chroot = CONTAINER_REGISTRY + "/oswee",
     kind = "deployment",
     namespace = _NAMESPACE,
 )
