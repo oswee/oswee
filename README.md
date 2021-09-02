@@ -70,6 +70,14 @@ Recommended requirements:
 - Minikube for local development
 - /etc/hosts DNS entries
 
+### Minikube
+
+- Install Minikube
+- Enable Metallb
+- Install Istio
+- Install Istio extensions `kubectl apply -f ~/istio-1.11.1/samples/addons`
+- Remove the Zipkin because Jaeger will be used `kubectl delete -f ~/istio-1.11.1/samples/addons/extras/zipkin.yaml`
+
 ### Other relevant things
 
 I have HAProxy configured at the edge which does the A+ perimeter security with valid TLS certificates.
