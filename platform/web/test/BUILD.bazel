@@ -20,12 +20,12 @@ filegroup(
 
 exports_files(
     [
-      "favicon.ico",
-      "index.html",
-      "index.ts",
-      "manifest.json",
-      "style.css",
-      "manifest.json",
+        "favicon.ico",
+        "index.html",
+        "index.ts",
+        "manifest.json",
+        "style.css",
+        "manifest.json",
     ],
     visibility = ["//visibility:public"],
 )
