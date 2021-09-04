@@ -324,9 +324,9 @@ node_repositories(
 # https://bazelbuild.github.io/rules_nodejs/repositories.html#npm
 yarn_install(
     name = "npm",  # Name this npm so that Bazel Label references look like @npm//package
+    yarn_lock = "//:yarn.lock",
     package_json = "//:package.json",
     symlink_node_modules = True,  # Expose installed packages for the IDE and the developer. See managed_directories.
-    yarn_lock = "//:yarn.lock",
 )
 # }}}
 
