@@ -136,7 +136,7 @@ container_pull(
 )
 # }}}
 
-# Rules Kubernetes{{{
+# Rules K8s{{{
 # ----------------------------------------------
 
 http_archive(
@@ -197,7 +197,7 @@ load("@io_bazel_rules_docker//go:image.bzl", _go_image_repos = "repositories")
 _go_image_repos()
 # }}}
 
-# Rules Protocol Buffers{{{
+# Rules Proto{{{
 # ----------------------------------------------
 
 http_archive(
@@ -331,7 +331,7 @@ yarn_install(
 )
 # }}}
 
-# Rules TypeScript Protocol Buffers{{{
+# Rules TypeScript Proto{{{
 # ----------------------------------------------
 
 http_archive(
