@@ -3,7 +3,7 @@ Prime Workspace
 """
 
 workspace(
-    name = "oswee",
+    name = "prime",
     managed_directories = {
         "@npm": ["node_modules"],
     },
