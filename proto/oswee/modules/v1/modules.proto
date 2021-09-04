@@ -2,7 +2,7 @@ syntax = "proto3";
 
 package oswee.module.v1;
 
-option go_package = "github.com/oswee/prime/protobuf/oswee/modules/v1;modules";
+option go_package = "github.com/oswee/prime/proto/oswee/modules/v1;modules";
 
 // import "google/protobuf/timestamp.proto";
 import "google/api/annotations.proto";

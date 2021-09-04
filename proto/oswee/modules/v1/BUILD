@@ -5,7 +5,7 @@ load("@rules_proto//proto:defs.bzl", "proto_library")
 proto_library(
     name = "modules_proto",
     srcs = ["modules.proto"],
-    strip_import_prefix = "/protobuf",
+    strip_import_prefix = "/proto",
     visibility = ["//visibility:public"],
     deps = ["@go_googleapis//google/api:annotations_proto"],
 )
@@ -13,7 +13,7 @@ proto_library(
 go_proto_library(
     name = "modules_go_proto",
     compilers = ["@io_bazel_rules_go//proto:go_grpc"],
-    importpath = "github.com/oswee/prime/protobuf/oswee/modules/v1",
+    importpath = "github.com/oswee/prime/proto/oswee/modules/v1",
     proto = ":modules_proto",
     visibility = ["//visibility:public"],
     deps = ["@go_googleapis//google/api:annotations_go_proto"],
@@ -22,6 +22,6 @@ go_proto_library(
 go_library(
     name = "modules",
     embed = [":modules_go_proto"],
-    importpath = "github.com/oswee/prime/protobuf/oswee/modules/v1",
+    importpath = "github.com/oswee/prime/proto/oswee/modules/v1",
     visibility = ["//visibility:public"],
 )
