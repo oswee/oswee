@@ -86,9 +86,10 @@ go_register_toolchains(version = "1.16.6")
 gazelle_dependencies()
 
 # buildifier: disable=load-on-top
-load("//:deps.bzl", "go_dependencies")
+load("//:repositories.bzl", "go_repositories")
 
-go_dependencies()
+# gazelle:repository_macro repositories.bzl%go_repositories
+go_repositories()
 # }}}
 
 # Rules Docker{{{
