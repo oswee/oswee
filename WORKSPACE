@@ -328,21 +328,6 @@ http_archive(
 load("@rules_typescript_proto//:index.bzl", "rules_typescript_proto_dependencies")
 
 rules_typescript_proto_dependencies()
-
-# Install all Bazel dependencies needed for npm packages that supply Bazel rules
-# Note, this will probably break in a future rules_nodejs release.
-# It causes all builds to fetch npm packages even if not needed (eg. only building go code)
-# load("@npm//:install_bazel_dependencies.bzl", "install_bazel_dependencies")
-# install_bazel_dependencies(suppress_warning = True)
-
-# load("@npm1//:install_bazel_dependencies.bzl", "install_bazel_dependencies")
-# install_bazel_dependencies(suppress_warning = True)
-
-# Setup TypeScript toolchain
-# load("@build_bazel_rules_typescript//:defs.bzl", "ts_setup_workspace")
-# load("@npm_bazel_typescript//:setup.bzl", "ts_setup_workspace")
-# load("@npm_bazel_typescript//:defs.bzl", "ts_setup_workspace")
-# ts_setup_workspace()
 # }}}
 
 # Rules SASS{{{
