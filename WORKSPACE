@@ -42,7 +42,7 @@ load("@bazel_skylib//lib:versions.bzl", "versions")
 versions.check(minimum_bazel_version = "4.1.0")
 #}}}
 
-# Go{{{
+# Rules Go{{{
 # ----------------------------------------------
 # Check the go_rules and Gazelle version compitability at https://github.com/bazelbuild/bazel-gazelle#id5
 
