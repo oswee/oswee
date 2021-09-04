@@ -26,7 +26,8 @@
       "@oswee/packages/*": ["packages/*/src"],
       "@oswee/platform/web/assets/*": ["platform/web/src/assets/*"],
       "@oswee/container/*": ["platform/web/src/ui/containers/*/src"],
-      "@oswee/feature/*": ["platform/web/src/store/src/lib/features/*/src"]
+      "@oswee/feature/*": ["platform/web/src/store/src/lib/features/*/src"],
+      "@oswee/proto/*": ["bazel-bin/proto/oswee/*"]
     },
     "plugins": [
       {
