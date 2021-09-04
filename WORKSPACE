@@ -1,3 +1,7 @@
+"""
+Prime Workspace
+"""
+
 workspace(
     name = "oswee",
     managed_directories = {
@@ -8,6 +12,7 @@ workspace(
 
 # buildifier: disable=load-on-top
 load("@bazel_tools//tools/build_defs/repo:http.bzl", "http_archive")
+# buildifier: disable=load-on-top
 load(
     "//defs:config.bzl",
     "CONTAINER_REGISTRY",
@@ -33,10 +38,12 @@ http_archive(
     ],
 )
 
+# buildifier: disable=load-on-top
 load("@bazel_skylib//:workspace.bzl", "bazel_skylib_workspace")
 
 bazel_skylib_workspace()
 
+# buildifier: disable=load-on-top
 load("@bazel_skylib//lib:versions.bzl", "versions")
 
 versions.check(minimum_bazel_version = "4.1.0")
@@ -44,7 +51,7 @@ versions.check(minimum_bazel_version = "4.1.0")
 
 # Rules Go{{{
 # ----------------------------------------------
-# Check the go_rules and Gazelle version compitability at https://github.com/bazelbuild/bazel-gazelle#id5
+# Check the go_rules and Gazelle version compatibility at https://github.com/bazelbuild/bazel-gazelle#id5
 
 http_archive(
     name = "io_bazel_rules_go",
@@ -64,7 +71,9 @@ http_archive(
     ],
 )
 
+# buildifier: disable=load-on-top
 load("@bazel_gazelle//:deps.bzl", "gazelle_dependencies")
+# buildifier: disable=load-on-top
 load("@io_bazel_rules_go//go:deps.bzl", "go_register_toolchains", "go_rules_dependencies")
 
 go_rules_dependencies()
@@ -73,6 +82,7 @@ go_register_toolchains(version = "1.16.6")
 
 gazelle_dependencies()
 
+# buildifier: disable=load-on-top
 load("//:deps.bzl", "go_dependencies")
 
 go_dependencies()
@@ -88,6 +98,7 @@ http_archive(
     urls = ["https://github.com/bazelbuild/rules_docker/releases/download/v0.17.0/rules_docker-v0.17.0.tar.gz"],
 )
 
+# buildifier: disable=load-on-top
 load("@io_bazel_rules_docker//toolchains/docker:toolchain.bzl", docker_toolchain_configure = "toolchain_configure")
 
 # Override the default docker toolchain configuration.
@@ -99,14 +110,18 @@ docker_toolchain_configure(
     docker_path = "/usr/bin/podman",
 )
 
+# buildifier: disable=load-on-top
 load("@io_bazel_rules_docker//repositories:repositories.bzl", container_repositories = "repositories")
 
+# buildifier: disable=load-on-top
 container_repositories()
 
+# buildifier: disable=load-on-top
 load("@io_bazel_rules_docker//repositories:deps.bzl", container_deps = "deps")
 
 container_deps()
 
+# buildifier: disable=load-on-top
 load("@io_bazel_rules_docker//container:container.bzl", "container_pull")
 
 container_pull(
@@ -127,10 +142,12 @@ http_archive(
     urls = ["https://github.com/bazelbuild/rules_k8s/archive/v0.6.tar.gz"],
 )
 
+# buildifier: disable=load-on-top
 load("@io_bazel_rules_k8s//k8s:k8s.bzl", "k8s_defaults", "k8s_repositories")
 
 k8s_repositories()
 
+# buildifier: disable=load-on-top
 load("@io_bazel_rules_k8s//k8s:k8s_go_deps.bzl", k8s_go_deps = "deps")
 
 k8s_go_deps()
@@ -170,6 +187,7 @@ k8s_defaults(
     "todo",
 ]]
 
+# buildifier: disable=load-on-top
 load("@io_bazel_rules_docker//go:image.bzl", _go_image_repos = "repositories")
 
 _go_image_repos()
@@ -198,12 +216,14 @@ http_archive(
     ],
 )
 
+# buildifier: disable=load-on-top
 load("@rules_proto//proto:repositories.bzl", "rules_proto_dependencies", "rules_proto_toolchains")
 
 rules_proto_dependencies()
 
 rules_proto_toolchains()
 
+# buildifier: disable=load-on-top
 load("@com_google_protobuf//:protobuf_deps.bzl", "protobuf_deps")
 
 protobuf_deps()
@@ -240,6 +260,7 @@ http_archive(
 #     ],
 # )
 
+# buildifier: disable=load-on-top
 load("@com_github_bazelbuild_buildtools//buildifier:deps.bzl", "buildifier_dependencies")
 
 buildifier_dependencies()
@@ -256,6 +277,7 @@ http_archive(
     url = "https://github.com/bazelbuild/rules_nodejs/releases/download/%s/rules_nodejs-%s.tar.gz" % (RULES_NODEJS_VERSION, RULES_NODEJS_VERSION),
 )
 
+# buildifier: disable=load-on-top
 load("@build_bazel_rules_nodejs//:index.bzl", "check_bazel_version", "node_repositories", "yarn_install")
 
 # The minimum bazel version to use with this repo is v4.1.0.
@@ -325,6 +347,7 @@ http_archive(
     ],
 )
 
+# buildifier: disable=load-on-top
 load("@rules_typescript_proto//:index.bzl", "rules_typescript_proto_dependencies")
 
 rules_typescript_proto_dependencies()
@@ -345,11 +368,13 @@ http_archive(
 
 # Fetch required transitive dependencies. This is an optional step because you
 # can always fetch the required NodeJS transitive dependency on your own.
+# buildifier: disable=load-on-top
 load("@io_bazel_rules_sass//:package.bzl", "rules_sass_dependencies")
 
 rules_sass_dependencies()
 
 # Setup the rules_sass toolchain
+# buildifier: disable=load-on-top
 load("@io_bazel_rules_sass//sass:sass_repositories.bzl", "sass_repositories")
 
 sass_repositories()
