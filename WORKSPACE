@@ -6,7 +6,6 @@ workspace(
     name = "oswee",
     managed_directories = {
         "@npm": ["node_modules"],
-        "@npm1": ["platform/web/prime/node_modules"],
     },
 )
 
@@ -328,14 +327,6 @@ yarn_install(
     package_json = "//:package.json",
     symlink_node_modules = True,  # Expose installed packages for the IDE and the developer. See managed_directories.
     yarn_lock = "//:yarn.lock",
-)
-
-yarn_install(
-    name = "npm1",
-    package_json = "//platform/web/prime:package.json",
-    yarn_lock = "//platform/web/prime:yarn.lock",
-    # always_hide_bazel_files = True,
-    # symlink_node_modules = True,
 )
 # }}}
 
