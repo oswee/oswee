@@ -1,9 +1,7 @@
 # PROJECT SPECIFIC STUFF
 # ----------------------------------------------------------------------
-
-dist/
-third_party/
-go.sum
+# This file is used for `git clean` script and all files listed there
+# will be deleted. BE CAREFULL!!!
 
 # YARN
 # ----------------------------------------------------------------------
@@ -30,15 +28,16 @@ build
 node_modules/
 bower_components/
 
-# IDE specific (Visual Studio Code)
-# .vscode
+# IDE specific
+.vscode
 .vimrc
 .nvimrc
 
 # Bazel
 bazel-*
-# .bazelrc
 bazel-explain.txt
+# Ignore generated files
+**/*.pb.go
 
 # Ignore npm/yarn debug log
 npm-debug.log
