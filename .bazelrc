@@ -1,3 +1,9 @@
+# Artifacts are typically placed in a directory called "dist"
+# Be aware that this setup will still create a bazel-out symlink in
+# your project directory, which you must exclude from version control and your
+# editor's search path.
+#build --symlink_prefix=dist/
+
 build --explain ./bazel-explain.txt
 build --verbose_failures --define=DEBUG=1
 build --verbose_explanations

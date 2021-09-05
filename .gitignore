@@ -29,15 +29,18 @@ node_modules/
 bower_components/
 
 # IDE specific
-.vscode
+.vscode/
+.idea/
 .vimrc
 .nvimrc
+.history/
 
 # Bazel
 bazel-*
 bazel-explain.txt
 # Ignore generated files
 **/*.pb.go
+go.sum
 
 # Ignore npm/yarn debug log
 npm-debug.log
