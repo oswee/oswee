@@ -1,3 +1,7 @@
+"""
+Global variables
+"""
+
 NODEJS_VERSION = "16.4.1"
 
 NODEJS_SHA256 = "3c73b58051a4435d605f9842e582a252e100d5ff62e0a30e3961cab71e8477b1"
