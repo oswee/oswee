@@ -87,19 +87,14 @@ I have custom CloudFlare DNS setup
 
 UPDATE: These instructions most likely is broken ATM
 
-Check the `package.json#scripts` for the available commands.
-
-Update Go dependencies `yarn run gazelle:update-repos`
-
-Generate BUILD rules for Go: `yarn run gazelle`
-
-Build everything: `yarn bazel build '...'`
-
-Build single target `yarn bazel build //oswee/server:binary`
-
-Run some binary with flags: `yarn bazel run //oswee/gateway:gateway -- -a :9090`
-
-Run Bazel in watch mode: `yarn ibazel run //platform/web:devserver`
+- Check the `package.json#scripts` for the available commands.
+- Run `yarn install` to install all required NPM packages
+- Update Go dependencies `yarn run gazelle:update-repos`
+- Generate BUILD rules for Go: `yarn run gazelle`
+- Build everything: `yarn bazel build '...'`
+- Build single target `yarn bazel build //oswee/server:binary`
+- Run some binary with flags: `yarn bazel run //oswee/gateway:gateway -- -a :9090`
+- Run Bazel in watch mode: `yarn ibazel run //platform/web:devserver`
 
 ### Potential issues
 
