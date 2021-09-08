@@ -10,9 +10,9 @@ workspace(
 )
 
 # buildifier: disable=load-on-top
-load("//tools:external_rules.bzl", "external_rules")
+load("//tools/build:workspace.bzl", "prime_dependencies")
 
-external_rules()
+prime_dependencies()
 
 # Variables{{{
 # ----------------------------------------------
@@ -75,18 +75,15 @@ go_register_toolchains(version = "1.16.6")
 
 # buildifier: disable=load-on-top
 load("@bazel_gazelle//:deps.bzl", "gazelle_dependencies")
-load("//:deps.bzl", "go_dependencies")
+load("@prime//tools/build:workspace_go.bzl", "prime_go_dependencies")
 
-# gazelle:repository_macro deps.bzl%go_dependencies
-go_dependencies()
+# gazelle:repository_macro tools/build/workspace_go.bzl%prime_go_dependencies
+prime_go_dependencies()
 
 gazelle_dependencies()
 
 # buildifier: disable=load-on-top
-load("//:repositories.bzl", "go_repositories")
 
-# gazelle:repository_macro repositories.bzl%go_repositories
-go_repositories()
 # }}}
 
 # Rules Docker{{{

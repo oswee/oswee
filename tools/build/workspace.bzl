@@ -7,15 +7,17 @@ load("@bazel_tools//tools/build_defs/repo:http.bzl", "http_archive")
 
 # buildifier: disable=load-on-top
 load(
-    "//defs:config.bzl",
+    "@prime//defs:config.bzl",
     "RULES_NODEJS_SHA256",
     "RULES_NODEJS_VERSION",
     "RULES_SASS_SHA256",
     "RULES_SASS_VERSION",
 )
-#}}}
 
-def external_rules():
+def prime_dependencies():
+  """Imports external rules
+
+  """
   http_archive(
     name = "build_bazel_rules_nodejs",
     sha256 = RULES_NODEJS_SHA256,
@@ -30,24 +32,15 @@ def external_rules():
       ],
   )
 
-  http_archive(
-      name = "bazel_skylib",
-      sha256 = "1c531376ac7e5a180e0237938a2536de0c54d93f5c278634818e0efc952dd56c",
-      urls = [
-          "https://github.com/bazelbuild/bazel-skylib/releases/download/1.0.3/bazel-skylib-1.0.3.tar.gz",
-          "https://mirror.bazel.build/github.com/bazelbuild/bazel-skylib/releases/download/1.0.3/bazel-skylib-1.0.3.tar.gz",
-      ],
-  )
-
-  http_archive(
-    name = "com_google_protobuf",
-    sha256 = "c6003e1d2e7fefa78a3039f19f383b4f3a61e81be8c19356f85b6461998ad3db",
-    strip_prefix = "protobuf-3.17.3",
-    urls = [
-        "https://mirror.bazel.build/github.com/protocolbuffers/protobuf/archive/v3.17.3.tar.gz",
-        "https://github.com/protocolbuffers/protobuf/archive/v3.17.3.tar.gz",
-    ],
-  )
+  # http_archive(
+  #   name = "com_google_protobuf",
+  #   sha256 = "c6003e1d2e7fefa78a3039f19f383b4f3a61e81be8c19356f85b6461998ad3db",
+  #   strip_prefix = "protobuf-3.17.3",
+  #   urls = [
+  #       "https://mirror.bazel.build/github.com/protocolbuffers/protobuf/archive/v3.17.3.tar.gz",
+  #       "https://github.com/protocolbuffers/protobuf/archive/v3.17.3.tar.gz",
+  #   ],
+  # )
 
   http_archive(
     name = "rules_proto",
@@ -116,3 +109,14 @@ def external_rules():
         "https://mirror.bazel.build/github.com/bazelbuild/rules_sass/archive/%s.tar.gz" % RULES_SASS_VERSION,
     ],
   )
+
+  http_archive(
+      name = "bazel_skylib",
+      sha256 = "1c531376ac7e5a180e0237938a2536de0c54d93f5c278634818e0efc952dd56c",
+      urls = [
+          "https://github.com/bazelbuild/bazel-skylib/releases/download/1.0.3/bazel-skylib-1.0.3.tar.gz",
+          "https://mirror.bazel.build/github.com/bazelbuild/bazel-skylib/releases/download/1.0.3/bazel-skylib-1.0.3.tar.gz",
+      ],
+  )
+
+

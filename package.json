@@ -31,7 +31,7 @@
     "bazel:clean": "yarn run bazel clean",
     "bazel:clean:deep": "yarn run bazel clean --expunge && git clean -dfx",
     "gazelle": "bazel run //:gazelle",
-    "gazelle:update-repos": "bazel run //:gazelle -- update-repos -from_file=go.mod -prune -to_macro=deps.bzl%go_dependencies",
+    "gazelle:update-repos": "bazel run //:gazelle -- update-repos -from_file=go.mod -prune -to_macro=tools/build/workspace_go.bzl%prime_go_dependencies",
     "start": "yarn webpack serve --config ./platform/web/prime/webpack.dev.ts",
     "prepare": "husky install"
   },
