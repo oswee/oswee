@@ -119,4 +119,10 @@ def prime_dependencies():
       ],
   )
 
+  http_archive(
+      name = "grpc_ecosystem_grpc_gateway",
+      sha256 = "8d7f101db6c458f3d263c823da224a4df05a413847673d1255d2fcce9deddd1f",
+      strip_prefix = "grpc-gateway-2.6.0",
+      url = "https://github.com/grpc-ecosystem/grpc-gateway/archive/v2.6.0.zip",
+  )
 
