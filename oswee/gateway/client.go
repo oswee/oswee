@@ -6,7 +6,7 @@ import (
 	"log"
 
 	"github.com/gorilla/websocket"
-	v1 "github.com/oswee/prime/protobuf/oswee/modules/v1"
+	v1 "github.com/oswee/prime/proto/oswee/modules/v1"
 )
 
 // random comment to test husky
