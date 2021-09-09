@@ -20,8 +20,8 @@ go_library(
     importpath = "github.com/oswee/prime/oswee/gateway",
     visibility = ["//visibility:private"],
     deps = [
-        "//protobuf/oswee/modules/v1:modules",
-        "@com_github_gorilla_websocket//:websocket",
+        "//proto/oswee/modules/v1:modules_go_library",
+        "@com_github_gorilla_websocket//:go_default_library",
     ],
 )
 

@@ -39,8 +39,8 @@ container_image(
     # Files are coppied at the / and so should be served from there.
     files = [
         ":binary",
-        "//platform/web/prime:prime.js",
         "//oswee/https-server/static",
+        "//platform/web/prime:prime.js",
     ],
     ports = [":80"],
 )

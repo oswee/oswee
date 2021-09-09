@@ -6,7 +6,7 @@ go_library(
     importpath = "github.com/oswee/prime/pkg/logger",
     visibility = ["//visibility:public"],
     deps = [
-        "@org_uber_go_zap//:zap",
-        "@org_uber_go_zap//zapcore",
+        "@org_uber_go_zap//:go_default_library",
+        "@org_uber_go_zap//zapcore:go_default_library",
     ],
 )

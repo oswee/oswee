@@ -2,12 +2,20 @@
 # Be aware that this setup will still create a bazel-out symlink in
 # your project directory, which you must exclude from version control and your
 # editor's search path.
+# Alex Eagle
+# this just seemed like the common existing idiom in the community so I wanted rules_nodejs default to meet users where they are
 #build --symlink_prefix=dist/
 
 build --explain ./bazel-explain.txt
 build --verbose_failures --define=DEBUG=1
 build --verbose_explanations
 build --worker_sandboxing
+
+# Added this to fix com_google_protobuf protoc recompilation.
+# https://docs.bazel.build/versions/main/command-line-reference.html#flag--incompatible_strict_action_env
+build --incompatible_strict_action_env
+test --incompatible_strict_action_env
+run --incompatible_strict_action_env
 
 # build --verbose_failures
 # --repository_cache for fetched externals
