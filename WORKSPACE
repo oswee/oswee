@@ -10,7 +10,7 @@ workspace(
 )
 
 # buildifier: disable=load-on-top
-load("//tools/build:workspace.bzl", "prime_dependencies")
+load("@prime//tools/build:workspace.bzl", "prime_dependencies")
 
 prime_dependencies()
 
@@ -27,170 +27,6 @@ load(
     "YARN_VERSION",
 )
 #}}}
-
-# Rules Python{{{
-# ----------------------------------------------
-#}}}
-
-# Skylib{{{
-# ----------------------------------------------
-
-# buildifier: disable=load-on-top
-load("@bazel_skylib//:workspace.bzl", "bazel_skylib_workspace")
-
-bazel_skylib_workspace()
-
-# buildifier: disable=load-on-top
-load("@bazel_skylib//lib:versions.bzl", "versions")
-
-versions.check(minimum_bazel_version = "4.1.0")
-#}}}
-
-# Rules Proto{{{
-# ----------------------------------------------
-
-# buildifier: disable=load-on-top
-load("@rules_proto//proto:repositories.bzl", "rules_proto_dependencies", "rules_proto_toolchains")
-
-rules_proto_dependencies()
-
-rules_proto_toolchains()
-
-# # buildifier: disable=load-on-top
-load("@com_google_protobuf//:protobuf_deps.bzl", "protobuf_deps")
-
-protobuf_deps()
-# }}}
-
-# Rules Go{{{
-# ----------------------------------------------
-# Check the go_rules and Gazelle version compatibility at https://github.com/bazelbuild/bazel-gazelle#id5
-
-# buildifier: disable=load-on-top
-load("@io_bazel_rules_go//go:deps.bzl", "go_register_toolchains", "go_rules_dependencies")
-
-go_rules_dependencies()
-
-go_register_toolchains(version = "1.16.6")
-
-# buildifier: disable=load-on-top
-load("@bazel_gazelle//:deps.bzl", "gazelle_dependencies")
-load("@prime//tools/build:workspace_go.bzl", "prime_go_dependencies")
-
-# gazelle:repository_macro tools/build/workspace_go.bzl%prime_go_dependencies
-prime_go_dependencies()
-
-gazelle_dependencies()
-
-# buildifier: disable=load-on-top
-
-# }}}
-
-# Rules Docker{{{
-# ----------------------------------------------
-
-# buildifier: disable=load-on-top
-load("@io_bazel_rules_docker//toolchains/docker:toolchain.bzl", docker_toolchain_configure = "toolchain_configure")
-
-# Override the default docker toolchain configuration.
-docker_toolchain_configure(
-    name = "docker_config",
-    docker_flags = [
-        "--log-level=info",
-    ],
-    docker_path = "/usr/bin/podman",
-)
-
-# buildifier: disable=load-on-top
-load("@io_bazel_rules_docker//repositories:repositories.bzl", container_repositories = "repositories")
-
-# buildifier: disable=load-on-top
-container_repositories()
-
-# buildifier: disable=load-on-top
-load("@io_bazel_rules_docker//repositories:deps.bzl", container_deps = "deps")
-
-container_deps()
-
-# buildifier: disable=load-on-top
-load("@io_bazel_rules_docker//container:container.bzl", "container_pull")
-
-container_pull(
-    name = "alpine_linux_amd64",
-    registry = "index.docker.io",
-    repository = "library/alpine",
-    tag = "3.8",
-)
-# }}}
-
-# Rules K8s{{{
-# ----------------------------------------------
-
-# buildifier: disable=load-on-top
-load("@io_bazel_rules_k8s//k8s:k8s.bzl", "k8s_defaults", "k8s_repositories")
-
-k8s_repositories()
-
-# buildifier: disable=load-on-top
-load("@io_bazel_rules_k8s//k8s:k8s_go_deps.bzl", k8s_go_deps = "deps")
-
-k8s_go_deps()
-
-_CLUSTER = "minikube"
-
-_CONTEXT = _CLUSTER
-
-_NAMESPACE = "prime"
-
-k8s_defaults(
-    name = "k8s_object",
-    cluster = _CLUSTER,
-    context = _CONTEXT,
-    image_chroot = CONTAINER_REGISTRY + "/oswee",
-    namespace = _NAMESPACE,
-)
-
-k8s_defaults(
-    name = "k8s_deploy",
-    cluster = _CLUSTER,
-    context = _CONTEXT,
-    image_chroot = CONTAINER_REGISTRY + "/oswee",
-    kind = "deployment",
-    namespace = _NAMESPACE,
-)
-
-[k8s_defaults(
-    name = "k8s_" + kind,
-    cluster = _CLUSTER,
-    context = _CONTEXT,
-    kind = kind,
-    namespace = _NAMESPACE,
-) for kind in [
-    "service",
-    "crd",
-    "todo",
-]]
-
-# buildifier: disable=load-on-top
-load("@io_bazel_rules_docker//go:image.bzl", _go_image_repos = "repositories")
-
-_go_image_repos()
-# }}}
-
-# Rules Go Mock{{{
-# ----------------------------------------------
-
-# bazel_gomock_commit = "fde78c91cf1783cc1e33ba278922ba67a6ee2a84"
-
-# http_archive(
-#     name = "bazel_gomock",
-#     sha256 = "692421b0c5e04ae4bc0bfff42fb1ce8671fe68daee2b8d8ea94657bb1fcddc0a",
-#     strip_prefix = "bazel_gomock-{v}".format(v = bazel_gomock_commit),
-#     urls = [
-#         "https://github.com/jmhodges/bazel_gomock/archive/{v}.tar.gz".format(v = bazel_gomock_commit),
-#     ],
-# )
-# }}}
 
 # Rules NodeJS{{{
 # ----------------------------------------------
@@ -244,6 +80,170 @@ yarn_install(
     yarn_lock = "//:yarn.lock",
 )
 # }}}
+
+# Rules Python{{{
+# ----------------------------------------------
+#}}}
+
+# Skylib{{{
+# ----------------------------------------------
+
+# buildifier: disable=load-on-top
+load("@bazel_skylib//:workspace.bzl", "bazel_skylib_workspace")
+
+bazel_skylib_workspace()
+
+# buildifier: disable=load-on-top
+load("@bazel_skylib//lib:versions.bzl", "versions")
+
+versions.check(minimum_bazel_version = "4.1.0")
+#}}}
+
+# Rules Go{{{
+# ----------------------------------------------
+# Check the go_rules and Gazelle version compatibility at https://github.com/bazelbuild/bazel-gazelle#id5
+
+# buildifier: disable=load-on-top
+load("@io_bazel_rules_go//go:deps.bzl", "go_register_toolchains", "go_rules_dependencies")
+
+# buildifier: disable=load-on-top
+load("@bazel_gazelle//:deps.bzl", "gazelle_dependencies")
+
+go_rules_dependencies()
+
+go_register_toolchains(version = "1.16.6")
+
+# buildifier: disable=load-on-top
+load("@prime//tools/build:workspace_go.bzl", "prime_go_dependencies")
+
+# gazelle:repository_macro tools/build/workspace_go.bzl%prime_go_dependencies
+prime_go_dependencies()
+
+# gazelle:repo bazel_gazelle
+gazelle_dependencies()
+# }}}
+
+# Rules Proto{{{
+# ----------------------------------------------
+
+# buildifier: disable=load-on-top
+load("@rules_proto//proto:repositories.bzl", "rules_proto_dependencies", "rules_proto_toolchains")
+
+rules_proto_dependencies()
+
+rules_proto_toolchains()
+
+# buildifier: disable=load-on-top
+load("@com_google_protobuf//:protobuf_deps.bzl", "protobuf_deps")
+
+protobuf_deps()
+# }}}
+
+# Rules Docker{{{
+# ----------------------------------------------
+
+# buildifier: disable=load-on-top
+load("@io_bazel_rules_docker//toolchains/docker:toolchain.bzl", docker_toolchain_configure = "toolchain_configure")
+
+# Override the default docker toolchain configuration.
+docker_toolchain_configure(
+    name = "docker_config",
+    docker_flags = [
+        "--log-level=info",
+    ],
+    docker_path = "/usr/bin/podman",
+)
+
+# buildifier: disable=load-on-top
+load("@io_bazel_rules_docker//repositories:repositories.bzl", container_repositories = "repositories")
+
+# buildifier: disable=load-on-top
+container_repositories()
+
+# buildifier: disable=load-on-top
+load("@io_bazel_rules_docker//repositories:deps.bzl", container_deps = "deps")
+
+container_deps()
+
+# buildifier: disable=load-on-top
+load("@io_bazel_rules_docker//container:container.bzl", "container_pull")
+
+container_pull(
+    name = "alpine_linux_amd64",
+    registry = "index.docker.io",
+    repository = "library/alpine",
+    tag = "3.8",
+)
+
+# buildifier: disable=load-on-top
+load("@io_bazel_rules_docker//go:image.bzl", _go_image_repos = "repositories")
+
+_go_image_repos()
+# }}}
+
+# Rules K8s{{{
+# ----------------------------------------------
+
+# buildifier: disable=load-on-top
+load("@io_bazel_rules_k8s//k8s:k8s.bzl", "k8s_defaults", "k8s_repositories")
+
+k8s_repositories()
+
+# buildifier: disable=load-on-top
+load("@io_bazel_rules_k8s//k8s:k8s_go_deps.bzl", k8s_go_deps = "deps")
+
+k8s_go_deps()
+
+_CLUSTER = "minikube"
+
+_CONTEXT = _CLUSTER
+
+_NAMESPACE = "prime"
+
+k8s_defaults(
+    name = "k8s_object",
+    cluster = _CLUSTER,
+    context = _CONTEXT,
+    image_chroot = CONTAINER_REGISTRY + "/oswee",
+    namespace = _NAMESPACE,
+)
+
+k8s_defaults(
+    name = "k8s_deploy",
+    cluster = _CLUSTER,
+    context = _CONTEXT,
+    image_chroot = CONTAINER_REGISTRY + "/oswee",
+    kind = "deployment",
+    namespace = _NAMESPACE,
+)
+
+[k8s_defaults(
+    name = "k8s_" + kind,
+    cluster = _CLUSTER,
+    context = _CONTEXT,
+    kind = kind,
+    namespace = _NAMESPACE,
+) for kind in [
+    "service",
+    "crd",
+    "todo",
+]]
+# }}}
+
+# Rules Go Mock{{{
+# ----------------------------------------------
+
+# bazel_gomock_commit = "fde78c91cf1783cc1e33ba278922ba67a6ee2a84"
+
+# http_archive(
+#     name = "bazel_gomock",
+#     sha256 = "692421b0c5e04ae4bc0bfff42fb1ce8671fe68daee2b8d8ea94657bb1fcddc0a",
+#     strip_prefix = "bazel_gomock-{v}".format(v = bazel_gomock_commit),
+#     urls = [
+#         "https://github.com/jmhodges/bazel_gomock/archive/{v}.tar.gz".format(v = bazel_gomock_commit),
+#     ],
+# )
+#}}}
 
 # Rules TypeScript Proto{{{
 # ----------------------------------------------
