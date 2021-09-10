@@ -33,7 +33,7 @@
     "gazelle": "bazel run //:gazelle",
     "gazelle:update-repos": "bazel run //:gazelle -- update-repos -from_file=go.mod -prune -to_macro=tools/build/workspace_go.bzl%prime_go_dependencies",
     "start": "yarn webpack serve --config ./platform/web/prime/webpack.dev.ts",
-    "start:swagger": "yarn webpack serve --config ./oswee/swagger/webpack.config.js",
+    "start:swagger": "yarn webpack serve --config ./platform/web/swagger/webpack.config.js",
     "prepare": "husky install"
   },
   "dependencies": {
