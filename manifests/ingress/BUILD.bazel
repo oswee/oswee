@@ -1,0 +1,21 @@
+"""
+
+"""
+
+load("@io_bazel_rules_k8s//k8s:object.bzl", "k8s_object")
+load("@io_bazel_rules_k8s//k8s:objects.bzl", "k8s_objects")
+
+package(default_visibility = ["//visibility:public"])
+
+k8s_object(
+    name = "gateway",
+    cluster = "minikube",
+    template = "gateway.yaml",
+)
+
+k8s_objects(
+    name = "all",
+    objects = [
+        ":gateway",
+    ],
+)

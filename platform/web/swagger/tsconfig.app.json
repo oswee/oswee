@@ -1,0 +1,18 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "outDir": "../../../dist/out-tsc",
+    "target": "ESNext",
+    "module": "ESNext",
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+    "moduleResolution": "node",
+    "declaration": true,
+    "inlineSources": true,
+    "types": ["node"],
+    "lib": ["ESNext", "DOM", "DOM.iterable"],
+    "composite": true
+  },
+  "include": ["src"],
+  "exclude": ["src/**/*.spec.ts"]
+}
