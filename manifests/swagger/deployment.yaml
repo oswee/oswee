@@ -2,23 +2,23 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: https-server
+  name: swagger
   namespace: prime
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: https-server
+      app: swagger
   template:
     metadata:
       labels:
-        app: https-server
+        app: swagger
     spec:
       imagePullSecrets:
-        - name: my-registry-key
+        - name: quay-registry-key
       containers:
-        - name: https-server
-          image: https-server:dzintars
+        - name: swagger
+          image: swagger:dzintars
           imagePullPolicy: Always  # Because i am not handling labeling
           ports:
             - containerPort: 8080

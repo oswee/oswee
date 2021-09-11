@@ -1,0 +1,116 @@
+"""
+
+"""
+
+load("@io_bazel_rules_docker//container:container.bzl", "container_image", "container_push")
+load("@npm//@bazel/typescript:index.bzl", "ts_config", "ts_library")
+load("@rules_pkg//:mappings.bzl", "pkg_filegroup")
+load("@rules_pkg//:pkg.bzl", "pkg_tar")
+load("@io_bazel_rules_k8s//k8s:object.bzl", "k8s_object")
+load("@io_bazel_rules_k8s//k8s:objects.bzl", "k8s_objects")
+load("@k8s_deploy//:defaults.bzl", "k8s_deploy")
+load("@prime//defs:config.bzl", "CONTAINER_REGISTRY")
+
+package(default_visibility = ["//visibility:public"])
+
+ts_library(
+    name = "shell",
+    srcs = glob(
+        include = [
+            "src/**/*.ts",
+        ],
+    ),
+    # module_name = "@oswee/components/ui-taskbar",
+    # module_root = "src",
+    devmode_module = "esnext",
+    devmode_target = "esnext",
+    tsconfig = ":tsconfig",
+    deps = [],
+)
+
+ts_config(
+    name = "tsconfig",
+    src = "tsconfig.app.json",
+    deps = [
+        "tsconfig.json",
+        "@prime//:tsconfig.base.json",
+    ],
+)
+
+# pkg_filegroup(
+#     name = "static",
+#     prefix = "/",
+#     srcs = [
+#         "@prime//platform/web/swagger/static:static",
+#     ],
+# )
+
+# pkg_tar(
+#     name = "static_tar",
+#     mode = "0644",
+#     package_dir = "/",
+#     srcs = [
+#         ":static",
+#     ],
+#     strip_prefix = "/",
+# )
+
+container_image(
+    name = "container_image",
+    base = "@prime//oswee/https-server:go_image_base",
+    entrypoint = ["/binary", "-d=/"],
+    # Files are coppied at the / and so should be served from there.
+    files = [
+        "@prime//oswee/https-server:binary",
+        "@prime//platform/web/swagger/static:static",
+    ],
+    # tars = [
+    #   ":static_tar",
+    # ],
+    ports = [":80"],
+)
+
+container_push(
+    name = "container_push",
+    format = "Docker",
+    image = ":container_image",
+    registry = CONTAINER_REGISTRY,
+    repository = "oswee/swagger",
+    tag = "{BUILD_USER}",
+)
+
+k8s_object(
+    name = "gateway",
+    cluster = "minikube",
+    template = "k8s/gateway.yaml",
+)
+
+k8s_object(
+    name = "virtual_service",
+    cluster = "minikube",
+    template = "k8s/virtual-service.yaml",
+)
+
+k8s_object(
+    name = "service",
+    cluster = "minikube",
+    template = "k8s/service.yaml",
+)
+
+k8s_deploy(
+    name = "deployment",
+    images = {
+        "swagger:dzintars": ":container_image",
+    },
+    template = "k8s/deployment.yaml",
+)
+
+k8s_objects(
+    name = "all",
+    objects = [
+        ":deployment",
+        ":service",
+        ":virtual_service",
+        ":gateway",
+    ],
+)

@@ -2,13 +2,13 @@
 apiVersion: networking.istio.io/v1alpha3
 kind: VirtualService
 metadata:
-  name: https-server-virtual-service
+  name: swagger-virtual-service
   namespace: prime
 spec:
   hosts:
-    - 'server.apps.ocp.oswee.com'
+    - 'swagger.apps.ocp.oswee.com'
   gateways:
-    - https-server-gateway
+    - prime-gateway
   http:
     - match:
         - uri:
@@ -17,5 +17,5 @@ spec:
         - destination:
             port:
               number: 8000 # Port of the service
-            # host: https-server-service.prime.svc.cluster.local
-            host: https-server-service
+            # host: swagger-service.prime.svc.cluster.local
+            host: swagger-service
