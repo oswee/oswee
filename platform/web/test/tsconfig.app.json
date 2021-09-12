@@ -1,8 +1,0 @@
-{
-  "extends": "./tsconfig.json",
-  "compilerOptions": {
-    "outDir": "../../dist/out-tsc"
-  },
-  "files": ["src/index.ts"],
-  "include": ["**/*.d.ts", "src/**/*.ts"]
-}
