@@ -29,7 +29,7 @@
 //   // yield put(getModules())
 // }
 
-export const routes = [
+export const routes: { path: string; route: any }[] = [
   // { path: '/', route: homeRoute },
   // { path: '/users', route: userListRoute },
   // { path: '/users/:id', route: userRoute },
