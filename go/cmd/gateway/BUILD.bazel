@@ -42,7 +42,7 @@ go_image(
     pure = "on",
     visibility = ["//visibility:public"],
     deps = [
-        "//protobuf/oswee/modules/v1:modules",
+        "//proto/oswee/modules/v1:modules_go_library",
         "@com_github_gorilla_websocket//:go_default_library",
     ],
 )
