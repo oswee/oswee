@@ -1,6 +1,6 @@
 import * as effects from 'redux-saga/effects'
 import { WeatherActions } from './actions'
-import { WeatherTypes } from './constants'
+// import { WeatherTypes } from './constants'
 import { fetchWeather } from './api'
 
 function* workerSaga() {
@@ -9,7 +9,8 @@ function* workerSaga() {
     console.log('Data:', data)
     yield effects.put(WeatherActions.weatherLoaded(data))
   } catch (error) {
-    console.log('Error in the worker saga:', error.toString())
+    // console.log('Error in the worker saga:', error.toString())
+    console.log('Error in the worker saga:')
   }
 }
 
