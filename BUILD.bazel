@@ -1,6 +1,5 @@
 load("@bazel_gazelle//:def.bzl", "gazelle")
 load("@com_github_bazelbuild_buildtools//buildifier:def.bzl", "buildifier")
-# load("//tools:ts_library.bzl", "ts_library")
 
 package(default_visibility = ["//:__subpackages__"])
 
@@ -37,10 +36,3 @@ exports_files(
     visibility = ["//visibility:public"],
 )
 
-# TODO: This is only here in order to workaround a bug in the way bazel resolves
-# workspace imports when in nested repositories, and can be removed once that is fixed.
-# ts_library(
-#     name = "modules-fix",
-#     srcs = [],
-#     module_name = "@oswee",
-# )
