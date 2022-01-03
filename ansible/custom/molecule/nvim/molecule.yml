@@ -18,7 +18,7 @@ lint: |
   yamllint -f colored .
   ansible-lint --force-color .
 platforms:
-  - name: 'f34-workstation'
+  - name: 'f34-custom'
     box: fedora/34-cloud-base
     cpus: 2
     memory: 4096

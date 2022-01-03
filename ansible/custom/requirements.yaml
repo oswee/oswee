@@ -11,8 +11,8 @@
   # - name: community.general
 
 # roles:
-#   - role: oswee.general.nodejs
-#   - role: oswee.general.yarn
-#   - role: oswee.general.nvim
-#   - role: oswee.general.github
+#   - role: oswee.core.nodejs
+#   - role: oswee.core.yarn
+#   - role: oswee.core.nvim
+#   - role: oswee.core.github
 ...
