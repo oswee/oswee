@@ -1,0 +1,25 @@
+---
+galaxy_info:
+  namespace: oswee
+  role_name: nodejs
+  version: '0.0.1'
+  author: 'Dzintars Klavins'
+  description: 'Ansible Galaxy role to maintain NodeJS'
+  company: 'Oswee'
+
+  license: 'Apache-2.0'
+
+  min_ansible_version: '2.11'
+
+  platforms:
+    - name: Fedora
+      versions:
+        - 34
+
+  galaxy_tags:
+    - 'nodejs'
+    - 'oswee'
+    - 'dzintars'
+    - 'fedora'
+
+dependencies: []

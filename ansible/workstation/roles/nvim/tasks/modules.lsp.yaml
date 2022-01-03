@@ -1,0 +1,19 @@
+---
+# tasks file for nvim
+
+- name: Copy LSP plugin configuration files
+  ansible.builtin.copy:
+    src: '{{ item.src }}'
+    dest: '{{ nvim_config_dir }}/{{ item.dest }}/'
+    mode: '0644'
+  loop:
+    - { src: 'lua/modules/lsp/', dest: 'lua/modules/lsp' }
+
+- name: Include LSP
+  ansible.builtin.lineinfile:
+    path: '{{ nvim_config_dir }}/init.lua'
+    line: "require('modules.lsp')"
+    regexp: "^require('modules.lsp')$"
+    state: present
+    # insertafter: '^-- LSP'
+    create: True

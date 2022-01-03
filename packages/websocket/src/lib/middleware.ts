@@ -1,7 +1,7 @@
 import { WebsocketTypes } from './constants'
 import { WebsocketActions, WebsocketActionsUnion } from './actions'
 
-let websocket: WebSocket = null
+let websocket: WebSocket = null as any
 
 export const WebsocketMiddleware =
   ({ dispatch }) =>
@@ -30,7 +30,7 @@ export const WebsocketMiddleware =
           if (websocket !== null) {
             websocket.close()
           }
-          websocket = null
+          websocket = null as any
           break
         case WebsocketTypes.DISCONNECTED:
           break

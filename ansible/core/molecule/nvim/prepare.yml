@@ -1,0 +1,41 @@
+---
+# prepare playbook called to provision an instance
+# use this to bring instance to a testable state
+- name: Prepare
+  hosts: all
+  tasks:
+    - name: Make sure we have a 'wheel' group
+      ansible.builtin.group:
+        name: wheel
+        state: present
+
+    - name: Add vagrant user to 'wheel' group
+      become: true
+      ansible.builtin.user:
+        name: 'vagrant'
+        groups: wheel
+        append: true
+
+    - name: Add ansible user to 'wheel' group
+      become: true
+      ansible.builtin.user:
+        name: 'ansible'
+        groups: wheel
+        append: true
+
+    - name: Enable passwordless sudo for 'wheel' group
+      become: true
+      ansible.builtin.copy:
+        dest: /etc/sudoers.d/wheel
+        content: "%wheel ALL=(ALL) NOPASSWD: ALL\n"
+        validate: visudo -cf %s
+
+    - name: Install Ranger (for easy debug)
+      become: true
+      ansible.builtin.dnf:
+        name: "ranger"
+        state: present
+
+    # - name: Ranger
+    #   include_role:
+    #     name: oswee.general.ranger

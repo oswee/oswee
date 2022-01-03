@@ -10,12 +10,12 @@ const devServer = {
   historyApiFallback: true, // Serves index file for any path
   hot: true, // https://github.com/webpack/webpack-dev-server/issues/97#issuecomment-69726201
   compress: true,
-  allowedHosts: ['dev.oswee.com'], // Disabling this and the disableHostCheck leads to Invalid Host header by HAProxy
+  allowedHosts: ['prime.oswee.dev'], // Disabling this and the disableHostCheck leads to Invalid Host header by HAProxy
   http2: true,
   https: {
-    key: fs.readFileSync('/home/dzintars/.tls/oswee.com/privkey.pem'),
-    cert: fs.readFileSync('/home/dzintars/.tls/oswee.com/fullchain.pem'),
-    ca: fs.readFileSync('/home/dzintars/.tls/oswee.com/fullchain.pem'),
+    key: fs.readFileSync('/home/dzintars/.tls/oswee.dev/privkey.pem'),
+    cert: fs.readFileSync('/home/dzintars/.tls/oswee.dev/fullchain.pem'),
+    ca: fs.readFileSync('/home/dzintars/.tls/oswee.dev/fullchain.pem'),
   },
   overlay: {
     warnings: true,

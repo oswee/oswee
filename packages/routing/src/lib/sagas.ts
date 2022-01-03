@@ -9,7 +9,7 @@ import * as effects from 'redux-saga/effects'
 
 const ROUTE_SAGAS = [...routes].map(r => ({
   ...r,
-  action: (context, params) =>
+  action: (context: any, params: any) =>
     effects.call([r, r.route], params, context.queries),
 }))
 

@@ -87,7 +87,7 @@ export function connect<T extends Constructor<Connectable>>(
 
     private [removeStateSubscription]() {
       this[unsubscribe] && this[unsubscribe]()
-      this[unsubscribe] = null
+      this[unsubscribe] = null as any
     }
 
     private [onStateChange]() {

@@ -1,0 +1,27 @@
+---
+# tasks file for nvim
+
+- name: Build prerequisites
+  import_tasks: prepare.yaml
+  tags:
+    - prepare
+
+- name: System packages
+  import_tasks: packages.yaml
+  tags:
+    - packages
+
+- name: Build
+  import_tasks: build.yaml
+  tags:
+    - build
+
+- name: Install
+  import_tasks: install.yaml
+  tags:
+    - install
+
+# - name: Cleanup
+#   import_tasks: cleanup.yaml
+#   tags:
+#     - cleanup

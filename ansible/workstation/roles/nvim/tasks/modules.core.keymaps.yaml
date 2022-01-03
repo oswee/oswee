@@ -1,0 +1,19 @@
+---
+# tasks file for nvim
+
+- name: Copy keymaps
+  ansible.builtin.copy:
+    src: '{{ item.src }}'
+    dest: '{{ nvim_config_dir }}/{{ item.dest }}/'
+    mode: '0644'
+  loop:
+    - { src: 'lua/modules/core/keymaps.lua', dest: '/lua/modules/core' }
+
+- name: Include keymaps
+  ansible.builtin.lineinfile:
+    path: '{{ nvim_config_dir }}/init.lua'
+    line: "require('modules.core.keymaps')"
+    regexp: "^require('modules.core.keymaps')$"
+    state: present
+    # insertafter: '^-- Keymaps'
+    create: True

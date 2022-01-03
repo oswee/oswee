@@ -1,0 +1,11 @@
+---
+- name: Converge
+  hosts: all
+
+  # tasks:
+  #   - name: Include role
+  #     include_role:
+  #       name: role-name
+
+  roles:
+    - name: oswee.core.yarn

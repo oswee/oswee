@@ -1,0 +1,4 @@
+---
+# defaults file for roles/github-cli
+
+github_cli_version: '2.0.0'

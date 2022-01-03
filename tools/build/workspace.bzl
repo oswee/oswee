@@ -1,5 +1,6 @@
 """
-Extension to retrieve external rules
+Extension to fetch third-party dependencies
+Separated from WORKSPACE to make it more maintainable
 """
 
 load("@bazel_tools//tools/build_defs/repo:http.bzl", "http_archive")

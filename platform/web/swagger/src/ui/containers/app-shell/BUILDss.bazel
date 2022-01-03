@@ -1,0 +1,33 @@
+"""App Shell container"""
+
+load("@npm//@bazel/typescript:index.bzl", "ts_config", "ts_library")
+
+# package(default_visibility = ["//libs/elements/oswee:__subpackages__"])
+package(default_visibility = ["//visibility:public"])
+
+ts_library(
+    name = "app-shell",
+    srcs = glob(
+        include = ["src/**/*.ts"],
+        exclude = [
+            "src/**/*.spec.ts",
+        ],
+    ),
+    module_root = "src",
+    devmode_module = "esnext",
+    devmode_target = "esnext",
+    tsconfig = ":tsconfig",
+    deps = [
+        "@npm//lit",
+        "@npm//tslib",
+    ],
+)
+
+ts_config(
+    name = "tsconfig",
+    src = "tsconfig.lib.json",
+    deps = [
+        ":tsconfig.json",
+        "//:tsconfig.base.json",
+    ],
+)

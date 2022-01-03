@@ -1,0 +1,14 @@
+---
+# tasks file for nvim
+
+# TODO: I don't think this should be there at all.
+# - name: Add 'vim' alias
+#   ansible.builtin.lineinfile:
+#     path: '$HOME/.zshrc'
+#     line: 'alias vim="nvim"'
+#     # owner: '{{ ansible_user_id }}'
+#     regexp: '^alias vim="nvim"$'
+#     state: present
+#     insertafter: '^# Aliases'
+#     # create: True
+#   when: nvim_vim_alias | bool

@@ -1,0 +1,19 @@
+---
+# tasks file for nvim
+
+- name: Copy autocmd
+  ansible.builtin.copy:
+    src: '{{ item.src }}'
+    dest: '{{ nvim_config_dir }}/{{ item.dest }}/'
+    mode: '0644'
+  loop:
+    - { src: 'lua/autocmd.lua', dest: '/lua/' }
+
+- name: Include autocmd
+  ansible.builtin.lineinfile:
+    path: '{{ nvim_config_dir }}/init.lua'
+    line: "require('autocmd')"
+    regexp: "^require('autocmd')$"
+    state: present
+    # insertafter: '^-- Autocmd'
+    create: True

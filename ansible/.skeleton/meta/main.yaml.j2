@@ -1,0 +1,26 @@
+---
+# roles/{{ role_name | regex_replace('.*roles\/') }}/meta/main.yml
+
+galaxy_info:
+  role_name: '{{ role_name | regex_replace('.*roles\/') }}'
+  version: '0.0.1'
+  author: 'Dzintars Klavins'
+  description: 'Ansible Galaxy role to maintain {{ role_name | regex_replace('.*roles\/') }}.'
+  company: 'Oswee'
+
+  license: 'Apache-2.0'
+
+  min_ansible_version: '2.11'
+
+  platforms:
+    - name: Fedora
+      versions:
+        - 34
+
+  galaxy_tags:
+    - '{{ role_name | regex_replace('.*roles\/') }}'
+    - 'oswee'
+    - 'dzintars'
+    - 'fedora'
+
+dependencies: []

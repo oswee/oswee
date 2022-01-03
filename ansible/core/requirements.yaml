@@ -1,0 +1,18 @@
+---
+# collections:
+  # - name: https://github.com/oswee/ansible.git#/general/
+  #   version: master
+  #   type: git
+  # - source: "/home/dzintars/code/github.com/oswee/prime/ansible/"
+  #   type: subdirs
+  # - source: "./"
+  #   type: subdirs
+  # - name: ansible.posix
+  # - name: community.general
+
+# roles:
+#   - role: oswee.general.nodejs
+#   - role: oswee.general.yarn
+#   - role: oswee.general.nvim
+#   - role: oswee.general.github
+...

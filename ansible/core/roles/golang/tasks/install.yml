@@ -1,0 +1,16 @@
+---
+# tasks file for roles/golang
+
+- name: download Go binary
+  unarchive:
+    src: "https://golang.org/dl/go{{ golang_version }}.linux-amd64.tar.gz"
+    dest: /tmp
+    remote_src: yes
+
+- name: copy Go binary
+  become: yes
+  copy:
+    src: /tmp/go
+    dest: /usr/local
+    # mode: a+x
+    remote_src: yes
