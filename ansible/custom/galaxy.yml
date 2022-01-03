@@ -1,10 +1,10 @@
 namespace: oswee
-name: workstation
+name: custom
 version: 0.0.1
 readme: README.md
 authors:
   - dzintars (https://github.com/dzintars)
-description: Semi-personal collection for Web development environment
+description: Personal collection for Web development environment
 license:
   - MIT
 license_file: ''
