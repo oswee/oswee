@@ -1,3 +1,3 @@
 #! /bin/bash
 
-python -m pip install --user ansible
+pip install --user ansible ansible-core molecule molecule-vagrant!=0.6.3 molecule-podman

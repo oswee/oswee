@@ -7,12 +7,21 @@
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
     "moduleResolution": "node",
-    "declaration": true,
-    "inlineSources": true,
-    "types": ["node"],
-    "lib": ["ESNext", "DOM", "DOM.iterable"],
-    "composite": true
+    "types": [
+      "node"
+    ],
+    "lib": [
+      "ESNext",
+      "DOM",
+      "DOM.iterable"
+    ],
+    "composite": true,
+    "declaration": true
   },
-  "include": ["src"],
-  "exclude": ["src/**/*.spec.ts"]
+  "include": [
+    "src"
+  ],
+  "exclude": [
+    "src/**/*.spec.ts"
+  ]
 }

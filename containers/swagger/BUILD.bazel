@@ -25,6 +25,10 @@ container_image(
     }),
     entrypoint = ["/usr/local/bin/swagger"],
     tars = [":bin"],
+    # files = [
+    #     "@prime//platform/web/swagger:swagger",
+    #     "@prime//platform/web/swagger/static",
+    # ]
 )
 
 container_push(

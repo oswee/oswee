@@ -189,7 +189,8 @@ load("@io_bazel_rules_k8s//k8s:k8s_go_deps.bzl", k8s_go_deps = "deps")
 
 k8s_go_deps()
 
-_CLUSTER = "minikube"
+# _CLUSTER = "minikube"
+_CLUSTER = "dev"
 
 _CONTEXT = _CLUSTER
 

@@ -1,3 +1,7 @@
 FROM envoyproxy/envoy-dev:c42a018d332920f3e523f1a0409b6056bd805853
 COPY containers/envoy/envoy.yaml /etc/envoy/envoy.yaml
+COPY containers/envoy/fullchain.pem /etc/envoy/certs/servercert.pem
+COPY containers/envoy/privkey.pem /etc/envoy/certs/serverkey.pem
 RUN chmod go+r /etc/envoy/envoy.yaml
+# RUN setcap CAP_NET_BIND_SERVICE=+eip /usr/local/bin/envoy
+EXPOSE 9090 443
