@@ -1,0 +1,19 @@
+---
+# tasks file for nvim
+
+- name: Copy plugin configuration files
+  ansible.builtin.copy:
+    src: '{{ item.src }}'
+    dest: '{{ nvim_config_dir }}/{{ item.dest }}/'
+    mode: '0644'
+  loop:
+    - { src: 'lua/theme/', dest: '/lua/theme/' }
+
+- name: Include theme
+  ansible.builtin.lineinfile:
+    path: '{{ nvim_config_dir }}/init.lua'
+    line: "require('theme')"
+    regexp: "^require('theme')$"
+    state: present
+    # insertafter: '^-- Theme'
+    create: True

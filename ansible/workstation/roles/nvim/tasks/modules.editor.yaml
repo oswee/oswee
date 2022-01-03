@@ -1,0 +1,19 @@
+---
+# tasks file for nvim
+
+- name: Copy UI plugin configuration files
+  ansible.builtin.copy:
+    src: '{{ item.src }}'
+    dest: '{{ nvim_config_dir }}/{{ item.dest }}/'
+    mode: '0644'
+  loop:
+    - { src: 'lua/modules/editor/', dest: 'lua/modules/editor' }
+
+- name: Include UI
+  ansible.builtin.lineinfile:
+    path: '{{ nvim_config_dir }}/init.lua'
+    line: "require('modules.editor')"
+    regexp: "^require('modules.editor')$"
+    state: present
+    # insertafter: '^-- Editor'
+    create: True

@@ -1,0 +1,10 @@
+---
+# tasks file for roles/golang
+
+- name: Add Go  bin dir to system-wide $PATH.
+  become: yes
+  copy:
+    dest: /etc/profile.d/go-path.sh
+    # content: "{{ paths }}"
+    # TODO: Read the README#ENV variables
+    content: 'PATH=$PATH:/usr/local/go/bin'

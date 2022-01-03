@@ -1,0 +1,6 @@
+---
+# defaults file for nodejs
+
+nodejs_version: '16.11.0'
+nodejs_dir: '/usr'
+nodejs_group: 'root'

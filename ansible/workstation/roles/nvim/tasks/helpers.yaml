@@ -1,0 +1,20 @@
+---
+# tasks file for nvim
+
+- name: Copy Lua helper files
+  ansible.builtin.copy:
+    src: '{{ item.src }}'
+    dest: '{{ nvim_config_dir }}/{{ item.dest }}/'
+    mode: '0644'
+  loop:
+    - { src: 'lua/helpers/', dest: '/lua/helpers/' }
+
+- name: Include helpers
+  ansible.builtin.lineinfile:
+    path: '{{ nvim_config_dir }}/init.lua'
+    line: "require('helpers')"
+    regexp: "^require('helpers')$"
+    state: present
+    # insertafter: '^-- Helpers'
+    create: True
+

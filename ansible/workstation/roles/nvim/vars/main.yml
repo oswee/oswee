@@ -1,0 +1,27 @@
+---
+# vars file for nvim
+
+nvim_build_packages:
+  - git
+  - ninja-build
+  - libtool
+  - autoconf
+  - automake
+  - cmake
+  - gcc
+  - gcc-c++
+  - make
+  - pkgconfig
+  - unzip
+  - patch
+  - gettext
+
+packages:
+  # - python3-neovim
+  - fzf
+  - ripgrep
+  - the_silver_searcher
+  - bat # for the pretty fzf previews
+  - yamllint
+  - wget
+  - fd-find

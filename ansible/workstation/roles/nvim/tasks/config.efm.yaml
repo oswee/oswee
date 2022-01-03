@@ -1,0 +1,22 @@
+---
+# tasks file for nvim
+
+# - name: Create efm-langserver direcory
+#   ansible.builtin.file:
+#     path: '$HOME/.local/bin'
+#     state: directory
+#     mode: '0755'
+
+# - name: Download efm-langserver release binary
+#   ansible.builtin.unarchive:
+#     src: "https://github.com/mattn/efm-langserver/releases/download/v0.0.38/efm-langserver_v0.0.38_linux_amd64.tar.gz"
+#     dest: $HOME/.local/bin
+#     remote_src: yes
+#     extra_opts: [--strip-components=1]
+
+# - name: Add efm-langserver to system-wide $PATH
+#   become: true
+#   ansible.builtin.copy:
+#     dest: /etc/profile.d/efm-langserver.sh
+#     content: "export PATH=$HOME/.local/bin:$PATH\n"
+

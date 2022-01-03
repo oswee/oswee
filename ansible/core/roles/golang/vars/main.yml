@@ -1,0 +1,6 @@
+---
+# vars file for roles/go
+
+paths: |
+  PATH=$PATH:/usr/local/go/bin
+  GOPATH=$HOME/go

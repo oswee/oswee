@@ -1,0 +1,42 @@
+---
+# tasks file for nvim
+
+# - name: Clone Packer repository
+#   ansible.builtin.git:
+#     repo: https://github.com/wbthomason/packer.nvim
+#     dest: '$HOME/.local/share/nvim/site/pack/packer/start/packer.nvim'
+#     version: master
+#     depth: 1
+
+- name: Copy plugin configuration files
+  ansible.builtin.copy:
+    src: '{{ item.src }}'
+    dest: '{{ nvim_config_dir }}/{{ item.dest }}/'
+    mode: '0644'
+  loop:
+    - { src: 'lua/plugins.lua', dest: '/lua/' }
+    # - { src: 'lua/plugins/', dest: '/lua/plugins/' }
+    # - { src: 'ultisnips', dest: '/' }
+  # notify:
+  #   - packer sync
+    # - packer install
+    # - packer update
+    # - packer compile
+
+- name: Include plugins
+  ansible.builtin.lineinfile:
+    path: '{{ nvim_config_dir }}/init.lua'
+    line: "require('plugins')"
+    regexp: "^require('plugins')$"
+    state: present
+    # insertafter: '^-- Plugins'
+    create: True
+
+# - name: Include config
+#   ansible.builtin.lineinfile:
+#     path: '{{ nvim_config_dir }}/init.lua'
+#     line: "require('config')"
+#     regexp: "^require('config')$"
+#     state: present
+#     # insertafter: '^-- Config'
+#     create: True

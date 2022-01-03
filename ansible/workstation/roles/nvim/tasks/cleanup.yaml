@@ -1,0 +1,19 @@
+---
+  # tasks file for nvim
+
+- name: Remove Neovim
+  become: true
+  dnf:
+    name: "{{ item }}"
+    state: absent
+  loop:
+    - neovim
+    - python3-neovim
+
+- name: Remove Neovim directories
+  file:
+    path: "{{ item }}"
+    state: absent
+  loop:
+    - $HOME/.config/nvim
+    - $HOME/.local/share/nvim

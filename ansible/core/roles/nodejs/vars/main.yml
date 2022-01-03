@@ -1,0 +1,4 @@
+---
+# vars file for nodejs
+
+nodejs_origin_url: 'https://nodejs.org/dist/v{{ nodejs_version }}/node-v{{ nodejs_version }}-linux-x64.tar.xz'

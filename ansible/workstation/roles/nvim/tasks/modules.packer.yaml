@@ -1,0 +1,19 @@
+---
+# tasks file for nvim
+
+- name: Copy Packer configuration files
+  ansible.builtin.copy:
+    src: '{{ item.src }}'
+    dest: '{{ nvim_config_dir }}/{{ item.dest }}/'
+    mode: '0644'
+  loop:
+    - { src: 'lua/modules/packer/', dest: 'lua/modules/packer' }
+
+- name: Include Packer
+  ansible.builtin.lineinfile:
+    path: '{{ nvim_config_dir }}/init.lua'
+    line: "require('modules.packer')"
+    regexp: "^require('modules.packer')$"
+    state: present
+    # insertafter: '^-- Packer'
+    create: True
