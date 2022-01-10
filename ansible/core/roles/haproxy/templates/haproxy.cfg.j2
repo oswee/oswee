@@ -1,0 +1,112 @@
+global
+    log 127.0.0.1 local2
+    chroot /var/lib/haproxy
+    pidfile /var/run/haproxy.pid
+    maxconn 4000
+    user haproxy
+    group haproxy
+    daemon
+    stats socket /var/lib/haproxy/stats
+    ssl-default-bind-ciphers PROFILE=SYSTEM
+    ssl-default-server-ciphers PROFILE=SYSTEM
+
+defaults
+    mode http
+    log global
+    option httplog
+    option dontlognull
+    option http-server-close
+    option forwardfor except 127.0.0.0/8
+    option redispatch
+    retries 3
+    timeout http-request 10s
+    timeout queue 1m
+    timeout connect 10s
+    timeout client 1m
+    timeout server 1m
+    timeout http-keep-alive 10s
+    timeout check 10s
+    maxconn 3000
+
+listen stats # Define a listen section called "stats"
+    bind :9000                       # Listen on localhost:9000
+    mode http
+    option forwardfor
+    option httpclose
+    stats enable                     # Enable stats page
+    stats show-legends
+    stats refresh 5s
+    stats hide-version               # Hide HAProxy version
+    stats realm Haproxy\ Statistics  # Title text for popup window
+    stats uri /stats                 # Stats URI
+    stats auth admin:password        # Authentication credentials
+    monitor-uri /health
+
+
+
+frontend {{ cluster_name }}-kubernetes-api-server
+    mode tcp
+    option tcplog
+    # option tcp-check
+    # option forwardfor
+    bind api.{{ cluster_name }}.{{ root_domain }}:6443
+    default_backend {{ cluster_name }}-kubernetes-api-server
+
+backend {{ cluster_name }}-kubernetes-api-server
+    balance source
+    mode tcp
+    server bootstrap bootstrap.{{ cluster_name }}.{{ root_domain }}:6443 check
+    server master-0 master-0.{{ cluster_name }}.{{ root_domain }}:6443 check
+    server master-1 master-1.{{ cluster_name }}.{{ root_domain }}:6443 check
+    server master-2 master-2.{{ cluster_name }}.{{ root_domain }}:6443 check
+
+
+
+frontend {{ cluster_name }}-machine-config-server
+    mode tcp
+    option tcplog
+    # option forwardfor
+    # timeout client 1m
+    bind api.{{ cluster_name }}.{{ root_domain }}:22623
+    default_backend {{ cluster_name }}-machine-config-server
+
+backend {{ cluster_name }}-machine-config-server
+    balance source
+    mode tcp
+    # log global
+    # timeout connect 10s
+    # timeout server 1m
+    server bootstrap bootstrap.{{ cluster_name }}.{{ root_domain }}:22623 check
+    server master-0 master-0.{{ cluster_name }}.{{ root_domain }}:22623 check
+    server master-1 master-1.{{ cluster_name }}.{{ root_domain }}:22623 check
+    server master-2 master-2.{{ cluster_name }}.{{ root_domain }}:22623 check
+
+
+
+frontend {{ cluster_name }}-router-http
+    mode tcp
+    option tcplog
+    # option forwardfor
+    bind apps.{{ cluster_name }}.{{ root_domain }}:80
+    default_backend {{ cluster_name }}-router-http
+
+backend {{ cluster_name }}-router-http
+    balance source
+    mode tcp
+    server infnod-0 infnod-0.{{ cluster_name }}.{{ root_domain }}:80 check
+    server infnod-1 infnod-1.{{ cluster_name }}.{{ root_domain }}:80 check
+
+
+
+frontend {{ cluster_name }}-router-https
+    mode tcp
+    option tcplog
+    # option forwardfor
+    bind apps.{{ cluster_name }}.{{ root_domain }}:443
+    default_backend {{ cluster_name }}-router-https
+
+backend {{ cluster_name }}-router-https
+    balance source
+    mode tcp
+    server infnod-0 infnod-0.{{ cluster_name }}.{{ root_domain }}:443 check
+    server infnod-1 infnod-1.{{ cluster_name }}.{{ root_domain }}:443 check

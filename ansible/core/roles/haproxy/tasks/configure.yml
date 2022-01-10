@@ -1,0 +1,33 @@
+---
+# tasks file for haproxy
+
+- name: Copy haproxy.cfg and reload HAProxy
+  ansible.builtin.template:
+    src: "haproxy.cfg.j2"
+    dest: "/etc/haproxy/haproxy.cfg"
+    owner: "{{ haproxy_user }}"
+    group: "{{ haproxy_group }}"
+    mode: '0644'
+    validate: haproxy -f %s -c -q
+  notify: Restart HAProxy
+
+- name: Create HAProxy error templates directory
+  ansible.builtin.file:
+    path: /etc/haproxy/errors
+    state: directory
+    mode: '0755'
+
+- name: Copy error pages
+  ansible.builtin.copy:
+    src: "errors/"
+    dest: "/etc/haproxy/errors/"
+    owner: "{{ haproxy_user }}"
+    group: "{{ haproxy_group }}"
+    mode: '0644'
+  notify: Restart HAProxy
+
+- name: Ensure HAProxy is enabled and running
+  ansible.builtin.service:
+    name: haproxy
+    state: started
+    enabled: true
