@@ -1,0 +1,10 @@
+---
+
+- name: Configure PXE server
+  hosts: pxeservers
+  become: false
+  gather_facts: true
+
+  roles:
+    - role: oswee.custom.pxe
+    - role: oswee.custom.matchbox

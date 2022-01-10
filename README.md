@@ -12,6 +12,11 @@ This is sandbox monorepository to test Bazel in action
 ## Project status
 
 Until this message is removed, the status is WIP.
+
+UPDATE 2022 JAN:
+Looking into merging infrastructure code into this repository.
+
+UPDATE 2021 AUG:
 Currently i am discoverig integration with Kubernetes. Ultimate goal
 is to let Bazel manage all image production and container provisioning. For
 local development it seems that i will utilize Minikube. For image registry -
@@ -59,7 +64,7 @@ Critical requirements:
 
 - Install latest NodeJS on the system
 - Install Yarn globally
-- Make sure you have NO ANY Bazel related binaries instelled on the system.
+- Make sure you have NO ANY Bazel related binaries installed on the system (there are exceptions).
 - Install all NPM modules
 
 Recommended requirements:

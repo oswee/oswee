@@ -1,0 +1,12 @@
+---
+
+hostname: 'jenkins'
+host_octet: '249'
+become_user: "ansible"
+ansible_python_interpreter: /usr/bin/python3.9
+mac: "74:6e:92:ae:83:e9"
+dhcp_network_interface: "eth0"
+uuid: "ccef16e2-1e29-4541-8fb9-8cb9d5fe45a8"
+vcpu: "2"
+memory: 2048
+disk_size: 10

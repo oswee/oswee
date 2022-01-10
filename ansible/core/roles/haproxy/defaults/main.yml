@@ -1,0 +1,11 @@
+---
+# defaults file for haproxy
+
+haproxy_user: haproxy
+haproxy_group: haproxy
+
+root_domain: oswee.com
+hostname: bastion
+network: 192.168.1
+host: 250
+cluster_name: dev
