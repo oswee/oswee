@@ -1,2 +1,6 @@
 ---
 # tasks file for sddm
+#
+# TODO:
+# - Systemd unit
+# - Theme
