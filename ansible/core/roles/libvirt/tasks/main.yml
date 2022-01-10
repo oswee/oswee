@@ -1,0 +1,19 @@
+---
+# tasks file for libvirt
+
+- name: Install
+  import_tasks: install.yml
+  tags:
+    - libvirt:setup
+    - libvirt:setup:install
+
+- name: Config
+  import_tasks: configure.yml
+  tags:
+    - libvirt:setup
+    - libvirt:setup:config
+
+# - name: Remove
+#   import_tasks: remove.yml
+#   tags:
+#     - libvirt:remove
