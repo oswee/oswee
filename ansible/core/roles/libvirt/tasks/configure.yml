@@ -34,6 +34,8 @@
     xml: '{{ lookup("template", "network/bridge.xml.j2") }}'
 
 - name: Turn On packet forwarding
+  become: true
+  ansible.builtin.lineinfile:
   ansible.posix.sysctl:
     name: net.ipv4.ip_forward
     value: '1'
