@@ -16,6 +16,18 @@ ansible-galaxy collection install -r collections.yml -f
 
 `-f` flag will force collection upgrade.
 
+To install all collections from this repository use
+
+```bash
+ ansible-galaxy collection install git+https://github.com/oswee/prime.git#/ansible/,master
+```
+
+To install only `core` collection from this repository use
+
+```bash
+ ansible-galaxy collection install git+https://github.com/oswee/prime.git#/ansible/core/,master
+```
+
 ### Skeleton (Role bootstrapping)
 
 To bootstrap new roles you can use Skeleton.
