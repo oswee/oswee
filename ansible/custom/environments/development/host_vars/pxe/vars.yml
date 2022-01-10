@@ -1,0 +1,13 @@
+---
+
+hostname: 'pxe'
+host_octet: '251'
+become_user: "ansible"
+ansible_python_interpreter: /usr/bin/python3.9
+mac: "f4:ce:30:a8:12:93"
+dhcp_network_interface: "eth0"
+uuid: "f0107bf7-97bd-4a76-bb7e-95144c11b4f6"
+vcpu: "2"
+memory: 1024
+disk_size: 5
+# ansible_host_key_checking: no

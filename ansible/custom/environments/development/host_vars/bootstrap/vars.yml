@@ -1,0 +1,9 @@
+---
+
+hostname: "bootstrap"
+host_octet: "249"
+uuid: "0ae7c565-029a-43e4-a13a-84de3d67bb46"
+vcpu: "2"
+memory: 2048
+disk_size: 20
+mac: "f0:40:2d:39:84:1f"

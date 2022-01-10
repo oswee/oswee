@@ -1,0 +1,15 @@
+---
+
+ansible_python_interpreter: /usr/bin/python3.9
+ansible_ssh_common_args: "-F environments/production/.ssh/config"
+
+tls_certs: '{{ vault_tls_certs }}'
+dns_domain_name: '{{ vault_dns_domain_name }}'
+dns_domain_search: '{{ vault_dns_domain_name }}'
+cluster_name: 'prod'
+cluster_network: '192.168.69'
+gateway_host_octet: '1'
+
+
+# These should be removed:
+network: '192.168.69'
