@@ -1,0 +1,9 @@
+---
+
+- name: Configure Jenkins server
+  hosts: buildservers
+  become: false
+  gather_facts: true
+
+  roles:
+    - role: oswee.custom.jenkins

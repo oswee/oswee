@@ -1,0 +1,95 @@
+---
+
+- name: Configure Workstation
+  hosts: workstations
+  connection: local
+  become: false
+  gather_facts: true
+
+  # collections:
+  #   - oswee.ansible
+
+  roles:
+    # - role: oswee.core.golang
+    #   tags:
+    #     - golang
+    #   vars:
+    #     golang_version: 1.16.6
+    # - role: minio
+    #   tags:
+    #     - minio
+    # - role: oswee.core.vault
+    #   tags:
+    #     - vault
+    # - role: oswee.core.terraform
+    #   tags:
+    #     - terraform
+    #   vars:
+    #     terraform_version: 1.0.3
+    # - role: oswee.core.bazel
+    #   tags:
+    #     - bazel
+    # - role: oswee.core.nodejs
+    #   tags:
+    #     - nodejs
+    # - role: oswee.core.helm
+    #   tags:
+    #     - helm
+    # - role: oswee.core.nvim
+    #   tags:
+    #     - nvim
+    # - role: oswee.core.sway
+    #   tags:
+    #     - sway
+    # - role: oswee.core.swaylock
+    #   tags:
+    #     - swaylock
+    # - role: oswee.core.sddm
+    #   tags:
+    #     - sddm
+    # - role: oswee.core.fonts
+    #   tags:
+    #     - fonts
+    # - role: oswee.core.zsh
+    #   tags:
+    #     - zsh
+    # - role: oswee.core.obsidian
+    #   tags:
+    #     - obsidian
+    # - role: oswee.core.alacritty
+    #   tags:
+    #     - alacritty
+    # - role: oswee.core.git
+    #   tags:
+    #     - git
+    # - role: oswee.core.tmux
+    #   tags:
+    #     - tmux
+    # - role: oswee.core.slack
+    #   tags:
+    #     - slack
+    - role: oswee.core.libvirt
+      tags:
+        - libvirt
+      vars:
+        libvirt_dir_iso: "/home/{{ ansible_user_id }}/kvm/iso"
+        libvirt_dir_images: "/home/{{ ansible_user_id }}/kvm/images"
+        libvirt_dir_pools: "/home/{{ ansible_user_id }}/kvm/pools"
+    # - role: oswee.core.mariadb
+    #   tags:
+    #     - mariadb
+    # - role: quay
+    #   tags:
+    #     - quay
+    # - role: haproxy
+    #   tags:
+    #     - haproxy
+    # - role: oswee.core.vagrant
+    #   tags:
+    #     - vagrant
+    # - role: oswee.core.molecule
+    #   tags:
+    #     - molecule
+    # - role: oswee.core.github
+    #   tags:
+    #     - github
