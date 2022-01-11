@@ -22,4 +22,5 @@ galaxy_info:
     - 'dzintars'
     - 'fedora'
 
-dependencies: []
+dependencies:
+  - role: oswee.core.libvirt

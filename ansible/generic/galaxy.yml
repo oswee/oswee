@@ -1,5 +1,6 @@
+---
 namespace: oswee
-name: core
+name: generic
 version: 0.0.1
 readme: README.md
 authors:
