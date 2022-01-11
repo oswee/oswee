@@ -48,9 +48,6 @@
     # - role: haproxy
     #   tags:
     #     - haproxy
-    # - role: oswee.core.vagrant
-    #   tags:
-    #     - vagrant
     # - role: oswee.core.molecule
     #   tags:
     #     - molecule
