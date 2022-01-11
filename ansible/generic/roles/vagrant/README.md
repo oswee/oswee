@@ -7,6 +7,7 @@ It is not finished, because there is some upstream issues related to Fedora setu
 
 Follow instructions from this [issue](https://github.com/hashicorp/vagrant/issues/11020#issuecomment-974222044)
 But be aware that those instructions will install older version of Vagrant than available in upstream.
+Another (issue)[https://github.com/vagrant-libvirt/vagrant-libvirt/issues/1031#issuecomment-517578903]
 
 ## Role Variables
 

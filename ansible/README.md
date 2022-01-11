@@ -22,10 +22,10 @@ To install all collections from this repository use
  ansible-galaxy collection install git+https://github.com/oswee/prime.git#/ansible/,master
 ```
 
-To install only `core` collection from this repository use
+To install only `generic` collection from this repository use
 
 ```bash
- ansible-galaxy collection install git+https://github.com/oswee/prime.git#/ansible/core/,master
+ ansible-galaxy collection install git+https://github.com/oswee/prime.git#/ansible/generic/,master
 ```
 
 ### Skeleton (Role bootstrapping)

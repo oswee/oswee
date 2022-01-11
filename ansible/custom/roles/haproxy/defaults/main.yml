@@ -1,0 +1,5 @@
+---
+# defaults file for haproxy
+
+haproxy_user: "haproxy"
+haproxy_group: "haproxy"
