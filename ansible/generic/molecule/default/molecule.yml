@@ -3,7 +3,7 @@ dependency:
   name: galaxy
   # enabled: false
   options:
-    # requirements-file: collections.yaml  # Collections
+    # requirements-file: requirements.yaml  # Collections
     # role-file: requirements.yaml
     ignore-errors: true
     # ignore-certs: True
@@ -18,10 +18,10 @@ lint: |
   yamllint -f colored .
   ansible-lint --force-color .
 platforms:
-  - name: f34-core
+  - name: f34-generic
     box: fedora/34-cloud-base
     cpus: 2
-    memory: 2048
+    memory: 1024
     instance_raw_config_args:
       - 'vagrant.plugins = ["vagrant-libvirt"]'
     provider_raw_config_args:
@@ -60,7 +60,7 @@ provisioner:
     PY_COLORS: true
     ANSIBLE_FORCE_COLOR: true
     # ANSIBLE_DEBUG: true
-    # ANSIBLE_CONFIG: './ansible.cfg'
+    # ANSIBLE_CONFIG: ../../ansible.cfg
     # ANSIBLE_ROLES_PATH: "./roles"
     # ANSIBLE_COLLECTIONS_PATH: "./collections"
   log: true

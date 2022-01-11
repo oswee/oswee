@@ -15,9 +15,9 @@ to see how to install collection directly from GitHub. I have no plans to use An
 
 This role depends on:
 
-- `oswee.core.nvim` (it will install `oswee.core.yarn/nodejs` as well)
-- `oswee.core.golang`
-- `oswee.core.github`
+- `oswee.generic.nvim` (it will install `oswee.generic.yarn/nodejs` as well)
+- `oswee.generic.golang`
+- `oswee.generic.github`
 
 For a up-to-date list of dependencies visit `meta/main.yaml` file.
 
@@ -25,7 +25,7 @@ For a up-to-date list of dependencies visit `meta/main.yaml` file.
 
     - hosts: workstation
       roles:
-         - { role: oswee.workstation.nvim }
+         - { role: oswee.custom.nvim }
 
 ## License
 

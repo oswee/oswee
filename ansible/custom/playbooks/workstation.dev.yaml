@@ -32,7 +32,7 @@
     # - role: oswee.core.helm
     #   tags:
     #     - helm
-    - role: oswee.core.libvirt
+    - role: oswee.generic.libvirt
       tags:
         - libvirt
       vars:
@@ -48,6 +48,6 @@
     # - role: haproxy
     #   tags:
     #     - haproxy
-    - role: oswee.core.molecule
+    - role: oswee.generic.molecule
       tags:
         - molecule

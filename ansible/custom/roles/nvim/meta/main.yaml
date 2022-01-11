@@ -1,6 +1,7 @@
+---
 galaxy_info:
-  namespace: oswee
-  role_name: nvim
+  namespace: 'oswee'
+  role_name: 'nvim'
   version: '0.0.1'
   author: 'Dzintars Klavins'
   description: 'Ansible Galaxy role to maintain Neovim'
@@ -8,12 +9,12 @@ galaxy_info:
 
   license: 'Apache-2.0'
 
-  min_ansible_version: '2.11'
+  min_ansible_version: '2.12'
 
   platforms:
     - name: Fedora
       versions:
-        - 34
+        - 35
 
   galaxy_tags:
     - 'nvim'
@@ -22,6 +23,6 @@ galaxy_info:
     - 'fedora'
 
 dependencies:
-  - role: oswee.core.nvim
-  - role: oswee.core.golang
-  - role: oswee.core.github
+  - role: oswee.generic.nvim
+  - role: oswee.generic.golang
+  - role: oswee.generic.github
