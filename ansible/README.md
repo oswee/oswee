@@ -97,8 +97,9 @@ No any plans of supporting Docker.
 There could be issues with OPENSSL library mismatch between Vagrant ruby gems and the
 system libraries. The solution was to download libssl, build it and to copy libk5crypto files into
 `/opt/vagrant/embedded/lib64` directory.
-Follow the Fedora instructions listed in `molecule-libvirt` repository readme.
+Follow the Fedora instructions listed in [molecule-libvirt](https://github.com/ansible-community/molecule-libvirt) repository readme.
 This [issue](https://github.com/hashicorp/vagrant/issues/11020) is the primary source to the solution
+UPDATE: https://github.com/hashicorp/vagrant/issues/11020#issuecomment-974222044
 
 If Vagrant is complaining about inability to create `virbr0` network, most likely it is worth to re-run
 `oswee.general.libvirt` role.
