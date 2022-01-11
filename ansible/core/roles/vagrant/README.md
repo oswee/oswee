@@ -1,43 +1,37 @@
-Vagrant
-=========
+# Vagrant
 
 This role "should" setup Vagrant for KVM with vagrant-libvirt plugin.
+It is not finished, because there is some upstream issues related to Fedora setup.
 
-Requirements
-------------
+## Requirements
 
-<!-- Any pre-requisites that may not be covered by Ansible itself or the role should be mentioned here. For instance, if the -->
-<!-- role uses the EC2 module, it may be a good idea to mention in this section that the boto package is required. -->
+Follow instructions from this [issue](https://github.com/hashicorp/vagrant/issues/11020#issuecomment-974222044)
+But be aware that those instructions will install older version of Vagrant than available in upstream.
 
-Role Variables
---------------
+## Role Variables
 
-<!-- A description of the settable variables for this role should go here, including any variables that are in -->
-<!-- defaults/main.yml, vars/main.yml, and any variables that can/should be set via parameters to the role. Any variables -->
-<!-- that are read from other roles and/or the global scope (ie. hostvars, group vars, etc.) should be mentioned here as -->
-<!-- well. -->
+Visit `./defaults/main.yml` file.
 
-Dependencies
-------------
+## Dependencies
 
-Currently there is no dependencies, but it is expected to have dependency on separate Libvirt role.
+See the `./meta/main.yml` for up-to-date list.
 
-Example Playbook
-----------------
+- role: oswee.core.libvirt
 
-<!-- Including an example of how to use your role (for instance, with variables passed in as parameters) is always nice for -->
-<!-- users too: -->
+## Example Playbook
 
-<!-- - hosts: servers -->
-<!-- roles: -->
-<!-- - { role: username.rolename, x: 42 } -->
+- hosts: servers
+  roles:
+  - { role: oswee.core.vagrant, vagrant_version: '2.2.19' }
 
-License
--------
+## License
 
-BSD
+MIT
 
-Author Information
-------------------
+## Author Information
 
 Dzintars Klavins
+
+## TODO
+
+- Make 2 setups available: legacy and upstream.
