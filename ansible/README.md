@@ -31,7 +31,7 @@ To install only `core` collection from this repository use
 ### Skeleton (Role bootstrapping)
 
 To bootstrap new roles you can use Skeleton.
-Use `ansible-galaxy init --role-skeleton=.skeleton namespace/roles/role-name` from the root of this repository.
+Use `ansible-galaxy init --role-skeleton=.skeleton namespace/roles/role-name` from the `./ansible/` directory.
 `namespace/role/` prefix will be stripped in the output files.
 All template files are located in `./.skeleton/*` directory.
 

@@ -1,13 +1,10 @@
 ---
 
-- name: Configure Workstation
+- name: Configure Workstation for development
   hosts: workstations
   connection: local
   become: false
   gather_facts: true
-
-  # collections:
-  #   - oswee.ansible
 
   roles:
     # - role: oswee.core.golang
@@ -35,39 +32,6 @@
     # - role: oswee.core.helm
     #   tags:
     #     - helm
-    # - role: oswee.core.nvim
-    #   tags:
-    #     - nvim
-    # - role: oswee.core.sway
-    #   tags:
-    #     - sway
-    # - role: oswee.core.swaylock
-    #   tags:
-    #     - swaylock
-    # - role: oswee.core.sddm
-    #   tags:
-    #     - sddm
-    # - role: oswee.core.fonts
-    #   tags:
-    #     - fonts
-    # - role: oswee.core.zsh
-    #   tags:
-    #     - zsh
-    # - role: oswee.core.obsidian
-    #   tags:
-    #     - obsidian
-    # - role: oswee.core.alacritty
-    #   tags:
-    #     - alacritty
-    # - role: oswee.core.git
-    #   tags:
-    #     - git
-    # - role: oswee.core.tmux
-    #   tags:
-    #     - tmux
-    # - role: oswee.core.slack
-    #   tags:
-    #     - slack
     - role: oswee.core.libvirt
       tags:
         - libvirt
@@ -90,6 +54,3 @@
     # - role: oswee.core.molecule
     #   tags:
     #     - molecule
-    # - role: oswee.core.github
-    #   tags:
-    #     - github

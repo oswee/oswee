@@ -1,10 +1,10 @@
 ---
 galaxy_info:
   namespace: 'oswee'
-  role_name: 'nvim'
+  role_name: 'molecule'
   version: '0.0.1'
   author: 'Dzintars Klavins'
-  description: 'Ansible role to install Neovim'
+  description: 'Ansible role to install Molecule'
   company: 'Oswee'
 
   license: 'Apache-2.0'
@@ -17,10 +17,10 @@ galaxy_info:
         - 35
 
   galaxy_tags:
-    - 'nvim'
+    - 'molecule'
     - 'oswee'
     - 'dzintars'
     - 'fedora'
 
 dependencies:
-  - role: oswee.core.yarn
+- name: oswee.core.vagrant

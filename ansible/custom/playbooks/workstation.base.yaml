@@ -1,0 +1,42 @@
+---
+
+- name: Configure Workstation Base
+  hosts: workstations
+  connection: local
+  become: false
+  gather_facts: true
+
+  roles:
+    # - role: oswee.core.git
+    #   tags:
+    #     - git
+    # - role: oswee.core.sddm
+    #   tags:
+    #     - sddm
+    # - role: oswee.core.sway
+    #   tags:
+    #     - sway
+    # - role: oswee.core.swaylock
+    #   tags:
+    #     - swaylock
+    # - role: oswee.core.fonts
+    #   tags:
+    #     - fonts
+    # - role: oswee.core.alacritty
+    #   tags:
+    #     - alacritty
+    # - role: oswee.core.zsh
+    #   tags:
+    #     - zsh
+    # - role: oswee.core.tmux
+    #   tags:
+    #     - tmux
+    - role: oswee.custom.nvim
+      tags:
+        - nvim
+    # - role: oswee.core.obsidian
+    #   tags:
+    #     - obsidian
+    # - role: oswee.core.slack
+    #   tags:
+    #     - slack
