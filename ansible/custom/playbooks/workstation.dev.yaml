@@ -48,6 +48,6 @@
     # - role: haproxy
     #   tags:
     #     - haproxy
-    # - role: oswee.core.molecule
-    #   tags:
-    #     - molecule
+    - role: oswee.core.molecule
+      tags:
+        - molecule
