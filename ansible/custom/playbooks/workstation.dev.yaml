@@ -42,9 +42,9 @@
     # - role: quay
     #   tags:
     #     - quay
-    # - role: haproxy
-    #   tags:
-    #     - haproxy
+    - role: oswee.custom.haproxy
+      tags:
+        - haproxy
     - role: oswee.generic.molecule
       tags:
         - molecule
