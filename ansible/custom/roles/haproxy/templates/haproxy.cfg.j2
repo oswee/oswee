@@ -20,7 +20,7 @@ global
 
   # curl https://ssl-config.mozilla.org/ffdhe2048.txt > /path/to/dhparam.pem
   # Be carefull about SELinux. If you get error there.. for debuging use `sudo setenforce 0`
-  # ssl-dh-param-file /home/dzintars/.tls/{{ root_domain }}/dhparam.pem
+  # ssl-dh-param-file /home/dzintars/.tls/{{ dns_domain_name }}/dhparam.pem
   tune.ssl.default-dh-param 4096
 
 defaults
@@ -105,7 +105,7 @@ frontend https-in
   # If HAProxy does not start, try `sudo setenforce 0` to see if it runs.
   # https://www.haproxy.com/blog/haproxy-2-0-and-beyond/
   # TODO: Organize into separate frontends
-  bind *:443 ssl alpn h2,http/1.1 crt /etc/letsencrypt/live/{{ root_domain }}/haproxy.pem ecdhe secp384r1
+  bind *:443 ssl alpn h2,http/1.1 crt /etc/letsencrypt/live/{{ dns_domain_name }}/haproxy.pem ecdhe secp384r1
   http-response replace-header Location ^http://(.*)$ https://\1
   maxconn 60000
 
@@ -139,32 +139,32 @@ frontend https-in
   # http-response set-header Feature-Policy "geolocation 'none'; midi 'none'; notifications 'none'; push 'none'; sync-xhr 'none'; microphone 'none'; camera 'none'; magnetometer 'none'; gyroscope 'none'; speaker 'none'; vibrate 'none'; fullscreen 'none'; payment 'none'"
 
   # https://serverfault.com/a/677060/440073
-  acl dev.{{ root_domain }}.host hdr(host) -i dev.{{ root_domain }}
-  use_backend dev.{{ root_domain }}.backend if dev.{{ root_domain }}.host
+  acl dev.{{ dns_domain_name }}.host hdr(host) -i dev.{{ dns_domain_name }}
+  use_backend dev.{{ dns_domain_name }}.backend if dev.{{ dns_domain_name }}.host
 
-  acl cloud.{{ root_domain }}.host hdr(host) -i cloud.{{ root_domain }}
-  use_backend cloud.{{ root_domain }}.backend if cloud.{{ root_domain }}.host
+  acl cloud.{{ dns_domain_name }}.host hdr(host) -i cloud.{{ dns_domain_name }}
+  use_backend cloud.{{ dns_domain_name }}.backend if cloud.{{ dns_domain_name }}.host
 
-  acl office.{{ root_domain }}.host hdr(host) -i office.{{ root_domain }}
-  use_backend office.{{ root_domain }}.backend if office.{{ root_domain }}.host
+  acl office.{{ dns_domain_name }}.host hdr(host) -i office.{{ dns_domain_name }}
+  use_backend office.{{ dns_domain_name }}.backend if office.{{ dns_domain_name }}.host
 
-  acl my.{{ root_domain }}.host hdr(Host) -i my.{{ root_domain }}
-  use_backend my.{{ root_domain }}.backend if my.{{ root_domain }}.host
+  acl my.{{ dns_domain_name }}.host hdr(Host) -i my.{{ dns_domain_name }}
+  use_backend my.{{ dns_domain_name }}.backend if my.{{ dns_domain_name }}.host
 
-  # acl api.{{ root_domain }}.host hdr(Host) -i api.{{ root_domain }}
-  # use_backend api.{{ root_domain }}.backend if api.{{ root_domain }}.host
+  # acl api.{{ dns_domain_name }}.host hdr(Host) -i api.{{ dns_domain_name }}
+  # use_backend api.{{ dns_domain_name }}.backend if api.{{ dns_domain_name }}.host
 
-  acl jenkins.{{ root_domain }}.host hdr(Host) -i jenkins.{{ root_domain }}
-  use_backend jenkins.{{ root_domain }}.backend if jenkins.{{ root_domain }}.host
+  acl jenkins.{{ dns_domain_name }}.host hdr(Host) -i jenkins.{{ dns_domain_name }}
+  use_backend jenkins.{{ dns_domain_name }}.backend if jenkins.{{ dns_domain_name }}.host
 
-  acl vault.{{ root_domain }}.host hdr(host) -i vault.{{ root_domain }}
-  use_backend vault.{{ root_domain }}.backend if vault.{{ root_domain }}.host
+  acl vault.{{ dns_domain_name }}.host hdr(host) -i vault.{{ dns_domain_name }}
+  use_backend vault.{{ dns_domain_name }}.backend if vault.{{ dns_domain_name }}.host
 
-  acl s3.{{ root_domain }}.host hdr(host) -i s3.{{ root_domain }}
-  use_backend s3.{{ root_domain }}.backend if s3.{{ root_domain }}.host
+  acl s3.{{ dns_domain_name }}.host hdr(host) -i s3.{{ dns_domain_name }}
+  use_backend s3.{{ dns_domain_name }}.backend if s3.{{ dns_domain_name }}.host
 
-  acl registry.{{ root_domain }}.host hdr(host) -i registry.{{ root_domain }}
-  use_backend registry.{{ root_domain }}.backend if registry.{{ root_domain }}.host
+  acl registry.{{ dns_domain_name }}.host hdr(host) -i registry.{{ dns_domain_name }}
+  use_backend registry.{{ dns_domain_name }}.backend if registry.{{ dns_domain_name }}.host
 
   acl dzintars.dev.host hdr(host) -i dzintars.dev
   use_backend dzintars.dev.backend if dzintars.dev.host
@@ -182,82 +182,82 @@ frontend https-in
 # Backends
 # **************************************************************
 
-backend my.{{ root_domain }}.backend
+backend my.{{ dns_domain_name }}.backend
   balance roundrobin
   http-request add-header X-Forwarded-Proto https
   compression algo gzip
   compression type text/html text/plain text/css
   # https://serverfault.com/a/887396/440073
-  # option httpchk HEAD / HTTP/1.1\r\nHost:\ my.{{ root_domain }}
+  # option httpchk HEAD / HTTP/1.1\r\nHost:\ my.{{ dns_domain_name }}
   server {{ hostname }} {{ network }}.{{ host_octet }}:8081 check
 
-backend dev.{{ root_domain }}.backend
+backend dev.{{ dns_domain_name }}.backend
   balance roundrobin
   http-request add-header X-Forwarded-Proto https
-  # option httpchk HEAD / h2,HTTP/1.1\r\nHost:\ dev.{{ root_domain }}
-  # option httpchk HEAD / HTTP/1.1\r\nHost:\ dev.{{ root_domain }}
+  # option httpchk HEAD / h2,HTTP/1.1\r\nHost:\ dev.{{ dns_domain_name }}
+  # option httpchk HEAD / HTTP/1.1\r\nHost:\ dev.{{ dns_domain_name }}
   server {{ hostname }} 127.0.0.1:3000 check
   # server {{ hostname }} 127.0.0.1:3000 ssl verify none alpn h2,HTTP/1.1 check
 
-backend api.{{ root_domain }}.backend
+backend api.{{ dns_domain_name }}.backend
   balance roundrobin
   http-request add-header X-Forwarded-Proto https
-  # option httpchk HEAD / HTTP/1.1\r\nHost:\ api.{{ root_domain }}
+  # option httpchk HEAD / HTTP/1.1\r\nHost:\ api.{{ dns_domain_name }}
   server {{ hostname }} 127.0.0.1:9090 check
 
-backend jenkins.{{ root_domain }}.backend
+backend jenkins.{{ dns_domain_name }}.backend
   balance roundrobin
   http-request add-header X-Forwarded-Proto https
   compression algo gzip
   compression type text/html text/plain text/css
   # https://serverfault.com/a/887396/440073
-  # option httpchk HEAD / HTTP/1.1\r\nHost:\ jenkins.{{ root_domain }}
+  # option httpchk HEAD / HTTP/1.1\r\nHost:\ jenkins.{{ dns_domain_name }}
   server {{ hostname }} {{ network }}.{{ host_octet }}:9093 check
 
-backend vault.{{ root_domain }}.backend
+backend vault.{{ dns_domain_name }}.backend
   balance roundrobin
   http-request add-header X-Forwarded-Proto https
   compression algo gzip
   compression type text/html text/plain text/css
   # https://serverfault.com/a/887396/440073
-  # option httpchk HEAD / HTTP/1.1\r\nHost:\ vault.{{ root_domain }}
+  # option httpchk HEAD / HTTP/1.1\r\nHost:\ vault.{{ dns_domain_name }}
   server {{ hostname }} {{ network }}.{{ host_octet }}:8200 ssl verify none alpn h2,HTTP/1.1 check
 
-backend s3.{{ root_domain }}.backend
+backend s3.{{ dns_domain_name }}.backend
   balance roundrobin
   http-request add-header X-Forwarded-Proto https
   compression algo gzip
   compression type text/html text/plain text/css
   # https://serverfault.com/a/887396/440073
-  # option httpchk HEAD / HTTP/1.1\r\nHost:\ s3.{{ root_domain }}
+  # option httpchk HEAD / HTTP/1.1\r\nHost:\ s3.{{ dns_domain_name }}
   #server {{ hostname }} {{ network }}.{{ host_octet }}:8001 ssl verify none alpn h2,HTTP/1.1 check
   server {{ hostname }} {{ network }}.{{ host_octet }}:8001 check
 
-backend cloud.{{ root_domain }}.backend
+backend cloud.{{ dns_domain_name }}.backend
   balance roundrobin
   http-request add-header X-Forwarded-Proto https
   compression algo gzip
   compression type text/html text/plain text/css
   # https://serverfault.com/a/887396/440073
-  # option httpchk HEAD / HTTP/1.1\r\nHost:\ cloud.{{ root_domain }}
+  # option httpchk HEAD / HTTP/1.1\r\nHost:\ cloud.{{ dns_domain_name }}
   server {{ hostname }} {{ network }}.{{ host_octet }}:8085 check
 
-backend office.{{ root_domain }}.backend
+backend office.{{ dns_domain_name }}.backend
   balance roundrobin
   http-request add-header X-Forwarded-Proto https
   compression algo gzip
   compression type text/html text/plain text/css
   # https://serverfault.com/a/887396/440073
-  # option httpchk HEAD / HTTP/1.1\r\nHost:\ office.{{ root_domain }}
+  # option httpchk HEAD / HTTP/1.1\r\nHost:\ office.{{ dns_domain_name }}
   server {{ hostname }} {{ network }}.{{ host_octet }}:9980 check
 
-backend registry.{{ root_domain }}.backend
+backend registry.{{ dns_domain_name }}.backend
   balance roundrobin
   http-request add-header X-Forwarded-Proto https
   compression algo gzip
   compression type text/html text/plain text/css
   # https://serverfault.com/a/887396/440073
-  # option httpchk HEAD / HTTP/1.1\r\nHost:\ registry.{{ root_domain }}
+  # option httpchk HEAD / HTTP/1.1\r\nHost:\ registry.{{ dns_domain_name }}
   server {{ hostname }} {{ network }}.{{ host_octet }}:9981 check
 
 backend dzintars.dev.backend
@@ -274,7 +274,7 @@ backend merumore.com.backend
   compression algo gzip
   compression type text/html text/plain text/css
   # https://serverfault.com/a/887396/440073
-  # option httpchk HEAD / HTTP/1.1\r\nHost:\ my.{{ root_domain }}
+  # option httpchk HEAD / HTTP/1.1\r\nHost:\ my.{{ dns_domain_name }}
   server {{ hostname }} {{ network }}.{{ host_octet }}:8082 check
 
 backend websocket.backend
@@ -291,7 +291,7 @@ backend websocket.backend
   #   acl ws_valid_protocol hdr(Sec-WebSocket-Protocol) echo-protocol
   #   http-request deny if ! ws_valid_protocol
   ## websocket health checking
-  option httpchk GET / HTTP/1.1\r\nHost:\ api.{{ root_domain }}\r\nConnection:\ Upgrade\r\nUpgrade:\ websocket\r\nSec-WebSocket-Key:\ haproxy\r\nSec-WebSocket-Version:\ 13\r\nSec-WebSocket-Protocol:\ echo-protocol
+  option httpchk GET / HTTP/1.1\r\nHost:\ api.{{ dns_domain_name }}\r\nConnection:\ Upgrade\r\nUpgrade:\ websocket\r\nSec-WebSocket-Key:\ haproxy\r\nSec-WebSocket-Version:\ 13\r\nSec-WebSocket-Protocol:\ echo-protocol
   http-check expect status 101
   server {{ hostname }} 127.0.0.1:9090 maxconn 30000 weight 10 cookie {{ hostname }} check
   #server websrv2 192.168.10.12:8080 maxconn 30000 weight 10 cookie websrv2 check
