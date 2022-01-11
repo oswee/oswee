@@ -23,4 +23,4 @@ galaxy_info:
     - 'fedora'
 
 dependencies:
-- name: oswee.core.vagrant
+- name: oswee.generic.vagrant

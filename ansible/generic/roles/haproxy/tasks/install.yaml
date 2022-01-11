@@ -10,28 +10,28 @@
 - name: Install supplementary packages
   become: true
   ansible.builtin.dnf:
-    name: "{{ item }}"
+    name: '{{ item }}'
     state: present
-  loop: "{{ packages.redhat }}"
+  loop: '{{ packages.redhat }}'
 
 - name: Turn On packet forwarding in order HAProxy to start
   become: true
   ansible.posix.sysctl:
     name: net.ipv4.ip_forward
-    value: "1"
+    value: '1'
     sysctl_set: true
 
 - name: Turn On Non-Local binding in order HAProxy to start
   become: true
   ansible.posix.sysctl:
     name: net.ipv4.ip_nonlocal_bind
-    value: "1"
+    value: '1'
     sysctl_set: true
 
 - name: Allowing firewall rules for services
   become: true
   ansible.posix.firewalld:
-    service: "{{ item }}"
+    service: '{{ item }}'
     permanent: true
     state: enabled
   loop:
@@ -41,7 +41,7 @@
 - name: Allowing firewall rules for ports
   become: true
   ansible.posix.firewalld:
-    port: "{{ item }}"
+    port: '{{ item }}'
     permanent: true
     state: enabled
   notify: Restart firewalld
@@ -68,7 +68,7 @@
 - name: Allow haproxy to bind to custom ports with SELinux
   become: true
   community.general.seport:
-    ports: "{{ item }}"
+    ports: '{{ item }}'
     proto: tcp
     setype: http_port_t
     state: present
@@ -77,8 +77,9 @@
     - 9000
     - 22623
 
-# - name: Ensure HAProxy is enabled and running
-#   ansible.buintin.service:
-#     name: haproxy
-#     state: started
-#     enabled: true
+- name: Ensure HAProxy is enabled and running
+  become: true
+  ansible.buintin.service:
+    name: haproxy
+    state: started
+    enabled: true
