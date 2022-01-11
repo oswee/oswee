@@ -1,0 +1,12 @@
+---
+# tasks file for haproxy
+
+- name: Install
+  import_tasks: install.yaml
+  tags:
+    - install
+
+# - name: Cleanup
+#   import_tasks: cleanup.yaml
+#   tags:
+#     - cleanup

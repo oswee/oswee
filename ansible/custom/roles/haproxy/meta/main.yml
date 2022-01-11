@@ -4,7 +4,7 @@ galaxy_info:
   role_name: 'haproxy'
   version: '0.0.1'
   author: 'Dzintars Klavins'
-  description: 'Ansible role to maintain HAProxy'
+  description: 'Ansible role to customize HAProxy server'
   company: 'Oswee'
 
   license: 'Apache-2.0'
