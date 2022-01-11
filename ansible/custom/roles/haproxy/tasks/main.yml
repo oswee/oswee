@@ -1,15 +1,15 @@
 ---
 # tasks file for haproxy
 
+- name: Errors
+  import_tasks: config.errors.yaml
+
+- name: TLS
+  import_tasks: config.tls.yaml
+
 - name: Config
   import_tasks: config.yaml
 
 - name: Config cluster
   import_tasks: config.cluster.yaml
   when: haproxy_cluster_setup | default(false) | bool
-
-- name: Errors
-  import_tasks: config.errors.yaml
-
-- name: TLS
-  import_tasks: config.tls.yaml

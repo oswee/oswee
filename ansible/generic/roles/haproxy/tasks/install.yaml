@@ -79,7 +79,7 @@
 
 - name: Ensure HAProxy is enabled and running
   become: true
-  ansible.buintin.service:
+  ansible.builtin.service:
     name: haproxy
     state: started
     enabled: true
