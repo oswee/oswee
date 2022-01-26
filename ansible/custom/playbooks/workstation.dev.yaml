@@ -29,14 +29,14 @@
     # - role: oswee.core.helm
     #   tags:
     #     - helm
-    - role: oswee.generic.libvirt
-      tags:
-        - libvirt
-      vars:
-        libvirt_dir_iso: "/home/{{ ansible_user_id }}/kvm/iso"
-        libvirt_dir_images: "/home/{{ ansible_user_id }}/kvm/images"
-        libvirt_dir_pools: "/home/{{ ansible_user_id }}/kvm/pools"
-    # - role: oswee.core.mariadb
+    # - role: oswee.generic.libvirt
+    #   tags:
+    #     - libvirt
+    #   vars:
+    #     libvirt_dir_iso: "/home/{{ ansible_user_id }}/kvm/iso"
+    #     libvirt_dir_images: "/home/{{ ansible_user_id }}/kvm/images"
+    #     libvirt_dir_pools: "/home/{{ ansible_user_id }}/kvm/pools"
+    # - role: oswee.generic.mariadb
     #   tags:
     #     - mariadb
     # - role: quay
@@ -45,6 +45,6 @@
     - role: oswee.custom.haproxy
       tags:
         - haproxy
-    - role: oswee.generic.molecule
-      tags:
-        - molecule
+    # - role: oswee.generic.molecule
+    #   tags:
+    #     - molecule

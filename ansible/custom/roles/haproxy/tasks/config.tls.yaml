@@ -1,18 +1,18 @@
 ---
 # tasks file for haproxy
 
-- name: Ensure certs directory exists
+- name: config | Ensure certs directory exists
   become: true
   file:
-    path: '/etc/letsencrypt/live/{{ root_domain }}'
+    path: '/etc/letsencrypt/live/{{ dns_domain_name }}'
     state: directory
     mode: '0755'
 
-- name: Copy private SSL certificates from Ansible Vault
+- name: config | Copy private SSL certificates from Ansible Vault
   become: true
   ansible.builtin.copy:
     content: '{{ tls_certs[0].content }}'
-    dest: '/etc/letsencrypt/live/{{ root_domain }}/haproxy.pem'
+    dest: '/etc/letsencrypt/live/{{ dns_domain_name }}/haproxy.pem'
     owner: '{{ haproxy_user }}'
     group: '{{ haproxy_group }}'
     mode: 'u=rw,g=r,o='

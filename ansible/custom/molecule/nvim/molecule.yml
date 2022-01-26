@@ -18,8 +18,9 @@ lint: |
   yamllint -f colored .
   ansible-lint --force-color .
 platforms:
-  - name: 'f34-custom'
-    box: fedora/34-cloud-base
+  - name: 'workstation'
+    box: fedora/35-cloud-base
+    box_version: 35.20211026.0
     cpus: 2
     memory: 4096
     instance_raw_config_args:
@@ -36,6 +37,9 @@ platforms:
     config_options:
       ssh.keep_alive: true
       ssh.remote_user: "'vagrant'"
+    groups:
+      - workstations
+      - all
 provisioner:
   name: ansible
   playbooks:

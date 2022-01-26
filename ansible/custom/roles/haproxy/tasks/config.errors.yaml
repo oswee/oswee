@@ -1,7 +1,7 @@
 ---
 # tasks file for haproxy
 
-- name: Copy error pages
+- name: config | Copy error pages
   become: true
   ansible.builtin.copy:
     src: 'errors/'

@@ -1,0 +1,21 @@
+---
+# handlers file for roles/mariadb
+
+- name: mariadb-restart
+  become: true
+  service:
+    name: '{{ service_mariadb }}'
+    state: restarted
+
+- name: mariadb-start
+  become: true
+  service:
+    name: '{{ service_mariadb }}'
+    state: started
+    enabled: true
+
+- name: mariadb-stop
+  become: true
+  service:
+    name: '{{ service_mariadb }}'
+    state: stopped

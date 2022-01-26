@@ -105,7 +105,7 @@ frontend https-in
   # If HAProxy does not start, try `sudo setenforce 0` to see if it runs.
   # https://www.haproxy.com/blog/haproxy-2-0-and-beyond/
   # TODO: Organize into separate frontends
-  bind *:443 ssl alpn h2,http/1.1 crt /etc/letsencrypt/live/{{ dns_domain_name }}/haproxy.pem ecdhe secp384r1
+  bind *:443 ssl alpn h2,http/1.1 crt /etc/letsencrypt/live/{{ dns_domain_name }}/haproxy.pem crt /etc/letsencrypt/live/{{ dns_dev_domain_name }}/haproxy.pem ecdhe secp384r1
   http-response replace-header Location ^http://(.*)$ https://\1
   maxconn 60000
 
@@ -139,8 +139,8 @@ frontend https-in
   # http-response set-header Feature-Policy "geolocation 'none'; midi 'none'; notifications 'none'; push 'none'; sync-xhr 'none'; microphone 'none'; camera 'none'; magnetometer 'none'; gyroscope 'none'; speaker 'none'; vibrate 'none'; fullscreen 'none'; payment 'none'"
 
   # https://serverfault.com/a/677060/440073
-  acl dev.{{ dns_domain_name }}.host hdr(host) -i dev.{{ dns_domain_name }}
-  use_backend dev.{{ dns_domain_name }}.backend if dev.{{ dns_domain_name }}.host
+  acl front.{{ dns_dev_domain_name }}.host hdr(host) -i front.{{ dns_dev_domain_name }}
+  use_backend front.{{ dns_dev_domain_name }}.backend if front.{{ dns_dev_domain_name }}.host
 
   acl cloud.{{ dns_domain_name }}.host hdr(host) -i cloud.{{ dns_domain_name }}
   use_backend cloud.{{ dns_domain_name }}.backend if cloud.{{ dns_domain_name }}.host
@@ -150,6 +150,9 @@ frontend https-in
 
   acl my.{{ dns_domain_name }}.host hdr(Host) -i my.{{ dns_domain_name }}
   use_backend my.{{ dns_domain_name }}.backend if my.{{ dns_domain_name }}.host
+
+  acl my.{{ dns_dev_domain_name }}.host hdr(Host) -i my.{{ dns_dev_domain_name }}
+  use_backend my.{{ dns_dev_domain_name }}.backend if my.{{ dns_dev_domain_name }}.host
 
   # acl api.{{ dns_domain_name }}.host hdr(Host) -i api.{{ dns_domain_name }}
   # use_backend api.{{ dns_domain_name }}.backend if api.{{ dns_domain_name }}.host
@@ -189,9 +192,18 @@ backend my.{{ dns_domain_name }}.backend
   compression type text/html text/plain text/css
   # https://serverfault.com/a/887396/440073
   # option httpchk HEAD / HTTP/1.1\r\nHost:\ my.{{ dns_domain_name }}
-  server {{ hostname }} {{ network }}.{{ host_octet }}:8081 check
+  server {{ hostname }} 127.0.0.1:8081 check
 
-backend dev.{{ dns_domain_name }}.backend
+backend my.{{ dns_dev_domain_name }}.backend
+  balance roundrobin
+  http-request add-header X-Forwarded-Proto https
+  compression algo gzip
+  compression type text/html text/plain text/css
+  # https://serverfault.com/a/887396/440073
+  # option httpchk HEAD / HTTP/1.1\r\nHost:\ my.{{ dns_dev_domain_name }}
+  server {{ hostname }} 127.0.0.1:8081 check
+
+backend front.{{ dns_dev_domain_name }}.backend
   balance roundrobin
   http-request add-header X-Forwarded-Proto https
   # option httpchk HEAD / h2,HTTP/1.1\r\nHost:\ dev.{{ dns_domain_name }}

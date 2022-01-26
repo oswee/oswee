@@ -17,48 +17,38 @@ lint: |
   set -e
   yamllint -f colored .
   ansible-lint --force-color .
-platforms:
-  - name: f34-custom
-    box: fedora/34-cloud-base
-    cpus: 2
-    memory: 2048
-    instance_raw_config_args:
-      - 'vagrant.plugins = ["vagrant-libvirt"]'
-    provider_raw_config_args:
-      - "cpu_mode = 'host-passthrough'"
-      - "disk_bus = 'virtio'"
-      - "nic_model_type = 'virtio'"
-      - "video_type = 'virtio'"
-      - "disk_driver :cache => 'writeback'"
-      - "storage :file, bus: 'virtio', cache: 'writeback'"
-    provider_options:
-      video_type: "'vga'"
-    config_options:
-      ssh.keep_alive: true
-      ssh.remote_user: "'vagrant'"
 provisioner:
   name: ansible
+  inventory:
+    links:
+      # hosts: ../../environments/development/hosts
+      group_vars: ../../environments/development/group_vars/
+      host_vars: ../../environments/development/host_vars/
   playbooks:
     prepare: prepare.yml
     converge: converge.yml
   config_options:
     defaults:
+      vault_password_file: "$HOME/.ansible/.vault.key"
       stdout_callback: 'yaml'  # To get pretty output
       bin_ansible_callbacks: true
       interpreter_python: 'python3'
       verbosity: 1
     ssh_connection:
-      pipelining: false
+      pipelining: true
+      # ssh_args: -o ControlMaster=auto -o ControlPersist=600s
   options:
     vvv: true
     # vault-id: '@$HOME/.ansible/.vault.key'
+  # ansible_args:
+  #   - --inventory=myinventory.yaml
   connection_options:
     ansible_ssh_user: vagrant
-    # ansible_become: true
     ansible_connection: smart  # Override the connection: local
+    # ansible_ssh_common_args: -o IdentitiesOnly=no
   env:
     PY_COLORS: true
-    ANSIBLE_FORCE_COLOR: true
+    # ANSIBLE_FORCE_COLOR: true
     # ANSIBLE_DEBUG: true
     # ANSIBLE_CONFIG: './ansible.cfg'
     # ANSIBLE_ROLES_PATH: "./roles"
