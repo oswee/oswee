@@ -151,6 +151,9 @@ frontend https-in
   acl my.{{ dns_domain_name }}.host hdr(Host) -i my.{{ dns_domain_name }}
   use_backend my.{{ dns_domain_name }}.backend if my.{{ dns_domain_name }}.host
 
+  acl my.{{ dns_dev_domain_name }}.host hdr(Host) -i my.{{ dns_dev_domain_name }}
+  use_backend my.{{ dns_dev_domain_name }}.backend if my.{{ dns_dev_domain_name }}.host
+
   # acl api.{{ dns_domain_name }}.host hdr(Host) -i api.{{ dns_domain_name }}
   # use_backend api.{{ dns_domain_name }}.backend if api.{{ dns_domain_name }}.host
 
@@ -189,7 +192,16 @@ backend my.{{ dns_domain_name }}.backend
   compression type text/html text/plain text/css
   # https://serverfault.com/a/887396/440073
   # option httpchk HEAD / HTTP/1.1\r\nHost:\ my.{{ dns_domain_name }}
-  server {{ hostname }} {{ network }}.{{ host_octet }}:8081 check
+  server {{ hostname }} 127.0.0.1:8081 check
+
+backend my.{{ dns_dev_domain_name }}.backend
+  balance roundrobin
+  http-request add-header X-Forwarded-Proto https
+  compression algo gzip
+  compression type text/html text/plain text/css
+  # https://serverfault.com/a/887396/440073
+  # option httpchk HEAD / HTTP/1.1\r\nHost:\ my.{{ dns_dev_domain_name }}
+  server {{ hostname }} 127.0.0.1:8081 check
 
 backend front.{{ dns_dev_domain_name }}.backend
   balance roundrobin
