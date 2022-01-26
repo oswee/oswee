@@ -1,6 +1,7 @@
 ---
 
-# become_user: '{{ vault_become_user }}'
 ansible_become_pass: '{{ vault_ansible_become_pass }}'
 hostname: workstation
 host_octet: "1"
+
+network: 192.168.100
