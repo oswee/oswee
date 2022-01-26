@@ -37,6 +37,9 @@ platforms:
     config_options:
       ssh.keep_alive: true
       ssh.remote_user: "'vagrant'"
+    groups:
+      - workstations
+      - all
 provisioner:
   name: ansible
   playbooks:
