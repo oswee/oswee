@@ -38,4 +38,4 @@
 
     # - name: Ranger
     #   include_role:
-    #     name: oswee.general.ranger
+    #     name: oswee.generic.ranger

@@ -1,0 +1,4 @@
+---
+
+- name: Workstation
+  import_playbook: ../../playbooks/workstation.dev.yaml
