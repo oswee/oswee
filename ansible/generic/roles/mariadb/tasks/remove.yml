@@ -1,0 +1,31 @@
+---
+# tasks file for roles/mariadb
+
+- name: mariadb | disable and stop mariadb.service
+  become: true
+  systemd:
+    name: mariadb
+    enabled: no
+    state: stopped
+
+- name: mariadb | remove rpm dependencies
+  become: true
+  dnf:
+    name: '{{ item }}'
+    state: absent
+  loop:
+    - '{{ mysql_dependencies }}'
+
+- name: mariadb | remove rpm mariadb
+  become: true
+  dnf:
+    name: '{{ item }}'
+    state: absent
+  loop:
+    - '{{ mysql_packages }}'
+
+- name: mariadb | remove directories
+  become: true
+  file:
+    path: /var/lib/mysql
+    state: absent
