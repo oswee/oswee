@@ -12,3 +12,12 @@ So you could place the common config in `git-repo/ansible/collection-a/.config/m
 Molecule documentation lacks the explanation, but this config will not be sourced automatically.
 On top of that, there is no ENV variable to specify base config file.
 The only option ATM is to use `molecule --base-config .config/molecule/config.yml create -s dev`.
+
+## Usage
+
+To test specific role in scenario use
+```bash
+molecule --base-config .config/molecule/config.yml converge -s dev -- --tags nvim
+```
+
+
