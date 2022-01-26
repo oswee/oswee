@@ -39,33 +39,16 @@ All template files are located in `./.skeleton/*` directory.
 
 UPDATE: You should not place Molecule inside of individual role. Molecule now is moved to the collection
 level.
-
-Molecule templates are handled by Skeleton so typically you should not create molecule scenarios manually.
-But if you have some custom requirements, then you can generate molecule scenario boilerplate manually:
-
-CD into specific role `cd ./roles/role-name`
-
-Create `default` scenario (Mandatory)
-
-```bash
-molecule init scenario default -r role-name --driver-name delegated
-```
-
-Create `vagrant` scenario
-
-```bash
-molecule init scenario vagrant -r role-name --driver-name vagrant
-```
-
-Create `podman` scenario
-
-```bash
-molecule init scenario podman -r role-name --driver-name podman
-```
+In general `molecule init` is not used there. You can copy `default` scenario as a base.
 
 ### Molecule dependencies
 
 To resolve Molecule dependencies in local development follow this (discussion)[https://github.com/oswee/ansible/discussions/73].
+
+Make sure you have namespace created `mkdir -p ~/.ansible/collections/ansible_collections/oswee/`
+Then from each collection create symlink like `ln -s $PWD ~/.ansible/collections/ansible_collections/oswee/`
+This will eliminate the need to do `ansible-galaxy collection install git+https://github.com/oswee/prime.git#/ansible/,master -f`
+all the time.
 
 ### Molecule testing
 
