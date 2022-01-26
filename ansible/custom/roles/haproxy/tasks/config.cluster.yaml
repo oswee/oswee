@@ -1,7 +1,7 @@
 ---
 # tasks file for haproxy
 
-- name: Copy cluster setup config
+- name: config | Copy cluster setup config
   become: true
   ansible.builtin.template:
     src: 'haproxy.cluster.cfg.j2'
