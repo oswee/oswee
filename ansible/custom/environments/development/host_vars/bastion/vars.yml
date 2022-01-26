@@ -2,7 +2,6 @@
 
 hostname: 'bastion'
 host_octet: '250'
-ansible_python_interpreter: /usr/bin/python3.9
 mac: "20:4b:76:ef:73:9b"
 become_user: "ansible"
 dns_network_interface: "eth0"

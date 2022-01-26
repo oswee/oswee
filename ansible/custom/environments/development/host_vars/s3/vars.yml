@@ -3,7 +3,6 @@
 hostname: "s3"
 host_octet: 248
 become_user: "ansible"
-ansible_python_interpreter: "/usr/bin/python3.9"
 mac: "46:ea:9d:e4:1a:02"
 dhcp_network_interface: "eth0"
 uuid: "ddd5810c-9216-497a-91dc-aa5163fc567c"
