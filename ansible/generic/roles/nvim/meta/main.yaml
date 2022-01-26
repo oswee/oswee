@@ -23,4 +23,4 @@ galaxy_info:
     - 'fedora'
 
 dependencies:
-  - role: oswee.core.yarn
+  - role: oswee.generic.yarn

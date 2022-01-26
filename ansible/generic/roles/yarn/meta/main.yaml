@@ -22,4 +22,4 @@ galaxy_info:
     - 'fedora'
 
 dependencies:
-  - name: oswee.core.nodejs
+  - name: oswee.generic.nodejs
