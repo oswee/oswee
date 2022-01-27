@@ -5,3 +5,5 @@ host_octet: '250'
 mac: "20:4b:76:ef:73:9b"
 become_user: "ansible"
 dns_network_interface: "eth0"
+
+network: 192.168.100
