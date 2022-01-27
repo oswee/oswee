@@ -1,12 +1,10 @@
 ---
-# roles/gpg/meta/main.yml
-
 galaxy_info:
   namespace: 'oswee'
   role_name: 'gpg'
   version: '0.0.1'
   author: 'Dzintars Klavins'
-  description: 'Ansible role to maintain GnuPG'
+  description: 'Ansible role to install GnuPG'
   company: 'Oswee'
 
   license: 'Apache-2.0'
@@ -16,7 +14,7 @@ galaxy_info:
   platforms:
     - name: Fedora
       versions:
-        - 34
+        - 35
 
   galaxy_tags:
     - 'gpg'
