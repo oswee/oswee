@@ -1,0 +1,9 @@
+---
+# tasks file for git
+
+- name: Remove files and directories
+  ansible.builtin.file:
+    path: "{{ item }}"
+    state: absent
+  loop:
+    - $HOME/.gitconfig

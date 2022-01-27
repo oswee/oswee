@@ -1,0 +1,12 @@
+---
+# tasks file for git
+
+- name: Install
+  import_tasks: install.yaml
+  tags:
+    - git:install
+
+# - name: Cleanup
+#   import_tasks: cleanup.yaml
+#   tags:
+#     - git:cleanup

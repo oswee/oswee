@@ -1,8 +1,8 @@
 ---
-# tasks file for gpg
+# tasks file for git
 
 - name: Install package
   become: true
   ansible.builtin.dnf:
-    name: gnupg2
+    name: git
     state: present
