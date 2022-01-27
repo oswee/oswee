@@ -22,3 +22,26 @@ platforms:
     groups:
       - workstations
       - all
+
+  - name: bastion
+    box: fedora/35-cloud-base
+    box_version: 35.20211026.0
+    cpus: 2
+    memory: 2048
+    instance_raw_config_args:
+      - 'vagrant.plugins = ["vagrant-libvirt"]'
+    provider_raw_config_args:
+      - "cpu_mode = 'host-passthrough'"
+      - "disk_bus = 'virtio'"
+      - "nic_model_type = 'virtio'"
+      - "video_type = 'virtio'"
+      - "disk_driver :cache => 'writeback'"
+      - "storage :file, bus: 'virtio', cache: 'writeback'"
+    provider_options:
+      video_type: "'vga'"
+    config_options:
+      ssh.keep_alive: true
+      ssh.remote_user: "'vagrant'"
+    groups:
+      - bastions
+      - all
