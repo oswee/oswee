@@ -7,3 +7,5 @@
 
   roles:
     - role: oswee.custom.haproxy
+      tags:
+        - haproxy
