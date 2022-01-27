@@ -1,0 +1,15 @@
+---
+# vars file for swaylock
+
+packages:
+  redhat:
+    - gcc
+    - meson
+    - wayland-devel
+    - wayland-protocols-devel
+    - libxkbcommon-devel
+    - cairo-devel
+    - gdk-pixbuf2
+    - pam
+    - scdoc
+    - git
