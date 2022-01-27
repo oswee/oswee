@@ -29,3 +29,7 @@ To login into specific host use
 ```bash
 molecule login -s dev -h bastion
 ```
+
+## Vagrant
+
+To login into VM from the TTY use username `vagrant` and password `vagrant`.
