@@ -3,14 +3,14 @@
 
 - name: config | Ensure Prod certs directory exists
   become: true
-  ansible.become.file:
+  ansible.builtin.file:
     path: '/etc/letsencrypt/live/{{ dns_prod_domain_name }}'
     state: directory
     mode: '0755'
 
 - name: config | Ensure Dev certs directory exists
   become: true
-  ansible.become.file:
+  ansible.builtin.file:
     path: '/etc/letsencrypt/live/{{ dns_dev_domain_name }}'
     state: directory
     mode: '0755'
