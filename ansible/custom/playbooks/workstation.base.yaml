@@ -13,12 +13,12 @@
     # - role: oswee.generic.sddm
     #   tags:
     #     - sddm
-    # - role: oswee.generic.sway
-    #   tags:
-    #     - sway
     # - role: oswee.generic.swaylock
     #   tags:
     #     - swaylock
+    - role: oswee.generic.sway
+      tags:
+        - sway
     # - role: oswee.generic.fonts
     #   tags:
     #     - fonts

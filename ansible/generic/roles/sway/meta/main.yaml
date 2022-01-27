@@ -1,0 +1,25 @@
+---
+galaxy_info:
+  namespace: 'oswee'
+  role_name: 'sway'
+  version: '0.0.1'
+  author: 'Dzintars Klavins'
+  description: 'Ansible role to install Sway'
+  company: 'Oswee'
+
+  license: 'Apache-2.0'
+
+  min_ansible_version: '2.12'
+
+  platforms:
+    - name: Fedora
+      versions:
+        - 35
+
+  galaxy_tags:
+    - 'sway'
+    - 'oswee'
+    - 'dzintars'
+    - 'fedora'
+
+dependencies: []

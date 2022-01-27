@@ -1,0 +1,9 @@
+---
+# tasks file for sway
+
+- name: Install packages
+  become: true
+  ansible.builtin.dnf:
+    name: '{{ item }}'
+    state: present
+  loop: '{{ packages.redhat }}'

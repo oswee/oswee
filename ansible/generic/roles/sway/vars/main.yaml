@@ -1,0 +1,23 @@
+---
+# vars file for sway
+
+packages:
+  redhat:
+    - sway
+    - waybar
+    - wlogout
+    - wdisplays
+    - swayidle
+    - mako
+    - wofi
+    - wl-clipboard
+    - slurp
+    - grim
+    - swappy
+    - breeze-cursor-theme
+    - breeze-icon-theme
+
+mountpoints:
+  - /mnt/external
+  - /mnt/backups
+  - /mnt/nextcloud

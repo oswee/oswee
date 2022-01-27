@@ -1,0 +1,19 @@
+---
+# tasks file for sway
+
+- name: Install
+  import_tasks: install.yaml
+  tags:
+    - sway:setup
+    - sway:setup:install
+
+- name: Config
+  import_tasks: config.yaml
+  tags:
+    - sway:setup
+    - sway:setup:config
+
+# - name: Remove
+#   import_tasks: remove.yaml
+#   tags:
+#     - sway:remove
