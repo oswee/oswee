@@ -20,4 +20,12 @@ To test specific role in scenario use
 molecule --base-config .config/molecule/config.yml converge -s dev -- --tags nvim
 ```
 
+You can also limit the hosts which should be tested to speed up some specific role testing.
+```bash
+molecule --base-config .config/molecule/config.yml converge -s dev -- --limit bastions --tags haproxy
+```
 
+To login into specific host use
+```bash
+molecule login -s dev -h bastion
+```
