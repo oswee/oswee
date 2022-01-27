@@ -7,36 +7,36 @@
   gather_facts: true
 
   roles:
-    # - role: oswee.core.git
-    #   tags:
-    #     - git
-    # - role: oswee.core.sddm
+    - role: oswee.custom.git
+      tags:
+        - git
+    # - role: oswee.generic.sddm
     #   tags:
     #     - sddm
-    # - role: oswee.core.sway
-    #   tags:
-    #     - sway
-    # - role: oswee.core.swaylock
-    #   tags:
-    #     - swaylock
-    # - role: oswee.core.fonts
+    - role: oswee.generic.sway
+      tags:
+        - sway
+    - role: oswee.generic.swaylock
+      tags:
+        - swaylock
+    # - role: oswee.generic.fonts
     #   tags:
     #     - fonts
-    # - role: oswee.core.alacritty
+    # - role: oswee.generic.alacritty
     #   tags:
     #     - alacritty
-    # - role: oswee.core.zsh
+    # - role: oswee.generic.zsh
     #   tags:
     #     - zsh
-    # - role: oswee.core.tmux
+    # - role: oswee.generic.tmux
     #   tags:
     #     - tmux
     - role: oswee.custom.nvim
       tags:
         - nvim
-    # - role: oswee.core.obsidian
+    # - role: oswee.generic.obsidian
     #   tags:
     #     - obsidian
-    # - role: oswee.core.slack
+    # - role: oswee.generic.slack
     #   tags:
     #     - slack

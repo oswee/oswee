@@ -7,7 +7,7 @@
   gather_facts: true
 
   roles:
-    # - role: oswee.core.golang
+    # - role: oswee.generic.golang
     #   tags:
     #     - golang
     #   vars:
@@ -15,18 +15,18 @@
     # - role: minio
     #   tags:
     #     - minio
-    # - role: oswee.core.vault
+    # - role: oswee.generic.vault
     #   tags:
     #     - vault
-    # - role: oswee.core.terraform
-    #   tags:
-    #     - terraform
-    #   vars:
-    #     terraform_version: 1.0.3
-    # - role: oswee.core.bazel
+    - role: oswee.generic.terraform
+      tags:
+        - terraform
+      vars:
+        terraform_version: 1.1.4
+    # - role: oswee.generic.bazel
     #   tags:
     #     - bazel
-    # - role: oswee.core.helm
+    # - role: oswee.generic.helm
     #   tags:
     #     - helm
     # - role: oswee.generic.libvirt

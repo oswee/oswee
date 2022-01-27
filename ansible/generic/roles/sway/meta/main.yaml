@@ -1,10 +1,10 @@
 ---
 galaxy_info:
   namespace: 'oswee'
-  role_name: 'gpg'
+  role_name: 'sway'
   version: '0.0.1'
   author: 'Dzintars Klavins'
-  description: 'Ansible role to install GnuPG'
+  description: 'Ansible role to install Sway'
   company: 'Oswee'
 
   license: 'Apache-2.0'
@@ -17,7 +17,7 @@ galaxy_info:
         - 35
 
   galaxy_tags:
-    - 'gpg'
+    - 'sway'
     - 'oswee'
     - 'dzintars'
     - 'fedora'

@@ -1,10 +1,10 @@
 ---
 galaxy_info:
   namespace: 'oswee'
-  role_name: 'gpg'
+  role_name: 'git'
   version: '0.0.1'
   author: 'Dzintars Klavins'
-  description: 'Ansible role to install GnuPG'
+  description: 'Ansible role to configure Git'
   company: 'Oswee'
 
   license: 'Apache-2.0'
@@ -17,9 +17,11 @@ galaxy_info:
         - 35
 
   galaxy_tags:
-    - 'gpg'
+    - 'git'
     - 'oswee'
     - 'dzintars'
     - 'fedora'
 
-dependencies: []
+dependencies:
+  - role: oswee.generic.gpg
+  - role: oswee.generic.git

@@ -1,0 +1,6 @@
+---
+# defaults file for git
+
+git_user_full_name: 'Dzintars Klavins'
+git_user_email: 'dzintars.klavins@gmail.com'
+git_gpg_key_fingerprint: 'C97D0274C5DC06C169463694C1D8E7C9DC570A10'
