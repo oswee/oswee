@@ -1,0 +1,8 @@
+---
+# tasks file for packer
+
+- name: Install
+  import_tasks: install.yaml
+  tags:
+    - packer:setup
+    - packer:setup:install

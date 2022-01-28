@@ -7,6 +7,9 @@
   gather_facts: true
 
   roles:
+    - role: oswee.custom.rpm
+      tags:
+        - rpm
     - role: oswee.custom.git
       tags:
         - git
@@ -31,6 +34,9 @@
     # - role: oswee.generic.tmux
     #   tags:
     #     - tmux
+    - role: oswee.generic.ranger
+      tags:
+        - ranger
     - role: oswee.custom.nvim
       tags:
         - nvim

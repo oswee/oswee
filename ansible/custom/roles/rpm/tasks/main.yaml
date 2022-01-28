@@ -1,0 +1,37 @@
+---
+# tasks file for rpm
+
+- name: RPM Fusion
+  when:
+    - ansible_os_family == 'RedHat'
+    - enable_rpm_fusion
+  block:
+    - name: Import RPM Fusion free repository signing key
+      become: true
+      ansible.builtin.rpm_key:
+        state: present
+        key: 'https://rpmfusion.org/keys?action=AttachFile&do=get&target=RPM-GPG-KEY-rpmfusion-free-{{ redhat_os }}-{{ rpm_fusion_key }}'
+
+    - name: Import RPM Fusion nonfree repository signing key
+      become: true
+      ansible.builtin.rpm_key:
+        state: present
+        key: 'https://rpmfusion.org/keys?action=AttachFile&do=get&target=RPM-GPG-KEY-rpmfusion-nonfree-{{ redhat_os }}-{{ rpm_fusion_key }}'
+
+    - name: Enable RPM fusion repositories
+      become: true
+      ansible.builtin.dnf:
+        name:
+          - 'https://mirrors.rpmfusion.org/free/{{ redhat_os }}/rpmfusion-free-release-{{ redhat_version }}.noarch.rpm'
+          - 'https://mirrors.rpmfusion.org/nonfree/{{ redhat_os }}/rpmfusion-nonfree-release-{{ redhat_version }}.noarch.rpm'
+
+# - name: Add RPM Fusion repository
+#   ansible.builtin.yum_repository:
+#     name: RPM Fusion
+#     description: RPM Fusion
+#     baseurl: ''
+#     enabled: true
+#     gpgcheck: true
+#     repo_gpgcheck: true
+#     gpgkey: ''
+

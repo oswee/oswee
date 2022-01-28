@@ -1,0 +1,22 @@
+---
+# tasks file for packer
+
+- name: Install unzip package
+  become: true
+  ansible.builtin.dnf:
+    name: unzip.x86_64
+    state: present
+
+- name: Download Packer '{{ packer_version }}'
+  ansible.builtin.unarchive:
+    src: '{{ packer_url }}'
+    dest: /tmp
+    remote_src: true
+
+- name: Copy Packer '{{ packer_version }}' binary
+  become: true
+  ansible.builtin.copy:
+    src: /tmp/packer
+    dest: /usr/local/bin
+    mode: a+x
+    remote_src: true

@@ -17,6 +17,7 @@ treesitter.setup({
     'toml',
     'yaml',
     'markdown',
+    'hcl',
   },
   ignore_install = {},
   highlight = {

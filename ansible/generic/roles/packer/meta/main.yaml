@@ -1,0 +1,27 @@
+---
+# roles/packer/meta/main.yml
+
+galaxy_info:
+  namespace: 'oswee'
+  role_name: 'packer'
+  version: '0.0.1'
+  author: 'Dzintars Klavins'
+  description: 'Ansible role to install HashiCorp Packer.'
+  company: 'Oswee'
+
+  license: 'Apache-2.0'
+
+  min_ansible_version: '2.12'
+
+  platforms:
+    - name: Fedora
+      versions:
+        - 35
+
+  galaxy_tags:
+    - 'packer'
+    - 'oswee'
+    - 'dzintars'
+    - 'fedora'
+
+dependencies: []

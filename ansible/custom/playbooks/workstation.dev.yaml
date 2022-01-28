@@ -18,11 +18,21 @@
     # - role: oswee.generic.vault
     #   tags:
     #     - vault
+    - role: oswee.generic.vagrant
+      tags:
+        - vagrant
+      vars:
+        vagrant_version: 2.2.19
     - role: oswee.generic.terraform
       tags:
         - terraform
       vars:
         terraform_version: 1.1.4
+    - role: oswee.generic.packer
+      tags:
+        - packer
+      vars:
+        packer_version: 1.7.9
     # - role: oswee.generic.bazel
     #   tags:
     #     - bazel
