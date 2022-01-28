@@ -7,6 +7,9 @@
   gather_facts: true
 
   roles:
+    - role: oswee.custom.rpm
+      tags:
+        - rpm
     - role: oswee.custom.git
       tags:
         - git
