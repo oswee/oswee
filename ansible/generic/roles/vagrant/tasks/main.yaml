@@ -2,18 +2,18 @@
 # tasks file for vagrant
 
 - name: Install
-  import_tasks: install.yml
+  import_tasks: install.yaml
   tags:
     - vagrant:setup
     - vagrant:setup:install
 
 # - name: Update configuration
-#   import_tasks: configure.yml
+#   import_tasks: configure.yaml
 #   tags:
 #     - vagrant:setup
 #     - vagrant:setup:config
 
 # - name: Remove Vagrant
-#   import_tasks: remove.yml
+#   import_tasks: remove.yaml
 #   tags:
 #     - vagrant:remove
