@@ -18,6 +18,11 @@
     # - role: oswee.generic.vault
     #   tags:
     #     - vault
+    - role: oswee.generic.vagrant
+      tags:
+        - vagrant
+      vars:
+        vagrant_version: 2.2.19
     - role: oswee.generic.terraform
       tags:
         - terraform
