@@ -1,0 +1,17 @@
+---
+# tasks file for ranger
+
+- name: Copy default configs
+  ansible.builtin.command: >
+    ranger --copy-config=all
+
+- name: Write config
+  ansible.builtin.template:
+    src: '{{ item.src }}'
+    dest: '{{ item.dest }}'
+    # owner: '{{ become_user }}'
+    # group: '{{ become_user_group }}'
+    mode: '{{ item.mode }}'
+    backup: true
+  loop:
+  - { src: 'rc.conf.j2', dest: '$HOME/.config/ranger/rc.conf', mode: '0644' }

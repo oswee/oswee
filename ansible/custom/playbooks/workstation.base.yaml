@@ -31,6 +31,9 @@
     # - role: oswee.generic.tmux
     #   tags:
     #     - tmux
+    - role: oswee.generic.ranger
+      tags:
+        - ranger
     - role: oswee.custom.nvim
       tags:
         - nvim

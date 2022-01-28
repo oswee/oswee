@@ -1,0 +1,10 @@
+---
+# tasks file for ranger
+
+- name: Remove
+  become: true
+  ansible.builtin.dnf:
+    name: '{{ item }}'
+    state: absent
+  loop:
+    - ranger
