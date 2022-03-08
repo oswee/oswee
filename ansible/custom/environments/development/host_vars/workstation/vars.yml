@@ -1,6 +1,6 @@
 ---
 
-# ansible_become_pass: '{{ vault_ansible_become_pass }}'
+ansible_become_pass: '{{ vault_ansible_become_pass }}'
 hostname: workstation
 host_octet: '1'
 
