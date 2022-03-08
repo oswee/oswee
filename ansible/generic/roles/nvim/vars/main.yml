@@ -20,6 +20,7 @@ nvim_build_packages:
 packages:
   redhat:
     # - python3-neovim
+    - python3-pip
     - fzf
     - ripgrep
     - the_silver_searcher
