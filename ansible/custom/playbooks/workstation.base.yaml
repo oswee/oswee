@@ -40,9 +40,9 @@
     - role: oswee.custom.nvim
       tags:
         - nvim
-    # - role: oswee.generic.obsidian
-    #   tags:
-    #     - obsidian
+    - role: oswee.generic.obsidian
+      tags:
+        - obsidian
     # - role: oswee.generic.slack
     #   tags:
     #     - slack
