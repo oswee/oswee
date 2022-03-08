@@ -22,9 +22,9 @@
     - role: oswee.generic.swaylock
       tags:
         - swaylock
-    # - role: oswee.generic.fonts
-    #   tags:
-    #     - fonts
+    - role: oswee.custom.fonts
+      tags:
+        - fonts
     # - role: oswee.generic.alacritty
     #   tags:
     #     - alacritty
@@ -40,9 +40,9 @@
     - role: oswee.custom.nvim
       tags:
         - nvim
-    # - role: oswee.generic.obsidian
-    #   tags:
-    #     - obsidian
+    - role: oswee.generic.obsidian
+      tags:
+        - obsidian
     # - role: oswee.generic.slack
     #   tags:
     #     - slack

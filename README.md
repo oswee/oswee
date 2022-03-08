@@ -13,6 +13,9 @@ This is sandbox monorepository to test Bazel in action
 
 Until this message is removed, the status is WIP.
 
+UPDATE 2022 FEB:
+Still moving Ansible Collections and Terraform code into this repository.
+
 UPDATE 2022 JAN:
 Looking into merging infrastructure code into this repository.
 
@@ -92,6 +95,11 @@ I have custom CloudFlare DNS setup
 
 UPDATE: These instructions most likely is broken ATM
 
+- Clone this repository
+- Cofigure workstation base
+- Cofigure workstation for development
+- Deploy Base infrastructure (MinIO, Vault, Jenkins)
+- ?
 - Check the `package.json#scripts` for the available commands.
 - Run `yarn install` to install all required NPM packages
 - Update Go dependencies `yarn run gazelle:update-repos`

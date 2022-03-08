@@ -7,11 +7,11 @@
   gather_facts: true
 
   roles:
-    # - role: oswee.generic.golang
-    #   tags:
-    #     - golang
-    #   vars:
-    #     golang_version: 1.16.6
+    - role: oswee.generic.golang
+      tags:
+        - golang
+      vars:
+        golang_version: 1.17.8
     # - role: minio
     #   tags:
     #     - minio

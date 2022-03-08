@@ -1,16 +1,16 @@
 local ok, luasnip = pcall(require, 'luasnip')
 if (not ok) then return end
 
-local config = require 'luasnip.config'
-local extras = require 'luasnip.extras'
+-- local config = require 'luasnip.config'
+-- local extras = require 'luasnip.extras'
 local types = require 'luasnip.util.types'
 
-local snippet = luasnip.snippet
-local text = luasnip.text_node
-local f = luasnip.function_node
-local insert = luasnip.insert_node
-local l = extras.lambda
-local match = extras.match
+-- local snippet = luasnip.snippet
+-- local text = luasnip.text_node
+-- local f = luasnip.function_node
+-- local insert = luasnip.insert_node
+-- local l = extras.lambda
+-- local match = extras.match
 
 
 -- luasnip.setup({
@@ -34,38 +34,34 @@ local match = extras.match
 
 luasnip.config.set_config({
   history = true,
-  updateevents = 'TextChanged,TextChangedI'
+  updateevents = 'TextChanged,TextChangedI',
+  enable_autosnippets = true,
+  ext_opts = {
+    [types.choiceNode] = {
+      active = {
+        virt_text = {{ "<-", "Error" }},
+      },
+    },
+  },
 })
 
-luasnip.snippets = {
-  lua = {
-    snippet({
-      trig = 'use',
-      name = 'packer use',
-      dscr = {
-        'packer use plugin block',
-        'e.g.',
-        "use {'author/plugin'}",
-      },
-    }, {
-      text "use { '",
-      -- Get the author and URL in the clipboard and auto populate the author and project
-      f(function(_)
-        local default = 'author/plugin'
-        local clip = fn.getreg '*'
-        if not vim.startswith(clip, 'https://github.com/') then
-          return default
-        end
-        local parts = vim.split(clip, '/')
-        if #parts < 2 then
-          return default
-        end
-        local author, project = parts[#parts - 1], parts[#parts]
-        return author .. '/' .. project
-      end, {}),
-      text "' ",
-      insert(2, { ', config = function()', '', 'end' }),
-      text '}',
-    }),
-  },
-}
+vim.keymap.set({"i", "s" }, "<c-k>", function ()
+  if luasnip.expand_or_jumpable() then
+    luasnip.expand_or_jump()
+  end
+end, { silent = true })
+
+vim.keymap.set({"i", "s" }, "<c-j>", function ()
+  if luasnip.jumpable(-1) then
+    luasnip.jump(-1)
+  end
+end, { silent = true })
+
+vim.keymap.set("i", "<c-l>", function ()
+  if luasnip.choice_active() then
+    luasnip.change_choice(1)
+  end
+end)
+
+vim.keymap.set("n", "<Leader><Leader>s", "<cmd>source ~/.config/nvim/after/plugin/luasnip.lua<CR>")
+

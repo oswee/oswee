@@ -1,7 +1,7 @@
-local ok, _ = pcall(require, 'lsp_signature')
+local ok, signature = pcall(require, 'lsp_signature')
 if (not ok) then return end
 
-require('lsp_signature').on_attach({
+signature.on_attach({
   bind                = true,      -- This is mandatory, otherwise border config won't get registered.
                                    -- If you want to hook lspsaga or other signature handler, pls set to false
   doc_lines           = 2,         -- will show two lines of comment/doc(if there are more than two lines in doc, will be truncated);

@@ -1,8 +1,9 @@
 ---
 platforms:
   - name: workstation
-    box: fedora/35-cloud-base
-    box_version: 35.20211026.0
+    box: fedora35
+    # box: fedora/35-cloud-base
+    # box_version: 35.20211026.0
     cpus: 4
     memory: 4096
     instance_raw_config_args:

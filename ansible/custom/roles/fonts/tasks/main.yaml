@@ -1,0 +1,8 @@
+---
+# tasks file for fonts
+
+- name: Copy fonts
+  ansible.builtin.copy:
+    src: 'fonts/'
+    dest: "/home/{{ ansible_user_id }}/.fonts/"
+    mode: '0644'
