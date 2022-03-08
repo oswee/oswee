@@ -60,7 +60,7 @@ cmp.setup({
 
   formatting = {
     format = lspkind.cmp_format {
-      with_text = true,
+      mode = 'symbol_text',
       preset = 'default',
       menu = {
         buffer = '[buf]',
