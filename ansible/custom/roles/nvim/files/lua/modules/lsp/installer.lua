@@ -26,7 +26,6 @@ local servers = {
   'stylelint_lsp',
   'terraformls',
   'efm',
-  'groovyls',
 }
 
 for _, name in pairs(servers) do
