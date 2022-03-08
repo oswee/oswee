@@ -7,29 +7,17 @@ local g = vim.g
 local map = require('helpers.map').map
 local tree_cb = require('nvim-tree.config').nvim_tree_callback
 
-g.nvim_tree_quit_on_open = 0
 g.nvim_tree_indent_markers = 1
 g.nvim_tree_git_hl = 0
 g.nvim_tree_highlight_opened_files = 1
 g.nvim_tree_root_folder_modifier = ':~'
 g.nvim_tree_add_trailing = 1
 g.nvim_tree_group_empty = 1
-g.nvim_tree_disable_window_picker = 1
 g.nvim_tree_icon_padding = ' '
 g.nvim_tree_symlink_arrow = ' >> '
 g.nvim_tree_respect_buf_cwd = 1
 g.nvim_tree_create_in_closed_folder = 0
 g.nvim_tree_refresh_wait = 500
-g.nvim_tree_window_picker_exclude = {
-  filetype = {
-    'notify',
-    'packer',
-    'qf',
-  },
-  buftype = {
-    'terminal',
-  }
-}
 
 g.nvim_tree_special_files = { 'README.md', 'Makefile', 'MAKEFILE', 'go.mod' }
 g.nvim_tree_show_icons = {
@@ -80,6 +68,24 @@ require('nvim-tree').setup {
   update_to_buf_dir   = {
     enable = true,
     auto_open = true,
+  },
+  actions = {
+    open_file = {
+      window_picker = {
+        enable = true,
+        exclude = {
+          filetype = {
+            'notify',
+            'packer',
+            'qf',
+          },
+          buftype = {
+            'terminal',
+          }
+        },
+      },
+      quit_on_open = false,
+    }
   },
   diagnostics = {
     enable = false,
