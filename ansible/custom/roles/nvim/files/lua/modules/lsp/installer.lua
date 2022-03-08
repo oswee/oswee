@@ -52,6 +52,7 @@ lsp_installer.settings {
       uninstall_server = 'X',
     },
   },
+  -- install_root_dir = path.concat { vim.fn.stdpath "data", "lsp_servers" },
   log_level = vim.log.levels.DEBUG,
   max_concurrent_installers = 4,
 }
