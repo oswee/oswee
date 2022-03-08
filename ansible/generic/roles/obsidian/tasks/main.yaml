@@ -1,0 +1,37 @@
+---
+# tasks file for obsidian
+
+- name: Prepare
+  import_tasks: prepare.yaml
+  tags:
+    - obsidian:setup
+    - obsidian:setup:prepare
+
+- name: Install
+  import_tasks: install.yaml
+  tags:
+    - obsidian:setup
+    - obsidian:setup:install
+
+- name: Desktop
+  import_tasks: desktop.yaml
+  tags:
+    - obsidian:setup
+    - obsidian:setup:desktop
+
+- name: Path
+  import_tasks: path.yaml
+  tags:
+    - obsidian:setup
+    - obsidian:setup:path
+
+# - name: Config
+#   import_tasks: configure.yaml
+#   tags:
+#     - obsidian:setup
+#     - obsidian:setup:config
+
+# - name: Remove
+#   import_tasks: remove.yaml
+#   tags:
+#     - obsidian:remove

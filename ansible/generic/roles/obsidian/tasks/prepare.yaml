@@ -1,0 +1,11 @@
+---
+# tasks file for obsidian
+
+- name: Install prerequisites
+  become: true
+  ansible.builtin.dnf:
+    name: '{{ item }}'
+    state: present
+  loop:
+    - ffmpeg
+    - ffmpeg-devel
