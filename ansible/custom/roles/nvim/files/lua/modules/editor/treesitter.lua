@@ -27,3 +27,7 @@ treesitter.setup({
   indent = { enable = true },
   additional_vim_regex_highlighting = { 'markdown' },
 })
+
+-- Enable folding
+vim.opt.foldmethod = "expr"
+vim.opt.foldexpr = "nvim_treesitter#foldexpr()"

@@ -16,5 +16,5 @@
     regexp: "^require('helpers')$"
     state: present
     # insertafter: '^-- Helpers'
-    create: True
-
+    create: true
+...

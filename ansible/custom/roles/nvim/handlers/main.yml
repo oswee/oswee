@@ -27,3 +27,4 @@
   # ansible.builtin.shell: "nvim +Silent +VimEnter +PackerCompile +qall &>/dev/null"
   ansible.builtin.shell: nvim --headless +'PackerCompile' +'qa'
   # nvim -c "PlugInstall" -c ":qa!"
+...

@@ -16,4 +16,5 @@
     regexp: "^require('modules.core.keymaps')$"
     state: present
     # insertafter: '^-- Keymaps'
-    create: True
+    create: true
+...

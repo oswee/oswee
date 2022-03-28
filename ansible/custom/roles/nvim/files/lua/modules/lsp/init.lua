@@ -1,4 +1,4 @@
-local lc = require("helpers.common").loadConfig
+local lc = require('helpers.common').loadConfig
 
 local Lsp = {}
 
@@ -9,17 +9,18 @@ function Lsp.config()
   }
 end
 
-function Lsp.installer()
-  return {
-    'williamboman/nvim-lsp-installer',
-    requires = Lsp.config(),
-    config = lc(require('modules.lsp.installer')),
-  }
-end
+-- function Lsp.installer()
+--   return {
+--     'williamboman/nvim-lsp-installer',
+--     requires = Lsp.config(),
+--     config = lc(require('modules.lsp.installer')),
+--   }
+-- end
 
 function Lsp.saga()
   return {
-    'glepnir/lspsaga.nvim',
+    -- 'glepnir/lspsaga.nvim' is abandoned
+    'tami5/lspsaga.nvim',
     requires = Lsp.config(),
     config = lc(require('modules.lsp.saga')),
   }

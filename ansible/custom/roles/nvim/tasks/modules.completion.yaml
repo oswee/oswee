@@ -13,8 +13,9 @@
   ansible.builtin.copy:
     src: '{{ item.src }}'
     dest: '{{ nvim_config_dir }}/{{ item.dest }}/'
+    mode: '0644'
   loop:
-    - { src: 'after/plugin/luasnip.lua', dest: 'after/plugin' }
+    - {   src: 'after/plugin/luasnip.lua', dest: 'after/plugin' }
 
 - name: Include Completion
   ansible.builtin.lineinfile:
@@ -22,5 +23,7 @@
     line: "require('modules.completion')"
     regexp: "^require('modules.completion')$"
     state: present
+    mode: '0644'
     # insertafter: '^-- Completion'
-    create: True
+    create: true
+...

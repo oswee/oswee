@@ -24,7 +24,7 @@ luasnip.snippets = {
       -- Get the author and URL in the clipboard and auto populate the author and project
       f(function(_)
         local default = 'author/plugin'
-        local clip = fn.getreg '*'
+        local clip = vim.fn.getreg '*'
         if not vim.startswith(clip, 'https://github.com/') then
           return default
         end

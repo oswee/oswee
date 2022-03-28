@@ -56,7 +56,8 @@ else
     use(completion.snippets())
 
     -- LSP
-    use(lsp.installer())
+    use(lsp.config())
+    -- use(lsp.installer())
     use(lsp.saga())
     use(lsp.signture())
 

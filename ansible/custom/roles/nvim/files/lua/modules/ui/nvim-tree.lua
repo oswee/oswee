@@ -54,7 +54,7 @@ map('n', '<C-n>', ':NvimTreeToggle<CR>', { noremap = true, silent = true })
 map('n', '<Leader>r', ':NvimTreeRefresh<CR>')
 map('n', '<Leader>n', ':NvimTreeFindFile<CR>')
 
-vim.cmd('highlight NvimTreeFolderIcon guibg=blue')
+-- vim.cmd('highlight NvimTreeFolderIcon guibg=blue')
 
 require('nvim-tree').setup {
   disable_netrw       = true,

@@ -41,9 +41,9 @@ end
 status.on_attach = function(client)
   lspstatus.on_attach(client)
 
-  vim.cmd [[augroup tj_lsp_status]] -- Waz iz zas?
-  vim.cmd [[autocmd CursorHold,BufEnter <buffer> lua require('lsp-status').update_current_function()]]
-  vim.cmd [[augroup END]]
+  -- vim.cmd [[augroup tj_lsp_status]]  -- Waz iz zas?
+  -- vim.cmd [[autocmd CursorHold,BufEnter <buffer> lua require('lsp-status').update_current_function()]]
+  -- vim.cmd [[augroup END]]
 end
 
 return status

@@ -21,7 +21,8 @@ packages:
   - fzf
   - ripgrep
   - the_silver_searcher
-  - bat # for the pretty fzf previews
+  - bat  # for the pretty fzf previews
   - yamllint
   - wget
   - fd-find
+...

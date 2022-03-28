@@ -40,9 +40,9 @@ Dzintars Klavins
 I am not a Lua and Neovim expert. That's why I rely on the power of the open-source.
 These are some core repositories I took inspiration from:
 
-- [](https://github.com/konapun/dotfiles)
-- [](https://github.com/Allaman/nvim)
-- [](https://github.com/mnabila/nvimrc)
-- [](https://github.com/tjdevries/config_manager)
+- [konapun/dotfiles](https://github.com/konapun/dotfiles)
+- [Allaman/nvim](https://github.com/Allaman/nvim)
+- [mnabila/nvimrc](https://github.com/mnabila/nvimrc)
+- [tjdevries/config_manager)](https://github.com/tjdevries/config_manager)
 
 You should take a look at these repositories first. And do not forget go give some stars to them.

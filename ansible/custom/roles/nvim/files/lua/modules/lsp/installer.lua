@@ -9,6 +9,9 @@ local capabilities = require('modules.lsp.handlers').capabilities
 local sumneko_opts = require('modules.lsp.opts.sumneko_lua')
 local gopls_opts = require('modules.lsp.opts.gopls')
 local efm_opts = require('modules.lsp.opts.efm')
+local tsserver_opts = require('modules.lsp.opts.tsserver')
+local ansiblels_opts = require('modules.lsp.opts.ansiblels')
+local yamlls_opts = require('modules.lsp.opts.yamlls')
 
 local servers = {
   'bashls',
@@ -74,6 +77,18 @@ lsp_installer.on_server_ready(function(server)
     if server.name == 'efm' then
       opts = vim.tbl_deep_extend('force', efm_opts, opts)
     end
+
+    if server.name == 'tsserver' then
+      opts = vim.tbl_deep_extend('force', tsserver_opts, opts)
+    end
+
+    -- if server.name == 'ansiblels' then
+    --   opts = vim.tbl_deep_extend('force', ansiblels_opts, opts)
+    -- end
+
+    -- if server.name == 'yamlls' then
+    --   opts = vim.tbl_deep_extend('force', yamlls_opts, opts)
+    -- end
 
     -- This setup() function is exactly the same as lspconfig's setup function.
     -- Refer to https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md

@@ -18,7 +18,7 @@
     # - { src: 'lua/plugins/', dest: '/lua/plugins/' }
     # - { src: 'ultisnips', dest: '/' }
   # notify:
-  #   - packer sync
+    # - packer sync
     # - packer install
     # - packer update
     # - packer compile
@@ -30,7 +30,7 @@
     regexp: "^require('plugins')$"
     state: present
     # insertafter: '^-- Plugins'
-    create: True
+    create: true
 
 # - name: Include config
 #   ansible.builtin.lineinfile:
@@ -39,4 +39,5 @@
 #     regexp: "^require('config')$"
 #     state: present
 #     # insertafter: '^-- Config'
-#     create: True
+#     create: true
+...
