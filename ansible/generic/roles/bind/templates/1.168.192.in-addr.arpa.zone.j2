@@ -1,0 +1,23 @@
+$TTL 900
+
+@   IN  SOA bastion.{{ cluster_name }}.{{ root_domain }}.    hostmaster.{{ cluster_name }}.{{ root_domain }}. (
+        2019062001  ; serial number
+        3H          ; refresh interval (3 hours)
+        30M         ; retry interval (30 minutes)
+        1W          ; expiry period (2 weeks)
+        3h )        ; negative TTL (1 week)
+
+    IN  NS  bastion.{{ cluster_name }}.{{ root_domain }}.
+254 IN  PTR bastion.{{ cluster_name }}.{{ root_domain }}.
+254 IN  PTR api.{{ cluster_name }}.{{ root_domain }}.
+254 IN  PTR api-int.{{ cluster_name }}.{{ root_domain }}.
+254 IN  PTR apps.{{ cluster_name }}.{{ root_domain }}.
+10  IN  PTR master-0.{{ cluster_name }}.{{ root_domain }}.
+11  IN  PTR master-1.{{ cluster_name }}.{{ root_domain }}.
+12  IN  PTR master-2.{{ cluster_name }}.{{ root_domain }}.
+20  IN  PTR infnod-0.{{ cluster_name }}.{{ root_domain }}.
+21  IN  PTR infnod-1.{{ cluster_name }}.{{ root_domain }}.
+30  IN  PTR cptnod-0.{{ cluster_name }}.{{ root_domain }}.
+31  IN  PTR cptnod-1.{{ cluster_name }}.{{ root_domain }}.
+32  IN  PTR cptnod-2.{{ cluster_name }}.{{ root_domain }}.
+;EOF

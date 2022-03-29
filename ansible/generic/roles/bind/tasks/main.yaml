@@ -1,0 +1,15 @@
+---
+# tasks file for named
+
+- name: install
+  import_tasks: install.yaml
+  tags:
+    - named:setup
+    - named:setup:install
+
+- name: configure
+  import_tasks: configure.yaml
+  tags:
+    - named:setup
+    - named:setup:config
+...
