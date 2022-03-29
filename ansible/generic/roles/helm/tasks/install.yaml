@@ -1,0 +1,17 @@
+---
+# tasks file for helm
+
+- name: Download Helm binary
+  ansible.builtin.unarchive:
+    src: "https://get.helm.sh/helm-v{{ helm_version }}-linux-amd64.tar.gz"
+    dest: /tmp
+    remote_src: true
+
+- name: Copy Helm binary
+  become: true
+  ansible.builtin.copy:
+    src: /tmp/linux-amd64/helm
+    dest: /usr/local/bin
+    mode: a+x
+    remote_src: true
+...

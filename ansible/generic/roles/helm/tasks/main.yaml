@@ -1,0 +1,9 @@
+---
+# tasks file for helm
+
+- name: Install
+  import_tasks: install.yaml
+  tags:
+    - helm:setup
+    - helm:setup:install
+...
