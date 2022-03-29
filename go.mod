@@ -1,6 +1,6 @@
 module github.com/oswee/prime
 
-go 1.16
+go 1.17
 
 require (
 	github.com/campoy/jsonenums v0.0.0-20201009151607-0f0230183423 // indirect
