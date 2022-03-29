@@ -1,0 +1,9 @@
+---
+# defaults file for dhcpd
+
+dhcp_network: '192.168.1'
+dhcp_domain_name: 'example.com'
+dhcp_domain_search: 'example.com'
+dhcpd_user: 'dhcpd'
+dhcpd_group: 'dhcpd'
+...
