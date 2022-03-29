@@ -1,0 +1,27 @@
+---
+# vars file for jenkins
+
+packages:
+  redhat:
+    - java-devel
+    - chkconfig
+    - jenkins
+
+java_package: java-devel
+# jenkins_package_state: latest
+# jenkins_hostname: https://jenkins.example.com
+# jenkins_http_port: 9093
+# jenkins_admin_username: '{{ vault_become_user }}'
+# jenkins_admin_password: '{{ vault_become_pass }}'
+# jenkins_plugins:
+#   - blueocean
+#   - name: greenballs
+#     version: "1.15.1"
+#   - name: terraform
+#     version: "1.0.10"
+#   - hashicorp-vault-plugin
+#   - hashicorp-vault-pipeline
+#   - solarized-theme
+# jenkins_plugins_install_dependencies: true
+# jenkins_plugins_state: latest
+...

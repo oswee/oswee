@@ -1,0 +1,19 @@
+---
+# tasks file for jenkins
+
+- name: install
+  become: true
+  import_tasks: install.yaml
+
+- name: firewall
+  become: true
+  import_tasks: firewall.yaml
+
+- name: ssh
+  become: true
+  import_tasks: ssh.yaml
+
+- name: configure
+  become: true
+  import_tasks: configure.yaml
+...

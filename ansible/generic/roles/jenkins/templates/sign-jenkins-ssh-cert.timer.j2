@@ -1,0 +1,10 @@
+[Unit]
+Description=Sign a new host cert on boot, then daily
+
+[Timer]
+OnCalendar=hourly
+Persistent=true
+Unit=sign-jenkins-ssh-cert.service
+
+[Install]
+WantedBy=timers.target

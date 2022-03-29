@@ -1,0 +1,27 @@
+[Unit]
+Description=Jenkins Automation Server
+Documentation=https://www.jenkins.io/doc/
+
+Wants=network.target
+After=network.target
+;Requires=network.target
+
+[Service]
+Type=simple
+EnvironmentFile=/etc/sysconfig/jenkins
+ExecStart=/usr/bin/java \
+  ${JENKINS_JAVA_OPTIONS} \
+  -jar /usr/lib/jenkins/jenkins.war \
+  --httpPort=${JENKINS_PORT} \
+  --httpListenAddress=${JENKINS_LISTEN_ADDRESS} \
+  ${JENKINS_ARGS}
+
+Group={{ jenkins_group }}
+User={{ jenkins_user }}
+PermissionsStartOnly=true
+Restart=always
+RestartSec=20
+SuccessExitStatus=143
+
+[Install]
+WantedBy=multi-user.target
