@@ -1,0 +1,10 @@
+---
+- name: Converge
+  hosts: all
+  # tasks:
+  #   - name: "Include ipxe"
+  #     include_role:
+  #       name: "ipxe"
+  roles:
+    - role: ipxe
+      when: ansible_os_family == "RedHat"
