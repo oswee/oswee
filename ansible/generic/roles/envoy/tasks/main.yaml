@@ -1,0 +1,17 @@
+---
+# tasks file for envoy
+
+- name: Install
+  import_tasks: install.yaml
+  tags:
+    - envoy:install
+
+# TODO: WIP
+# - name: Systemd
+#   import_tasks: systemd.yaml
+
+# - name: Cleanup
+#   import_tasks: cleanup.yaml
+#   tags:
+#     - envoy:cleanup
+...

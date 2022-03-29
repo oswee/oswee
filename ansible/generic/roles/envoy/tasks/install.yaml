@@ -1,0 +1,50 @@
+---
+# install file for envoy
+
+- name: Install Envoy GPG key
+  become: true
+  ansible.builtin.rpm_key:
+    fingerprint: 'A8220FC0141BFA990DE5609CCF716AF503183491'
+    key: 'https://rpm.dl.getenvoy.io/public/gpg.CF716AF503183491.key'
+    state: present
+
+- name: Install Envoy RPM repository
+  become: true
+  ansible.builtin.get_url:
+    url: 'https://rpm.dl.getenvoy.io/public/config.rpm.txt?distro=fedora&codename=34'
+    dest: '/etc/yum.repos.d/envoy.repo'
+
+- name: Install Envoy
+  become: true
+  ansible.builtin.dnf:
+    name: 'getenvoy-envoy'
+    state: present
+
+- name: Create Envoy config directory
+  become: true
+  ansible.builtin.file:
+    path: '{{ envoy_config_dir }}'
+    state: directory
+    owner: root
+    group: root
+    mode: '0644'
+
+- name: Copy default Envoy config file
+  become: true
+  ansible.builtin.template:
+    src: 'envoy.yaml.j2'
+    dest: '{{ envoy_config_path }}'
+    owner: root
+    group: root
+    mode: '0644'
+    # validate: 'envoy --mode validate --config-path %s'
+
+- name: Run Evoy Proxy
+  become: true
+  ansible.builtin.command: 'envoy -c {{ envoy_config_path }}'
+  args:
+    chdir: '{{ envoy_config_dir }}'
+  # TODO: Because i need to run Envoy in background
+  async: 1000
+  poll: 0
+...

@@ -1,0 +1,15 @@
+---
+# cleanup file for envoy
+
+- name: Remove Envoy
+  become: true
+  ansible.builtin.dnf:
+    name: 'getenvoy-envoy'
+    state: absent
+
+- name: Remove Envoy config directory
+  become: true
+  ansible.builtin.file:
+    path: '{{ envoy_config_dir }}'
+    state: absent
+...

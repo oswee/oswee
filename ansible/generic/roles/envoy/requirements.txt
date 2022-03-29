@@ -1,0 +1,9 @@
+ansible
+libvirt
+podman
+vagrant
+molecule
+molecule-vagrant
+molecule-podman
+yamllint
+ansible-lint
