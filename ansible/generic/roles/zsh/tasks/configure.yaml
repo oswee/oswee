@@ -1,0 +1,53 @@
+---
+# tasks file for zsh
+
+# - name: create mounting directories
+#   become: true
+#   file:
+#     path: "{{ item }}"
+#     state: directory
+#     owner: "{{ ansible_user_id }}"
+#     group: "{{ ansible_user_id }}"
+#     mode: '0755'
+#   loop: "{{ mountpoints }}"
+
+# - name: copy config
+#   template:
+#     src: "{{ item.src }}"
+#     dest: "{{ item.dest }}"
+#     owner: "{{ ansible_user_id }}"
+#     group: "{{ ansible_user_id }}"
+#     mode: '0644'
+#   loop:
+#     - { src: "config.j2", dest: "$HOME/.config/i3/config" }
+#     - { src: "compton.conf.j2", dest: "$HOME/.config/compton.conf" }
+#     - { src: ".profile.j2", dest: "$HOME/.profile" }
+
+- name: Write .zshrc config
+  ansible.builtin.template:
+    src: "{{ item.src }}"
+    dest: "{{ item.dest }}"
+    owner: "{{ ansible_user_id }}"
+    group: "{{ ansible_user_id_group }}"
+    mode: "{{ item.mode }}"
+    backup: true
+  loop:
+    - { src: "zprofile.j2", dest: "$HOME/.zprofile", mode: '0644' }
+    - { src: "zshrc.j2", dest: "$HOME/.zshrc", mode: '0644' }
+
+- name: Set zsh as default shell
+  become: true
+  ansible.builtin.user:
+    name: "{{ ansible_user_id }}"
+    shell: /bin/zsh
+
+- name: Copy envirionment variables
+  ansible.builtin.copy:
+    src: "{{ item.src }}"
+    dest: "{{ item.dest }}"
+    owner: "{{ ansible_user_id }}"
+    group: "{{ ansible_user_id }}"
+    mode: '0644'
+  loop:
+    - { src: ".zshenv", dest: "$HOME/" }
+...
