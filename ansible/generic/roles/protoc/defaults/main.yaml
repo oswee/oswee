@@ -1,0 +1,7 @@
+---
+# defaults file for protoc
+
+protoc_version: '3.18.1'
+protoc_dir: '/opt/protoc'
+protoc_group: 'wheel'
+...

@@ -1,0 +1,35 @@
+---
+- name: Converge
+  hosts: all
+
+  vars:
+    sudoers:
+      - vagrant
+
+  tasks:
+  # https://newbedev.com/ansible-best-practice-for-maintaining-list-of-sudoers
+    - name: Make sure we have a 'wheel' group
+      group:
+        name: wheel
+        state: present
+
+    - name: Allow 'wheel' group to have passwordless sudo
+      lineinfile:
+        dest: /etc/sudoers
+        state: present
+        regexp: '^%wheel'
+        line: '%wheel ALL=(ALL) NOPASSWD: ALL'
+        validate: visudo -cf %s
+
+    - name: Add sudoers users to wheel group
+      user:
+        name: "{{ item }}"
+        groups: wheel
+        append: yes
+      with_items: "{{ sudoers }}"
+
+    # - name: Include Protoc
+    #   include_role:
+    #     name: protoc
+  roles:
+    - protoc
