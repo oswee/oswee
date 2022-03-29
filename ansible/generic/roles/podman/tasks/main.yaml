@@ -13,8 +13,8 @@
     - podman:setup
     - podman:setup:config
 
-- name: Remove
-  import_tasks: remove.yaml
-  tags:
-    - podman:remove
+# - name: Remove
+#   import_tasks: remove.yaml
+#   tags:
+#     - podman:remove
 ...

@@ -1,7 +1,7 @@
 ---
 # tasks file for podman
 
-- name: remove packages
+- name: Remove packages
   become: true
   ansible.builtin.dnf:
     name: "{{ item }}"
