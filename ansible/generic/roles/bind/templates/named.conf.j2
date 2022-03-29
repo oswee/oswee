@@ -1,0 +1,63 @@
+acl internal_nets { {{ network }}.0/24; };
+
+options {
+  listen-on port 53 { 127.0.0.1; {{ network }}.254; };
+  listen-on-v6 port 53 { ::1; };
+
+  directory "/var/named";
+  dump-file "data/cache_dump.db";
+  statistics-file "data/named_stats.txt";
+  memstatistics-file "data/named_mem_stats.txt";
+  secroots-file "data/named.secroots";
+  recursing-file "data/named.recursing";
+
+  allow-query { localhost; internal_nets; {{ network }}.0/24; };
+  recursion yes;
+  allow-recursion { localhost; internal_nets; };
+
+  dnssec-enable yes;
+  dnssec-validation no;
+
+  managed-keys-directory "/var/named/dynamic";
+
+  pid-file "/run/named/named.pid";
+  session-keyfile "/run/named/session.key";
+
+  /* https://fedoraproject.org/wiki/Changes/CryptoPolicy */
+  include "/etc/crypto-policies/back-ends/bind.config";
+
+  /* forward only; */
+  /* forwarders { {{ dns.forwarder1 | default("9.9.9.9") }}; {{ dns.forwarder2 | default("8.8.8.8") }}; }; */
+  forwarders { 1.1.1.1; 8.8.8.8; };
+};
+
+logging {
+  channel default_debug {
+    file "data/named.run";
+    severity dynamic;
+  };
+};
+
+zone "." IN {
+  type hint;
+  file "named.ca";
+};
+
+include "/etc/named.rfc1912.zones";
+include "/etc/named.root.key";
+
+zone "{{ cluster_name }}.{{ root_domain }}" IN {
+  type master;
+  file "{{ cluster_name }}.{{ root_domain }}.zone";
+  allow-query { any; };
+  allow-transfer { none; };
+  allow-update { none; };
+};
+
+zone "{{ network | ipaddr('revdns') | regex_replace('^[0-9]+\\.', '') }}" IN {
+  type master;
+  file "{{ network | ipaddr('revdns') | regex_replace('^[0-9]+\\.', '') }}zone";
+  allow-query { any; };
+  allow-transfer { none; };
+  allow-update { none; };
+};

@@ -1,0 +1,8 @@
+---
+# vars file for zsh
+
+packages:
+  redhat:
+    - zsh
+    # Tar is required by powerlevel10k gitstatus module
+    - tar

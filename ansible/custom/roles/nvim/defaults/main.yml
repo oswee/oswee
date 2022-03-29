@@ -5,3 +5,4 @@ nvim_repo_url: "https://github.com/neovim/neovim.git"
 nvim_source_dir: "/home/{{ ansible_user_id }}/code/github.com/neovim/neovim"
 nvim_config_dir: "$HOME/.config/nvim"
 nvim_vim_alias: false
+...

@@ -1,0 +1,7 @@
+---
+# vars file for podman
+
+packages:
+  redhat:
+    - podman
+...

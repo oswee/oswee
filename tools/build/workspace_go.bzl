@@ -221,8 +221,8 @@ def prime_go_dependencies():
     go_repository(
         name = "com_github_grpc_ecosystem_grpc_gateway_v2",
         importpath = "github.com/grpc-ecosystem/grpc-gateway/v2",
-        sum = "h1:ajue7SzQMywqRjg2fK7dcpc0QhFGpTR2plWfV4EZWR4=",
-        version = "v2.5.0",
+        sum = "h1:rgxjzoDmDXw5q8HONgyHhBas4to0/XWRo/gPpJhsUNQ=",
+        version = "v2.6.0",
     )
     go_repository(
         name = "com_github_hashicorp_golang_lru",
@@ -510,8 +510,8 @@ def prime_go_dependencies():
     go_repository(
         name = "org_golang_x_oauth2",
         importpath = "golang.org/x/oauth2",
-        sum = "h1:x622Z2o4hgCr/4CiKWc51jHVKaWdtVpBNmEI8wI9Qns=",
-        version = "v0.0.0-20210615190721-d04028783cf1",
+        sum = "h1:Qmd2pbz05z7z6lm0DrgQVVPuBm92jqujBKMHMOlOQEw=",
+        version = "v0.0.0-20210819190943-2bc19b11175f",
     )
     go_repository(
         name = "org_golang_x_sync",

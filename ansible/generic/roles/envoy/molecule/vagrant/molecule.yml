@@ -1,0 +1,50 @@
+---
+dependency:
+  name: galaxy
+  # options:
+    # role-file: requirements.yml
+    # requirements-file: collections.yml
+driver:
+  name: vagrant
+  provider:
+    name: libvirt
+    type: libvirt
+lint: |
+  set -e
+  yamllint .
+  ansible-lint
+platforms:
+  - name: f34-envoy
+    box: fedora/34-cloud-base
+    memory: 1024
+    cpus: 2
+    config_options:
+      ssh.keep_alive: true
+      ssh.remote_user: "'vagrant'"
+    provider_options:
+      video_type: "'vga'"
+    # interfaces:
+    #   - network_name: forwarded_port
+    #     guest: 9000
+    #     host: 9111
+    instance_raw_config_args:
+      - 'vagrant.plugins = ["vagrant-libvirt"]'
+provisioner:
+  name: ansible
+  connection_options:
+    ansible_ssh_user: vagrant
+    ansible_become: true
+  # playbooks:
+  #   - converge: converge.yml
+  #   - cleanup: cleanup.yml
+  log: true
+  lint: |
+    set -e
+    yamllint .
+    ansible-lint
+    flake8
+verifier:
+  name: ansible
+  lint: |
+    set -e
+    ansible-lint

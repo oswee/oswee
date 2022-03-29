@@ -59,9 +59,10 @@ telescope.setup{
 
 require('telescope').load_extension('fzy_native')
 
+vim.keymap.set('n', '<Leader>ff', ':Telescope find_files<CR>', { buffer = 0 })
 -- _G.map('n', '<Leader>ff', ':Telescope find_files<CR>', opts)
 -- _G.map('n', '<Leader>ff', ':Telescope find_files find_command=rg,--ignore,--hidden,--files prompt_prefix=🔍<CR>', opts)
-map('n', '<Leader>ff', '<cmd>lua require("telescope.builtin").find_files()<CR>', opts)
+-- map('n', '<Leader>ff', '<cmd>lua require("telescope.builtin").find_files()<CR>', opts)
 map('n', '<Leader>fg', ':Telescope live_grep<CR>', opts)
 map('n', '<Leader>fb', ':Telescope buffers<CR>', opts)
 map('n', '<Leader>fh', ':Telescope help_tags<CR>', opts)

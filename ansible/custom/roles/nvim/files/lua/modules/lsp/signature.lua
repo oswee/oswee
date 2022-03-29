@@ -1,6 +1,8 @@
 local ok, signature = pcall(require, 'lsp_signature')
 if (not ok) then return end
 
+-- vim.notify('LspSignature config loaded')
+
 signature.on_attach({
   bind                = true,      -- This is mandatory, otherwise border config won't get registered.
                                    -- If you want to hook lspsaga or other signature handler, pls set to false

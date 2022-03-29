@@ -26,3 +26,4 @@ dependencies:
   - role: oswee.generic.nvim
   - role: oswee.generic.golang
   - role: oswee.generic.github
+...

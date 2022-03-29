@@ -1,0 +1,30 @@
+- name: Copy Jenkins config template
+  ansible.builtin.template:
+    src: jenkins.j2
+    dest: /etc/sysconfig/jenkins
+    owner: "{{ jenkins_user }}"
+    group: "{{ jenkins_group }}"
+    mode: 0600
+    backup: yes
+
+- name: Copy Jenkins systemd unit template
+  become: yes
+  ansible.builtin.template:
+    src: jenkins.service.j2
+    dest: /etc/systemd/system/jenkins.service
+    mode: '0644'
+  # notify:
+  #   - enable {{ jenkins_service_name }}
+  #   - start {{ jenkins_service_name }}
+
+- name: Force systemd to re-execute itself (2.8 and above)
+  become: yes
+  ansible.builtin.systemd:
+    daemon_reexec: yes
+
+- name: Start Jenkins server
+  become: true
+  ansible.builtin.systemd:
+    name: "{{ jenkins_service_name }}.service"
+    state: "{{ jenkins_service_enabled | ternary('started','stopped') }}"
+    enabled: "{{ jenkins_service_enabled }}"

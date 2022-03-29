@@ -1,4 +1,3 @@
----
 # tasks file for nvim
 
 - name: Copy autocmd
@@ -15,5 +14,7 @@
     line: "require('autocmd')"
     regexp: "^require('autocmd')$"
     state: present
+    mode: '0644'
     # insertafter: '^-- Autocmd'
-    create: True
+    create: true
+...

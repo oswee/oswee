@@ -1,0 +1,8 @@
+---
+# tasks file for dhcpd
+
+- name: Install
+  import_tasks: install.yaml
+
+- name: Configure
+  import_tasks: configure.yaml

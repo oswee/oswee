@@ -1,0 +1,54 @@
+#!/bin/bash
+
+# Author: Dzintars Klavins
+
+# This script authenticates against Vault and signs the Jenkins user SSH
+# certificate. Most likely it is triggered by Systemd timer unit.
+
+set -eu -o pipefail
+
+VAULT_URI='{{ vault_uri }}'
+ROLE_ID="{{ jenkins_approle_role_id }}"
+SECRET_ID="{{ jenkins_approle_secret_id }}"
+SSH_PUB_KEY_PATH='{{ jenkins_home }}/.ssh/id_ecdsa.pub'
+SSH_CERT_PATH='{{ jenkins_home }}/.ssh/id_ecdsa-cert.pub'
+
+main () {
+  local VAULT_TOKEN=$(vault_signin "${ROLE_ID}" "${SECRET_ID}")
+  local SSH_PUB_KEY=$(cat "${SSH_PUB_KEY_PATH}")
+
+  sign_ssh_cert "${VAULT_TOKEN}" "${SSH_PUB_KEY}" "${SSH_CERT_PATH}"
+
+  chmod 0640 ${SSH_CERT_PATH}
+}
+
+vault_signin () {
+  local ROLE_ID=$1
+  local SECRET_ID=$2
+
+  local RES=$(curl -s --request POST \
+    --data '{"role_id": "'"${ROLE_ID}"'", "secret_id": "'"${SECRET_ID}"'"}' \
+    ${VAULT_URI}/v1/auth/approle/login | jq -r .auth.client_token)
+
+  local RT=$?
+  if [ "$RT" == "0" ]; then
+    echo $RES
+  else
+    echo "Login with role $ROLE_ID failed. RT:$RT $RES"
+    echo ""
+  fi
+}
+
+sign_ssh_cert () {
+  local VAULT_TOKEN="$1";
+  local PUB_KEY="$2";
+  local CERT_PATH="$3";
+
+  curl -s \
+    --header "X-Vault-Token: ${VAULT_TOKEN}" \
+    --request POST \
+    --data '{"public_key": "'"${PUB_KEY}"'", "cert_type": "user"}' \
+    ${VAULT_URI}/v1/ssh-client-signer/sign/clientrole | jq -r .data.signed_key > "${CERT_PATH}"
+}
+
+main "$@"; exit

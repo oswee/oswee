@@ -1,0 +1,7 @@
+---
+# vars file for alacritty
+
+packages:
+  redhat:
+    - alacritty
+...

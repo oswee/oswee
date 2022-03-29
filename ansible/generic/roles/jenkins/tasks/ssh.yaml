@@ -1,0 +1,47 @@
+---
+
+
+- name: Ensure SSH directory exists
+  file:
+    path: "{{ jenkins_home }}/.ssh"
+    state: directory
+    mode: '0600'
+
+- name: Generate Jenkins OpenSSH ECDSA user keypair
+  community.crypto.openssh_keypair:
+    path: "{{ jenkins_home }}/.ssh/id_ecdsa"
+    comment: master@jenkins
+    type: ecdsa
+    size: 521
+    state: present
+    force: false
+    regenerate: never
+    owner: "{{ jenkins_user }}"
+    group: "{{ jenkins_group }}"
+    mode: 0600
+
+- name: Copy SSH Certificate signing script template
+  ansible.builtin.template:
+    src: sign-jenkins-ssh-cert.sh.j2
+    dest: "{{ jenkins_home }}/.ssh/sign-jenkins-ssh-cert.sh"
+    owner: "{{ jenkins_user }}"
+    group: "{{ jenkins_group }}"
+    mode: 0600
+
+- name: Copy Jenkins SSH systemd service unit template
+  become: true
+  ansible.builtin.template:
+    src: sign-jenkins-ssh-cert.service.j2
+    dest: /etc/systemd/system/sign-jenkins-ssh-cert.service
+    mode: '0644'
+
+- name: Copy Jenkins SSH systemd timer unit template
+  become: true
+  ansible.builtin.template:
+    src: sign-jenkins-ssh-cert.timer.j2
+    dest: /etc/systemd/system/sign-jenkins-ssh-cert.timer
+    mode: '0644'
+  notify:
+    - start ssh signing timer
+    - enable ssh signing timer
+...

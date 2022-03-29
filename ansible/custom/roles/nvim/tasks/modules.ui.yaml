@@ -16,4 +16,5 @@
     regexp: "^require('modules.ui')$"
     state: present
     # insertafter: '^-- UI'
-    create: True
+    create: true
+...

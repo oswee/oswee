@@ -1,0 +1,11 @@
+---
+# tasks file for firewalld
+
+- name: Install Firewalld
+  become: true
+  ansible.builtin.dnf:
+    name: '{{ item }}'
+    state: present
+  loop:
+    - firewalld
+...

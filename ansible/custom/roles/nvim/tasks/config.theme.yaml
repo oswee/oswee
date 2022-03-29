@@ -16,4 +16,5 @@
     regexp: "^require('theme')$"
     state: present
     # insertafter: '^-- Theme'
-    create: True
+    create: true
+...

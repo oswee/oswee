@@ -16,4 +16,5 @@
     regexp: "^require('modules.packer')$"
     state: present
     # insertafter: '^-- Packer'
-    create: True
+    create: true
+...

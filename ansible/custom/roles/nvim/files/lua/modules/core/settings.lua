@@ -81,7 +81,7 @@ set.endofline      = true                           -- Last line in the file has
 set.fixendofline   = true                           -- Fixed missing end-of-line at end of the text file
 set.splitright     = true
 set.splitbelow     = true
-set.foldmethod     = 'marker'
+-- set.foldmethod     = 'marker'                       -- Most likely this is ovirrided by TreeSitter config
 set.ignorecase     = true
 set.smartcase      = true
 

@@ -1,0 +1,11 @@
+---
+# tasks file for podman
+
+- name: Install packages
+  become: true
+  ansible.builtin.dnf:
+    name: "{{ item }}"
+    enablerepo: updates-testing
+    state: present
+  loop: "{{ packages.redhat }}"
+...

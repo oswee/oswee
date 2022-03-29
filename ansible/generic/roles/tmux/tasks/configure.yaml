@@ -1,0 +1,11 @@
+---
+# tasks file for tmux
+
+- name: Copy template/s
+  ansible.builtin.template:
+    src: "{{ item.src }}"
+    dest: "{{ item.dest }}"
+    mode: '0644'
+  loop:
+    - { src: ".tmux.conf.j2", dest: "$HOME/.tmux.conf" }
+...

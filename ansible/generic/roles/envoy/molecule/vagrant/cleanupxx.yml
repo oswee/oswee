@@ -1,0 +1,10 @@
+---
+- name: Cleanup
+  hosts: all
+  tasks:
+    - name: Include envoy
+      include_role:
+        name: envoy
+        apply:
+          tags:
+            - envoy:clean

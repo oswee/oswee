@@ -1,0 +1,7 @@
+---
+- name: Converge
+  hosts: all
+  tasks:
+    - name: "Include buildkite"
+      include_role:
+        name: "buildkite"

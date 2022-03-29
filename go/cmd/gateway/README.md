@@ -63,4 +63,13 @@ https://www.hascode.com/2016/10/writing-a-websocket-chat-in-go/comment-page-1/#c
 
 `go run *.go -addr :9090` to run the server
 
-or `» bazel run //oswee/gateway -- -a :9090`
+This command most likely will fail due to missing protobuf stubs. To make it work, you could generate Go protobuf stubs
+by using local `protoc` compiler. But, this is a bad idea, because you should use Bazel toolchain which will automate
+all these steps and will not polute codebase with any build artifacts which generated stubs are.
+
+So, better idea is to use `yarn bazel run //go/cmd/gateway -- -a :9090` (extra arguments might not work on some Yarn versions)
+But even this way is nor ideal, nor reccommended.
+
+Ideally the artifacts should be run as container in local Minikube cluster or Kubernetes development cluster.
+This means that `yarn bazel run //go/cmd/gageway` will execute whole toolchain to get the changes out into close to real-world
+environment. This way you know that your changes does not conflict.

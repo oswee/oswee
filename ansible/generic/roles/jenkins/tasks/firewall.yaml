@@ -1,0 +1,21 @@
+---
+
+- name: Allowing firewall services
+  become: yes
+  firewalld:
+    service: '{{ item }}'
+    permanent: yes
+    state: enabled
+  notify:
+    - restart firewalld
+  with_items:
+    - jenkins
+
+- name: Allowing firewall ports
+  become: yes
+  firewalld:
+    port: "{{ jenkins_http_port }}/tcp"
+    permanent: yes
+    state: enabled
+  notify:
+    - restart firewalld

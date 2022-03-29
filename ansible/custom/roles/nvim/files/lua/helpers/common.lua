@@ -32,5 +32,13 @@ function helpers.loadConfig(callback)
   end
 end
 
+-- https://github.com/mnabila/nvimrc/blob/65b4b9ccf7891f6f1a27bc83223934055cb2905a/lua/modules/completion/lsp/custom.lua
+function helpers.custom_cwd()
+  if vim.loop.cwd() == vim.loop.os_homedir() then
+    return vim.fn.expand("%:p:h")
+  end
+  return vim.loop.cwd()
+end
+
 return helpers
 

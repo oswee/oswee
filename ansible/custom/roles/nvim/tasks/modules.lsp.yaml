@@ -16,4 +16,5 @@
     regexp: "^require('modules.lsp')$"
     state: present
     # insertafter: '^-- LSP'
-    create: True
+    create: true
+...

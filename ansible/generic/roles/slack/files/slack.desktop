@@ -1,0 +1,17 @@
+[Desktop Entry]
+Name=Slack
+# --enable-features=UseOzonePlatform --ozone-platform=wayland
+Exec=slack --enable-features=UseOzonePlatform --ozone-platform=wayland %U
+Terminal=false
+Type=Application
+Icon=slack
+StartupWMClass=slack
+Comment=Slack Desktop
+GenericName=Slack Desktop Client for Linux
+MimeType=x-scheme-handler/slack;
+Categories=Office;
+
+TryExec=slack
+X-AppImage-Old-Icon=slack
+X-AppImage-Old-Name=Slack
+

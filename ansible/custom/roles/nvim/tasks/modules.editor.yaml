@@ -16,4 +16,5 @@
     regexp: "^require('modules.editor')$"
     state: present
     # insertafter: '^-- Editor'
-    create: True
+    create: true
+...

@@ -1,0 +1,8 @@
+---
+# vars file for vault
+
+packages:
+  redhat:
+    - firewalld
+    - vault
+...
