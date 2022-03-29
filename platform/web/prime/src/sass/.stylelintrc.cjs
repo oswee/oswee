@@ -1,6 +1,6 @@
 module.exports = {
   "extends": [
-    "../../../../.stylelintrc.js"
+    "../../../../../.stylelintrc.cjs"
   ],
   "rules": {
     "selector-class-pattern": null,

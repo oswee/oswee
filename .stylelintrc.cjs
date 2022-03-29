@@ -10,7 +10,7 @@ module.exports = {
     "function-comma-space-before": "never",
     "function-name-case": "lower",
     "function-url-quotes": "always",
-    "function-url-scheme-blacklist": ["data"],
+    "function-url-scheme-disallowed-list": ["data"],
     "function-whitespace-after": "always",
 
     "number-leading-zero": "always",
@@ -22,7 +22,7 @@ module.exports = {
 
     "unit-case": "lower",
     "unit-no-unknown": true,
-    "unit-whitelist": [
+    "unit-allowed-list": [
       "px",
       "%",
       "deg",
@@ -57,7 +57,7 @@ module.exports = {
     "declaration-block-semicolon-space-after": "always-single-line",
     "declaration-block-semicolon-newline-before": "never-multi-line",
     "declaration-block-semicolon-newline-after": "always-multi-line",
-    "declaration-property-value-blacklist": [
+    "declaration-property-value-disallowed-list": [
       {"/.*/": ["initial"]},
       {"message": "The `initial` value is not supported in IE."}
     ],
