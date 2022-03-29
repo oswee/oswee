@@ -1,0 +1,12 @@
+---
+- name: Converge
+  hosts: all
+  # pre-tasks:
+  # tasks:
+  #   - name: "Include roles/tftp"
+  #     include_role:
+  #       name: "dzinstars.ansible.tftp"
+  roles:
+    # - role: dzintars.ansible.tftp
+    - role: tftp
+      when: ansible_os_family == "RedHat"

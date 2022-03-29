@@ -1,0 +1,49 @@
+---
+# tasks file for tftp
+
+- name: Install TFTP
+  become: true
+  ansible.builtin.dnf:
+    name: tftp-server
+    state: present
+
+# - name: Install iPXE
+#   ansible.builtin.dnf:
+#     name: ipxe-bootimgs
+#     state: latest
+
+# - name: Remove symlink
+#   ansible.builtin.file:
+#     path: /var/lib/tftpboot
+#     state: absent
+
+# - name: Create tftpboot directory
+#   ansible.builtin.file:
+#     path: /var/lib/tftpboot
+#     state: directory
+#     owner: root
+#     group: root
+#     mode: '0644'
+
+# - name: Link the image
+#   ansible.builtin.file:
+#     src: /usr/share/ipxe/undionly.kpxe
+#     dest: /var/lib/tftpboot
+#     force: true
+#     state: link
+
+- name: Add TFTP service to the firewall
+  become: true
+  ansible.posix.firewalld:
+    service: tftp
+    permanent: true
+    state: enabled
+  notify: Restart Firewalld
+
+- name: Start TFTP service
+  become: true
+  ansible.builtin.systemd:
+    name: tftp
+    state: started
+    enabled: true
+...
