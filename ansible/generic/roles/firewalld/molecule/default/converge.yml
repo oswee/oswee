@@ -1,0 +1,7 @@
+---
+- name: Converge
+  hosts: all
+  tasks:
+    - name: "Include roles/firewalld"
+      include_role:
+        name: "roles/firewalld"
