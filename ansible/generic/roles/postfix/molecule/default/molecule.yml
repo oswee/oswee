@@ -1,0 +1,42 @@
+---
+dependency:
+  name: galaxy
+driver:
+  name: vagrant
+  provider:
+    name: libvirt
+    type: libvirt
+lint: |
+  set -e
+  yamllint .
+  ansible-lint
+platforms:
+  - name: fedora
+    box: fedora/33-cloud-base
+    memory: 1024
+    cpus: 2
+    config_options:
+      ssh.keep_alive: yes
+      ssh.remote_user: "'vagrant'"
+    provider_options:
+      video_type: "'vga'"
+    interfaces:
+      - network_name: forwarded_port
+        guest: 9000
+        host: 9111
+    instance_raw_config_args:
+      - 'vagrant.plugins = ["vagrant-libvirt"]'
+provisioner:
+  name: ansible
+  connection_options:
+    ansible_ssh_user: vagrant
+    ansible_become: true
+  log: true
+  lint: |
+    set -e
+    ansible-lint
+verifier:
+  name: ansible
+  lint: |
+    set -e
+    ansible-lint
