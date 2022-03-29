@@ -1,0 +1,11 @@
+---
+# tasks file for minikube
+
+- name: Install Minikube RPM
+  become: true
+  ansible.builtin.dnf:
+    name: 'https://storage.googleapis.com/minikube/releases/latest/minikube-latest.x86_64.rpm'
+    state: present
+    # TODO: Don't do this
+    disable_gpg_check: true
+...
