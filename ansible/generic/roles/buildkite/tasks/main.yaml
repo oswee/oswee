@@ -1,0 +1,16 @@
+---
+# tasks file for buildkite
+
+- name: Copy Buildkite repository
+  become: true
+  ansible.builtin.copy:
+    src: buildkite-agent.repo
+    dest: "/etc/yum.repos.d/buildkite-agent.repo"
+    mode: '0644'
+
+- name: Install Buildkite
+  become: true
+  ansible.builtin.dnf:
+    name: 'buildkite-agent'
+    state: present
+...
