@@ -1,0 +1,41 @@
+---
+# tasks file for bazel
+
+- name: Download bazelisk
+  become: true
+  ansible.builtin.get_url:
+    url: "https://github.com/bazelbuild/bazelisk/releases/download/v{{ bazel_bazelisk_version }}/bazelisk-linux-amd64"
+    dest: /usr/local/bin/bazelisk
+    mode: a+x
+
+# - name: Clone bazel-watcher
+#   # become: yes
+#   ansible.builtin.git:
+#     repo: git@github.com:bazelbuild/bazel-watcher
+#     dest: /tmp/bazel-watcher
+#     version: master
+
+# - name: Build ibazel
+#   become: yes
+#   ansible.builtin.command:
+#     argv:
+#       - bazel
+#       - build
+#       - //ibazel
+#     chdir: /tmp/bazel-watcher/
+#     creates: /tmp/bazel-watcher/bazel-bin/ibazel/linux_amd64_pure_stripped
+
+- name: Download ibazel
+  become: true
+  ansible.builtin.get_url:
+    url: "https://github.com/bazelbuild/bazel-watcher/releases/download/v{{ bazel_ibazel_version }}/ibazel_linux_amd64"
+    dest: /usr/local/bin/ibazel
+    mode: a+x
+
+- name: Download buildifier
+  become: true
+  ansible.builtin.get_url:
+    url: "https://github.com/bazelbuild/buildtools/releases/download/{{ bazel_buildifier_version }}/buildifier"
+    dest: /usr/local/bin/buildifier
+    mode: a+x
+...

@@ -1,0 +1,76 @@
+---
+dependency:
+  name: galaxy
+  # enabled: false
+  options:
+    # role-file: meta/requirements.dev.yml
+    # requirements-file: meta/requirements.dev.yml
+    ignore-errors: true
+    # ignore-certs: True
+  # env:
+    # ANSIBLE_FORCE_COLOR: true
+    # PY_COLORS: 1
+driver:
+  name: vagrant
+  provider:
+    name: libvirt
+    type: libvirt
+    driver: kvm
+lint: |
+  set -e
+  yamllint .
+  ansible-lint
+platforms:
+  - name: f34-bazel
+    box: fedora/34-cloud-base
+    cpus: 2
+    memory: 1024
+    instance_raw_config_args:
+      - 'vagrant.plugins = ["vagrant-libvirt"]'
+    provider_raw_config_args:
+      - "cpu_mode = 'host-passthrough'"
+      - "disk_bus = 'virtio'"
+      - "nic_model_type = 'virtio'"
+      - "video_type = 'virtio'"
+      - "disk_driver :cache => 'writeback'"
+      - "storage :file, bus: 'virtio', cache: 'writeback'"
+    provider_options:
+      video_type: "'vga'"
+    config_options:
+      ssh.keep_alive: true
+      ssh.remote_user: "'vagrant'"
+provisioner:
+  name: ansible
+  playbooks:
+    converge: converge.yml
+  #  cleanup: cleanup.yml
+  config_options:
+    defaults:
+      stdout_callback: 'yaml'  # To get pretty output
+      bin_ansible_callbacks: true
+      interpreter_python: 'python3'
+      verbosity: 1
+  options:
+    vvv: true
+    # vault-id: '@$HOME/.ansible/.vault.key'
+  connection_options:
+    ansible_ssh_user: vagrant
+    # ansible_become: true
+    ansible_connection: smart  # Override the connection: local
+  # env:
+  #   ANSIBLE_DEBUG: '1'
+  #   ANSIBLE_CONFIG: ../../ansible.cfg
+  #   ANSIBLE_ROLES_PATH: "../../roles/"
+  #   ANSIBLE_COLLECTIONS_PATHS: "../../collections"
+  #   ANSIBLE_FORCE_COLOR: true
+  log: true
+  lint: |
+    set -e
+    yamllint .
+    ansible-lint
+    flake8
+verifier:
+  name: ansible
+  lint: |
+    set -e
+    ansible-lint

@@ -1,0 +1,10 @@
+---
+
+# roles:
+#   - name: general.nodejs
+
+collections:
+  - name: https://github.com/oswee/ansible.git
+    version: master
+    type: git
+...
