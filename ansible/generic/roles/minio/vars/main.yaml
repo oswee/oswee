@@ -1,0 +1,7 @@
+---
+# vars file for minio
+
+packages:
+  redhat:
+    - firewalld
+...

@@ -1,0 +1,12 @@
+---
+# defaults file for minio
+
+minio_user: minio
+minio_group: minio
+
+# Minio server listen port
+minio_server_port: '9000'
+
+minio_volumes: '/tmp'
+minio_domain: 's3.example.local'
+...

@@ -1,0 +1,43 @@
+---
+# handlers file for minio
+
+- name: Change user
+  become: true
+  ansible.builtin.replace:
+    path: /etc/systemd/system/minio.service
+    regexp: 'User=minio-user'
+    replace: 'User={{ minio_user }}'
+
+- name: Change group
+  become: true
+  ansible.builtin.replace:
+    path: /etc/systemd/system/minio.service
+    regexp: 'Group=minio-user'
+    replace: 'Group={{ minio_group }}'
+
+- name: Reexec systemd
+  become: true
+  ansible.builtin.systemd:
+    daemon_reexec: true
+
+- name: Restart firewalld
+  become: true
+  ansible.builtin.systemd:
+    name: firewalld
+    state: restarted
+    daemon_reload: true
+
+- name: Start minio
+  become: true
+  ansible.builtin.service:
+    name: minio
+    state: started
+    enabled: true
+
+- name: Restart minio
+  become: true
+  ansible.builtin.systemd:
+    name: minio
+    state: restarted
+    # daemon_reload: true
+...
