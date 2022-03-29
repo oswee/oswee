@@ -1,0 +1,9 @@
+---
+# handlers file for matchbox
+
+- name: Restart Firewalld
+  become: true
+  ansible.builtin.systemd:
+    name: firewalld
+    state: restarted
+...
