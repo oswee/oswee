@@ -105,8 +105,8 @@ UPDATE: These instructions most likely is broken ATM
 - Update Go dependencies `yarn run gazelle:update-repos`
 - Generate BUILD rules for Go: `yarn run gazelle`
 - Build everything: `yarn bazel build '...'`
-- Build single target `yarn bazel build //oswee/server:binary`
-- Run some binary with flags: `yarn bazel run //oswee/gateway:gateway -- -a :9090`
+- Build single target `yarn bazel build //go/cmd/http-server:http-server`
+- Run some binary with flags: `yarn bazel run //go/cmd/gateway:gateway -- -a :9090`
 - Run Bazel in watch mode: `yarn ibazel run //platform/web:devserver`
 
 ### Potential issues
