@@ -1,3 +1,4 @@
+---
 galaxy_info:
   namespace: oswee
   role_name: golang
@@ -7,12 +8,12 @@ galaxy_info:
 
   license: 'Apache-2.0'
 
-  min_ansible_version: '2.11'
+  min_ansible_version: '2.12'
 
   platforms:
     - name: Fedora
       versions:
-        - 34
+        - 35
 
   galaxy_tags:
     - 'golang'
@@ -22,3 +23,4 @@ galaxy_info:
     - 'fedora'
 
 dependencies: []
+...
