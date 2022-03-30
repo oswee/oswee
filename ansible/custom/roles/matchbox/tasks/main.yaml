@@ -1,0 +1,66 @@
+---
+# tasks file for roles/matchbox
+
+# I should use Ansible URI module there to avoid repetitive download ???
+
+# - name: Download NIGHTLY RHCOS Initramfs
+#   ansible.builtin.get_url:
+#     url: '{{ item }}'
+#     dest: /var/lib/matchbox/assets
+#     mode: '0644'
+#   loop:
+#     - "{{ nightly_rhcos_baseurl }}/{{ nightly_bios }}"
+#     - "{{ nightly_rhcos_baseurl }}/{{ nightly_kernel }}"
+#     - "{{ nightly_rhcos_baseurl }}/{{ nightly_initramfs }}"
+
+# - name: Download RHCOS Initramfs
+#   ansible.builtin.get_url:
+#     url: '{{ item }}'
+#     dest: /var/lib/matchbox/assets
+#     mode: '0644'
+#   loop:
+#     - "{{ rhcos_baseurl }}/{{ bios }}"
+#     - "{{ rhcos_baseurl }}/{{ kernel }}"
+#     - "{{ rhcos_baseurl }}/{{ initramfs }}"
+
+- name: Copy profiles
+  become: true
+  ansible.builtin.template:
+    # path: profiles
+    src: '{{ item.src }}'
+    dest: '/var/lib/matchbox/profiles/{{ item.dest }}'
+    mode: '0644'
+  loop:
+    - {src: 'profiles/bootstrap.json.j2', dest: 'bootstrap.json'}
+    - {src: 'profiles/cptnod.json.j2', dest: 'cptnod.json'}
+    - {src: 'profiles/infnod.json.j2', dest: 'infnod.json'}
+    - {src: 'profiles/master.json.j2', dest: 'master.json'}
+
+- name: Copy groups
+  become: true
+  ansible.builtin.template:
+    # path: groups
+    src: '{{ item.src }}'
+    dest: '/var/lib/matchbox/groups/{{ item.dest }}'
+    mode: '0644'
+  loop:
+    - {src: 'groups/bootstrap.json.j2', dest: 'bootstrap.json'}
+    - {src: 'groups/cptnod-0.json.j2', dest: 'cptnod-0.json'}
+    - {src: 'groups/cptnod-1.json.j2', dest: 'cptnod-1.json'}
+    - {src: 'groups/cptnod-2.json.j2', dest: 'cptnod-2.json'}
+    - {src: 'groups/infnod-0.json.j2', dest: 'infnod-0.json'}
+    - {src: 'groups/infnod-1.json.j2', dest: 'infnod-1.json'}
+    - {src: 'groups/master-0.json.j2', dest: 'master-0.json'}
+    - {src: 'groups/master-1.json.j2', dest: 'master-1.json'}
+    - {src: 'groups/master-2.json.j2', dest: 'master-2.json'}
+  notify:
+    - Debug
+
+- name: Open firewall port
+  become: true
+  ansible.posix.firewalld:
+    port: 8080/tcp
+    permanent: true
+    state: enabled
+  notify: Restart Firewalld
+...
