@@ -9,3 +9,7 @@
     - role: oswee.custom.haproxy
       tags:
         - haproxy
+    - role: oswee.generic.envoy
+      tags:
+        - envoy
+...
