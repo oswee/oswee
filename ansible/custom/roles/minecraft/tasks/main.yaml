@@ -1,0 +1,26 @@
+---
+# tasks file for minecraft
+
+- name: Install
+  import_tasks: install.yaml
+  tags:
+    - minecraft:setup
+    - minecraft:setup:install
+
+- name: Mods
+  import_tasks: mods.yaml
+  tags:
+    - minecraft:setup
+    - minecraft:setup:mods
+
+# - name: Configure
+#   import_tasks: configure.yaml
+#   tags:
+#     - minecraft:setup
+#     - minecraft:setup:config
+
+# - name: Remove
+#   import_tasks: remove.yaml
+#   tags:
+#     - minecraft:remove
+...
