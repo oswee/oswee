@@ -20,7 +20,7 @@ set $up k
 set $right l
 
 # Disable XWayland (Log Out required)
-xwayland disable
+#xwayland disable
 
 # Your preferred terminal emulator
 set $term alacritty
@@ -397,6 +397,9 @@ bindsym $mod+Shift+m exec makoctl dismiss --all
 
 # exec --no-startup-id mako
 
+# https://github.com/swaywm/sway/wiki#gtk-applications-take-20-seconds-to-start
+#exec dbus-update-activation-environment --systemd DISPLAY WAYLAND_DISPLAY SWAYSOCK
+
 set $gnome-schema org.gnome.desktop.interface
 
 exec_always {
@@ -408,4 +411,3 @@ exec_always {
 }
 
 include /etc/sway/config.d/*
-

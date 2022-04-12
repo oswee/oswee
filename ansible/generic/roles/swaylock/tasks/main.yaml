@@ -61,3 +61,4 @@
   ansible.builtin.file:
     path: /usr/bin/swaylock
     mode: 'a+s'
+...
