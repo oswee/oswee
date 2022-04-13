@@ -126,8 +126,6 @@ input "type:keyboard" {
 #     tap_button_map lrm
 # }
 
-
-
 # *************************
 # Key bindings: General
 # *************************
@@ -305,6 +303,8 @@ bindsym $mod+Ctrl+Down resize grow height 10 px or 10 ppt
 bindsym $mod+Ctrl+Up resize shrink height 10 px or 10 ppt
 bindsym $mod+Ctrl+Right resize grow width 10 px or 10 ppt
 
+bindsym $mod+r mode "resize"
+
 mode "resize" {
   # left will shrink the containers width
   # right will grow the containers width
@@ -325,7 +325,6 @@ mode "resize" {
   bindsym Return mode "default"
   bindsym Escape mode "default"
 }
-bindsym $mod+r mode "resize"
 
 
 
@@ -335,12 +334,12 @@ bindsym $mod+r mode "resize"
 
 # Capture all displays to the clipboard
 bindsym Print exec grim - | wl-copy
+# Select the screen area and open it into Swappy
+bindsym Shift+Print exec grim -g "$(slurp)" - | swappy -f -
 # Capture all displays and save in the file
-bindsym Shift+Print exec grim ~/Pictures/Printscreens/screen-"$(date +'%m.%d.%y %T')".png
+bindsym Alt+Print exec grim ~/Pictures/Printscreens/screen-"$(date +'%m.%d.%y %T')".png
 # Select the screen area to capture into clipboard
 #bindsym Alt+Print exec grim -g "$(slurp)" - | wl-copy
-# Select the screen area and open it into Swappy
-bindsym Alt+Print exec grim -g "$(slurp)" - | swappy -f -
 # Select the screen area and save it into the file
 #bindsym Alt+Shift+Print exec grim -g "$(slurp)" ~/Pictures/Printscreens/screen-"$(date +'%m.%d.%y %T')".png
 
