@@ -34,6 +34,9 @@
     # - role: oswee.generic.tmux
     #   tags:
     #     - tmux
+    - role: oswee.generic.nodejs
+      tags:
+        - nodejs
     - role: oswee.generic.ranger
       tags:
         - ranger
