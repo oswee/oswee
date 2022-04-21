@@ -29,4 +29,3 @@ dependencies:
     when: minikube_install_kubectl
   - role: oswee.generic.istio
     when: minikube_install_istio
-...

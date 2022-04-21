@@ -4,7 +4,6 @@
 - name: Remove packages
   become: true
   ansible.builtin.dnf:
-    name: "{{ item }}"
+    name: '{{ item }}'
     state: absent
-  loop: "{{ packages.redhat }}"
-...
+  loop: '{{ packages.redhat }}'

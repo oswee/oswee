@@ -32,3 +32,14 @@
     owner: '{{ haproxy_user }}'
     group: '{{ haproxy_group }}'
     mode: 'u=rw,g=r,o='
+
+- name: config | Copy cert-list file
+  become: true
+  ansible.builtin.template:
+    src: 'cert-list.txt.j2'
+    dest: '/etc/letsencrypt/live/cert-list.txt'
+    owner: 'root'
+    group: 'root'
+    mode: '0644'
+  notify:
+    - Restart HAProxy

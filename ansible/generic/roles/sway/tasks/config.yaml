@@ -11,6 +11,17 @@
 #     mode: '0755'
 #   loop: '{{ mountpoints }}'
 
+- name: Create Sway environment
+  become: true
+  ansible.builtin.copy:
+    dest: '{{ sway_environment_path }}'
+    mode: '0644'
+    content: |
+      [ "$(tty)" = "/dev/tty1" ] && exec sway
+
+# https://github.com/swaywm/sway/wiki#issues-with-java-applications
+# export _JAVA_AWT_WM_NONREPARENTING=1
+
 - name: Create sway directory
   ansible.builtin.file:
     path: '$HOME/.config/sway'
@@ -82,8 +93,16 @@
     dest: '{{ item.dest }}'
     mode: '{{ item.mode }}'
   loop:
-    - { src: 'wlogout/layout', dest: '/home/{{ ansible_user_id }}/.config/wlogout/', mode: '0644' }
-    - { src: 'wlogout/style.css', dest: '/home/{{ ansible_user_id }}/.config/wlogout/', mode: '0644' }
+    - {
+        src: 'wlogout/layout',
+        dest: '/home/{{ ansible_user_id }}/.config/wlogout/',
+        mode: '0644',
+      }
+    - {
+        src: 'wlogout/style.css',
+        dest: '/home/{{ ansible_user_id }}/.config/wlogout/',
+        mode: '0644',
+      }
 
 - name: Set timezone
   become: true

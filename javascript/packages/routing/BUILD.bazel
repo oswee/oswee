@@ -1,0 +1,47 @@
+load("@build_bazel_rules_nodejs//:index.bzl", "nodejs_binary")
+load("@npm//@bazel/typescript:index.bzl", "ts_config", "ts_project")
+
+package(default_visibility = ["//visibility:public"])
+
+ts_project(
+    name = "routing",
+    srcs = glob(
+        include = [
+            "src/**/*.ts",
+        ],
+        exclude = [
+            "src/**/*.spec.ts",
+        ],
+    ),
+    # devmode_module = "esnext",
+    # devmode_target = "esnext",
+    # module_name = "@oswee/packages/routing",
+    # module_root = "src",
+    tsconfig = "tsconfig",
+    deps = [
+        "//lib/action",
+        "@npm//history",
+        # "@npm//@types/history",
+        "@npm//redux-dynamic-modules-saga",
+        "@npm//redux-first-routing",
+        "@npm//universal-router",
+        "@npm//redux-saga",
+        "@npm//reselect",
+        "@npm//redux",
+    ],
+)
+
+nodejs_binary(
+    name = "history",
+    data = ["@npm//history"],
+    entry_point = "@npm//:node_modules/history/index.js",
+)
+
+ts_config(
+    name = "tsconfig",
+    src = "tsconfig.json",
+    deps = [
+        "tsconfig.json",
+        "//:tsconfig.base.json",
+    ],
+)

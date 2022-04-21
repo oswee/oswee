@@ -1,5 +1,4 @@
 ---
-
 - name: remove libvirt and it's dependencies
   become: true
   ansible.builtin.dnf:

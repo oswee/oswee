@@ -1,0 +1,29 @@
+---
+# tasks file for minecraft
+
+- name: Install packages
+  become: true
+  ansible.builtin.dnf:
+    name: '{{ item }}'
+    state: present
+  loop: '{{ packages.redhat }}'
+
+- name: Download minecraft launcher
+  unarchive:
+    src: https://launcher.mojang.com/download/Minecraft.tar.gz
+    dest: '/home/{{ ansible_user_id }}'
+    remote_src: true
+
+- name: Create minecraft symlink
+  become: true
+  ansible.builtin.file:
+    src: '/home/{{ ansible_user_id }}/minecraft-launcher/minecraft-launcher'
+    path: /usr/local/bin/minecraft-launcher
+    state: link
+    force: true
+
+- name: Copy Minecraft desktop launcher
+  ansible.builtin.copy:
+    src: minecraft.desktop
+    dest: '/home/{{ ansible_user_id }}/.local/share/applications/minecraft.desktop'
+    mode: '0755'

@@ -12,17 +12,17 @@
   become: true
   template:
     src: my.cnf.j2
-    dest: "{{ mysql_config_file }}"
+    dest: '{{ mysql_config_file }}'
     owner: root
     group: root
     mode: 0644
-    force: "{{ overwrite_global_mycnf }}"
+    force: '{{ overwrite_global_mycnf }}'
   notify: mariadb-restart
 
 - name: Verify mysql include directory exists.
   become: true
   file:
-    path: "{{ mysql_config_include_dir }}"
+    path: '{{ mysql_config_include_dir }}'
     state: directory
     owner: root
     group: root
@@ -32,15 +32,14 @@
 - name: Copy my.cnf override files into include directory.
   become: true
   template:
-    src: "{{ item.src }}"
-    dest: "{{ mysql_config_include_dir }}/{{ item.src | basename }}"
+    src: '{{ item.src }}'
+    dest: '{{ mysql_config_include_dir }}/{{ item.src | basename }}'
     owner: root
     group: root
     mode: 0644
-    force: "{{ item.force | default(False) }}"
-  with_items: "{{ mysql_config_include_files }}"
+    force: '{{ item.force | default(False) }}'
+  with_items: '{{ mysql_config_include_files }}'
   notify: mariadb-restart
-
 
 # - name: mariadb | copy mariadb configurations
 #   become: true
@@ -74,19 +73,18 @@
 #     owner: "{{ mysql_user_name }}"
 #     mode: 0600
 
-
 - name: Create slow query log file (if configured).
   become: true
-  command: "touch {{ mysql_slow_query_log_file }}"
+  command: 'touch {{ mysql_slow_query_log_file }}'
   args:
-    creates: "{{ mysql_slow_query_log_file }}"
+    creates: '{{ mysql_slow_query_log_file }}'
     warn: false
   when: mysql_slow_query_log_enabled
 
 - name: Create datadir if it does not exist
   become: true
   file:
-    path: "{{ mysql_datadir }}"
+    path: '{{ mysql_datadir }}'
     state: directory
     owner: mysql
     group: mysql
@@ -96,18 +94,18 @@
 - name: Set ownership on slow query log file (if configured).
   become: true
   file:
-    path: "{{ mysql_slow_query_log_file }}"
+    path: '{{ mysql_slow_query_log_file }}'
     state: file
     owner: mysql
-    group: "{{ mysql_log_file_group }}"
+    group: '{{ mysql_log_file_group }}'
     mode: 0640
   when: mysql_slow_query_log_enabled
 
 - name: Create error log file (if configured).
   become: true
-  command: "touch {{ mysql_log_error }}"
+  command: 'touch {{ mysql_log_error }}'
   args:
-    creates: "{{ mysql_log_error }}"
+    creates: '{{ mysql_log_error }}'
     warn: false
   when:
     - mysql_log | default(true)
@@ -117,10 +115,10 @@
 - name: Set ownership on error log file (if configured).
   become: true
   file:
-    path: "{{ mysql_log_error }}"
+    path: '{{ mysql_log_error }}'
     state: file
     owner: mysql
-    group: "{{ mysql_log_file_group }}"
+    group: '{{ mysql_log_file_group }}'
     mode: 0640
   when:
     - mysql_log | default(true)
@@ -129,5 +127,5 @@
 
 - name: Ensure MySQL is started and enabled on boot.
   become: true
-  service: "name={{ mysql_daemon }} state=started enabled={{ mysql_enabled_on_startup }}"
+  service: 'name={{ mysql_daemon }} state=started enabled={{ mysql_enabled_on_startup }}'
   register: mysql_service_configuration

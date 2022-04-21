@@ -1,11 +1,11 @@
 ---
 # collections:
-  # - name: https://github.com/oswee/ansible.git#/general/
-  #   version: master
-  #   type: git
-  # - source: "/home/dzintars/code/github.com/oswee/prime/ansible"
-  #   type: subdirs
-  # - source: "./ansible"
-  #   type: subdirs
-  # - source: "../"
-  #   type: subdirs
+# - name: https://github.com/oswee/ansible.git#/general/
+#   version: master
+#   type: git
+# - source: "/home/dzintars/code/github.com/oswee/prime/ansible"
+#   type: subdirs
+# - source: "./ansible"
+#   type: subdirs
+# - source: "../"
+#   type: subdirs

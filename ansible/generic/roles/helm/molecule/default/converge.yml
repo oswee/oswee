@@ -2,6 +2,6 @@
 - name: Converge
   hosts: all
   tasks:
-    - name: "Include roles/helm"
+    - name: 'Include roles/helm'
       include_role:
-        name: "roles/helm"
+        name: 'roles/helm'

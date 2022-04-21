@@ -40,4 +40,3 @@
     name: minio
     state: restarted
     # daemon_reload: true
-...

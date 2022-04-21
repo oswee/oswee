@@ -16,15 +16,14 @@
 
 - name: packer install
   become: false
-  ansible.builtin.shell: "nvim +Silent +VimEnter +PackerInstall +qall &>/dev/null"
+  ansible.builtin.shell: 'nvim +Silent +VimEnter +PackerInstall +qall &>/dev/null'
 
 - name: packer update
   become: false
-  ansible.builtin.shell: "nvim +Silent +VimEnter +PackerUpdate +qall &>/dev/null"
+  ansible.builtin.shell: 'nvim +Silent +VimEnter +PackerUpdate +qall &>/dev/null'
 
 - name: packer compile
   become: false
   # ansible.builtin.shell: "nvim +Silent +VimEnter +PackerCompile +qall &>/dev/null"
   ansible.builtin.shell: nvim --headless +'PackerCompile' +'qa'
   # nvim -c "PlugInstall" -c ":qa!"
-...

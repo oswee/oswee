@@ -6,7 +6,7 @@
 - name: Install rpm keys
   ansible.builtin.rpm_key:
     state: present
-    key: "{{ item }}"
+    key: '{{ item }}'
   loop:
     - https://rpm.releases.hashicorp.com/gpg
 
@@ -17,9 +17,9 @@
 
 - name: Install packages
   ansible.builtin.dnf:
-    name: "{{ item }}"
+    name: '{{ item }}'
     state: present
-  loop: "{{ packages.redhat }}"
+  loop: '{{ packages.redhat }}'
 
 - name: Copy Vault systemd sevice unit
   ansible.builtin.copy:
@@ -47,14 +47,13 @@
 
 - name: Allow the service to be accessed at the firewall level
   ansible.posix.firewalld:
-    port: "{{ item }}"
+    port: '{{ item }}'
     permanent: true
     state: enabled
   notify: Restart Firewalld
   loop:
     - 8200/tcp
     - 8201/tcp
-
 # - name: Allow the service to be accessed at the firewall level
 #   ansible.posix.firewalld:
 #     port: 8201/tcp
@@ -91,4 +90,3 @@
 #     dest: /usr/local/bin
 #     mode: a+x
 #     remote_src: true
-...

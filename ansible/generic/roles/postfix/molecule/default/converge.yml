@@ -2,6 +2,6 @@
 - name: Converge
   hosts: all
   tasks:
-    - name: "Include dzintars.postfix"
+    - name: 'Include dzintars.postfix'
       include_role:
-        name: "ansible-role-postfix"
+        name: 'ansible-role-postfix'

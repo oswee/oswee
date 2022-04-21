@@ -12,9 +12,7 @@
   tags:
     - bazel:setup
     - bazel:setup:config
-
 # - name: Remove
 #   import_tasks: remove.yaml
 #   tags:
 #     - bazel:remove
-...

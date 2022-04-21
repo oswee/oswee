@@ -9,8 +9,14 @@
     line: '{{ item.value }}'
     state: present
   loop:
-    - {pattern: '^#?unix_sock_group = "libvirt"', value: 'unix_sock_group = "libvirt"'}
-    - {pattern: '^#?unix_sock_rw_perms = "0770"', value: 'unix_sock_rw_perms = "0770"'}
+    - {
+        pattern: '^#?unix_sock_group = "libvirt"',
+        value: 'unix_sock_group = "libvirt"',
+      }
+    - {
+        pattern: '^#?unix_sock_rw_perms = "0770"',
+        value: 'unix_sock_rw_perms = "0770"',
+      }
   notify: restart libvirtd
 
 # In order to grant quemu access to my users directories i modified /etc/libvirt/qemu.conf file.
@@ -23,8 +29,14 @@
     line: '{{ item.value }}'
     state: present
   loop:
-    - {pattern: '^#?user = (?!{{ ansible_user_id }})', value: 'user = "{{ ansible_user_id }}"'}
-    - {pattern: '^#?group = (?!{{ ansible_user_id }})', value: 'group = "{{ ansible_user_id }}"'}
+    - {
+        pattern: '^#?user = (?!{{ ansible_user_id }})',
+        value: 'user = "{{ ansible_user_id }}"',
+      }
+    - {
+        pattern: '^#?group = (?!{{ ansible_user_id }})',
+        value: 'group = "{{ ansible_user_id }}"',
+      }
   notify: restart libvirtd
 
 - name: Define a new network

@@ -12,4 +12,3 @@
   notify:
     - Start Envoy Proxy
     - Enable Envoy Proxy
-...

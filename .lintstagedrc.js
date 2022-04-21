@@ -1,4 +1,4 @@
-'use strict';
+'use strict'
 
 module.exports = {
   '*.{ts,html,md}': ['npx --no-install prettier --write'],
@@ -33,4 +33,4 @@ module.exports = {
 //   '{.*,*}.{js,json}': json,
 // };
 
-// export default config;
+// export default config

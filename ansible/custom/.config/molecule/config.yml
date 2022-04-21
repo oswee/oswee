@@ -29,8 +29,8 @@ provisioner:
     converge: converge.yml
   config_options:
     defaults:
-      vault_password_file: "$HOME/.ansible/.vault.key"
-      stdout_callback: 'yaml'  # To get pretty output
+      vault_password_file: '$HOME/.ansible/.vault.key'
+      stdout_callback: 'yaml' # To get pretty output
       bin_ansible_callbacks: true
       interpreter_python: 'python3'
       verbosity: 1
@@ -44,7 +44,7 @@ provisioner:
   #   - --inventory=myinventory.yaml
   connection_options:
     ansible_ssh_user: vagrant
-    ansible_connection: smart  # Override the connection: local
+    ansible_connection: smart # Override the connection: local
     # ansible_ssh_common_args: -o IdentitiesOnly=no
   env:
     PY_COLORS: true

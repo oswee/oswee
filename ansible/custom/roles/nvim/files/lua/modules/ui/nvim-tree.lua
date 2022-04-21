@@ -7,7 +7,6 @@ local g = vim.g
 local map = require('helpers.map').map
 local tree_cb = require('nvim-tree.config').nvim_tree_callback
 
-g.nvim_tree_indent_markers = 1
 g.nvim_tree_git_hl = 0
 g.nvim_tree_highlight_opened_files = 1
 g.nvim_tree_root_folder_modifier = ':~'
@@ -127,6 +126,16 @@ require('nvim-tree').setup {
     number = false,
     relativenumber = false,
     signcolumn = 'yes'
+  },
+  renderer = {
+    indent_markers = {
+      enable = false,
+      icons = {
+        corner = "└ ",
+        edge = "│ ",
+        none = "  ",
+      },
+    },
   },
   trash = {
     cmd = 'trash',

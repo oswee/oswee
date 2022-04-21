@@ -6,7 +6,6 @@
   tags:
     - minio:setup
     - minio:setup:install
-
 # - name: Config
 #   import_tasks: configure.yaml
 #   tags:
@@ -17,4 +16,3 @@
 #   import_tasks: cleanup.yaml
 #   tags:
 #     - minio:cleanup
-...

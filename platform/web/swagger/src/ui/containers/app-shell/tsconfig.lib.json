@@ -6,18 +6,9 @@
     "target": "es2015",
     "declaration": true,
     "moduleResolution": "node",
-    "types": [
-      "node"
-    ],
-    "lib": [
-      "dom",
-      "es2018"
-    ]
+    "types": ["node"],
+    "lib": ["dom", "es2018"]
   },
-  "include": [
-    "**/*.ts"
-  ],
-  "exclude": [
-    "**/*.spec.ts"
-  ]
+  "include": ["**/*.ts"],
+  "exclude": ["**/*.spec.ts"]
 }

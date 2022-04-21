@@ -11,7 +11,7 @@
 - name: Install Envoy RPM repository
   become: true
   ansible.builtin.get_url:
-    url: 'https://rpm.dl.getenvoy.io/public/config.rpm.txt?distro=fedora&codename=34'
+    url: 'https://rpm.dl.getenvoy.io/public/config.rpm.txt?distro=fedora&codename=35'
     dest: '/etc/yum.repos.d/envoy.repo'
 
 - name: Install Envoy
@@ -47,4 +47,3 @@
   # TODO: Because i need to run Envoy in background
   async: 1000
   poll: 0
-...

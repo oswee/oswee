@@ -6,4 +6,3 @@ postfix_service: 'postfix'
 packages:
   redhat:
     - postfix
-...

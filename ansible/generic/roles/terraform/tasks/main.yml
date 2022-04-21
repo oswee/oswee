@@ -6,7 +6,6 @@
   tags:
     - terraform:setup
     - terraform:setup:install
-
 # - name: Remove
 #   import_tasks: remove.yml
 #   tags:

@@ -13,4 +13,3 @@
   ansible.builtin.dnf:
     name: 'kubectl'
     state: present
-...

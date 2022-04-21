@@ -1,7 +1,7 @@
 * {
   border: none;
   border-radius: 0;
-  font-family: "Hack Nerd Font", monospace;
+  font-family: 'Hack Nerd Font', monospace;
   font-size: 12px;
   min-height: 0;
 }
@@ -73,7 +73,7 @@ window#waybar {
 #custom-disturb-off,
 #custom-arch {
   color: white;
-  background: #283F6E;
+  background: #283f6e;
 }
 
 @keyframes blink {

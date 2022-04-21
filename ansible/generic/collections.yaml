@@ -5,7 +5,7 @@ collections:
   #   type: git
   # - source: "/home/dzintars/code/github.com/oswee/prime/ansible"
   #   type: subdirs
-  - source: "./ansible"
+  - source: './ansible'
     type: subdirs
   # - source: "../"
   #   type: subdirs

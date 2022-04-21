@@ -42,7 +42,7 @@ provisioner:
     # cleanup: cleanup.yml
   config_options:
     defaults:
-      stdout_callback: 'yaml'  # To get pretty output
+      stdout_callback: 'yaml' # To get pretty output
       bin_ansible_callbacks: true
       interpreter_python: 'python3'
       verbosity: 1

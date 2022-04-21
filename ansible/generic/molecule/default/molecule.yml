@@ -44,7 +44,7 @@ provisioner:
     converge: converge.yml
   config_options:
     defaults:
-      stdout_callback: 'yaml'  # To get pretty output
+      stdout_callback: 'yaml' # To get pretty output
       bin_ansible_callbacks: true
       interpreter_python: 'python3'
       verbosity: 1
@@ -56,7 +56,7 @@ provisioner:
   connection_options:
     ansible_ssh_user: vagrant
     # ansible_become: true
-    ansible_connection: smart  # Override the connection: local
+    ansible_connection: smart # Override the connection: local
   env:
     PY_COLORS: true
     ANSIBLE_FORCE_COLOR: true

@@ -12,4 +12,3 @@
   ansible.builtin.file:
     path: '{{ envoy_config_dir }}'
     state: absent
-...

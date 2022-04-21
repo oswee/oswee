@@ -6,8 +6,7 @@
   ansible.builtin.dnf:
     name: '{{ item }}'
     state: present
-  loop:
-    '{{ nvim_build_packages.redhat }}'
+  loop: '{{ nvim_build_packages.redhat }}'
   when: nvim_nightly | bool
 
 - name: Get package facts

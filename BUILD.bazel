@@ -5,7 +5,8 @@ Prime
 load("@bazel_gazelle//:def.bzl", "gazelle")
 load("@com_github_bazelbuild_buildtools//buildifier:def.bzl", "buildifier")
 
-package(default_visibility = ["//:__subpackages__"])
+# package(default_visibility = ["//:__subpackages__"])
+package(default_visibility = ["//visibility:public"])
 
 # gazelle:exclude node_modules
 # gazelle:build_file_name BUILD.bazel,BUILD
@@ -14,12 +15,18 @@ gazelle(
     name = "gazelle",
 )
 
+# To automatically format all .bzl files and all BUILD.bzl files, run:
+#    bazelisk run //:buildifier
+# or
+#    yarn bazel run //:buildifier
 buildifier(
     name = "buildifier",
+    exclude_patterns = ["node_modules"],
 )
 
 buildifier(
     name = "buildifier_check",
+    exclude_patterns = ["node_modules"],
     mode = "check",
 )
 
@@ -30,8 +37,6 @@ buildifier(
 # attribute.
 exports_files(
     [
-        "tsconfig.json",
-        "tsconfig.base.json",
         # Stylelint and prettier config are neeeded for style linting
         ".stylelintrc.js",
         ".prettierrc.js",
@@ -40,3 +45,12 @@ exports_files(
     visibility = ["//visibility:public"],
 )
 
+alias(
+    name = "tsconfig.base.json",
+    actual = "//javascript:tsconfig.base.json",
+)
+
+alias(
+    name = "tsconfig.json",
+    actual = "//javascript:tsconfig.json",
+)

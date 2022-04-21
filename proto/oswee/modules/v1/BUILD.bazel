@@ -6,7 +6,6 @@ https://github.com/grpc-ecosystem/grpc-gateway/blob/master/examples/internal/pro
 load("@io_bazel_rules_go//go:def.bzl", "go_library")
 load("@io_bazel_rules_go//proto:def.bzl", "go_proto_library")
 load("@rules_proto//proto:defs.bzl", "proto_library")
-
 load("@grpc_ecosystem_grpc_gateway//protoc-gen-openapiv2:defs.bzl", "protoc_gen_openapiv2")
 load("@prime//proto:defs.bzl", "protobufjs_library")
 
@@ -20,11 +19,8 @@ proto_library(
 
 go_proto_library(
     name = "modules_go_proto",
+    compilers = ["@io_bazel_rules_go//proto:go_grpc"],
     importpath = "github.com/oswee/prime/proto/oswee/modules/v1",
-    compilers = [
-        "@io_bazel_rules_go//proto:go_grpc",
-        "@com_github_grpc_ecosystem_grpc_gateway//protoc-gen-grpc-gateway:go_gen_grpc_gateway",
-    ],
     proto = ":modules_proto",
     visibility = ["//visibility:public"],
     deps = [

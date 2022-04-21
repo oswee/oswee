@@ -4,9 +4,9 @@
 - name: Install libvirt dependencies
   become: true
   ansible.builtin.dnf:
-    name: "{{ item }}"
+    name: '{{ item }}'
     state: latest
-  loop: "{{ packages.redhat }}"
+  loop: '{{ packages.redhat }}'
 
 # Create libvirt group and add current user to it to allow to run libvirt without root
 
@@ -21,7 +21,7 @@
 - name: Add {{ ansible_user_id }} to libvirt group
   become: true
   ansible.builtin.user:
-    name: "{{ ansible_user_id }}"
+    name: '{{ ansible_user_id }}'
     groups:
       - libvirt
     append: true

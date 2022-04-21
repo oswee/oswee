@@ -1,5 +1,4 @@
 ---
-
 - name: Allowing firewall services
   become: yes
   firewalld:
@@ -14,7 +13,7 @@
 - name: Allowing firewall ports
   become: yes
   firewalld:
-    port: "{{ jenkins_http_port }}/tcp"
+    port: '{{ jenkins_http_port }}/tcp'
     permanent: yes
     state: enabled
   notify:

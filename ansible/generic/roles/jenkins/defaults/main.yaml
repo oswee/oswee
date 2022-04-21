@@ -9,8 +9,7 @@ jenkins_group: jenkins
 jenkins_hostname: localhost
 jenkins_listen_address: 127.0.0.1
 jenkins_http_port: 9093
-jenkins_approle_role_id: ""
-jenkins_approle_secret_id: ""
+jenkins_approle_role_id: ''
+jenkins_approle_secret_id: ''
 
-vault_uri: "https://vault.example.com"
-...
+vault_uri: 'https://vault.example.com'

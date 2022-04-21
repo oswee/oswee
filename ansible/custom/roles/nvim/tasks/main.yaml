@@ -59,9 +59,7 @@
   tags:
     - nvim.config
     - nvim.samples
-
 # - name: Cleanup
 #  import_tasks: cleanup.yaml
 #  tags:
 #    - nvim.Cleanup
-...

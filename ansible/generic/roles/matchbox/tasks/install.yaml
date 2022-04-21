@@ -53,7 +53,7 @@
 - name: Create Matchbox directories
   become: true
   ansible.builtin.file:
-    path: "{{ item }}"
+    path: '{{ item }}'
     state: directory
     owner: matchbox
     group: matchbox
@@ -71,4 +71,3 @@
     name: matchbox
     state: started
     enabled: true
-...

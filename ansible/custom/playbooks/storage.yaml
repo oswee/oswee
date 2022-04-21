@@ -1,5 +1,4 @@
 ---
-
 - name: Configure storage
   hosts: storage
   become: false

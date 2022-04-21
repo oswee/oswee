@@ -1,6 +1,5 @@
 ---
-
-hostname: "cptnod-2"
-host_octet: "32"
-uuid: "c045ed5c-f03e-4e5e-87ac-ef219821cc9c"
-mac: "d0:67:e5:8a:b9:1c"
+hostname: 'cptnod-2'
+host_octet: '32'
+uuid: 'c045ed5c-f03e-4e5e-87ac-ef219821cc9c'
+mac: 'd0:67:e5:8a:b9:1c'

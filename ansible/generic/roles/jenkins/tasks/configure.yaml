@@ -2,8 +2,8 @@
   ansible.builtin.template:
     src: jenkins.j2
     dest: /etc/sysconfig/jenkins
-    owner: "{{ jenkins_user }}"
-    group: "{{ jenkins_group }}"
+    owner: '{{ jenkins_user }}'
+    group: '{{ jenkins_group }}'
     mode: 0600
     backup: yes
 
@@ -25,6 +25,6 @@
 - name: Start Jenkins server
   become: true
   ansible.builtin.systemd:
-    name: "{{ jenkins_service_name }}.service"
+    name: '{{ jenkins_service_name }}.service'
     state: "{{ jenkins_service_enabled | ternary('started','stopped') }}"
-    enabled: "{{ jenkins_service_enabled }}"
+    enabled: '{{ jenkins_service_enabled }}'

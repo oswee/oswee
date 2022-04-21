@@ -1,5 +1,4 @@
 ---
-
 - name: Configure Workstation Base
   hosts: workstations
   connection: local
@@ -34,12 +33,18 @@
     # - role: oswee.generic.tmux
     #   tags:
     #     - tmux
+    - role: oswee.generic.nodejs
+      tags:
+        - nodejs
     - role: oswee.generic.ranger
       tags:
         - ranger
     - role: oswee.custom.nvim
       tags:
         - nvim
+    - role: oswee.custom.minecraft
+      tags:
+        - minecraft
     - role: oswee.generic.obsidian
       tags:
         - obsidian

@@ -6,7 +6,7 @@ go_library(
         "middleware.go",
         "request-id.go",
     ],
-    importpath = "github.com/oswee/prime/pkg/middleware",
+    importpath = "github.com/oswee/prime/go/pkg/middleware",
     visibility = ["//visibility:public"],
     deps = ["@org_uber_go_zap//:go_default_library"],
 )

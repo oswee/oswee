@@ -2,6 +2,6 @@
 - name: Converge
   hosts: all
   tasks:
-    - name: "Include ansible-role-vault"
+    - name: 'Include ansible-role-vault'
       include_role:
-        name: "ansible-role-vault"
+        name: 'ansible-role-vault'

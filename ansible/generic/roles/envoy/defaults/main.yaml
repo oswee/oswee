@@ -4,4 +4,3 @@
 envoy_service_name: 'envoy'
 envoy_config_dir: '/etc/envoy'
 envoy_config_path: '{{ envoy_config_dir }}/envoy.yaml'
-...

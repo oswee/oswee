@@ -1,5 +1,4 @@
 ---
-
 - name: Configure Workstation for development
   hosts: workstations
   connection: local
@@ -11,7 +10,7 @@
       tags:
         - golang
       vars:
-        golang_version: 1.17.8
+        golang_version: 1.18
     # - role: minio
     #   tags:
     #     - minio
@@ -32,7 +31,7 @@
       tags:
         - packer
       vars:
-        packer_version: 1.7.9
+        packer_version: 1.8.0
     # - role: oswee.generic.bazel
     #   tags:
     #     - bazel

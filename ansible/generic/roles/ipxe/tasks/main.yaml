@@ -8,7 +8,6 @@
     state: present
   loop:
     - ipxe-bootimgs
-
 # - name: Ensure TFTPboot directory exists
 #   become: true
 #   ansible.builtin.file:
@@ -38,4 +37,3 @@
 #     name: tftp
 #     state: started
 #     enabled: true
-...

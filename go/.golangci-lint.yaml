@@ -1,139 +1,138 @@
 ---
 run:
-   concurrency: 4
-   timeout: 3m
-   issues-exit-code: 1
-   tests: true
-   skip-dirs-use-default: true
-   modules-download-mode: readonly
+  concurrency: 4
+  timeout: 3m
+  issues-exit-code: 1
+  tests: true
+  skip-dirs-use-default: true
+  modules-download-mode: readonly
 
- output:
-   format: colored-line-number
-   print-issued-lines: true
-   print-linter-name: true
-   uniq-by-line: true
+  output:
+    format: colored-line-number
+    print-issued-lines: true
+    print-linter-name: true
+    uniq-by-line: true
 
- linters-settings:
-   errcheck:
-     check-type-assertions: true
-     check-blank: true
-   govet:
-     check-shadowing: true
-     enable-all: true
-     disable-all: false
-     disable:
-       - fieldalignment
-   unused:
-     check-exported: true
-   gocyclo:
-     min-complexity: 7
-   gocognit:
-     min-complexity: 7
-   nakedret:
-     max-func-lines: 10
-   goconst:
-     min-len: 3
-     min-occurrences: 2
-   gofmt:
-     simplify: true
-   maligned:
-     suggest-new: true
-   fieldalignment:
-     suggest-new: true
-   tagliatelle:
-     case:
-       rules:
-         json: snake
-   lll:
-     line-length: 160
-   revive:
-     ignore-generated-header: true
-     severity: warning
-     formatter: friendly
-     confidence: 0.8
-     errorCode: 0
-     warningCode: 0
-     rules:
-       - name: atomic
-       - name: blank-imports
-       - name: context-as-argument
-       - name: context-keys-type
-       - name: dot-imports
-       - name: error-return
-       - name: error-strings
-       - name: error-naming
-       - name: exported
-       - name: if-return
-       - name: increment-decrement
-       - name: var-naming
-       - name: var-declaration
-       - name: package-comments
-       - name: range
-       - name: receiver-naming
-       - name: time-naming
-       - name: unexported-return
-       - name: indent-error-flow
-       - name: errorf
-       - name: empty-block
-       - name: superfluous-else
-       - name: unused-parameter
-       - name: unreachable-code
-       - name: redefines-builtin-id
+  linters-settings:
+    errcheck:
+      check-type-assertions: true
+      check-blank: true
+    govet:
+      check-shadowing: true
+      enable-all: true
+      disable-all: false
+      disable:
+        - fieldalignment
+    unused:
+      check-exported: true
+    gocyclo:
+      min-complexity: 7
+    gocognit:
+      min-complexity: 7
+    nakedret:
+      max-func-lines: 10
+    goconst:
+      min-len: 3
+      min-occurrences: 2
+    gofmt:
+      simplify: true
+    maligned:
+      suggest-new: true
+    fieldalignment:
+      suggest-new: true
+    tagliatelle:
+      case:
+        rules:
+          json: snake
+    lll:
+      line-length: 160
+    revive:
+      ignore-generated-header: true
+      severity: warning
+      formatter: friendly
+      confidence: 0.8
+      errorCode: 0
+      warningCode: 0
+      rules:
+        - name: atomic
+        - name: blank-imports
+        - name: context-as-argument
+        - name: context-keys-type
+        - name: dot-imports
+        - name: error-return
+        - name: error-strings
+        - name: error-naming
+        - name: exported
+        - name: if-return
+        - name: increment-decrement
+        - name: var-naming
+        - name: var-declaration
+        - name: package-comments
+        - name: range
+        - name: receiver-naming
+        - name: time-naming
+        - name: unexported-return
+        - name: indent-error-flow
+        - name: errorf
+        - name: empty-block
+        - name: superfluous-else
+        - name: unused-parameter
+        - name: unreachable-code
+        - name: redefines-builtin-id
 
- linters:
-   enable:
-     - bodyclose
-     - deadcode
-     - depguard
-     - dogsled
-     - dupl
-     - errcheck
-     - exportloopref
-     - exhaustive
-     - funlen
-     - gochecknoinits
-     - goconst
-     - gocritic
-     - gocyclo
-     - gofmt
-     - goimports
-     - revive
-     - gomnd
-     - goprintffuncname
-     - gosimple
-     - govet
-     - ineffassign
-     - lll
-     - misspell
-     - nakedret
-     - noctx
-     - nolintlint
-     - rowserrcheck
-     - staticcheck
-     - structcheck
-     - stylecheck
-     - unconvert
-     - unparam
-     - unused
-     - varcheck
-     - whitespace
-   fast: false
+linters:
+  enable:
+    - bodyclose
+    - deadcode
+    - depguard
+    - dogsled
+    - dupl
+    - errcheck
+    - exportloopref
+    - exhaustive
+    - funlen
+    - gochecknoinits
+    - goconst
+    - gocritic
+    - gocyclo
+    - gofmt
+    - goimports
+    - revive
+    - gomnd
+    - goprintffuncname
+    - gosimple
+    - govet
+    - ineffassign
+    - lll
+    - misspell
+    - nakedret
+    - noctx
+    - nolintlint
+    - rowserrcheck
+    - staticcheck
+    - structcheck
+    - stylecheck
+    - unconvert
+    - unparam
+    - unused
+    - varcheck
+    - whitespace
+  fast: false
 
- issues:
-   exclude-use-default: true
-   max-issues-per-linter: 0
-   max-same-issues: 0
-   new-from-rev: origin/master
-   exclude-rules:
-     - path: test
-       linters:
-         - lll
-         - dupl
-         - funlen
-         - exhaustivestruct
-         - gocognit
-         - fieldalignment
-         - scopelint
-         - testpackage
-         - paralleltest
-...
+issues:
+  exclude-use-default: true
+  max-issues-per-linter: 0
+  max-same-issues: 0
+  new-from-rev: origin/master
+  exclude-rules:
+    - path: test
+      linters:
+        - lll
+        - dupl
+        - funlen
+        - exhaustivestruct
+        - gocognit
+        - fieldalignment
+        - scopelint
+        - testpackage
+        - paralleltest

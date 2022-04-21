@@ -1,0 +1,29 @@
+load("@npm//@bazel/typescript:index.bzl", "ts_config", "ts_project")
+
+package(default_visibility = ["//visibility:public"])
+
+ts_project(
+    name = "action",
+    srcs = glob(
+        include = [
+            "src/**/*.ts",
+        ],
+        exclude = [
+            "src/**/*.spec.ts",
+            "src/test-setup.ts",
+        ],
+    ),
+    tsconfig = "tsconfig",
+    deps = [
+        "@npm//redux",
+    ],
+)
+
+ts_config(
+    name = "tsconfig",
+    src = "tsconfig.json",
+    deps = [
+        "tsconfig.json",
+        "//:tsconfig.base.json",
+    ],
+)

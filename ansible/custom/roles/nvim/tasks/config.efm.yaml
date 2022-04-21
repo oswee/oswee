@@ -19,4 +19,3 @@
 #   ansible.builtin.copy:
 #     dest: /etc/profile.d/efm-langserver.sh
 #     content: "export PATH=$HOME/.local/bin:$PATH\n"
-...

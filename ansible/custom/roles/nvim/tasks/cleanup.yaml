@@ -4,7 +4,7 @@
 - name: Remove Neovim
   become: true
   ansible.builtin.dnf:
-    name: "{{ item }}"
+    name: '{{ item }}'
     state: absent
   loop:
     - neovim
@@ -12,9 +12,8 @@
 
 - name: Remove Neovim directories
   ansible.builtin.file:
-    path: "{{ item }}"
+    path: '{{ item }}'
     state: absent
   loop:
     - $HOME/.config/nvim
     - $HOME/.local/share/nvim
-...

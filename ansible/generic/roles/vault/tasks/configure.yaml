@@ -3,7 +3,7 @@
 
 - name: Create vault directories
   ansible.builtin.file:
-    path: "{{ item }}"
+    path: '{{ item }}'
     state: directory
     owner: vault
     group: vault
@@ -15,14 +15,14 @@
 
 - name: Copy Vault configuration file
   ansible.builtin.template:
-    src: "{{ item.src }}"
-    dest: "{{ item.dest }}"
+    src: '{{ item.src }}'
+    dest: '{{ item.dest }}'
     owner: vault
     group: vault
     # setype: named_conf_t
     mode: '0640'
   loop:
-    - { src: "vault.hcl.j2", dest: "/etc/vault.d/vault.hcl" }
+    - { src: 'vault.hcl.j2', dest: '/etc/vault.d/vault.hcl' }
 
 # - name: Copy TLS certificates
 #   ansible.builtin.copy:
@@ -40,4 +40,3 @@
     name: vault
     enabled: true
     state: started
-...

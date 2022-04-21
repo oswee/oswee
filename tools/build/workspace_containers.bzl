@@ -1,5 +1,5 @@
 """
-Prime container images
+Prime container base images
 """
 
 # buildifier: disable=load-on-top

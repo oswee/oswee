@@ -8,7 +8,7 @@ load("@bazel_tools//tools/build_defs/repo:http.bzl", "http_archive")
 
 # buildifier: disable=load-on-top
 load(
-    "@prime//defs:config.bzl",
+    "@prime//bazel:config.bzl",
     "RULES_NODEJS_SHA256",
     "RULES_NODEJS_VERSION",
     "RULES_SASS_SHA256",
@@ -108,6 +108,7 @@ def prime_dependencies():
     urls = [
         "https://github.com/bazelbuild/rules_sass/archive/%s.tar.gz" % RULES_SASS_VERSION,
         "https://mirror.bazel.build/github.com/bazelbuild/rules_sass/archive/%s.tar.gz" % RULES_SASS_VERSION,
+        # "https://github.com/bazelbuild/rules_sass/archive/%s.zip" % RULES_SASS_VERSION,
     ],
   )
 

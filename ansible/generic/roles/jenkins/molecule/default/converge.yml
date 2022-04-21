@@ -2,6 +2,6 @@
 - name: Converge
   hosts: all
   tasks:
-    - name: "Include ansible-role-jenkins"
+    - name: 'Include ansible-role-jenkins'
       include_role:
-        name: "ansible-role-jenkins"
+        name: 'ansible-role-jenkins'

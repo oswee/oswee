@@ -23,7 +23,6 @@ MIT
 
 This role was created in 2022 by [Dzintars Klavins](https://dzintars.github.io)
 
-
 ## Credits
 
 HAProxy custom Error pages by [Jonathan Rosewood](https://github.com/Jonathan-Rosewood/haproxy-custom-errors)

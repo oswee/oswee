@@ -12,7 +12,6 @@
   tags:
     - sway:setup
     - sway:setup:config
-
 # - name: Remove
 #   import_tasks: remove.yaml
 #   tags:
