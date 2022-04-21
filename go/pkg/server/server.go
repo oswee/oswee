@@ -7,8 +7,8 @@ import (
 	"net/http"
 	"time"
 
-	"github.com/dzintars/bazel/pkg/logger"
-	"github.com/dzintars/bazel/pkg/middleware"
+	"github.com/oswee/prime/go/pkg/logger"
+	"github.com/oswee/prime/go/pkg/middleware"
 )
 
 // Config is configuration for Server

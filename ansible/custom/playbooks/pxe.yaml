@@ -1,5 +1,4 @@
 ---
-
 - name: Configure PXE server
   hosts: pxeservers
   become: false

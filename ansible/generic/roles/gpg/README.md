@@ -33,4 +33,3 @@ Dzintars Klavins @dzintars
 ## Credits
 
 - https://eklitzke.org/using-gpg-agent-effectively
-

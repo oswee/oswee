@@ -1,5 +1,4 @@
 ---
-
 - name: Configure Jenkins server
   hosts: buildservers
   become: false

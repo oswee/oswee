@@ -1,5 +1,4 @@
 ---
-
 collections:
   - name: https://github.com/oswee/ansible.git
     version: master

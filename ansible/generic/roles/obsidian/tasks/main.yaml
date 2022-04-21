@@ -24,7 +24,6 @@
   tags:
     - obsidian:setup
     - obsidian:setup:path
-
 # - name: Config
 #   import_tasks: configure.yaml
 #   tags:

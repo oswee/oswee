@@ -20,4 +20,3 @@
     dest: /usr/local/bin
     mode: a+x
     remote_src: true
-...

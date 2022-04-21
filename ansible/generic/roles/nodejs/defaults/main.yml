@@ -4,4 +4,3 @@
 nodejs_version: '17.9.0'
 nodejs_dir: '/usr'
 nodejs_group: 'root'
-...

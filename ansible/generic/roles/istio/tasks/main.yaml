@@ -14,7 +14,7 @@
 - name: Download Istio release source
   become: true
   ansible.builtin.unarchive:
-    src: "https://github.com/istio/istio/releases/download/{{ istio_version }}/istio-{{ istio_version }}-linux-amd64.tar.gz"
+    src: 'https://github.com/istio/istio/releases/download/{{ istio_version }}/istio-{{ istio_version }}-linux-amd64.tar.gz'
     dest: /opt/istio
     remote_src: true
     group: '{{ become_user }}'
@@ -28,4 +28,3 @@
   ansible.builtin.copy:
     dest: /etc/profile.d/istio.sh
     content: 'PATH=$PATH:/opt/istio/bin'
-...

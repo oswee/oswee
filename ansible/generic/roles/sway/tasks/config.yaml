@@ -93,11 +93,18 @@
     dest: '{{ item.dest }}'
     mode: '{{ item.mode }}'
   loop:
-    - { src: 'wlogout/layout', dest: '/home/{{ ansible_user_id }}/.config/wlogout/', mode: '0644' }
-    - { src: 'wlogout/style.css', dest: '/home/{{ ansible_user_id }}/.config/wlogout/', mode: '0644' }
+    - {
+        src: 'wlogout/layout',
+        dest: '/home/{{ ansible_user_id }}/.config/wlogout/',
+        mode: '0644',
+      }
+    - {
+        src: 'wlogout/style.css',
+        dest: '/home/{{ ansible_user_id }}/.config/wlogout/',
+        mode: '0644',
+      }
 
 - name: Set timezone
   become: true
   ansible.builtin.timezone:
     name: 'Europe/Riga'
-...

@@ -9,4 +9,3 @@ minio_server_port: '9000'
 
 minio_volumes: '/tmp'
 minio_domain: 's3.example.local'
-...

@@ -15,26 +15,24 @@
 - name: Install packages
   become: true
   ansible.builtin.dnf:
-    name: "{{ item }}"
+    name: '{{ item }}'
     state: present
-  loop: "{{ packages.redhat }}"
+  loop: '{{ packages.redhat }}'
 
 - name: Create Jenkins system group
   become: true
   ansible.builtin.group:
-    name: "{{ jenkins_group }}"
+    name: '{{ jenkins_group }}'
     state: present
     system: true
 
 - name: Create Jenkins user
   become: true
   ansible.builtin.user:
-    name: "{{ jenkins_user }}"
-    home: "{{ jenkins_home }}"
+    name: '{{ jenkins_user }}'
+    home: '{{ jenkins_home }}'
     system: true
-    shell: /bin/false  # TODO: Does this will allow to execute SSH Cert rotation?
-    group: "{{ jenkins_group }}"
-
+    shell: /bin/false # TODO: Does this will allow to execute SSH Cert rotation?
+    group: '{{ jenkins_group }}'
 # TODO: Add the Jenkins to the libvirt group in order to allow Jenkins to
 # create localhost virtual machines.
-...

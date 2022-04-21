@@ -2,8 +2,8 @@
 # roles/rpm/meta/main.yml
 
 galaxy_info:
-  namespace: 'oswee'
-  role_name: 'rpm'
+  namespace: oswee
+  role_name: rpm
   version: '0.0.1'
   author: 'Dzintars Klavins'
   description: 'Ansible role to maintain rpm.'

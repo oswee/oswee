@@ -2,6 +2,6 @@
 - name: Converge
   hosts: all
   tasks:
-    - name: "Include buildkite"
+    - name: 'Include buildkite'
       include_role:
-        name: "buildkite"
+        name: 'buildkite'

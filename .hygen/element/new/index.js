@@ -15,7 +15,8 @@ module.exports = {
         resolve({ ...args })
       }
     }).then(values => {
-      if (values.tag.indexOf('-') <= 0) throw new Error('tag must contain hyphen')
+      if (values.tag.indexOf('-') <= 0)
+        throw new Error('tag must contain hyphen')
       return values
     })
   },

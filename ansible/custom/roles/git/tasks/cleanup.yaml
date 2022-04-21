@@ -3,7 +3,7 @@
 
 - name: Remove files and directories
   ansible.builtin.file:
-    path: "{{ item }}"
+    path: '{{ item }}'
     state: absent
   loop:
     - $HOME/.gitconfig

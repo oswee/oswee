@@ -1,5 +1,4 @@
 ---
-
 - name: Configure Workstation Base
   hosts: workstations
   connection: local

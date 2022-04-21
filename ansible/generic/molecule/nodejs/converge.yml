@@ -14,7 +14,7 @@
   #       groups: wheel
   #       append: true
 
-  #   - name: Enable passwordless sudo for 'wheel' group 
+  #   - name: Enable passwordless sudo for 'wheel' group
   #     ansible.builtin.copy:
   #       dest: /etc/sudoers.d/wheel
   #       content: "%wheel ALL=(ALL) NOPASSWD: ALL\n"

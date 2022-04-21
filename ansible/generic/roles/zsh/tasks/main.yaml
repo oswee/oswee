@@ -12,9 +12,7 @@
   tags:
     - zsh:setup
     - zsh:setup:config
-
 # - name: Remove
 #   import_tasks: remove.yaml
 #   tags:
 #     - zsh:remove
-...

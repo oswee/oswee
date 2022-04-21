@@ -23,4 +23,4 @@ galaxy_info:
     - 'fedora'
 
 dependencies:
-- name: oswee.generic.haproxy
+  - name: oswee.generic.haproxy

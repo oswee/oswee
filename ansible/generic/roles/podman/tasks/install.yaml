@@ -4,8 +4,7 @@
 - name: Install packages
   become: true
   ansible.builtin.dnf:
-    name: "{{ item }}"
+    name: '{{ item }}'
     enablerepo: updates-testing
     state: present
-  loop: "{{ packages.redhat }}"
-...
+  loop: '{{ packages.redhat }}'

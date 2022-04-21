@@ -6,4 +6,3 @@
   ansible.builtin.service:
     name: firewalld
     statestate: restarted
-...

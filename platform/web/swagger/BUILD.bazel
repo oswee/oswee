@@ -1,6 +1,6 @@
 """Swagger UI app"""
 
-load("@npm//@bazel/typescript:index.bzl", "ts_project", "ts_config")
+load("@npm//@bazel/typescript:index.bzl", "ts_config", "ts_project")
 load("@rules_pkg//:pkg.bzl", "pkg_tar")
 
 package(default_visibility = ["//visibility:public"])
@@ -8,11 +8,10 @@ package(default_visibility = ["//visibility:public"])
 pkg_tar(
     name = "bin",
     srcs = [
-      ":swagger",
+        ":swagger",
     ],
     mode = "0755",
 )
-
 
 ts_project(
     name = "swagger",
@@ -21,7 +20,7 @@ ts_project(
             "src/**/*.ts",
         ],
         exclude = [
-        "src/**/*.spec.ts",
+            "src/**/*.spec.ts",
         ],
     ),
     composite = True,
@@ -29,8 +28,8 @@ ts_project(
     tsconfig = ":tsconfig",
     deps = [
         "@npm//@types",
-        "@npm//tslib",
         "@npm//lit",
+        "@npm//tslib",
     ],
 )
 

@@ -6,7 +6,8 @@ module.exports = {
           .prompt({
             type: 'input',
             name: 'feature',
-            message: 'Feature name of the redux feature (e.g. my-feature or myfeature)?',
+            message:
+              'Feature name of the redux feature (e.g. my-feature or myfeature)?',
           })
           .then(values => {
             resolve({ ...args, ...values })

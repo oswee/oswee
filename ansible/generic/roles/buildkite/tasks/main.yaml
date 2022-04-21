@@ -5,7 +5,7 @@
   become: true
   ansible.builtin.copy:
     src: buildkite-agent.repo
-    dest: "/etc/yum.repos.d/buildkite-agent.repo"
+    dest: '/etc/yum.repos.d/buildkite-agent.repo'
     mode: '0644'
 
 - name: Install Buildkite
@@ -13,4 +13,3 @@
   ansible.builtin.dnf:
     name: 'buildkite-agent'
     state: present
-...

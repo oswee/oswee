@@ -1,5 +1,4 @@
 ---
-
 yaml-files:
   - '*.yaml'
   - '*.yml'
@@ -41,5 +40,5 @@ rules:
     level: warning
     allowed-values: ['true', 'false']
     check-keys: true
-...
+---
 

@@ -1,5 +1,4 @@
 ---
-
 # collections:
 #   - name: "file:///home/dzintars/code/github.com/oswee/ansible"
 #     type: "git"
@@ -7,4 +6,3 @@
 # roles:
 #   - name: general.yarn
 #   - name: general.github
-...

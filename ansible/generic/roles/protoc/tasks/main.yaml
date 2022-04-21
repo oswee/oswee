@@ -5,4 +5,3 @@
   include: install.yaml
   tags:
     - protoc:setup
-...

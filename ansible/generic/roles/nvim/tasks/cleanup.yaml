@@ -1,5 +1,5 @@
 ---
-  # tasks file for nvim
+# tasks file for nvim
 
 - name: Remove Neovim
   become: true

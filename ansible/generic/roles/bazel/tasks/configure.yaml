@@ -6,7 +6,6 @@
   ansible.builtin.copy:
     dest: /etc/profile.d/bazelisk.sh
     content: "alias bazel='bazelisk'\n"
-
 # - name: Add bazel alias
 #   lineinfile:
 #     path: $HOME/.zshrc

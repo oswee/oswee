@@ -4,7 +4,7 @@
 # TODO: https://github.com/devnullcake/ansible-role-copr-repository/blob/master/tasks/fedora/install-dnf.yml
 - name: Install fedora copr repository (dnf)
   become: true
-  ansible.builtin.command: "dnf -y copr enable pschyska/alacritty"
+  ansible.builtin.command: 'dnf -y copr enable pschyska/alacritty'
   args:
     # creates: "{{ copr_repository_repofile }}"
     warn: false
@@ -12,8 +12,7 @@
 - name: Install packages
   become: true
   ansible.builtin.dnf:
-    name: "{{ item }}"
+    name: '{{ item }}'
     state: present
   loop:
-    - "{{ packages }}"
-...
+    - '{{ packages }}'

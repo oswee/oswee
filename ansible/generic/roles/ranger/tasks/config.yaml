@@ -14,4 +14,4 @@
     mode: '{{ item.mode }}'
     backup: true
   loop:
-  - { src: 'rc.conf.j2', dest: '$HOME/.config/ranger/rc.conf', mode: '0644' }
+    - { src: 'rc.conf.j2', dest: '$HOME/.config/ranger/rc.conf', mode: '0644' }

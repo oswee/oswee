@@ -10,4 +10,3 @@ bind_network_interface_name: eth0
 dns:
   - forwarder1: 1.1.1.1
   - forwarder2: 8.8.8.8
-...

@@ -6,7 +6,6 @@
   tags:
     - vagrant:setup
     - vagrant:setup:install
-
 # - name: Update configuration
 #   import_tasks: configure.yaml
 #   tags:

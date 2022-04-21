@@ -12,7 +12,6 @@
   tags:
     - ranger:setup
     - ranger:setup:config
-
 # - name: Remove
 #   import_tasks: remove.yaml
 #   tags:

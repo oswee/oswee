@@ -21,9 +21,9 @@ platforms:
     interfaces:
       - network_name: private_network
         auto_config: yes
-        dev: "virbr2"
-        type: "bridge"
-        mode: "bridge"
+        dev: 'virbr2'
+        type: 'bridge'
+        mode: 'bridge'
         ip: 192.168.121.4
     provider_options:
       video_type: "'vga'"

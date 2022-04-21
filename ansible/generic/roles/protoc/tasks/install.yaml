@@ -6,7 +6,7 @@
     path: '{{ protoc_dir }}'
     state: directory
     # mode: '0755'
-    mode: "u=rwx,go=rx"
+    mode: 'u=rwx,go=rx'
 
 - name: Install unzip package
   become: true
@@ -25,4 +25,3 @@
   ansible.builtin.copy:
     dest: /etc/profile.d/protoc.sh
     content: "export PATH={{ protoc_dir }}/bin:{{ protoc_dir }}/include:$PATH\n"
-...

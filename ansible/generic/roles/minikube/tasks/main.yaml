@@ -8,4 +8,3 @@
     state: present
     # TODO: Don't do this
     disable_gpg_check: true
-...

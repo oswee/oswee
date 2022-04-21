@@ -10,4 +10,3 @@
   ansible.builtin.service:
     name: vault
     state: restarted
-...

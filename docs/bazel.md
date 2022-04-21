@@ -48,3 +48,23 @@ Install Bazelisk as `bazel`
 sudo wget -O /usr/local/bin/bazel https://github.com/bazelbuild/bazelisk/releases/latest/download/bazelisk-linux-amd64
 sudo chmod +x /usr/local/bin/bazel
 ```
+
+## Update
+
+- Update NodeJS
+- Update Yarn
+- Update Bazelisk
+- Increase the Bazel version in .bazelversion file of this repository
+- Update other components like ibazel, buildifier, etc.
+
+## TODO
+
+- [ ] How to get SHA checksum?
+      From command line run `sha256sum ~/Downloads/node-v17.9.0-linux-x64.tar.xz`
+
+To get checksums you can visit https://github.com/bazelbuild/rules_nodejs/blob/stable/nodejs/private/node_versions.bzl
+and https://github.com/bazelbuild/rules_nodejs/blob/stable/nodejs/private/yarn_versions.bzl files.
+
+## NPM vs Yarn
+
+If you take a look at Angular project, you will see this statement [Please use yarn instead of NPM to install dependencies](https://github.com/angular/angular/blob/5d155950e3764f72972017144edd9c7793200cd1/package.json#L13)

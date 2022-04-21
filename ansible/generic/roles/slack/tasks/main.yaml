@@ -10,6 +10,5 @@
 - name: Copy Slack desktop entry
   ansible.builtin.copy:
     src: slack.desktop
-    dest: "/home/{{ ansible_user_id }}/.local/share/applications/slack.desktop"
+    dest: '/home/{{ ansible_user_id }}/.local/share/applications/slack.desktop'
     mode: '0644'
-...

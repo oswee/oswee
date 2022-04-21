@@ -47,4 +47,3 @@
   # TODO: Because i need to run Envoy in background
   async: 1000
   poll: 0
-...

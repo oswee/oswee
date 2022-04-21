@@ -17,4 +17,3 @@
     service: tftp
     state: absent
   notify: Restart Firewalld
-...

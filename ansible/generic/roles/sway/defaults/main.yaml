@@ -2,4 +2,3 @@
 # defaults file for sway
 
 sway_environment_path: /etc/profile.d/sway.sh
-...

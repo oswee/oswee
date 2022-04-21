@@ -8,8 +8,8 @@ dependency:
     ignore-errors: true
     # ignore-certs: True
   # env:
-    # ANSIBLE_FORCE_COLOR: true
-    # PY_COLORS: 1
+  # ANSIBLE_FORCE_COLOR: true
+  # PY_COLORS: 1
 driver:
   name: vagrant
   provider:
@@ -46,7 +46,7 @@ provisioner:
   #  cleanup: cleanup.yml
   config_options:
     defaults:
-      stdout_callback: 'yaml'  # To get pretty output
+      stdout_callback: 'yaml' # To get pretty output
       bin_ansible_callbacks: true
       interpreter_python: 'python3'
       verbosity: 1
@@ -56,7 +56,7 @@ provisioner:
   connection_options:
     ansible_ssh_user: vagrant
     # ansible_become: true
-    ansible_connection: smart  # Override the connection: local
+    ansible_connection: smart # Override the connection: local
   # env:
   #   ANSIBLE_DEBUG: '1'
   #   ANSIBLE_CONFIG: ../../ansible.cfg

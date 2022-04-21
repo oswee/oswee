@@ -1,6 +1,5 @@
 ---
-
-ansible_ssh_common_args: "-F environments/development/.ssh/config"
+ansible_ssh_common_args: '-F environments/development/.ssh/config'
 
 tls_certs: '{{ vault_tls_certs }}'
 dns_prod_domain_name: '{{ vault_dns_prod_domain_name }}'

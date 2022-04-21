@@ -1,5 +1,4 @@
 ---
-
 - name: Workstation desktop environment base configuration
   import_playbook: ../../playbooks/workstation.base.yaml
 

@@ -12,7 +12,6 @@
   tags:
     - libvirt:setup
     - libvirt:setup:config
-
 # - name: Remove
 #   import_tasks: remove.yml
 #   tags:

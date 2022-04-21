@@ -1,4 +1,3 @@
 exports_files([
     "ts_proto_library.bzl",
-    "ts_library.bzl",
 ])

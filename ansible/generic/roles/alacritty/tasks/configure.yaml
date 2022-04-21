@@ -6,18 +6,20 @@
   ansible.builtin.file:
     path: $HOME/.config/alacritty
     state: directory
-    owner: "{{ ansible_user_id }}"
-    group: "{{ ansible_user_id }}"
+    owner: '{{ ansible_user_id }}'
+    group: '{{ ansible_user_id }}'
     mode: '0755'
 
 - name: Copy config
   # become: true
   ansible.builtin.template:
-    src: "{{ item.src }}"
-    dest: "{{ item.dest }}"
-    owner: "{{ ansible_user_id }}"
-    group: "{{ ansible_user_id }}"
+    src: '{{ item.src }}'
+    dest: '{{ item.dest }}'
+    owner: '{{ ansible_user_id }}'
+    group: '{{ ansible_user_id }}'
     mode: '0644'
   loop:
-    - { src: "alacritty.yaml.j2", dest: "$HOME/.config/alacritty/alacritty.yaml" }
-...
+    - {
+        src: 'alacritty.yaml.j2',
+        dest: '$HOME/.config/alacritty/alacritty.yaml',
+      }

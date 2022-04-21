@@ -1,5 +1,7 @@
 # Quay
 
+https://gist.github.com/dzintars/c93beed43f4eb1610af8307cb235eba3
+
 Use @latest tag.
 
 See this issue https://github.com/oswee/prime/issues/98 about some setup caveats.

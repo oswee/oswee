@@ -6,7 +6,6 @@
   tags:
     - nodejs:setup
     - nodejs:setup:install
-
 # - name: Update configuration
 #   import_tasks: configure.yml
 #   tags:

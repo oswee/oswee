@@ -1,11 +1,11 @@
 ---
-  # tasks file for nodejs
+# tasks file for nodejs
 
 - name: Ensure nodejs directory exists
   ansible.builtin.file:
     path: '{{ nodejs_dir }}'
     state: directory
-    mode: "u=rwx,go=rx"
+    mode: 'u=rwx,go=rx'
 
 - name: Install unzip package
   become: true
@@ -23,6 +23,11 @@
     remote_src: true
     # Strip the top level directory
     extra_opts: [--strip-components=1]
+
+- name: Set NodeJS package prefix
+  ansible.builtin.copy:
+    dest: '/home/{{ ansible_user_id }}/.npmrc'
+    content: 'prefix=/home/{{ ansible_user_id }}/.local'
 
 - name: Add NodeJS to system-wide $PATH
   become: true

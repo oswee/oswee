@@ -1,6 +1,6 @@
 # [WIP] Prime
 
-This is sandbox monorepository to test Bazel in action
+This is sandbox monorepository to test Bazel in action to build "microservices" oriented web application for transportation domain.
 
 [![GitHub@dzintars](https://img.shields.io/github/followers/dzintars?label=follow&style=social)](https://github.com/dzintars)
 
@@ -12,6 +12,11 @@ This is sandbox monorepository to test Bazel in action
 ## Project status
 
 Until this message is removed, the status is WIP.
+
+UPDATE: 2022 APR:
+Mostly busy with my house rennovation so its less time to code.
+Majority of Ansible roles are migrated and requires refactor and cleanup.
+Plan to write automation for Dev/semi-Prod environments. Meanwhile also playing with Golang Hexagonal Architecture.
 
 UPDATE 2022 FEB:
 Still moving Ansible Collections and Terraform code into this repository.
@@ -44,9 +49,10 @@ for entire project. But i see how it can be done and i am slowly moving there.
 - **Kafka** : Message broker
 - **SASS** (SMACSS) : If style is not in TS, then SASS is used.
 
-## General TO DO
+## General TODO
 
 - Cleanup the repository
+- Script all the manual bits and pieces
 - Unified package API (The structure of the package)
 - Test on fresh Linux dev workstation
 - Implement Hygen
@@ -56,6 +62,7 @@ for entire project. But i see how it can be done and i am slowly moving there.
 - Potentially replace WebPack Dev Server with the `ts_project`
 - Swagger rollout for the REST part
 - Swagger alternative for the WebSocket API (UPD: HTTP/2 vs WebSocket)
+- Monitoring
 - Documentation
 - T E S T S (Should place higher in the list, but... let's be realistic :) )
 
@@ -66,7 +73,7 @@ These tools should be installed locally in order to execute
 Critical requirements:
 
 - Install latest NodeJS on the system
-- Install Yarn globally
+- Install Yarn globally (Can be done via Ansible playbook. NodeJS will be installed automatically as dependency)
 - Make sure you have NO ANY Bazel related binaries installed on the system (there are exceptions).
 - Install all NPM modules
 

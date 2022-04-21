@@ -2,9 +2,9 @@
 - name: Ensure default user is present.
   become: yes
   mysql_user:
-    name: "{{ mysql_user_name }}"
+    name: '{{ mysql_user_name }}'
     host: 'localhost'
-    password: "{{ mysql_user_password }}"
+    password: '{{ mysql_user_password }}'
     priv: '*.*:ALL,GRANT'
     state: present
   when: mysql_user_name != mysql_root_username
@@ -13,9 +13,9 @@
 - name: Copy user-my.cnf file with password credentials.
   become: yes
   template:
-    src: "user-my.cnf.j2"
-    dest: "{{ mysql_user_home }}/.my.cnf"
-    owner: "{{ mysql_user_name }}"
+    src: 'user-my.cnf.j2'
+    dest: '{{ mysql_user_home }}/.my.cnf'
+    owner: '{{ mysql_user_name }}'
     mode: 0600
   when: >
     mysql_user_name != mysql_root_username
@@ -49,7 +49,7 @@
     mysql -u root -NBe
     'ALTER USER "{{ mysql_root_username }}"@"{{ item }}"
     IDENTIFIED WITH mysql_native_password BY "{{ mysql_root_password }}";'
-  with_items: "{{ mysql_root_hosts.stdout_lines|default([]) }}"
+  with_items: '{{ mysql_root_hosts.stdout_lines|default([]) }}'
   when: >
     ((mysql_install_packages | bool) or mysql_root_password_update)
     and ('5.7.' in mysql_cli_version.stdout or '8.0.' in mysql_cli_version.stdout)
@@ -60,7 +60,7 @@
   shell: >
     mysql -NBe
     'SET PASSWORD FOR "{{ mysql_root_username }}"@"{{ item }}" = PASSWORD("{{ mysql_root_password }}");'
-  with_items: "{{ mysql_root_hosts.stdout_lines|default([]) }}"
+  with_items: '{{ mysql_root_hosts.stdout_lines|default([]) }}'
   when: >
     ((mysql_install_packages | bool) or mysql_root_password_update)
     and ('5.7.' not in mysql_cli_version.stdout and '8.0.' not in mysql_cli_version.stdout)
@@ -69,8 +69,8 @@
 - name: Copy .my.cnf file with root password credentials.
   become: yes
   template:
-    src: "root-my.cnf.j2"
-    dest: "{{ mysql_root_home }}/.my.cnf"
+    src: 'root-my.cnf.j2'
+    dest: '{{ mysql_root_home }}/.my.cnf'
     owner: root
     group: root
     mode: 0600
@@ -86,10 +86,10 @@
 - name: Remove anonymous MySQL users.
   become: yes
   mysql_user:
-    name: ""
-    host: "{{ item }}"
+    name: ''
+    host: '{{ item }}'
     state: absent
-  with_items: "{{ mysql_anonymous_hosts.stdout_lines|default([]) }}"
+  with_items: '{{ mysql_anonymous_hosts.stdout_lines|default([]) }}'
 
 - name: Remove MySQL test database.
   become: yes

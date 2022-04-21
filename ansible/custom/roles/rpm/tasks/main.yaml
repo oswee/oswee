@@ -24,7 +24,6 @@
         name:
           - 'https://mirrors.rpmfusion.org/free/{{ redhat_os }}/rpmfusion-free-release-{{ redhat_version }}.noarch.rpm'
           - 'https://mirrors.rpmfusion.org/nonfree/{{ redhat_os }}/rpmfusion-nonfree-release-{{ redhat_version }}.noarch.rpm'
-
 # - name: Add RPM Fusion repository
 #   ansible.builtin.yum_repository:
 #     name: RPM Fusion

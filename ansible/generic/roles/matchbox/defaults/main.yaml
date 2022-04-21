@@ -13,4 +13,3 @@ initramfs: rhcos-4.6.8-x86_64-live-initramfs.x86_64.img
 nightly_bios: 'rhcos-42.80.20191002.0-metal-bios.raw.gz'
 nightly_kernel: 'rhcos-42.80.20191002.0-installer-kernel'
 nightly_initramfs: 'rhcos-42.80.20191002.0-installer-initramfs.img'
-...

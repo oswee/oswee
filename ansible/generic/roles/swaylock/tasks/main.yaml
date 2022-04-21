@@ -6,8 +6,7 @@
   ansible.builtin.dnf:
     name: '{{ item }}'
     state: present
-  loop:
-    '{{ packages.redhat }}'
+  loop: '{{ packages.redhat }}'
 
 - name: Get package facts
   ansible.builtin.package_facts:
@@ -61,4 +60,3 @@
   ansible.builtin.file:
     path: /usr/bin/swaylock
     mode: 'a+s'
-...

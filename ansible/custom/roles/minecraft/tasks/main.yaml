@@ -12,7 +12,6 @@
   tags:
     - minecraft:setup
     - minecraft:setup:mods
-
 # - name: Configure
 #   import_tasks: configure.yaml
 #   tags:
@@ -23,4 +22,3 @@
 #   import_tasks: remove.yaml
 #   tags:
 #     - minecraft:remove
-...

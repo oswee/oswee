@@ -1,10 +1,9 @@
 ---
-
-hostname: "s3"
+hostname: 's3'
 host_octet: 248
-mac: "46:ea:9d:e4:1a:02"
-dhcp_network_interface: "eth0"
-uuid: "ddd5810c-9216-497a-91dc-aa5163fc567c"
+mac: '46:ea:9d:e4:1a:02'
+dhcp_network_interface: 'eth0'
+uuid: 'ddd5810c-9216-497a-91dc-aa5163fc567c'
 vcpu: 2
 memory: 1024
 disk_size: 5

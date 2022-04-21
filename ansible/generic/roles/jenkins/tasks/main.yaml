@@ -16,4 +16,3 @@
 - name: configure
   become: true
   import_tasks: configure.yaml
-...

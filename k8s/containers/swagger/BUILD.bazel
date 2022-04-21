@@ -1,0 +1,41 @@
+"""
+Example container of Swagger UI
+"""
+
+load("@rules_pkg//:pkg.bzl", "pkg_tar")
+load("@io_bazel_rules_docker//container:container.bzl", "container_image", "container_push")
+load("@prime//defs:config.bzl", "CONTAINER_REGISTRY")
+
+package(default_visibility = ["//visibility:public"])
+
+pkg_tar(
+    name = "bin",
+    files = {
+        "@prime//go/cmd/http-server": "/usr/local/bin/swagger",
+    },
+    mode = "0755",
+)
+
+container_image(
+    name = "image",
+    base = select({
+        "@io_bazel_rules_go//go/platform:linux_amd64": "@com_google_distroless_base//image",
+        "@io_bazel_rules_go//go/platform:linux_arm64": "@com_google_distroless_base_arm64//image",
+        "//conditions:default": "@com_google_distroless_base//image",
+    }),
+    entrypoint = ["/usr/local/bin/swagger"],
+    tars = [":bin"],
+    # files = [
+    #     "@prime//platform/web/swagger:swagger",
+    #     "@prime//platform/web/swagger/static",
+    # ]
+)
+
+container_push(
+    name = "push",
+    format = "Docker",
+    image = ":image",
+    registry = CONTAINER_REGISTRY,
+    repository = "oswee/swagger",
+    tag = "{BUILD_USER}",
+)

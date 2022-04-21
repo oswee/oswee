@@ -19,64 +19,66 @@ prime_dependencies()
 
 # buildifier: disable=load-on-top
 load(
-    "//defs:config.bzl",
-    "CONTAINER_REGISTRY",
-    "NODEJS_SHA256",
-    "NODEJS_VERSION",
+    "//bazel:config.bzl",
+    "NODE_SHA256",
+    "NODE_VERSION",
     "YARN_SHA256",
     "YARN_VERSION",
+    "CONTAINER_REGISTRY",
 )
 #}}}
 
 # Rules NodeJS{{{
 # ----------------------------------------------
 
+load("@build_bazel_rules_nodejs//:repositories.bzl", "build_bazel_rules_nodejs_dependencies")
+
+build_bazel_rules_nodejs_dependencies()
+
 # buildifier: disable=load-on-top
-load("@build_bazel_rules_nodejs//:index.bzl", "check_bazel_version", "node_repositories", "yarn_install")
+load("@rules_nodejs//nodejs:repositories.bzl", "nodejs_register_toolchains")
 
-# The minimum bazel version to use with this repo is v4.1.0.
-check_bazel_version(minimum_bazel_version = "4.1.0")
-
-# Bazel will use it's default NodeJS version and will not rely on the NodeJS version installed on the machine
-node_repositories(
-    # OPTIONAL
-    node_repositories = {
-        "%s-linux_amd64" % NODEJS_VERSION: (
-            "node-v%s-linux-x64.tar.xz" % NODEJS_VERSION,
-            "node-v%s-linux-x64" % NODEJS_VERSION,
-            "%s" % NODEJS_SHA256,
-        ),
-    },
-    # name = "nodejs", # This is build in name, included in this comment for the clarity
-    node_version = NODEJS_VERSION,
+nodejs_register_toolchains(
+    name = "nodejs",
+    node_version = NODE_VERSION,
     # node_urls = ["https://nodejs.org/dist/v16.4.1/node-v16.4.1-linux-x64.tar.xz"],
-    # yarn_urls = ["https://github.com/yarnpkg/yarn/releases/download/v1.22.10/yarn-v1.22.10.tar.gz"],
-    package_json = ["//:package.json"],
-    preserve_symlinks = True,
-    yarn_repositories = {
-        "%s" % YARN_VERSION: (
-            "yarn-v%s.tar.gz" % YARN_VERSION,
-            "yarn-v%s" % YARN_VERSION,
-            "%s" % YARN_SHA256,
+    node_repositories = {
+        "%s-linux_amd64" % NODE_VERSION: (
+            "node-v%s-linux-x64.tar.xz" % NODE_VERSION,
+            "node-v%s-linux-x64" % NODE_VERSION,
+            "%s" % NODE_SHA256,
         ),
     },
-    yarn_version = YARN_VERSION,
+
+    # Use custom Yarn version.
+    # yarn_version = YARN_VERSION,
+    # yarn_version = "1.22.18",
+    # yarn_urls = ["https://github.com/yarnpkg/berry/archive/refs/tags/@yarnpkg/cli/%s.tar.gz" % YARN_VERSION],
+    # yarn_repositories = {
+    #     "%s" % YARN_VERSION: (
+    #         "berry--yarnpkg-cli-%s.tar.gz" % YARN_VERSION,
+    #         "berry--yarnpkg-cli-%s" % YARN_VERSION,
+    #         "%s" % YARN_SHA256,
+    #     ),
+    # },
+
+    # package_json = ["//:package.json"],
+    # preserve_symlinks = True,
 )
 
-# Setup Bazel managed npm dependencies with the `yarn_install` rule.
-# The name of this rule should be set to `npm` so that `ts_library`
-# can find your npm dependencies by default in the `@npm` workspace. You may
-# also use the `npm_install` rule with a `package-lock.json` file if you prefer.
-# See https://github.com/bazelbuild/rules_nodejs#dependencies for more info.
-
-# Bazel will run Yarn on it's own and will install all the packages.
-# Other option is to look into Self Managed Dependencies
-# Setup the Node.js toolchain & install our npm dependencies into @npm
-# https://bazelbuild.github.io/rules_nodejs/repositories.html#npm
+load("@build_bazel_rules_nodejs//:index.bzl", "yarn_install")
 yarn_install(
     name = "npm",  # Name this npm so that Bazel Label references look like @npm//package
-    package_json = "//:package.json",
+    # args = ["--immutable"],  # Pass extra Yarn arguments
+    # frozen_lockfile = False,
     symlink_node_modules = True,  # Expose installed packages for the IDE and the developer. See managed_directories.
+    # use_mutex = False,
+    # quiet = False,
+    data = [
+      # "//:.yarnrc.yml",
+      # "@vendored_yarn_3_2_0//:berry--yarnpkg-cli-3.2.0/packages/yarnpkg-cli/bin/yarn.js",
+    ],
+    package_json = "//:package.json",
     yarn_lock = "//:yarn.lock",
 )
 # }}}
@@ -96,7 +98,7 @@ bazel_skylib_workspace()
 # buildifier: disable=load-on-top
 load("@bazel_skylib//lib:versions.bzl", "versions")
 
-versions.check(minimum_bazel_version = "4.1.0")
+versions.check(minimum_bazel_version = "5.0.0")
 #}}}
 
 # Rules Go{{{
@@ -111,13 +113,13 @@ load("@bazel_gazelle//:deps.bzl", "gazelle_dependencies")
 
 go_rules_dependencies()
 
-go_register_toolchains(version = "1.16.6")
+go_register_toolchains(version = "1.18")
 
 # buildifier: disable=load-on-top
-load("@prime//tools/build:workspace_go.bzl", "prime_go_dependencies")
+load("//go:repositories.bzl", "go_deps")
 
-# gazelle:repository_macro tools/build/workspace_go.bzl%prime_go_dependencies
-prime_go_dependencies()
+# gazelle:repository_macro go/repositories.bzl%go_deps
+go_deps()
 
 # gazelle:repo bazel_gazelle
 gazelle_dependencies()
@@ -280,9 +282,9 @@ buildifier_dependencies()
 # Fetch required transitive dependencies. This is an optional step because you
 # can always fetch the required NodeJS transitive dependency on your own.
 # buildifier: disable=load-on-top
-load("@io_bazel_rules_sass//:package.bzl", "rules_sass_dependencies")
+# load("@io_bazel_rules_sass//:package.bzl", "rules_sass_dependencies")
 
-rules_sass_dependencies()
+# rules_sass_dependencies()
 
 # Setup the rules_sass toolchain
 # buildifier: disable=load-on-top

@@ -33,7 +33,7 @@
     - name: Install Ranger (for easy debug)
       become: true
       ansible.builtin.dnf:
-        name: "ranger"
+        name: 'ranger'
         state: present
 
     # - name: Ranger

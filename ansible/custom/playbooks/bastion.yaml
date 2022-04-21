@@ -1,5 +1,4 @@
 ---
-
 - name: Configure Bastion server
   hosts: bastions
   become: false
@@ -12,4 +11,3 @@
     - role: oswee.generic.envoy
       tags:
         - envoy
-...
