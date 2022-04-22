@@ -1,0 +1,36 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: hello-http-staging
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: hello-http-staging
+  template:
+    metadata:
+      labels:
+        app: hello-http-staging
+    spec:
+      imagePullSecrets:
+      - name: my-registry-key
+      containers:
+      - name: hello-http
+        image: server:latest
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 9090
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: hello-http-staging
+spec:
+  selector:
+    app: hello-http-staging
+  type: NodePort
+  ports:
+  - name: http
+    port: 9090
+    nodePort: 31061
