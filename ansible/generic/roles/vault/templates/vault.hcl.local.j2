@@ -15,12 +15,7 @@ storage "raft" {
 listener "tcp" {
   address       = "127.0.0.1:8200"
   tls_disable   = true
-  #tls_cert_file = "/opt/vault/tls/fullchain.pem"
-  #tls_key_file  = "/opt/vault/tls/privkey.pem"
 }
 
-#api_addr = "https://vault.{{ root_domain }}"
-#cluster_addr = "https://vault.{{ root_domain }}:8201"
-
 api_addr = "http://127.0.0.1:8200"
-cluster_addr = "https://127.0.0.1:8201"
+cluster_addr = "http://127.0.0.1:8201"

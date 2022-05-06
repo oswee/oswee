@@ -3,5 +3,5 @@
 
 packages:
   redhat:
-    - firewalld
     - vault
+...

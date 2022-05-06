@@ -14,9 +14,9 @@
     # - role: minio
     #   tags:
     #     - minio
-    # - role: oswee.generic.vault
-    #   tags:
-    #     - vault
+    - role: oswee.generic.vault
+      tags:
+        - vault
     - role: oswee.generic.vagrant
       tags:
         - vagrant
@@ -57,3 +57,4 @@
     # - role: oswee.generic.molecule
     #   tags:
     #     - molecule
+...
