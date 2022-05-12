@@ -1,18 +1,27 @@
 ---
 # tasks file for minio
 
-- name: Install
-  import_tasks: install.yaml
+- name: Install Server
+  import_tasks: install.server.yaml
   tags:
-    - minio:setup
-    - minio:setup:install
-# - name: Config
-#   import_tasks: configure.yaml
-#   tags:
-#     - minio:setup
-#     - minio:setup:config
+    - minio.server
+    - minio.server.install
 
-# - name: Cleanup
-#   import_tasks: cleanup.yaml
-#   tags:
-#     - minio:cleanup
+- name: Install Client
+  import_tasks: install.client.yaml
+  tags:
+    - minio.client
+    - minio.client.install
+
+- name: Config
+  import_tasks: config.server.yaml
+  tags:
+    - minio.server
+    - minio.server.config
+
+- name: Cleanup
+  import_tasks: cleanup.server.yaml
+  tags:
+    - minio.cleanup
+    - minio.cleanup.server
+...

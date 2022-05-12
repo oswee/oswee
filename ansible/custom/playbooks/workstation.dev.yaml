@@ -17,6 +17,11 @@
     - role: oswee.generic.vault
       tags:
         - vault
+    - role: oswee.generic.minio
+      vars:
+        minio_domain: 's3.{{ dns_prod_domain_name }}'
+        minio_server_port: '9199'
+        minio_console_port: '8001'
     - role: oswee.generic.vagrant
       tags:
         - vagrant
