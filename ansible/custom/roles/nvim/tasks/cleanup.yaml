@@ -1,7 +1,7 @@
 ---
 # tasks file for nvim
 
-- name: Remove Neovim
+- name: cleanup | Remove Neovim
   become: true
   ansible.builtin.dnf:
     name: '{{ item }}'
@@ -10,10 +10,11 @@
     - neovim
     - python3-neovim
 
-- name: Remove Neovim directories
+- name: cleanup | Remove Neovim directories
   ansible.builtin.file:
     path: '{{ item }}'
     state: absent
   loop:
     - $HOME/.config/nvim
     - $HOME/.local/share/nvim
+...

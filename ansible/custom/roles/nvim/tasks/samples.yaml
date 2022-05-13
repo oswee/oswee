@@ -1,9 +1,10 @@
 ---
 # tasks file for nvim
 
-- name: Clone Prime sample repository
+- name: samples | Clone Prime sample repository
   ansible.builtin.git:
     repo: https://github.com/oswee/prime.git
     dest: '$HOME/code/github.com/oswee/prime'
     version: master
     depth: 1
+...

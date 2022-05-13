@@ -1,7 +1,7 @@
 ---
 # tasks file for nvim
 
-- name: Copy Completion plugin configuration files
+- name: completion | Copy Completion plugin configuration files
   ansible.builtin.copy:
     src: '{{ item.src }}'
     dest: '{{ nvim_config_dir }}/{{ item.dest }}/'
@@ -9,7 +9,7 @@
   loop:
     - { src: 'lua/modules/completion/', dest: 'lua/modules/completion' }
 
-- name: Copy LuaSnip snippets
+- name: completion | Copy LuaSnip snippets
   ansible.builtin.copy:
     src: '{{ item.src }}'
     dest: '{{ nvim_config_dir }}/{{ item.dest }}/'
@@ -17,7 +17,7 @@
   loop:
     - { src: 'after/plugin/luasnip.lua', dest: 'after/plugin' }
 
-- name: Include Completion
+- name: completion | Include Completion
   ansible.builtin.lineinfile:
     path: '{{ nvim_config_dir }}/init.lua'
     line: "require('modules.completion')"
@@ -26,3 +26,4 @@
     mode: '0644'
     # insertafter: '^-- Completion'
     create: true
+...

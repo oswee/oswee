@@ -4,23 +4,29 @@
 - name: Build prerequisites
   import_tasks: prepare.yaml
   tags:
-    - prepare
+    - nvim.install
+    - nvim.prepare
 
 - name: System packages
   import_tasks: packages.yaml
   tags:
-    - packages
+    - nvim.install
+    - nvim.packages
 
 - name: Build
   import_tasks: build.yaml
   tags:
-    - build
+    - nvim.install
+    - nvim.build
 
 - name: Install
   import_tasks: install.yaml
   tags:
-    - install
+    - nvim.install
+    - nvim.build.install
+
 # - name: Cleanup
 #   import_tasks: cleanup.yaml
 #   tags:
-#     - cleanup
+#     - nvim.install.cleanup
+...
