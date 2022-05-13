@@ -1,18 +1,27 @@
 ---
 # tasks file for jenkins
 
-- name: install
-  become: true
+- name: Install
   import_tasks: install.yaml
+  tags:
+    - jenkins.server
+    - jenkins.server.install
 
-- name: firewall
-  become: true
+- name: Firewall
   import_tasks: firewall.yaml
+  tags:
+    - jenkins.server
+    - jenkins.server.firewall
 
-- name: ssh
-  become: true
+- name: SSH
   import_tasks: ssh.yaml
+  tags:
+    - jenkins.server
+    - jenkins.server.ssh
 
-- name: configure
-  become: true
-  import_tasks: configure.yaml
+- name: Config
+  import_tasks: config.yaml
+  tags:
+    - jenkins.server
+    - jenkins.server.config
+...
