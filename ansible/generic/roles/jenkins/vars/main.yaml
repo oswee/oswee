@@ -24,3 +24,4 @@ java_package: java-devel
 #   - solarized-theme
 # jenkins_plugins_install_dependencies: true
 # jenkins_plugins_state: latest
+...

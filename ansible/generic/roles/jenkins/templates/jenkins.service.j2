@@ -9,9 +9,7 @@ After=network.target
 [Service]
 Type=simple
 EnvironmentFile=/etc/sysconfig/jenkins
-ExecStart=/usr/bin/java \
-  ${JENKINS_JAVA_OPTIONS} \
-  -jar /usr/lib/jenkins/jenkins.war \
+ExecStart=/usr/bin/jenkins \
   --httpPort=${JENKINS_PORT} \
   --httpListenAddress=${JENKINS_LISTEN_ADDRESS} \
   ${JENKINS_ARGS}

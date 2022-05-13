@@ -1,0 +1,25 @@
+---
+# tasks file for minio
+
+- name: install | Download MinIO Server binary
+  become: true
+  ansible.builtin.get_url:
+    url: https://dl.min.io/server/minio/release/linux-amd64/minio
+    dest: '{{ minio_server_path }}'
+    mode: '0755'
+
+- name: install | Create Minio system group
+  become: true
+  ansible.builtin.group:
+    name: '{{ minio_group }}'
+    state: present
+    system: true
+
+- name: install | Create Minio user
+  become: true
+  ansible.builtin.user:
+    name: '{{ minio_user }}'
+    system: true
+    shell: /sbin/nologin
+    group: '{{ minio_group }}'
+...

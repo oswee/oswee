@@ -45,7 +45,7 @@ end
 
 local function lsp_highlight_document(client)
   -- Set autocommands conditional on server_capabilities
-  if client.resolved_capabilities.document_highlight then
+  if client.server_capabilities.document_highlight then
     local LspDocumentHighlight = vim.api.nvim_create_augroup('lsp_document_highlight', { clear = true })
     vim.api.nvim_create_autocmd('CursorHold', {
       callback = function()
@@ -105,7 +105,7 @@ end
 
 function handlers.on_attach(client, bufnr)
   -- if client.name == 'tsserver' then
-  --   client.resolved_capabilities.document_formatting = false
+  --   client.server_capabilities.document_formatting = false
   -- end
   lsp_keymaps(bufnr)
   lsp_highlight_document(client)

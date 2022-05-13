@@ -23,7 +23,7 @@ local lint_settings = {
 }
 
 local on_attach_efm = function(client)
-  if format_on_write and client.resolved_capabilities.document_formatting then -- format on write
+  if format_on_write and client.server_capabilities.document_formatting then -- format on write
     -- vim.api.nvim_command [[augroup Format]]
     -- vim.api.nvim_command [[autocmd! * <buffer>]]
     -- vim.api.nvim_command [[autocmd BufWritePost <buffer> lua vim.lsp.buf.formatting_seq_sync({}, 1000)]] -- Use all formatters

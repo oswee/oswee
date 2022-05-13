@@ -1,0 +1,22 @@
+# Full configuration options can be found at https://www.vaultproject.io/docs/configuration
+
+ui = true
+
+#mlock = true
+#disable_mlock = true
+
+#log_level = "warn"
+
+storage "raft" {
+  path    = "/opt/vault/data"
+  node_id = "node1"
+}
+
+listener "tcp" {
+  address       = "127.0.0.1:8200"
+  tls_cert_file = "/opt/vault/tls/fullchain.pem"
+  tls_key_file  = "/opt/vault/tls/privkey.pem"
+}
+
+api_addr = "https://vault.{{ dns_prod_domain_name }}"
+cluster_addr = "https://vault.{{ dns_prod_domain_name }}:8201"

@@ -39,9 +39,8 @@
     - role: oswee.generic.ranger
       tags:
         - ranger
+    - role: oswee.generic.nvim
     - role: oswee.custom.nvim
-      tags:
-        - nvim
     - role: oswee.custom.minecraft
       tags:
         - minecraft

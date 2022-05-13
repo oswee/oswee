@@ -1,11 +1,16 @@
 ---
 # defaults file for minio
 
+minio_server_path: /usr/local/bin
+minio_client_path: /usr/local/bin
 minio_user: minio
 minio_group: minio
 
 # Minio server listen port
-minio_server_port: '9000'
+minio_server_port: '9199'
+minio_console_port: '9001'
 
-minio_volumes: '/tmp'
+# minio_volumes: '/home/{{ ansible_user_id }}/.minio/data/'
+minio_volumes: '/tmp/minio/data'
 minio_domain: 's3.example.local'
+...
