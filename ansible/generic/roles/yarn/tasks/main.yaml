@@ -1,0 +1,14 @@
+---
+# tasks file for yarn
+
+- name: Install
+  import_tasks: install.yaml
+  tags:
+    - yarn.install
+
+- name: Environment
+  import_tasks: environment.yaml
+  tags:
+    - yarn.install
+    - yarn.config
+...

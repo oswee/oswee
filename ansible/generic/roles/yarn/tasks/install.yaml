@@ -1,11 +1,11 @@
 ---
 # tasks file for yarn
 
-- name: Install Yarn NPM package globally
+- name: install | Install Yarn NPM package globally
   community.general.npm:
     # remote_user: vagrant
     name: yarn@latest
     global: true
   # environment:
   #   PATH: /opt/nodejs/bin:{{ ansible_facts.env.PATH }}
-# TODO: Extend $PATH ENV variable with export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
+...
