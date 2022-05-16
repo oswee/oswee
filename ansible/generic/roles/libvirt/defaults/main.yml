@@ -1,7 +1,0 @@
----
-# defaults file for libvirt
-
-libvirt_dir_iso: '/home/{{ ansible_user_id }}/kvm/iso'
-libvirt_dir_images: '/home/{{ ansible_user_id }}/kvm/images'
-libvirt_dir_pools: '/home/{{ ansible_user_id }}/kvm/pools'
-libvirt_group_name: 'libvirt'

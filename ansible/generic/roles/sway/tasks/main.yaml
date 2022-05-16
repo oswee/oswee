@@ -4,15 +4,23 @@
 - name: Install
   import_tasks: install.yaml
   tags:
-    - sway:setup
-    - sway:setup:install
+    - sway.setup
+    - sway.setup.install
+
+- name: Environment
+  import_tasks: environment.yaml
+  tags:
+    - sway.setup
+    - sway.setup.environment
 
 - name: Config
   import_tasks: config.yaml
   tags:
-    - sway:setup
-    - sway:setup:config
-# - name: Remove
-#   import_tasks: remove.yaml
+    - sway.setup
+    - sway.setup.config
+
+# - name: Cleanup
+#   import_tasks: cleanup.yaml
 #   tags:
-#     - sway:remove
+#     - sway.cleanup
+...

@@ -21,3 +21,4 @@ mountpoints:
   - /mnt/external
   - /mnt/backups
   - /mnt/nextcloud
+...

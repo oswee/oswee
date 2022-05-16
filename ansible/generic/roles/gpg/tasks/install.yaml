@@ -1,0 +1,9 @@
+---
+# tasks file for gpg
+
+- name: Install package
+  become: true
+  ansible.builtin.dnf:
+    name: gnupg2
+    state: present
+...

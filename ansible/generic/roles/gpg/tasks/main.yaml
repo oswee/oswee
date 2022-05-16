@@ -1,8 +1,14 @@
 ---
 # tasks file for gpg
 
-- name: Install package
-  become: true
-  ansible.builtin.dnf:
-    name: gnupg2
-    state: present
+- name: Install
+  import_tasks: install.yaml
+  tags:
+    - gpg.install
+
+- name: Environment
+  import_tasks: environment.yaml
+  tags:
+    - gpg.install
+    - gpg.config
+...

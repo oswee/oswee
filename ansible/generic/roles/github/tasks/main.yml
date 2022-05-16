@@ -1,9 +1,0 @@
----
-# tasks file for github
-
-- name: Install GitHub CLI rpm
-  become: true
-  ansible.builtin.dnf:
-    name: 'https://github.com/cli/cli/releases/download/v{{ github_cli_version }}/gh_{{ github_cli_version }}_linux_amd64.rpm'
-    state: present
-    disable_gpg_check: true
