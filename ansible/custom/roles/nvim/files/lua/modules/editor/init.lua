@@ -46,41 +46,8 @@ end
 function Editor.editorconfig()
   return {
     'editorconfig/editorconfig-vim',
-    config = lc(require('modules.editor.editorconfig')),
+    -- config = lc(require('modules.editor.editorconfig')),
   }
 end
 
 return Editor
-
--- use 'airblade/vim-rooter'
-
--- use {
---   'glepnir/lspsaga.nvim',
---   config = config('lspsaga-nvim')
--- }
-
--- -- use 'folke/lsp-colors.nvim'
-
--- use {
---   'dstein64/vim-startuptime',
---   cmd = 'StartupTime',
--- }
-
--- use {
---   'pwntester/octo.nvim',
---   requires = {
---     {'nvim-lua/popup.nvim'},
---     {'nvim-lua/plenary.nvim'},
---     {'nvim-telescope/telescope.nvim'},
---     {'kyazdani42/nvim-web-devicons'}
---   }
--- }
--- use 'vimwiki/vimwiki'
--- use 'lepture/vim-jinja'
--- use 'bufbuild/vim-buf'
--- use 'pearofducks/ansible-vim'
--- -- use 'dense-analysis/ale'
--- use 'mbbill/undotree'
--- use 'stephpy/vim-php-cs-fixer'
-
-

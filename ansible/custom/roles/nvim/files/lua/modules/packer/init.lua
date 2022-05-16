@@ -50,6 +50,7 @@ else
     use(editor.gitsigns())
     use(editor.comment())
     use(editor.indentline())
+    use(editor.editorconfig())
 
     -- Completion
     use(completion.cmp())
@@ -60,6 +61,7 @@ else
     -- use(lsp.installer())
     use(lsp.saga())
     use(lsp.signture())
+    use(lsp.lspcolors())
 
   end)
 end

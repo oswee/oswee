@@ -3,13 +3,13 @@ if (not ok) then return end
 
 -- Examples:
 -- https://github.com/agusthas/dotfiles/blob/85fbfcfb77ef668997dfdca8fd8681298d3abefa/nvim/.config/nvim/lua/config/treesitter.lua
---
 
 treesitter.setup({
   ensure_installed = {
     'bash',
     'go',
     'html',
+    'css',
     'javascript',
     'json',
     'lua',
@@ -18,6 +18,15 @@ treesitter.setup({
     'yaml',
     'markdown',
     'hcl',
+    'php',
+    'typescript',
+    'gomod',
+    'gowork',
+    'make',
+    'proto',
+    'rust',
+    'scss',
+    'vim',
   },
   ignore_install = {},
   highlight = {

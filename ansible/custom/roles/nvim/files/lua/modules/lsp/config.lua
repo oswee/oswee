@@ -6,24 +6,24 @@ local capabilities = require('modules.lsp.handlers').capabilities
 
 local servers = {
   'sumneko_lua',
-  -- 'efm',
-  -- 'gopls',
-  -- 'tsserver',
+  'efm',
+  'gopls',
+  'tsserver',
   -- 'bashls',
   -- 'pyright',
-  'yamlls',
+  -- 'yamlls',
   'ansiblels',
-  -- 'cssls',
   -- 'html',
   -- 'jsonls',
-  -- 'stylelint_lsp',
+  'stylelint_lsp',
   -- 'terraformls',
 }
 
 local sumneko_opts = require('modules.lsp.opts.sumneko_lua')
--- local efm_opts = require('modules.lsp.opts.efm')
-local yamlls_opts = require('modules.lsp.opts.yamlls')
+local efm_opts = require('modules.lsp.opts.efm')
+-- local yamlls_opts = require('modules.lsp.opts.yamlls')
 local ansiblels_opts = require('modules.lsp.opts.ansiblels')
+local stylelint_opts = require('modules.lsp.opts.stylelint')
 
 for _, server in pairs(servers) do
   local opts = {
@@ -40,16 +40,20 @@ for _, server in pairs(servers) do
     opts = vim.tbl_deep_extend('force', sumneko_opts, opts)
   end
 
-  -- if server == 'efm' then
-  --   opts = vim.tbl_deep_extend('force', efm_opts, opts)
-  -- end
-
-  if server == 'yamlls' then
-    opts = vim.tbl_deep_extend('force', yamlls_opts, opts)
+  if server == 'efm' then
+    opts = vim.tbl_deep_extend('force', efm_opts, opts)
   end
+
+  -- if server == 'yamlls' then
+  --   opts = vim.tbl_deep_extend('force', yamlls_opts, opts)
+  -- end
 
   if server == 'ansiblels' then
     opts = vim.tbl_deep_extend('force', ansiblels_opts, opts)
+  end
+
+  if server == 'stylelint_lsp' then
+    opts = vim.tbl_deep_extend('force', stylelint_opts, opts)
   end
 
   lspconfig[server].setup(opts)

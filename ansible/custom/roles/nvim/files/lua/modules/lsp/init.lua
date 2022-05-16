@@ -40,4 +40,11 @@ function Lsp.signture()
   }
 end
 
+function Lsp.lspcolors()
+  return {
+    'folke/lsp-colors.nvim',
+    config = lc(require('modules.lsp.lsp-colors')),
+  }
+end
+
 return Lsp

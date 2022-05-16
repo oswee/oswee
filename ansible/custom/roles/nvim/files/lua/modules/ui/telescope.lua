@@ -1,10 +1,7 @@
 local ok, telescope = pcall(require, 'telescope')
 if (not ok) then return end
 
-local builtin = require('telescope.builtin')
-local map = require('helpers.map').map
-
-local opts = { noremap = true, silent = true }
+-- local builtin = require('telescope.builtin')
 
 telescope.setup{
   defaults = {
@@ -57,12 +54,4 @@ telescope.setup{
   }
 }
 
-require('telescope').load_extension('fzy_native')
-
-vim.keymap.set('n', '<Leader>ff', ':Telescope find_files<CR>', { buffer = 0 })
--- _G.map('n', '<Leader>ff', ':Telescope find_files<CR>', opts)
--- _G.map('n', '<Leader>ff', ':Telescope find_files find_command=rg,--ignore,--hidden,--files prompt_prefix=🔍<CR>', opts)
--- map('n', '<Leader>ff', '<cmd>lua require("telescope.builtin").find_files()<CR>', opts)
-map('n', '<Leader>fg', ':Telescope live_grep<CR>', opts)
-map('n', '<Leader>fb', ':Telescope buffers<CR>', opts)
-map('n', '<Leader>fh', ':Telescope help_tags<CR>', opts)
+telescope.load_extension('fzy_native')

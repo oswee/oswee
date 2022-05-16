@@ -1,7 +1,6 @@
 local vim    = vim
 local set    = vim.opt
 local cmd    = vim.cmd
-local g      = set
 local home   = vim.env.HOME
 local config = home .. '/.config/nvim'
 local has    = vim.fn.has

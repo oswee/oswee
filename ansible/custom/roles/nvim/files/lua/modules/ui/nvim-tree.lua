@@ -13,6 +13,7 @@ g.nvim_tree_icon_padding = ' '
 g.nvim_tree_symlink_arrow = ' >> '
 g.nvim_tree_respect_buf_cwd = 1
 g.nvim_tree_create_in_closed_folder = 0
+-- g.nvim_tree_refresh_wait = 500
 
 g.nvim_tree_special_files = { 'README.md', 'Makefile', 'MAKEFILE', 'go.mod' }
 g.nvim_tree_show_icons = {
@@ -45,10 +46,6 @@ g.nvim_tree_icons = {
   },
 }
 
-vim.keymap.set('n', '<Leader>r', ':NvimTreeRefresh<CR>', { buffer = 0 })
-vim.keymap.set('n', '<Leader>n', ':NvimTreeFindFile<CR>', { buffer = 0 })
-vim.keymap.set('n', '<C-n>', ':NvimTreeToggle<CR>', { buffer = 0 })
-
 require('nvim-tree').setup {
   auto_reload_on_write = true,
   disable_netrw        = true,
@@ -61,13 +58,19 @@ require('nvim-tree').setup {
   open_on_setup_file = false,
   open_on_tab = false,
   sort_by = "name",
+  -- auto_close           = false,
   update_cwd           = false,
+  -- update_to_buf_dir    = {
+  --   enable = true,
+  --   auto_open = true,
+  -- },
   view = {
     width = 30,
     height = 30,
     hide_root_folder = false,
     side = 'left',
     preserve_window_proportions = false,
+    -- auto_resize = false,
     number = false,
     relativenumber = false,
     signcolumn = 'yes',

@@ -11,11 +11,11 @@ local lint_settings = {
   -- python = {linters.black, linters.isort, linters.flake8, linters.mypy},
   -- typescript = {linters.prettier, linters.eslint},
   -- javascript = {linters.prettier, linters.eslint},
-  yaml = {linters.yamllint},
+  -- yaml = {linters.yamllint},
   -- json = {linters.prettier},
   -- html = {linters.prettier},
-  -- scss = {linters.prettier},
-  -- css = {linters.stylelint},
+  scss = {linters.stylelint},
+  css = {linters.stylelint},
   -- markdown = {linters.prettier},
   -- sh = {linters.shellcheck},
   -- tf = {linters.terraform},
@@ -43,7 +43,7 @@ return {
   on_attach = on_attach_efm,
   init_options = {
     documentFormatting = true,
-    hover = true,
+    -- hover = true,
   },
   root_dir = vim.loop.cwd,
   settings = {

@@ -10,6 +10,7 @@ return {
   completion_menu_label = 'YAML',
   settings = {
     yaml = {
+      rootMarkers = {'.yamllint.yaml'},
       hover = true,
       completion = true,
       validate = true,

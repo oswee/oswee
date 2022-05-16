@@ -1,8 +1,6 @@
 -- local ok, _ = pcall(require, 'dashboard-nvim')
 -- if (not ok) then return end
 
--- vim.notify('Dashboard loaded')
-
 vim.g.dashboard_default_executive ='telescope'
 
 -- vim.g.dashboard_custom_header = {}
