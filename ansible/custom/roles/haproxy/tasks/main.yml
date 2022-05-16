@@ -13,3 +13,4 @@
 - name: Config cluster
   import_tasks: config.cluster.yaml
   when: haproxy_cluster_setup | default(false) | bool
+...
