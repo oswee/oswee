@@ -1,10 +1,22 @@
 ---
 # tasks file for minikube
 
+# It seems that Minikube RPM is not signed
+# - name: Install Minikube GPG key
+#   become: true
+#   ansible.builtin.rpm_key:
+#     fingerprint: '3749E1BA95A86CE054546ED2F09C394C3E1BA8D5'
+#     key: 'https://packages.cloud.google.com/apt/doc/rpm-package-key.gpg'
+#     state: present
+#   tags:
+#     - minikube.install
+
 - name: Install Minikube RPM
   become: true
   ansible.builtin.dnf:
     name: 'https://storage.googleapis.com/minikube/releases/latest/minikube-latest.x86_64.rpm'
     state: present
-    # TODO: Don't do this
     disable_gpg_check: true
+  tags:
+    - minikube.install
+...
