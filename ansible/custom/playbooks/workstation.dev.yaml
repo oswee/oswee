@@ -15,6 +15,7 @@
         minio_domain: 's3.{{ dns_prod_domain_name }}'
         minio_server_port: '9199'
         minio_console_port: '8001'
+    - role: oswee.generic.jenkins
     - role: oswee.generic.vagrant
       vars:
         vagrant_version: 2.2.19
@@ -24,6 +25,11 @@
     - role: oswee.generic.packer
       vars:
         packer_version: 1.8.0
+    # - role: oswee.generic.kubectl
+    # - role: oswee.generic.istio
+    - role: oswee.generic.minikube
+      tags:
+        - minikube
     # - role: oswee.generic.bazel
     # - role: oswee.generic.helm
     # - role: oswee.generic.libvirt
