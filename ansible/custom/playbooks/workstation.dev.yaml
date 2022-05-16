@@ -32,7 +32,7 @@
     #     libvirt_dir_images: "/home/{{ ansible_user_id }}/kvm/images"
     #     libvirt_dir_pools: "/home/{{ ansible_user_id }}/kvm/pools"
     # - role: oswee.generic.mariadb
-    # - role: quay
+    # - role: oswee.generic.quay
     - role: oswee.custom.haproxy
       tags:
         - haproxy
