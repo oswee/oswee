@@ -1,5 +1,5 @@
 ---
-- name: remove libvirt and it's dependencies
+- name: cleanup | Remove libvirt and it's dependencies
   become: true
   ansible.builtin.dnf:
     name: '{{ item }}'
@@ -14,3 +14,4 @@
     - libguestfs-tools
     - libvirt-devel
     - libvirt-daemon-kvm
+...

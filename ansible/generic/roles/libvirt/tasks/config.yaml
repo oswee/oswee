@@ -1,7 +1,7 @@
 ---
 # configuration tasks file for libvirt
 
-- name: Uncomment line from /etc/libvirt/libvirtd.conf
+- name: config | Uncomment line from /etc/libvirt/libvirtd.conf
   become: true
   ansible.builtin.lineinfile:
     dest: /etc/libvirt/libvirtd.conf
@@ -21,7 +21,7 @@
 
 # In order to grant quemu access to my users directories i modified /etc/libvirt/qemu.conf file.
 # [Link to GitHub](https://github.com/jedi4ever/veewee/issues/996#issuecomment-536519623)
-- name: Set qemu user in /etc/libvirt/qemu.conf
+- name: config | Set qemu user in /etc/libvirt/qemu.conf
   become: true
   ansible.builtin.lineinfile:
     dest: /etc/libvirt/qemu.conf
@@ -39,30 +39,7 @@
       }
   notify: restart libvirtd
 
-- name: Define a new network
-  community.libvirt.virt_net:
-    command: define
-    name: virbr0
-    xml: '{{ lookup("template", "network/bridge.xml.j2") }}'
-
-- name: Turn On packet forwarding
-  become: true
-  ansible.posix.sysctl:
-    name: net.ipv4.ip_forward
-    value: '1'
-    sysctl_set: true
-
-- name: Start a network
-  community.libvirt.virt_net:
-    command: create
-    name: virbr0
-
-- name: Autostart a network
-  community.libvirt.virt_net:
-    autostart: true
-    name: virbr0
-
-- name: Create KVM userspace direcories
+- name: config | Create KVM userspace direcories
   ansible.builtin.file:
     path: '{{ item }}'
     state: directory
@@ -74,7 +51,7 @@
     - '{{ libvirt_dir_images }}'
     - '{{ libvirt_dir_pools }}'
 
-- name: Create libvirt pools directory
+- name: config | Create libvirt pools directory
   become: true
   ansible.builtin.file:
     path: '{{ libvirt_dir_pools }}'
@@ -83,13 +60,13 @@
     group: root
     mode: '0755'
 
-- name: Create libvirt userspace config directory
+- name: config | Create libvirt userspace config directory
   ansible.builtin.file:
     path: '/home/{{ ansible_user_id }}/.config/libvirt'
     state: directory
     mode: '0755'
 
-- name: Copy default config file to allow virsh to use qemu:///system
+- name: config | Copy default config file to allow virsh to use qemu:///system
   become: true
   ansible.builtin.copy:
     src: /etc/libvirt/libvirt.conf
@@ -98,8 +75,9 @@
     group: '{{ ansible_user_id }}'
     remote_src: true
 
-- name: Use qemu:///system for virsh by default
+- name: config | Use qemu:///system for virsh by default
   ansible.builtin.replace:
     path: '/home/{{ ansible_user_id }}/.config/libvirt/libvirt.conf'
     regexp: '#uri_default = "qemu:///system'
     replace: 'uri_default = "qemu:///system'
+...
