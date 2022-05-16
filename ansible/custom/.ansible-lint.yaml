@@ -5,3 +5,4 @@ use_default_rules: true
 offline: true
 skip_list:
   - internal-error
+...
