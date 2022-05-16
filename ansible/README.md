@@ -68,7 +68,11 @@ molecule converge -s role-name
 ```
 
 ```bash
-molecule converge -s nvim -- --tags config.plugins
+molecule --base-config .config/molecule/config.yml converge -s dev -- --limit bastion --tags envoy
+```
+
+```bash
+molecule --base-config .config/molecule/config.yml converge -s dev -- --limit workstations --tags nvim.modules.lsp
 ```
 
 Vagrant is the only maintained scenario if at all (too early to spend time on pollishing up the roles).
