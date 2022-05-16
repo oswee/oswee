@@ -1,4 +1,5 @@
 ---
 # defaults file for istio
 
-istio_version: '1.11.3'
+istio_version: '1.13.3'
+...
