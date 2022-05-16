@@ -132,6 +132,6 @@ module.exports = {
     'scss/operator-no-newline-before': true,
     'scss/operator-no-unspaced': true,
     'scss/selector-no-redundant-nesting-selector': true,
-    customSyntax: 'postcss-html',
+    'customSyntax': 'postcss-html',
   },
 }
