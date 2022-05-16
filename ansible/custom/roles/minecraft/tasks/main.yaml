@@ -4,21 +4,23 @@
 - name: Install
   import_tasks: install.yaml
   tags:
-    - minecraft:setup
-    - minecraft:setup:install
+    - minecraft.setup
+    - minecraft.setup.install
 
 - name: Mods
   import_tasks: mods.yaml
   tags:
-    - minecraft:setup
-    - minecraft:setup:mods
-# - name: Configure
-#   import_tasks: configure.yaml
-#   tags:
-#     - minecraft:setup
-#     - minecraft:setup:config
+    - minecraft.setup
+    - minecraft.setup.mods
 
-# - name: Remove
-#   import_tasks: remove.yaml
+# - name: Config
+#   import_tasks: config.yaml
 #   tags:
-#     - minecraft:remove
+#     - minecraft.setup
+#     - minecraft.setup.config
+
+# - name: Cleanup
+#   import_tasks: cleanup.yaml
+#   tags:
+#     - minecraft.cleanup
+...

@@ -1,11 +1,9 @@
 [Desktop Entry]
-Name[en_US]=Minecraft
+Name[en_US]=Minecraft Launcher
 Version=1.0
+Exec=bash -c "/home/dzintars/Games/minecraft-launcher"
 Terminal=false
 Type=Application
-Name=Minecraft
-Exec=bash -c "java -jar /home/dzintars/minecraft-launcher/minecraft-launcher"
 Icon=minecraft
-NoDisplay=true
-Categories=Games
 StartupWMClass=minecraft
+Categories=Games
