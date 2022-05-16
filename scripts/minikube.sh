@@ -11,17 +11,17 @@ virsh net-autostart --network default
 minikube config set driver kvm2
 # Set the profile
 minikube profile dev
-# Istio and Kiali requires more memory and CPU
-minikube start --memory=16384 --cpus=6 --network=default -p dev
+# Istio and Kiali requires extra memory and CPU
+minikube -p dev start --memory=16384 --cpus=6 --network=default
 
 # Enable Metallb in order to run Istio
-minikube addons enable metallb
+minikube -p dev addons enable metallb
 
 # Apply Metallb cofing map (could be done with vanilla `kubectl`)
-yarn bazel run //manifests/devcluster:metallb_config_map.apply
-#kubectl apply -f ./manifests/devcluster/metallb-config-map.yaml
+yarn bazel run //k8s/manifests/devcluster:metallb_config_map.apply
+#kubectl apply -f ./k8s/manifests/devcluster/metallb-config-map.yaml
 
-# Install Istio. `istioctl` can be installed via `oswee.ansible.istio`.
+# Install Istio. `istioctl` can be installed via `oswee.generic.istio`.
 istioctl install -y
 
 # Install Istio addons
@@ -40,8 +40,11 @@ kubectl get svc istio-ingressgateway -n istio-system
 #kubectl get svc -n istio-system
 
 # Enable Metrics API
-#minikube addons enable metrics-server
+#minikube -p dev addons enable metrics-server
 
 kubectl apply -f https://github.com/kubernetes-sigs/metrics-server/releases/latest/download/components.yaml
 # Temporary added `--kubelet-insecure-tls` flag
-kubectl apply -f ./manifests/devcluster/metrics-server.yaml
+kubectl apply -f ./k8s/manifests/devcluster/metrics-server.yaml
+
+# Run the Minikube dashboard
+minikube -p dev dashboard
