@@ -7,46 +7,19 @@
 
   roles:
     - role: oswee.custom.rpm
-      tags:
-        - rpm
     - role: oswee.custom.git
-      tags:
-        - git
     # - role: oswee.generic.sddm
-    #   tags:
-    #     - sddm
     - role: oswee.generic.sway
-      tags:
-        - sway
     - role: oswee.generic.swaylock
-      tags:
-        - swaylock
     - role: oswee.custom.fonts
-      tags:
-        - fonts
     # - role: oswee.generic.alacritty
-    #   tags:
-    #     - alacritty
     # - role: oswee.generic.zsh
-    #   tags:
-    #     - zsh
     # - role: oswee.generic.tmux
-    #   tags:
-    #     - tmux
     - role: oswee.generic.nodejs
-      tags:
-        - nodejs
     - role: oswee.generic.ranger
-      tags:
-        - ranger
     - role: oswee.generic.nvim
     - role: oswee.custom.nvim
     - role: oswee.custom.minecraft
-      tags:
-        - minecraft
     - role: oswee.generic.obsidian
-      tags:
-        - obsidian
     # - role: oswee.generic.slack
-    #   tags:
-    #     - slack
+...

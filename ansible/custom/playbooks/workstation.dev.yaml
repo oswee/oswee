@@ -7,59 +7,34 @@
 
   roles:
     - role: oswee.generic.golang
-      tags:
-        - golang
       vars:
         golang_version: 1.18
-    # - role: minio
-    #   tags:
-    #     - minio
     - role: oswee.generic.vault
-      tags:
-        - vault
     - role: oswee.generic.minio
       vars:
         minio_domain: 's3.{{ dns_prod_domain_name }}'
         minio_server_port: '9199'
         minio_console_port: '8001'
     - role: oswee.generic.vagrant
-      tags:
-        - vagrant
       vars:
         vagrant_version: 2.2.19
     - role: oswee.generic.terraform
-      tags:
-        - terraform
       vars:
         terraform_version: 1.1.4
     - role: oswee.generic.packer
-      tags:
-        - packer
       vars:
         packer_version: 1.8.0
     # - role: oswee.generic.bazel
-    #   tags:
-    #     - bazel
     # - role: oswee.generic.helm
-    #   tags:
-    #     - helm
     # - role: oswee.generic.libvirt
-    #   tags:
-    #     - libvirt
     #   vars:
     #     libvirt_dir_iso: "/home/{{ ansible_user_id }}/kvm/iso"
     #     libvirt_dir_images: "/home/{{ ansible_user_id }}/kvm/images"
     #     libvirt_dir_pools: "/home/{{ ansible_user_id }}/kvm/pools"
     # - role: oswee.generic.mariadb
-    #   tags:
-    #     - mariadb
     # - role: quay
-    #   tags:
-    #     - quay
     - role: oswee.custom.haproxy
       tags:
         - haproxy
     # - role: oswee.generic.molecule
-    #   tags:
-    #     - molecule
 ...
