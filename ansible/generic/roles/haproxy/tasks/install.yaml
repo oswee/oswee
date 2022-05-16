@@ -46,10 +46,10 @@
     state: enabled
   notify: Restart firewalld
   loop:
-    - 6443/tcp # HAProxy
+    - 6443/tcp  # HAProxy
     - 6443/udp
-    - 9000/tcp # HAProxy stats/health page
-    - 22623/tcp # HAProxy
+    - 9000/tcp  # HAProxy stats/health page
+    - 22623/tcp  # HAProxy
     - 22623/udp
 
 - name: Enable SELinux
@@ -82,3 +82,4 @@
 #     name: haproxy
 #     state: started
 #     enabled: true
+...
