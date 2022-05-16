@@ -1,8 +1,6 @@
 local ok, lualine = pcall(require, 'lualine')
 if (not ok) then return end
 
-local vim = vim
-
 local function lsp_progress()
   local messages = vim.lsp.util.get_progress_messages()
   if #messages == 0 then

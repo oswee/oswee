@@ -1,7 +1,3 @@
-local vim = vim
-local api = vim.api
-local cmd = vim.cmd
-
 local helpers = {}
 
 helpers.map = function(mode, lhs, rhs, opts)
@@ -9,7 +5,7 @@ helpers.map = function(mode, lhs, rhs, opts)
   if opts then
     options = vim.tbl_extend("force", options, opts)
   end
-  api.nvim_set_keymap(mode, lhs, rhs, options)
+  vim.api.nvim_set_keymap(mode, lhs, rhs, options)
 end
 
 return helpers

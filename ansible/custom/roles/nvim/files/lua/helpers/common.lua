@@ -1,16 +1,12 @@
-local vim = vim
-local api = vim.api
-local cmd = vim.cmd
-
 local helpers = {}
 
 function helpers.create_augroup(autocmds, name)
-  cmd('augroup ' .. name)
-  cmd('autocmd!')
+  vim.cmd('augroup ' .. name)
+  vim.cmd('autocmd!')
   for _, autocmd in ipairs(autocmds) do
-      cmd('autocmd ' .. table.concat(autocmd, ' '))
+      vim.cmd('autocmd ' .. table.concat(autocmd, ' '))
   end
-  cmd('augroup END')
+  vim.cmd('augroup END')
 end
 
 function helpers.get_table_keys(tab)
@@ -22,7 +18,6 @@ function helpers.get_table_keys(tab)
 end
 
 function helpers.get_config(name)
-  print('Get Config hit')
   return string.format("require(\"%s\")", name)
 end
 
