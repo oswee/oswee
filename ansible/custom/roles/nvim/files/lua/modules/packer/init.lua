@@ -52,6 +52,7 @@ else
     use(editor.comment())
     use(editor.indentline())
     use(editor.editorconfig())
+    use(editor.vimbazel())
 
     -- Completion
     use(completion.cmp())
