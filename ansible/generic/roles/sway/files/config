@@ -412,4 +412,6 @@ exec_always {
   gsettings set $gnome-schema cursor-theme 'Breeze_Snow'
 }
 
+for_window [app_id="pinentry-qt"] floating enable
+
 include /etc/sway/config.d/*
