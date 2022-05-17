@@ -44,6 +44,7 @@ else
     use(ui.telescope())
     use(ui.dashboard())
     use(ui.fugitive())
+    use(ui.vimrooter())
 
     -- Editor
     use(editor.treesitter())
