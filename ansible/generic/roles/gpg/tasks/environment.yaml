@@ -1,7 +1,7 @@
 ---
 # tasks file for gpg
 
-- name: Add environment
+- name: environment | Add environment
   become: true
   ansible.builtin.copy:
     dest: /etc/profile.d/gpg2.sh

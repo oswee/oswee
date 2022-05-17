@@ -1,9 +1,15 @@
 ---
 # tasks file for gpg
 
-- name: Install package
+- name: install | Install package
   become: true
   ansible.builtin.dnf:
     name: gnupg2
     state: present
+
+- name: install | Copy GPG Agent config
+  ansible.builtin.copy:
+    src: 'gpg-agent.conf'
+    dest: '/home/{{ ansible_user_id }}/.gnupg/gpg-agent.conf'
+    mode: '0644'
 ...
