@@ -1,12 +1,12 @@
 ---
-# roles/{{ role_name | regex_replace('.*roles\/') }}/meta/main.yml
+# roles/{{ role_name | regex_replace('.*roles\/') }}/meta/main.yaml
 
 galaxy_info:
   namespace: 'oswee'
   role_name: '{{ role_name | regex_replace('.*roles\/') }}'
   version: '0.0.1'
   author: 'Dzintars Klavins'
-  description: 'Ansible role to maintain {{ role_name | regex_replace('.*roles\/') }}.'
+  description: 'Ansible role to maintain {{ role_name | regex_replace('.*roles\/') | capitalize }}'
   company: 'Oswee'
 
   license: 'Apache-2.0'

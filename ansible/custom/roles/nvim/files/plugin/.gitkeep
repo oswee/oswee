@@ -1,0 +1,2 @@
+Runs scripts on __any__ file type always when N/Vim starts.
+If the thing does not fit in any other runtime folder, then place it there.

@@ -1,0 +1,8 @@
+This is loaded after all runtimepath directories (or `plugin` directory).
+This directory can mimic the runtimepath directory structure.
+For example it can contain `after/plugins`, `after/ftdetect`, `after/ftplugin`, etc.
+So... put the global things in the runtimepath directories and put the any overrides in this directory.
+
+In this directory you can override Vim's internal options.
+
+In general this is considired to be like a hack directory. You should strive not to use it.
