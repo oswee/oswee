@@ -32,11 +32,6 @@ else
 
     use({ 'wbthomason/packer.nvim' })
 
-    -- use({
-    --   'tweekmonster/startuptime.vim',
-    --   cmd = 'StartupTime',
-    -- })
-
     -- UI
     use(ui.theme())
     use(ui.filemanager())
@@ -53,6 +48,13 @@ else
     use(editor.indentline())
     use(editor.editorconfig())
     use(editor.vimbazel())
+    -- use(editor.vimjinja())
+    -- use(editor.ansiblevim())
+    -- use(editor.vimwiki())
+    -- use(editor.undotree())
+    -- use(editor.octonvim())
+    -- use(editor.vimstartuptime())
+    -- use(editor.vimphpcsfixer())
 
     -- Completion
     use(completion.cmp())

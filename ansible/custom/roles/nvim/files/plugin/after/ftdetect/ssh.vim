@@ -1,1 +1,0 @@
--- autocmd! BufNew,BufNewFile,Bufread *ssh.cfg :setfiletype sshconfig

@@ -59,4 +59,53 @@ function Editor.vimbazel()
   }
 end
 
+function Editor.vimjinja()
+  return {
+    'lepture/vim-jinja',
+  }
+end
+
+function Editor.ansiblevim()
+  return {
+    'pearofducks/ansible-vim',
+  }
+end
+
+function Editor.vimwiki()
+  return {
+    'vimwiki/vimwiki',
+  }
+end
+
+function Editor.undotree()
+  return {
+    'mbbill/undotree',
+  }
+end
+
+function Editor.octonvim()
+  return {
+    'pwntester/octo.nvim',
+    requires = {
+      {'nvim-lua/popup.nvim'},
+      {'nvim-lua/plenary.nvim'},
+      {'nvim-telescope/telescope.nvim'},
+      {'kyazdani42/nvim-web-devicons'}
+    }
+  }
+end
+
+function Editor.vimstartuptime()
+  return {
+    'dstein64/vim-startuptime',
+    cmd = 'StartupTime',
+  }
+end
+
+function Editor.vimphpcsfixer()
+  return {
+    'stephpy/vim-php-cs-fixer',
+  }
+end
+
 return Editor
