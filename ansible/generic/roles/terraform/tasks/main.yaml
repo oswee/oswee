@@ -1,0 +1,14 @@
+---
+# tasks file for terraform
+
+- name: Install
+  import_tasks: install.yaml
+  tags:
+    - terraform.setup
+    - terraform.setup.install
+
+# - name: Teardown
+#   import_tasks: teardown.yaml
+#   tags:
+#     - terraform.teardown
+...
