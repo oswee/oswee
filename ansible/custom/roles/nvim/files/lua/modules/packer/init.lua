@@ -44,6 +44,7 @@ else
     use(ui.telescope())
     use(ui.dashboard())
     use(ui.fugitive())
+    use(ui.vimrooter())
 
     -- Editor
     use(editor.treesitter())
@@ -51,6 +52,7 @@ else
     use(editor.comment())
     use(editor.indentline())
     use(editor.editorconfig())
+    use(editor.vimbazel())
 
     -- Completion
     use(completion.cmp())

@@ -75,4 +75,10 @@ function Ui.fugitive()
   }
 end
 
+function Ui.vimrooter()
+  return {
+    'airblade/vim-rooter',
+  }
+end
+
 return Ui

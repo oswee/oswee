@@ -50,4 +50,13 @@ function Editor.editorconfig()
   }
 end
 
+function Editor.vimbazel()
+  return {
+    'bazelbuild/vim-bazel',
+    requires = {
+      'google/vim-maktaba',
+    },
+  }
+end
+
 return Editor
