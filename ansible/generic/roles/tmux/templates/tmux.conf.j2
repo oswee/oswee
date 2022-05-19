@@ -1,7 +1,3 @@
-# To source this file on the fly use :source-file ~/.tmux.conf
-
-
-
 # source "/usr/share/tmux/powerline.conf"
 
 # remap prefix from 'C-b' to 'C-a'
@@ -18,6 +14,9 @@ setw -g pane-base-index 1
 # Highlight window when it has new activity
 setw -g monitor-activity on
 set -g visual-activity off
+
+# Source config file (r/s will conflict with ressurect plugin)
+# bind r source-file ~/.tmux.conf
 
 # split panes using | and -
 unbind '"'

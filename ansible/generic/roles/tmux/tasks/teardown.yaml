@@ -1,9 +1,10 @@
 ---
-# tasks file for tmux
+# tasks file for Tmux
 
-- name: Remove packages
+- name: teardown | Remove packages
   become: true
   ansible.builtin.dnf:
     name: '{{ item }}'
     state: absent
   loop: '{{ packages.redhat }}'
+...

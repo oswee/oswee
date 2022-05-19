@@ -1,19 +1,20 @@
 ---
-# tasks file for tmux
+# tasks file for Tmux
 
 - name: Install
   import_tasks: install.yaml
   tags:
-    - tmux:setup
-    - tmux:setup:install
+    - tmux.setup
+    - tmux.setup.install
 
 - name: Config
-  import_tasks: configure.yaml
+  import_tasks: config.yaml
   tags:
-    - tmux:setup
-    - tmux:setup:config
+    - tmux.setup
+    - tmux.setup.config
 
-- name: Remove
-  import_tasks: remove.yaml
+- name: Teardown
+  import_tasks: teardown.yaml
   tags:
-    - tmux:remove
+    - tmux.teardown
+...
