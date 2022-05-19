@@ -12,6 +12,7 @@ vim.keymap.set('n', '<Leader>fg', ':Telescope live_grep<CR>')
 vim.keymap.set('n', '<Leader>fb', ':Telescope buffers<CR>')
 vim.keymap.set('n', '<Leader>fh', ':Telescope help_tags<CR>')
 
+vim.keymap.set('n', '<Leader>gg', ':LazyGit<CR>')
 
 vim.keymap.set("n", "<Leader><Leader>s", "<cmd>source ~/.config/nvim/after/plugin/luasnip.lua<CR>")
 
