@@ -1,5 +1,5 @@
 ---
-# tasks file for terraform
+# tasks file for Terraform
 
 - name: Install
   import_tasks: install.yaml

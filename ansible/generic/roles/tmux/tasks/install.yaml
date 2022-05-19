@@ -1,15 +1,16 @@
 ---
-# tasks file for tmux
+# tasks file for Tmux
 
-- name: Install packages
+- name: install | Install packages
   become: true
   ansible.builtin.dnf:
     name: '{{ item }}'
     state: present
   loop: '{{ packages.redhat }}'
 
-- name: Clone Tmux Plugin Manager
+- name: install | Clone Tmux Plugin Manager
   ansible.builtin.git:
     repo: https://github.com/tmux-plugins/tpm.git
     dest: $HOME/.tmux/plugins/tpm
     version: master
+...

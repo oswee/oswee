@@ -1,8 +1,9 @@
 ---
-# vars file for tmux
+# vars file for Tmux
 
 packages:
   redhat:
     - tmux
     - tmux-powerline
     - powerline-fonts
+...

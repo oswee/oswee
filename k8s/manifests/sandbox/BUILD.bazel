@@ -8,13 +8,13 @@ load("@io_bazel_rules_k8s//k8s:objects.bzl", "k8s_objects")
 k8s_object(
     name = "secret",
     cluster = "minikube",
-    template = "src/secret.yaml",
+    template = "src/secret.k8s.yaml",
 )
 
 k8s_object(
     name = "persistent_volume",
     cluster = "minikube",
-    template = "src/pv.yaml",
+    template = "src/pv.k8s.yaml",
 )
 
 k8s_objects(

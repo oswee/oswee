@@ -10,7 +10,7 @@ package(default_visibility = ["//visibility:public"])
 k8s_object(
     name = "gateway",
     cluster = "minikube",
-    template = "gateway.yaml",
+    template = "gateway.k8s.yaml",
 )
 
 k8s_objects(

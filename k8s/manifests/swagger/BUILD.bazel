@@ -11,13 +11,13 @@ package(default_visibility = ["//visibility:public"])
 k8s_object(
     name = "virtual_service",
     cluster = "minikube",
-    template = "virtual-service.yaml",
+    template = "virtual-service.k8s.yaml",
 )
 
 k8s_object(
     name = "service",
     cluster = "minikube",
-    template = "service.yaml",
+    template = "service.k8s.yaml",
 )
 
 k8s_deploy(
@@ -25,7 +25,7 @@ k8s_deploy(
     images = {
         "swagger:dzintars": "@prime//containers/swagger:image",
     },
-    template = "deployment.yaml",
+    template = "deployment.k8s.yaml",
 )
 
 k8s_objects(
