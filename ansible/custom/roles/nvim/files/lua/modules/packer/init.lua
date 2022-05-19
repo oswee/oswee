@@ -40,6 +40,7 @@ else
     use(ui.dashboard())
     use(ui.fugitive())
     use(ui.vimrooter())
+    use(ui.lazygit())
 
     -- Editor
     use(editor.treesitter())
