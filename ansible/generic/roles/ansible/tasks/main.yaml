@@ -1,0 +1,13 @@
+---
+# tasks file for Ansible
+
+- name: Install ansible-lint python package
+  ansible.builtin.pip:
+    name: ansible-lint
+    state: forcereinstall
+
+- name: Install NPM ansible-language-server package globally
+  community.general.yarn:
+    name: '@ansible/ansible-language-server@latest'
+    global: true
+...
