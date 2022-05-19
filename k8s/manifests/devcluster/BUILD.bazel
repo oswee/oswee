@@ -7,20 +7,26 @@ load("@io_bazel_rules_k8s//k8s:objects.bzl", "k8s_objects")
 
 k8s_object(
     name = "namespace",
-    cluster = "minikube",
-    template = "namespace.yaml",
+    cluster = "dev",
+    template = "namespace.k8s.yaml",
 )
 
 k8s_object(
     name = "registry_key_secret",
-    cluster = "minikube",
-    template = "registry-key-secret.yaml",
+    cluster = "dev",
+    template = "registry-key-secret.k8s.yaml",
 )
 
 k8s_object(
     name = "metallb_config_map",
-    cluster = "minikube",
-    template = "metallb-config-map.yaml",
+    cluster = "dev",
+    template = "metallb-config-map.k8s.yaml",
+)
+
+k8s_object(
+    name = "dashboard_ingress",
+    cluster = "dev",
+    template = "dashboard-ingress.k8s.yaml",
 )
 
 k8s_objects(
@@ -29,6 +35,7 @@ k8s_objects(
         ":namespace",
         ":registry_key_secret",
         ":metallb_config_map",
+        ":dashboard_ingress",
     ],
     visibility = ["@prime//visibility:public"],
 )
