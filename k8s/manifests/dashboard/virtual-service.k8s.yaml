@@ -1,0 +1,16 @@
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: kubernetes-dashboard-virtualservice
+  namespace: kubernetes-dashboard
+spec:
+  hosts:
+    - "dash.oswee.local"
+  gateways:
+    - kubernetes-dashboard-gateway
+  http:
+    - route:
+      - destination:
+          host: kubernetes-dashboard.kubernetes-dashboard.svc.cluster.local
+          port:
+            number: 80

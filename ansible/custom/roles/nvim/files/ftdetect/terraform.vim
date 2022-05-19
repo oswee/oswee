@@ -1,2 +1,1 @@
--- autocmd! BufNew,BufNewFile,BufRead terraform/**/*.tpl :setfiletype yaml
-
+-- autocmd! BufNewFile,BufRead terraform/**/*.tpl set filetype yaml

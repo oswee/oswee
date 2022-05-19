@@ -1,1 +1,1 @@
-autocmd! BufNew,BufNewFile,BufRead .env* :setfiletype sh
+autocmd! BufNewFile,BufRead .env* set filetype sh

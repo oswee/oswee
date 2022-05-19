@@ -1,0 +1,27 @@
+"""
+Rules to configure development cluster
+"""
+
+load("@io_bazel_rules_k8s//k8s:object.bzl", "k8s_object")
+load("@io_bazel_rules_k8s//k8s:objects.bzl", "k8s_objects")
+
+k8s_object(
+    name = "gateway",
+    cluster = "dev",
+    template = "gateway.k8s.yaml",
+)
+
+k8s_object(
+    name = "virtual_service",
+    cluster = "dev",
+    template = "virtual-service.k8s.yaml",
+)
+
+k8s_objects(
+    name = "all",
+    objects = [
+        ":gateway",
+        ":virtual_service",
+    ],
+    visibility = ["@prime//visibility:public"],
+)

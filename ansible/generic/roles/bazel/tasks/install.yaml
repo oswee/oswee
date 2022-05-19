@@ -38,3 +38,4 @@
     url: 'https://github.com/bazelbuild/buildtools/releases/download/{{ bazel_buildifier_version }}/buildifier'
     dest: /usr/local/bin/buildifier
     mode: a+x
+...
