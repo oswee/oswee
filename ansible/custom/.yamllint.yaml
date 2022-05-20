@@ -12,6 +12,8 @@ rules:
   commas: enable
   comments:
     level: warning
+    require-starting-space: true
+    min-spaces-from-content: 2
   comments-indentation:
     level: warning
   document-end:
@@ -24,7 +26,9 @@ rules:
     max-end: 0
   empty-values: disable
   hyphens: enable
-  indentation: enable
+  indentation:
+    spaces: consistent
+    indent-sequences: false
   key-duplicates: enable
   key-ordering: disable
   line-length:
@@ -32,9 +36,12 @@ rules:
     allow-non-breakable-words: true
     allow-non-breakable-inline-mappings: false
   new-line-at-end-of-file: enable
-  new-lines: enable
+  new-lines:
+    type: unix
   octal-values: disable
-  quoted-strings: disable
+  quoted-strings:
+    quote-type: single
+    required: only-when-needed
   trailing-spaces: enable
   truthy:
     level: warning

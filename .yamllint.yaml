@@ -2,7 +2,7 @@
 yaml-files:
   - '*.yaml'
   - '*.yml'
-  - '.yamllint'
+  - '.yamllint.yaml'
 rules:
   braces:
     level: warning
@@ -18,13 +18,15 @@ rules:
     present: true
   document-start:
     level: warning
+    present: true
   empty-lines:
     max: 2
     max-start: 0
     max-end: 0
   empty-values: disable
   hyphens: enable
-  indentation: enable
+  indentation:
+    spaces: 2
   key-duplicates: enable
   key-ordering: disable
   line-length:
@@ -35,8 +37,12 @@ rules:
   new-lines: enable
   octal-values: disable
   quoted-strings: disable
+  # quoted-strings:
+  #   quote-type: single
+  #   required: only-when-needed
   trailing-spaces: enable
   truthy:
     level: warning
     allowed-values: ['true', 'false']
     check-keys: true
+...

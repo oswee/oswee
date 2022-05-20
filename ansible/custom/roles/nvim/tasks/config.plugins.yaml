@@ -1,5 +1,5 @@
 ---
-# tasks file for nvim
+# tasks file for Nvim
 
 # - name: plugins | Clone Packer repository
 #   ansible.builtin.git:
@@ -14,7 +14,7 @@
     dest: '{{ nvim_config_dir }}/{{ item.dest }}/'
     mode: '0644'
   loop:
-    - { src: 'lua/plugins.lua', dest: '/lua/' }
+    - { src: "lua/plugins.lua", dest: '/lua/' }
     # - { src: 'lua/plugins/', dest: '/lua/plugins/' }
     # - { src: 'ultisnips', dest: '/' }
   # notify:

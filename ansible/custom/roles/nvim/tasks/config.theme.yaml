@@ -1,5 +1,5 @@
 ---
-# tasks file for nvim
+# tasks file for Nvim
 
 - name: theme | Copy plugin configuration files
   ansible.builtin.copy:
@@ -15,6 +15,7 @@
     line: "require('theme')"
     regexp: "^require('theme')$"
     state: present
+    mode: '0644'
     # insertafter: '^-- Theme'
     create: true
 ...

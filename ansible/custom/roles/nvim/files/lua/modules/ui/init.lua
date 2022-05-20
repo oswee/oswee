@@ -81,4 +81,11 @@ function Ui.vimrooter()
   }
 end
 
+function Ui.lazygit()
+  return {
+    'kdheepak/lazygit.nvim',
+    config = lc(require('modules.ui.lazygit')),
+  }
+end
+
 return Ui

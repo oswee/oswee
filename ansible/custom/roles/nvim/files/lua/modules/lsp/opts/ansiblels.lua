@@ -1,6 +1,7 @@
 local util = require 'lspconfig.util'
 
 return {
+  cmd = { 'ansible-language-server', '--stdio' },
   filetypes = {
     'yaml.ansible',
   },
@@ -8,6 +9,9 @@ return {
   single_file_support = true,
   settings = {
     ansible = {
+      python = {
+        interpreterPath = 'python3'
+      },
       ansible = {
         path = 'ansible'
       },
@@ -18,15 +22,12 @@ return {
       executionEnvironment = {
         enabled = false
       },
-      python = {
-        interpreterPath = 'python'
-      },
-      workspace = {
-        -- library = {
-        --   [vim.fn.expand("$VIMRUNTIME/lua")] = true,
-        --   [vim.fn.stdpath("config") .. "/lua"] = true,
-        -- },
-      },
+      -- workspace = {
+      --   -- library = {
+      --   --   [vim.fn.expand("$VIMRUNTIME/lua")] = true,
+      --   --   [vim.fn.stdpath("config") .. "/lua"] = true,
+      --   -- },
+      -- },
     },
   },
 }
