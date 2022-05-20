@@ -65,8 +65,9 @@
   tags:
     - nvim.config
     - nvim.samples
-# - name: Cleanup
-#  import_tasks: cleanup.yaml
+
+# - name: Teardown
+#  import_tasks: teardown.yaml
 #  tags:
-#    - nvim.Cleanup
+#    - nvim.teardown
 ...
