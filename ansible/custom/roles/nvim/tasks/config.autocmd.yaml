@@ -1,4 +1,4 @@
-# tasks file for nvim
+# tasks file for Nvim
 
 - name: autocmd | Copy autocmd
   ansible.builtin.copy:
