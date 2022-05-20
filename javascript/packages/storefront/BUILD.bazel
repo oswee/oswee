@@ -1,0 +1,40 @@
+load("@npm//@bazel/typescript:index.bzl", "ts_config", "ts_project")
+load("@npm//http-server:index.bzl", "http_server")
+
+package(default_visibility = ["//visibility:public"])
+
+http_server(
+    name = "server",
+    data = [
+        ":storefront",
+        "src/index.html",
+    ],
+    args = ["."],
+)
+
+ts_project(
+    name = "storefront",
+    srcs = glob(
+        include = [
+            "src/**/*.ts",
+        ],
+        exclude = [
+            "src/**/*.spec.ts",
+        ],
+    ),
+    tsconfig = "tsconfig",
+    deps = [
+        "@npm//lit",
+        "@npm//rxjs",
+        "@npm//@ngneat/falso",
+    ],
+)
+
+ts_config(
+    name = "tsconfig",
+    src = "tsconfig.json",
+    deps = [
+        "tsconfig.json",
+        "//:tsconfig.base.json",
+    ],
+)
