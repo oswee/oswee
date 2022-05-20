@@ -1,5 +1,5 @@
 ---
-# tasks file for nvim
+# tasks file for Nvim
 
 - name: ui | Copy UI plugin configuration files
   ansible.builtin.copy:
