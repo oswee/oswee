@@ -1,0 +1,18 @@
+---
+# tasks file for Nvim
+
+- name: runtime | Copy runtimepath directories
+  ansible.builtin.copy:
+    src: '{{ item.src }}'
+    dest: '{{ nvim_config_dir }}/{{ item.dest }}/'
+    mode: '0644'
+  loop:
+    - { src: 'after', dest: 'after' }
+    - { src: 'colors', dest: 'colors' }
+    - { src: 'ftdetect', dest: 'ftdetect' }
+    - { src: 'ftplugin', dest: 'ftplugin' }
+    - { src: 'indent', dest: 'indent' }
+    - { src: 'luasnip', dest: 'luasnip' }
+    - { src: 'plugin', dest: 'plugin' }
+    - { src: 'syntax', dest: 'syntax' }
+...

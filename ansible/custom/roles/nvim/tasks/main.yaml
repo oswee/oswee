@@ -1,6 +1,12 @@
 ---
 # tasks file for nvim
 
+- name: Runtime
+  import_tasks: runtime.yaml
+  tags:
+    - nvim.config
+    - nvim.runtime
+
 - name: Helpers
   import_tasks: helpers.yaml
   tags:
