@@ -10,6 +10,7 @@ local yamlls_opts = require('modules.lsp.opts.yamlls')
 local ansiblels_opts = require('modules.lsp.opts.ansiblels')
 local stylelint_opts = require('modules.lsp.opts.stylelint')
 local terraformls_opts = require('modules.lsp.opts.terraformls')
+local rust_analyzer_opts = require('modules.lsp.opts.rust_analyzer')
 
 local servers = {
   'sumneko_lua',
@@ -24,6 +25,7 @@ local servers = {
   -- 'jsonls',
   'stylelint_lsp',
   'terraformls',
+  'rust_analyzer',
 }
 
 for _, server in pairs(servers) do
@@ -58,6 +60,10 @@ for _, server in pairs(servers) do
 
   if server == 'terraformls' then
     opts = vim.tbl_deep_extend('force', terraformls_opts, opts)
+  end
+
+  if server == 'rust_analyzer' then
+    opts = vim.tbl_deep_extend('force', rust_analyzer_opts, opts)
   end
 
   lspconfig[server].setup(opts)
