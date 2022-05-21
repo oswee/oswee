@@ -1,0 +1,25 @@
+---
+# tasks file for Rust
+
+- name: install | Download Rust-analyzer '{{ rust_analyzer_version }}'
+  ansible.builtin.get_url:
+    url: '{{ rust_analyzer_url }}'
+    dest: /home/{{ ansible_user_id }}/.local/bin
+    mode: a+x
+
+# Unarchive does not handle compressed gz files. So i need an another way to handle that.
+# - name: install | Download Rust-analyzer '{{ rust_analyzer_version }}'
+#   ansible.builtin.unarchive:
+#     src: '{{ rust_analyzer_url }}'
+#     dest: /tmp
+#     remote_src: true
+#     extra_opts:
+#       - '-z'
+#
+# - name: install | Copy Rust-analyzer '{{ rust_analyzer_version }}' binary
+#   ansible.builtin.copy:
+#     src: /tmp/rust-analyzer
+#     dest: /home/{{ ansible_user_id }}/.local/bin
+#     mode: a+x
+#     remote_src: true
+...

@@ -43,4 +43,7 @@
       tags:
         - haproxy
     # - role: oswee.generic.molecule
+    - role: oswee.generic.rust
+      tags:
+        - rust
 ...
