@@ -13,6 +13,8 @@ load(
     "RULES_NODEJS_VERSION",
     "RULES_SASS_SHA256",
     "RULES_SASS_VERSION",
+    "RULES_RUST_SHA256",
+    "RULES_RUST_VERSION",
 )
 
 def prime_dependencies():
@@ -136,3 +138,12 @@ def prime_dependencies():
       ],
       sha256 = "a89e203d3cf264e564fcb96b6e06dd70bc0557356eb48400ce4b5d97c2c3720d",
   )
+
+  http_archive(
+    name = "rules_rust",
+    sha256 = RULES_RUST_SHA256,
+    urls = [
+        "https://mirror.bazel.build/github.com/bazelbuild/rules_rust/releases/download/%s/rules_rust-v0.2.0.tar.gz" % RULES_RUST_VERSION,
+        "https://github.com/bazelbuild/rules_rust/releases/download/%s/rules_rust-v%s.tar.gz" % (RULES_RUST_VERSION, RULES_RUST_VERSION),
+    ],
+)
