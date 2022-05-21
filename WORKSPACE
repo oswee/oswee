@@ -301,3 +301,14 @@ load("@rules_pkg//:deps.bzl", "rules_pkg_dependencies")
 
 rules_pkg_dependencies()
 # }}}
+
+# Rules Rust{{{
+# ----------------------------------------------
+
+# buildifier: disable=load-on-top
+load("@rules_rust//rust:repositories.bzl", "rules_rust_dependencies", "rust_register_toolchains")
+
+rules_rust_dependencies()
+
+rust_register_toolchains()
+# }}}
