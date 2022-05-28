@@ -1,0 +1,4 @@
+FROM docker.io/pihole/pihole:latest
+MAINTAINER dzintars.klavins@gmail.com
+
+STOPSIGNAL SIGTERM

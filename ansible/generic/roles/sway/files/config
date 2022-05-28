@@ -20,10 +20,11 @@ set $up k
 set $right l
 
 # Disable XWayland (Log Out required)
-#xwayland disable
+# xwayland disable
 
 # Your preferred terminal emulator
-set $term alacritty
+set $terminal kitty
+set $file_manager vifm
 
 # Note: pass the final command to swaymsg so that the resulting window can be opened
 # on the original workspace that the command was run on.
@@ -32,27 +33,17 @@ set $menu wofi --show drun --allow-images
 set $lock_path ~/.config/sway/lock.sh
 set $idle_path ~/.config/sway/idle.sh
 
-# Hide the mouse pointer after delay
-seat * hide_cursor 6000
-seat * hide_cursor when-typing enable
-
 
 
 # *************************
 # Output configuration
 # *************************
 
-# Example configuration:
-#
-#   output HDMI-A-1 resolution 1920x1080 position 1920,0
-#
-# You can get the names of your outputs by running: swaymsg -t get_outputs
-
 output 'Dell Inc. DELL U2913WM 5YD8C328433L' pos 0 0
 # Set the left and right displays in portrait mode
 output 'Dell Inc. DELL U2312HM 59DJP1AQFPQL' pos 2560 0 transform 270
-output 'Dell Inc. DELL U2412M 0FFXD47E0V2S' pos -1200 0 transform 270
-output 'Goldstar Company Ltd LG ULTRAWIDE 0x00000101' pos 3640 0
+# output 'Dell Inc. DELL U2412M 0FFXD47E0V2S' pos -1200 0 transform 270
+# output 'Goldstar Company Ltd LG ULTRAWIDE 0x00000101' pos 3640 0
 
 focus output 'Dell Inc. DELL U2913WM 5YD8C328433L'
 
@@ -62,6 +53,12 @@ output * bg /usr/share/backgrounds/tharsus.jpg fill
 # Assign workspace to the specific display
 workspace 1 output 'Dell Inc. DELL U2913WM 5YD8C328433L'
 workspace 10 output 'Dell Inc. DELL U2312HM 59DJP1AQFPQL'
+
+# *************************
+# Fonts
+# *************************
+
+font pango: "Comic Code", 10
 
 # *************************
 # Idle configuration
@@ -84,15 +81,6 @@ workspace 10 output 'Dell Inc. DELL U2312HM 59DJP1AQFPQL'
 # Input configuration
 # *************************
 
-# Example configuration:
-#
-#   input "2:14:SynPS/2_Synaptics_TouchPad" {
-#       dwt enabled
-#       tap enabled
-#       natural_scroll enabled
-#       middle_emulation enabled
-#   }
-#
 # You can get the names of your inputs by running: swaymsg -t get_inputs
 # Read `man 5 sway-input` for more information about this section.
 # Use `man 7 xkeyboard-config` to see the available options for key remapping.
@@ -102,9 +90,13 @@ workspace 10 output 'Dell Inc. DELL U2312HM 59DJP1AQFPQL'
 #     pointer_accel -0.2
 # }
 
-input "type:keyboard" {
-# input "51984:21078:Keebio_Iris_Rev._5" {
-  xkb_layout us,us(colemak_dh),lv(apostrophe),lv(colemak)
+# Hide the mouse pointer after delay
+seat * hide_cursor 6000
+seat * hide_cursor when-typing enable
+
+# input "type:keyboard" {
+input "51984:21078:Keebio_Iris_Rev._5" {
+  xkb_layout us,lv(apostrophe)
   # xkb_options grp:alt_shift_toggle,caps:swapescape,altwin:menu_win
   xkb_options grp:alt_shift_toggle
   repeat_delay 300
@@ -120,31 +112,26 @@ input "type:keyboard" {
 # }
 
 
-# input type:touchpad {
-#     accel_profile flat
-#     tap enabled
-#     tap_button_map lrm
-# }
 
 # *************************
 # Key bindings: General
 # *************************
 
 # Start a terminal
-bindsym $mod+Return exec $term
+bindsym $mod+Return exec $terminal
 
 # Open terminal file explorer
-bindsym $mod+Shift+Return exec $term -e ranger
+bindsym $mod+Shift+Return exec $terminal -e $file_manager
 
 # Start application launcher
-bindsym $mod+d exec $menu
+bindsym $mod+m exec $menu
 # bindsym Menu exec $menu
 
 # Open GUI file manager
 # bindsym $mod+Menu exec thunar
 
 # Open terminal file editor
-# bindsym $mod+Shift+Menu exec $term -e nvim
+# bindsym $mod+Shift+Menu exec $terminal -e nvim
 
 # Drag floating windows by holding down $mod and left mouse button.
 # Resize them with right mouse button + $mod.
@@ -153,26 +140,26 @@ bindsym $mod+d exec $menu
 # mouse button for dragging.
 floating_modifier $mod normal
 
-# Kill focused window
-bindsym $mod+Shift+q kill
+# Kill the focused window
+#bindsym $mod+shift+a kill
+bindsym $mod+q kill
 
 # Reload the configuration file
 bindsym $mod+Shift+c reload
 
 # Exit sway (logs you out of your Wayland session)
-#bindsym $mod+Shift+e exec swaynag -t warning -m 'You pressed the exit shortcut. Do you really want to exit sway? This will end your Wayland session.' -b 'Yes, exit sway' 'swaymsg exit'
 bindsym $mod+Shift+e exec wlogout
 
-# Move entire workspace to the right display
+# Cycle entire workspace to the right display
 bindsym $mod+p move workspace to output right
 
 # Lock the screen
-bindsym $mod+Control+l exec $lock_path
+bindsym $mod+Tab exec $lock_path
 
 # Multimedia controls
-bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume 0 +5%; exec --no-startup-id pactl set-sink-volume 1 +5%
-bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume 0 -5%; exec --no-startup-id pactl set-sink-volume 1 -5%
-bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute 0 toggle; exec --no-startup-id pactl set-sink-mute 1 toggle
+# bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume 0 +5%; exec --no-startup-id pactl set-sink-volume 1 +5%
+# bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume 0 -5%; exec --no-startup-id pactl set-sink-volume 1 -5%
+# bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute 0 toggle; exec --no-startup-id pactl set-sink-mute 1 toggle
 
 
 
@@ -185,22 +172,24 @@ bindsym $mod+$left focus left
 bindsym $mod+$down focus down
 bindsym $mod+$up focus up
 bindsym $mod+$right focus right
+
 # Or use $mod+[up|down|left|right]
-bindsym $mod+Left focus left
-bindsym $mod+Down focus down
-bindsym $mod+Up focus up
-bindsym $mod+Right focus right
+# bindsym $mod+Left focus left
+# bindsym $mod+Down focus down
+# bindsym $mod+Up focus up
+# bindsym $mod+Right focus right
 
 # Move the focused window with the same, but add Shift
 bindsym $mod+Shift+$left move left
 bindsym $mod+Shift+$down move down
 bindsym $mod+Shift+$up move up
 bindsym $mod+Shift+$right move right
+
 # Ditto, with arrow keys
-bindsym $mod+Shift+Left move left
-bindsym $mod+Shift+Down move down
-bindsym $mod+Shift+Up move up
-bindsym $mod+Shift+Right move right
+# bindsym $mod+Shift+Left move left
+# bindsym $mod+Shift+Down move down
+# bindsym $mod+Shift+Up move up
+# bindsym $mod+Shift+Right move right
 
 
 
@@ -231,10 +220,9 @@ bindsym $mod+Shift+7 move container to workspace number 7
 bindsym $mod+Shift+8 move container to workspace number 8
 bindsym $mod+Shift+9 move container to workspace number 9
 bindsym $mod+Shift+0 move container to workspace number 10
-# Note: workspaces can have any name you want, not just numbers.
-# We just use 1-10 as the default.
 
-
+#Swith with same key to precedent workspace
+workspace_auto_back_and_forth yes
 
 # *************************
 # Key bindings: Layout
@@ -265,9 +253,10 @@ bindsym $mod+a focus parent
 
 # Disable container borders and set gaps
 default_border none
-default_border none
-smart_gaps off
-gaps inner 2
+hide_edge_borders --i3 both
+smart_borders off
+smart_gaps on
+gaps inner 4
 gaps outer 0
 
 seat seat0 xcursor_theme breeze_cursors 28
@@ -283,9 +272,6 @@ set $opacity 0.96
 # Key bindings: Scratchpad
 # *************************
 
-# Sway has a "scratchpad", which is a bag of holding for windows.
-# You can send windows there and get them back later.
-
 # Move the currently focused window to the scratchpad
 bindsym $mod+Shift+Menu move scratchpad
 
@@ -300,28 +286,24 @@ bindsym $mod+Menu scratchpad show
 # *************************
 
 # Resizing windows by 10 in sway using keyboard only
-bindsym $mod+Ctrl+Left resize shrink width 10 px or 10 ppt
-bindsym $mod+Ctrl+Down resize grow height 10 px or 10 ppt
-bindsym $mod+Ctrl+Up resize shrink height 10 px or 10 ppt
-bindsym $mod+Ctrl+Right resize grow width 10 px or 10 ppt
+bindsym $mod+Ctrl+$left resize shrink width 10 px or 10 ppt
+bindsym $mod+Ctrl+$down resize grow height 10 px or 10 ppt
+bindsym $mod+Ctrl+$up resize shrink height 10 px or 10 ppt
+bindsym $mod+Ctrl+$right resize grow width 10 px or 10 ppt
 
 bindsym $mod+r mode "resize"
 
 mode "resize" {
-  # left will shrink the containers width
-  # right will grow the containers width
-  # up will shrink the containers height
-  # down will grow the containers height
   bindsym $left resize shrink width 10px
   bindsym $down resize grow height 10px
   bindsym $up resize shrink height 10px
   bindsym $right resize grow width 10px
 
-  # Ditto, with arrow keys
-  bindsym Left resize shrink width 10px
-  bindsym Down resize grow height 10px
-  bindsym Up resize shrink height 10px
-  bindsym Right resize grow width 10px
+  # Resize with the arrow keys
+  # bindsym Left resize shrink width 10px
+  # bindsym Down resize grow height 10px
+  # bindsym Up resize shrink height 10px
+  # bindsym Right resize grow width 10px
 
   # Return to default mode
   bindsym Return mode "default"
@@ -362,24 +344,25 @@ bar {
 # Theme: Gruvbox
 # ***********************
 
-# set $bg0 #282828
-# set $bg0hard #1d2021
-# set $fg1 #ebdbb2
-# set $fg4  #a89984
-# set $reddark  #cc241d
-# set $bluedark  #458588
-# set $gray #a89984
+# set $bg0         #282828
+# set $bg0hard     #1d2021
+# set $fg1         #ebdbb2
+# set $fg4         #a89984
+# set $reddark     #cc241d
+# set $bluedark    #458588
+# set $gray        #a89984
 # set $purplelight #d3869b
-# set $white #ffffff
-# set $black #000000
-# set $magenta #b16286
-# set $bg2 #504945
-
-# # class                 border  backgr. text    indicator child_border
-# client.focused          $bg0 $bg0 $fg1 $magenta $fg1
-# client.focused_inactive $bg0 $bg0 $fg1 $bg0 $bg0hard
-# client.unfocused        $bg0 $bg0 $fg4 $white $bg0
-# client.urgent           $bg0hard $bg0hard $fg1 $reddark $reddark
+# set $white       #ffffff
+# set $black       #000000
+# set $magenta     #b16286
+# set $bg2         #504945
+#
+# class                   border   backgr.  text    indicator child_border
+# client.focused          $bg0     $bg0     $fg1    $magenta  $fg1
+# client.focused_inactive $bg0     $bg0     $fg1    $bg0      $bg0hard
+# client.unfocused        $bg0     $bg0     $fg4    $white    $bg0
+# client.urgent           $bg0hard $bg0hard $fg1    $reddark  $reddark
+# client.placeholder      #000000 #0c0c0c   #ffffff #000000   #0c0c0c
 
 
 
@@ -387,8 +370,8 @@ bar {
 # Notifications
 # ***********************
 
-bindsym $mod+m exec makoctl dismiss
-bindsym $mod+Shift+m exec makoctl dismiss --all
+bindsym $mod+d exec makoctl dismiss
+bindsym $mod+Shift+d exec makoctl dismiss --all
 
 
 
@@ -398,7 +381,6 @@ bindsym $mod+Shift+m exec makoctl dismiss --all
 
 # exec --no-startup-id mako
 
-# https://github.com/swaywm/sway/wiki#gtk-applications-take-20-seconds-to-start
 exec systemctl --user import-environment WAYLAND_DISPLAY XDG_CURRENT_DESKTOP
 exec dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP=sway
 
@@ -415,3 +397,4 @@ exec_always {
 for_window [app_id="pinentry-qt"] floating enable
 
 include /etc/sway/config.d/*
+

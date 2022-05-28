@@ -1,0 +1,55 @@
+apiVersion: apps/v1
+kind: Pod
+metadata:
+  name: pihole
+  labels:
+    app: pihole
+spec:
+  restartPolicy: Never
+  containers:
+  - name: server
+    image: docker.io/pihole/pihole:latest
+    env:
+    - name: TZ
+      value: Europe/Riga
+    ports:
+    - containerPort: 53
+      hostPort: 53
+      protocol: TCP
+    - containerPort: 53
+      hostPort: 53
+      protocol: UDP
+    # - containerPort: 67
+    #   hostPort: 67
+    #   protocol: UDP
+    - containerPort: 80
+      hostPort: 8100
+      protocol: TCP
+    # securityContext:
+    #   privileged: true
+    #   runAsUser: 1000
+      # allowPrivilegeEscalation: true
+      # readOnlyRootFilesystem: false
+      # seLinuxOptions: {}
+      # capabilities:
+      #   add:
+      #     - 'NET_ADMIN'
+    stdin: true
+    tty: true
+    volumeMounts:
+    - name: pihole
+      mountPath: /etc/pihole:z
+      # readOnly: false
+    - name: dnsmasq
+      mountPath: /etc/dnsmasq.d:z
+      # readOnly: false
+    workingDir: /
+  volumes:
+  - name: pihole
+    hostPath:
+      path: /home/dzintars/containers/pihole
+      type: Directory
+  - name: dnsmasq
+    hostPath:
+      path: /home/dzintars/containers/dnsmasq
+      type: Directory
