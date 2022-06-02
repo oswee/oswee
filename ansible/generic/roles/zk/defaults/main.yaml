@@ -1,0 +1,6 @@
+---
+# defaults file for Zk
+
+zk_environment_path: /etc/profile.d/zk.sh
+zk_repo_url: 'https://github.com/mickael-menu/zk.git'
+zk_source_dir: '/home/{{ ansible_user_id }}/code/github.com/mickael-menu/zk'
