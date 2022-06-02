@@ -1,17 +1,17 @@
 module.exports = {
-  arrowParens: 'avoid',
-  bracketSpacing: true,
+  printWidth: 120,
+  tabWidth: 2,
+  useTabs: true,
   semi: false,
   singleQuote: true,
   trailingComma: 'all',
-  useTabs: false,
-  tabWidth: 2,
-  printWidth: 80,
+  arrowParens: 'avoid',
+  bracketSpacing: true,
   endOfLine: 'lf',
   htmlWhitespaceSensitivity: 'css',
   overrides: [
     {
-      files: ['.stylelintrc'],
+      files: ['.stylelintrc.cjs'],
       options: {
         parser: 'json',
       },
