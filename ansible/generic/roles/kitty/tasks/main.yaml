@@ -1,0 +1,8 @@
+---
+# tasks file for Kitty
+
+- name: Install
+  import_tasks: install.yaml
+  tags:
+    - kitty.setup
+...
