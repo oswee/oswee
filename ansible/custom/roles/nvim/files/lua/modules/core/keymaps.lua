@@ -1,35 +1,41 @@
-vim.g.mapleader = ','
-vim.g.maplocalleader = '\\'
+vim.g.mapleader = ","
+vim.g.maplocalleader = "\\"
 
 -- I DON'T LIKE THIS TO BE THERE
 
-vim.keymap.set('n', '<C-n>', ':NvimTreeToggle<CR>')
-vim.keymap.set('n', '<Leader>r', ':NvimTreeRefresh<CR>')
-vim.keymap.set('n', '<Leader>n', ':NvimTreeFindFile<CR>')
+-- LaziGit
 
-vim.keymap.set('n', '<Leader>ff', ':Telescope find_files<CR>')
-vim.keymap.set('n', '<Leader>fg', ':Telescope live_grep<CR>')
-vim.keymap.set('n', '<Leader>fb', ':Telescope buffers<CR>')
-vim.keymap.set('n', '<Leader>fh', ':Telescope help_tags<CR>')
+-- LuaSnips
 
-vim.keymap.set('n', '<Leader>gg', ':LazyGit<CR>')
+-- DAP keymaps should be global so that they can launch the DAP plugins
+-- vim.keymap.set("n", "<F5>", "<Cmd>lua require'dap'.continue()<CR>")
+-- vim.keymap.set("n", "<F10>", "<Cmd>lua require'dap'.step_over()<CR>")
+-- vim.keymap.set("n", "<F11>", "<Cmd>lua require'dap'.step_into()<CR>")
+-- vim.keymap.set("n", "<F12>", "<Cmd>lua require'dap'.step_out()<CR>")
+-- vim.keymap.set("n", "<Leader>b", "<Cmd>lua require'dap'.toggle_breakpoint()<CR>")
+-- vim.keymap.set("n", "<Leader>B", "<Cmd>lua require'dap'.set_breakpoint(vim.fn.input('Breakpoint condition: '))<CR>")
+-- vim.keymap.set(
+-- 	"n",
+-- 	"<Leader>lp",
+-- 	"<Cmd>lua require'dap'.set_breakpoint(nil, nil, vim.fn.input('Log point message: '))<CR>"
+-- )
+-- vim.keymap.set("n", "<Leader>dr", "<Cmd>lua require'dap'.repl.open()<CR>")
+-- vim.keymap.set("n", "<Leader>dl", "<Cmd>lua require'dap'.run_last()<CR>")
 
-vim.keymap.set('n', '<Leader><Leader>s', '<cmd>source ~/.config/nvim/after/plugin/luasnip.lua<CR>')
+-- Trouble
+vim.keymap.set("n", "<Leader>xx", "<cmd>TroubleToggle<CR>")
+vim.keymap.set("n", "<Leader>xw", "<cmd>TroubleToggle workspace_diagnostics<CR>")
+vim.keymap.set("n", "<Leader>xd", "<cmd>TroubleToggle document_diagnostics<CR>")
+vim.keymap.set("n", "<Leader>xq", "<cmd>TroubleToggle quickfix<CR>")
+vim.keymap.set("n", "<Leader>xl", "<cmd>TroubleToggle loclist<CR>")
+vim.keymap.set("n", "gR", "<cmd>TroubleToggle lsp_references<CR>")
+
+-- vim.keymap.set(
+-- 	"n",
+-- 	"<Leader>za",
+-- 	"require('telekasten').search_notes({default_text=[[^aliases: \\\\[([a-zA-Z].*,\\\\s*)*]]})<CR>"
+-- )
 
 -- local opts = { noremap=true, silent=true }
-
--- map('n', '<Leader>cf', ':Lspsaga lsp_finder<CR>', opts)
--- map('n', '<Leader>ca', ':Lspsaga code_action<CR>', opts)
--- map('v', '<Leader>ca', ':<C-U>Lspsaga range_code_action<CR>', opts)
--- map('n', '<Leader>ch', ':Lspsaga hover_doc<CR>', opts)
--- map('n', '<Leader>ck', '<cmd>lua require('lspsaga.action').smart_scroll_with_saga(-1)<CR>', opts)
--- map('n', '<Leader>cj', '<cmd>lua require('lspsaga.action').smart_scroll_with_saga(1)<CR>', opts)
--- map('n', '<Leader>cs', ':Lspsaga signature_help<CR>', opts)
--- map('n', '<Leader>ci', ':Lspsaga show_line_diagnostics<CR>', opts)
--- map('n', '<Leader>cc', ':Lspsaga show_cursor_diagnostics<CR>', opts)
--- map('n', '<Leader>cn', ':Lspsaga diagnostic_jump_next<CR>', opts)
--- map('n', '<Leader>cp', ':Lspsaga diagnostic_jump_prev<CR>', opts)
--- map('n', '<Leader>cr', ':Lspsaga rename<CR>', opts)
--- map('n', '<Leader>cd', ':Lspsaga preview_definition<CR>', opts)
 
 -- vim.keymap.set('n', '<F5>', ':UndotreeToggle<CR>', { buffer = 0 })

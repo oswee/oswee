@@ -15,13 +15,13 @@
 if version < 600
   syn clear
 elsei exists("b:current_syntax")
-  finish
+  fini
 en
 
 scriptencoding utf-8
 
 " Error
-" syn match swayConfigError /.*/
+syn match swayConfigError /.*/
 
 " Todo
 syn keyword swayConfigTodo TODO FIXME XXX contained
@@ -227,6 +227,7 @@ hi! def link swayConfigEdgeKeyword                     Type
 hi! def link swayConfigAction                          Type
 hi! def link swayConfigCommand                         Type
 hi! def link swayConfigOutputKeyword                   Type
+hi! def link swayConfigSeatKeyword                     Type
 hi! def link swayConfigWindowCommandSpecial            Type
 hi! def link swayConfigFocusWrappingType               Type
 hi! def link swayConfigUnitOr                          Type

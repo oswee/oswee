@@ -12,7 +12,7 @@ end
 cmp.setup({
   snippet = {
     expand = function(args)
-      require('luasnip').lsp_expand(args.body)
+      luasnip.lsp_expand(args.body)
     end,
   },
 
@@ -51,11 +51,11 @@ cmp.setup({
   },
 
   sources = cmp.config.sources({
-    { name = 'luasnip', options = { use_show_condition = false } },
-    { name = 'nvim_lua' },
     { name = 'nvim_lsp' },
-    { name = 'path' },
+    { name = 'nvim_lua' },
+    { name = 'luasnip', options = { use_show_condition = false } },
     { name = 'buffer' , keyword_length = 5 },
+    { name = 'path' },
   }),
 
   formatting = {
@@ -63,11 +63,11 @@ cmp.setup({
       mode = 'symbol_text',
       preset = 'default',
       menu = {
-        buffer = '[buf]',
         nvim_lsp = '[LSP]',
         nvim_lua = '[api]',
-        path = '[path]',
+        buffer = '[buf]',
         luasnip = '[snip]',
+        path = '[path]',
       },
     },
   },
