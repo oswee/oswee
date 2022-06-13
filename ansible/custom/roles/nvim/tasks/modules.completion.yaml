@@ -3,7 +3,7 @@
 
 - name: completion | Copy Completion plugin configuration files
   ansible.builtin.copy:
-    src: '{{ item.src }}'
+    src: '{{item.src}}'
     dest: '{{ nvim_config_dir }}/{{ item.dest }}/'
     mode: '0644'
   loop:

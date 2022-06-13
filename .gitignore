@@ -2,12 +2,14 @@
 # ----------------------------------------------------------------------
 # This file is used for `git clean` script and all files listed there
 # will be deleted. BE CAREFULL!!!
+# `git clean` cleans the .gitignore files when `-x` flag is used or
+# if ignored directories are listed as `dir/*`. Instead use `dir/`
 
 # YARN
 # ----------------------------------------------------------------------
 # https://yarnpkg.com/advanced/qa#which-files-should-be-gitignored
 
-.yarn/*
+.yarn/
 !.yarn/releases
 !.yarn/plugins
 !.yarn/sdks
@@ -17,6 +19,10 @@
 
 # GENERAL STUFF
 # ----------------------------------------------------------------------
+
+# Environment
+.env
+.envrc
 
 # backup and temporary files
 *~
@@ -40,6 +46,7 @@ bazel-explain.txt
 # Ignore generated files
 **/*.pb.go
 go.sum
+dist/
 
 # Ignore npm/yarn debug log
 npm-debug.log

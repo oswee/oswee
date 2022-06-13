@@ -1,14 +1,5 @@
 local helpers = {}
 
-function helpers.create_augroup(autocmds, name)
-  vim.cmd('augroup ' .. name)
-  vim.cmd('autocmd!')
-  for _, autocmd in ipairs(autocmds) do
-      vim.cmd('autocmd ' .. table.concat(autocmd, ' '))
-  end
-  vim.cmd('augroup END')
-end
-
 function helpers.get_table_keys(tab)
   local keyset = {}
   for k,_ in pairs(tab) do
@@ -18,6 +9,7 @@ function helpers.get_table_keys(tab)
 end
 
 function helpers.get_config(name)
+  print('Get Config hit')
   return string.format("require(\"%s\")", name)
 end
 

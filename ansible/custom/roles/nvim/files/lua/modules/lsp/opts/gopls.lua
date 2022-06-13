@@ -17,7 +17,7 @@ return {
           Google's lsp server for golang.
         ]],
         default_config = {
-          root_dir = [[root_pattern("go.mod", ".git")]],
+          root_dir = [[root_pattern('go.mod', '.git')]],
         },
       },
     },
