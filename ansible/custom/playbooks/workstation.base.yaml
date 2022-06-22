@@ -18,8 +18,7 @@
     - role: oswee.generic.nodejs
     - role: oswee.generic.ranger
     - role: oswee.generic.nvim
-    - role: oswee.custom.nvim
+    # - role: oswee.custom.nvim
     - role: oswee.custom.minecraft
     - role: oswee.generic.obsidian
     # - role: oswee.generic.slack
-...
