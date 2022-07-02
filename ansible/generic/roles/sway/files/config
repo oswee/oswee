@@ -151,7 +151,7 @@ bindsym $mod+Shift+c reload
 bindsym $mod+Shift+e exec wlogout
 
 # Cycle entire workspace to the right display
-bindsym $mod+p move workspace to output right
+bindsym $mod+p move workspace to output next
 
 # Lock the screen
 bindsym $mod+Tab exec $lock_path
