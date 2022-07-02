@@ -68,3 +68,14 @@ and https://github.com/bazelbuild/rules_nodejs/blob/stable/nodejs/private/yarn_v
 ## NPM vs Yarn
 
 If you take a look at Angular project, you will see this statement [Please use yarn instead of NPM to install dependencies](https://github.com/angular/angular/blob/5d155950e3764f72972017144edd9c7793200cd1/package.json#L13)
+
+## Modules
+
+To get Subresource Integrity use this command
+
+```bash
+» shasum -b -a 256 ~/Downloads/rules_swc-0.10.0.tar.gz | awk '{ print $1 }' | xxd -r -p | base64
+g7qJa977TS1Te2dHQrw4vxUa3jU65KVk+IS8buLB3GU=
+```
+
+where the archive is dowloaded from the GitHub releases or similar source. Don't forget to add `sha256-` prefix when listing dependency in the registry.
