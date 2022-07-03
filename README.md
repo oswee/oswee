@@ -13,6 +13,18 @@ This is sandbox monorepository to test Bazel in action to build "microservices" 
 
 Until this message is removed, the status is WIP.
 
+UPDATE: 2022 JUN:
+Did some Neovim configuration.
+Mostly looking into changes at Bazel ecosystem.
+Planning to finally set Bazel up for all required languages.
+Constantly thinking about cleaunp in all areas.
+Repository structure still is under the question. Seperation by language could have some downisdes. I collected some resources in my personal notes, how people handle this.
+I am specifically talking about repository structure and not the single "sub-project" structure.
+Also thinking to ditch the SASS. Taking into account how modern CSS evolves I think there is no more point to use SASS. If you want imports, you can use PostCSS.
+Bazel setup seems cluttered. There are many competing rules and it is not clear which is recommended and which is not and its time consuming to test every of them.
+Bazel modules promises to solve that, but they still are too fresh and I am not sure is it worth to invest time into looking into `bzlmod`
+Also thinking to fully migrate my workshop (IDE) setup to remote server with only reasionig to test remote workflow.
+
 UPDATE: 2022 APR:
 Mostly busy with my house rennovation so its less time to code.
 Majority of Ansible roles are migrated and requires refactor and cleanup.
