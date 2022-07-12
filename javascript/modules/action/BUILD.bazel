@@ -1,8 +1,9 @@
-load("@npm//@bazel/typescript:index.bzl", "ts_config", "ts_project")
+load("@npm//@bazel/typescript:index.bzl", "ts_config")
+load("@npm//@bazel/concatjs:index.bzl", "ts_library")
 
 package(default_visibility = ["//visibility:public"])
 
-ts_project(
+ts_library(
     name = "action",
     srcs = glob(
         include = [
@@ -13,7 +14,7 @@ ts_project(
             "src/test-setup.ts",
         ],
     ),
-    tsconfig = "tsconfig",
+    tsconfig = ":tsconfig",
     deps = [
         "@npm//redux",
     ],
@@ -24,6 +25,6 @@ ts_config(
     src = "tsconfig.json",
     deps = [
         "tsconfig.json",
-        "//:tsconfig.base.json",
+        "//javascript:tsconfig.base.json",
     ],
 )

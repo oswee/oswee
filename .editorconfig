@@ -4,8 +4,10 @@ root = true
 charset = utf-8
 end_of_line = lf
 tab_width = 2
-indent_size = 2
-indent_style = space
+; indent_size = 2
+; indent_style = tab
+indent_style = unset
+indent_size = unset
 quote_type = single
 insert_final_newline = true
 trim_trailing_whitespace = true
@@ -15,9 +17,9 @@ indent_size = unset
 insert_final_newline = false
 trim_trailing_whitespace = false
 
-# [{BUILD.bazel,*.bzl, WORKSPACE}]
-# indent_size = 2
-# indent_style = space
+[{*.bazel,*.bzl, WORKSPACE}]
+indent_size = 2
+indent_style = space
 
 [*.{d.ts,patch,editorconfig}]
 charset = unset

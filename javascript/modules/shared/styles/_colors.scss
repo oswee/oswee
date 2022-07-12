@@ -1,2 +1,7 @@
-$example-blue: dodgerblue;
+$example-blue: #aa00ff;
 $example-red: red;
+
+root {
+	background-color: red;
+	border: 1px solit $example-red;
+}

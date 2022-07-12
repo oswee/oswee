@@ -1,8 +1,9 @@
-load("@npm//@bazel/typescript:index.bzl", "ts_config", "ts_project")
+load("@npm//@bazel/typescript:index.bzl", "ts_config")
+load("@npm//@bazel/concatjs:index.bzl", "ts_library")
 
 package(default_visibility = ["//visibility:public"])
 
-ts_project(
+ts_library(
     name = "weather",
     srcs = glob(
         include = [
@@ -13,13 +14,13 @@ ts_project(
             "src/test-setup.ts",
         ],
     ),
-    # devmode_module = "esnext",
-    # devmode_target = "esnext",
-    # module_name = "@oswee/packages/weather",
-    # module_root = "src",
-    tsconfig = "tsconfig",
+    devmode_module = "esnext",
+    devmode_target = "esnext",
+    module_name = "@oswee/packages/weather",
+    module_root = "src",
+    tsconfig = ":tsconfig",
     deps = [
-        "//lib/action",
+        "//javascript/modules/action",
         "@npm//immer",
         "@npm//redux-dynamic-modules-core",
         "@npm//redux-dynamic-modules-saga",
@@ -33,6 +34,6 @@ ts_config(
     src = "tsconfig.json",
     deps = [
         "tsconfig.json",
-        "//:tsconfig.base.json",
+        "//javascript:tsconfig.base.json",
     ],
 )

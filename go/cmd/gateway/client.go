@@ -6,7 +6,7 @@ import (
 	"log"
 
 	"github.com/gorilla/websocket"
-	v1 "github.com/oswee/prime/proto/oswee/modules/v1"
+	v1 "github.com/oswee/oswee/proto/oswee/modules/v1"
 )
 
 // random comment to test husky
@@ -132,10 +132,9 @@ var rpcHandlers = map[RPC]func() interface{}{
 
 func (c *client) read() {
 	defer c.socket.Close()
-
 	for {
 		// Read the plain message from the socket
-		_, message err := c.socket.ReadMessage()
+		_, message, err := c.socket.ReadMessage()
 		if err != nil {
 			return
 		}
@@ -249,4 +248,4 @@ func (c *client) write() {
 			return
 		}
 	}
-},
+}

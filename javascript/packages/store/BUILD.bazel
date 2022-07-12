@@ -19,7 +19,7 @@ ts_project(
     tsconfig = "tsconfig",
     deps = [
         # "//lib/action",
-        "//packages/websocket",
+        "//javascript/packages/websocket",
         "@npm//redux",
         "@npm//redux-dynamic-modules-core",
         "@npm//redux-dynamic-modules-saga",

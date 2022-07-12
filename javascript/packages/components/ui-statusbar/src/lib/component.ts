@@ -5,11 +5,11 @@ import style from './style'
 
 @customElement('ui-statusbar')
 export class UiStatusbarComponent extends LitElement {
-  protected render(): TemplateResult {
-    return template.call(this)
-  }
+	protected override render(): TemplateResult {
+		return template.call(this)
+	}
 
-  public static get styles(): CSSResultArray {
-    return [style]
-  }
+	public static override get styles(): CSSResultArray {
+		return [style]
+	}
 }

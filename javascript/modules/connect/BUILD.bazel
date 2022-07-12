@@ -1,9 +1,10 @@
-load("@npm//@bazel/typescript:index.bzl", "ts_config", "ts_project")
+load("@npm//@bazel/typescript:index.bzl", "ts_config")
+load("@npm//@bazel/concatjs:index.bzl", "ts_library")
 
 package(default_visibility = ["//visibility:public"])
 
 # Build the TypeScript files
-ts_project(
+ts_library(
     name = "connect",
     srcs = glob(
         include = [
@@ -14,11 +15,11 @@ ts_project(
             "src/test-setup.ts",
         ],
     ),
-    # devmode_module = "esnext",
-    # devmode_target = "esnext",
-    # module_name = "@oswee/lib/connect",
-    # module_root = "src",
-    tsconfig = "tsconfig",
+    devmode_module = "esnext",
+    devmode_target = "esnext",
+    module_name = "@oswee/lib/connect",
+    module_root = "src",
+    tsconfig = ":tsconfig",
     deps = [
         "@npm//redux",
     ],
@@ -29,6 +30,6 @@ ts_config(
     src = "tsconfig.json",
     deps = [
         "tsconfig.json",
-        "//:tsconfig.base.json",
+        "//javascript:tsconfig.base.json",
     ],
 )

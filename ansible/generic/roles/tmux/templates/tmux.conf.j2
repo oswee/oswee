@@ -1,9 +1,8 @@
 # source "/usr/share/tmux/powerline.conf"
 
-# remap prefix from 'C-b' to 'C-a'
 unbind C-b
-set-option -g prefix C-a
-bind-key C-a send-prefix
+set-option -g prefix C-t
+bind-key C-t send-prefix
 
 # Start windows index at 1 instead of 0
 set -g base-index 1
@@ -39,6 +38,8 @@ bind -n M-Down select-pane -D
 # Shift arrow to switch windows
 bind -n S-Left  previous-window
 bind -n S-Right next-window
+# loop between last 2 windows
+bind -n l last-window
 
 # Enable mouse mode
 set -g mouse on

@@ -1,0 +1,102 @@
+load("@npm//@bazel/typescript:index.bzl", "ts_config", "ts_project")
+load("@npm//http-server:index.bzl", "http_server")
+load("@build_bazel_rules_nodejs//:index.bzl", "pkg_web")
+load("@npm//@bazel/terser:index.bzl", "terser_minified")
+load("@npm//html-insert-assets:index.bzl", "html_insert_assets")
+load("@npm//@bazel/concatjs:index.bzl", "concatjs_devserver", "ts_library")
+load("@npm//@bazel/esbuild:index.bzl", "esbuild")
+
+package(default_visibility = ["//visibility:public"])
+
+# Merge tsconfig files into single label.
+ts_config(
+    name = "tsconfig",
+    src = "tsconfig.json",
+    deps = [
+        "tsconfig.app.json",
+        "tsconfig.json",
+    ],
+)
+
+esbuild(
+    name = "bundle",
+    entry_point = "//javascript/hack/lit/src:index.ts",
+    target = "esnext",
+    deps = ["//javascript/hack/lit/src"],
+)
+
+# Minify the bundle
+terser_minified(
+    name = "bundle.esm.min",
+    src = ":bundle",
+)
+
+# Encapsulate bundle and static files into single variable
+_ASSETS = [
+    # ":src/assets/favicon.ico",
+]
+
+# Dynamically inject bundle into html template
+html_insert_assets(
+    name = "inject_tags_for_dev",
+    outs = ["index.html"],
+    args = [
+        "--html=$(execpath //javascript/hack/lit/src:template.html)",
+        "--out=$@",
+        "--roots=. $(RULEDIR)",
+        "--assets",
+    ] + ["$(execpath %s)" % a for a in _ASSETS] + [
+        "--scripts --module $(locations //javascript/hack/lit:bundle.esm.min)",
+    ],
+    data = [
+        "//javascript/hack/lit/src:template.html",
+        ":bundle.esm.min",
+    ] + _ASSETS,
+)
+
+# Package all assets into single package
+pkg_web(
+    name = "devapp",
+    srcs = _ASSETS + [
+        ":bundle.esm.min",
+        ":inject_tags_for_dev",  # HTML template
+    ],
+)
+
+concatjs_devserver(
+    name = "devserver",
+    # This is the path we'll request from the browser, see index.html
+    serving_path = "/bundle.esm.min.js",
+    # The devserver can serve our static files too
+    static_files = [
+        ":bundle.esm.min",
+        # ":inject_tags_for_dev",
+        "//javascript/hack/lit/src:assets/favicon.ico",
+    ],
+    # We'll collect all the devmode JS sources from these TypeScript libraries
+    deps = [
+        # ":devapp",
+        "bundle.esm.min",
+        # ":inject_tags_for_dev",
+        "//javascript/hack/lit/src:assets/favicon.ico",
+    ],
+)
+
+ts_library(
+    name = "app",
+    srcs = ["app.ts"],
+    tsconfig = ":tsconfig",
+)
+
+concatjs_devserver(
+    name = "devsrv",
+    # This is the path we'll request from the browser, see index.html
+    serving_path = "/bundle.js",
+    static_files = [
+        "//javascript/hack/lit/src",
+    ],
+    # We'll collect all the devmode JS sources from these TypeScript libraries
+    deps = [
+        "//javascript/hack/lit/src",
+    ],
+)

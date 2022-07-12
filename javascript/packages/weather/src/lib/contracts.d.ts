@@ -1,21 +1,21 @@
-import { StringMap } from '@oswee/lib/action'
+import { StringMap } from '@oswee/modules/action'
 
 export interface IWeatherRootState {
-  readonly weatherState: IWeatherState
+	readonly weatherState: IWeatherState
 }
 
 export interface IWeatherState {
-  readonly weather: {
-    weather: [
-      {
-        description: string
-      },
-    ]
-    main: {
-      temp: number
-    }
-    name: string
-  }
+	readonly weather: {
+		weather: [
+			{
+				description: string
+			},
+		]
+		main: {
+			temp: number
+		}
+		name: string
+	}
 }
 
 // export interface IWeatherState {

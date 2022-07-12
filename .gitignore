@@ -21,8 +21,8 @@
 # ----------------------------------------------------------------------
 
 # Environment
-.env
-.envrc
+*.env
+*.envrc
 
 # backup and temporary files
 *~

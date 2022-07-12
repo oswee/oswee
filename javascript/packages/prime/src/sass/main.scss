@@ -1,21 +1,18 @@
-@use '../../../../modules/shared/styles/_colors.scss'
-
-$my-color: green;
-
 * {
-  padding: 0;
-  margin: 0;
   box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
 
 body {
-  overflow: hidden;
   height: 100vh;
   width: 100vw;
+  overflow: hidden;
 }
 
 h1 {
-  --color-success-10: hsla(100, 100%, 38%, 1);
+  --color-success-10: hsl(100deg 100% 38% / 100%);
+
+  color: var(--color-success-10, red, #af0221);
   font-size: 4rem;
-  color: var(--color-success-10, #{$example-red}, orange);
 }
