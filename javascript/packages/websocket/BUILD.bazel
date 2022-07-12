@@ -1,8 +1,9 @@
-load("@npm//@bazel/typescript:index.bzl", "ts_config", "ts_project")
+load("@npm//@bazel/typescript:index.bzl", "ts_config")
+load("@npm//@bazel/concatjs:index.bzl", "ts_library")
 
 package(default_visibility = ["//visibility:public"])
 
-ts_project(
+ts_library(
     name = "websocket",
     srcs = glob(
         include = [
@@ -12,9 +13,9 @@ ts_project(
             "src/**/*.spec.ts",
         ],
     ),
-    tsconfig = "tsconfig",
+    tsconfig = ":tsconfig",
     deps = [
-        "//js/modules/action",
+        "//javascript/modules/action",
         "@npm//immer",
         "@npm//redux-dynamic-modules-core",
         "@npm//redux-dynamic-modules-saga",
@@ -28,6 +29,6 @@ ts_config(
     src = "tsconfig.json",
     deps = [
         "tsconfig.json",
-        "//:tsconfig.base.json",
+        "//javascript:tsconfig.base.json",
     ],
 )
