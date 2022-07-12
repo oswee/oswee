@@ -1,48 +1,46 @@
 {
-  "compileOnSave": false,
-  "compilerOptions": {
-    "baseUrl": ".",
-    "rootDirs": [
-      ".",
-      "../bazel-out/host/libraries/a",
-      "../bazel-out/darwin-fastbuild/bin/libraries/a",
-      "../bazel-out/k8-fastbuild/bin/libraries/a",
-      "../bazel-out/x64_windows-fastbuild/bin/libraries/a",
-      "../bazel-out/darwin-dbg/bin/libraries/a",
-      "../bazel-out/k8-dbg/bin/libraries/a",
-      "../bazel-out/x64_windows-dbg/bin/libraries/a"
-    ],
-    "module": "CommonJS",
-    "target": "ES2019",
-    "lib": ["ES2019", "DOM", "DOM.iterable"],
-    "esModuleInterop": true,
-    "noImplicitAny": false,
-    "noImplicitThis": true,
-    "importHelpers": true,
-    "preserveConstEnums": true,
-    "removeComments": true,
-    "skipLibCheck": true,
-    "experimentalDecorators": true,
-    "allowSyntheticDefaultImports": true,
-    "typeRoots": ["node_modules/@types"],
-    "paths": {
-      "@oswee/*": ["*", "bazel-bin/*", "bazel-genfiles/*"],
-      "@oswee/modules/*": ["javascript/modules/*/src"],
-      "@oswee/packages/*": ["javascript/packages/*/src"],
-      "@oswee/tools/*": ["tools/*/src"],
-      "@oswee/platform/web/assets/*": ["platform/web/src/assets/*"],
-      "@oswee/container/*": ["platform/web/src/ui/containers/*/src"],
-      "@oswee/feature/*": ["platform/web/src/store/src/lib/features/*/src"],
-      "@oswee/proto/*": ["bazel-bin/proto/oswee/*"]
-    },
-    "plugins": [
-      {
-        "alwaysShowRuleFailuresAsWarnings": false,
-        "ignoreDefinitionFiles": true,
-        "disableNoUnusedVariableRule": false,
-        "suppressWhileTypeErrorsPresent": false
-      }
-    ]
-  },
-  "exclude": ["bazel-*", "node_modules"]
+	"compilerOptions": {
+		"declaration": false,
+		"stripInternal": true,
+		"noImplicitAny": true,
+		"noImplicitOverride": true,
+		"strictNullChecks": true,
+		"esModuleInterop": true,
+		"strict": true,
+		"strictPropertyInitialization": true,
+		"noFallthroughCasesInSwitch": true,
+		"moduleResolution": "node",
+		"module": "es2022",
+		"target": "es2022",
+		"lib": [
+			"es2022",
+			"dom"
+		],
+		"skipLibCheck": true,
+		"types": [],
+		"experimentalDecorators": true,
+		"emitDecoratorMetadata": true,
+		"sourceMap": false,
+		"inlineSources": true,
+		"importHelpers": true,
+		"rootDirs": [
+			".",
+			"../bazel-out/host/bin/javascript",
+			"../bazel-out/darwin-fastbuild/bin/javascript",
+			"../bazel-out/darwin_arm64-fastbuild/bin/javascript",
+			"../bazel-out/k8-fastbuild/bin/javascript/",
+			"../bazel-out/x64_windows-fastbuild/bin/javascript",
+			"../bazel-out/darwin-dbg/bin/javascript",
+			"../bazel-out/k8-dbg/bin/javascript",
+			"../bazel-out/x64_windows-dbg/bin/javascript"
+		],
+		"paths": {
+			"@oswee/modules/*": [
+				"../javascript/modules/*/src"
+			]
+		}
+	},
+	"bazelOptions": {
+		"suppressTsconfigOverrideWarnings": true
+	}
 }
