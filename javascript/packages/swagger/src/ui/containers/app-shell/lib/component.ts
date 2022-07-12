@@ -5,9 +5,9 @@ import style from './style'
 
 @customElement('app-shell')
 export class AppShellElement extends LitElement {
-  @property({ type: Boolean, reflect: true }) selected: boolean = false
-  @property({ type: Number }) key: number = 0
-  @property({ type: String }) name: string = 'Component'
+  @property({ type: Boolean, reflect: true }) selected = false
+  @property({ type: Number }) key = 0
+  @property({ type: String }) name = 'Component'
 
   protected render(): TemplateResult {
     return template.call(this)
