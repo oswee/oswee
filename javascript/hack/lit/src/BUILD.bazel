@@ -1,0 +1,29 @@
+load("@npm//@bazel/typescript:index.bzl", "ts_project")
+
+package(default_visibility = ["//visibility:public"])
+
+exports_files(
+    [
+        "template.html",
+        "assets/favicon.ico",
+    ],
+    visibility = ["//visibility:public"],
+)
+
+ts_project(
+    name = "src",
+    srcs = glob(
+        include = [
+            "index.ts",
+        ],
+        exclude = [
+            "*.spec.ts",
+        ],
+    ),
+    tsconfig = "//javascript/hack/lit:tsconfig",
+    deps = [
+        "//javascript/hack/lit/src/ui/containers/app-shell",
+        # "@npm//lit",
+        # "@npm//tslib",
+    ],
+)

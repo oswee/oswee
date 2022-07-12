@@ -1,0 +1,23 @@
+"""
+
+"""
+
+load("@npm//@bazel/typescript:index.bzl", "ts_project")
+# load("@npm//@bazel/concatjs:index.bzl", "ts_library")
+
+package(default_visibility = ["//visibility:public"])
+
+ts_project(
+    name = "app-shell",
+    srcs = [
+        "component.ts",
+        "index.ts",
+        "style.ts",
+        "template.ts",
+    ],
+    tsconfig = "//javascript/hack/lit:tsconfig",
+    deps = [
+        "@npm//lit",
+        "@npm//tslib",
+    ],
+)

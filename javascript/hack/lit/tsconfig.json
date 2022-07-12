@@ -1,0 +1,38 @@
+{
+	"compileOnSave": false,
+	"compilerOptions": {
+		"baseUrl": "src",
+		"strict": true,
+		"sourceMap": false,
+		"declaration": false,
+		"experimentalDecorators": true,
+		"moduleResolution": "node",
+		"importHelpers": true,
+		"target": "es2022",
+		"module": "es2020",
+		"lib": [
+			"es2022",
+			"dom"
+		],
+		"allowSyntheticDefaultImports": true,
+		"rootDirs": [
+			".",
+			"../../../bazel-out/host/bin/javascript/hack/lit/src",
+			"../../../bazel-out/darwin-fastbuild/bin/javascript/hack/lit/src",
+			"../../../bazel-out/darwin_arm64-fastbuild/bin/javascript/hack/lit/src",
+			"../../../bazel-out/k8-fastbuild/bin/javascript/hack/lit/src",
+			"../../../bazel-out/x64_windows-fastbuild/bin/javascript/hack/lit/src",
+			"../../../bazel-out/darwin-dbg/bin/javascript/hack/lit/src",
+			"../../../bazel-out/k8-dbg/bin/javascript/hack/lit/src",
+			"../../../bazel-out/x64_windows-dbg/bin/javascript/hack/lit/src"
+		]
+	},
+	"exclude": [
+		"content",
+		"dist",
+		"node_modules",
+		"out-tsc",
+		"scripts",
+		"tools"
+	]
+}
