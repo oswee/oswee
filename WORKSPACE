@@ -20,17 +20,19 @@ prime_dependencies()
 # buildifier: disable=load-on-top
 load(
     "//bazel:config.bzl",
+    "ASPECT_RULES_SWC_VERSION",
+    "CONTAINER_REGISTRY",
     "NODE_SHA256",
     "NODE_VERSION",
     "YARN_SHA256",
     "YARN_VERSION",
-    "CONTAINER_REGISTRY",
 )
 #}}}
 
 # Rules NodeJS{{{
 # ----------------------------------------------
 
+# buildifier: disable=load-on-top
 load("@build_bazel_rules_nodejs//:repositories.bzl", "build_bazel_rules_nodejs_dependencies")
 
 build_bazel_rules_nodejs_dependencies()
@@ -40,7 +42,6 @@ load("@rules_nodejs//nodejs:repositories.bzl", "nodejs_register_toolchains")
 
 nodejs_register_toolchains(
     name = "nodejs",
-    node_version = NODE_VERSION,
     # node_urls = ["https://nodejs.org/dist/v16.4.1/node-v16.4.1-linux-x64.tar.xz"],
     node_repositories = {
         "%s-linux_amd64" % NODE_VERSION: (
@@ -49,6 +50,7 @@ nodejs_register_toolchains(
             "%s" % NODE_SHA256,
         ),
     },
+    node_version = NODE_VERSION,
 
     # Use custom Yarn version.
     # yarn_version = YARN_VERSION,
@@ -66,20 +68,40 @@ nodejs_register_toolchains(
     # preserve_symlinks = True,
 )
 
+# buildifier: disable=load-on-top
 load("@build_bazel_rules_nodejs//:index.bzl", "yarn_install")
+
 yarn_install(
     name = "npm",  # Name this npm so that Bazel Label references look like @npm//package
-    # args = ["--immutable"],  # Pass extra Yarn arguments
-    # frozen_lockfile = False,
-    symlink_node_modules = True,  # Expose installed packages for the IDE and the developer. See managed_directories.
     # use_mutex = False,
     # quiet = False,
     data = [
-      # "//:.yarnrc.yml",
-      # "@vendored_yarn_3_2_0//:berry--yarnpkg-cli-3.2.0/packages/yarnpkg-cli/bin/yarn.js",
+        # "//:.yarnrc.yml",
+        # "@vendored_yarn_3_2_0//:berry--yarnpkg-cli-3.2.0/packages/yarnpkg-cli/bin/yarn.js",
     ],
+    # args = ["--immutable"],  # Pass extra Yarn arguments
+    # frozen_lockfile = False,
+    exports_directories_only = False,  # from rules_nodejs exaple
     package_json = "//:package.json",
+    symlink_node_modules = True,  # Expose installed packages for the IDE and the developer. See managed_directories.
     yarn_lock = "//:yarn.lock",
+)
+
+load("@build_bazel_rules_nodejs//toolchains/esbuild:esbuild_repositories.bzl", "esbuild_repositories")
+
+esbuild_repositories(npm_repository = "npm")
+
+# buildifier: disable=load-on-top
+load("@io_bazel_rules_webtesting//web:repositories.bzl", "web_test_repositories")
+
+web_test_repositories()
+
+# buildifier: disable=load-on-top
+load("@io_bazel_rules_webtesting//web/versioned:browsers-0.3.3.bzl", "browser_repositories")
+
+browser_repositories(
+    chromium = True,
+    firefox = True,
 )
 # }}}
 
