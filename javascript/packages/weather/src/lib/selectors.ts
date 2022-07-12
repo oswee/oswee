@@ -14,13 +14,13 @@ const getState = (state): IWeatherRootState => state
  * Whats the point of using memoizaton of i have no any arguments there?
  */
 const selectState = reselect.createSelector([getState], state => {
-  console.log('SelectState:', state)
-  return state.weatherState
+	console.log('SelectState:', state)
+	return state.weatherState
 })
 
 const selectWeather = reselect.createSelector([selectState], state => {
-  console.log('SelectWeather:', state.weather)
-  return state.weather
+	console.log('SelectWeather:', state.weather)
+	return state.weather
 })
 
 // const selectState = (state): IWeatherRootState => {
@@ -34,22 +34,19 @@ const selectWeather = reselect.createSelector([selectState], state => {
 // }
 
 const selectName = reselect.createSelector([selectWeather], state => {
-  return state.name
+	return state.name
 })
 
-const selectTemperature = reselect.createSelector(
-  [selectWeather],
-  state => state.main.temp,
-)
+const selectTemperature = reselect.createSelector([selectWeather], state => state.main.temp)
 
 const selectDescription = reselect.createSelector([selectWeather], state => {
-  return state.weather[0].description
+	return state.weather[0].description
 })
 
 export const WeatherSelectors = {
-  selectState,
-  selectWeather,
-  selectName,
-  selectTemperature,
-  selectDescription,
+	selectState,
+	selectWeather,
+	selectName,
+	selectTemperature,
+	selectDescription,
 }
