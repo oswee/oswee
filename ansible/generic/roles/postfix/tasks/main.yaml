@@ -1,5 +1,5 @@
 ---
-# tasks file for postfix
+# tasks file for Postfix
 
 - name: Install packages
   become: true
@@ -8,12 +8,19 @@
     state: present
   loop: '{{ packages.redhat }}'
 
-- name: Copy Postfix config
-  ansible.builtin.template:
-    src: 'main.cf.j2'
-    dest: '{{ postfix_config_dir }}/main.cf'
-    owner: '{{ postfix_user }}'
-    group: '{{ postfix_group }}'
-    mode: '0644'
-    validate: haproxy -f %s -c -q
-  notify: Restart Postfix
+# - name: Copy Postfix config
+#   ansible.builtin.template:
+#     src: 'main.cf.j2'
+#     dest: '{{ postfix_config_dir }}/main.cf'
+#     owner: '{{ postfix_user }}'
+#     group: '{{ postfix_group }}'
+#     mode: '0644'
+#     validate: haproxy -f %s -c -q
+#   notify: Restart Postfix
+
+- name: Ensure Postfix is enabled and running
+  become: true
+  ansible.builtin.service:
+    name: { { postfix_service } }
+    state: started
+    enabled: true
