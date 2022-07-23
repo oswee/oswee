@@ -308,6 +308,9 @@ backend websocket.backend
   server {{ hostname }} 127.0.0.1:9090 maxconn 30000 weight 10 cookie {{ hostname }} check
   #server websrv2 192.168.10.12:8080 maxconn 30000 weight 10 cookie websrv2 check
 
+backend letsencrypt.backend
+  server letsencrypt 127.0.0.1:8888
+
 backend default.backend
   server {{ hostname }} 127.0.0.1:8888 maxconn 50 check
   http-request set-header Host Default
