@@ -1,0 +1,8 @@
+---
+# tasks file for Opendkim
+
+- name: Install
+  import_tasks: install.yaml
+  tags:
+    - opendkim.setup
+...
