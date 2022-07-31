@@ -1,14 +1,25 @@
 ---
 # tasks file for Terraform
 
-- name: Install
-  import_tasks: install.yaml
+- name: Prepare
+  import_tasks: prepare.yaml
+  tags:
+    - terraform.setup
+    - terraform.setup.prepare
+
+- name: Install Terraform CLI
+  import_tasks: install.tf.yaml
   tags:
     - terraform.setup
     - terraform.setup.install
 
-# - name: Teardown
-#   import_tasks: teardown.yaml
-#   tags:
-#     - terraform.teardown
-...
+- name: Install Terraform Language Server
+  import_tasks: install.ls.yaml
+  tags:
+    - terraform.setup
+    - terraform.setup.install
+
+- name: Teardown
+  import_tasks: teardown.yaml
+  tags:
+    - terraform.teardown
