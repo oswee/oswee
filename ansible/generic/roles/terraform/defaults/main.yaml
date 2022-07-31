@@ -1,6 +1,8 @@
 ---
 # defaults file for Terraform
 
+binary_path: /usr/local/bin
+
 terraform_version: 1.2.6
 terraform_url: https://releases.hashicorp.com/terraform/{{ terraform_version }}/terraform_{{ terraform_version }}_linux_amd64.zip
 terraform_ls_version: 0.28.1
