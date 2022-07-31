@@ -11,8 +11,8 @@ license:
 license_file: ''
 tags: [oswee]
 dependencies: {}
-repository: http://github.com/oswee/prime
-documentation: https://github.com/oswee/prime/wiki
-homepage: http://github.com/oswee/prime
-issues: https://github.com/oswee/prime/issues
+repository: http://github.com/oswee/oswee
+documentation: https://github.com/oswee/oswee/wiki
+homepage: http://github.com/oswee/oswee
+issues: https://github.com/oswee/oswee/issues
 build_ignore: []
