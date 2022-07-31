@@ -1,0 +1,14 @@
+---
+# tasks file for Terraform
+
+- name: teardown \ Remove Terraform CLI binary
+  become: true
+  ansible.builtin.file:
+    path: '{{ binary_path }}/terraform'
+    state: absent
+
+- name: teardown \ Remove Terraform Language Server binary
+  become: true
+  ansible.builtin.file:
+    path: '{{ binary_path }}/terraform-ls'
+    state: absent
