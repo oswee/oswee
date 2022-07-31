@@ -1,8 +1,7 @@
 ---
 # defaults file for Terraform
 
-terraform_version: 1.1.9
+terraform_version: 1.2.6
 terraform_url: https://releases.hashicorp.com/terraform/{{ terraform_version }}/terraform_{{ terraform_version }}_linux_amd64.zip
 terraform_ls_version: 0.27.0
 terraform_ls_url: https://github.com/hashicorp/terraform-ls/releases/download/v{{ terraform_ls_version }}/terraform-ls_{{ terraform_ls_version }}_linux_amd64.zip
-...
