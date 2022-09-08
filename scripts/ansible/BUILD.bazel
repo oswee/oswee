@@ -1,0 +1,8 @@
+"""
+Scripts to manage Ansible code
+"""
+
+sh_binary(
+    name = "rekey",
+    srcs = ["rekey.sh"],
+)
