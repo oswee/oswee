@@ -8,14 +8,14 @@ read option
 
 function decrypt {
   ansible-vault decrypt --ask-vault-pass \
-  ansible/*/environments/development/group_vars/*/vault.yaml \
-  ansible/*/environments/development/host_vars/*/vault.yaml
+  ansible/*/environments/*/group_vars/*/vault.yaml \
+  ansible/*/environments/*/host_vars/*/vault.yaml
 }
 
 function encrypt {
   ansible-vault encrypt --ask-vault-pass \
-  ansible/*/environments/development/group_vars/*/vault.yaml \
-  ansible/*/environments/development/host_vars/*/vault.yaml
+  ansible/*/environments/*/group_vars/*/vault.yaml \
+  ansible/*/environments/*/host_vars/*/vault.yaml
 }
 
 case $option in
