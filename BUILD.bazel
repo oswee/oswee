@@ -1,5 +1,5 @@
 """
-Prime
+Oswee
 """
 
 load("@bazel_gazelle//:def.bzl", "gazelle")
@@ -10,7 +10,7 @@ package(default_visibility = ["//visibility:public"])
 
 # gazelle:exclude node_modules
 # gazelle:build_file_name BUILD.bazel,BUILD
-# gazelle:prefix github.com/oswee/prime
+# gazelle:prefix github.com/oswee/oswee
 gazelle(
     name = "gazelle",
 )
