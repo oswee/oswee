@@ -1,4 +1,4 @@
-# [WIP] Prime
+# [WIP] Oswee
 
 This is sandbox monorepository to test Bazel in action to build "microservices" oriented web application for transportation domain.
 
