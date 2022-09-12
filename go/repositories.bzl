@@ -1,8 +1,8 @@
-load("@bazel_gazelle//:deps.bzl", "go_repository")
-
 """
 Workspace wide Go dependencies auto-managed by Gazelle
 """
+
+load("@bazel_gazelle//:deps.bzl", "go_repository")
 
 def go_deps():
     """Go dependencies
