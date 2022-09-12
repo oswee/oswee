@@ -59,7 +59,7 @@ def prime_dependencies():
         name = "rules_python",
         sha256 = RULES_PYTHON_SHA256,
         urls = [
-            "https://github.com/bazelbuild/rules_python/releases/download/%s/rules_python-%s.tar.gz" % (RULES_PYTHON_VERSION, RULES_PYTHON_VERSION),
+            "https://github.com/bazelbuild/rules_python/archive/refs/tags/%s.tar.gz" % RULES_PYTHON_VERSION,
         ],
     )
 
