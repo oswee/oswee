@@ -28,7 +28,9 @@ How to structure repository?
 
 Run single build rule
 
-`bazel build //apps/front:server`
+```bash
+bazel build //apps/front:server
+```
 
 "Server" is a target name in the `//apps/front/BUILD.bazel`
 
@@ -74,8 +76,17 @@ If you take a look at Angular project, you will see this statement [Please use y
 To get Subresource Integrity use this command
 
 ```bash
-» shasum -b -a 256 ~/Downloads/rules_swc-0.10.0.tar.gz | awk '{ print $1 }' | xxd -r -p | base64
-g7qJa977TS1Te2dHQrw4vxUa3jU65KVk+IS8buLB3GU=
+shasum -b -a 256 ~/Downloads/rules_swc-0.10.0.tar.gz | awk '{ print $1 }' | xxd -r -p | base64
+```
+
+It will return `g7qJa977TS1Te2dHQrw4vxUa3jU65KVk+IS8buLB3GU=`
+
+```bash
+sha256sum ~/Downloads/protobuf-21.5.tar.gz
 ```
 
 where the archive is dowloaded from the GitHub releases or similar source. Don't forget to add `sha256-` prefix when listing dependency in the registry.
+
+```
+
+```
