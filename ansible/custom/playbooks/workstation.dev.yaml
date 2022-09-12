@@ -8,7 +8,7 @@
   roles:
     - role: oswee.generic.golang
       vars:
-        golang_version: 1.18
+        golang_version: 1.19.1
     - role: oswee.generic.vault
     - role: oswee.generic.minio
       vars:

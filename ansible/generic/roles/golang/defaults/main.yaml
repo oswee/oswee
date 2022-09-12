@@ -1,5 +1,4 @@
 ---
 # defaults file for golang
 
-golang_version: 1.18.0
-...
+golang_version: 1.19.1
