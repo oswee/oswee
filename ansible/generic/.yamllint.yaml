@@ -14,10 +14,10 @@ rules:
     level: warning
   comments-indentation:
     level: warning
-  document-end:
-    present: true
   document-start:
     level: warning
+  document-end:
+    present: true
   empty-lines:
     max: 2
     max-start: 0
