@@ -4,17 +4,15 @@
 - name: Install
   import_tasks: install.yaml
   tags:
-    - golang:setup
-    - golang:setup:install
+    - golang.setup
+    - golang.setup:install
 
 - name: Config
   import_tasks: configure.yaml
   tags:
-    - golang:setup
-    - golang:setup:config
-
+    - golang.setup
+    - golang.setup:config
 # - name: Clean
 #   import_tasks: clean.yaml
 #   tags:
-#     - golang:clean
-...
+#     - golang.clean
