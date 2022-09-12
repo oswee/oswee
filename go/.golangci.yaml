@@ -1,5 +1,6 @@
 ---
 run:
+  go: '1.19'
   concurrency: 4
   timeout: 3m
   issues-exit-code: 1
@@ -54,8 +55,6 @@ run:
     lll:
       line-length: 160
       tab-width: 2
-    unused:
-      check-exported: false
 
     unparam:
       check-exported: false
