@@ -1,0 +1,8 @@
+"""
+Test
+"""
+
+sh_binary(
+    name = "minikube",
+    srcs = ["test.sh"],
+)
