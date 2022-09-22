@@ -1,0 +1,13 @@
+---
+# tasks file for Minikube
+
+- name: Install
+  import_tasks: install.yaml
+  tags:
+    - minikube.setup
+
+- name: Teardown
+  import_tasks: teardown.yaml
+  tags:
+    - minikube.teardown
+...

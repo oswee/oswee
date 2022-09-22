@@ -1,0 +1,13 @@
+---
+# tasks file for kubectl
+
+- name: Install
+  import_tasks: install.yaml
+  tags:
+    - kubectl.setup
+
+- name: Teardown
+  import_tasks: teardown.yaml
+  tags:
+    - kubectl.teardown
+...

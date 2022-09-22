@@ -1,9 +1,0 @@
----
-# defaults file for minikube
-
-minikube_version: '1.23.2'
-minikube_download_dir: '/tmp'
-minikube_kvm_ready: true
-minikube_install_kubectl: true
-minikube_install_istio: true
-...
