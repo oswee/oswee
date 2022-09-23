@@ -12,3 +12,4 @@
   ansible.builtin.file:
     path: '{{ binary_path }}/terraform-ls'
     state: absent
+...
