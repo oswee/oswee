@@ -5,4 +5,9 @@
   import_tasks: install.yaml
   tags:
     - {{ role_name | regex_replace('.*roles\/')}}.setup
+
+- name: Teardown
+  import_tasks: teardown.yaml
+  tags:
+    - {{ role_name | regex_replace('.*roles\/')}}.teardown
 ...
