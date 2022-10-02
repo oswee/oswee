@@ -10,6 +10,7 @@
       vars:
         golang_version: 1.19.1
     - role: oswee.generic.cfssl
+    - role: oswee.generic.helm
     - role: oswee.generic.vault
     - role: oswee.generic.minio
       vars:
