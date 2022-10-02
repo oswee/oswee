@@ -21,3 +21,4 @@
   when:
     - nvim_nightly | bool
     - '"neovim" in ansible_facts.packages'
+...

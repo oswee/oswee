@@ -25,9 +25,10 @@
   when: nvim_repo.changed
   register: nvim_build
 
-- name: Install build version of the NeoVim
-  become: true
-  community.general.make:
-    chdir: '{{ nvim_source_dir }}'
-    target: install
-  when: nvim_build.changed
+# - name: Install build version of the NeoVim
+#   become: true
+#   community.general.make:
+#     chdir: '{{ nvim_source_dir }}'
+#     target: install
+#   when: nvim_build.changed
+...

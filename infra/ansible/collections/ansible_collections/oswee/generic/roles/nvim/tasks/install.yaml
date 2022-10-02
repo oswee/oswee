@@ -7,3 +7,4 @@
     chdir: '{{ nvim_source_dir }}'
     target: install
   when: nvim_build.changed
+...
