@@ -1,0 +1,9 @@
+<pool type="fs">
+  <name>virt</name>
+  <source>
+    <device path="/dev/vgdata/lvminio"/>
+  </source>
+  <target>
+    <path>/data/virt</path>
+  </target>
+</pool>

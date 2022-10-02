@@ -2,6 +2,7 @@
 
 echo "Server uptime is:" $(uptime)
 
-# Install the metrics server
+script_path=$(realpath $0)
+dir_path=$(dirname $script_path)
 
-# kubectl apply -f https://github.com/kubernetes-sigs/metrics-server/releases/latest/download/components.yaml
+source $dir_path/echo.sh
