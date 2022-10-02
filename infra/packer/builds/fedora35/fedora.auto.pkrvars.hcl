@@ -13,7 +13,7 @@ vm_guest_os_version  = "35"
 // Virtual Machine Hardware Settings
 vm_cpus                  = 1
 vm_mem_size              = 2048
-vm_disk_size             = 20480
+vm_disk_size             = 5120
 
 // Media Settings
 iso_url       = "https://dl.fedoraproject.org/pub/fedora/linux/releases/35/Server/x86_64/iso/Fedora-Server-netinst-x86_64-35-1.2.iso"
