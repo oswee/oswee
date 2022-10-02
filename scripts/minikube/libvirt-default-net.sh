@@ -4,16 +4,22 @@
 # This script will create Libvirt default network
 # Make sure this file is executable
 # User should be part of Libvirt group Qemu should have access to user directories
-# See oswee.ansible.libvirt Ansible role
+# See oswee.generic.libvirt Ansible role
 
 # ========================
 # Network setup
 # ========================
 
-virsh net-define /usr/share/libvirt/networks/default.xml
+# Stop default network
+virsh net-destroy default
+# Delete default network
+virsh net-undefine default
+
+# virsh net-define /usr/share/libvirt/networks/default.xml
+virsh net-define ./scripts/minikube/libvirt-default-net.xml
 
 virsh net-autostart default
 
 virsh net-start default
 
-virsh net-list --all
+# virsh net-list --all
