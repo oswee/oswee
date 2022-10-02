@@ -61,7 +61,7 @@ nmcli connection reload
 nmcli connection down ${NETWORK_ETHERNET_CONNECTION} && nmcli connection up ${NETWORK_ETHERNET_CONNECTION}
 
 # View bridge details
-nmcli connection show ${NETWORK_BRIDGE_CONNECTION}
+echo "`nmcli connection show ${NETWORK_BRIDGE_CONNECTION}`"
 
 # ========================
 # Network validation
