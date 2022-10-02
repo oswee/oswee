@@ -71,7 +71,7 @@ until [ "$selection" = "0" ]; do
   echo ""
   echo "      Linux Distribution:"
   echo ""
-  echo "    	 1  -  Fedora 35 (QEMU)"
+  echo "        1  -  Fedora 35 (QEMU)"
   echo ""
   echo "      Other:"
   echo ""
