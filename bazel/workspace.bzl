@@ -8,7 +8,7 @@ load("@bazel_tools//tools/build_defs/repo:http.bzl", "http_archive")
 
 # buildifier: disable=load-on-top
 load(
-    "@prime//bazel:config.bzl",
+    "//bazel:depvars.bzl",
     "ASPECT_RULES_SWC_SHA256",
     "ASPECT_RULES_SWC_VERSION",
     "BAZEL_GAZELLE_SHA256",
@@ -45,7 +45,7 @@ load(
     "RULES_TYPESCRIPT_PROTO_VERSION",
 )
 
-def prime_dependencies():
+def bazel_dependencies():
     """Imports external rules
 
     """
@@ -114,7 +114,7 @@ def prime_dependencies():
     http_archive(
         name = "io_bazel_rules_docker",
         sha256 = IO_BAZEL_RULES_DOCKER_SHA256,
-        strip_prefix = "rules_docker-%s" % IO_BAZEL_RULES_DOCKER_VERSION,
+        # strip_prefix = "rules_docker-%s" % IO_BAZEL_RULES_DOCKER_VERSION,
         urls = [
             "https://github.com/bazelbuild/rules_docker/releases/download/v%s/rules_docker-v%s.tar.gz" % (IO_BAZEL_RULES_DOCKER_VERSION, IO_BAZEL_RULES_DOCKER_VERSION),
         ],
@@ -125,7 +125,7 @@ def prime_dependencies():
         sha256 = IO_BAZEL_RULES_K8S_SHA256,
         strip_prefix = "rules_k8s-%s" % IO_BAZEL_RULES_K8S_VERSION,
         urls = [
-            "https://github.com/bazelbuild/rules_k8s/archive/v%s.tar.gz" % IO_BAZEL_RULES_K8S_VERSION,
+            "https://github.com/bazelbuild/rules_k8s/archive/refs/tags/v%s.tar.gz" % IO_BAZEL_RULES_K8S_VERSION,
         ],
     )
 

@@ -7,11 +7,11 @@ load("@bazel_tools//tools/build_defs/repo:http.bzl", "http_archive")
 
 # buildifier: disable=load-on-top
 load(
-    "//bazel:config.bzl",
+    "//bazel:depvars.bzl",
     "RULES_TYPESCRIPT_PROTO_VERSION",
 )
 
-def prime_typescript_dependencies():
+def oswee_typescript_dependencies():
     """Imports external dependencies
 
     """
