@@ -1,7 +1,7 @@
 #!/bin/sh
 
 # Author: Dzintars Klavins
-# This script will setup new bridge connection
+# This script will setup new connection
 # Make sure this file is executable
 
 NETWORK_ETHERNET_DEVICE="eno1"
