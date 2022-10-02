@@ -19,8 +19,8 @@
     - libvirt.setup
     - libvirt.setup.network
 
-# - name: Cleanup
-#   import_tasks: cleanup.yaml
-#   tags:
-#     - libvirt.cleanup
+- name: Teardown
+  import_tasks: teardown.yaml
+  tags:
+    - libvirt.teardown
 ...
