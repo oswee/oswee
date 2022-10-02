@@ -12,3 +12,4 @@ packages:
     - libguestfs-tools-c
     - ruby-devel
     # - "{{ vagrant_rpm }}"
+...
