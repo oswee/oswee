@@ -22,8 +22,9 @@
   when: zk_repo.changed
   register: zk_build
 
-- name: Install build version of the NeoVim
+- name: Install build version of the ZK
   community.general.make:
-    chdir: '{{ nvim_source_dir }}'
+    chdir: '{{ zk_source_dir }}'
     target: install
   when: nvim_build.changed
+...

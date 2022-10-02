@@ -8,3 +8,4 @@
     mode: '0644'
     content: |
       export ZK_NOTEBOOK_DIR="~/zet"
+...
