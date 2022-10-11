@@ -1,5 +1,5 @@
 ---
-# vars file for vault
+# vars file for Vault
 
 packages:
   redhat:

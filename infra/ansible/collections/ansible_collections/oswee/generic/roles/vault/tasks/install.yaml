@@ -1,8 +1,6 @@
 ---
 # tasks file for Vault
 
-# TODO: 1: Disable mlock
-
 - name: install | Install rpm keys
   become: true
   ansible.builtin.rpm_key:
@@ -47,7 +45,7 @@
     shell: /bin/false
     group: vault
 
-- name: install | Force systemd to re-execute itself (2.8 and above)
+- name: install | Force systemd to re-execute itself
   become: true
   ansible.builtin.systemd:
     daemon_reexec: true
@@ -63,7 +61,6 @@
     - 8200/tcp
     - 8201/tcp
 
-# https://www.vaultproject.io/docs/configuration#parameters
 # Actually we don't need to do this because it's done in Systemd unit file.
 # - name: install | Set mlock capabilities
 #   become: true

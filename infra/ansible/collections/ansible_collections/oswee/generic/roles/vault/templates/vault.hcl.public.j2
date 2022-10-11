@@ -2,21 +2,20 @@
 
 ui = true
 
-#mlock = true
-#disable_mlock = true
+disable_mlock = true
 
 #log_level = "warn"
 
 storage "raft" {
-  path    = "/opt/vault/data"
+  path    = "{{ vault_data_path }}"
   node_id = "node1"
 }
 
 listener "tcp" {
   address       = "127.0.0.1:8200"
-  tls_cert_file = "/opt/vault/tls/fullchain.pem"
-  tls_key_file  = "/opt/vault/tls/privkey.pem"
+  tls_cert_file = "{{ vault_tls_path }}/fullchain.pem"
+  tls_key_file  = "{{ vault_tls_path }}/privkey.pem"
 }
 
-api_addr = "https://vault.{{ dns_prod_domain_name }}"
-cluster_addr = "https://vault.{{ dns_prod_domain_name }}:8201"
+api_addr = "{{ vault_url }}"
+cluster_addr = "{{ vault_url }}:8201"

@@ -17,7 +17,7 @@
 - name: init | Initialise Vault operator
   ansible.builtin.shell: vault operator init -key-shares=5 -key-threshold=3 -format json
   environment:
-    VAULT_ADDR: "https://vault.oswee.com"
+    VAULT_ADDR: "{{ vault_url }}"
   register: vault_init
 
 - name: init | Parse output of vault init

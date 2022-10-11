@@ -1,5 +1,5 @@
 ---
-# handlers file for vault
+# handlers file for Vault
 
 - name: Restart Firewalld
   ansible.builtin.service:
@@ -10,3 +10,4 @@
   ansible.builtin.service:
     name: vault
     state: restarted
+...

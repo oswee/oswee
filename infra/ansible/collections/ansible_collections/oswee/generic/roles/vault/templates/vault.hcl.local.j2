@@ -2,13 +2,12 @@
 
 ui = true
 
-#mlock = true
-#disable_mlock = true
+disable_mlock = true
 
 #log_level = "warn"
 
 storage "raft" {
-  path    = "/opt/vault/data"
+  path    = "{{ vault_data_path }}"
   node_id = "node1"
 }
 

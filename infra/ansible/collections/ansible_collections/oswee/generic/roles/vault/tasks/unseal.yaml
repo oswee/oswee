@@ -12,6 +12,6 @@
   ansible.builtin.shell: |
     vault operator unseal {{ item.stdout }}
   environment:
-    VAULT_ADDR: "https://vault.oswee.com"
+    VAULT_ADDR: "{{ vault_url }}"
   with_items: "{{unseal_keys.results}}"
 ...
