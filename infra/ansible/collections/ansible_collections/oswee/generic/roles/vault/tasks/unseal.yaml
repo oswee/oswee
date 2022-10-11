@@ -1,0 +1,17 @@
+---
+# tasks file for Vault
+
+- name: unseal | Reading unseal key contents
+  become: true
+  ansible.builtin.command: cat {{item}}
+  with_fileglob: "{{ vault_unseal_keys_path }}/*"
+  delegate_to: localhost
+  register: unseal_keys
+
+- name: unseal | Unseal vault with unseal keys
+  ansible.builtin.shell: |
+    vault operator unseal {{ item.stdout }}
+  environment:
+    VAULT_ADDR: "https://vault.oswee.com"
+  with_items: "{{unseal_keys.results}}"
+...

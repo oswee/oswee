@@ -1,14 +1,30 @@
 ---
-# tasks file for HashiCorp Vault
+# tasks file for Vault
 
 - name: Install
   import_tasks: install.yaml
   tags:
-    - vault:setup
-    - vault:setup:install
+    - vault.setup
+    - vault.setup.install
 
 - name: Configure
   import_tasks: configure.yaml
   tags:
-    - vault:setup
-    - vault:setup:config
+    - vault.setup
+    - vault.setup.config
+
+- name: Init
+  import_tasks: init.yaml
+  tags:
+    - vault.init
+
+- name: Unseal
+  import_tasks: unseal.yaml
+  tags:
+    - vault.unseal
+
+- name: Teardown
+  import_tasks: teardown.yaml
+  tags:
+    - vault.teardown
+...

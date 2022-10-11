@@ -1,9 +1,9 @@
 ---
-# tasks file for vault
+# tasks file for Vault
 
 # TODO: 1: Disable mlock
 
-- name: Install rpm keys
+- name: install | Install rpm keys
   become: true
   ansible.builtin.rpm_key:
     state: present
@@ -11,34 +11,34 @@
   loop:
     - https://rpm.releases.hashicorp.com/gpg
 
-- name: Install HashiCorp repository
+- name: install | Install HashiCorp repository
   become: true
   ansible.builtin.get_url:
     url: https://rpm.releases.hashicorp.com/fedora/hashicorp.repo
     dest: /etc/yum.repos.d/hashicorp.repo
 
-- name: Install packages
+- name: install | Install packages
   become: true
   ansible.builtin.dnf:
     name: '{{ item }}'
     state: present
   loop: '{{ packages.redhat }}'
 
-- name: Copy Vault systemd sevice unit
+- name: install | Copy Vault systemd sevice unit
   become: true
   ansible.builtin.copy:
     src: vault.service
     dest: /etc/systemd/system/vault.service
     mode: '0644'
 
-- name: Create Vault system group
+- name: install | Create Vault system group
   become: true
   ansible.builtin.group:
     name: vault
     state: present
     system: true
 
-- name: Create Vault user
+- name: install | Create Vault user
   become: true
   ansible.builtin.user:
     name: vault
@@ -47,12 +47,12 @@
     shell: /bin/false
     group: vault
 
-- name: Force systemd to re-execute itself (2.8 and above)
+- name: install | Force systemd to re-execute itself (2.8 and above)
   become: true
   ansible.builtin.systemd:
     daemon_reexec: true
 
-- name: Allow the service to be accessed at the firewall level
+- name: install | Allow the service to be accessed at the firewall level
   become: true
   ansible.posix.firewalld:
     port: '{{ item }}'
@@ -62,36 +62,30 @@
   loop:
     - 8200/tcp
     - 8201/tcp
-# - name: Allow the service to be accessed at the firewall level
-#   ansible.posix.firewalld:
-#     port: 8201/tcp
-#     permanent: true
-#     state: enabled
-#   notify: Restart Firewalld
 
 # https://www.vaultproject.io/docs/configuration#parameters
 # Actually we don't need to do this because it's done in Systemd unit file.
-# - name: Set mlock capabilities
+# - name: install | Set mlock capabilities
 #   become: true
 #   community.general.capabilities:
 #     path: /usr/bin/vault
 #     capability: cap_ipc_lock=+ep
 #     state: present
 
-# - name: install packages
+# - name: install | install packages
 #   become: true
 #   ansible.builtin.package:
 #     name: "{{ item }}"
 #     update_cache: true
 #   with_items: "{{ vault_install_prerequisites }}"
 
-# - name: download Hashicorp Vault
+# - name: install | download Hashicorp Vault
 #   ansible.builtin.unarchive:
-#     src: https://releases.hashicorp.com/vault/1.6.1/vault_1.6.1_linux_amd64.zip
+#     src: https://releases.hashicorp.com/vault/{{ vault_version }}/vault_{{ vault_version }}_linux_amd64.zip
 #     dest: /tmp
 #     remote_src: true
 
-# - name: copy Vault binary
+# - name: install | copy Vault binary
 #   become: true
 #   ansible.builtin.copy:
 #     src: /tmp/vault

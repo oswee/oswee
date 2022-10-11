@@ -1,7 +1,7 @@
 ---
-# tasks file for vault
+# tasks file for Vault
 
-- name: Create vault directories
+- name: configure | Create vault directories
   become: true
   ansible.builtin.file:
     path: '{{ item }}'
@@ -14,7 +14,7 @@
     - /opt/vault/data
     - /opt/vault/tls
 
-- name: Copy Vault PUBLIC configuration file
+- name: configure | Copy Vault PUBLIC configuration file
   become: true
   ansible.builtin.template:
     src: '{{ item.src }}'
@@ -26,7 +26,7 @@
   loop:
     - { src: 'vault.hcl.public.j2', dest: '/etc/vault.d/vault.hcl' }
 
-- name: Copy TLS certificates
+- name: configure | Copy TLS certificates
   become: true
   ansible.builtin.copy:
     src: "{{ item.src }}"
@@ -39,7 +39,7 @@
     - { src: "/etc/letsencrypt/live/{{ dns_prod_domain_name  }}/fullchain.pem", dest: "/opt/vault/tls" }
     - { src: "/etc/letsencrypt/live/{{ dns_prod_domain_name }}/privkey.pem", dest: "/opt/vault/tls" }
 
-- name: Make sure a vault.service is enabled and running
+- name: configure | Make sure a vault.service is enabled and running
   become: true
   ansible.builtin.systemd:
     name: vault
