@@ -29,5 +29,5 @@ BSD
 
 This role was created in 2020 by [Dzintars Klavins](https://dzintars.github.io)
 
-[image-release]: https://img.shields.io/github/tag/dzintars/ansible-role-vault.svg
-[link-release]: https://github.com/dzintars/ansible-role-vault/releases
+[image-release]: https://img.shields.io/github/tag/oswee/oswee.svg
+[link-release]: https://github.com/oswee/oswee/releases
