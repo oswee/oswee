@@ -29,6 +29,7 @@
   ansible.builtin.copy:
     dest: "{{ vault_unseal_keys_path }}/unseal_key_{{ item.0 }}"
     content: "{{ item.1 }}"
+    mode: '0400'
   with_indexed_items: "{{ vault_init_parsed.unseal_keys_hex }}"
   delegate_to: localhost
 
@@ -37,5 +38,6 @@
   ansible.builtin.copy:
     content: "{{ vault_init_parsed.root_token }}"
     dest: "{{vault_root_token_path}}/rootkey"
+    mode: '0400'
   delegate_to: localhost
 ...

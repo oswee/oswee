@@ -5,9 +5,9 @@ vault_version: 1.11.4
 root_domain: example.com
 vault_url: "https://vault.example.com"
 ip_addr: 127.0.0.1
+vault_data_path: "/opt/vault/data"
+vautl_tls_path: "/opt/vault/tls"
 secrets_path: "/home/{{ ansible_user_id }}/.secrets"
 vault_unseal_keys_path: "{{ secrets_path }}/vault/unseal"
 vault_root_token_path: "{{ secrets_path }}/vault/root"
-vault_data_path: "/opt/vault/data"
-vautl_tls_path: "/opt/vault/tls"
 ...

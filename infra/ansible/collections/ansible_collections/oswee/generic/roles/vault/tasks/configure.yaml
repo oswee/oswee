@@ -11,8 +11,8 @@
     mode: '0755'
   loop:
     - /etc/vault.d
-    - {{ vault_data_path }}
-    - {{ vault_tls_path }}
+    - "{{ vault_data_path }}"
+    - "{{ vault_tls_path }}"
 
 - name: configure | Copy Vault PUBLIC configuration file
   become: true
