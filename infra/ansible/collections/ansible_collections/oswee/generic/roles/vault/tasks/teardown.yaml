@@ -1,4 +1,11 @@
 ---
 # tasks file for Vault
 
+# Stop service
+# Remove service
+# Reexecute systemd
+# Remove package
+# Remove secrets
+# Remove data
+# Remove vault config
 ...

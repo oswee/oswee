@@ -6,12 +6,12 @@
   ansible.builtin.file:
     path: '{{ item }}'
     state: directory
-    owner: vault
-    group: vault
+    owner: '{{ vault_user }}'
+    group: '{{ vault_group }}'
     mode: '0755'
   loop:
     - /etc/vault.d
-    - "{{ vault_data_path }}"
+    - "{{ vault_db_path }}"
     - "{{ vault_tls_path }}"
 
 - name: configure | Copy Vault PUBLIC configuration file
@@ -19,8 +19,8 @@
   ansible.builtin.template:
     src: '{{ item.src }}'
     dest: '{{ item.dest }}'
-    owner: vault
-    group: vault
+    owner: '{{ vault_user }}'
+    group: '{{ vault_group }}'
     # setype: named_conf_t
     mode: '0640'
   loop:
@@ -31,8 +31,8 @@
   ansible.builtin.copy:
     src: "{{ item.src }}"
     dest: "{{ item.dest }}"
-    owner: vault
-    group: vault
+    owner: '{{ vault_user }}'
+    group: '{{ vault_group }}'
     mode: '0640'
     remote_src: true
   loop:
