@@ -28,6 +28,8 @@
     - role: oswee.generic.packer
       vars:
         packer_version: 1.8.0
+        vault_version: 1.12.0
+        vault_url: "https://vault.oswee.com"
     # - role: oswee.generic.kubectl
     # - role: oswee.generic.istio
     - role: oswee.generic.minikube
