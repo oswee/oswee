@@ -13,6 +13,7 @@
     - /etc/vault.d
     - "{{ vault_db_path }}"
     - "{{ vault_tls_path }}"
+    - "{{ vault_audit_path }}"
 
 - name: configure | Copy Vault PUBLIC configuration file
   become: true
