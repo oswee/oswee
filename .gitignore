@@ -5,6 +5,10 @@
 # `git clean` cleans the .gitignore files when `-x` flag is used or
 # if ignored directories are listed as `dir/*`. Instead use `dir/`
 
+# Internal notes
+INTERNAL.md
+internal.md
+
 # YARN
 # ----------------------------------------------------------------------
 # https://yarnpkg.com/advanced/qa#which-files-should-be-gitignored
