@@ -13,8 +13,8 @@ write_files:
       #!/bin/sh
       set -eu -o pipefail
       token_path=/root/.vault-token
-      ssh_pub_key_path=/etc/ssh/ssh_host_ecdsa_key.pub
-      ssh_cert_path=/etc/ssh/ssh_host_ecdsa_key-cert.pub
+      ssh_pub_key_path=/etc/ssh/ssh_host_ed25519_key.pub
+      ssh_cert_path=/etc/ssh/ssh_host_ed25519_key-cert.pub
       echo "Authenticating with Vault"
       curl -sS \
         -X POST \
@@ -25,7 +25,7 @@ write_files:
       }
       EOF
       echo "Successfully authenticated with Vault"
-      echo "Signing host cert"
+      echo "Signing host certificate"
       curl -sS \
         -H "X-Vault-Token: $(cat $token_path)" \
         -X POST \
@@ -36,9 +36,9 @@ write_files:
       }
       EOF
       chmod 0640 $ssh_cert_path
-      echo "Successfully signed cert"
+      echo "Successfully signed ssh host certificate!"
     path: /etc/vault/sign-host-cert.sh
-    permissions: '0644'
+    permissions: '0500'
     owner: root:root
   - content: |
       [Unit]
@@ -71,25 +71,29 @@ runcmd:
   - [ curl, -o, /etc/ssh/trusted-user-ca-keys.pem, "${vault_address}/v1/ssh-client-signer/public_key" ]
   - [ chmod, 0600, /etc/ssh/trusted-user-ca-keys.pem ]
   - [ sed, -i, -e, "$aTrustedUserCAKeys /etc/ssh/trusted-user-ca-keys.pem", /etc/ssh/sshd_config ]
+  - [ sed, -i, -e, "$aHostKey /etc/ssh/ssh_host_ed25519_key", /etc/ssh/sshd_config ]
+  - [ sed, -i, -e, "$aHostCertificate /etc/ssh/ssh_host_ed25519_key-cert.pub", /etc/ssh/sshd_config ]
+  - [ systemctl, restart, sshd.service ]
   - [ systemctl, enable, sign-host-certificate.timer ]
   - [ systemctl, start, sign-host-certificate.timer ]
-  - [ sed, -i, -e, "$aHostKey /etc/ssh/ssh_host_ecdsa_key", /etc/ssh/sshd_config ]
-  - [ sed, -i, -e, "$aHostCertificate /etc/ssh/ssh_host_ecdsa_key-cert.pub", /etc/ssh/sshd_config ]
-  - [ systemctl, restart, sshd.service ]
 
 users:
   - name: ${user}
     sudo: ['ALL=(ALL) NOPASSWD:ALL']
     groups: users, wheel
     shell: /bin/bash
+# TODO: If host certificates are used, then ssh key is not required and can be removed.
+    %{ if user_ssh_pub_key != "" }
     ssh-authorized-keys:
       - ${user_ssh_pub_key}
+    %{ endif }
 #     lock_passwd: false
 #     passwd: $6$J.GyJJBeV05c7FkF$Y2poMCgFMT.kgQpkMaraj70idTEOSlZJKXApUs9eoYnANJB.s326Co6C3s7qhVevOXtMDOAuQ3TX2TjORAQSi. #"pass"
 #     ssh_import_id:
 
 ssh_deletekeys: true
 
+# TODO: For testing purposes only! Root access should be removed!
 ssh_pwauth: true
 chpasswd:
   list: |
@@ -104,4 +108,4 @@ resize_rootfs: true
 
 timezone: ${time_zone}
 
-final_message: "**** The system is finally up, after $UPTIME seconds ****"
+final_message: "**** The system is up, after $UPTIME seconds ****"

@@ -15,10 +15,17 @@
 #   })
 # }
 
+# variable "network" {
+#   description = ""
+#   type = object({
+#     name = optional(string)
+#   })
+# }
+
 variable "network" {
   description = ""
   type = object({
-    name = optional(string)
+    name = optional(string, "default")
   })
 }
 

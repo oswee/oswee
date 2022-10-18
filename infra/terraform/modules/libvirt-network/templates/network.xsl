@@ -12,7 +12,6 @@
   <xsl:template match="/network">
     <xsl:copy>
       <xsl:apply-templates select="node()|@*"/>
-      <virtualport type="openvswitch"/>
     </xsl:copy>
   </xsl:template>
 

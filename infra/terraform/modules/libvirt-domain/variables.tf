@@ -2,9 +2,9 @@ variable "volume" {
   description = "Libvirt domain volume"
   type = object({
     name   = optional(string)
-    pool   = optional(string)
-    source = optional(string)
-    format = optional(string)
+    pool   = optional(string, "/var/lib/libvirt/pools")
+    source = optional(string, "https://download.fedoraproject.org/pub/fedora/linux/releases/33/Cloud/x86_64/images/Fedora-Cloud-Base-33-1.2.x86_64.qcow2")
+    format = optional(string, "qcow2")
   })
 }
 
@@ -12,30 +12,18 @@ variable "cloudinit" {
   description = "Cloudinit image"
   type = object({
     name           = optional(string)
-    dhcp           = optional(bool)
-    interface_name = optional(string)
+    dhcp           = optional(bool, true)
+    interface_name = optional(string, "eth0")
   })
-  # default = {
-  #   name           = ""
-  #   dhcp           = false
-  #   interface_name = ""
-  #   addresses      = ""
-  #   gateway        = ""
-  #   nameservers    = {
-  #     ns1 = ""
-  #     ns2 = ""
-  #     ns3 = ""
-  #   }
-  # }
 }
 
 variable "vm" {
   type = object({
-    user             = optional(string)
-    user_ssh_pub_key = optional(string)
     hostname         = optional(string)
-    domain           = optional(string)
-    time_zone        = optional(string)
+    user             = optional(string, "terraform")
+    user_ssh_pub_key = optional(string, "")
+    domain           = optional(string, "example.local")
+    time_zone        = optional(string, "UTC")
   })
 }
 
@@ -45,23 +33,28 @@ variable "vault" {
     role_id   = string
     secret_id = string
   })
+  default = {
+    address   = "https://vault.example.local"
+    role_id   = "value"
+    secret_id = "value"
+  }
 }
 
 variable "domain" {
   type = object({
     name   = optional(string)
-    memory = optional(string)
-    vcpu   = optional(string)
-    arch   = optional(string)
+    memory = optional(string, "1024")
+    vcpu   = optional(string, "1")
+    arch   = optional(string, "x86_64")
   })
 }
 
 variable "network" {
   type = object({
     id             = optional(string)
-    name           = string
     mac            = optional(string)
-    wait_for_lease = optional(bool)
+    name           = optional(string, "default")
+    wait_for_lease = optional(bool, false)
   })
 }
 
@@ -82,6 +75,6 @@ variable "nameservers" {
 
 variable "provider_libvirt_uri" {
   description = "Qemu server uri. Format - qemu+ssh://user@host:2222/system"
-  type    = string
-  default = "qemu:///system"
+  type        = string
+  default     = "qemu:///system"
 }
