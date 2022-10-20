@@ -1,0 +1,29 @@
+---
+apiVersion: networking.istio.io/v1alpha3
+kind: Gateway
+metadata:
+  name: kube-gateway
+  namespace: kubernetes-dashboard
+spec:
+  selector:
+    istio: ingressgateway
+  servers:
+    - port:
+        number: 443
+        name: https-http
+        protocol: HTTPS
+      tls:
+        mode: SIMPLE
+        credentialName: httpbin-credential
+      hosts:
+        - http-server.apps.ocp.oswee.com
+    - port:
+        number: 443
+        name: https-swagger
+        protocol: HTTPS
+      tls:
+        mode: SIMPLE
+        credentialName: httpbin-credential
+      hosts:
+        - swagger.apps.ocp.oswee.com
+...
