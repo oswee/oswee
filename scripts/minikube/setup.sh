@@ -9,8 +9,8 @@ MINIKUBE_PROFILE="minikube-dev"
 # virsh net-start default
 # virsh net-autostart --network default
 
-virsh pool-define --file ./scripts/libvirt-pool.xml
-virsh pool-start virt
+# virsh pool-define --file ./scripts/libvirt-pool.xml
+# virsh pool-start virt
 
 source ./scripts/libvirt-default-net.sh
 

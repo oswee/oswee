@@ -10,26 +10,26 @@ sudo pvcreate /dev/sda
 # Create volume group and attach raptor disk to it
 sudo vgcreate vgdata /dev/sda
 # Create volume group
-sudo lvcreate -n lvminio -L 100G vgdata
+sudo lvcreate -n lvminikube -L 100G vgdata
 # Create file system
-mkfs -t ext4 /dev/vgdata/lvminio
+mkfs -t ext4 /dev/vgdata/lvminikube
 # Create mount point directory
-mkdir -p /data/minio
+mkdir -p /data/minikube
 # Create SystemD Mount unit
-cat <<EOT >> /etc/systemd/system/data-minio.mount
+cat <<EOT >> /etc/systemd/system/data-minikube.mount
 [Unit]
-Description=MinIO Share
+Description=Minikube Share
 Before=local-fs.target
 
 [Mount]
-What=/dev/vgdata/lvminio
-Where=/data/minio
+What=/dev/vgdata/lvminikube
+Where=/data/minikube
 Type=ext4
 
 [Install]
 WantedBy=local-fs.target
 EOT
 # Enable SystemD mount unit
-systemctl enable data-minio.mount
+systemctl enable data-minikube.mount
 # Start SystemD mount unit
-systemctl start data-minio.mount
+systemctl start data-minikube.mount

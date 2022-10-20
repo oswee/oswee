@@ -20,6 +20,7 @@ NETWORK_DNS_ADDRESES="1.1.1.1,8.8.8.8"
 
 read -p "Do you really want to delete current network connections and devices? (y/n)" -n 1 -r
 echo
+
 if [[ $REPLY =~ ^[Yy]$ ]]
 then
   # Delete all existing connections
