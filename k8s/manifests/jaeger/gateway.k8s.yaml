@@ -1,0 +1,20 @@
+---
+apiVersion: networking.istio.io/v1alpha3
+kind: Gateway
+metadata:
+  name: jaeger-gateway
+  namespace: istio-system
+spec:
+  selector:
+    istio: ingressgateway
+  servers:
+    - port:
+        number: 443
+        name: https-jaeger
+        protocol: HTTPS
+      tls:
+        mode: SIMPLE
+        credentialName: jaeger-credential
+      hosts:
+        - "jaeger.oswee.local"
+...

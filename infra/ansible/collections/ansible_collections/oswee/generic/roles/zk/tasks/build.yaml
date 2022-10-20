@@ -1,0 +1,30 @@
+---
+# tasks file for nvim
+
+- name: Clone Zk repository
+  ansible.builtin.git:
+    repo: '{{ zk_repo_url }}'
+    dest: '{{ zk_source_dir }}'
+    version: master
+    depth: 1
+  register: zk_repo
+
+- name: Cleanup build artifacts
+  community.general.make:
+    chdir: '{{ zk_source_dir }}'
+    target: clean
+  when: zk_repo.changed
+
+- name: Build Zk from the source
+  community.general.make:
+    chdir: '{{ zk_source_dir }}'
+    target: build
+  when: zk_repo.changed
+  register: zk_build
+
+- name: Install build version of the ZK
+  community.general.make:
+    chdir: '{{ zk_source_dir }}'
+    target: install
+  when: nvim_build.changed
+...

@@ -1,0 +1,24 @@
+---
+# tasks file for Cfssl
+
+- name: build | Clone CFSSL repository
+  ansible.builtin.git:
+    repo: '{{ cfssl_repo_url }}'
+    dest: '{{ cfssl_source_dir }}'
+    version: master
+    depth: 1
+  register: cfssl_repo
+
+- name: build | Cleanup build artifacts
+  community.general.make:
+    chdir: '{{ cfssl_source_dir }}'
+    target: clean
+  when: cfssl_repo.changed
+
+- name: build | Build CFSSL from the source
+  community.general.make:
+    chdir: '{{ cfssl_source_dir }}'
+    target: all
+  when: cfssl_repo.changed
+  register: cfssl_build
+...

@@ -8,7 +8,7 @@ build --symlink_prefix=dist/
 
 build --explain ./bazel-explain.txt
 build --verbose_failures --define=DEBUG=1
-# build --verbose_explanations
+build --verbose_explanations
 # build --worker_sandboxing
 
 # SWC

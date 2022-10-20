@@ -1,0 +1,13 @@
+---
+# tasks file for Istio
+
+- name: Install
+  import_tasks: install.yaml
+  tags:
+    - istio.setup
+
+- name: Teardown
+  import_tasks: teardown.yaml
+  tags:
+    - istio.teardown
+...

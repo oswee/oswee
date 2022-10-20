@@ -8,7 +8,7 @@ go_library(
     name = "http_server_go_lib",
     srcs = ["main.go"],
     importpath = "github.com/oswee/prime/go/cmd/http-server",
-    visibility = ["@prime//visibility:private"],
+    visibility = ["//visibility:private"],
     deps = [],
 )
 
@@ -16,5 +16,5 @@ go_binary(
     name = "http-server",
     embed = [":http_server_go_lib"],
     pure = "on",
-    visibility = ["@prime//visibility:public"],
+    visibility = ["//visibility:public"],
 )

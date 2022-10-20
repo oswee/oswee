@@ -1,0 +1,12 @@
+---
+# tasks file for nvim
+
+- name: Remove Neovim
+  become: true
+  ansible.builtin.dnf:
+    name: '{{ item }}'
+    state: absent
+  loop:
+    - neovim
+    - python3-neovim
+...

@@ -6,6 +6,18 @@ load("@io_bazel_rules_k8s//k8s:object.bzl", "k8s_object")
 load("@io_bazel_rules_k8s//k8s:objects.bzl", "k8s_objects")
 
 k8s_object(
+    name = "persistent_volume",
+    cluster = "dev",
+    template = "persistent-volume.k8s.yaml",
+)
+
+k8s_object(
+    name = "storage_class",
+    cluster = "dev",
+    template = "storage-class.k8s.yaml",
+)
+
+k8s_object(
     name = "namespace",
     cluster = "dev",
     template = "namespace.k8s.yaml",
@@ -37,5 +49,5 @@ k8s_objects(
         ":metallb_config_map",
         ":dashboard_ingress",
     ],
-    visibility = ["@prime//visibility:public"],
+    visibility = ["//visibility:public"],
 )

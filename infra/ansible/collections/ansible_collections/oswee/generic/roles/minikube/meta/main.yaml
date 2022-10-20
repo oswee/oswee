@@ -1,0 +1,32 @@
+---
+galaxy_info:
+  namespace: 'oswee'
+  role_name: 'minikube'
+  version: '0.0.1'
+  author: 'Dzintars Klavins'
+  description: 'Ansible role to install Minikube'
+  company: 'Oswee'
+
+  license: 'Apache-2.0'
+
+  min_ansible_version: '2.12'
+
+  platforms:
+    - name: Fedora
+      versions:
+        - 35
+
+  galaxy_tags:
+    - 'minikube'
+    - 'oswee'
+    - 'dzintars'
+    - 'fedora'
+
+dependencies:
+  # - role: oswee.generic.libvirt
+  #   when: minikube_kvm_ready
+  - role: oswee.generic.kubectl
+    when: minikube_install_kubectl
+  - role: oswee.generic.istio
+    when: minikube_install_istio
+...

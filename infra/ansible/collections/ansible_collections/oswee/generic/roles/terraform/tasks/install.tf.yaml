@@ -1,0 +1,16 @@
+---
+# tasks file for Terraform
+
+- name: install.tf | Download Terraform '{{ terraform_version }}'
+  ansible.builtin.unarchive:
+    src: '{{ terraform_url }}'
+    dest: /tmp
+    remote_src: true
+
+- name: install.tf | Copy Terraform '{{ terraform_version }}' binary
+  become: true
+  ansible.builtin.copy:
+    src: /tmp/terraform
+    dest: '{{ binary_path }}'
+    mode: a+x
+    remote_src: true

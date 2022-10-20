@@ -26,3 +26,4 @@ spec:
         credentialName: httpbin-credential
       hosts:
         - swagger.apps.ocp.oswee.com
+...

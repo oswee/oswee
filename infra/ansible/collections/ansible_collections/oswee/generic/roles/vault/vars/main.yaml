@@ -1,0 +1,7 @@
+---
+# vars file for Vault
+
+packages:
+  redhat:
+    - vault
+...

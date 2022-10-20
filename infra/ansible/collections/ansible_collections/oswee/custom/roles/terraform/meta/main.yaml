@@ -1,0 +1,28 @@
+---
+# roles/terraform/meta/main.yaml
+
+galaxy_info:
+  namespace: 'oswee'
+  role_name: 'terraform'
+  version: '0.0.1'
+  author: 'Dzintars Klavins'
+  description: 'Ansible role to maintain Terraform'
+  company: 'Oswee'
+
+  license: 'Apache-2.0'
+
+  min_ansible_version: '2.12'
+
+  platforms:
+    - name: Fedora
+      versions:
+        - 35
+
+  galaxy_tags:
+    - 'terraform'
+    - 'oswee'
+    - 'dzintars'
+    - 'fedora'
+
+dependencies: []
+...

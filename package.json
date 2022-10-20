@@ -1,11 +1,11 @@
 {
-	"name": "@oswee/prime",
+	"name": "@oswee/oswee",
 	"version": "0.0.0",
 	"private": true,
 	"description": "Bazel monorepo test setup",
 	"author": "Dzintars Klavins <dzintars.dev@gmail.com>",
 	"license": "MIT",
-	"homepage": "https://github.com/oswee/prime#readme",
+	"homepage": "https://github.com/oswee/oswee#readme",
 	"keywords": [
 		"bazel",
 		"lit",
@@ -19,10 +19,10 @@
 	},
 	"repository": {
 		"type": "git",
-		"url": "ssh://git@github.com/oswee/prime.git"
+		"url": "ssh://git@github.com/oswee/oswee.git"
 	},
 	"bugs": {
-		"url": "https://github.com/oswee/prime/issues"
+		"url": "https://github.com/oswee/oswee/issues"
 	},
 	"scripts": {
 		"bazel": "bazelisk",
@@ -33,7 +33,7 @@
 		"bazel:serve": "yarn ibazel run //javascript/hack/lit:devserver",
 		"gazelle": "bazel run //:gazelle",
 		"gazelle:update-repos": "bazel run //:gazelle -- update-repos -from_file=go/go.mod -prune -to_macro=go/repositories.bzl%go_deps",
-		"start:prime": "yarn webpack serve --config ./platform/web/prime/webpack.dev.ts",
+		"start:oswee": "yarn webpack serve --config ./platform/web/oswee/webpack.dev.ts",
 		"start:swagger": "yarn webpack serve --config ./platform/web/swagger/webpack.config.ts",
 		"prepare": "husky install",
 		"hygen:element": "hygen element new",
@@ -165,7 +165,7 @@
 		"@bazel/typescript": "^5.5.0"
 	},
 	"bazelWorkspaces": {
-		"prime": {
+		"oswee": {
 			"rootPath": "."
 		}
 	}

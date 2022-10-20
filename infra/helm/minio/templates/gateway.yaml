@@ -1,0 +1,20 @@
+---
+apiVersion: networking.istio.io/v1alpha3
+kind: Gateway
+metadata:
+  name: minio-gateway
+  namespace: istio-system
+spec:
+  selector:
+    istio: ingressgateway
+  servers:
+    - port:
+        number: 443
+        name: https-minio
+        protocol: HTTPS
+      tls:
+        mode: SIMPLE
+        credentialName: minio-cert
+      hosts:
+        - "minio.oswee.local"
+...

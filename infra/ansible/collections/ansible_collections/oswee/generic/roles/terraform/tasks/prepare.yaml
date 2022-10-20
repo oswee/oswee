@@ -1,0 +1,8 @@
+---
+# tasks file for Terraform
+
+- name: prepare | Install unzip package
+  become: true
+  ansible.builtin.dnf:
+    name: unzip.x86_64
+    state: present

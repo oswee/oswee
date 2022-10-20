@@ -1,6 +1,6 @@
-module github.com/oswee/prime/go
+module github.com/oswee/oswee/go
 
-go 1.18
+go 1.19
 
 require (
 	github.com/gorilla/mux v1.7.4

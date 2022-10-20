@@ -1,0 +1,10 @@
+---
+# tasks file for nvim
+
+- name: Install build version of the Neovim
+  become: true
+  community.general.make:
+    chdir: '{{ nvim_source_dir }}'
+    target: install
+  when: nvim_build.changed
+...

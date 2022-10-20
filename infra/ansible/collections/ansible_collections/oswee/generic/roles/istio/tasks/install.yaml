@@ -1,0 +1,37 @@
+---
+# tasks file for istio
+
+- name: Create Istio direcory
+  become: true
+  ansible.builtin.file:
+    path: '/opt/istio'
+    state: directory
+    # TODO: Ideally should be assigned to "users" group and user should be member of that group
+    group: '{{ ansible_user_id }}'
+    mode: '0755'
+  tags:
+    - istio.setup
+
+# TODO: Unarchive is NOT idempotent
+- name: Download Istio release source
+  become: true
+  ansible.builtin.unarchive:
+    src: 'https://github.com/istio/istio/releases/download/{{ istio_version }}/istio-{{ istio_version }}-linux-amd64.tar.gz'
+    dest: /opt/istio
+    remote_src: true
+    group: '{{ ansible_user_id }}'
+    # Strip the top level directory
+    extra_opts: [--strip-components=1]
+  tags:
+    - istio.setup
+
+# Use `source /etc/profile.d/istio.sh` to source the file
+# TODO: Keep in mind that this will override the file if that is modified from the other place
+- name: Add Istio to system-wide $PATH
+  become: true
+  ansible.builtin.copy:
+    dest: /etc/profile.d/istio.sh
+    content: 'PATH=$PATH:/opt/istio/bin'
+  tags:
+    - istio.setup
+...

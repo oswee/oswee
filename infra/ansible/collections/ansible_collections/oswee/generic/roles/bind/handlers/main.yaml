@@ -1,0 +1,35 @@
+---
+# handlers file for named
+
+- name: start named
+  become: true
+  ansible.builtin.systemd:
+    name: named
+    state: started
+
+- name: enable named
+  become: true
+  ansible.builtin.systemd:
+    name: named
+    enabled: true
+
+- name: restart named
+  become: true
+  ansible.builtin.systemd:
+    state: restarted
+    # daemon_reload: true
+    name: named
+
+# - name: restart firewalld
+#   ansible.builtin.systemd:
+#     state: restarted
+#     daemon_reload: true
+#     name: firewalld
+
+- name: restart NetworkManager
+  become: true
+  ansible.builtin.systemd:
+    state: restarted
+    daemon_reload: true
+    name: NetworkManager
+...

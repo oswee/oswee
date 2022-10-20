@@ -1,0 +1,31 @@
+---
+# tasks file for Vagrant
+
+- name: Install packages
+  become: true
+  ansible.builtin.dnf:
+    name: '{{ item }}'
+    state: present
+  loop: '{{ packages.redhat }}'
+
+- name: Install Vagrant
+  become: true
+  ansible.builtin.dnf:
+    name: '{{ vagrant_rpm }}'
+    state: present
+    disable_gpg_check: true
+
+- name: Install Vagrant-Libvirt plugin
+  ansible.builtin.command: vagrant plugin install vagrant-libvirt
+  environment:
+    CONFIGURE_ARGS: 'with-libvirt-include=/usr/include/libvirt with-libvirt-lib=/usr/lib64'
+
+# Don't forget to `source /etc/profile.d/vagrant.sh`
+- name: Add Vagrant environment variables
+  become: true
+  ansible.builtin.copy:
+    dest: /etc/profile.d/vagrant.sh
+    # TODO: Read the README#ENV variables
+    content: |
+      export VAGRANT_DEFAULT_PROVIDER=libvirt
+...

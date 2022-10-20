@@ -1,26 +1,26 @@
-load("@build_bazel_rules_nodejs//:index.bzl", "nodejs_binary")
+# load("@build_bazel_rules_nodejs//:index.bzl", "nodejs_binary")
 
 # ORIGIN: https://github.com/dataform-co/dataform/blob/master/tools/gen-package-json/BUILD
-load("//tools:ts_library.bzl", "ts_library")
-
-package(default_visibility = ["//visibility:public"])
-
-ts_library(
-    name = "json-merge",
-    srcs = glob(["**/*.ts"]),
-    deps = [
-        "@npm//@types/node",
-        "@npm//@types/yargs",
-        "@npm//yargs",
-    ],
-)
-
-nodejs_binary(
-    name = "bin",
-    data = [
-        ":json-merge",
-        "@npm//source-map-support",
-    ],
-    entry_point = ":index.ts",
-    templated_args = ["--node_options=--require=source-map-support/register"],
-)
+# load("//tools:ts_library.bzl", "ts_library")
+#
+# package(default_visibility = ["//visibility:public"])
+#
+# ts_library(
+#     name = "json-merge",
+#     srcs = glob(["**/*.ts"]),
+#     deps = [
+#         "@npm//@types/node",
+#         "@npm//@types/yargs",
+#         "@npm//yargs",
+#     ],
+# )
+#
+# nodejs_binary(
+#     name = "bin",
+#     data = [
+#         ":json-merge",
+#         "@npm//source-map-support",
+#     ],
+#     entry_point = ":index.ts",
+#     templated_args = ["--node_options=--require=source-map-support/register"],
+# )

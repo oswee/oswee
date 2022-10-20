@@ -1,0 +1,7 @@
+<devices>
+  <filesystem type='mount' accessmode='passthrough'>
+    <driver type='virtiofs' wrpolicy='immediate'/>
+    <source dir='/data/minio'/>
+    <target dir='/data/minio'/>
+  </filesystem>
+</devices>

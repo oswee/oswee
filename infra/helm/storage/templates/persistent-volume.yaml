@@ -1,0 +1,26 @@
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: local-pv-raptor-minio
+  labels:
+    type: local
+spec:
+  storageClassName: raptor
+  capacity:
+    storage: 50Gi
+  accessModes:
+    - ReadWriteOnce
+  local:
+    path: /data/minio
+  {{/* persistentVolumeReclaimPolicy: Retain */}}
+  # volumeMode: Filesystem
+  nodeAffinity:
+    required:
+      nodeSelectorTerms:
+        - matchExpressions:
+            - key: kubernetes.io/hostname
+              operator: In
+              values:
+                - minikube-dev
+...

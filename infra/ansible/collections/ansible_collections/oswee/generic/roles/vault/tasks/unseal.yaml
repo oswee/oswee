@@ -1,0 +1,18 @@
+---
+# tasks file for Vault
+
+- name: unseal | Reading unseal key contents
+  ansible.builtin.command: cat {{item}}
+  with_fileglob: "{{ vault_unseal_keys_path }}/*"
+  delegate_to: localhost
+  register: unseal_keys
+
+# TODO: I don't like no_log
+- name: unseal | Unseal vault with unseal keys
+  no_log: true
+  ansible.builtin.shell: |
+    vault operator unseal {{ item.stdout }}
+  environment:
+    VAULT_ADDR: "{{ vault_url }}"
+  with_items: "{{unseal_keys.results}}"
+...

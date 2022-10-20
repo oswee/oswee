@@ -20,6 +20,7 @@ NETWORK_DNS_ADDRESES="1.1.1.1,8.8.8.8"
 
 read -p "Do you really want to delete current network connections and devices? (y/n)" -n 1 -r
 echo
+
 if [[ $REPLY =~ ^[Yy]$ ]]
 then
   # Delete all existing connections
@@ -61,7 +62,7 @@ nmcli connection reload
 nmcli connection down ${NETWORK_ETHERNET_CONNECTION} && nmcli connection up ${NETWORK_ETHERNET_CONNECTION}
 
 # View bridge details
-nmcli connection show ${NETWORK_BRIDGE_CONNECTION}
+echo "`nmcli connection show ${NETWORK_BRIDGE_CONNECTION}`"
 
 # ========================
 # Network validation

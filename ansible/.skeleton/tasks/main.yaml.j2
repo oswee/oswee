@@ -1,8 +1,0 @@
----
-# tasks file for {{ role_name | regex_replace('.*roles\/') | capitalize }}
-
-- name: Install
-  import_tasks: install.yaml
-  tags:
-    - {{ role_name | regex_replace('.*roles\/')}}.setup
-...

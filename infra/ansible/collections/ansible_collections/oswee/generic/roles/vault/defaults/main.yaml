@@ -1,0 +1,17 @@
+---
+# defaults file for Vault
+
+vault_version: 1.12.0
+root_domain: example.com
+secrets_path: "/home/{{ ansible_user_id }}/.secrets"
+vault_url: "https://vault.example.com"
+ip_addr: 127.0.0.1
+vault_data: "/opt/vault"
+vault_db_path: "{{ vault_data }}/db"
+vault_tls_path: "{{ vault_data }}/tls"
+vault_audit_path: "/var/log/vault"
+vault_unseal_keys_path: "{{ secrets_path }}/vault/unseal"
+vault_root_token_path: "{{ secrets_path }}/vault/root"
+vault_user: "vault"
+vault_group: "vault"
+...

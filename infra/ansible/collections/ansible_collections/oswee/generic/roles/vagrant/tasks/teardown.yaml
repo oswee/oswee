@@ -1,0 +1,11 @@
+---
+# tasks file for vagrant
+
+- name: Teardown | Remove Vagrant
+  become: true
+  ansible.builtin.dnf:
+    name: '{{ vagrant_rpm }}'
+    state: absent
+
+# TODO: Remove `/etc/profile.d/vagrant.sh
+...

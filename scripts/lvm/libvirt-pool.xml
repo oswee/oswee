@@ -1,0 +1,9 @@
+<pool type="logical">
+  <name>raptor</name>
+  <source>
+    <device path="/dev/vgraptor"/>
+  </source>
+  <target>
+    <path>/dev/vgraptor</path>
+  </target>
+</pool>

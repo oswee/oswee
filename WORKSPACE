@@ -1,25 +1,25 @@
 """
-Prime Workspace
+Oswee Workspace
 """
 
 workspace(
-    name = "prime",
+    name = "oswee",
     managed_directories = {
         "@npm": ["node_modules"],
     },
 )
 
 # buildifier: disable=load-on-top
-load("@prime//tools/build:workspace.bzl", "prime_dependencies")
+load("//bazel:workspace.bzl", "bazel_dependencies")
 
-prime_dependencies()
+bazel_dependencies()
 
 # Variables{{{
 # ----------------------------------------------
 
 # buildifier: disable=load-on-top
 load(
-    "//bazel:config.bzl",
+    "//bazel:depvars.bzl",
     "ASPECT_RULES_SWC_VERSION",
     "CONTAINER_REGISTRY",
     "NODE_SHA256",
@@ -123,6 +123,17 @@ load("@bazel_skylib//lib:versions.bzl", "versions")
 versions.check(minimum_bazel_version = "5.0.0")
 #}}}
 
+# Rules Proto{{{
+# ----------------------------------------------
+
+# buildifier: disable=load-on-top
+load("@rules_proto//proto:repositories.bzl", "rules_proto_dependencies", "rules_proto_toolchains")
+
+rules_proto_dependencies()
+
+rules_proto_toolchains()
+# }}}
+
 # Rules Go{{{
 # ----------------------------------------------
 # Check the go_rules and Gazelle version compatibility at https://github.com/bazelbuild/bazel-gazelle#id5
@@ -135,7 +146,7 @@ load("@bazel_gazelle//:deps.bzl", "gazelle_dependencies")
 
 go_rules_dependencies()
 
-go_register_toolchains(version = "1.18")
+go_register_toolchains(version = "1.19.1")
 
 # buildifier: disable=load-on-top
 load("//go:repositories.bzl", "go_deps")
@@ -147,15 +158,8 @@ go_deps()
 gazelle_dependencies()
 # }}}
 
-# Rules Proto{{{
+# Rules Google Protobuf{{{
 # ----------------------------------------------
-
-# buildifier: disable=load-on-top
-load("@rules_proto//proto:repositories.bzl", "rules_proto_dependencies", "rules_proto_toolchains")
-
-rules_proto_dependencies()
-
-rules_proto_toolchains()
 
 # buildifier: disable=load-on-top
 load("@com_google_protobuf//:protobuf_deps.bzl", "protobuf_deps")
@@ -181,7 +185,6 @@ docker_toolchain_configure(
 # buildifier: disable=load-on-top
 load("@io_bazel_rules_docker//repositories:repositories.bzl", container_repositories = "repositories")
 
-# buildifier: disable=load-on-top
 container_repositories()
 
 # buildifier: disable=load-on-top
@@ -190,9 +193,9 @@ load("@io_bazel_rules_docker//repositories:deps.bzl", container_deps = "deps")
 container_deps()
 
 # buildifier: disable=load-on-top
-load("@prime//tools/build:workspace_containers.bzl", "prime_containers")
+load("//bazel:workspace_containers.bzl", "containers")
 
-prime_containers()
+containers()
 
 # buildifier: disable=load-on-top
 load("@io_bazel_rules_docker//go:image.bzl", _go_image_repos = "repositories")
@@ -213,18 +216,18 @@ load("@io_bazel_rules_k8s//k8s:k8s_go_deps.bzl", k8s_go_deps = "deps")
 
 k8s_go_deps()
 
-# _CLUSTER = "minikube"
+# Minikube profile
 _CLUSTER = "dev"
 
 _CONTEXT = _CLUSTER
 
-_NAMESPACE = "prime"
+_NAMESPACE = "oswee"
 
 k8s_defaults(
     name = "k8s_object",
     cluster = _CLUSTER,
     context = _CONTEXT,
-    image_chroot = CONTAINER_REGISTRY + "/oswee",
+    # image_chroot = CONTAINER_REGISTRY + "/oswee",
     namespace = _NAMESPACE,
 )
 
@@ -232,7 +235,7 @@ k8s_defaults(
     name = "k8s_deploy",
     cluster = _CLUSTER,
     context = _CONTEXT,
-    image_chroot = CONTAINER_REGISTRY + "/oswee",
+    # image_chroot = CONTAINER_REGISTRY + "/oswee",
     kind = "deployment",
     namespace = _NAMESPACE,
 )

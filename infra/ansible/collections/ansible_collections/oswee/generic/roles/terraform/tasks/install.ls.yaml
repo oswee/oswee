@@ -1,0 +1,17 @@
+---
+# tasks file for Terraform
+
+- name: install.ls | Download Terraform Language Server '{{ terraform_ls_version }}'
+  ansible.builtin.unarchive:
+    src: '{{ terraform_ls_url }}'
+    dest: /tmp
+    remote_src: true
+
+- name: install.ls | Copy Terraform Language Server '{{ terraform_ls_version }}' binary
+  become: true
+  ansible.builtin.copy:
+    src: /tmp/terraform-ls
+    dest: '{{ binary_path }}'
+    mode: a+x
+    remote_src: true
+# TODO: Install Terraform linter??? Do i really need it?
