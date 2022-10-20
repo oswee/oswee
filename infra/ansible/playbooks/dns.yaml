@@ -5,4 +5,5 @@
   gather_facts: true
 
   roles:
-    - role: oswee.custom.bind
+    - role: oswee.generic.bind
+...
