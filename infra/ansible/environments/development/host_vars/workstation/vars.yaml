@@ -9,3 +9,5 @@ redhat_os: fedora
 redhat_version: 35
 enable_rpm_fusion: true
 rpm_fusion_key: '2020'
+secrets_path: "/home/{{ ansible_user_id }}/.secrets"
+...
