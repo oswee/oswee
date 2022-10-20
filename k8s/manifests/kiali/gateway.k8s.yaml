@@ -1,3 +1,4 @@
+---
 apiVersion: networking.istio.io/v1alpha3
 kind: Gateway
 metadata:
@@ -7,12 +8,13 @@ spec:
   selector:
     istio: ingressgateway
   servers:
-  - port:
-      number: 443
-      name: https-kiali
-      protocol: HTTPS
-    tls:
-      mode: SIMPLE
-      credentialName: telemetry-gw-cert
-    hosts:
-    - "kiali.oswee.local"
+    - port:
+        number: 443
+        name: https-kiali
+        protocol: HTTPS
+      tls:
+        mode: SIMPLE
+        credentialName: kiali-cert
+      hosts:
+        - "kiali.oswee.local"
+...

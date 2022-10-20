@@ -1,3 +1,4 @@
+---
 apiVersion: networking.istio.io/v1alpha3
 kind: VirtualService
 metadata:
@@ -5,12 +6,13 @@ metadata:
   namespace: istio-system
 spec:
   hosts:
-  - "kiali.oswee.local"
+    - "kiali.oswee.local"
   gateways:
-  - kiali-gateway
+    - kiali-gateway
   http:
-  - route:
-    - destination:
-        host: kiali
-        port:
-          number: 20001
+    - route:
+        - destination:
+            host: kiali
+            port:
+              number: 20001
+...
