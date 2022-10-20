@@ -1,0 +1,8 @@
+---
+# defaults file for Libvirt
+
+connection_uri: qemu:///system
+pool_name: raptor
+storage_source: /dev/vgraptor
+storage_path: /data/raptor
+...

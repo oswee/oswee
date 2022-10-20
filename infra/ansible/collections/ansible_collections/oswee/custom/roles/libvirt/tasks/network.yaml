@@ -1,0 +1,23 @@
+---
+# tasks file for Libvirt
+
+- name: Undefine default network
+  community.libvirt.virt_net:
+    command: undefine
+    name: default
+    uri: "{{ connection_uri }}"
+
+# - name: Redefine default network
+#   community.libvirt.virt_net:
+#     command: define
+#     name: default
+#     xml: '{{ lookup("file", "net-default.xml") }}'
+#     uri: "xen:///"
+
+# - name: Start default network
+#   community.libvirt.virt_net:
+#     name: default
+#     state: active
+#     autostart: yes
+#     uri: "xen:///"
+...

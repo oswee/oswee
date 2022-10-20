@@ -1,0 +1,25 @@
+---
+# tasks file for Libvirt
+
+- name: Install
+  import_tasks: install.yaml
+  tags:
+    - libvirt.setup
+
+- name: Network
+  import_tasks: network.yaml
+  tags:
+    - libvirt.setup
+    - libvirt.setup.network
+
+- name: Pool
+  import_tasks: pool.yaml
+  tags:
+    - libvirt.setup
+    - libvirt.setup.pool
+
+- name: Teardown
+  import_tasks: teardown.yaml
+  tags:
+    - libvirt.teardown
+...
