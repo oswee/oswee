@@ -1,7 +1,9 @@
 #cloud-config
 
-fqdn: ${hostname}.${domain}
+fqdn: ${fqdn}
 hostname: ${hostname}
+
+timezone: ${time_zone}
 
 packages:
   - qemu-guest-agent
@@ -9,65 +11,30 @@ packages:
   - firewalld
 
 write_files:
+  %{ if ssh_host_cert }
   - content: |
-      #!/bin/sh
-      set -eu -o pipefail
-      token_path=/root/.vault-token
-      ssh_pub_key_path=/etc/ssh/ssh_host_ed25519_key.pub
-      ssh_cert_path=/etc/ssh/ssh_host_ed25519_key-cert.pub
-      echo "Authenticating with Vault"
-      curl -sS \
-        -X POST \
-        -d @- "${vault_address}/v1/auth/approle/login" <<-EOF | jq -r '.auth.client_token' > $token_path
-      {
-        "role_id": "${vault_role_id}",
-        "secret_id": "${vault_secret_id}"
-      }
-      EOF
-      echo "Successfully authenticated with Vault"
-      echo "Signing host certificate"
-      curl -sS \
-        -H "X-Vault-Token: $(cat $token_path)" \
-        -X POST \
-        -d @- "${vault_address}/v1/ssh-host-signer/sign/hostrole" <<-EOF | jq -r .data.signed_key > $ssh_cert_path
-      {
-        "public_key": "$(cat $ssh_pub_key_path)",
-        "cert_type": "host"
-      }
-      EOF
-      chmod 0640 $ssh_cert_path
-      echo "Successfully signed ssh host certificate!"
+      ${indent(6, ssh_host_cert_script)}
     path: /etc/vault/sign-host-cert.sh
-    permissions: '0500'
-    owner: root:root
+    owner: "root:root"
+    permissions: "0500"
   - content: |
-      [Unit]
-      Description=Sign a new host cert on boot, then daily
-      [Service]
-      ExecStart=/bin/sh /etc/vault/sign-host-cert.sh
-      Restart=on-failure
-      RestartSec=20
-      Type=forking
+      ${indent(6, ssh_host_cert_service)}
     path: /etc/systemd/system/sign-host-certificate.service
-    permissions: '0644'
-    owner: root:root
+    owner: "root:root"
+    permissions: "0644"
   - content: |
-      [Unit]
-      Description=Sign a new host cert on boot, then daily
-      [Timer]
-      OnCalendar=daily
-      Persistent=true
-      Unit=sign-host-certificate.service
-      [Install]
-      WantedBy=timers.target
+      ${indent(6, ssh_host_cert_timer)}
     path: /etc/systemd/system/sign-host-certificate.timer
-    permissions: '0644'
-    owner: root:root
+    owner: "root:root"
+    permissions: "0644"
+  %{ endif }
 
 runcmd:
   - [ systemctl, daemon-reload ]
   - [ systemctl, enable, qemu-guest-agent ]
   - [ systemctl, start, qemu-guest-agent ]
+
+  %{ if ssh_host_cert }
   - [ curl, -o, /etc/ssh/trusted-user-ca-keys.pem, "${vault_address}/v1/ssh-client-signer/public_key" ]
   - [ chmod, 0600, /etc/ssh/trusted-user-ca-keys.pem ]
   - [ sed, -i, -e, "$aTrustedUserCAKeys /etc/ssh/trusted-user-ca-keys.pem", /etc/ssh/sshd_config ]
@@ -76,36 +43,28 @@ runcmd:
   - [ systemctl, restart, sshd.service ]
   - [ systemctl, enable, sign-host-certificate.timer ]
   - [ systemctl, start, sign-host-certificate.timer ]
+  %{ endif }
 
 users:
   - name: ${user}
-    sudo: ['ALL=(ALL) NOPASSWD:ALL']
+    sudo: ["ALL=(ALL) NOPASSWD:ALL"]
     groups: users, wheel
     shell: /bin/bash
-# TODO: If host certificates are used, then ssh key is not required and can be removed.
     %{ if user_ssh_pub_key != "" }
-    ssh-authorized-keys:
+    ssh_authorized_keys:
       - ${user_ssh_pub_key}
     %{ endif }
-#     lock_passwd: false
-#     passwd: $6$J.GyJJBeV05c7FkF$Y2poMCgFMT.kgQpkMaraj70idTEOSlZJKXApUs9eoYnANJB.s326Co6C3s7qhVevOXtMDOAuQ3TX2TjORAQSi. #"pass"
-#     ssh_import_id:
 
-ssh_deletekeys: true
-
-# TODO: For testing purposes only! Root access should be removed!
-ssh_pwauth: true
+# TODO: For testing purposes enable TTY access. SHOULD BE REMOVED!
 chpasswd:
-  list: |
-     root:root
-  expire: false
+  expire: false  # Request password change on login
+  list:
+    - ${user}:test
 
 growpart:
   mode: auto
   devices: ['/']
 
 resize_rootfs: true
-
-timezone: ${time_zone}
 
 final_message: "**** The system is up, after $UPTIME seconds ****"

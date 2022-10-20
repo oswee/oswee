@@ -8,15 +8,16 @@ resource "libvirt_volume" "volume" {
 # tag::tagname[]
 
 resource "libvirt_cloudinit_disk" "cloudinit" {
-  name           = "${local.cloudinit.name}-cloudinit.iso"
-  user_data      = data.template_file.user_data.rendered
+  name      = "${local.cloudinit.name}-cloudinit.iso"
+  user_data = data.template_file.user_data.rendered
+  # user_data      = data.template_cloudinit_config.user_data.rendered
   network_config = data.template_file.network_config.rendered
   pool           = var.volume.pool
 }
 
 # end::tagname[]
 
-resource "libvirt_domain" "domain" {
+resource "libvirt_domain" "instance" {
   name   = local.domain.name
   memory = var.domain.memory
   vcpu   = var.domain.vcpu

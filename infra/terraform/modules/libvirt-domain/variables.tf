@@ -1,9 +1,23 @@
+variable "fqdn" {
+  description = "Fully Qualified Domain Name"
+  type        = string
+  default     = "www.example.local"
+}
+
+variable "hostname" {
+  description = "Hostname of the instance"
+  type        = string
+  default     = "fedora"
+}
+
 variable "volume" {
   description = "Libvirt domain volume"
   type = object({
-    name   = optional(string)
-    pool   = optional(string, "/var/lib/libvirt/pools")
-    source = optional(string, "https://download.fedoraproject.org/pub/fedora/linux/releases/33/Cloud/x86_64/images/Fedora-Cloud-Base-33-1.2.x86_64.qcow2")
+    name = optional(string)
+    pool = optional(string, "/var/lib/libvirt/pools")
+    # Use local pre-dowloaded image for faster provisioning
+    source = optional(string, "/mnt/data/cloudinit/Fedora-Cloud-Base-36-1.5.x86_64.qcow2")
+    # source = optional(string, "https://download.fedoraproject.org/pub/fedora/linux/releases/36/Cloud/x86_64/images/Fedora-Cloud-Base-36-1.5.x86_64.qcow2")
     format = optional(string, "qcow2")
   })
 }
@@ -19,9 +33,10 @@ variable "cloudinit" {
 
 variable "vm" {
   type = object({
-    hostname         = optional(string)
-    user             = optional(string, "terraform")
-    user_ssh_pub_key = optional(string, "")
+    hostname = optional(string)
+    user     = optional(string, "terraform")
+    # user_ssh_pub_key = optional(string, "")
+    user_ssh_pub_key = string
     domain           = optional(string, "example.local")
     time_zone        = optional(string, "UTC")
   })
@@ -29,15 +44,10 @@ variable "vm" {
 
 variable "vault" {
   type = object({
-    address   = string
-    role_id   = string
-    secret_id = string
+    address   = optional(string, "https://vault.example.local")
+    role_id   = optional(string, "")
+    secret_id = optional(string, "")
   })
-  default = {
-    address   = "https://vault.example.local"
-    role_id   = "value"
-    secret_id = "value"
-  }
 }
 
 variable "domain" {
@@ -59,8 +69,15 @@ variable "network" {
 }
 
 variable "addresses" {
-  type    = list(string)
-  default = []
+  description = ""
+  type        = list(string)
+  default     = []
+}
+
+variable "ssh_host_cert" {
+  description = "Enable SSH Host key signing"
+  type        = bool
+  default     = false
 }
 
 variable "gateway" {

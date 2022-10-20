@@ -12,12 +12,10 @@ locals {
     mac = coalesce(var.network.mac, macaddress.mac.address)
   }
 
+  hostname = coalesce(var.hostname, random_pet.instance.id)
+
   cloudinit = {
     name = coalesce(var.cloudinit.name, random_pet.instance.id)
-  }
-
-  vm = {
-    hostname = coalesce(var.vm.hostname, random_pet.instance.id)
   }
 
   domain = {
