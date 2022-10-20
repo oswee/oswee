@@ -68,3 +68,4 @@ spec:
       hostPath:
         path: /home/dzintars/containers/github.com/dzintars/prime/volumes/redis/data
         type: Directory
+...
