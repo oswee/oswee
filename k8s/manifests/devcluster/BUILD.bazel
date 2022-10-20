@@ -49,5 +49,5 @@ k8s_objects(
         ":metallb_config_map",
         ":dashboard_ingress",
     ],
-    visibility = ["@prime//visibility:public"],
+    visibility = ["//visibility:public"],
 )
