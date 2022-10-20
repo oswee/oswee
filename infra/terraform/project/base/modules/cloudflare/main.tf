@@ -52,3 +52,8 @@ resource "cloudflare_record" "acme" {
   ttl     = 1
   proxied = false
 }
+
+output "root_zone_id" {
+  description = "Cloudflare Root Zone ID"
+  value       = cloudflare_zone.root_zone.id
+}
