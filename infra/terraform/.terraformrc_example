@@ -1,0 +1,39 @@
+# https://developer.hashicorp.com/terraform/cli/config/config-file
+
+provisioners {
+  vault-secret-id = "/usr/bin/terraform-provisioner-vault-secret-id"
+}
+
+providers {
+  gotemplate = "/usr/bin/gotemplate"
+  ct = "/home/ed/dev/go/bin/terraform-provider-fuze"
+}
+
+provider_installation {
+  network_mirror {
+    url = "https://terraform-mirror.yandexcloud.net/"
+    include = ["registry.terraform.io/*/*"]
+  }
+
+  filesystem_mirror {
+    path    = "/terraform/provider-mirror"
+    include = ["*/*"]
+  }
+
+  dev_overrides {
+    "oswee/libvirt-domain" = "../target/debug"
+  }
+
+  direct {
+    exclude = ["*/*"]
+  }
+}
+
+credentials "app.terraform.io" {
+  token = ""
+  token = file("${~/.ssh/tf-token}")
+}
+
+disable_checkpoint = true
+plugin_cache_dir   = "$HOME/.terraform.d/plugin-cache"
+credentials_helper "keychain" {}
