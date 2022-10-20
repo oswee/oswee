@@ -3,3 +3,4 @@ hostname: 'ns1'
 host_octet: '253'
 mac: '56:90:01:22:e9:05'
 network_interface_name: 'eth0'
+...
