@@ -7,6 +7,6 @@ dns_prod_domain_name: '{{ vault_dns_prod_domain_name }}'
 dns_dev_domain_name: '{{ vault_dns_dev_domain_name }}'
 dns_domain_search: '{{ vault_dns_prod_domain_name }}'
 cluster_name: 'dev'
-cluster_network: '192.168.0'
+cluster_network: '192.168.100'
 gateway_host_octet: '254'
 ...
