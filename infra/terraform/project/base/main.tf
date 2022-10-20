@@ -13,27 +13,77 @@ module "storage" {
   pool_path = "/mnt/data/libvirt"
 }
 
-module "minio" {
-  source = "./modules/minio"
-  fqdn   = "oswee.dev"
+module "cloudflare" {
+  source                = "./modules/cloudflare"
+  cloudflare_api_token  = var.cloudflare_api_token
+  cloudflare_account_id = var.cloudflare_account_id
+  public_ip_address     = var.public_ip_address
+  root_domain           = var.root_domain
+}
+
+# TODO: I don't like this repetition!!!
+module "bastion" {
+  source               = "./modules/bastion"
+  fqdn                 = "${var.bastion.hostname}.${var.root_domain}"
+  hostname             = var.bastion.hostname
+  ansible_ssh_key_name = "ansible_${var.bastion.hostname}_dev_ed25519"
   volume = {
-    name = "s3.oswee.dev"
+    name = "${var.bastion.hostname}.${var.root_domain}"
     pool = module.storage.pool.name
   }
   cloudinit = {
-    name = "s3.oswee.dev"
+    name = "${var.bastion.hostname}.${var.root_domain}"
   }
-  addresses = ["192.168.100.222/16"]
-  gateway   = "192.168.254.254"
+  addresses = ["${var.bastion.ip_address}/16"]
+  gateway   = var.gateway_ip
   vm = {
-    domain   = "oswee.dev"
-    hostname = "s3.oswee.dev"
-    user     = "ansible"
+    domain   = var.root_domain
+    hostname = "${var.bastion.hostname}.${var.root_domain}"
+    user     = var.bastion.user
   }
   domain = {
-    name = "s3.oswee.dev"
+    name = "${var.bastion.hostname}.${var.root_domain}"
   }
   network = {
-    name = module.network.network
+    name = module.network.name
   }
+  vault = {
+    address = var.vault_address
+  }
+  cloudflare_api_token    = var.cloudflare_api_token
+  cloudflare_root_zone_id = module.cloudflare.root_zone_id
+  public_ip_address       = var.public_ip_address
+}
+
+module "vault" {
+  source               = "./modules/vault"
+  fqdn                 = "${var.vault.hostname}.${var.root_domain}"
+  hostname             = var.vault.hostname
+  ansible_ssh_key_name = "ansible_${var.vault.hostname}_dev_ed25519"
+  volume = {
+    name = "${var.vault.hostname}.${var.root_domain}"
+    pool = module.storage.pool.name
+  }
+  cloudinit = {
+    name = "${var.vault.hostname}.${var.root_domain}"
+  }
+  addresses = ["${var.vault.ip_address}/16"]
+  gateway   = var.gateway_ip
+  vm = {
+    domain   = var.root_domain
+    hostname = "${var.vault.hostname}.${var.root_domain}"
+    user     = var.vault.user
+  }
+  domain = {
+    name = "${var.vault.hostname}.${var.root_domain}"
+  }
+  network = {
+    name = module.network.name
+  }
+  vault = {
+    address = var.vault_address
+  }
+  cloudflare_api_token    = var.cloudflare_api_token
+  cloudflare_root_zone_id = module.cloudflare.root_zone_id
+  public_ip_address       = var.public_ip_address
 }

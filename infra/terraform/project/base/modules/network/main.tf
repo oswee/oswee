@@ -8,7 +8,7 @@ module "network" {
   domain = null
 }
 
-output "network" {
+output "name" {
   description = "Libvirt network"
   value       = module.network.name
 }
