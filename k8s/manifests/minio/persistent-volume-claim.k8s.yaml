@@ -1,0 +1,13 @@
+---
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+  name: my-raptor-claim
+spec:
+  accessModes:
+    - ReadWriteOnce
+  storageClassName: raptor
+  resources:
+    requests:
+      storage: 20Gi
+...
