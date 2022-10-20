@@ -24,6 +24,7 @@
     # backup: true
   notify:
     - restart NetworkManager
+
 # - name: Add an Ethernet connection with static IP configuration
 #   become: true
 #   community.general.nmcli:
@@ -45,3 +46,4 @@
 #     - {pattern: '^DNS1=', value: 'DNS1="192.168.1.254"'}
 #   notify:
 #     - restart NetworkManager
+...

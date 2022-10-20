@@ -17,7 +17,7 @@
   become: true
   ansible.builtin.systemd:
     state: restarted
-    daemon_reload: true
+    # daemon_reload: true
     name: named
 
 # - name: restart firewalld
@@ -32,3 +32,4 @@
     state: restarted
     daemon_reload: true
     name: NetworkManager
+...
