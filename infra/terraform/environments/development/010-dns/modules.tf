@@ -1,14 +1,14 @@
 module "domain" {
   # source = "git@github.com:oswee/terraform-libvirt-domain.git?ref=v0.0.1-alpha"
-  source = "../../../../../../oswee/terraform-libvirt-domain"
+  source = "../../../modules/libvirt-domain"
 
   volume = {
-    name = "${var.instance_name}.${var.env_name}.${var.global_fqdn}"
+    name = "${var.instance_name}.${var.env_name}.${var.root_fqdn}"
     pool = data.terraform_remote_state.base.outputs.libvirt_pool.name
   }
 
   cloudinit = {
-    name           = "${var.instance_name}.${var.env_name}.${var.global_fqdn}"
+    name           = "${var.instance_name}.${var.env_name}.${var.root_fqdn}"
     dhcp           = false
     interface_name = var.interface_name
     nameservers = {
@@ -25,17 +25,17 @@ module "domain" {
     user             = "ansible"
     user_ssh_pub_key = tls_private_key.ansible.public_key_openssh
     hostname         = var.instance_name
-    domain           = "${var.env_name}.${var.global_fqdn}"
+    domain           = "${var.root_fqdn}"
   }
 
   vault = {
-    address   = "https://vault.example.local"
-    role_id   = "role-id"
-    secret_id = "secret-id"
+    address   = var.vault_url
+    role_id   = module.vault-ssh.approle.role
+    secret_id = module.vault-ssh.approle.secret
   }
 
   domain = {
-    name   = "${var.instance_name}.${var.env_name}.${var.global_fqdn}"
+    name   = "${var.instance_name}.${var.root_fqdn}"
     memory = "1024"
     vcpu   = "2"
   }
@@ -46,3 +46,4 @@ module "domain" {
     wait_for_lease = false
   }
 }
+

@@ -1,3 +1,11 @@
+resource "random_pet" "instance" {}
+
+variable "root_fqdn" {
+  description = ""
+  type        = string
+  default     = "example.com"
+}
+
 variable "env_name" {
   description = "Environment name"
   type        = string
@@ -22,10 +30,10 @@ variable "addresses" {
   default     = ["192.168.0.0/24"]
 }
 
-variable "global_fqdn" {
+variable "libvirt_pool_type" {
   description = ""
   type        = string
-  default     = "example.com"
+  default     = "dir"
 }
 
 variable "global_libvirt_pool_path" {
@@ -52,3 +60,8 @@ variable "network_name" {
   default     = "default"
 }
 
+variable "vault_addr" {
+  description = "URL address of Vault store"
+  type        = string
+  default     = "https://vault.example.com"
+}

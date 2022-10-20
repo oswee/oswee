@@ -4,22 +4,28 @@ variable "env_name" {
   default     = "dev"
 }
 
-variable "global_fqdn" {
+variable "root_fqdn" {
   description = ""
   type        = string
   default     = "example.com"
 }
 
+variable "vault_url" {
+  description = "Hashicorp Vault URL"
+  type        = string
+  default     = "https://vault.example.com"
+}
+
 variable "instance_name" {
   description = ""
   type        = string
-  default     = "ns1"
+  default     = "ca"
 }
 
 variable "ansible_ssh_key_name" {
   description = ""
   type        = string
-  default     = "ansible_ns1_dev_ecdsa"
+  default     = "ansible_ca_dev_ed25519"
 }
 
 variable "interface_name" {
@@ -37,13 +43,13 @@ variable "provider_libvirt_uri" {
 variable "network_addresses" {
   description = ""
   type        = list(string)
-  default     = ["192.168.0.253/16"]
+  default     = ["192.168.100.199/16"]
 }
 
 variable "network_mac" {
   description = ""
   type        = string
-  default     = "56:90:01:22:e9:05"
+  default     = "2b:70:31:76:6a:ac"
 }
 
 variable "default_gateway" {

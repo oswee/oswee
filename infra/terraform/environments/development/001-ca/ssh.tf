@@ -1,6 +1,5 @@
 resource "tls_private_key" "ansible" {
-  algorithm   = "ECDSA"
-  ecdsa_curve = "P521"
+  algorithm   = "ED25519"
 }
 
 resource "local_file" "ansible_ssh_priv_key" {
@@ -14,7 +13,7 @@ resource "local_file" "ansible_ssh_priv_key" {
 
   provisioner "local-exec" {
     when = destroy
-    # command = "ssh-keygen -R bastion.${var.env_name}.${var.global_fqdn}"
-    command = "ssh-keygen -R bastion.dev.oswee.com"
+    # command = "ssh-keygen -R ${var.instance_name}.${var.root_fqdn}"
+    command = "ssh-keygen -R ca.oswee.dev"
   }
 }

@@ -16,7 +16,7 @@ resource "null_resource" "bastion_config" {
   # https://www.digitalocean.com/community/tutorials/how-to-use-ansible-with-terraform-for-configuration-management
   provisioner "local-exec" {
     working_dir = "../../../../ansible"
-    command     = "ansible-playbook -i environments/development playbooks/bastion.yml"
+    command     = "ansible-playbook -i environments/development playbooks/bastion.yaml"
   }
 
   depends_on = [
@@ -24,5 +24,3 @@ resource "null_resource" "bastion_config" {
     module.bastion,
   ]
 }
-
-
