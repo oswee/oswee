@@ -23,8 +23,8 @@ galaxy_info:
     - 'fedora'
 
 dependencies:
-  - role: oswee.generic.libvirt
-    when: minikube_kvm_ready
+  # - role: oswee.generic.libvirt
+  #   when: minikube_kvm_ready
   - role: oswee.generic.kubectl
     when: minikube_install_kubectl
   - role: oswee.generic.istio
