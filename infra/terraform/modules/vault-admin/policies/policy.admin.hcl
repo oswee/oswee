@@ -1,3 +1,6 @@
+# Enable and manage authentication methods broadly across Vault
+# =============================================================
+
 # Manage auth methods broadly across Vault
 path "auth/*"
 {
@@ -15,6 +18,9 @@ path "sys/auth"
 {
   capabilities = ["read"]
 }
+
+# Create and manage ACL policies broadly across Vault
+# =============================================================
 
 # List existing policies
 path "sys/policies/acl"
@@ -52,12 +58,15 @@ path "sys/health"
   capabilities = ["read", "sudo"]
 }
 
-path "operations/*"
-{
-  capabilities = ["create", "read", "update", "delete", "list"]
+# Metrics
+# =============================================================
+
+# To retrieve the usage metrics
+path "sys/internal/counters/activity" {
+  capabilities = ["read"]
 }
 
-path "developers/*"
-{
-  capabilities = ["create", "read", "update", "delete", "list"]
+# To read and update the usage metrics configuration
+path "sys/internal/counters/config" {
+  capabilities = ["read", "update"]
 }

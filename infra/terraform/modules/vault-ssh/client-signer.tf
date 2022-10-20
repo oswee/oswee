@@ -1,16 +1,15 @@
 resource "vault_mount" "ssh_client_signer" {
-  description = "SSH Certs user key signer"
+  description = "SSH Certificate user key signer"
   path        = "ssh-client-signer"
   type        = "ssh"
 }
 
 resource "tls_private_key" "client" {
-  algorithm   = "ECDSA"
-  ecdsa_curve = "P521"
+  algorithm   = "ED25519"
 }
 
 resource "vault_ssh_secret_backend_ca" "client_ca" {
-  backend		  = vault_mount.ssh_client_signer.path
+  backend     = vault_mount.ssh_client_signer.path
   private_key = tls_private_key.client.private_key_pem
   public_key  = tls_private_key.client.public_key_openssh
 }

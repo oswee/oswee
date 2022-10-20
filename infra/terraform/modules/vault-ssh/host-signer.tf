@@ -6,8 +6,7 @@ resource "vault_mount" "ssh_host_signer" {
 }
 
 resource "tls_private_key" "host" {
-  algorithm   = "ECDSA"
-  ecdsa_curve = "P521"
+  algorithm   = "ED25519"
 }
 
 resource "vault_ssh_secret_backend_ca" "host_ca" {
@@ -21,7 +20,7 @@ resource "vault_ssh_secret_backend_role" "hostrole" {
   backend                 = vault_mount.ssh_host_signer.path
   key_type                = "ca"
   allow_host_certificates = "true"
-  allowed_domains         = "localdomain,oswee.com"
+  allowed_domains         = "127.0.0.1,localdomain,oswee.com,oswee.dev"
   allow_subdomains        = true
   ttl                     = "87600h"
 }

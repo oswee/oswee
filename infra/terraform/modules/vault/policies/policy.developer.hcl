@@ -7,4 +7,3 @@ path "developers/*"
 #{
 #  capabilities = ["create", "read", "update", "list"]
 #}
-

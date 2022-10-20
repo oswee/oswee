@@ -1,5 +1,13 @@
-resource "vault_auth_backend" "userpass" {
-  type = "userpass"
+terraform {
+  required_version = ">= 1.3.1"
+
+  required_providers {
+    vault = ">= 3.9.1"
+  }
+}
+
+provider "vault" {
+  address = var.vault_addr
 }
 
 # resource "vault_auth_backend" "approle" {

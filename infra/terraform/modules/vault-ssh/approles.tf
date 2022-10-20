@@ -1,7 +1,3 @@
-# data "vault_auth_backend" "approle" {
-#   path = "approle"
-# }
-
 # Create approle backend
 resource "vault_auth_backend" "approle" {
   type = "approle"
