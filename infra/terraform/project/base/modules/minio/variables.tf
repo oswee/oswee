@@ -1,7 +1,13 @@
 variable "fqdn" {
   description = "Fully Qualified Domain Name"
   type        = string
-  default     = "example.com"
+  default     = "www.example.com"
+}
+
+variable "ansible_ssh_key_name" {
+  description = ""
+  type        = string
+  default     = "ansible_minio_dev_ed25519"
 }
 
 # variable "libvirt_pool_name" {

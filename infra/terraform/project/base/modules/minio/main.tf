@@ -2,6 +2,10 @@ module "domain" {
   # source = "git@github.com:oswee/terraform-libvirt-domain.git?ref=v0.0.1-alpha"
   source = "../../../../modules/libvirt-domain"
 
+  fqdn          = var.fqdn
+  hostname      = var.hostname
+  ssh_host_cert = false
+
   volume = {
     name = var.volume.name
     pool = var.volume.pool
@@ -21,10 +25,10 @@ module "domain" {
   gateway   = var.gateway
 
   vm = {
-    user = var.vm.user
-    # user_ssh_pub_key = tls_private_key.ansible.public_key_openssh
-    hostname = var.vm.hostname
-    domain   = var.vm.domain
+    user             = var.vm.user
+    user_ssh_pub_key = tls_private_key.ansible.public_key_openssh
+    hostname         = var.vm.hostname
+    domain           = var.vm.domain
   }
 
   # vault = {
