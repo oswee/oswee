@@ -1,0 +1,12 @@
+---
+apiVersion: networking.istio.io/v1alpha3
+kind: DestinationRule
+metadata:
+  name: my-oswee-dr
+  namespace: istio-system
+spec:
+  host: my.oswee.com
+  trafficPolicy:
+    tls:
+      mode: DISABLE
+...

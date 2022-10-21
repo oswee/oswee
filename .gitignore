@@ -9,6 +9,9 @@
 INTERNAL.md
 internal.md
 
+# Secrets
+.tls/
+
 # YARN
 # ----------------------------------------------------------------------
 # https://yarnpkg.com/advanced/qa#which-files-should-be-gitignored
