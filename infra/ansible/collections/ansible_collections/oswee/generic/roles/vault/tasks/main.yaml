@@ -23,8 +23,8 @@
   tags:
     - vault.unseal
 
-- name: Teardown
-  import_tasks: teardown.yaml
-  tags:
-    - vault.teardown
+# - name: Teardown
+#   import_tasks: teardown.yaml
+#   tags:
+#     - vault.teardown
 ...
