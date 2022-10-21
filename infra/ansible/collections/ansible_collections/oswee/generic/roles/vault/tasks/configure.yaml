@@ -37,7 +37,7 @@
     mode: '0640'
     remote_src: true
   loop:
-    - { src: "/etc/letsencrypt/live/{{ dns_prod_domain_name  }}/fullchain.pem", dest: "{{ vautl_tls_path }}" }
+    - { src: "/etc/letsencrypt/live/{{ dns_prod_domain_name  }}/fullchain.pem", dest: "{{ vault_tls_path }}" }
     - { src: "/etc/letsencrypt/live/{{ dns_prod_domain_name }}/privkey.pem", dest: "{{ vault_tls_path }}" }
 
 - name: configure | Make sure a vault.service is enabled and running

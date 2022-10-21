@@ -1,29 +1,13 @@
 [workstations]
 workstation
 
-[dhcpservers]
+[infra]
+vault
 dhcp
-
-[pxeservers]
 pxe
-
-[nameservers]
 ns1
-
-[storage]
 s3
-
-[buildservers]
-jenkins
-
-[bastions]
 bastion
-
-[infra:children]
-nameservers
-
-[bootservers]
-bootstrap
 
 [masters]
 master-0
@@ -41,13 +25,7 @@ cptnod-2
 
 [all:children]
 workstations
-bootservers
-nameservers
-storage
-dhcpservers
-pxeservers
-bastions
-buildservers
+infra
 masters
 infnodes
 cptnodes
