@@ -8,10 +8,10 @@ resource "tls_self_signed_cert" "root-ca" {
   private_key_pem = tls_private_key.root-ca.private_key_pem
 
   subject {
-    country = "LV"
-    organization = "Oswee"
+    country             = "LV"
+    organization        = "Oswee"
     organizational_unit = "Root CA"
-    common_name  = "Oswee Root CA"
+    common_name         = "Oswee Root CA"
   }
 
   validity_period_hours = 8760
@@ -24,6 +24,6 @@ resource "tls_self_signed_cert" "root-ca" {
   ]
 
   provisioner "local-exec" {
-    command = "echo '${self.cert_pem}' > tls/ca.pem && chmod 0600 tls/ca.pem"
+    command = "echo '${self.cert_pem}' > .tls/ca.pem && chmod 0600 .tls/ca.pem"
   }
 }
