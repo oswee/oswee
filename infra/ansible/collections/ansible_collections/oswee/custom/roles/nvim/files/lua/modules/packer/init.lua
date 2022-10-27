@@ -35,24 +35,25 @@ else
 
 		-- UI
 		use(ui.theme())
-		-- use(ui.filemanager())
 		-- use(ui.netrw())
-		use(ui.nerdtree())
+		-- use(ui.nerdtree())  -- Replaced with Nvim-tree
+		use(ui.nvimtree())
 		use(ui.statusline())
 		use(ui.lualinelspprogress())
 		use(ui.telescope())
 		use(ui.dashboard())
-		-- use(ui.fugitive())
-		use(ui.vimrooter())
+		-- use(ui.fugitive())  -- Replaced with LazyGit
 		use(ui.lazygit())
+		use(ui.vimrooter())
 		use(ui.whichkey())
-		-- use(ui.vimwiki())
-		-- use(ui.telekasten())
+		-- use(ui.vimwiki())  -- Replaced with ZK-Nvim
 		-- use(ui.vimzettel())
+		-- use(ui.telekasten())  -- Bad zettelkasten ID support
 		use(ui.zknvim())
-		use(ui.nvimnotify())
 		use(ui.startuptime())
 		use(ui.symbols())
+		-- use(ui.nvimnotify())  -- Replaced with Noice.nvim
+		use(ui.noice())
 
 		-- Editor
 		use(editor.treesitter())
@@ -65,6 +66,10 @@ else
 		-- use(editor.ansiblevim())
 		use(editor.vimmarkdownfootnotes())
 		use(editor.csscolor())
+		use(editor.packageinfo())
+		use(editor.neogen())
+		use(editor.helm())
+		use(editor.jinja())
 
 		-- Completion
 		use(completion.cmp())

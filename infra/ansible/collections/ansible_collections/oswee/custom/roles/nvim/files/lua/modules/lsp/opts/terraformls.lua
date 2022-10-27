@@ -14,27 +14,11 @@ end
 
 return {
 	on_attach = on_attach,
-	root_dir = lspconfig.util.root_pattern('package.json', 'tsconfig.json', 'jsconfig.json', '.git'),
+	root_dir = lspconfig.util.root_pattern('.git', 'terraform'),
 	settings = {
-		cmd = { 'typescript-language-server', '--stdio' },
+		cmd = { 'terraform-ls', 'serve' },
 		filetypes = {
-			'javascript',
-			'typescript',
-		},
-		tsserver = {
-			useBatchedBufferSync = true,
-		},
-		javascript = {
-			autoClosingTags = true,
-			suggest = {
-				autoImports = true,
-			},
-			updateImportsOnFileMove = {
-				enable = true,
-			},
-			suggestionActions = {
-				enabled = false,
-			},
+			'terraform',
 		},
 	},
 }

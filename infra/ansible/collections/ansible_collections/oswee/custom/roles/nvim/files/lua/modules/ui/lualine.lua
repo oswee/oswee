@@ -1,4 +1,5 @@
-local ok, lualine = pcall(require, "lualine")
+-- local package = require("package-info")
+local ok, lualine = pcall(require, 'lualine')
 if not ok then
 	return
 end
@@ -44,46 +45,50 @@ local function diff_source()
 	end
 end
 
+-- local function package_info()
+-- 	return package.get_status()
+-- end
+
 lualine.setup({
 	options = {
 		icons_enabled = true,
-		theme = "gruvbox",
-		component_separators = { left = "", right = "" },
-		section_separators = { left = "", right = "" },
-		disabled_filetypes = { "alpha", "dashboard", "NvimTree", "NERDTree", "Outline" },
+		theme = 'gruvbox',
+		component_separators = { left = '', right = '' },
+		section_separators = { left = '', right = '' },
+		disabled_filetypes = { 'alpha', 'dashboard', 'NvimTree', 'NERDTree', 'Outline' },
 		always_divide_middle = true,
 		globalstatus = false,
 	},
 	sections = {
-		lualine_a = { "mode" },
+		lualine_a = { 'mode' },
 		-- lualine_b = { "branch", "diff", "GitStatusCount" },
 		-- lualine_b = { { "b:gitsigns_head", icon = "" } },
-		lualine_b = { { "diff", source = diff_source } },
+		lualine_b = { { 'branch', 'diff', source = diff_source } },
 		lualine_x = {
 			{
-				"diagnostics",
-				sources = { "nvim_diagnostic" },
-				color_error = "#CC241D",
+				'diagnostics',
+				sources = { 'nvim_diagnostic' },
+				color_error = '#CC241D',
 				symbols = {
-					error = " ",
-					warn = " ",
-					info = " ",
-					hint = " ",
+					error = ' ',
+					warn = ' ',
+					info = ' ',
+					hint = ' ',
 				},
 			},
-			"encoding",
-			"filetype",
-			"lsp_progress",
+			'encoding',
+			'filetype',
+			'lsp_progress',
 		},
-		lualine_y = { "progress" },
+		lualine_y = { 'progress' },
 		lualine_z = {
-			"location",
+			'location',
 			{
 				function()
-					return vim.fn.search([[\s\+$]], "nw") ~= 0 and "trailing" or ""
+					return vim.fn.search([[\s\+$]], 'nw') ~= 0 and 'trailing' or ''
 				end,
-				icon = "", -- What ever icon you want
-				color = { bg = "#ff5a50" },
+				icon = '', -- What ever icon you want
+				color = { bg = '#ff5a50' },
 			},
 			{
 				-- function()
@@ -95,41 +100,41 @@ lualine.setup({
 				function()
 					local space_pat = [[\v^ +]]
 					local tab_pat = [[\v^\t+]]
-					local space_indent = vim.fn.search(space_pat, "nwc")
-					local tab_indent = vim.fn.search(tab_pat, "nwc")
+					local space_indent = vim.fn.search(space_pat, 'nwc')
+					local tab_indent = vim.fn.search(tab_pat, 'nwc')
 					local mixed = (space_indent > 0 and tab_indent > 0)
 					local mixed_same_line
 					if not mixed then
-						mixed_same_line = vim.fn.search([[\v^(\t+ | +\t)]], "nwc")
+						mixed_same_line = vim.fn.search([[\v^(\t+ | +\t)]], 'nwc')
 						mixed = mixed_same_line > 0
 					end
 					if not mixed then
-						return ""
+						return ''
 					end
 					if mixed_same_line ~= nil and mixed_same_line > 0 then
-						return "MI:" .. mixed_same_line
+						return 'MI:' .. mixed_same_line
 					end
 					local space_indent_cnt = vim.fn.searchcount({ pattern = space_pat, max_count = 1e3 }).total
 					local tab_indent_cnt = vim.fn.searchcount({ pattern = tab_pat, max_count = 1e3 }).total
 					if space_indent_cnt > tab_indent_cnt then
-						return "MI:" .. tab_indent
+						return 'MI:' .. tab_indent
 					else
-						return "MI:" .. space_indent
+						return 'MI:' .. space_indent
 					end
 				end,
-				icon = "",
-				color = { bg = "#bb2200" },
+				icon = '',
+				color = { bg = '#bb2200' },
 			},
 		},
 	},
 	inactive_sections = {
 		lualine_a = {},
 		lualine_b = {},
-		lualine_c = { "filename" },
-		lualine_x = { "location" },
+		lualine_c = { 'filename' },
+		lualine_x = { 'location' },
 		lualine_y = {},
 		lualine_z = {},
 	},
 	tabline = {},
-	extensions = { "fzf", "nvim-tree", "fugitive" },
+	extensions = { 'fzf', 'nvim-tree', 'fugitive' },
 })
