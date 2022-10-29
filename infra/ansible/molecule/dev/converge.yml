@@ -2,8 +2,9 @@
 - name: Workstation desktop environment base configuration
   import_playbook: ../../playbooks/workstation.base.yaml
 
-- name: Workstation tools for local development
-  import_playbook: ../../playbooks/workstation.dev.yaml
-
-- name: Bastion setup
-  import_playbook: ../../playbooks/bastion.yaml
+# - name: Workstation tools for local development
+#   import_playbook: ../../playbooks/workstation.dev.yaml
+#
+# - name: Bastion setup
+#   import_playbook: ../../playbooks/bastion.yaml
+...

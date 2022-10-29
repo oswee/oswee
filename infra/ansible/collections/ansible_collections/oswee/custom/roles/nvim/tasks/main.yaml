@@ -66,8 +66,9 @@
     - nvim.config
     - nvim.samples
 
-# - name: Teardown
-#  import_tasks: teardown.yaml
-#  tags:
-#    - nvim.teardown
+- name: Teardown
+  import_tasks: teardown.yaml
+  when: '{{ teardown }} == true'
+  tags:
+    - nvim.teardown
 ...

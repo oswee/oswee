@@ -27,6 +27,7 @@
 
 - name: Teardown
   import_tasks: teardown.yaml
+  when: '{{ teardown }} == true'
   tags:
-    - nvim.install.teardown
+    - nvim.teardown
 ...

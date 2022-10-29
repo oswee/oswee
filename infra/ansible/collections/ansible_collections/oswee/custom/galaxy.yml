@@ -1,3 +1,4 @@
+---
 namespace: oswee
 name: custom
 version: 0.0.1
@@ -15,3 +16,4 @@ documentation: https://github.com/oswee/oswee/wiki
 homepage: http://github.com/oswee/oswee
 issues: https://github.com/oswee/oswee/issues
 build_ignore: []
+...

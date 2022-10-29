@@ -30,12 +30,13 @@
         content: "%wheel ALL=(ALL) NOPASSWD: ALL\n"
         validate: visudo -cf %s
 
-    - name: Install Ranger (for easy debug)
-      become: true
-      ansible.builtin.dnf:
-        name: 'ranger'
-        state: present
+    # - name: Install Ranger (for easy debug)
+    #   become: true
+    #   ansible.builtin.dnf:
+    #     name: 'ranger'
+    #     state: present
 
-    # - name: Ranger
-    #   include_role:
-    #     name: oswee.generic.ranger
+    - name: Ranger
+      include_role:
+        name: oswee.generic.ranger
+...

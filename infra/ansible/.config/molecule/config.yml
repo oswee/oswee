@@ -1,12 +1,11 @@
 ---
 dependency:
   name: galaxy
-  # enabled: false
-  options:
-    # requirements-file: collections.yaml  # Collections
-    # role-file: requirements.yaml
-    ignore-errors: true
-    # ignore-certs: True
+  enabled: true
+  # options:
+  #   ignore-errors: true
+  #   ignore-certs: true
+  #   requirements-file: requirements.yaml
 driver:
   name: vagrant
   provider:
@@ -29,10 +28,10 @@ provisioner:
     converge: converge.yml
   config_options:
     defaults:
-      vault_password_file: '$HOME/.ansible/.vault.key'
-      stdout_callback: 'yaml' # To get pretty output
+      vault_password_file: $HOME/.secrets/ansible/vault.oswee.key
+      stdout_callback: yaml  # To get pretty output
       bin_ansible_callbacks: true
-      interpreter_python: 'python3'
+      interpreter_python: python3
       verbosity: 1
     ssh_connection:
       pipelining: true
@@ -44,15 +43,15 @@ provisioner:
   #   - --inventory=myinventory.yaml
   connection_options:
     ansible_ssh_user: vagrant
-    ansible_connection: smart # Override the connection: local
+    ansible_connection: smart  # Override the connection: local
     # ansible_ssh_common_args: -o IdentitiesOnly=no
   env:
     PY_COLORS: true
+    ANSIBLE_COLLECTIONS_PATH: ./collections  # Because `dependency#options#requirements-file` has no any effect.
+    # ANSIBLE_ROLES_PATH: "./roles"
     # ANSIBLE_FORCE_COLOR: true
     # ANSIBLE_DEBUG: true
     # ANSIBLE_CONFIG: './ansible.cfg'
-    # ANSIBLE_ROLES_PATH: "./roles"
-    # ANSIBLE_COLLECTIONS_PATH: "./collections"
   log: true
   lint: |
     set -e
@@ -64,3 +63,4 @@ verifier:
   lint: |
     set -e
     ansible-lint
+...
