@@ -2,23 +2,28 @@
 yaml-files:
   - '*.yaml'
   - '*.yml'
-  - '.yamllint.yaml'
+  - '.yamllint'
 rules:
   braces:
     level: warning
     max-spaces-inside: 1
   brackets: enable
-  colons: enable
-  commas: enable
+  colons:
+    level: warning
+    max-spaces-before: 0
+    max-spaces-after: 1
+  commas:
+    level: warning
+    max-spaces-before: 0
   comments:
     level: warning
-  comments-indentation:
-    level: warning
-  document-start:
-    present: true
-    level: warning
+    require-starting-space: true
+    min-spaces-from-content: 2
+    ignore-shebangs: true
+  comments-indentation: disable
   document-end:
     present: true
+  document-start:
     level: warning
   empty-lines:
     max: 2
@@ -27,21 +32,23 @@ rules:
   empty-values: disable
   hyphens: enable
   indentation:
-    spaces: 2
+    level: warning
+    spaces: consistent
+    indent-sequences: false
   key-duplicates: enable
   key-ordering: disable
   line-length:
-    max: 120
+    level: warning
+    max: 140
     allow-non-breakable-words: true
     allow-non-breakable-inline-mappings: false
-    level: warning
   new-line-at-end-of-file: enable
-  new-lines: enable
+  new-lines:
+    type: unix
   octal-values: disable
-  quoted-strings: disable
-  # quoted-strings:
-  #   quote-type: single
-  #   required: only-when-needed
+  quoted-strings:
+    quote-type: single
+    required: only-when-needed
   trailing-spaces: enable
   truthy:
     level: warning
