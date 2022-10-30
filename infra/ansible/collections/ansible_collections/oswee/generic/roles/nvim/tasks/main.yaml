@@ -1,33 +1,38 @@
 ---
-# tasks file for nvim
+# tasks file for Nvim
 
-- name: Build prerequisites
-  import_tasks: prepare.yaml
-  tags:
-    - nvim.install
-    - nvim.prepare
+- name: Setup
+  block:
+    - name: Build prerequisites
+      import_tasks: prepare.yaml
+      tags:
+        - prepare
+        - nvim.prepare
 
-- name: System packages
-  import_tasks: packages.yaml
-  tags:
-    - nvim.install
-    - nvim.packages
+    - name: System packages
+      import_tasks: packages.yaml
+      tags:
+        - packages
+        - nvim.packages
 
-- name: Build
-  import_tasks: build.yaml
-  tags:
-    - nvim.install
-    - nvim.build
+    - name: Build
+      import_tasks: build.yaml
+      tags:
+        - build
+        - nvim.build
 
-- name: Install
-  import_tasks: install.yaml
+    - name: Install
+      import_tasks: install.yaml
+      tags:
+        - install
+        - nvim.install
   tags:
-    - nvim.install
-    - nvim.build.install
+    - nvim
 
 - name: Teardown
   import_tasks: teardown.yaml
-  when: '{{ teardown }} == true'
   tags:
+    - teardown
     - nvim.teardown
+    - never
 ...

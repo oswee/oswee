@@ -1,7 +1,7 @@
 ---
-# tasks file for nvim
+# tasks file for Nvim
 
-- name: Clone NeoVim repository
+- name: build | Clone NeoVim repository
   ansible.builtin.git:
     repo: '{{ nvim_repo_url }}'
     dest: '{{ nvim_source_dir }}'
@@ -10,13 +10,13 @@
   when: nvim_nightly | bool
   register: nvim_repo
 
-- name: Cleanup build artifacts
+- name: build | Cleanup build artifacts
   community.general.make:
     chdir: '{{ nvim_source_dir }}'
     target: clean
   when: nvim_repo.changed
 
-- name: Build NeoVim from the source
+- name: build | Build NeoVim from the source
   community.general.make:
     chdir: '{{ nvim_source_dir }}'
     target: nvim
@@ -25,7 +25,7 @@
   when: nvim_repo.changed
   register: nvim_build
 
-# - name: Install build version of the NeoVim
+# - name: build | Install build version of the NeoVim
 #   become: true
 #   community.general.make:
 #     chdir: '{{ nvim_source_dir }}'
