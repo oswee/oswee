@@ -1,0 +1,28 @@
+---
+# roles/fzf/meta/main.yaml
+
+galaxy_info:
+  namespace: 'oswee'
+  role_name: 'fzf'
+  version: '0.0.1'
+  author: 'Dzintars Klavins'
+  description: 'Ansible role to maintain Fzf'
+  company: 'Oswee'
+
+  license: 'Apache-2.0'
+
+  min_ansible_version: '2.12'
+
+  platforms:
+    - name: Fedora
+      versions:
+        - 35
+
+  galaxy_tags:
+    - 'fzf'
+    - 'oswee'
+    - 'dzintars'
+    - 'fedora'
+
+dependencies: []
+...
