@@ -1,3 +1,26 @@
 ---
 # tasks file for Zoxide
+
+- name: Setup
+  block:
+    - name: Install
+      import_tasks: install.yaml
+      tags:
+        - install
+        - zoxide.install
+
+    - name: Config
+      import_tasks: config.yaml
+      tags:
+        - config
+        - zoxide.config
+  tags:
+    - zoxide
+
+- name: Teardown
+  import_tasks: teardown.yaml
+  tags:
+    - teardown
+    - zoxide.teardown
+    - never
 ...

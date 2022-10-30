@@ -1,0 +1,7 @@
+---
+# vars file for Fzf
+
+packages:
+  redhat:
+    - fzf
+...

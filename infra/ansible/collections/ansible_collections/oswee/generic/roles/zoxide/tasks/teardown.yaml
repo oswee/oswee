@@ -1,0 +1,15 @@
+---
+# tasks file for Zoxide
+
+- name: teardown | Remove system package
+  become: true
+  ansible.builtin.dnf:
+    name: 'zoxide'
+    state: absent
+
+- name: teardown | Remove environment
+  become: true
+  ansible.builtin.file:
+    path: '{{ zoxide_environment_path }}'
+    state: absent
+...

@@ -7,8 +7,8 @@ import (
 	"net/http"
 	"time"
 
-	"github.com/oswee/prime/go/pkg/logger"
-	"github.com/oswee/prime/go/pkg/middleware"
+	"github.com/oswee/oswee/go/pkg/logger"
+	"github.com/oswee/oswee/go/pkg/middleware"
 )
 
 // Config is configuration for Server

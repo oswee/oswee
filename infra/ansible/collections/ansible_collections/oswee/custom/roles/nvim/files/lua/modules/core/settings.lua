@@ -1,14 +1,16 @@
-local vim = vim
 local set = vim.opt
 local cmd = vim.cmd
-local g = set
 local home = vim.env.HOME
-local config = home .. "/.config/nvim"
+local config = home .. '/.config/nvim'
 local has = vim.fn.has
 
-cmd("filetype plugin on")
-cmd("filetype indent off")
-cmd("syntax on")
+cmd('filetype plugin on')
+cmd('filetype indent off')
+cmd('syntax on')
+
+-- https://www.reddit.com/r/neovim/comments/rvwsl3/introducing_filetypelua_and_a_call_for_help/
+-- vim.g.do_filetype_lua = true
+vim.g.did_load_filetypes = false
 
 -- if vim.opt.diff:get() then
 --   vim.opt.foldopen = ''
@@ -22,26 +24,25 @@ cmd("syntax on")
 -- set.confirm = true
 -- set.guioptions = set.guioptions + "c"
 
-set.shortmess = set.shortmess + "c" --
-set.iskeyword = set.iskeyword + "-" -- Treat dash separated words as a word text object (when navigating with `w` and `b`)
+set.shortmess = set.shortmess + 'c' --
+set.iskeyword = set.iskeyword + '-' -- Treat dash separated words as a word text object (when navigating with `w` and `b`)
 set.compatible = false --
-if not has("gui_running") then
+if not has('gui_running') then
 	set.t_Co = 256
 end
-set.background = "dark" -- Tell the VIM what the background color looks like (does not change the background itself)
-if has("+termguicolors") then
+if has('+termguicolors') then
 	cmd('let &t_8f = "\\<Esc>[38;2;%lu;%lu;%lum"')
 	cmd('let &t_8b = "\\<Esc>[48;2;%lu;%lu;%lum"')
 	set.termguicolors = true
 end
 set.autochdir = true
-set.fileencoding = "UTF-8" -- File-content encoding for the current buffer
+set.fileencoding = 'UTF-8' -- File-content encoding for the current buffer
 set.hidden = true -- Hide buffers instead of closing them
 set.wrap = false -- Long line wrapping
-set.clipboard = "unnamedplus" -- Copy into primary clipboard
-set.mouse = "a" -- Enables mouse support
-set.number = true -- Show relative line number for current line in the gutter
-set.relativenumber = true -- Enable ralative line numbers
+set.clipboard = 'unnamedplus' -- Copy into primary clipboard
+set.mouse = 'a' -- Enables mouse support
+set.number = true -- Show line numbers for current line in the gutter
+set.relativenumber = false -- Enable relative line numbers
 set.undolevels = 1000 -- Maximum number of changes that can be undone
 
 -- local undodir = "/tmp/.vim-undo-dir"
@@ -50,7 +51,7 @@ set.undolevels = 1000 -- Maximum number of changes that can be undone
 
 set.undofile = true -- Enable undo history writing into the file
 -- set.undodir = config .. "/undodir//" -- Set the undo file directory
-set.undodir = "/home/dzintars/.tmp/undodir/" -- Set the undo file directory
+set.undodir = '/home/dzintars/.tmp/undodir/' -- Set the undo file directory
 set.undoreload = 10000 -- Maximum number lines to save for undo and buffer reload
 
 -- Tabs
@@ -61,11 +62,11 @@ set.softtabstop = 2 -- How many spaces tab or backspace keypress is worth
 set.smarttab = true -- Makes tabs smarter. Recognizes that you have 2 vs 4 etc
 set.list = true -- Display whitespaces
 set.listchars = {
-	nbsp = "⦸", -- CIRCLED REVERSE SOLIDUS (U+29B8, UTF-8: E2 A6 B8)
-	extends = "»", -- RIGHT-POINTING DOUBLE ANGLE QUOTATION MARK (U+00BB, UTF-8: C2 BB)
-	precedes = "«", -- LEFT-POINTING DOUBLE ANGLE QUOTATION MARK (U+00AB, UTF-8: C2 AB)
-	tab = "▷⋯", -- WHITE RIGHT-POINTING TRIANGLE (U+25B7, UTF-8: E2 96 B7) + MIDLINE HORIZONTAL ELLIPSIS (U+22EF, UTF-8: E2 8B AF)
-	trail = "•", -- BULLET (U+2022, UTF-8: E2 80 A2)
+	nbsp = '⦸', -- CIRCLED REVERSE SOLIDUS (U+29B8, UTF-8: E2 A6 B8)
+	extends = '»', -- RIGHT-POINTING DOUBLE ANGLE QUOTATION MARK (U+00BB, UTF-8: C2 BB)
+	precedes = '«', -- LEFT-POINTING DOUBLE ANGLE QUOTATION MARK (U+00AB, UTF-8: C2 AB)
+	tab = '▷⋯', -- WHITE RIGHT-POINTING TRIANGLE (U+25B7, UTF-8: E2 96 B7) + MIDLINE HORIZONTAL ELLIPSIS (U+22EF, UTF-8: E2 8B AF)
+	trail = '•', -- BULLET (U+2022, UTF-8: E2 80 A2)
 }
 
 -- Indentation
@@ -73,8 +74,8 @@ set.autoindent = true -- Copy indent from current line when starting a new line
 set.preserveindent = true
 set.smartindent = true
 set.shiftround = false -- Don't always indent by multiple of shiftwidth
-set.backspace = "indent,start,eol" -- Allow unrestricted backspacing in insert mode
-set.signcolumn = "yes" -- Always show the signcolum, otherwise it would shift the text each time
+set.backspace = 'indent,start,eol' -- Allow unrestricted backspacing in insert mode
+set.signcolumn = 'yes' -- Always show the signcolum, otherwise it would shift the text each time
 set.swapfile = false --
 set.showmode = false -- Hide vimmode from the commandline
 set.updatetime = 300 -- Faster completion
@@ -90,9 +91,9 @@ set.backup = false --
 set.writebackup = false --
 set.linebreak = true -- Wrap long lines at characters in 'breakat'
 set.scrolloff = 3 -- Number of screen lines to show around the cursor
-set.shell = "/usr/bin/sh" -- Shell to use for `!`, `:!`, `system()` etc.
-set.completeopt = "menuone" -- Whether to use a popup menu for Insert mode completion
-set.completeopt = set.completeopt + "noselect" -- don't automatically select canditate (for nvim-compe)
+set.shell = '/usr/bin/sh' -- Shell to use for `!`, `:!`, `system()` etc.
+set.completeopt = 'menuone' -- Whether to use a popup menu for Insert mode completion
+set.completeopt = set.completeopt + 'noselect' -- don't automatically select canditate (for nvim-compe)
 set.endofline = true -- Last line in the file has an end-of-line
 set.fixendofline = true -- Fixed missing end-of-line at end of the text file
 
@@ -105,7 +106,9 @@ set.fixendofline = true -- Fixed missing end-of-line at end of the text file
 set.ignorecase = true
 set.smartcase = true
 
-set.sessionoptions = "blank" -- Save empty windows
+-- Sessions
+set.sessionoptions = 'blank' -- Save empty windows
+vim.g.session_dir = config .. '/sessions'
 
 -- airblade/vim-rooter
 -- g.rooter_patterns = {'.git', 'WORKSPACE', 'Makefile',}
@@ -130,4 +133,4 @@ set.sessionoptions = "blank" -- Save empty windows
 -- set.loaded_netrwSettings = 1
 -- set.loaded_netrwfilehandlers = 1
 
-vim.g.markdown_fenced_languages = { "bash", "lua", "go", "html", "python", "ruby", "vim", "css", "vim", "hcl" }
+vim.g.markdown_fenced_languages = { 'bash', 'lua', 'go', 'html', 'python', 'ruby', 'vim', 'css', 'vim', 'hcl' }
