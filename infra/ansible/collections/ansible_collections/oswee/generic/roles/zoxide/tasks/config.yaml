@@ -1,0 +1,28 @@
+---
+# tasks file for Zoxide
+
+# - name: config | Create environment
+#   become: true
+#   ansible.builtin.copy:
+#     dest: '{{ zoxide_environment_path }}'
+#     mode: '0644'
+#     content: |
+#       eval "$(zoxide init bash)"
+#       alias zz="z -"
+
+- name: config | Add Zoxide to /etc/profile.d/
+  become: true
+  ansible.builtin.lineinfile:
+    dest: '{{ zoxide_environment_path }}'
+    regexp: '{{ item.regexp }}'
+    line: '{{ item.line }}'
+    mode: '0644'
+    state: present
+    create: true
+  loop:
+    - { regexp: '^eval "$(zoxide init bash)"', line: 'eval "$(zoxide init bash)"' }
+    - { regexp: '^alias zz=', line: 'alias zz="z -"' }
+
+- name: config | Reload profile
+  ansible.builtin.shell: source ~/.bash_profile
+...

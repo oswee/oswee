@@ -1,3 +1,5 @@
 ---
 # defaults file for Zoxide
+
+zoxide_environment_path: /etc/profile.d/zoxide.sh
 ...
