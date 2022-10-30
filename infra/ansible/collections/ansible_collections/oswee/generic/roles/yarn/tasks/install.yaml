@@ -1,5 +1,5 @@
 ---
-# tasks file for yarn
+# tasks file for Yarn
 
 - name: install | Install Yarn NPM package globally
   community.general.npm:

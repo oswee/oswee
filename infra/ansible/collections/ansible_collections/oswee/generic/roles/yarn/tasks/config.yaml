@@ -1,7 +1,7 @@
 ---
-# tasks file for yarn
+# tasks file for Yarn
 
-- name: environment | Add environment
+- name: config | Add environment
   become: true
   ansible.builtin.copy:
     dest: /etc/profile.d/yarn.sh
