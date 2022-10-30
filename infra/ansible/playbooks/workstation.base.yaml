@@ -6,22 +6,37 @@
   # become_user: ansible
   gather_facts: true
 
-  roles:
+  # roles:
     # - role: oswee.custom.rpm
     # - role: oswee.custom.git
-    # # - role: oswee.generic.sddm
+    # - role: oswee.generic.sddm
     # - role: oswee.generic.sway
     # - role: oswee.generic.swaylock
     # - role: oswee.custom.fonts
-    # # - role: oswee.generic.alacritty
-    # # - role: oswee.generic.zsh
-    # # - role: oswee.generic.tmux
+    # - role: oswee.generic.alacritty
+    # - role: oswee.generic.zsh
+    # - role: oswee.generic.tmux
     # - role: oswee.generic.nodejs
     # - role: oswee.generic.ranger
-    - role: oswee.generic.yarn
-    - role: oswee.generic.nvim
-    - role: oswee.custom.nvim
     # - role: oswee.custom.minecraft
     # - role: oswee.generic.obsidian
-    # # - role: oswee.generic.slack
+    # - role: oswee.generic.slack
+
+  tasks:
+    - name: Neovim
+      block:
+        - name: Install Neovim
+          ansible.builtin.import_role:
+            name: oswee.generic.nvim
+        - name: Configure Neovim
+          ansible.builtin.import_role:
+            name: oswee.custom.nvim
+
+    - name: Zoxide
+      ansible.builtin.import_role:
+        name: oswee.generic.zoxide
+
+    - name: Fzf
+      ansible.builtin.import_role:
+        name: oswee.generic.fzf
 ...
