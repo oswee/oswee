@@ -26,8 +26,13 @@
   become: true
   ansible.builtin.copy:
     src: vault.service
-    dest: /etc/systemd/system/vault.service
+    dest: '/etc/systemd/system/{{ vault_service_name }}.service'
     mode: '0644'
+
+- name: install | Force systemd to re-execute itself
+  become: true
+  ansible.builtin.systemd:
+    daemon_reexec: true
 
 - name: install | Create Vault system group
   become: true
@@ -40,15 +45,10 @@
   become: true
   ansible.builtin.user:
     name: '{{ vault_user }}'
-    home: /etc/vault.d
+    home: '{{ vault_config_path }}'
     system: true
     shell: /bin/false
     group: '{{ vault_group }}'
-
-- name: install | Force systemd to re-execute itself
-  become: true
-  ansible.builtin.systemd:
-    daemon_reexec: true
 
 - name: install | Allow the service to be accessed at the firewall level
   become: true
@@ -68,25 +68,4 @@
 #     path: /usr/bin/vault
 #     capability: cap_ipc_lock=+ep
 #     state: present
-
-# - name: install | install packages
-#   become: true
-#   ansible.builtin.package:
-#     name: "{{ item }}"
-#     update_cache: true
-#   with_items: "{{ vault_install_prerequisites }}"
-
-# - name: install | download Hashicorp Vault
-#   ansible.builtin.unarchive:
-#     src: https://releases.hashicorp.com/vault/{{ vault_version }}/vault_{{ vault_version }}_linux_amd64.zip
-#     dest: /tmp
-#     remote_src: true
-
-# - name: install | copy Vault binary
-#   become: true
-#   ansible.builtin.copy:
-#     src: /tmp/vault
-#     dest: /usr/local/bin
-#     mode: a+x
-#     remote_src: true
 ...

@@ -5,13 +5,14 @@
   ansible.builtin.file:
     path: "{{ vault_unseal_keys_path }}"
     state: directory
-  delegate_to: localhost
+  # delegate_to: localhost
 
 - name: init | Create root key directories
   ansible.builtin.file:
     path: "{{ vault_root_token_path }}"
     state: directory
-  delegate_to: localhost
+  # delegate_to: localhost
+
 
 # TODO: We need to wait until Vault will start
 - name: init | Initialise Vault operator
@@ -31,7 +32,7 @@
     content: "{{ item.1 }}"
     mode: '0400'
   with_indexed_items: "{{ vault_init_parsed.unseal_keys_hex }}"
-  delegate_to: localhost
+  # delegate_to: localhost
 
 - name: init | Write root token to file
   no_log: true
@@ -39,5 +40,5 @@
     content: "{{ vault_init_parsed.root_token }}"
     dest: "{{vault_root_token_path}}/rootkey"
     mode: '0400'
-  delegate_to: localhost
+  # delegate_to: localhost
 ...
