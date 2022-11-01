@@ -1,3 +1,3 @@
-# Base
+# Network
 
-Base configuration for bootstrapping infrastructure.
+For now just a simple plain routed.

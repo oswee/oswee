@@ -1,3 +1,3 @@
-# Base
+# Storage
 
-Base configuration for bootstrapping infrastructure.
+Just a single pool.
