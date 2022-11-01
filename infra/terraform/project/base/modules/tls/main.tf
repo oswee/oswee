@@ -24,6 +24,11 @@ resource "tls_self_signed_cert" "root-ca" {
   ]
 
   provisioner "local-exec" {
-    command = "echo '${self.cert_pem}' > .tls/ca.pem && chmod 0600 .tls/ca.pem"
+    command = "mkdir ./.tls && echo '${self.cert_pem}' > ./.tls/ca.pem && chmod 0600 ./.tls/ca.pem"
+  }
+
+  provisioner "local-exec" {
+    when    = "destroy"
+    command = "rm -rf ./.tls"
   }
 }
