@@ -34,7 +34,7 @@ resource "null_resource" "instance_config" {
   # https://www.digitalocean.com/community/tutorials/how-to-use-ansible-with-terraform-for-configuration-management
   provisioner "local-exec" {
     working_dir = "../../../ansible"
-    command     = "ANSIBLE_FORCE_COLOR=1 ansible-playbook -i environments/development playbooks/vault.yaml"
+    command     = "ANSIBLE_FORCE_COLOR=1 ansible-playbook -i environments/development playbooks/vault.yaml -t vault.init"
   }
 
   depends_on = [
