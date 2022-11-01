@@ -175,7 +175,6 @@ end
 function Ui.noice()
 	return {
 		'folke/noice.nvim',
-		event = 'VimEnter',
 		requires = {
 			{ 'MunifTanjim/nui.nvim' },
 			{ 'rcarriga/nvim-notify' },
