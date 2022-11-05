@@ -24,6 +24,7 @@ end
 function Lsp.trouble()
 	return {
 		'folke/trouble.nvim',
+		-- wants = "nvim-web-devicons",
 		requires = {
 			{ 'kyazdani42/nvim-web-devicons' },
 		},
