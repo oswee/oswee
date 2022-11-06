@@ -5,7 +5,16 @@ local Ui = {}
 function Ui.devicons()
 	return {
 		'kyazdani42/nvim-web-devicons',
-		opt = true,
+		-- opt = true,
+		config = lc(require('modules.ui.devicons')),
+	}
+end
+
+function Ui.theme()
+	return {
+		'ellisonleao/gruvbox.nvim',
+		requires = { 'rktjmp/lush.nvim' },
+		config = lc(require('modules.ui.gruvbox')),
 	}
 end
 
@@ -17,11 +26,14 @@ function Ui.nvimnotify()
 	}
 end
 
-function Ui.theme()
+function Ui.noice()
 	return {
-		'ellisonleao/gruvbox.nvim',
-		requires = { 'rktjmp/lush.nvim' },
-		config = lc(require('modules.ui.gruvbox')),
+		'folke/noice.nvim',
+		requires = {
+			{ 'MunifTanjim/nui.nvim' },
+			Ui.nvimnotify(),
+		},
+		config = lc(require('modules.ui.noice')),
 	}
 end
 
@@ -34,7 +46,6 @@ end
 function Ui.nerdtree()
 	return {
 		'preservim/nerdtree',
-		wants = 'nvim-web-devicons',
 		requires = Ui.devicons(),
 		config = lc(require('modules.ui.nerdtree')),
 	}
@@ -169,18 +180,6 @@ function Ui.zknvim()
 		-- 	{ "renerocksai/calendar-vim" },
 		-- },
 		config = lc(require('modules.ui.zk-nvim')),
-	}
-end
-
-function Ui.noice()
-	return {
-		'folke/noice.nvim',
-		event = 'VimEnter',
-		requires = {
-			{ 'MunifTanjim/nui.nvim' },
-			{ 'rcarriga/nvim-notify' },
-		},
-		config = lc(require('modules.ui.noice')),
 	}
 end
 

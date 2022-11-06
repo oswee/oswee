@@ -11,10 +11,10 @@
   tags:
     - fzf
 
-- name: Teardown
-  import_tasks: teardown.yaml
-  tags:
-    - teardown
-    - fzf.teardown
-    - never
+# - name: Teardown
+#   import_tasks: teardown.yaml
+#   tags:
+#     - teardown
+#     - fzf.teardown
+#     - never
 ...

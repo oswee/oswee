@@ -35,6 +35,7 @@ else
 
 		-- UI
 		use(ui.theme())
+		use(ui.devicons())
 		-- use(ui.netrw())
 		-- use(ui.nerdtree())  -- Replaced with Nvim-tree
 		use(ui.nvimtree())
@@ -67,7 +68,7 @@ else
 		use(editor.vimmarkdownfootnotes())
 		use(editor.csscolor())
 		use(editor.packageinfo())
-		use(editor.neogen())
+		-- use(editor.neogen())  -- Annotation toolkit. Takes too much time to load without any vaule to my experience
 		use(editor.helm())
 		use(editor.jinja())
 

@@ -12,7 +12,7 @@ storage "raft" {
 }
 
 listener "tcp" {
-  address       = "127.0.0.1:8200"
+  address       = "{{ ip_addr }}:8200"
   tls_cert_file = "{{ vault_tls_path }}/fullchain.pem"
   tls_key_file  = "{{ vault_tls_path }}/privkey.pem"
 }

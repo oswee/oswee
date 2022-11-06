@@ -4,7 +4,7 @@
 - name: unseal | Reading unseal key contents
   ansible.builtin.command: cat {{item}}
   with_fileglob: "{{ vault_unseal_keys_path }}/*"
-  delegate_to: localhost
+  # delegate_to: localhost
   register: unseal_keys
 
 # TODO: I don't like no_log

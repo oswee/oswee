@@ -47,20 +47,20 @@ variable "vault_address" {
   default     = "https://vault.example.local"
 }
 
-variable "bastion" {
-  description = "Bastion Guest"
-  type = object({
-    hostname   = string
-    ip_address = string
-    user       = string
-  })
-}
-
-variable "vault" {
-  description = "Vault Guest"
-  type = object({
-    hostname   = string
-    ip_address = string
-    user       = string
-  })
-}
+# variable "bastion" {
+#   description = "Bastion Guest"
+#   type = object({
+#     hostname   = string
+#     ip_address = string
+#     user       = string
+#   })
+# }
+#
+# variable "vault" {
+#   description = "Vault Guest"
+#   type = object({
+#     hostname   = string
+#     ip_address = string
+#     user       = string
+#   })
+# }

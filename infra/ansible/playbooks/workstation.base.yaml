@@ -39,4 +39,12 @@
     - name: Fzf
       ansible.builtin.import_role:
         name: oswee.generic.fzf
+
+    - name: Vifm
+      ansible.builtin.import_role:
+        name: oswee.generic.vifm
+
+    - name: Bat
+      ansible.builtin.import_role:
+        name: oswee.generic.bat
 ...

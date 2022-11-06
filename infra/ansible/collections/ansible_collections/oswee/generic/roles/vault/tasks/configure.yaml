@@ -10,7 +10,7 @@
     group: '{{ vault_group }}'
     mode: '0755'
   loop:
-    - /etc/vault.d
+    - '{{ vault_config_path }}'
     - "{{ vault_db_path }}"
     - "{{ vault_tls_path }}"
     - "{{ vault_audit_path }}"
@@ -25,25 +25,37 @@
     # setype: named_conf_t
     mode: '0640'
   loop:
-    - { src: 'vault.hcl.public.j2', dest: '/etc/vault.d/vault.hcl' }
+    - { src: 'vault.hcl.public.j2', dest: '{{ vault_config_path }}/vault.hcl' }
 
-- name: configure | Copy TLS certificates
+# - name: configure | Copy TLS certificates
+#   become: true
+#   ansible.builtin.copy:
+#     src: "{{ item.src }}"
+#     dest: "{{ item.dest }}"
+#     owner: '{{ vault_user }}'
+#     group: '{{ vault_group }}'
+#     mode: '0640'
+#     remote_src: true
+#   loop:
+#     - { src: "/etc/letsencrypt/live/{{ dns_prod_domain_name  }}/fullchain.pem", dest: "{{ vault_tls_path }}" }
+#     - { src: "/etc/letsencrypt/live/{{ dns_prod_domain_name }}/privkey.pem", dest: "{{ vault_tls_path }}" }
+
+- name: config | Copy Dev TLS certificates from Ansible Vault
   become: true
   ansible.builtin.copy:
-    src: "{{ item.src }}"
-    dest: "{{ item.dest }}"
+    content: '{{ item.src }}'
+    dest: '{{ item.dest }}'
     owner: '{{ vault_user }}'
     group: '{{ vault_group }}'
-    mode: '0640'
-    remote_src: true
+    mode: 'u=rw,g=r,o='
   loop:
-    - { src: "/etc/letsencrypt/live/{{ dns_prod_domain_name  }}/fullchain.pem", dest: "{{ vault_tls_path }}" }
-    - { src: "/etc/letsencrypt/live/{{ dns_prod_domain_name }}/privkey.pem", dest: "{{ vault_tls_path }}" }
+    - { src: "{{ tls_certs_dev[0].content }}", dest: "{{ vault_tls_path }}/fullchain.pem" }
+    - { src: "{{ tls_certs_dev[1].content }}", dest: "{{ vault_tls_path }}/privkey.pem" }
 
 - name: configure | Make sure a vault.service is enabled and running
   become: true
   ansible.builtin.systemd:
-    name: vault
+    name: '{{ vault_service_name }}'
     enabled: true
     state: started
 ...

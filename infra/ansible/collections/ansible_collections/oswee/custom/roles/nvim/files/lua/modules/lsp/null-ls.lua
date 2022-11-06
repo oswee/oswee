@@ -36,14 +36,14 @@ local prettier_cwd = function(params)
 	return utils.root_pattern(prettier_files)(params.bufname)
 end
 
-local go_files = {
-	'go.mod',
-}
+-- local go_files = {
+-- 	'go.mod',
+-- }
 
-local go_cwd = function(params)
-	local utils = require('null-ls.utils')
-	return utils.root_pattern(go_files)(params.bufname)
-end
+-- local go_cwd = function(params)
+-- 	local utils = require('null-ls.utils')
+-- 	return utils.root_pattern(go_files)(params.bufname)
+-- end
 
 null_ls.setup({
 	debug = true,
