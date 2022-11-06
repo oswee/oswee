@@ -8,7 +8,6 @@
 
 - name: Teardown
   import_tasks: teardown.yaml
-  when: '{{ teardown }} == true'
   tags:
     - {{ role_name | regex_replace('.*roles\/')}}.teardown
 ...
