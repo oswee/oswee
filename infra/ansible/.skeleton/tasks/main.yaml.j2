@@ -1,13 +1,20 @@
 ---
 # tasks file for {{ role_name | regex_replace('.*roles\/') | capitalize }}
 
-- name: Install
-  import_tasks: install.yaml
+- name: Setup
+  block:
+    - name: Install
+      import_tasks: install.yaml
+      tags:
+        - install
+        - {{ role_name | regex_replace('.*roles\/')}}.install
   tags:
-    - {{ role_name | regex_replace('.*roles\/')}}.setup
+    - {{ role_name | regex_replace('.*roles\/')}}
 
 - name: Teardown
   import_tasks: teardown.yaml
   tags:
+    - never
+    - teardown
     - {{ role_name | regex_replace('.*roles\/')}}.teardown
 ...
