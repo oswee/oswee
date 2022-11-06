@@ -39,4 +39,8 @@
     - name: Fzf
       ansible.builtin.import_role:
         name: oswee.generic.fzf
+
+    - name: Vifm
+      ansible.builtin.import_role:
+        name: oswee.generic.vifm
 ...
