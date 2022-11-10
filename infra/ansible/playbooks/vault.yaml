@@ -4,9 +4,15 @@
   become: false
   gather_facts: true
 
-  roles:
-    - role: oswee.generic.vault
+  tasks:
+    - name: Firewall
+      ansible.builtin.import_role:
+        name: oswee.generic.firewalld
+
+    - name: Vault
+      ansible.builtin.import_role:
+        name: oswee.generic.vault
       vars:
         vault_version: 1.12.0
-        vault_url: "https://vault.oswee.dev"
+        vault_url: https://vault.oswee.dev
 ...
