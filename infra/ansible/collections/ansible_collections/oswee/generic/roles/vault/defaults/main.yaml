@@ -4,7 +4,7 @@
 vault_version: 1.12.0
 root_domain: example.com
 vault_url: "https://vault.example.com"
-ip_addr: 127.0.0.1
+ip_addr: 0.0.0.0
 vault_config_path: '/etc/vault.d'
 vault_secrets_path: "/home/{{ ansible_user_id }}/.secrets/vault"
 vault_data_path: "/opt/vault"
