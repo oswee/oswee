@@ -16,6 +16,7 @@
         - vault.config
   tags:
     - vault
+    - vault.setup
 
 - name: Init
   block:
@@ -37,7 +38,6 @@
 - name: Teardown
   import_tasks: teardown.yaml
   tags:
-    - vault
     - teardown
     - vault.teardown
     - never

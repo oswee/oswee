@@ -22,7 +22,8 @@ data "template_file" "network_config" {
     interface_name = var.cloudinit.interface_name
     addresses      = jsonencode(var.addresses)
     gateway        = var.gateway
-    nameservers    = jsonencode(var.nameservers)
+    # nameservers    = jsonencode(var.nameservers)
+    nameservers = "[\"1.1.1.1\", \"9.9.9.9\"]"
   }
 }
 
