@@ -3,6 +3,7 @@ ansible_ssh_common_args: '-F environments/development/.ssh/config'
 
 environment: 'dev'
 tls_certs: '{{ vault_tls_certs }}'
+tls_certs_dev: '{{ vault_tls_certs_dev }}'
 dns_prod_domain_name: '{{ vault_dns_prod_domain_name }}'
 dns_dev_domain_name: '{{ vault_dns_dev_domain_name }}'
 dns_domain_search: '{{ vault_dns_prod_domain_name }}'
