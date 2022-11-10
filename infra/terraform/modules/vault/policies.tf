@@ -12,4 +12,3 @@ resource "vault_policy" "operations" {
   name   = "operations"
   policy = data.local_file.operations_policy.content
 }
-
