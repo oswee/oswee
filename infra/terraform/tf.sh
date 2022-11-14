@@ -4,7 +4,7 @@
 shfmt -i 2 -w $0
 
 tfinit() {
-  terraform -chdir=$1 init \
+  terraform -chdir=$1 init -upgrade \
     -backend-config "bucket=$TF_VAR_s3_bucket" \
     -backend-config "access_key=$TF_VAR_access_key" \
     -backend-config "secret_key=$TF_VAR_secret_key" \
