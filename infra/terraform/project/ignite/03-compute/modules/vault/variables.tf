@@ -57,3 +57,22 @@ variable "ansible_ssh_key_name" {
   type        = string
   default     = "terraform_id_ed25519"
 }
+
+variable "cloudflare_api_token" {
+  description = "CloudFlare API Token"
+  type        = string
+  default     = ""
+  sensitive   = true
+}
+
+variable "cloudflare_zone_id" {
+  description = "CloudFlare Root Zone ID"
+  type        = string
+  default     = ""
+  sensitive   = true
+}
+
+variable "public_ip_address" {
+  description = ""
+  type        = string
+}
