@@ -1,3 +1,7 @@
 ---
 # defaults file for Ansible
+
+ansible_user: ansible
+ansible_group: ansible
+ansible_home: /home/ansible
 ...

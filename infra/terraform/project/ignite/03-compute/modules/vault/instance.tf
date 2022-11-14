@@ -1,5 +1,5 @@
 module "instance" {
-  source = "../../../modules/libvirt-domain"
+  source = "../../../../../modules/libvirt-domain"
 
   fqdn          = "${var.instance.hostname}.${var.local_root_domain}"
   hostname      = var.instance.hostname
@@ -7,7 +7,7 @@ module "instance" {
 
   volume = {
     name = "${var.instance.hostname}.${var.local_root_domain}"
-    pool = data.terraform_remote_state.storage.outputs.pool.name
+    pool = var.volume.pool
   }
 
   cloudinit = {
@@ -44,6 +44,6 @@ module "instance" {
   }
 
   network = {
-    name = data.terraform_remote_state.network.outputs.name
+    name = var.network.name
   }
 }

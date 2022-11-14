@@ -1,13 +1,11 @@
 terraform {
-  required_providers {
-    cloudflare = {
-      source  = "cloudflare/cloudflare"
-      version = "~> 3.0"
-    }
-  }
+  required_version = ">= 1.3.1"
 
+  required_providers {
+    vault = ">= 3.9.1"
+  }
   backend "s3" {
-    key                         = "03-vault/terraform.tfstate"
+    key                         = "04-vault/terraform.tfstate"
     region                      = "eu1"
     skip_credentials_validation = true
     skip_region_validation      = true
@@ -17,6 +15,6 @@ terraform {
   }
 }
 
-provider "cloudflare" {
-  api_token = var.cloudflare_api_token
+provider "vault" {
+  address = var.vault.address
 }

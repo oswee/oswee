@@ -1,5 +1,6 @@
+# TODO: DNS should be in this module because Vault.admin plan will ping the URL.
 resource "cloudflare_record" "vault" {
-  zone_id = data.terraform_remote_state.dns.outputs.root_zone_id
+  zone_id = var.cloudflare_zone_id
   name    = var.instance.hostname
   value   = var.public_ip_address
   type    = "A"

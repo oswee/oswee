@@ -27,22 +27,20 @@ variable "endpoint" {
 # These are loaded from auto.tfvars
 # _________________________________
 
-variable "cloudflare_api_token" {
-  description = "CloudFlare API Token"
+variable "github_organization" {
+  description = ""
   type        = string
-  default     = ""
-  sensitive   = true
+}
+
+variable "github_user" {
+  description = ""
+  type        = string
 }
 
 variable "ansible_ssh_key_name" {
   description = ""
   type        = string
   default     = "terraform_id_ed25519"
-}
-
-variable "public_ip_address" {
-  description = ""
-  type        = string
 }
 
 variable "public_root_domain" {
