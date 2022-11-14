@@ -1,0 +1,37 @@
+---
+# tasks file for Ansible
+
+- name: install | Create Ansible system group
+  become: true
+  ansible.builtin.group:
+    name: '{{ ansible_group }}'
+    state: present
+    system: true
+
+- name: Allow 'ansible' group to have passwordless sudo
+  become: true
+  ansible.builtin.lineinfile:
+    dest: /etc/sudoers
+    state: present
+    regexp: '^%ansible'
+    line: '%ansible ALL=(ALL) NOPASSWD: ALL'
+    validate: visudo -cf %s
+
+- name: install | Create Ansible user
+  become: true
+  ansible.builtin.user:
+    name: '{{ ansible_user }}'
+    home: '{{ ansible_home }}'
+    append: true
+    shell: /bin/false  # TODO: Does this will allow to execute SSH Cert rotation?
+    groups: '{{ ansible_group }}'
+
+- name: configure | Create secrets directory
+  become: true
+  ansible.builtin.file:
+    path: '/home/ansible/.secrets'
+    state: directory
+    owner: '{{ ansible_user }}'
+    group: '{{ ansible_group }}'
+    mode: '0644'
+...

@@ -1,13 +1,26 @@
 ---
-# tasks file for Ansible
+- name: Setup
+  block:
+    - name: Install
+      import_tasks: install.yaml
+      tags:
+        - install
+        - ansible.install
 
-- name: Install ansible-lint python package
-  ansible.builtin.pip:
-    name: ansible-lint
-    state: forcereinstall
+    - name: Config
+      import_tasks: config.yaml
+      tags:
+        - config
+        - ansible.config
 
-- name: Install NPM ansible-language-server package globally
-  community.general.yarn:
-    name: '@ansible/ansible-language-server@latest'
-    global: true
+  tags:
+    - ansible
+    - ansible.setup
+
+# - name: Teardown
+#   import_tasks: teardown.yaml
+#   tags:
+#     - teardown
+#     - ansible.teardown
+#     - never
 ...
