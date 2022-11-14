@@ -2,10 +2,10 @@
 # defaults file for jenkins
 
 jenkins_service_enabled: true
-jenkins_home: /home/jenkins
 jenkins_service_name: jenkins
 jenkins_user: jenkins
 jenkins_group: jenkins
+jenkins_home: /home/jenkins
 jenkins_hostname: localhost
 jenkins_listen_address: 127.0.0.1
 jenkins_http_port: 9093
