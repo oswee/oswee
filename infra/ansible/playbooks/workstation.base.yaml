@@ -51,4 +51,8 @@
     - name: Bat
       ansible.builtin.import_role:
         name: oswee.generic.bat
+
+    - name: Sonarscanner
+      ansible.builtin.import_role:
+        name: oswee.generic.sonarscanner
 ...
