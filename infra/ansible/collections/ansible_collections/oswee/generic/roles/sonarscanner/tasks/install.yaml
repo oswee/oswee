@@ -1,0 +1,64 @@
+---
+# tasks file for Sonarscanner
+
+# - name: install | Create sonar-scanner direcory
+#   become: true
+#   ansible.builtin.file:
+#     path: '/opt/sonar-scanner'
+#     state: directory
+#     group: '{{ ansible_user_id }}'
+#     mode: '0755'
+#   tags:
+#     - sonar-scanner.setup
+
+# - name: Install unzip package
+#   become: true
+#   ansible.builtin.dnf:
+#     name: unzip.x86_64
+#     state: present
+
+# - name: install | Download sonar-scanner
+#   ansible.builtin.get_url:
+#     url: '{{ sonar_scanner_source_url }}'
+#     dest: /tmp
+#     mode: '0440'
+
+# TODO: Unarchive is NOT idempotent
+- name: install | Download sonar-scanner
+  # become: true
+  ansible.builtin.unarchive:
+    remote_src: true
+    src: '{{ sonar_scanner_source_url }}'
+    dest: /tmp
+    group: '{{ ansible_user_id }}'
+    # Strip the top level directory
+    # extra_opts:
+    #   - --strip-components=1
+  tags:
+    - sonar-scanner.setup
+
+# TODO: By some reason unzip does not allow to strip the top directory.
+# That's why i use this coply/paste shenanigans.
+
+- name: Copy file with new name
+  become: true
+  ansible.builtin.copy:
+    remote_src: true
+    src: "/tmp/sonar-scanner-{{ sonar_scanner_version }}-linux/"
+    dest: "/opt/sonar-scanner"
+
+- name: Remove old file
+  ansible.builtin.file:
+    path: "/tmp/sonar-scanner-{{ sonar_scanner_version }}-linux"
+    state: absent
+
+# Use `source /etc/profile.d/sonar-scanner.sh` to source the file
+# TODO: Keep in mind that this will override the file if that is modified from the other place
+- name: install | Add sonar-scanner to system $PATH
+  become: true
+  ansible.builtin.copy:
+    dest: /etc/profile.d/sonar-scanner.sh
+    content: 'PATH=$PATH:/opt/sonar-scanner/bin'
+  tags:
+    - sonar-scanner.setup
+...
