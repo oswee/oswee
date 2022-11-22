@@ -1,0 +1,21 @@
+---
+# tasks file for Nushell
+
+- name: Setup
+  block:
+    - name: Install
+      import_tasks: install.yaml
+      tags:
+        - install
+        - nushell.install
+  tags:
+    - nushell
+    - nushell.setup
+
+- name: Teardown
+  import_tasks: teardown.yaml
+  tags:
+    - never
+    - teardown
+    - nushell.teardown
+...
