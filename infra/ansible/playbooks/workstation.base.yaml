@@ -27,6 +27,15 @@
       ansible.builtin.import_role:
         name: oswee.generic.ansible
 
+    # - name: Nushell
+    #   block:
+    #     - name: Install Nushell
+    #       ansible.builtin.import_role:
+    #         name: yethal.nushell
+    #     - name: Configure Nushell
+    #       ansible.builtin.import_role:
+    #         name: oswee.custom.nushell
+
     - name: Neovim
       block:
         - name: Install Neovim
