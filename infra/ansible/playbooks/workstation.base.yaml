@@ -6,22 +6,6 @@
   # become_user: ansible
   gather_facts: true
 
-  # roles:
-    # - role: oswee.custom.rpm
-    # - role: oswee.custom.git
-    # - role: oswee.generic.sddm
-    # - role: oswee.generic.sway
-    # - role: oswee.generic.swaylock
-    # - role: oswee.custom.fonts
-    # - role: oswee.generic.alacritty
-    # - role: oswee.generic.zsh
-    # - role: oswee.generic.tmux
-    # - role: oswee.generic.nodejs
-    # - role: oswee.generic.ranger
-    # - role: oswee.custom.minecraft
-    # - role: oswee.generic.obsidian
-    # - role: oswee.generic.slack
-
   tasks:
     - name: Ansible
       ansible.builtin.import_role:
