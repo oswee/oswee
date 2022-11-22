@@ -1,0 +1,21 @@
+---
+# tasks file for Starship
+
+- name: Setup
+  block:
+    - name: Install
+      import_tasks: install.yaml
+      tags:
+        - install
+        - starship.install
+  tags:
+    - starship
+    - starship.setup
+
+- name: Teardown
+  import_tasks: teardown.yaml
+  tags:
+    - never
+    - teardown
+    - starship.teardown
+...
