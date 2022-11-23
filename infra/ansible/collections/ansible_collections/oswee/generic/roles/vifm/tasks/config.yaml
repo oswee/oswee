@@ -1,17 +1,23 @@
 ---
 # tasks file for Vifm
 
-- name: config | Copy color scheme
+- name: config | Copy dark color scheme
   ansible.builtin.copy:
-    src: colors/Gruvbox.vifm
-    dest: /home/{{ ansible_user_id }}/.config/vifm/colors/Gruvbox.vifm
+    src: colors/gruvbox-dark.vifm
+    dest: /home/{{ ansible_user_id }}/.config/vifm/colors/gruvbox-dark.vifm
     mode: '0644'
 
-- name: config | Enable theme
+- name: config | Copy light color scheme
+  ansible.builtin.copy:
+    src: colors/gruvbox-light.vifm
+    dest: /home/{{ ansible_user_id }}/.config/vifm/colors/gruvbox-light.vifm
+    mode: '0644'
+
+- name: config | Enable dark theme
   ansible.builtin.lineinfile:
     dest: '/home/{{ ansible_user_id }}/.config/vifm/vifmrc'
     regexp: '{{ item.regexp }}'
     line: '{{ item.line }}'
   loop:
-    - { regexp: '^colorscheme', line: 'colorscheme Gruvbox Default-256 Default' }
+    - { regexp: '^colorscheme', line: 'colorscheme gruvbox-dark' }
 ...
