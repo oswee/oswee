@@ -1,6 +1,6 @@
 ---
 collections:
-  - source: "./ansible/collections/"
+  - source: ./ansible/collections/
     type: subdirs
 # - name: https://github.com/oswee/ansible.git#/general/
 #   version: master
@@ -10,9 +10,15 @@ collections:
 # - name: ansible.posix
 # - name: community.general
 
-# roles:
+roles:
 #   - role: oswee.core.nodejs
 #   - role: oswee.core.yarn
 #   - role: oswee.core.nvim
 #   - role: oswee.core.github
+  - src: https://github.com/Yethal/ansible-role-nushell.git
+    name: yethal.nushell
+    version: main
+  # - source: ./ansible/roles
+  #   type: subdirs
+
 ...
