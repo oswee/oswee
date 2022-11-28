@@ -1,8 +1,8 @@
 ---
 yaml-files:
-  - '*.yaml'
+  - .yaml
   - '*.yml'
-  - '.yamllint'
+  - .yamllint
 rules:
   braces:
     level: warning
@@ -34,7 +34,7 @@ rules:
   indentation:
     level: warning
     spaces: consistent
-    indent-sequences: false
+    indent-sequences: true
   key-duplicates: enable
   key-ordering: disable
   line-length:
@@ -47,6 +47,7 @@ rules:
     type: unix
   octal-values: disable
   quoted-strings:
+    level: warning
     quote-type: single
     required: only-when-needed
   trailing-spaces: enable
