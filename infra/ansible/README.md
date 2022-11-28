@@ -12,6 +12,7 @@ Include the collection in your project collections.yml file and import it.
 
 ```bash
 ansible-galaxy collection install -r collections.yml -f
+ansible-galaxy install -r requirements.yaml
 ```
 
 `-f` flag will force collection upgrade.
