@@ -1,0 +1,44 @@
+---
+# tasks file for Rust
+
+# - name: install | Install packages
+#   become: true
+#   ansible.builtin.dnf:
+#     name: '{{ item }}'
+#     state: present
+#   loop: '{{ packages.redhat }}'
+#
+# - name: Install RustUp
+#   ansible.builtin.shell: |
+#     set -o pipefail
+#     curl https://sh.rustup.rs -sSf | sh -s -- -y
+#   args:
+#     creates: "{{ rustup_user_home }}/{{ rustup_cargo_home_suffix }}/bin/rustup"
+#     executable: /bin/bash
+#   environment:
+#     TMPDIR: '{{ temp_install_dir.path }}'
+#     RUSTUP_HOME: "{{ rustup_user_home }}/{{ rustup_home_suffix }}"
+#     CARGO_HOME: "{{ rustup_user_home }}/{{ rustup_cargo_home_suffix }}"
+
+- name: install | Download Rust-analyzer '{{ rust_analyzer_version }}'
+  ansible.builtin.get_url:
+    url: '{{ rust_analyzer_url }}'
+    dest: /home/{{ ansible_user_id }}/.local/bin
+    mode: a+x
+
+# Unarchive does not handle compressed gz files. So i need an another way to handle that.
+# - name: install | Download Rust-analyzer '{{ rust_analyzer_version }}'
+#   ansible.builtin.unarchive:
+#     src: '{{ rust_analyzer_url }}'
+#     dest: /tmp
+#     remote_src: true
+#     extra_opts:
+#       - '-z'
+#
+# - name: install | Copy Rust-analyzer '{{ rust_analyzer_version }}' binary
+#   ansible.builtin.copy:
+#     src: /tmp/rust-analyzer
+#     dest: /home/{{ ansible_user_id }}/.local/bin
+#     mode: a+x
+#     remote_src: true
+...
