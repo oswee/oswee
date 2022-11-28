@@ -3,6 +3,7 @@ yaml-files:
   - '*.yaml'
   - '*.yml'
   - '.yamllint'
+  - '.yamllint.yaml'
 rules:
   braces:
     level: warning
@@ -33,7 +34,7 @@ rules:
   hyphens: enable
   indentation:
     level: warning
-    spaces: consistent
+    spaces: 2
     indent-sequences: false
   key-duplicates: enable
   key-ordering: disable
