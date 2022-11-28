@@ -1,13 +1,21 @@
 ---
 # tasks file for Istio
 
-- name: Install
-  import_tasks: install.yaml
+- name: Setup
+  block:
+    - name: Install
+      import_tasks: install.yaml
+      tags:
+        - install
+        - istio.install
   tags:
+    - istio
     - istio.setup
 
 - name: Teardown
   import_tasks: teardown.yaml
   tags:
+    - never
+    - teardown
     - istio.teardown
 ...

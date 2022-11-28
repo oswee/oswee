@@ -48,7 +48,7 @@ provisioner:
   env:
     PY_COLORS: true
     ANSIBLE_COLLECTIONS_PATH: ./collections  # Because `dependency#options#requirements-file` has no any effect.
-    # ANSIBLE_ROLES_PATH: "./roles"
+    ANSIBLE_ROLES_PATH: ./roles
     # ANSIBLE_FORCE_COLOR: true
     # ANSIBLE_DEBUG: true
     # ANSIBLE_CONFIG: './ansible.cfg'

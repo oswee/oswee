@@ -1,10 +1,27 @@
 ---
-- name: Workstation desktop environment base configuration
+- name: Workstation base tools
   import_playbook: ../../playbooks/workstation.base.yaml
 
 # - name: Workstation tools for local development
 #   import_playbook: ../../playbooks/workstation.dev.yaml
-#
+
 # - name: Bastion setup
 #   import_playbook: ../../playbooks/bastion.yaml
+
+# You can import external playbooks this way:
+# - import_playbook: nginxinc.nginx_core.playbooks.deploy-nginx.yml
+#   name: some-name.yml
+#   vars:
+#     some_var: some_value
+#   tags:
+#     - some-tag
+
+# - name: Converge
+#   collections:
+#     - oswee.custom
+#   tasks:
+#     - name: Workstation desktop environment base configuration
+#       block:
+#         - name: Setup workstation
+#           ansible.builtin.import_playbook: ../../playbooks/workstation.base.yaml
 ...

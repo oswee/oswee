@@ -1,3 +1,23 @@
+# Metrics UI
+# __________
+
+# To read and update the usage metrics configuration
+path "sys/internal/counters/config" {
+  capabilities = ["read", "update"]
+}
+
+# To retrieve the usage metrics
+path "sys/internal/counters/activity" {
+  capabilities = ["read"]
+}
+
+# Current month overview
+path "sys/internal/counters/activity/monthly" {
+  capabilities = ["read"]
+}
+
+#__________
+
 # Manage auth methods broadly across Vault
 path "auth/*" {
   capabilities = ["create", "read", "update", "delete", "list"]
@@ -57,41 +77,6 @@ path "kv/data/users/*" {
   capabilities = ["create", "update"]
 }
 
-# Active Directory secrets engine
-path "ad/*" {
-  capabilities = ["create", "read", "update", "delete", "list"]
-}
-
-# Alicloud secrets engine
-path "alicloud/*" {
-  capabilities = ["create", "read", "update", "delete", "list"]
-}
-
-# AWS secrets engine
-path "aws/*" {
-  capabilities = ["create", "read", "update", "delete", "list"]
-}
-
-# Azure secrets engine
-path "azure/*" {
-  capabilities = ["create", "read", "update", "delete", "list"]
-}
-
-# Google Cloud secrets engine
-path "gcp/*" {
-  capabilities = ["create", "read", "update", "delete", "list"]
-}
-
-# Google Cloud KMS secrets engine
-path "gcpkms/*" {
-  capabilities = ["create", "read", "update", "delete", "list"]
-}
-
-# Consul secrets engine
-path "consul/*" {
-  capabilities = ["create", "read", "update", "delete", "list"]
-}
-
 # Cubbyhole secrets engine
 path "cubbyhole/*" {
   capabilities = ["create", "read", "update", "delete", "list"]
@@ -108,17 +93,7 @@ path "identity/*" {
 }
 
 # PKI secrets engine
-path "nomad/*" {
-  capabilities = ["create", "read", "update", "delete", "list"]
-}
-
-# Nomad secrets engine
 path "pki/*" {
-  capabilities = ["create", "read", "update", "delete", "list"]
-}
-
-# RabbitMQ secrets engine
-path "rabbitmq/*" {
   capabilities = ["create", "read", "update", "delete", "list"]
 }
 
@@ -255,50 +230,4 @@ path "sys/step-down" {
 # Wrapping
 path "sys/wrapping/*" {
   capabilities = ["create", "update"]
-}
-
-## Enterprise Features
-# Manage license
-path "sys/license" {
-  capabilities = ["create", "read", "update"]
-}
-
-# Use control groups
-path "sys/control-group/*" {
-  capabilities = ["create", "read", "update", "delete", "list"]
-}
-
-# MFA
-path "sys/mfa/*" {
-  capabilities = ["create", "read", "update", "delete", "list"]
-}
-
-# List MFA
-path "sys/mfa/" {
-  capabilities = ["list"]
-}
-
-# Namespaces
-path "sys/namespaces/*" {
-  capabilities = ["create", "read", "update", "delete", "list"]
-}
-
-# List sys/namespaces
-path "sys/namespaces/" {
-  capabilities = ["list"]
-}
-
-# Replication
-path "sys/replication/*" {
-  capabilities = ["create", "read", "update", "delete", "list"]
-}
-
-# Seal Wrap
-path "sys/sealwrap/rewrap" {
-  capabilities = ["create", "read", "update"]
-}
-
-# KMIP secrets engine
-path "kmip/*" {
-  capabilities = ["create", "read", "update", "delete", "list"]
 }

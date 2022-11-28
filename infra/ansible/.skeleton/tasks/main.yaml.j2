@@ -2,17 +2,23 @@
 # tasks file for {{ role_name | regex_replace('.*roles\/') | capitalize }}
 
 - name: Setup
+  tags:
+    - {{ role_name | regex_replace('.*roles\/')}}
+    - {{ role_name | regex_replace('.*roles\/')}}.setup
   block:
     - name: Install
-      import_tasks: install.yaml
+      ansible.builtin.import_tasks: install.yaml
       tags:
         - install
         - {{ role_name | regex_replace('.*roles\/')}}.install
-  tags:
-    - {{ role_name | regex_replace('.*roles\/')}}
+    - name: Config
+      ansible.builtin.import_tasks: config.yaml
+      tags:
+        - config
+        - {{ role_name | regex_replace('.*roles\/')}}.config
 
 - name: Teardown
-  import_tasks: teardown.yaml
+  ansible.builtin.import_tasks: teardown.yaml
   tags:
     - never
     - teardown

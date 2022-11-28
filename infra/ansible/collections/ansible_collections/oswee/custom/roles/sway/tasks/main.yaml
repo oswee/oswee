@@ -1,0 +1,21 @@
+---
+# tasks file for Sway
+
+- name: Setup
+  block:
+    - name: Install
+      import_tasks: install.yaml
+      tags:
+        - install
+        - sway.install
+  tags:
+    - sway
+    - sway.setup
+
+- name: Teardown
+  import_tasks: teardown.yaml
+  tags:
+    - never
+    - teardown
+    - sway.teardown
+...

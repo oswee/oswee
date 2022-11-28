@@ -1,0 +1,72 @@
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: sonarqube
+  labels:
+    app: sonarqube
+spec:
+  restartPolicy: Always
+  containers:
+    - name: postgresql
+      image: docker.io/postgres:latest
+      env:
+        - name: POSTGRES_USER
+          value: sonar
+        - name: POSTGRES_PASSWORD
+          value: sonar
+      securityContext:
+        allowPrivilegeEscalation: false
+        readOnlyRootFilesystem: false
+      volumeMounts:
+        - mountPath: /var/lib/postgresql:Z
+          name: postgresql
+        - mountPath: /var/lib/postgresql/data:Z
+          name: postgresql_data
+
+    - name: server
+      image: docker.io/sonarqube:community
+      env:
+        - name: SONAR_JDBC_URL
+          value: jdbc:postgresql://localhost:5432/sonar
+        - name: SONAR_JDBC_USERNAME
+          value: sonar
+        - name: SONAR_JDBC_PASSWORD
+          value: sonar
+      securityContext:
+        allowPrivilegeEscalation: false
+        readOnlyRootFilesystem: false
+      ports:
+        - containerPort: 9000
+          hostPort: 9100
+          protocol: TCP
+      volumeMounts:
+        - mountPath: /opt/sonarqube/data:Z
+          name: sonarqube_data
+        - mountPath: /opt/sonarqube/extensions:Z
+          name: sonarqube_extensions
+        - mountPath: /opt/sonarqube/logs:Z
+          name: sonarqube_logs
+
+  volumes:
+    - name: postgresql
+      hostPath:
+        path: /home/dzintars/containers/github.com/dzintars/oswee/sonarqube/volumes/postgres
+        type: Directory
+    - name: postgresql_data
+      hostPath:
+        path: /home/dzintars/containers/github.com/dzintars/oswee/sonarqube/volumes/postgres/data
+        type: Directory
+    - name: sonarqube_data
+      hostPath:
+        path: /home/dzintars/containers/github.com/dzintars/oswee/sonarqube/volumes/sonarqube/data
+        type: Directory
+    - name: sonarqube_logs
+      hostPath:
+        path: /home/dzintars/containers/github.com/dzintars/oswee/sonarqube/volumes/sonarqube/logs
+        type: Directory
+    - name: sonarqube_extensions
+      hostPath:
+        path: /home/dzintars/containers/github.com/dzintars/oswee/sonarqube/volumes/sonarqube/extensions
+        type: Directory
+...

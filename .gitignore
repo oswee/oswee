@@ -50,10 +50,16 @@ bower_components/
 # Bazel
 bazel-*
 bazel-explain.txt
+
 # Ignore generated files
 **/*.pb.go
 go.sum
 dist/
+
+# Code Quality
+.sonar
+.sonarwork
+.scannerwork
 
 # Ignore npm/yarn debug log
 npm-debug.log
