@@ -9,17 +9,17 @@ platforms:
     instance_raw_config_args:
       - 'vagrant.plugins = ["vagrant-libvirt"]'
     provider_raw_config_args:
-      - "cpu_mode = 'host-passthrough'"
-      - "disk_bus = 'virtio'"
-      - "nic_model_type = 'virtio'"
-      - "video_type = 'virtio'"
-      - "disk_driver :cache => 'writeback'"
-      - "storage :file, bus: 'virtio', cache: 'writeback'"
+      - 'cpu_mode = "host-passthrough"'
+      - 'disk_bus = "virtio"'
+      - 'nic_model_type = "virtio"'
+      - 'video_type = "virtio"'
+      - 'disk_driver :cache => "writeback"'
+      - 'storage :file, bus: "virtio", cache: "writeback"'
     provider_options:
-      video_type: "'vga'"
+      video_type: '"vga"'
     config_options:
       ssh.keep_alive: true
-      ssh.remote_user: "'vagrant'"
+      ssh.remote_user: '"vagrant"'
     groups:
       - workstations
       - all
@@ -32,17 +32,17 @@ platforms:
     instance_raw_config_args:
       - 'vagrant.plugins = ["vagrant-libvirt"]'
     provider_raw_config_args:
-      - "cpu_mode = 'host-passthrough'"
-      - "disk_bus = 'virtio'"
-      - "nic_model_type = 'virtio'"
-      - "video_type = 'virtio'"
-      - "disk_driver :cache => 'writeback'"
-      - "storage :file, bus: 'virtio', cache: 'writeback'"
+      - 'cpu_mode = "host-passthrough"'
+      - 'disk_bus = "virtio"'
+      - 'nic_model_type = "virtio"'
+      - 'video_type = "virtio"'
+      - 'disk_driver :cache => "writeback"'
+      - 'storage :file, bus: "virtio", cache: "writeback"'
     provider_options:
-      video_type: "'vga'"
+      video_type: '"vga"'
     config_options:
       ssh.keep_alive: true
-      ssh.remote_user: "'vagrant'"
+      ssh.remote_user: '"vagrant"'
     groups:
       - bastions
       - all
