@@ -60,6 +60,24 @@ variable "vault" {
   }
 }
 
+variable "git" {
+  description = ""
+  type = object({
+    hostname   = string
+    ip_address = string
+    user       = string
+    memory     = string
+    vcpu       = string
+  })
+  default = {
+    hostname   = "instance"
+    ip_address = "192.168.0.0"
+    user       = "admin"
+    memory     = "512"
+    vcpu       = "1"
+  }
+}
+
 variable "ansible_ssh_key_name" {
   description = ""
   type        = string
