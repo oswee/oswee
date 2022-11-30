@@ -24,9 +24,14 @@ build --verbose_explanations
 # --repository_cache for fetched externals
 # --disk_cache for build artifacts
 
-build --repository_cache=~/.cache/bazel-repo
-fetch --repository_cache=~/.cache/bazel-repo
-query --repository_cache=~/.cache/bazel-repo
-build --disk_cache=~/.cache/bazel-disk
+# Local cache
+# build --repository_cache=~/.cache/bazel-repo
+# fetch --repository_cache=~/.cache/bazel-repo
+# query --repository_cache=~/.cache/bazel-repo
+# build --disk_cache=~/.cache/bazel-disk
 
-# build --color=yes
+# Remote Cache
+build --remote_cache=http://build.oswee.local:8000/cache
+
+build --color=yes
+run --color=yes
