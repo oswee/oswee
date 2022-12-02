@@ -11,8 +11,15 @@
       ansible.builtin.import_role:
         name: oswee.generic.firewalld
 
+    - name: Buildkite
+      ansible.builtin.import_role:
+        name: oswee.generic.buildkite
+
     - name: Bazel
       block:
+        - name: Install Bazel
+          ansible.builtin.import_role:
+            name: oswee.generic.bazel
         - name: Install Bazel Remote Cache
           ansible.builtin.import_role:
             name: oswee.generic.bazelremote
