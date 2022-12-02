@@ -56,10 +56,13 @@
     port: '{{ item }}'
     permanent: true
     state: enabled
-  notify: Restart Firewalld
+  notify: Reload firewalld
   loop:
     - 8200/tcp
     - 8201/tcp
+
+- name: install | Force firewalld reload
+  ansible.builtin.meta: flush_handlers
 
 # Actually we don't need to do this because it's done in Systemd unit file.
 # - name: install | Set mlock capabilities

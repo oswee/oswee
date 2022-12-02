@@ -2,12 +2,15 @@
 # tasks file for Vault
 
 - name: unseal | Reading unseal key contents
+  no_log: true
   ansible.builtin.command: cat {{item}}
+  # FIXIT:
   with_fileglob: "{{ vault_unseal_keys_path }}/*"
-  # delegate_to: localhost
+  delegate_to: workstation
   register: unseal_keys
 
-# TODO: I don't like no_log
+
+# TODO: I don't like no_log thing
 - name: unseal | Unseal vault with unseal keys
   no_log: true
   ansible.builtin.shell: |
