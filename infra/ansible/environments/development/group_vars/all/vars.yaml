@@ -1,6 +1,4 @@
 ---
-ansible_ssh_common_args: '-F environments/development/.ssh/config'
-
 environment: 'dev'
 tls_certs: '{{ vault_tls_certs }}'
 tls_certs_dev: '{{ vault_tls_certs_dev }}'
