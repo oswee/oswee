@@ -1,2 +1,7 @@
 ---
-# vars file for bazel
+# vars file for Bazel
+
+packages:
+  redhat:
+    - gcc
+...

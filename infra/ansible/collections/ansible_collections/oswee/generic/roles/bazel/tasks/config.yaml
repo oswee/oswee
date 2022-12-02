@@ -1,20 +1,20 @@
 ---
-# tasks file for bazel
+# tasks file for Bazel
 
 - name: Add bazel alias to bazelik
   become: true
   ansible.builtin.copy:
     dest: /etc/profile.d/bazelisk.sh
     mode: '0644'
-    content: "alias bazel='bazelisk'\n"
+    content: alias bazel="bazelisk"\n
 
 # - name: Add bazel alias
 #   lineinfile:
 #     path: $HOME/.zshrc
-#     line: "alias bazel='bazelisk'"
-#     owner: "{{ ansible_user_id }}"
-#     regexp: "^alias bazel='bazelisk'$"
+#     line: 'alias bazel="bazelisk"'
+#     owner: {{ ansible_user_id }}
+#     regexp: '^alias bazel="bazelisk"$'
 #     state: present
 #     insertafter: '^# Aliases'
-#     # create: True
+#     # create: true
 ...
