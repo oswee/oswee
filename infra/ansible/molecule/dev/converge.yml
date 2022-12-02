@@ -2,6 +2,9 @@
 - name: Workstation base tools
   import_playbook: ../../playbooks/workstation.base.yaml
 
+- name: Build tools
+  import_playbook: ../../playbooks/build.yaml
+
 # - name: Workstation tools for local development
 #   import_playbook: ../../playbooks/workstation.dev.yaml
 
