@@ -1,4 +1,6 @@
 ---
-# defaults file for buildkite
+# defaults file for Buildkite
 
 buildkite_agent_token: ''
+buildkite_agent_service_name: buildkite-agent
+...
