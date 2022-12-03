@@ -23,13 +23,13 @@ resource "null_resource" "instance_config" {
 
   provisioner "local-exec" {
     working_dir = "../../../ansible"
-    command     = "ANSIBLE_FORCE_COLOR=1 ansible-playbook -i environments/development playbooks/vault.yaml -t vault.setup"
+    command     = "ANSIBLE_FORCE_COLOR=1 ansible-playbook -i environments/development playbooks/vault.yaml"
   }
 
   depends_on = [
     module.compute,
-    local_file.ansible_ssh_priv_key,
     cloudflare_record.vault,
+    local_file.ansible_ssh_priv_key,
   ]
 }
 
@@ -45,3 +45,10 @@ resource "null_resource" "vault_init" {
 }
 
 # TODO: Remove local secrets when destroying instance.
+resource "null_resource" "vault_teardown" {
+  provisioner "local-exec" {
+    when        = destroy
+    working_dir = "../../../ansible"
+    command     = "ANSIBLE_FORCE_COLOR=1 ansible-playbook -i environments/development playbooks/vault.yaml --limit workstation -t vault.teardown"
+  }
+}
