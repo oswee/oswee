@@ -26,11 +26,6 @@
     state: absent
   loop: '{{ packages.redhat }}'
 
-- name: teardown | Remove secrets
-  ansible.builtin.file:
-    path: '{{ vault_secrets_path }}'
-    state: absent
-
 - name: teardown | Remove Vault data directories
   become: true
   ansible.builtin.file:
