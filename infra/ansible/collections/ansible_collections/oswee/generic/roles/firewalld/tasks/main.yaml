@@ -1,5 +1,5 @@
 ---
-# tasks file for firewalld
+# tasks file for Firewalld
 
 - name: Install Firewalld
   become: true
@@ -9,4 +9,11 @@
   loop:
     - firewalld
     - python-firewall
+
+- name: config | Make sure a service is enabled and running
+  become: true
+  ansible.builtin.systemd:
+    name: '{{ firewalld_service_name }}'
+    enabled: true
+    state: started
 ...

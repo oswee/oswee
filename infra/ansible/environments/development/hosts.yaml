@@ -1,0 +1,31 @@
+---
+workstations:
+  hosts:
+    workstation:
+      ansible_host: localhost
+      ansible_connection: local
+      ansible_user: dzintars
+
+infra:
+  hosts:
+    vault:
+      # ansible_host: 192.168.100.200
+    dhcp:
+    pxe:
+    ns1:
+    s3:
+    bastion:
+
+build:
+  hosts:
+    build:
+      ansible_host: 192.168.100.201
+
+all:
+  children:
+    workstations:
+    infra:
+    build:
+  vars:
+    ansible_ssh_common_args: '-F environments/development/.ssh/config'
+...

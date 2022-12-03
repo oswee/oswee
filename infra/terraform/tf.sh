@@ -27,7 +27,7 @@ tflint() {
   tflint --enable-rule=terraform_unused_declarations $1
 }
 
-environment="./project/ignite/$1"
+environment="./project/$1"
 case $2 in
 init)
   tfinit $environment

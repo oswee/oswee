@@ -1,0 +1,57 @@
+---
+# tasks file for Bazelremote
+
+- name: install | Download bazel-remote binary
+  become: true
+  ansible.builtin.get_url:
+    url: 'https://github.com/buchgr/bazel-remote/releases/download/v2.3.9/bazel-remote-2.3.9-linux-x86_64'
+    dest: '{{ bazelremote_binary_path }}'
+    mode: a+x
+
+- name: install | Copy Systemd service unit template
+  become: true
+  ansible.builtin.template:
+    src: bazel-remote.service.j2
+    dest: /etc/systemd/system/bazel-remote.service
+    mode: '0644'
+
+- name: install | Force systemd to re-execute itself
+  become: true
+  ansible.builtin.systemd:
+    daemon_reexec: true
+
+- name: install | Create system group
+  become: true
+  ansible.builtin.group:
+    name: '{{ bazelremote_group }}'
+    state: present
+    system: true
+
+- name: install | Create system user
+  become: true
+  ansible.builtin.user:
+    name: '{{ bazelremote_user }}'
+    home: '{{ bazelremote_home_path }}'
+    system: true
+    shell: /bin/false
+    group: '{{ bazelremote_group }}'
+
+- name: install | Allow the service to be accessed at the firewall level
+  become: true
+  ansible.posix.firewalld:
+    port: '{{ item }}'
+    permanent: true
+    state: enabled
+  notify: Restart Firewalld
+  loop:
+    - 8000/tcp
+    - 9092/tcp
+    - 8080/tcp
+
+- name: config | Make sure a service is enabled and running
+  become: true
+  ansible.builtin.systemd:
+    name: '{{ bazelremote_service_name }}'
+    enabled: true
+    state: started
+...

@@ -1,0 +1,26 @@
+---
+- name: Configure Build Server
+  hosts: build
+  # connection: local
+  become: false
+  # become_user: ansible
+  gather_facts: true
+
+  tasks:
+    - name: Firewall
+      ansible.builtin.import_role:
+        name: oswee.generic.firewalld
+
+    - name: Buildkite
+      ansible.builtin.import_role:
+        name: oswee.generic.buildkite
+
+    - name: Bazel
+      block:
+        - name: Install Bazel
+          ansible.builtin.import_role:
+            name: oswee.generic.bazel
+        - name: Install Bazel Remote Cache
+          ansible.builtin.import_role:
+            name: oswee.generic.bazelremote
+...

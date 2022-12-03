@@ -1,90 +1,109 @@
-variable "fqdn" {
-  description = "Fully Qualified Domain Name"
+# These are loaded from environment variables
+# ___________________________________________
+
+variable "s3_bucket" {
+  description = ""
   type        = string
-  default     = "fedora.example.local"
+  sensitive   = true
 }
 
-variable "hostname" {
-  description = "Hostname of the instance"
+variable "access_key" {
+  description = ""
   type        = string
-  default     = "fedora"
+  sensitive   = true
+}
+
+variable "secret_key" {
+  description = ""
+  type        = string
+  sensitive   = true
+}
+
+variable "endpoint" {
+  description = ""
+  type        = string
+}
+
+# These are loaded from auto.tfvars
+# _________________________________
+
+variable "github_organization" {
+  description = ""
+  type        = string
+}
+
+variable "github_user" {
+  description = ""
+  type        = string
 }
 
 variable "ansible_ssh_key_name" {
   description = ""
   type        = string
-  default     = "ansible_bastion_dev_ed25519"
+  default     = "terraform_id_ed25519"
 }
 
-variable "volume" {
+variable "public_root_domain" {
   description = ""
-  type = object({
-    name = optional(string)
-    pool = optional(string)
-  })
+  type        = string
+  default     = "example.com"
+  sensitive   = true
 }
 
-variable "cloudinit" {
-  description = ""
-  type = object({
-    name = optional(string)
-  })
-}
-
-variable "addresses" {
-  description = ""
-  type        = list(string)
-}
-
-variable "gateway" {
+variable "public_ip_address" {
   description = ""
   type        = string
 }
 
-variable "vm" {
+variable "local_root_domain" {
   description = ""
-  type = object({
-    user             = optional(string)
-    user_ssh_pub_key = optional(string)
-    hostname         = optional(string)
-    domain           = optional(string)
-  })
+  type        = string
+  default     = "example.local"
+  sensitive   = true
 }
 
-variable "domain" {
+variable "gateway_ip" {
+  description = ""
+  type        = string
+  default     = "192.168.0.0"
+  sensitive   = true
+}
+
+variable "instance" {
   description = ""
   type = object({
-    name = optional(string)
+    name       = string
+    hostname   = string
+    ip_address = string
+    user       = string
+    memory     = string
+    vcpu       = string
   })
+  default = {
+    name       = "instance"
+    hostname   = "instance"
+    ip_address = "192.168.0.0"
+    user       = "admin"
+    memory     = "512"
+    vcpu       = "1"
+  }
 }
 
 variable "vault" {
   description = ""
   type = object({
-    address = optional(string)
+    address = string
+    token   = string
   })
-}
-
-variable "network" {
-  description = ""
-  type = object({
-    name = string
-    mac  = optional(string)
-  })
+  default = {
+    address = "https://vault.example.local"
+    token   = ""
+  }
 }
 
 variable "cloudflare_api_token" {
   description = "CloudFlare API Token"
   type        = string
   default     = ""
-}
-
-variable "cloudflare_root_zone_id" {
-  description = ""
-  type        = string
-}
-
-variable "public_ip_address" {
-  description = ""
-  type        = string
+  sensitive   = true
 }

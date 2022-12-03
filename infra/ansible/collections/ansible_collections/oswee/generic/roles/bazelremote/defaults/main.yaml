@@ -1,0 +1,9 @@
+---
+# defaults file for Bazelremote
+
+bazelremote_service_name: bazel-remote
+bazelremote_home_path: /home/bazel
+bazelremote_user: bazel-remote
+bazelremote_group: bazel-remote
+bazelremote_binary_path: /usr/local/bin/bazel-remote
+...

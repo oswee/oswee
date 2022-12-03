@@ -13,6 +13,6 @@
       ansible.builtin.import_role:
         name: oswee.generic.vault
       vars:
-        vault_version: 1.12.0
+        vault_version: 1.12.2
         vault_url: https://vault.oswee.dev
 ...

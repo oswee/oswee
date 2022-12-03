@@ -1,13 +1,21 @@
 ---
 # handlers file for Vault
 
-- name: Restart Firewalld
+- name: Reload firewalld
+  become: true
   ansible.builtin.service:
     name: firewalld
+    state: reloaded
+
+- name: Restart vault
+  become: true
+  ansible.builtin.service:
+    name: '{{ vault_service_name }}'
     state: restarted
 
-- name: Restart Vault
+- name: Reload vault
+  become: true
   ansible.builtin.service:
-    name: vault
-    state: restarted
+    name: '{{ vault_service_name }}'
+    state: reloaded
 ...

@@ -1,6 +1,13 @@
 ---
 # tasks file for bazel
 
+- name: install | Install system packages
+  become: true
+  ansible.builtin.dnf:
+    name: '{{ item }}'
+    state: present
+  loop: '{{ packages.redhat }}'
+
 - name: Download bazelisk
   become: true
   ansible.builtin.get_url:

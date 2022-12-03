@@ -6,6 +6,11 @@
     name: ansible-lint
     state: forcereinstall
 
+- name: install | Install Hashicorp Vault module
+  ansible.builtin.pip:
+    name: hvac
+    state: forcereinstall
+
 - name: install | Install NPM ansible-language-server package globally
   community.general.yarn:
     name: '@ansible/ansible-language-server@latest'
@@ -18,9 +23,9 @@
     state: present
     system: true
 
-- name: Allow 'ansible' group to have passwordless sudo
+- name: install | Allow 'ansible' group to have passwordless sudo
   become: true
-  lineinfile:
+  ansible.builtin.lineinfile:
     dest: /etc/sudoers
     state: present
     regexp: '^%ansible'

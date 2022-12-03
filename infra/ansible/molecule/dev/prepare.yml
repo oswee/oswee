@@ -27,10 +27,6 @@
       become: true
       ansible.builtin.copy:
         dest: /etc/sudoers.d/wheel
-        content: '%wheel ALL=(ALL) NOPASSWD: ALL\n'
+        content: '%wheel ALL=(ALL) NOPASSWD: ALL'
         validate: visudo -cf %s
-
-    - name: Ranger
-      ansible.builtin.include_role:
-        name: oswee.generic.ranger
 ...

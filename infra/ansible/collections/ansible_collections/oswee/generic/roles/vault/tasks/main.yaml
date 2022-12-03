@@ -2,43 +2,44 @@
 # tasks file for Vault
 
 - name: Setup
+  tags:
+    - vault
+    - vault.setup
   block:
     - name: Install
-      import_tasks: install.yaml
+      ansible.builtin.import_tasks: install.yaml
       tags:
         - install
         - vault.install
 
-    - name: Configure
-      import_tasks: configure.yaml
+    - name: Config
+      ansible.builtin.import_tasks: config.yaml
       tags:
         - config
         - vault.config
-  tags:
-    - vault
-    - vault.setup
 
 - name: Init
+  tags:
+    - vault
+    - vault.init
   block:
     - name: Init
-      import_tasks: init.yaml
+      ansible.builtin.import_tasks: init.yaml
       tags:
         - init
         - vault.init
 
     - name: Unseal
-      import_tasks: unseal.yaml
+      ansible.builtin.import_tasks: unseal.yaml
       tags:
         - unseal
         - vault.unseal
-  tags:
-    - vault
-    - vault.init
 
 - name: Teardown
-  import_tasks: teardown.yaml
   tags:
+    - vault
     - teardown
     - vault.teardown
     - never
+  ansible.builtin.import_tasks: teardown.yaml
 ...

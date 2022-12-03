@@ -16,6 +16,9 @@ ns1
 [bastions]
 bastion
 
+[build]
+build
+
 [infra:children]
 nameservers
 
