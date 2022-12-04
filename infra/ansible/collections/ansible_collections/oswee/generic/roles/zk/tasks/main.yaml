@@ -1,20 +1,26 @@
 ---
 # tasks file for Zk
 
-- name: Install
-  import_tasks: install.yaml
+- name: Setup
   tags:
+    - zk
     - zk.setup
+  block:
+    - name: Build
+      ansible.builtin.import_tasks: build.yaml
+      tags:
+        - build
+        - zk.build
 
-- name: Build
-  import_tasks: build.yaml
-  tags:
-    - zk.install
-    - zk.build
+    # - name: Install
+    #   ansible.builtin.import_tasks: install.yaml
+    #   tags:
+    #     - install
+    #     - zk.install
 
-- name: Environment
-  import_tasks: environment.yaml
-  tags:
-    - zk.setup
-    - zk.setup.environment
+    - name: Environment
+      ansible.builtin.import_tasks: environment.yaml
+      tags:
+        - environment
+        - zk.environment
 ...
