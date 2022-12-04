@@ -1,8 +1,9 @@
 ---
-# tasks file for packer
+# tasks file for Packer
 
 - name: Install
-  import_tasks: install.yaml
+  ansible.builtin.import_tasks: install.yaml
   tags:
-    - packer:setup
-    - packer:setup:install
+    - packer.setup
+    - packer.setup.install
+...

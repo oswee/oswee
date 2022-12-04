@@ -1,5 +1,6 @@
 ---
-# defaults file for packer
+# defaults file for Packer
 
-packer_version: 1.8.0
+packer_version: 1.8.4
 packer_url: https://releases.hashicorp.com/packer/{{ packer_version }}/packer_{{ packer_version }}_linux_amd64.zip
+...
