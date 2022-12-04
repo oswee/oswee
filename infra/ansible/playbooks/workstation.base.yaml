@@ -32,6 +32,10 @@
           ansible.builtin.import_role:
             name: oswee.custom.nvim
 
+    - name: Zk
+      ansible.builtin.import_role:
+        name: oswee.generic.zk
+
     - name: Zoxide
       ansible.builtin.import_role:
         name: oswee.generic.zoxide
