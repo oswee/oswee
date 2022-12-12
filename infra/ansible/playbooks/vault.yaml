@@ -15,4 +15,16 @@
       vars:
         vault_version: 1.12.2
         vault_url: https://vault.oswee.dev
+
+- name: Initialize and unseal Vault server
+  hosts: workstation
+  become: false
+  gather_facts: true
+
+  tasks:
+    - name: Vault
+      ansible.builtin.import_role:
+        name: vault
+      vars:
+        vault_url: https://vault.oswee.dev
 ...

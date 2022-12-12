@@ -1,6 +1,6 @@
-local ok, lspconfig = pcall(require, 'lspconfig')
+local ok, lspconfig = pcall(require, "lspconfig")
 if not ok then
-	local errmsg = '[LSP] `nvim-lspconfig` plugin not installed! Please install via your plugin manager.'
+	local errmsg = "[LSP] `nvim-lspconfig` plugin not installed! Please install via your plugin manager."
 	vim.api.nvim_err_writeln(errmsg)
 	return
 end
@@ -14,11 +14,11 @@ end
 
 return {
 	on_attach = on_attach,
-	root_dir = lspconfig.util.root_pattern('.git', 'terraform'),
+	root_dir = lspconfig.util.root_pattern(".git", "terraform"),
 	settings = {
-		cmd = { 'terraform-ls', 'serve' },
+		cmd = { "terraform-ls", "serve" },
 		filetypes = {
-			'terraform',
+			"terraform",
 		},
 	},
 }

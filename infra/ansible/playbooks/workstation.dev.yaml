@@ -28,9 +28,9 @@
     #   vars:
     #     terraform_version: 1.3.1
     #     terraform_ls_version: 0.29.2
-    # - role: oswee.generic.packer
-    #   vars:
-    #     packer_version: 1.8.0
+    - role: oswee.generic.packer
+      vars:
+        packer_version: 1.8.4
     # - role: oswee.generic.kubectl
     # - role: oswee.generic.istio
     - role: oswee.custom.terraform

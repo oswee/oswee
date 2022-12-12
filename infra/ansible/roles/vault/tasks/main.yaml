@@ -1,0 +1,29 @@
+---
+# tasks file for Vault
+
+- name: Init
+  tags:
+    - vault
+    - vault.init
+  block:
+    - name: Init
+      ansible.builtin.import_tasks: init.yaml
+      tags:
+        - init
+        - vault.init
+
+    - name: Unseal
+      ansible.builtin.import_tasks: unseal.yaml
+      tags:
+        - unseal
+        - vault.unseal
+
+- name: Teardown
+  tags:
+    - never
+    - teardown
+    - vault.teardown
+  block:
+    - name: Teardown
+      ansible.builtin.import_tasks: teardown.yaml
+...

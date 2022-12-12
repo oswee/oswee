@@ -1,7 +1,61 @@
-local ok, db = pcall(require, 'dashboard')
-if not ok then
+local packer_installed, packer = pcall(require, "packer")
+if not packer_installed then
+	vim.api.nvim_err_writeln("[modules.ui.dashboard-nvim] Packer not found")
 	return
 end
+
+packer.use({
+	"glepnir/dashboard-nvim",
+	disable = true,
+	opt = false,
+	requires = { "nvim-telescope/telescope.nvim" },
+	config = function()
+		require("dashboard").custom_center = {
+			-- {
+			-- 	icon = "  ",
+			-- 	desc = "Recently laset session                  ",
+			-- 	shortcut = "SPC s l",
+			-- 	action = "SessionLoad",
+			-- },
+			{
+				icon = "  ",
+				desc = "Recent files                            ",
+				action = "Telescope oldfiles",
+				shortcut = "SPC f h",
+			},
+			{
+				icon = "  ",
+				desc = "Find  Files                             ",
+				action = "Telescope find_files find_command=rg,--hidden,--files",
+				shortcut = "SPC f f",
+			},
+			{
+				icon = "  ",
+				desc = "Find Word                               ",
+				action = "Telescope live_grep",
+				shortcut = "SPC f b",
+			},
+			{
+				icon = "  ",
+				desc = "File Browser                            ",
+				action = "Telescope file_browser",
+				shortcut = "SPC f b",
+			},
+			{
+				icon = "  ",
+				desc = "Marks                                   ",
+				action = "DashboardFindWord",
+				shortcut = "SPC f w",
+			},
+			{
+				icon = "  ",
+				desc = "Nvim Config                             ",
+				action = "edit ~/.config/nvim/init.lua",
+				shortcut = "SPC f c",
+			},
+		}
+	end,
+})
 
 -- vim.g.dashboard_custom_section = {
 -- 	a = { description = { "  Restore last session" }, command = "SessionLoad" },
@@ -14,48 +68,3 @@ end
 -- }
 
 -- vim.g.dashboard_custom_footer = {}
-
-db.custom_center = {
-	-- {
-	-- 	icon = "  ",
-	-- 	desc = "Recently laset session                  ",
-	-- 	shortcut = "SPC s l",
-	-- 	action = "SessionLoad",
-	-- },
-	{
-		icon = '  ',
-		desc = 'Recent files                            ',
-		action = 'Telescope oldfiles',
-		shortcut = 'SPC f h',
-	},
-	{
-		icon = '  ',
-		desc = 'Find  Files                             ',
-		action = 'Telescope find_files find_command=rg,--hidden,--files',
-		shortcut = 'SPC f f',
-	},
-	{
-		icon = '  ',
-		desc = 'Find Word                               ',
-		action = 'Telescope live_grep',
-		shortcut = 'SPC f b',
-	},
-	{
-		icon = '  ',
-		desc = 'File Browser                            ',
-		action = 'Telescope file_browser',
-		shortcut = 'SPC f b',
-	},
-	{
-		icon = '  ',
-		desc = 'Marks                                   ',
-		action = 'DashboardFindWord',
-		shortcut = 'SPC f w',
-	},
-	{
-		icon = '  ',
-		desc = 'Nvim Config                             ',
-		action = 'edit ~/.config/nvim/init.lua',
-		shortcut = 'SPC f c',
-	},
-}

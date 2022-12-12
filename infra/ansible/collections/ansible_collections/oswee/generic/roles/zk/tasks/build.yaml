@@ -1,30 +1,31 @@
 ---
-# tasks file for nvim
+# tasks file for Zk
 
-- name: Clone Zk repository
+- name: build | Clone Zk repository
   ansible.builtin.git:
     repo: '{{ zk_repo_url }}'
     dest: '{{ zk_source_dir }}'
-    version: master
+    version: main
     depth: 1
   register: zk_repo
 
-- name: Cleanup build artifacts
+- name: build | Cleanup build artifacts
   community.general.make:
     chdir: '{{ zk_source_dir }}'
     target: clean
   when: zk_repo.changed
 
-- name: Build Zk from the source
+- name: build | Build Zk from the source
   community.general.make:
     chdir: '{{ zk_source_dir }}'
     target: build
   when: zk_repo.changed
-  register: zk_build
+  # register: zk_build
 
-- name: Install build version of the ZK
+# Make sure GOBIN is set correctly. In my case it points to ~/go/bin in Nushell env.nu
+- name: build | Install build version of the ZK
   community.general.make:
     chdir: '{{ zk_source_dir }}'
     target: install
-  when: nvim_build.changed
+  # when: zk_build.changed
 ...

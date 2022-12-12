@@ -24,9 +24,9 @@ galaxy_info:
     - dzintars
     - fedora
 
-# dependencies: []
-dependencies:
-  - role: yethal.nushell
+dependencies: []
+# dependencies:
+#   - role: yethal.nushell
     # vars:
     #   nushell_binary_path: /usr/local/bin
     #   nushell_plugins_path: ~/.config/nushell/plugins

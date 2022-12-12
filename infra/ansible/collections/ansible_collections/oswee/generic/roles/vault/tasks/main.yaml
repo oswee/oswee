@@ -18,28 +18,15 @@
         - config
         - vault.config
 
-- name: Init
-  tags:
-    - vault
-    - vault.init
-  block:
-    - name: Init
-      ansible.builtin.import_tasks: init.yaml
-      tags:
-        - init
-        - vault.init
-
-    - name: Unseal
-      ansible.builtin.import_tasks: unseal.yaml
-      tags:
-        - unseal
-        - vault.unseal
-
 - name: Teardown
   tags:
-    - vault
+    - never
     - teardown
     - vault.teardown
-    - never
-  ansible.builtin.import_tasks: teardown.yaml
+  block:
+    - name: Full
+      ansible.builtin.import_tasks: teardown.yaml
+      tags:
+        - full
+        - vault.teardown
 ...
