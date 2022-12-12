@@ -7,7 +7,6 @@ function M.setup()
 		vim.api.nvim_err_writeln(errmsg)
 		return
 	end
-	-- local dap = require("dap")
 	dap.configurations.lua = {
 		{
 			type = "nlua",

@@ -1,14 +1,19 @@
-local ok, lspcolors = pcall(require, 'lsp-colors')
-if not ok then
-  local errmsg = '[LSP] `lsp-colors` plugin not installed! Please install via your plugin manager.'
-  vim.api.nvim_err_writeln(errmsg)
-  return
+local packer_installed, packer = pcall(require, "packer")
+if not packer_installed then
+	vim.api.nvim_err_writeln("[modules.lsp.lsp-colors] Packer not found")
+	return
 end
 
-lspcolors.setup({
-  Error = "#db4b4b",
-  Warning = "#e0af68",
-  Information = "#0db9d7",
-  Hint = "#10B981"
+packer.use({
+	"folke/lsp-colors.nvim",
+	disable = false,
+	opt = false,
+	config = function()
+		require("lsp-colors").setup({
+			Error = "#db4b4b",
+			Warning = "#e0af68",
+			Information = "#0db9d7",
+			Hint = "#10B981",
+		})
+	end,
 })
-
