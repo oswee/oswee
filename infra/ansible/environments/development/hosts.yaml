@@ -16,6 +16,11 @@ infra:
     s3:
     bastion:
 
+db:
+  hosts:
+    sql1:
+      ansible_host: 192.168.100.101
+
 ci:
   hosts:
     build:
@@ -25,6 +30,7 @@ all:
   children:
     workstations:
     infra:
+    db:
     ci:
   vars:
     ansible_ssh_common_args: '-F environments/development/.ssh/config'
