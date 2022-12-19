@@ -5,6 +5,9 @@
 - name: Build tools
   import_playbook: ../../playbooks/build.yaml
 
+- name: Database
+  import_playbook: ../../playbooks/database.yaml
+
 # - name: Workstation tools for local development
 #   import_playbook: ../../playbooks/workstation.dev.yaml
 

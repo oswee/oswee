@@ -6,21 +6,21 @@
     - nushell
     - nushell.setup
   block:
-    - name: Install
-      ansible.builtin.import_tasks: install.yaml
-      tags:
-        - install
-        - nushell.install
+    # - name: Install
+    #   ansible.builtin.import_tasks: install.yaml
+    #   tags:
+    #     - install
+    #     - nushell.install
     - name: Config
       ansible.builtin.import_tasks: config.yaml
       tags:
         - config
         - nushell.config
 
-- name: Teardown
-  ansible.builtin.import_tasks: teardown.yaml
-  tags:
-    - never
-    - teardown
-    - nushell.teardown
+# - name: Teardown
+#   ansible.builtin.import_tasks: teardown.yaml
+#   tags:
+#     - never
+#     - teardown
+#     - nushell.teardown
 ...

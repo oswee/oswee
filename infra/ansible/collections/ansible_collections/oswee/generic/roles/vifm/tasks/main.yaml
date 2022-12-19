@@ -17,10 +17,10 @@
   tags:
     - vifm
 
-- name: Teardown
-  import_tasks: teardown.yaml
-  tags:
-    - never
-    - teardown
-    - vifm.teardown
+# - name: Teardown
+#   import_tasks: teardown.yaml
+#   tags:
+#     - never
+#     - teardown
+#     - vifm.teardown
 ...

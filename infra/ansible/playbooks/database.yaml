@@ -1,0 +1,13 @@
+---
+- name: Setup database server
+  hosts: db
+  become: false
+  gather_facts: true
+
+  tasks:
+    - name: MariaDB
+      block:
+        - name: Install MariaDB
+          ansible.builtin.import_role:
+            name: oswee.generic.mariadb
+...
