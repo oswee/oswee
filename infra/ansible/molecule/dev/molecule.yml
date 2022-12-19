@@ -67,6 +67,6 @@ platforms:
       ssh.keep_alive: true
       ssh.remote_user: '"vagrant"'
     groups:
-      - build
+      - ci
       - all
 ...
