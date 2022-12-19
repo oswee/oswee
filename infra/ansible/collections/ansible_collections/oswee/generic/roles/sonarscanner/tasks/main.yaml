@@ -17,10 +17,10 @@
     - sonarscanner
     - sonarscanner.setup
 
-- name: Teardown
-  import_tasks: teardown.yaml
-  tags:
-    - never
-    - teardown
-    - sonarscanner.teardown
+# - name: Teardown
+#   import_tasks: teardown.yaml
+#   tags:
+#     - never
+#     - teardown
+#     - sonarscanner.teardown
 ...
