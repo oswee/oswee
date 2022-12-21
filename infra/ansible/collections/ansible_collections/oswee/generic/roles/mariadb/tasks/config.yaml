@@ -1,16 +1,16 @@
 ---
-# tasks file for roles/mariadb
+# tasks file for MariaDB
 
-- name: Get MySQL version.
+- name: config | Get MySQL version
   become: true
-  command: 'mysql --version'
+  ansible.builtin.command: 'mysql --version'
   register: mysql_cli_version
   changed_when: false
   check_mode: false
 
-- name: Copy my.cnf global MySQL configuration.
+- name: config | Copy my.cnf MariaDB global configuration
   become: true
-  template:
+  ansible.builtin.template:
     src: my.cnf.j2
     dest: '{{ mysql_config_file }}'
     owner: root
@@ -19,9 +19,9 @@
     force: '{{ overwrite_global_mycnf }}'
   notify: mariadb-restart
 
-- name: Verify mysql include directory exists.
+- name: config | Verify mysql.d include directory exists
   become: true
-  file:
+  ansible.builtin.file:
     path: '{{ mysql_config_include_dir }}'
     state: directory
     owner: root
@@ -29,9 +29,9 @@
     mode: 0755
   when: mysql_config_include_files | length
 
-- name: Copy my.cnf override files into include directory.
+- name: config | Copy my.cnf override files into include directory
   become: true
-  template:
+  ansible.builtin.template:
     src: '{{ item.src }}'
     dest: '{{ mysql_config_include_dir }}/{{ item.src | basename }}'
     owner: root
@@ -41,9 +41,20 @@
   with_items: '{{ mysql_config_include_files }}'
   notify: mariadb-restart
 
-# - name: mariadb | copy mariadb configurations
+- name: config | Copy charset.cnf override files into include directory
+  become: true
+  ansible.builtin.template:
+    src: charset.cnf.j2
+    dest: '{{ mysql_config_include_dir }}/charset.cnf'
+    owner: root
+    group: root
+    mode: 0644
+    force: true
+  notify: mariadb-restart
+
+# - name: config | copy mariadb configurations
 #   become: true
-#   template:
+#   ansible.builtin.template:
 #     src: "{{ item.src }}"
 #     dest: "{{ item.dest }}"
 #     owner: root
@@ -56,7 +67,7 @@
 #   notify: mariadb-restart
 #
 #
-# - name: Ensure default user is present.
+# - name: config | Ensure default user is present.
 #   mysql_user:
 #     name: "{{ mysql_user_name }}"
 #     host: 'localhost'
@@ -66,24 +77,24 @@
 #   when: mysql_user_name != mysql_root_username
 #
 # # # Has to be after the password assignment, for idempotency.
-# - name: Copy user-my.cnf file with password credentials.
-#   template:
+# - name: config | Copy user-my.cnf file with password credentials
+#   ansible.builtin.template:
 #     src: "user-my.cnf.j2"
 #     dest: "{{ mysql_user_home }}/.my.cnf"
 #     owner: "{{ mysql_user_name }}"
 #     mode: 0600
 
-- name: Create slow query log file (if configured).
+- name: config | Create slow query log file (if configured)
   become: true
-  command: 'touch {{ mysql_slow_query_log_file }}'
+  ansible.builtin.command: 'touch {{ mysql_slow_query_log_file }}'
   args:
     creates: '{{ mysql_slow_query_log_file }}'
-    warn: false
+    # warn: false
   when: mysql_slow_query_log_enabled
 
-- name: Create datadir if it does not exist
+- name: config | Create datadir if it does not exist
   become: true
-  file:
+  ansible.builtin.file:
     path: '{{ mysql_datadir }}'
     state: directory
     owner: mysql
@@ -91,9 +102,9 @@
     mode: 0755
     setype: mysqld_db_t
 
-- name: Set ownership on slow query log file (if configured).
+- name: config | Set ownership on slow query log file (if configured)
   become: true
-  file:
+  ansible.builtin.file:
     path: '{{ mysql_slow_query_log_file }}'
     state: file
     owner: mysql
@@ -101,20 +112,21 @@
     mode: 0640
   when: mysql_slow_query_log_enabled
 
-- name: Create error log file (if configured).
+- name: config | Create error log file (if configured)
   become: true
-  command: 'touch {{ mysql_log_error }}'
+  ansible.builtin.command: 'touch {{ mysql_log_error }}'
   args:
     creates: '{{ mysql_log_error }}'
     warn: false
   when:
     - mysql_log | default(true)
     - mysql_log_error | default(false)
-  tags: ['skip_ansible_galaxy']
+  tags:
+    - skip_ansible_galaxy
 
-- name: Set ownership on error log file (if configured).
+- name: config | Set ownership on error log file (if configured)
   become: true
-  file:
+  ansible.builtin.file:
     path: '{{ mysql_log_error }}'
     state: file
     owner: mysql
@@ -123,9 +135,14 @@
   when:
     - mysql_log | default(true)
     - mysql_log_error | default(false)
-  tags: ['skip_ansible_galaxy']
+  tags:
+    - skip_ansible_galaxy
 
-- name: Ensure MySQL is started and enabled on boot.
+- name: config | Ensure MariaDB is started and enabled on boot
   become: true
-  service: 'name={{ mysql_daemon }} state=started enabled={{ mysql_enabled_on_startup }}'
+  ansible.builtin.systemd:
+    name: '{{ mysql_daemon }}'
+    state: started
+    enabled: '{{ mysql_enabled_on_startup }}'
   register: mysql_service_configuration
+...

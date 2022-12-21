@@ -1,19 +1,22 @@
 ---
-- name: Ensure replication user exists on master.
-  mysql_user:
+# tasks file for mariadb
+
+- name: replication | Ensure replication user exists on master.
+  community.mysql.mysql_user:
     name: '{{ mysql_replication_user.name }}'
-    host: "{{ mysql_replication_user.host | default('%') }}"
+    host: '{{ mysql_replication_user.host | default("%") }}'
     password: '{{ mysql_replication_user.password }}'
-    priv: "{{ mysql_replication_user.priv | default('*.*:REPLICATION SLAVE,REPLICATION CLIENT') }}"
+    priv: '{{ mysql_replication_user.priv | default("*.*:REPLICATION SLAVE,REPLICATION CLIENT") }}'
     state: present
   when:
     - mysql_replication_role == 'master'
     - mysql_replication_user.name is defined
     - (mysql_replication_master | length) > 0
-  tags: ['skip_ansible_galaxy']
+  tags:
+    - skip_ansible_galaxy
 
-- name: Check slave replication status.
-  mysql_replication:
+- name: replication | Check slave replication status.
+  community.mysql.mysql_replication:
     mode: getslave
     login_user: '{{ mysql_replication_user.name }}'
     login_password: '{{ mysql_replication_user.password }}'
@@ -22,20 +25,22 @@
   when:
     - mysql_replication_role == 'slave'
     - (mysql_replication_master | length) > 0
-  tags: ['skip_ansible_galaxy']
+  tags:
+    - skip_ansible_galaxy
 
-- name: Check master replication status.
-  mysql_replication: mode=getmaster
+- name: replication | Check master replication status.
+  community.mysql.mysql_replication: mode=getmaster
   delegate_to: '{{ mysql_replication_master }}'
   register: master
   when:
     - (slave.Is_Slave is defined and not slave.Is_Slave) or (slave.Is_Slave is not defined and slave is failed)
     - mysql_replication_role == 'slave'
     - (mysql_replication_master | length) > 0
-  tags: ['skip_ansible_galaxy']
+  tags:
+    - skip_ansible_galaxy
 
-- name: Configure replication on the slave.
-  mysql_replication:
+- name: replication | Configure replication on the slave.
+  community.mysql.mysql_replication:
     mode: changemaster
     master_host: '{{ mysql_replication_master }}'
     master_user: '{{ mysql_replication_user.name }}'
@@ -49,10 +54,12 @@
     - mysql_replication_user.name is defined
     - (mysql_replication_master | length) > 0
 
-- name: Start replication.
-  mysql_replication: mode=startslave
+- name: replication | Start replication.
+  community.mysql.mysql_replication: mode=startslave
   when:
     - (slave.Is_Slave is defined and not slave.Is_Slave) or (slave.Is_Slave is not defined and slave is failed)
     - mysql_replication_role == 'slave'
     - (mysql_replication_master | length) > 0
-  tags: ['skip_ansible_galaxy']
+  tags:
+    - skip_ansible_galaxy
+...
