@@ -4,15 +4,8 @@ if not ok then
 end
 
 return {
-	root_dir = function(fname)
-		return lspconfig.util.root_pattern("go.work")(fname) or lspconfig.util.root_pattern("go.mod", ".git")(fname)
-	end,
-	settings = {
-		Go = {
-			default_config = {
-				cmd = { "gopls" },
-				filetypes = { "go", "gomod" },
-			},
-		},
-	},
+	root_dir = lspconfig.util.root_pattern("go.mod", ".git"),
+	cmd = { "gopls" },
+	filetypes = { "go", "gomod", "gowork", "gotmpl" },
+	single_file_support = true,
 }

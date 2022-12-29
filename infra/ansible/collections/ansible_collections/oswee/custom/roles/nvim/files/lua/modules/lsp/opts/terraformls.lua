@@ -14,11 +14,9 @@ end
 
 return {
 	on_attach = on_attach,
-	root_dir = lspconfig.util.root_pattern(".git", "terraform"),
-	settings = {
-		cmd = { "terraform-ls", "serve" },
-		filetypes = {
-			"terraform",
-		},
+	root_dir = lspconfig.util.root_pattern(".git", ".terraform"),
+	cmd = { "terraform-ls", "serve" },
+	filetypes = {
+		"terraform",
 	},
 }

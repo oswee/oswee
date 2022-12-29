@@ -20,7 +20,7 @@ packer.use({
 			},
 			actions = {
 				remove_file = {
-					close_window = true,
+					close_window = false,
 				},
 			},
 		})

@@ -10,6 +10,6 @@ packer.use({
 	opt = false,
 	run = "make hexokinase",
 	config = function()
-		vim.g.Hexokinase_ftEnabled = { "css", "scss", "svg", "html", "javascript" }
+		vim.g.Hexokinase_ftEnabled = { "css", "scss", "svg", "html", "javascript", "lua" }
 	end,
 })

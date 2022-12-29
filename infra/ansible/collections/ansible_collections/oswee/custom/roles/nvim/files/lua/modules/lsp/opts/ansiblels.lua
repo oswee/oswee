@@ -6,8 +6,12 @@ if not ok then
 end
 
 return {
+	root_dir = lspconfig.util.root_pattern("ansible.cfg", ".ansible-lint.yaml", ".ansible-lint"),
 	filetypes = { "yaml.ansible" },
 	single_file_support = true,
-	autostart = true,
-	root_dir = lspconfig.util.root_pattern("ansible.cfg", ".ansible-lint.yaml", ".ansible-lint"),
+	settings = {
+		ansible = {
+			path = "ansible",
+		},
+	},
 }
