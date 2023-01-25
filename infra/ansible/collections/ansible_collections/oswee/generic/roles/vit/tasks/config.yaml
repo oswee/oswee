@@ -1,0 +1,12 @@
+---
+# tasks file for Vit
+
+- name: config | Write config
+  ansible.builtin.template:
+    src: '{{ item.src }}'
+    dest: '{{ item.dest }}'
+    mode: '{{ item.mode }}'
+    # backup: true
+  loop:
+    - { src: 'config.ini.j2', dest: '$HOME/.vit/config.ini', mode: '0644' }
+...

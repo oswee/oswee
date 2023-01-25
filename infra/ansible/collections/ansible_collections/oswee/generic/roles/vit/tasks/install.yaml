@@ -1,0 +1,9 @@
+---
+# tasks file for Vit
+
+- name: install | Install Vit
+  become: true
+  ansible.builtin.dnf:
+    name: vit
+    state: present
+...
