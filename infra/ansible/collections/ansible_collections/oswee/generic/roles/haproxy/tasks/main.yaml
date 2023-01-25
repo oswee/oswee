@@ -4,8 +4,11 @@
 - name: Install
   import_tasks: install.yaml
   tags:
-    - install
-# - name: Cleanup
-#   import_tasks: cleanup.yaml
+    - haproxy.install
+
+# - name: Teardown
+#   import_tasks: teardown.yaml
 #   tags:
-#     - cleanup
+#     - never
+#     - teardown
+...
