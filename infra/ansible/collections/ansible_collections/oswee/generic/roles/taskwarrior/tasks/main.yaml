@@ -1,0 +1,27 @@
+---
+# tasks file for Taskwarrior
+
+- name: Setup
+  tags:
+    - taskwarrior
+    - taskwarrior.setup
+  block:
+    - name: Install
+      ansible.builtin.import_tasks: install.yaml
+      tags:
+        - install
+        - taskwarrior.install
+
+    - name: Config
+      ansible.builtin.import_tasks: config.yaml
+      tags:
+        - config
+        - taskwarrior.config
+
+# - name: Teardown
+#   ansible.builtin.import_tasks: teardown.yaml
+#   tags:
+#     - never
+#     - teardown
+#     - taskwarrior.teardown
+...
