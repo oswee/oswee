@@ -1,0 +1,9 @@
+---
+# tasks file for Timewarrior
+
+- name: install | Install Timewarrior
+  become: true
+  ansible.builtin.dnf:
+    name: timew
+    state: present
+...
