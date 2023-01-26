@@ -1,0 +1,148 @@
+---
+# tasks file for MariaDB
+
+- name: config | Get MySQL version
+  become: true
+  ansible.builtin.command: 'mysql --version'
+  register: mysql_cli_version
+  changed_when: false
+  check_mode: false
+
+- name: config | Copy my.cnf MariaDB global configuration
+  become: true
+  ansible.builtin.template:
+    src: my.cnf.j2
+    dest: '{{ mysql_config_file }}'
+    owner: root
+    group: root
+    mode: 0644
+    force: '{{ overwrite_global_mycnf }}'
+  notify: mariadb-restart
+
+- name: config | Verify mysql.d include directory exists
+  become: true
+  ansible.builtin.file:
+    path: '{{ mysql_config_include_dir }}'
+    state: directory
+    owner: root
+    group: root
+    mode: 0755
+  when: mysql_config_include_files | length
+
+- name: config | Copy my.cnf override files into include directory
+  become: true
+  ansible.builtin.template:
+    src: '{{ item.src }}'
+    dest: '{{ mysql_config_include_dir }}/{{ item.src | basename }}'
+    owner: root
+    group: root
+    mode: 0644
+    force: '{{ item.force | default(False) }}'
+  with_items: '{{ mysql_config_include_files }}'
+  notify: mariadb-restart
+
+- name: config | Copy charset.cnf override files into include directory
+  become: true
+  ansible.builtin.template:
+    src: charset.cnf.j2
+    dest: '{{ mysql_config_include_dir }}/charset.cnf'
+    owner: root
+    group: root
+    mode: 0644
+    force: true
+  notify: mariadb-restart
+
+# - name: config | copy mariadb configurations
+#   become: true
+#   ansible.builtin.template:
+#     src: "{{ item.src }}"
+#     dest: "{{ item.dest }}"
+#     owner: root
+#     group: root
+#     mode: '0644'
+#   loop:
+#     # - { src: "my.cnf.j2", dest: "/etc/my.cnf" }
+#     - { src: "root-my.cnf.j2", dest: "/root/my.cnf" }
+#     - { src: "user-my.cnf.j2", dest: "/home/dzintars/my.cnf" }
+#   notify: mariadb-restart
+#
+#
+# - name: config | Ensure default user is present.
+#   mysql_user:
+#     name: "{{ mysql_user_name }}"
+#     host: 'localhost'
+#     password: "{{ mysql_user_password }}"
+#     priv: '*.*:ALL,GRANT'
+#     state: present
+#   when: mysql_user_name != mysql_root_username
+#
+# # # Has to be after the password assignment, for idempotency.
+# - name: config | Copy user-my.cnf file with password credentials
+#   ansible.builtin.template:
+#     src: "user-my.cnf.j2"
+#     dest: "{{ mysql_user_home }}/.my.cnf"
+#     owner: "{{ mysql_user_name }}"
+#     mode: 0600
+
+- name: config | Create slow query log file (if configured)
+  become: true
+  ansible.builtin.command: 'touch {{ mysql_slow_query_log_file }}'
+  args:
+    creates: '{{ mysql_slow_query_log_file }}'
+    # warn: false
+  when: mysql_slow_query_log_enabled
+
+- name: config | Create datadir if it does not exist
+  become: true
+  ansible.builtin.file:
+    path: '{{ mysql_datadir }}'
+    state: directory
+    owner: mysql
+    group: mysql
+    mode: 0755
+    setype: mysqld_db_t
+
+- name: config | Set ownership on slow query log file (if configured)
+  become: true
+  ansible.builtin.file:
+    path: '{{ mysql_slow_query_log_file }}'
+    state: file
+    owner: mysql
+    group: '{{ mysql_log_file_group }}'
+    mode: 0640
+  when: mysql_slow_query_log_enabled
+
+- name: config | Create error log file (if configured)
+  become: true
+  ansible.builtin.command: 'touch {{ mysql_log_error }}'
+  args:
+    creates: '{{ mysql_log_error }}'
+    warn: false
+  when:
+    - mysql_log | default(true)
+    - mysql_log_error | default(false)
+  tags:
+    - skip_ansible_galaxy
+
+- name: config | Set ownership on error log file (if configured)
+  become: true
+  ansible.builtin.file:
+    path: '{{ mysql_log_error }}'
+    state: file
+    owner: mysql
+    group: '{{ mysql_log_file_group }}'
+    mode: 0640
+  when:
+    - mysql_log | default(true)
+    - mysql_log_error | default(false)
+  tags:
+    - skip_ansible_galaxy
+
+- name: config | Ensure MariaDB is started and enabled on boot
+  become: true
+  ansible.builtin.systemd:
+    name: '{{ mysql_daemon }}'
+    state: started
+    enabled: '{{ mysql_enabled_on_startup }}'
+  register: mysql_service_configuration
+...

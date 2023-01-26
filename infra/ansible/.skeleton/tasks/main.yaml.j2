@@ -11,6 +11,7 @@
       tags:
         - install
         - {{ role_name | regex_replace('.*roles\/')}}.install
+
     - name: Config
       ansible.builtin.import_tasks: config.yaml
       tags:

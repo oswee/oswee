@@ -1,0 +1,9 @@
+---
+# tasks file for Lua
+
+- name: install | Download prebuilt release artifacts
+  ansible.builtin.unarchive:
+    src: '{{ lua_release_url }}'
+    dest: '{{ lua_destination_dir }}'
+    remote_src: true
+...

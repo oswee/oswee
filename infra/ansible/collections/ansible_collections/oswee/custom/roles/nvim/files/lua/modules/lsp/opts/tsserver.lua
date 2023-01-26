@@ -15,12 +15,12 @@ end
 return {
 	on_attach = on_attach,
 	root_dir = lspconfig.util.root_pattern("package.json", "tsconfig.json", "jsconfig.json", ".git"),
+	cmd = { "typescript-language-server", "--stdio" },
+	filetypes = {
+		"javascript",
+		"typescript",
+	},
 	settings = {
-		cmd = { "typescript-language-server", "--stdio" },
-		filetypes = {
-			"javascript",
-			"typescript",
-		},
 		tsserver = {
 			useBatchedBufferSync = true,
 		},

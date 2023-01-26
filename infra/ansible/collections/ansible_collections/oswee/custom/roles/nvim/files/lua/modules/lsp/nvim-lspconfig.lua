@@ -17,21 +17,22 @@ packer.use({
 		end
 
 		local servers = {
-			"sumneko_lua",
-			-- 'html',
-			"cssls",
-			-- 'efm',
-			"gopls",
-			"golangci_lint_ls",
-			"tsserver",
-			"yamlls",
 			"ansiblels",
 			"bashls",
-			"pyright",
+			"bufls",
+			"cssls",
+			"cssmodules_ls",
+			"gopls",
+			"golangci_lint_ls",
+			"html",
 			"jsonls",
-			"stylelint_lsp",
+			"pyright",
 			"rust_analyzer",
+			"sumneko_lua",
+			"stylelint_lsp",
 			"terraformls",
+			"tsserver",
+			"yamlls",
 		}
 
 		for _, server in pairs(servers) do
@@ -47,11 +48,8 @@ packer.use({
 
 			local has_custom_opts, custom_server_opts = pcall(require, "modules.lsp.opts." .. server)
 			if has_custom_opts then
-				-- opts = vim.tbl_deep_extend('force', custom_server_opts, opts)  -- Override defaults (force/keep)
-				opts = vim.tbl_deep_extend("force", opts, custom_server_opts) -- Override defaults (force/keep)
-				-- for k, v in pairs(opts) do
-				-- 	print(k, v, "END")
-				-- end
+				opts = vim.tbl_deep_extend("force", custom_server_opts, opts) -- Override defaults (force/keep)
+				-- opts = vim.tbl_deep_extend("force", opts, custom_server_opts) -- Override defaults (force/keep)
 			end
 
 			-- print(opts)
@@ -72,12 +70,6 @@ packer.use({
 			"<leader>ll",
 			"<cmd>LspInfo<cr>",
 			{ silent = true, desc = "lsp | Connected language servers" }
-		)
-		vim.keymap.set(
-			"n",
-			"<leader>lk",
-			"<cmd>lua vim.lsp.buf.signature_help()<cr>",
-			{ silent = true, desc = "lsp | Signature help" }
 		)
 		vim.keymap.set(
 			"n",

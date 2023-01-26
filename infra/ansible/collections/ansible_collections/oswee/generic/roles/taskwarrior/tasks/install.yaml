@@ -1,0 +1,9 @@
+---
+# tasks file for Taskwarrior
+
+- name: install | Install Taskwarrior
+  become: true
+  ansible.builtin.dnf:
+    name: task
+    state: present
+...

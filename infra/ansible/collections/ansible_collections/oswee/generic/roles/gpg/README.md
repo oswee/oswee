@@ -1,6 +1,8 @@
 # gpg
 
-A brief description of the role goes here.
+Simple GPG role
+
+Using `pinentry-qt` for the ability to paste passphrase from the password manager.
 
 ## Requirements
 

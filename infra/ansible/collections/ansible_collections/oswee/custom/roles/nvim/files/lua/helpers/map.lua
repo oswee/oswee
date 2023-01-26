@@ -1,3 +1,7 @@
+-- local vim = vim
+-- local api = vim.api
+-- local cmd = vim.cmd
+
 local helpers = {}
 
 -- helpers.map = function(mode, lhs, rhs, opts)

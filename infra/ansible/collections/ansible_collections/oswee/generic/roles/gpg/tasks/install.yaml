@@ -7,6 +7,12 @@
     name: gnupg2
     state: present
 
+- name: install | Install pinentry-qt
+  become: true
+  ansible.builtin.dnf:
+    name: pinentry-qt
+    state: present
+
 - name: install | Copy GPG Agent config
   ansible.builtin.copy:
     src: 'gpg-agent.conf'

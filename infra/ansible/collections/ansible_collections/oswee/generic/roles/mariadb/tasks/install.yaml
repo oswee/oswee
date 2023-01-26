@@ -1,0 +1,37 @@
+---
+# tasks file for MariaDB
+
+- name: install | Create MariaDB system group
+  become: true
+  ansible.builtin.group:
+    name: '{{ mariadb_group }}'
+    state: present
+    system: true
+
+- name: install | Create MariaDB user
+  become: true
+  ansible.builtin.user:
+    name: '{{ mariadb_user }}'
+    home: '{{ mariadb_datadir }}'
+    system: true
+    shell: /bin/false
+    group: '{{ mariadb_group }}'
+
+- name: install | Install rpm dependencies
+  become: true
+  ansible.builtin.dnf:
+    name: '{{ item }}'
+    state: latest
+  loop:
+    - '{{ mysql_dependencies }}'
+
+- name: install | Install rpm MariaDB
+  become: true
+  ansible.builtin.dnf:
+    name: '{{ item }}'
+    state: latest
+    update_cache: true
+  loop:
+    - '{{ mysql_packages }}'
+  register: mysql_install_packages
+...

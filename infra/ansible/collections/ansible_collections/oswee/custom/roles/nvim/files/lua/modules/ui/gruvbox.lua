@@ -28,7 +28,7 @@ packer.use({
 			transparent_mode = false,
 		})
 
-		vim.opt.background = "dark" -- dark | light
+		vim.opt.background = "light" -- dark | light
 		vim.cmd([[colorscheme gruvbox]])
 	end,
 })

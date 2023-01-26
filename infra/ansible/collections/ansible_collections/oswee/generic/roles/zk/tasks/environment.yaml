@@ -7,5 +7,5 @@
     dest: '{{ zk_environment_path }}'
     mode: '0644'
     content: |
-      export ZK_NOTEBOOK_DIR="~/zet"
+      ZK_NOTEBOOK_DIR="{{ zk_notebook_dir }}"
 ...

@@ -17,3 +17,4 @@
   ansible.builtin.pip:
     name: pynvim
     state: forcereinstall
+...

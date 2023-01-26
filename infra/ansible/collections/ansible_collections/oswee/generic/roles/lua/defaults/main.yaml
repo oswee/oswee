@@ -1,0 +1,8 @@
+---
+# defaults file for Lua
+
+lua_ls_version: 3.6.7
+lua_repo_url: https://github.com/sumneko/lua-language-server
+lua_release_url: https://github.com/sumneko/lua-language-server/releases/download/{{ lua_ls_version }}/lua-language-server-{{ lua_ls_version }}-linux-x64.tar.gz
+lua_destination_dir: /home/{{ ansible_user_id }}/code/github.com/sumneko/lua-language-server
+...

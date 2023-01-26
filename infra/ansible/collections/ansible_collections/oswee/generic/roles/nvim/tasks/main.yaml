@@ -32,7 +32,7 @@
 - name: Teardown
   import_tasks: teardown.yaml
   tags:
+    - never
     - teardown
     - nvim.teardown
-    - never
 ...
