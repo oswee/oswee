@@ -1,0 +1,27 @@
+---
+# tasks file for Lua
+
+- name: Setup
+  tags:
+    - lua
+    - lua.setup
+  block:
+    - name: Install
+      ansible.builtin.import_tasks: install.yaml
+      tags:
+        - install
+        - lua.install
+
+    - name: Config
+      ansible.builtin.import_tasks: config.yaml
+      tags:
+        - config
+        - lua.config
+
+- name: Teardown
+  ansible.builtin.import_tasks: teardown.yaml
+  tags:
+    - never
+    - teardown
+    - lua.teardown
+...
