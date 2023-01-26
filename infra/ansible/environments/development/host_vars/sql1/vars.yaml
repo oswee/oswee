@@ -1,0 +1,9 @@
+---
+hostname: sql1
+host_octet: 101
+mac: 9e.74.d0.1d.a0.c9
+become_user: ansible
+dns_network_interface: eth0
+
+network: 192.168.100
+...
