@@ -1,3 +1,10 @@
 ---
-# tasks file for exa
+# tasks file for Exa
+
+- name: install | Install system packages
+  become: true
+  ansible.builtin.dnf:
+    name: '{{ item }}'
+    state: present
+  loop: '{{ packages.redhat }}'
 ...
