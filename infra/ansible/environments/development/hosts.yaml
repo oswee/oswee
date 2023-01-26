@@ -20,6 +20,8 @@ db:
   hosts:
     sql1:
       ansible_host: 192.168.100.101
+      vars:
+        mac: 9e.74.d0.1d.a0.c9
 
 ci:
   hosts:
