@@ -24,5 +24,6 @@ galaxy_info:
     - 'dzintars'
     - 'fedora'
 
-dependencies: []
+dependencies:
+  - name: oswee.generic.golang
 ...
