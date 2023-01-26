@@ -4,7 +4,7 @@
 - name: config | Add bash wrapper script
   ansible.builtin.copy:
     dest: /home/{{ ansible_user_id }}/.local/bin/lua-language-server
-    mode: 0766
+    mode: 0755
     content: |
       #!/bin/bash
       exec "/home/dzintars/code/github.com/sumneko/lua-language-server/bin/lua-language-server" "$@"
