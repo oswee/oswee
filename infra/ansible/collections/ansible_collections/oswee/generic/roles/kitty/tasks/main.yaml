@@ -1,8 +1,26 @@
 ---
 # tasks file for Kitty
 
-- name: Install
-  import_tasks: install.yaml
+- name: Setup
   tags:
-    - kitty.setup
+    - kitty
+  block:
+    - name: Install
+      ansible.builtin.import_tasks: install.yaml
+      tags:
+        - install
+        - kitty.install
+
+    - name: Config
+      ansible.builtin.import_tasks: config.yaml
+      tags:
+        - config
+        - kitty.config
+
+- name: Teardown
+  ansible.builtin.import_tasks: teardown.yaml
+  tags:
+    - never
+    - teardown
+    - kitty.teardown
 ...
