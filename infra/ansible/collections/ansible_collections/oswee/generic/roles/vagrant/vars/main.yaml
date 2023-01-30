@@ -1,5 +1,5 @@
 ---
-# vars file for vagrant
+# vars file for Vagrant
 
 packages:
   redhat:

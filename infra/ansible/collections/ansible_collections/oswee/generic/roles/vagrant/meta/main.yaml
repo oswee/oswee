@@ -1,15 +1,15 @@
 ---
 galaxy_info:
-  namespace: 'oswee'
-  role_name: 'vagrant'
-  version: '0.0.1'
-  author: 'Dzintars Klavins'
-  description: 'Ansible role to install Vagrant'
-  company: 'Oswee'
+  namespace: oswee
+  role_name: vagrant
+  version: 0.0.1
+  author: Dzintars Klavins
+  description: Ansible role to install Vagrant
+  company: Oswee
 
-  license: 'Apache-2.0'
+  license: Apache-2.0
 
-  min_ansible_version: '2.12'
+  min_ansible_version: 2.12
 
   platforms:
     - name: Fedora
@@ -17,10 +17,11 @@ galaxy_info:
         - 35
 
   galaxy_tags:
-    - 'vagrant'
-    - 'oswee'
-    - 'dzintars'
-    - 'fedora'
+    - vagrant
+    - oswee
+    - dzintars
+    - fedora
 
 dependencies:
   - role: oswee.generic.libvirt
+...
