@@ -2,24 +2,34 @@
 # tasks file for Libvirt
 
 - name: Install
-  import_tasks: install.yaml
+  ansible.builtin.import_tasks: install.yaml
   tags:
     - libvirt.setup
 
-- name: Network
-  import_tasks: network.yaml
+
+- name: Setup
   tags:
     - libvirt.setup
-    - libvirt.setup.network
+  block:
+    - name: Install
+      ansible.builtin.import_tasks: install.yaml
+      tags:
+        - libvirt.install
 
-- name: Pool
-  import_tasks: pool.yaml
-  tags:
-    - libvirt.setup
-    - libvirt.setup.pool
+    - name: Network
+      ansible.builtin.import_tasks: network.yaml
+      tags:
+        - libvirt.network
 
-- name: Teardown
-  import_tasks: teardown.yaml
-  tags:
-    - libvirt.teardown
+    - name: Pool
+      ansible.builtin.import_tasks: pool.yaml
+      tags:
+        - libvirt.pool
+
+# - name: Teardown
+#   ansible.builtin.import_tasks: teardown.yaml
+#   tags:
+#     - never
+#     - teardown
+#     - libvirt.teardown
 ...
