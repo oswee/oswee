@@ -6,6 +6,8 @@ Some of roles are specific to my particular use cases.
 
 Most likely You don't want to use this collection ATM.
 
+ATM I don't care about role reusability. It works only on my hardware and setup (Fedora).
+
 ## Usage
 
 **DOT'T ATTEMPT TO RUN __ROOT__ PLAYBOOK IN A SINGLE PLAY!**
