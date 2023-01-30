@@ -1,0 +1,63 @@
+---
+# tasks file for Swaylock
+
+- name: install | Install prerequisites
+  become: true
+  ansible.builtin.dnf:
+    name: '{{ item }}'
+    state: present
+  loop: '{{ packages.redhat }}'
+
+- name: install | Get package facts
+  ansible.builtin.package_facts:
+    manager: rpm
+
+- name: install | Remove default swaylock-effects package if exists
+  become: true
+  ansible.builtin.dnf:
+    name: swaylock-effects
+    state: absent
+  when: '"swaylock-effects" in ansible_facts.packages'
+
+- name: install | Clone swaylock-effects repository
+  ansible.builtin.git:
+    repo: https://github.com/mortie/swaylock-effects.git
+    dest: '/home/{{ ansible_user_id }}/code/github.com/mortie/swaylock-effects/'
+    version: master
+    depth: 1
+  register: swaylock_effects_repo
+
+- name: install | Cleanup build artifacts
+  ansible.builtin.file:
+    path: '{{ item }}'
+    state: absent
+  loop:
+    - '/home/{{ ansible_user_id }}/code/github.com/mortie/swaylock-effects/.deps'
+    - '/home/{{ ansible_user_id }}/code/github.com/mortie/swaylock-effects/build'
+  when: swaylock_effects_repo.changed
+
+- name: install | Meson build swaylock-effects
+  ansible.builtin.command: meson --prefix=/usr build/
+  args:
+    chdir: '/home/{{ ansible_user_id }}/code/github.com/mortie/swaylock-effects'
+  when: swaylock_effects_repo.changed
+
+- name: install | Build swaylock-effects
+  ansible.builtin.command: ninja -C build
+  args:
+    chdir: '/home/{{ ansible_user_id }}/code/github.com/mortie/swaylock-effects'
+  when: swaylock_effects_repo.changed
+
+- name: install | Install swaylock-effects
+  become: true
+  ansible.builtin.command: ninja -C build install
+  args:
+    chdir: '/home/{{ ansible_user_id }}/code/github.com/mortie/swaylock-effects'
+  when: swaylock_effects_repo.changed
+
+- name: install | Change swaylock binary permissions
+  become: true
+  ansible.builtin.file:
+    path: /usr/bin/swaylock
+    mode: 'a+s'
+...
