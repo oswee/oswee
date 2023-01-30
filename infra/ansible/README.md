@@ -2,11 +2,16 @@
 
 These are NOT PRODUCTION READY collections!
 
-Some of roles are specific to my particular usecases.
+Some of roles are specific to my particular use cases.
 
 Most likely You don't want to use this collection ATM.
 
 ## Usage
+
+**DOT'T ATTEMPT TO RUN __ROOT__ PLAYBOOK IN A SINGLE PLAY!**
+
+Root playbook is **massive** and highly specific for my own requirements.
+Instead, rely on __tag__ filtering if you want to play just some parts.
 
 Include the collection in your project collections.yml file and import it.
 
@@ -58,7 +63,7 @@ Also see this discussion: https://github.com/ansible/ansible/issues/68915
 
 ### Molecule testing
 
-Use this evironment variable to get the colorfule molecule run output:
+Use this environment variable to get the colorful molecule run output:
 
 ```bash
 export PY_COLORS=1
@@ -76,7 +81,7 @@ molecule --base-config .config/molecule/config.yml converge -s dev -- --limit wo
 
 UPDATE: In case of Nvim, don't use tags. For teardown not to kick in i did implemented simple `when` conditional.
 
-Vagrant is the only maintained scenario if at all (too early to spend time on pollishing up the roles).
+Vagrant is the only maintained scenario if at all (too early to spend time on polishing up the roles).
 Later potentially I will introduce Podman scenario as well.
 No any plans of supporting Docker.
 
