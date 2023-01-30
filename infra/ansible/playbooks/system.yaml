@@ -1,0 +1,16 @@
+---
+- name: Setup Base
+  hosts: all
+  become: false
+  gather_facts: true
+
+# Base tools
+  # Firewall
+  # SSH
+  # Updates
+  #
+
+# Hardening
+  # Rsync
+  # SSH
+...

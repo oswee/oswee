@@ -1,0 +1,20 @@
+---
+- name: Setup Desktop Environment
+  hosts: workstations
+  become: false
+  gather_facts: true
+
+
+# Sway
+# Sway idle
+# Background
+# Fonts
+# Waybar
+
+  tasks:
+    - name: Swaylock
+      ansible.builtin.import_role:
+        name: oswee.generic.swaylock
+      tags:
+        - swaylock
+...
