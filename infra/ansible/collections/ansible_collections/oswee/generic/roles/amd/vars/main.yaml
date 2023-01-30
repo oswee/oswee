@@ -1,0 +1,8 @@
+---
+# vars file for Amd
+
+packages:
+  redhat:
+    - radeontop
+    - radeontool
+...
