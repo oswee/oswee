@@ -18,4 +18,14 @@
     mode: '0644'
     # insertafter: '^-- LSP'
     create: true
+
+# - name: packages | Install cspell
+#   community.general.npm:
+#     name: cspell
+#     global: true
+#
+# - name: packages | Install cspell
+#   community.general.npm:
+#     name: cspell
+#     global: true
 ...
