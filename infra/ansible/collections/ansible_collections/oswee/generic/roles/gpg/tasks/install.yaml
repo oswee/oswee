@@ -7,15 +7,15 @@
     name: gnupg2
     state: present
 
-- name: install | Install pinentry-qt
+- name: install | Install pinentry program
   become: true
   ansible.builtin.dnf:
-    name: pinentry-qt
+    name: pinentry-gtk  # Because it supports KeePassXC (libsecret) integration.
     state: present
 
 - name: install | Copy GPG Agent config
   ansible.builtin.copy:
-    src: 'gpg-agent.conf'
-    dest: '/home/{{ ansible_user_id }}/.gnupg/gpg-agent.conf'
+    src: gpg-agent.conf
+    dest: /home/{{ ansible_user_id }}/.gnupg/gpg-agent.conf
     mode: '0644'
 ...
