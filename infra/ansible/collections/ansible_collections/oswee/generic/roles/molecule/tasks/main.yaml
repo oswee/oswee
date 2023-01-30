@@ -1,0 +1,21 @@
+---
+# tasks file for Molecule
+
+- name: Setup
+  tags:
+    - molecule
+    - molecule.setup
+  block:
+    - name: Install
+      ansible.builtin.import_tasks: install.yaml
+      tags:
+        - install
+        - molecule.install
+
+# - name: Teardown
+#   ansible.builtin.import_tasks: teardown.yaml
+#   tags:
+#     - never
+#     - teardown
+#     - molecule.teardown
+...
