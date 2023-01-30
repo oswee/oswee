@@ -2,23 +2,24 @@
 collections:
   - source: ./ansible/collections/
     type: subdirs
+
 # - name: https://github.com/oswee/ansible.git#/general/
 #   version: master
 #   type: git
+
 # - source: "/home/dzintars/code/github.com/oswee/oswee/ansible/"
 #   type: subdirs
+
 # - name: ansible.posix
 # - name: community.general
 
 roles:
-#   - role: oswee.core.nodejs
-#   - role: oswee.core.yarn
-#   - role: oswee.core.nvim
-#   - role: oswee.core.github
-  - src: https://github.com/Yethal/ansible-role-nushell.git
-    name: yethal.nushell
-    version: main
+  # - src: https://github.com/Yethal/ansible-role-nushell.git
+  #    name: yethal.nushell
+  #    version: main
+
   # - source: ./ansible/roles
   #   type: subdirs
 
+  - name: oswee.generic.vault
 ...
