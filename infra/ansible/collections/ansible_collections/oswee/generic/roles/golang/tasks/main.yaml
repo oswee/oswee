@@ -19,10 +19,10 @@
         - environment
         - golang.environment
 
-- name: Teardown
-  import_tasks: teardown.yaml
-  tags:
-    - never
-    - teardown
-    - golang.teardown
+# - name: Teardown
+#   import_tasks: teardown.yaml
+#   tags:
+#     - never
+#     - teardown
+#     - golang.teardown
 ...
