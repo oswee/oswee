@@ -1,7 +1,7 @@
 ---
 # defaults file for Bazel
 
-bazel_bazelisk_version: 1.10.1
-bazel_ibazel_version: 0.15.10
-bazel_buildifier_version: 4.2.2
+bazel_bazelisk_version: 1.15.0
+bazel_ibazel_version: 0.21.4
+bazel_buildifier_version: 6.0.0
 ...
