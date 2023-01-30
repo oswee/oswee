@@ -1,12 +1,13 @@
 ---
-# tasks file for haproxy
+# tasks file for Haproxy
 
-- name: config | Copy error pages
+- name: errors | Copy error pages
   become: true
   ansible.builtin.copy:
-    src: 'errors/'
-    dest: '/etc/haproxy/errors/'
+    src: errors/
+    dest: /etc/haproxy/errors/
     owner: '{{ haproxy_user }}'
     group: '{{ haproxy_group }}'
-    mode: '0644'
+    mode: 0644
   notify: Restart HAProxy
+...

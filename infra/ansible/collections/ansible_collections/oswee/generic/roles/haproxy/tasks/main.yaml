@@ -1,14 +1,18 @@
 ---
-# tasks file for haproxy
+# tasks file for Haproxy
 
-- name: Install
-  import_tasks: install.yaml
+- name: Setup
   tags:
-    - haproxy.install
+    - haproxy.setup
+  block:
+    - name: Install
+      ansible.builtin.import_tasks: install.yaml
+      tags:
+        - haproxy.install
 
 # - name: Teardown
 #   import_tasks: teardown.yaml
 #   tags:
 #     - never
-#     - teardown
+#     - haproxy.teardown
 ...

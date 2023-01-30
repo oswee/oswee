@@ -1,5 +1,5 @@
 ---
-# handlers file for haproxy
+# handlers file for Haproxy
 
 - name: Restart HAProxy
   become: true
@@ -13,3 +13,4 @@
     name: firewalld
     state: restarted
     daemon_reload: true
+...

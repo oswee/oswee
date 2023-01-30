@@ -1,14 +1,15 @@
 ---
-# tasks file for haproxy
+# tasks file for Haproxy
 
 - name: config | Copy haproxy.cfg
   become: true
   ansible.builtin.template:
-    src: 'haproxy.cfg.j2'
-    dest: '/etc/haproxy/haproxy.cfg'
+    src: haproxy.cfg.j2
+    dest: /etc/haproxy/haproxy.cfg
     owner: '{{ haproxy_user }}'
     group: '{{ haproxy_group }}'
-    mode: '0644'
+    mode: 0644
     validate: haproxy -f %s -c -q
   notify:
     - Restart HAProxy
+...

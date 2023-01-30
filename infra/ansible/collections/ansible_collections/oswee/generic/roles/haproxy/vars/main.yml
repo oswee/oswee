@@ -1,5 +1,5 @@
 ---
-# vars file for haproxy
+# vars file for Haproxy
 
 packages:
   redhat:
@@ -13,3 +13,4 @@ packages:
     - python3-pip
     - python3-setuptools
     - python3-virtualenv
+...
