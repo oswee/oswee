@@ -1,0 +1,270 @@
+---
+- name: Configure Workstation Tools
+  hosts: workstations
+  connection: local
+  become: false
+  # become_user: ansible
+  gather_facts: true
+
+  tasks:
+
+    - name: Ansible
+      ansible.builtin.import_role:
+        name: oswee.generic.ansible
+
+    - name: Molecule
+      tags:
+        - molecule
+      ansible.builtin.import_role:
+        name: oswee.generic.molecule
+
+    - name: Nushell
+      tags:
+        - nushell
+      block:
+        # - name: Install Nushell
+        #   ansible.builtin.import_role:
+        #     name: yethal.nushell
+        #     vars:
+        #       set_shell: false
+        #       install_configs: false
+        - name: Configure Nushell
+          ansible.builtin.import_role:
+            name: oswee.custom.nushell
+
+    - name: Neovim
+      tags:
+        - nvim
+      block:
+        - name: Install Neovim
+          ansible.builtin.import_role:
+            name: oswee.generic.nvim
+          tags:
+            - nvim.install
+        - name: Configure Neovim
+          ansible.builtin.import_role:
+            name: oswee.custom.nvim
+          tags:
+            - nvim.config
+
+    - name: Golang
+      tags:
+        - golang
+      ansible.builtin.import_role:
+        name: oswee.generic.golang
+      vars:
+        golang_version: 1.19.5
+
+    - name: Zk
+      tags:
+        - zk
+      ansible.builtin.import_role:
+        name: oswee.generic.zk
+
+    - name: Zoxide
+      tags:
+        - zoxide
+      ansible.builtin.import_role:
+        name: oswee.generic.zoxide
+
+    - name: Fzf
+      tags:
+        - fzf
+      ansible.builtin.import_role:
+        name: oswee.generic.fzf
+
+    - name: Vifm
+      tags:
+        - vifm
+      ansible.builtin.import_role:
+        name: oswee.generic.vifm
+
+    - name: Bat
+      tags:
+        - bat
+      ansible.builtin.import_role:
+        name: oswee.generic.bat
+
+    - name: Sonarscanner
+      tags:
+        - sonnarscanner
+      ansible.builtin.import_role:
+        name: oswee.generic.sonarscanner
+
+    - name: Tmux
+      tags:
+        - tmux
+      ansible.builtin.import_role:
+        name: oswee.generic.tmux
+
+    - name: Lazygit
+      tags:
+        - lazygit
+      ansible.builtin.import_role:
+        name: oswee.generic.lazygit
+
+    - name: GPG
+      tags:
+        - gpg
+      ansible.builtin.import_role:
+        name: oswee.generic.gpg
+
+    - name: Taskwarrior
+      tags:
+        - taskwarrior
+      ansible.builtin.import_role:
+        name: oswee.generic.taskwarrior
+
+    - name: Timewarrior
+      tags:
+        - timewarrior
+      ansible.builtin.import_role:
+        name: oswee.generic.timewarrior
+
+    - name: Vit
+      tags:
+        - vit
+      ansible.builtin.import_role:
+        name: oswee.generic.vit
+
+    - name: Lua
+      tags:
+        - lua
+      ansible.builtin.import_role:
+        name: oswee.generic.lua
+
+    - name: NodeJS
+      tags:
+        - nodejs
+      ansible.builtin.import_role:
+        name: oswee.generic.nodejs
+
+    - name: CFSSL
+      tags:
+        - cfssl
+      ansible.builtin.import_role:
+        name: oswee.generic.cfssl
+
+    # - role: oswee.generic.helm
+    - name: Helm
+      tags:
+        - helm
+      ansible.builtin.import_role:
+        name: oswee.generic.helm
+
+    - name: Vault
+      tags:
+        - vault
+      ansible.builtin.import_role:
+        name: oswee.generic.vault
+      vars:
+        vault_version: 1.12.0
+        vault_url: https://vault.oswee.com
+
+    - name: Minio
+      tags:
+        - minio
+      ansible.builtin.import_role:
+        name: oswee.generic.minio
+      vars:
+        minio_domain: s3.{{ dns_prod_domain_name }}
+        minio_server_port: '9199'
+        minio_console_port: '8001'
+
+    - name: Jenkins
+      tags:
+        - jenkins
+      ansible.builtin.import_role:
+        name: oswee.generic.jenkins
+
+    - name: Vagrant
+      tags:
+        - vagrant
+      ansible.builtin.import_role:
+        name: oswee.generic.vagrant
+      vars:
+        vagrant_version: 2.2.19
+
+    - name: Terraform
+      tags:
+        - terraform
+      ansible.builtin.import_role:
+        name: oswee.generic.terraform
+      vars:
+        terraform_version: 1.3.1
+        terraform_ls_version: 0.29.2
+
+    # - role: oswee.custom.terraform
+
+    - name: Packer
+      tags:
+        - packer
+      ansible.builtin.import_role:
+        name: oswee.generic.packer
+      vars:
+        packer_version: 1.8.4
+
+    - name: Kubectl
+      tags:
+        - kubectl
+      ansible.builtin.import_role:
+        name: oswee.generic.kubectl
+
+    - name: Istio
+      tags:
+        - istio
+      ansible.builtin.import_role:
+        name: oswee.generic.istio
+
+    - name: Libvirt
+      tags:
+        - libvirt
+      ansible.builtin.import_role:
+        name: oswee.generic.libvirt
+      vars:
+        libvirt_dir_iso: /home/{{ ansible_user_id }}/kvm/iso
+        libvirt_dir_images: /home/{{ ansible_user_id }}/kvm/images
+        libvirt_dir_pools: /home/{{ ansible_user_id }}/kvm/pools
+
+    - name: Libvirt
+      tags:
+        - libvirt
+      ansible.builtin.import_role:
+        name: oswee.custom.libvirt
+
+    - name: Minikube
+      tags:
+        - minikube
+      ansible.builtin.import_role:
+        name: oswee.generic.minikube
+
+    - name: Bazel
+      tags:
+        - bazel
+      ansible.builtin.import_role:
+        name: oswee.generic.bazel
+
+    - name: Mariadb
+      tags:
+        - mariadb
+      ansible.builtin.import_role:
+        name: oswee.generic.mariadb
+
+    - name: Haproxy
+      tags:
+        - haproxy
+      ansible.builtin.import_role:
+        name: oswee.generic.haproxy
+
+    - name: Haproxy
+      tags:
+        - haproxy
+      ansible.builtin.import_role:
+        name: oswee.custom.haproxy
+
+    - name: Rust
+      tags:
+        - rust
+      ansible.builtin.import_role:
+        name: oswee.generic.rust
+...

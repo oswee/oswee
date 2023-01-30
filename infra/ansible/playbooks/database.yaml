@@ -10,4 +10,16 @@
         - name: Install MariaDB
           ansible.builtin.import_role:
             name: oswee.generic.mariadb
+            vars:
+              mysql_databases:
+                - name: testdb
+                  collation: utf8_general_ci
+                  encoding: utf8
+                  replicate: 1
+              mysql_users:
+                - name: admin
+                  # host: '127.0.0.1'
+                  host: '%'
+                  password: secret
+                  priv: '*.*:ALL,GRANT'
 ...

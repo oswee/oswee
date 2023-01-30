@@ -1,26 +1,27 @@
 ---
+# tasks file for Ansible
+
 - name: Setup
+  tags:
+    - ansible
+    - ansible.setup
   block:
     - name: Install
-      import_tasks: install.yaml
+      ansible.builtin.import_tasks: install.yaml
       tags:
         - install
         - ansible.install
 
     - name: Config
-      import_tasks: config.yaml
+      ansible.builtin.import_tasks: config.yaml
       tags:
         - config
         - ansible.config
 
-  tags:
-    - ansible
-    - ansible.setup
-
 # - name: Teardown
-#   import_tasks: teardown.yaml
+#   ansible.builtin.import_tasks: teardown.yaml
 #   tags:
+#     - never
 #     - teardown
 #     - ansible.teardown
-#     - never
 ...

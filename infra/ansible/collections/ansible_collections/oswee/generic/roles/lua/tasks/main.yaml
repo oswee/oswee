@@ -18,10 +18,10 @@
         - config
         - lua.config
 
-- name: Teardown
-  ansible.builtin.import_tasks: teardown.yaml
-  tags:
-    - never
-    - teardown
-    - lua.teardown
+# - name: Teardown
+#   ansible.builtin.import_tasks: teardown.yaml
+#   tags:
+#     - never
+#     - teardown
+#     - lua.teardown
 ...

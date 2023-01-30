@@ -4,11 +4,11 @@ galaxy_info:
   role_name: golang
   author: Dzintars Klavins
   description: Install Golang
-  company: 'Oswee'
+  company: Oswee
 
-  license: 'Apache-2.0'
+  license: Apache-2.0
 
-  min_ansible_version: '2.12'
+  min_ansible_version: 2.12
 
   platforms:
     - name: Fedora
@@ -16,11 +16,11 @@ galaxy_info:
         - 35
 
   galaxy_tags:
-    - 'golang'
-    - 'go'
-    - 'oswee'
-    - 'dzintars'
-    - 'fedora'
+    - golang
+    - go
+    - oswee
+    - dzintars
+    - fedora
 
 dependencies: []
 ...

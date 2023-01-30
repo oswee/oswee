@@ -1,0 +1,10 @@
+---
+# tasks file for Cockpit
+
+- name: install | Install packages
+  become: true
+  ansible.builtin.dnf:
+    name: '{{ item }}'
+    state: present
+  loop: '{{ packages.redhat }}'
+...

@@ -1,0 +1,16 @@
+---
+- name: System
+  ansible.builtin.import_playbook: playbooks/system.yaml
+  tags:
+    - system
+
+- name: Desktop
+  ansible.builtin.import_playbook: playbooks/desktop.yaml
+  tags:
+    - desktop
+
+- name: Tools
+  ansible.builtin.import_playbook: playbooks/tools.yaml
+  tags:
+    - tools
+...

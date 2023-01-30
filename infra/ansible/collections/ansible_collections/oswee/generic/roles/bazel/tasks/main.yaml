@@ -1,17 +1,19 @@
 ---
-# tasks file for bazel
+# tasks file for Bazel
 
-- name: Install
-  ansible.builtin.import_tasks: install.yaml
+- name: Setup
   tags:
     - bazel.setup
-    - bazel.setup.install
+  block:
+    - name: Install
+      ansible.builtin.import_tasks: install.yaml
+      tags:
+        - bazel.install
 
-- name: Config
-  ansible.builtin.import_tasks: config.yaml
-  tags:
-    - bazel.setup
-    - bazel.setup.config
+    - name: Config
+      ansible.builtin.import_tasks: config.yaml
+      tags:
+        - bazel.config
 
 # - name: Teardown
 #   import_tasks: teardown.yaml

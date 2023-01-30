@@ -1,7 +1,7 @@
 ---
-# tasks file for vagrant
+# tasks file for Vagrant
 
-- name: Teardown | Remove Vagrant
+- name: teardown | Remove Vagrant
   become: true
   ansible.builtin.dnf:
     name: '{{ vagrant_rpm }}'

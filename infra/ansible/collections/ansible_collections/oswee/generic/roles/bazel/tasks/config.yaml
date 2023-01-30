@@ -1,14 +1,14 @@
 ---
 # tasks file for Bazel
 
-- name: Add bazel alias to bazelik
+- name: config | Add bazel alias to bazelik
   become: true
   ansible.builtin.copy:
     dest: /etc/profile.d/bazelisk.sh
-    mode: '0644'
+    mode: 0644
     content: alias bazel="bazelisk"\n
 
-# - name: Add bazel alias
+# - name: config | Add bazel alias
 #   lineinfile:
 #     path: $HOME/.zshrc
 #     line: 'alias bazel="bazelisk"'

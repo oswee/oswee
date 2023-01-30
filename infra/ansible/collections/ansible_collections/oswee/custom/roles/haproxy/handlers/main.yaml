@@ -1,0 +1,9 @@
+---
+# handlers file for Haproxy
+
+- name: Restart HAProxy
+  become: true
+  ansible.builtin.systemd:
+    name: haproxy
+    state: restarted
+...

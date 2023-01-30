@@ -4,25 +4,22 @@
 
 - name: Setup
   tags:
-    - golang
     - golang.setup
   block:
     - name: Install
       ansible.builtin.import_tasks: install.yaml
       tags:
-        - install
         - golang.install
 
     - name: Environment
       ansible.builtin.import_tasks: environment.yaml
       tags:
-        - environment
         - golang.environment
 
-- name: Teardown
-  import_tasks: teardown.yaml
-  tags:
-    - never
-    - teardown
-    - golang.teardown
+# - name: Teardown
+#   import_tasks: teardown.yaml
+#   tags:
+#     - never
+#     - teardown
+#     - golang.teardown
 ...

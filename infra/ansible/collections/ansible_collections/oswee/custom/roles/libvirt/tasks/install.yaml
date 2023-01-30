@@ -1,37 +1,37 @@
 ---
 # tasks file for Libvirt
 
-- name: Define Storage
+- name: install | Define Storage
   community.libvirt.virt_pool:
     command: define
-    uri: "{{ virsh_uri }}"
-    name: "storename"
+    uri: '{{ virsh_uri }}'
+    name: storename
     xml: '{{ lookup("template", "storage/pool.xml.j2") }}'
 
-- name: Load Storage
+- name: install | Load Storage
   community.libvirt.virt_pool:
     command: info
-    uri: "{{ virsh_uri }}"
+    uri: '{{ virsh_uri }}'
   register: storage_pools
 
-# - name: Print Storage Info
+# - name: install | Print Storage Info
 #   ansible.builtin.debug:
 #     msg: Storage info {{ storage_pools.pools }}
 
-# - name: Undefine default network
+# - name: install | Undefine default network
 #   community.libvirt.virt_net:
 #     command: undefine
 #     name: default
 #     uri: "xen:///"
 
-# - name: Redefine default network
+# - name: install | Redefine default network
 #   community.libvirt.virt_net:
 #     command: define
 #     name: default
 #     xml: '{{ lookup("file", "net-default.xml") }}'
 #     uri: "xen:///"
 
-# - name: Start default network
+# - name: install | Start default network
 #   community.libvirt.virt_net:
 #     name: default
 #     state: active

@@ -2,19 +2,13 @@
 # tasks file for Vagrant
 
 - name: Install
-  import_tasks: install.yaml
+  ansible.builtin.import_tasks: install.yaml
   tags:
     - vagrant.setup
     - vagrant.setup.install
 
-# - name: Update configuration
-#   import_tasks: configure.yaml
-#   tags:
-#     - vagrant:setup
-#     - vagrant:setup:config
-
 - name: Teardown
-  import_tasks: teardown.yaml
+  ansible.builtin.import_tasks: teardown.yaml
   tags:
     - vagrant.teardown
 ...

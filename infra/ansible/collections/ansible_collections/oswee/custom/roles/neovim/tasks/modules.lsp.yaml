@@ -1,0 +1,31 @@
+---
+# tasks file for nvim
+
+- name: lsp | Copy LSP plugin configuration files
+  ansible.builtin.copy:
+    src: '{{ item.src }}'
+    dest: '{{ nvim_config_dir }}/{{ item.dest }}/'
+    mode: '0644'
+  loop:
+    - { src: 'lua/modules/lsp/', dest: 'lua/modules/lsp' }
+
+- name: lsp | Include LSP
+  ansible.builtin.lineinfile:
+    path: '{{ nvim_config_dir }}/init.lua'
+    line: "require('modules.lsp')"
+    regexp: "^require('modules.lsp')$"
+    state: present
+    mode: '0644'
+    # insertafter: '^-- LSP'
+    create: true
+
+# - name: packages | Install cspell
+#   community.general.npm:
+#     name: cspell
+#     global: true
+#
+# - name: packages | Install cspell
+#   community.general.npm:
+#     name: cspell
+#     global: true
+...

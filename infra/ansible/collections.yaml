@@ -7,6 +7,6 @@ collections:
   #   type: subdirs
   # - source: "./ansible"
   #   type: subdirs
-  - source: "./ansible/collections"
-    type: subdirs
+  #  - source: "./ansible/collections"
+  #  type: subdirs
 ...

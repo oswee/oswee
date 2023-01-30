@@ -1,0 +1,12 @@
+---
+# tasks file for Kitty
+
+- name: config | Copy config template/s
+  ansible.builtin.template:
+    src: '{{ item.src }}'
+    dest: '{{ item.dest }}'
+    mode: '0644'
+  loop:
+    - { src: 'kitty.conf.j2', dest: '$HOME/.config/kitty/kitty.conf' }
+    - { src: 'theme.conf.j2', dest: '$HOME/.config/kitty/theme.conf' }
+...

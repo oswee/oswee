@@ -1,17 +1,17 @@
 ---
-# tasks file for golang
+# tasks file for Golang
 
-- name: Download Go binary
+- name: install | Download Go binary
   ansible.builtin.unarchive:
-    src: "https://golang.org/dl/go{{ golang_version }}.linux-amd64.tar.gz"
+    src: https://golang.org/dl/go{{ golang_version }}.linux-amd64.tar.gz
     dest: /tmp
     remote_src: true
 
-- name: Copy Go binary
+- name: install | Copy Go binary
   become: true
   ansible.builtin.copy:
     src: /tmp/go
     dest: /usr/local
-    # mode: a+x
+    mode: a+x
     remote_src: true
 ...
