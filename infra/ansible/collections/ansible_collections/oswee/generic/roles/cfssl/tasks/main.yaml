@@ -1,19 +1,23 @@
 ---
 # tasks file for Cfssl
 
-- name: Build
-  import_tasks: build.yaml
+- name: Setup
   tags:
-    - cfssl.build
     - cfssl.setup
+  block:
+    - name: Build
+      ansible.builtin.import_tasks: build.yaml
+      tags:
+        - cfssl.build
 
-- name: Install
-  import_tasks: install.yaml
-  tags:
-    - cfssl.setup
+    - name: Install
+      ansible.builtin.import_tasks: install.yaml
+      tags:
+        - cfssl.install
 
 - name: Teardown
-  import_tasks: teardown.yaml
+  ansible.builtin.import_tasks: teardown.yaml
   tags:
+    - never
     - cfssl.teardown
 ...

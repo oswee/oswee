@@ -1,0 +1,43 @@
+# /etc/rsyncd: configuration file for rsync daemon mode
+
+# See rsyncd.conf man page for more options.
+
+# configuration example:
+
+# uid = nobody
+# gid = nobody
+# use chroot = yes
+# max connections = 4
+# pid file = /var/run/rsyncd.pid
+# exclude = lost+found/
+# transfer logging = yes
+# timeout = 900
+# ignore nonreadable = yes
+# dont compress   = *.gz *.tgz *.zip *.z *.Z *.rpm *.deb *.bz2
+
+[home]
+  path = /home/{{ ansible_user_id }}
+  comment = Home directory
+
+[keepass.db]
+  path = /home/{{ ansible_user_id }}/code/github.com/dzintars/secrets
+  comment = KeePass databases
+
+[keepass.key]
+  path = /home/{{ ansible_user_id }}/.secrets
+  comment = KeePass keys
+
+[gpg]
+  path = /home/{{ ansible_user_id }}/.gnupg
+  comment = GPG
+  list = yes
+  use chroot = false
+
+[letsencrypt]
+  path = /etc/letsencrypt
+  comment = Letsencrypt certificates
+
+[mariadb]
+  path = /var/lib/mysql
+  comment = MariDB data files
+

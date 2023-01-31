@@ -1,26 +1,28 @@
 ---
-# tasks file for libvirt
+# tasks file for Libvirt
 
-- name: Install
-  import_tasks: install.yaml
+- name: Setup
   tags:
     - libvirt.setup
-    - libvirt.setup.install
+  block:
+    - name: Install
+      ansible.builtin.import_tasks: install.yaml
+      tags:
+        - libvirt.install
 
-- name: Config
-  import_tasks: config.yaml
-  tags:
-    - libvirt.setup
-    - libvirt.setup.config
+    - name: Config
+      ansible.builtin.import_tasks: config.yaml
+      tags:
+        - libvirt.config
 
-- name: Network
-  import_tasks: network.yaml
-  tags:
-    - libvirt.setup
-    - libvirt.setup.network
+    - name: Network
+      ansible.builtin.import_tasks: network.yaml
+      tags:
+        - libvirt.network
 
 - name: Teardown
-  import_tasks: teardown.yaml
+  ansible.builtin.import_tasks: teardown.yaml
   tags:
+    - never
     - libvirt.teardown
 ...

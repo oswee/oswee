@@ -1,19 +1,15 @@
 ---
-# tasks file for istio
+# tasks file for Istio
 
-- name: Delete Istio directory
+- name: teardown | Delete Istio directory
   become: true
   ansible.builtin.file:
     state: absent
     path: /opt/istio/
-  tags:
-    - istio.teardown
 
-- name: Remove Istio from system $PATH
+- name: teardown | Remove Istio from system $PATH
   become: true
   ansible.builtin.file:
     state: absent
     path: /etc/profile.d/istio.sh
-  tags:
-    - istio.teardown
 ...

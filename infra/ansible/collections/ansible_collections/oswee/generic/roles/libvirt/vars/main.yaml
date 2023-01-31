@@ -1,5 +1,5 @@
 ---
-# vars file for libvirt
+# vars file for Libvirt
 
 packages:
   redhat:
@@ -14,3 +14,4 @@ packages:
     - bridge-utils
     - qemu-kvm
     - python3-lxml
+...

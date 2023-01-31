@@ -16,6 +16,11 @@
       tags:
         - libvirt.install
 
+    - name: Config
+      ansible.builtin.import_tasks: config.yaml
+      tags:
+        - libvirt.config
+
     - name: Network
       ansible.builtin.import_tasks: network.yaml
       tags:

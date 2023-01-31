@@ -4,11 +4,24 @@
   become: false
   gather_facts: true
 
+  tasks:
+    - name: Firewalld
+      ansible.builtin.import_role:
+        name: oswee.generic.firewalld
+      tags:
+        - firewalld
+
+    - name: Vifm
+      ansible.builtin.import_role:
+        name: oswee.generic.vifm
+      tags:
+        - vifm
+
 # Base tools
   # Firewall
   # SSH
   # Updates
-  #
+  # Backups
 
 # Hardening
   # Rsync

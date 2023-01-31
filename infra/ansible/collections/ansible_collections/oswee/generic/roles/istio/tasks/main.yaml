@@ -2,20 +2,17 @@
 # tasks file for Istio
 
 - name: Setup
+  tags:
+    - istio.setup
   block:
     - name: Install
-      import_tasks: install.yaml
+      ansible.builtin.import_tasks: install.yaml
       tags:
-        - install
         - istio.install
-  tags:
-    - istio
-    - istio.setup
 
 - name: Teardown
-  import_tasks: teardown.yaml
+  ansible.builtin.import_tasks: teardown.yaml
   tags:
     - never
-    - teardown
     - istio.teardown
 ...

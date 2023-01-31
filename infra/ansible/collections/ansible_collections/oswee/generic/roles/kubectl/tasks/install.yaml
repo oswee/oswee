@@ -1,20 +1,16 @@
 ---
-# tasks file for kubectl
+# tasks file for Kubectl
 
-- name: Copy Kubernetes repository
+- name: install | Copy Kubernetes repository
   become: true
   ansible.builtin.copy:
     src: kubernetes.repo
-    dest: '/etc/yum.repos.d/kubernetes.repo'
-    mode: '0644'
-  tags:
-    - kubectl.setup
+    dest: /etc/yum.repos.d/kubernetes.repo
+    mode: 0644
 
-- name: Install Kubectl
+- name: install | Install Kubectl
   become: true
   ansible.builtin.dnf:
-    name: 'kubectl'
+    name: kubectl
     state: present
-  tags:
-    - kubectl.setup
 ...

@@ -1,25 +1,22 @@
 ---
 # tasks file for Cfssl
 
-- name: install | Create CFSSL direcory
+- name: install | Create CFSSL directory
   become: true
   ansible.builtin.file:
-    path: '/opt/cfssl'
+    path: /opt/cfssl
     state: directory
     # TODO: Ideally should be assigned to "users" group and user should be member of that group
     group: '{{ ansible_user_id }}'
-    mode: '0755'
-  tags:
-    - cfssl.setup
+    mode: 0755
 
 - name: install | Copy CFSSL artifact binaries
   become: true
   ansible.builtin.copy:
-    src: "{{ cfssl_source_dir }}/bin"
+    src: '{{ cfssl_source_dir }}/bin'
     dest: /opt/cfssl/
     remote_src: true
-  tags:
-    - cfssl.setup
+    mode: a+x
 
 # Use `source /etc/profile.d/cfssl.sh` to source the file
 # TODO: Keep in mind that this will override the file if that is modified from the other place
@@ -28,7 +25,7 @@
   ansible.builtin.copy:
     dest: /etc/profile.d/cfssl.sh
     # TODO: I don't like this. Probably need to copy binaries over.
-    content: 'PATH=$PATH:/opt/cfssl/bin'
-  tags:
-    - cfssl.setup
+    mode: 0644
+    content: |
+      PATH=$PATH:/opt/cfssl/bin
 ...

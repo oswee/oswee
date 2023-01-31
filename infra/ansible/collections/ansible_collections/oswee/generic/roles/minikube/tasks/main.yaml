@@ -1,13 +1,18 @@
 ---
 # tasks file for Minikube
 
-- name: Install
-  import_tasks: install.yaml
+- name: Setup
   tags:
     - minikube.setup
+  block:
+    - name: Install
+      ansible.builtin.import_tasks: install.yaml
+      tags:
+        - minikube.install
 
 - name: Teardown
-  import_tasks: teardown.yaml
+  ansible.builtin.import_tasks: teardown.yaml
   tags:
+    - never
     - minikube.teardown
 ...

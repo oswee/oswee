@@ -1,25 +1,28 @@
 ---
 # tasks file for Terraform
 
-- name: Prepare
-  import_tasks: prepare.yaml
+- name: Setup
   tags:
     - terraform.setup
-    - terraform.setup.prepare
+  block:
+    - name: Prepare
+      ansible.builtin.import_tasks: prepare.yaml
+      tags:
+        - terraform.prepare
 
-- name: Install Terraform CLI
-  import_tasks: install.tf.yaml
-  tags:
-    - terraform.setup
-    - terraform.setup.install
+    - name: Install
+      ansible.builtin.import_tasks: install.yaml
+      tags:
+        - terraform.install
 
-- name: Install Terraform Language Server
-  import_tasks: install.ls.yaml
-  tags:
-    - terraform.setup
-    - terraform.setup.install
+    - name: LSP
+      ansible.builtin.import_tasks: lsp.yaml
+      tags:
+        - terraform.lsp
 
 - name: Teardown
-  import_tasks: teardown.yaml
+  ansible.builtin.import_tasks: teardown.yaml
   tags:
+    - never
     - terraform.teardown
+...

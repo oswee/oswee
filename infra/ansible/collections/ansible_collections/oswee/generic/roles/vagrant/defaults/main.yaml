@@ -1,7 +1,7 @@
 ---
 # defaults file for Vagrant
 
-vagrant_version: 2.2.19
+vagrant_version: 2.3.4
 
 vagrant_rpm: https://releases.hashicorp.com/vagrant/{{ vagrant_version }}/vagrant_{{ vagrant_version }}_x86_64.rpm
 vagrant_archive: https://releases.hashicorp.com/vagrant/{{ vagrant_version }}/vagrant_{{ vagrant_version }}_linux_amd64.zip
