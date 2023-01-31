@@ -1,4 +1,6 @@
 ---
+# Root Playbook
+
 - name: System
   ansible.builtin.import_playbook: playbooks/system.yaml
   tags:
@@ -9,8 +11,28 @@
   tags:
     - desktop
 
-- name: Tools
-  ansible.builtin.import_playbook: playbooks/tools.yaml
+- name: Personal Productivity Environment
+  ansible.builtin.import_playbook: playbooks/ppe.yaml
   tags:
-    - tools
+    - ppe
+
+- name: Personal Development Environment
+  ansible.builtin.import_playbook: playbooks/pde.yaml
+  tags:
+    - pde
+
+- name: Web
+  ansible.builtin.import_playbook: playbooks/web.yaml
+  tags:
+    - web
+
+- name: Virtualization
+  ansible.builtin.import_playbook: playbooks/virtualization.yaml
+  tags:
+    - virtualization
+
+- name: Containers
+  ansible.builtin.import_playbook: playbooks/containers.yaml
+  tags:
+    - containers
 ...

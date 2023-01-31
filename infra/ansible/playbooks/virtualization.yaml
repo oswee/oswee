@@ -1,0 +1,45 @@
+---
+- name: Virtualization
+  hosts: workstations
+  connection: local
+  become: false
+  # become_user: ansible
+  gather_facts: true
+
+  tasks:
+    - name: Libvirt
+      tags:
+        - libvirt
+      block:
+        - name: Libvirt
+          tags:
+            - libvirt.up
+          ansible.builtin.import_role:
+            name: oswee.generic.libvirt
+          vars:
+            libvirt_dir_iso: /home/{{ ansible_user_id }}/kvm/iso
+            libvirt_dir_pools: /home/{{ ansible_user_id }}/kvm/pools
+            libvirt_dir_images: /home/{{ ansible_user_id }}/kvm/images
+
+        - name: Libvirt
+          tags:
+            - libvirt.customize
+          ansible.builtin.import_role:
+            name: oswee.custom.libvirt
+
+    - name: Vagrant
+      tags:
+        - vagrant
+      ansible.builtin.import_role:
+        name: oswee.generic.vagrant
+      vars:
+        vagrant_version: 2.2.19
+
+    - name: Packer
+      tags:
+        - packer
+      ansible.builtin.import_role:
+        name: oswee.generic.packer
+      vars:
+        packer_version: 1.8.4
+...

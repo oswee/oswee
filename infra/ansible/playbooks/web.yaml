@@ -1,0 +1,52 @@
+---
+- name: WEB
+  hosts: workstations
+  connection: local
+  become: false
+  # become_user: ansible
+  gather_facts: true
+
+  tasks:
+    - name: Haproxy
+      tags:
+        - haproxy
+      ansible.builtin.import_role:
+        name: oswee.generic.haproxy
+
+    - name: Haproxy
+      tags:
+        - haproxy
+      ansible.builtin.import_role:
+        name: oswee.custom.haproxy
+
+    - name: Mariadb
+      tags:
+        - mariadb
+      ansible.builtin.import_role:
+        name: oswee.generic.mariadb
+
+    - name: Vault
+      tags:
+        - vault
+      ansible.builtin.import_role:
+        name: oswee.generic.vault
+      vars:
+        vault_version: 1.12.0
+        vault_url: https://vault.oswee.com
+
+    - name: Minio
+      tags:
+        - minio
+      ansible.builtin.import_role:
+        name: oswee.generic.minio
+      vars:
+        minio_domain: s3.{{ dns_prod_domain_name }}
+        minio_server_port: '9199'
+        minio_console_port: '8001'
+
+    - name: Jenkins
+      tags:
+        - jenkins
+      ansible.builtin.import_role:
+        name: oswee.generic.jenkins
+...

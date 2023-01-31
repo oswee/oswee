@@ -1,0 +1,34 @@
+---
+- name: Containers
+  hosts: workstations
+  connection: local
+  become: false
+  # become_user: ansible
+  gather_facts: true
+
+  tasks:
+    # - role: oswee.generic.helm
+    - name: Helm
+      tags:
+        - helm
+      ansible.builtin.import_role:
+        name: oswee.generic.helm
+
+    - name: Kubectl
+      tags:
+        - kubectl
+      ansible.builtin.import_role:
+        name: oswee.generic.kubectl
+
+    - name: Istio
+      tags:
+        - istio
+      ansible.builtin.import_role:
+        name: oswee.generic.istio
+
+    - name: Minikube
+      tags:
+        - minikube
+      ansible.builtin.import_role:
+        name: oswee.generic.minikube
+...
