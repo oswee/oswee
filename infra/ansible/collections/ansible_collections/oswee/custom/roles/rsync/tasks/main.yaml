@@ -1,0 +1,23 @@
+---
+# tasks file for Rsync
+
+- name: Setup
+  tags:
+    - rsync.setup
+  block:
+    - name: Install
+      ansible.builtin.import_tasks: install.yaml
+      tags:
+        - rsync.install
+
+    - name: Config
+      ansible.builtin.import_tasks: config.yaml
+      tags:
+        - rsync.config
+
+- name: Teardown
+  ansible.builtin.import_tasks: teardown.yaml
+  tags:
+    - never
+    - rsync.teardown
+...
