@@ -6,7 +6,8 @@
   ansible.builtin.copy:
     dest: /etc/profile.d/bazelisk.sh
     mode: 0644
-    content: alias bazel="bazelisk"\n
+    content: |
+      alias bazel="bazelisk"
 
 # - name: config | Add bazel alias
 #   lineinfile:
