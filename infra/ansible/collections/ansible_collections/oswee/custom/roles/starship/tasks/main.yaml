@@ -2,20 +2,17 @@
 # tasks file for Starship
 
 - name: Setup
+  tags:
+    - starship.setup
   block:
     - name: Install
-      import_tasks: install.yaml
+      ansible.builtin.import_tasks: install.yaml
       tags:
-        - install
         - starship.install
-  tags:
-    - starship
-    - starship.setup
 
 - name: Teardown
-  import_tasks: teardown.yaml
+  ansible.builtin.import_tasks: teardown.yaml
   tags:
     - never
-    - teardown
     - starship.teardown
 ...
