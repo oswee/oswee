@@ -1,13 +1,18 @@
 ---
-# tasks file for kubectl
+# tasks file for Kubectl
 
-- name: Install
-  import_tasks: install.yaml
+- name: Setup
   tags:
     - kubectl.setup
+  block:
+    - name: Install
+      ansible.builtin.import_tasks: install.yaml
+      tags:
+        - kubectl.install
 
 - name: Teardown
-  import_tasks: teardown.yaml
+  ansible.builtin.import_tasks: teardown.yaml
   tags:
+    - never
     - kubectl.teardown
 ...

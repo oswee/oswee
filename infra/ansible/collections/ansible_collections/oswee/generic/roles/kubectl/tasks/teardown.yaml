@@ -1,11 +1,9 @@
 ---
-# tasks file for kubectl
+# tasks file for Kubectl
 
-- name: Remove Kubectl
+- name: teardown | Remove Kubectl
   become: true
   ansible.builtin.dnf:
-    name: 'kubectl'
+    name: kubectl
     state: absent
-  tags:
-    - kubectl.teardown
 ...
