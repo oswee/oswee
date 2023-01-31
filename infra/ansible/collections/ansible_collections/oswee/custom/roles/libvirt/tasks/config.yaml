@@ -1,0 +1,47 @@
+---
+# tasks file for Libvirt
+
+- name: config | Create KVM user space directories
+  ansible.builtin.file:
+    path: '{{ item }}'
+    state: directory
+    owner: '{{ libvirt_system_user }}'
+    group: '{{ libvirt_system_user }}'
+    mode: 0755
+  loop:
+    - '{{ libvirt_dir_iso }}'
+    - '{{ libvirt_dir_images }}'
+    - '{{ libvirt_dir_pools }}'
+
+# Default storage pool location is `/var/lib/libvirt/images`
+- name: config | Create libvirt pools directory
+  become: true
+  ansible.builtin.file:
+    path: '{{ libvirt_dir_pools }}'
+    state: directory
+    owner: root
+    group: root
+    mode: 0755
+
+- name: config | Create libvirt user space config directory
+  ansible.builtin.file:
+    path: /home/{{ libvirt_system_user }}/.config/libvirt
+    state: directory
+    mode: 0755
+
+- name: config | Copy default config file to allow virsh to use qemu:///system
+  become: true
+  ansible.builtin.copy:
+    src: /etc/libvirt/libvirt.conf
+    dest: '{{ libvirt_user_config_path }}'
+    owner: '{{ libvirt_system_user }}'
+    group: '{{ libvirt_system_user }}'
+    mode: 0644
+    remote_src: true
+
+- name: config | Use qemu:///system for virsh by default
+  ansible.builtin.replace:
+    path: /home/{{ libvirt_system_user }}/.config/libvirt/libvirt.conf
+    regexp: '#uri_default = "qemu:///system"'
+    replace: uri_default = "qemu:///system"
+...
