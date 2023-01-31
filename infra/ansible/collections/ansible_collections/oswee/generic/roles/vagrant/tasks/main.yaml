@@ -10,5 +10,6 @@
 - name: Teardown
   ansible.builtin.import_tasks: teardown.yaml
   tags:
+    - never
     - vagrant.teardown
 ...
