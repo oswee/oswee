@@ -1,83 +1,41 @@
 ---
-# configuration tasks file for libvirt
+# configuration tasks file for Libvirt
 
-- name: config | Uncomment line from /etc/libvirt/libvirtd.conf
+- name: config | Set the domain socket group ownership to libvirt
   become: true
   ansible.builtin.lineinfile:
     dest: /etc/libvirt/libvirtd.conf
-    insertafter: '{{ item.pattern }}'
-    line: '{{ item.value }}'
+    insertafter: ^#?unix_sock_group = "libvirt"
+    line: unix_sock_group = "libvirt"
     state: present
-  loop:
-    - {
-        pattern: '^#?unix_sock_group = "libvirt"',
-        value: 'unix_sock_group = "libvirt"',
-      }
-    - {
-        pattern: '^#?unix_sock_rw_perms = "0770"',
-        value: 'unix_sock_rw_perms = "0770"',
-      }
   notify: restart libvirtd
 
-# In order to grant quemu access to my users directories i modified /etc/libvirt/qemu.conf file.
+- name: config | Adjust the UNIX socket permissions for the R/W socket
+  become: true
+  ansible.builtin.lineinfile:
+    dest: /etc/libvirt/libvirtd.conf
+    insertafter: ^#?unix_sock_rw_perms = "0770"
+    line: unix_sock_rw_perms = "0770"
+    state: present
+  notify: restart libvirtd
+
+# In order to grant qemu access to my users directories i modified /etc/libvirt/qemu.conf file.
 # [Link to GitHub](https://github.com/jedi4ever/veewee/issues/996#issuecomment-536519623)
 - name: config | Set qemu user in /etc/libvirt/qemu.conf
   become: true
   ansible.builtin.lineinfile:
     dest: /etc/libvirt/qemu.conf
-    insertafter: '{{ item.pattern }}'
-    line: '{{ item.value }}'
+    insertafter: ^#?user = (?!{{ libvirt_system_user }})
+    line: user = "{{ libvirt_system_user }}"
     state: present
-  loop:
-    - {
-        pattern: '^#?user = (?!{{ ansible_user_id }})',
-        value: 'user = "{{ ansible_user_id }}"',
-      }
-    - {
-        pattern: '^#?group = (?!{{ ansible_user_id }})',
-        value: 'group = "{{ ansible_user_id }}"',
-      }
   notify: restart libvirtd
 
-- name: config | Create KVM userspace direcories
-  ansible.builtin.file:
-    path: '{{ item }}'
-    state: directory
-    owner: '{{ ansible_user_id }}'
-    group: '{{ ansible_user_id }}'
-    mode: '0755'
-  loop:
-    - '{{ libvirt_dir_iso }}'
-    - '{{ libvirt_dir_images }}'
-    - '{{ libvirt_dir_pools }}'
-
-- name: config | Create libvirt pools directory
+- name: config | Set qemu group in /etc/libvirt/qemu.conf
   become: true
-  ansible.builtin.file:
-    path: '{{ libvirt_dir_pools }}'
-    state: directory
-    owner: root
-    group: root
-    mode: '0755'
-
-- name: config | Create libvirt userspace config directory
-  ansible.builtin.file:
-    path: '/home/{{ ansible_user_id }}/.config/libvirt'
-    state: directory
-    mode: '0755'
-
-- name: config | Copy default config file to allow virsh to use qemu:///system
-  become: true
-  ansible.builtin.copy:
-    src: /etc/libvirt/libvirt.conf
-    dest: '/home/{{ ansible_user_id }}/.config/libvirt/libvirt.conf'
-    owner: '{{ ansible_user_id }}'
-    group: '{{ ansible_user_id }}'
-    remote_src: true
-
-- name: config | Use qemu:///system for virsh by default
-  ansible.builtin.replace:
-    path: '/home/{{ ansible_user_id }}/.config/libvirt/libvirt.conf'
-    regexp: '#uri_default = "qemu:///system'
-    replace: 'uri_default = "qemu:///system'
+  ansible.builtin.lineinfile:
+    dest: /etc/libvirt/qemu.conf
+    insertafter: ^#?group = (?!{{ libvirt_system_user }})
+    line: group = "{{ libvirt_system_user }}"
+    state: present
+  notify: restart libvirtd
 ...

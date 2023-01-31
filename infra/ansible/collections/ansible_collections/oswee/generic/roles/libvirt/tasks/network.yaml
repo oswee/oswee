@@ -1,5 +1,5 @@
 ---
-# configuration tasks file for libvirt
+# network tasks file for Libvirt
 
 - name: network | Define a new network
   community.libvirt.virt_net:

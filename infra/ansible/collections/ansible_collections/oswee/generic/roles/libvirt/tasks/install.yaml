@@ -1,5 +1,5 @@
 ---
-# tasks file for libvirt
+# tasks file for Libvirt
 
 - name: install | Install libvirt dependencies
   become: true
@@ -8,22 +8,20 @@
     state: present
   loop: '{{ packages.redhat }}'
 
-# Create libvirt group and add current user to it to allow to run libvirt without root
-
 # TODO: Some of these tasks changes home directory group to libvirt
 - name: install | Create libvirt system group
   become: true
   ansible.builtin.group:
-    name: libvirt
+    name: '{{ libvirt_group }}'
     state: present
     system: true
 
-- name: install | Add {{ ansible_user_id }} to libvirt group
+- name: install | Add user to libvirt group
   become: true
   ansible.builtin.user:
-    name: '{{ ansible_user_id }}'
+    name: '{{ libvirt_system_user }}'
     groups:
-      - libvirt
+      - '{{ libvirt_group }}'
     append: true
     state: present
 
@@ -32,7 +30,7 @@
   ansible.builtin.systemd:
     daemon_reexec: true
 
-- name: install | Start libvirtd service
+- name: install | Enable and start libvirtd service
   become: true
   ansible.builtin.service:
     name: libvirtd

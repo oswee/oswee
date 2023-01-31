@@ -1,17 +1,9 @@
 ---
-- name: cleanup | Remove libvirt and it's dependencies
+- name: teardown | Remove libvirt and it's dependencies
   become: true
   ansible.builtin.dnf:
     name: '{{ item }}'
     state: absent
   loop:
-    - libvirt
-    - virt-install
-    - virt-manager
-    - bridge-utils
-    - qemu-kvm
-    - virt-top
-    - libguestfs-tools
-    - libvirt-devel
-    - libvirt-daemon-kvm
+    - '{{ packages.redhat }}'
 ...
