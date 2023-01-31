@@ -16,16 +16,16 @@
             - libvirt.up
           ansible.builtin.import_role:
             name: oswee.generic.libvirt
-          vars:
-            libvirt_dir_iso: /home/{{ ansible_user_id }}/kvm/iso
-            libvirt_dir_pools: /home/{{ ansible_user_id }}/kvm/pools
-            libvirt_dir_images: /home/{{ ansible_user_id }}/kvm/images
 
         - name: Libvirt
           tags:
             - libvirt.customize
           ansible.builtin.import_role:
             name: oswee.custom.libvirt
+          vars:
+            libvirt_dir_iso: /home/{{ ansible_user_id }}/kvm/iso
+            libvirt_dir_pools: /home/{{ ansible_user_id }}/kvm/pools
+            libvirt_dir_images: /home/{{ ansible_user_id }}/kvm/images
 
     - name: Vagrant
       tags:
