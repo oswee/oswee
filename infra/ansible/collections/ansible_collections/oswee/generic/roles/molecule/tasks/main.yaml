@@ -7,15 +7,13 @@
     - molecule.setup
   block:
     - name: Install
-      ansible.builtin.import_tasks: install.yaml
+      ansible.builtin.include_tasks: install.yaml
       tags:
-        - install
         - molecule.install
 
 # - name: Teardown
-#   ansible.builtin.import_tasks: teardown.yaml
+#   ansible.builtin.include_tasks: teardown.yaml
 #   tags:
 #     - never
-#     - teardown
 #     - molecule.teardown
 ...
