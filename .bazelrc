@@ -33,5 +33,8 @@ build --verbose_explanations
 # Remote Cache
 build --remote_cache=http://build.oswee.local:8000/cache
 
+# Remote Execution
+# build --remote_executor=grpc://build.oswee.local:8980
+
 build --color=yes
 run --color=yes
