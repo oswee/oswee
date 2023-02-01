@@ -22,19 +22,10 @@
             name: oswee.custom.nushell
 
     - name: Neovim
+      ansible.builtin.import_role:
+        name: oswee.custom.nvim
       tags:
         - nvim
-      block:
-        - name: Install Neovim
-          ansible.builtin.import_role:
-            name: oswee.generic.nvim
-          tags:
-            - nvim.install
-        - name: Configure Neovim
-          ansible.builtin.import_role:
-            name: oswee.custom.nvim
-          tags:
-            - nvim.config
 
     - name: Zk
       tags:
