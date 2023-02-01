@@ -1,0 +1,57 @@
+---
+# tasks file for Nvim
+
+- name: lsp | Install Pip packages
+  ansible.builtin.pip:
+    name: '{{ item }}'
+  loop:
+    - ansible-lint
+    - pyright
+    - yamllint
+
+- name: lsp | Install NPM packages
+  community.general.npm:
+    name: '{{ item }}'
+    global: true
+  loop:
+    - '@ansible/ansible-language-server'
+    - bash-language-server
+    - cspell
+    - cssmodules-language-server
+    - eslint_d
+    - '@fsouza/prettierd'
+    - jsonlint
+    - typescript
+    - typescript-language-server
+    - stylelint-lsp
+    - vscode-langservers-extracted
+    - yaml-language-server
+
+# - name: lsp | Install DNF packages
+#   become: true
+#   ansible.builtin.dnf:
+#     name: '{{ item }}'
+#     state: present
+#   loop:
+#     - ''
+
+- name: lsp | Install Cargo crates
+  community.general.cargo:
+    name: '{{ item }}'
+    # version: ''
+    # path: ''
+  loop:
+    - selene
+    - stylua
+
+- name: lsp | Install Go packages
+  ansible.builtin.command: go install {{ item }}
+  loop:
+    - github.com/bufbuild/buf-language-server/cmd/bufls@latest
+    - github.com/nametake/golangci-lint-langserver@latest
+    - github.com/golangci/golangci-lint/cmd/golangci-lint@latest
+    - golang.org/x/tools/gopls@latest
+    - golang.org/x/tools/cmd/goimports@latest
+
+# marksman (prebuilt Go binary)
+...

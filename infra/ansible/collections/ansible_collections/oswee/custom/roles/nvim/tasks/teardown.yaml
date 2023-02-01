@@ -1,0 +1,11 @@
+---
+# tasks file for Nvim
+
+- name: teardown | Remove Neovim directories
+  ansible.builtin.file:
+    path: '{{ item }}'
+    state: absent
+  loop:
+    - '{{ nvim_config_path }}'
+    - /home/{{ system_user }}/.local/share/nvim
+...

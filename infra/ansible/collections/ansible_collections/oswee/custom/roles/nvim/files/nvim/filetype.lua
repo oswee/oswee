@@ -1,0 +1,30 @@
+vim.filetype.add({
+	extension = {
+		j2 = "jinja",
+		Vagrantfile = "ruby",
+		tf = "terraform",
+		tfvars = "terraform",
+		tfstate = "json",
+		terraformrc = "hcl",
+		["terraform.rc"] = "hcl",
+		["tfstate.backup"] = "json",
+		["*/nginx{,-*}/*,{,*.}nginx{,.*}.conf"] = "nginx",
+		["terraform/**/*.tpl"] = "yaml",
+	},
+	pattern = {
+		["*/ansible/**/*.{yaml,yml}"] = "yaml.ansible",
+		[".*/tasks/.*%.y(a*)ml"] = "yaml.ansible",
+		["[Cc]ontainerfile.*,*.[Cc]ontainerfile"] = "Dockerfile",
+		[".env*"] = "sh",
+		[".yamlfmt"] = "yaml",
+		["*.desktop"] = "desktop",
+		["*.[Jj]enkinsfile"] = "Jenkinsfile",
+		["*ssh.sfg"] = "sshconfig",
+		["*/.ssh/config.d/*"] = "sshconfig",
+		["*/ansible/*/roles/sway/files/config,*/sway/config"] = "swayconfig",
+		["*/sway/config-dev"] = "swayconfig",
+	},
+	filename = {
+		["tmux.conf.j2"] = "tmux",
+	},
+})

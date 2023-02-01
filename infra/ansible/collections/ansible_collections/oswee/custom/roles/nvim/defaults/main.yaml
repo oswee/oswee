@@ -1,0 +1,5 @@
+---
+# defaults file for Nvim
+
+nvim_config_path: /home/{{ system_user }}/.config/nvim
+...

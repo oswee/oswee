@@ -1,0 +1,9 @@
+---
+# tasks file for Nvim
+
+- name: config | Copy all configuration files
+  ansible.builtin.copy:
+    src: nvim/
+    dest: '{{ nvim_config_path }}'
+    mode: 0755
+...
