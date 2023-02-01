@@ -3,7 +3,7 @@ root = true
 [*]
 charset = utf-8
 end_of_line = lf
-tab_width = 2
+; tab_width = 2  ; Don't force anyone to use default width. Let their editor to deal with that.
 ; indent_size = 2
 ; indent_style = tab
 indent_style = unset
