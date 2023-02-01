@@ -1,0 +1,9 @@
+---
+# tasks file for Sway
+
+- name: config | Copy all configuration files
+  ansible.builtin.copy:
+    src: sway/
+    dest: '{{ sway_config_path }}'
+    mode: 0755
+...
