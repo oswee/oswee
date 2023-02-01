@@ -1,3 +1,5 @@
 ---
 # defaults file for Sway
+
+sway_config_path: /home/{{ system_user }}/.config/sway
 ...

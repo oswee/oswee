@@ -1,14 +1,15 @@
 ---
 # tasks file for Golang
 
-- name: environment | Add Go bin dir to system-wide $PATH
+- name: environment | Setup Golang environment variables
   become: true
   ansible.builtin.copy:
     dest: /etc/profile.d/golang.sh
-    # TODO: Read the README#ENV variables
     mode: 0644
     content: |
+      # GOROOT=/usr/local/go
       GOBIN=/usr/local/go/bin
       GOPATH=$HOME/go
+      # GOCACHE=$HOME/go/.cache/go-build
       PATH=$PATH:$GOBIN:$GOPATH/bin
 ...

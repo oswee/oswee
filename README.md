@@ -17,16 +17,16 @@ UPDATE: 2022 JUN:
 Did some Neovim configuration.
 Mostly looking into changes at Bazel ecosystem.
 Planning to finally set Bazel up for all required languages.
-Constantly thinking about cleaunp in all areas.
-Repository structure still is under the question. Seperation by language could have some downisdes. I collected some resources in my personal notes, how people handle this.
+Constantly thinking about cleanup in all areas.
+Repository structure still is under the question. Separation by language could have some downsides. I collected some resources in my personal notes, how people handle this.
 I am specifically talking about repository structure and not the single "sub-project" structure.
 Also thinking to ditch the SASS. Taking into account how modern CSS evolves I think there is no more point to use SASS. If you want imports, you can use PostCSS.
 Bazel setup seems cluttered. There are many competing rules and it is not clear which is recommended and which is not and its time consuming to test every of them.
 Bazel modules promises to solve that, but they still are too fresh and I am not sure is it worth to invest time into looking into `bzlmod`
-Also thinking to fully migrate my workshop (IDE) setup to remote server with only reasionig to test remote workflow.
+Also thinking to fully migrate my workshop (IDE) setup to remote server with only reasoning to test remote workflow.
 
 UPDATE: 2022 APR:
-Mostly busy with my house rennovation so its less time to code.
+Mostly busy with my house renovation so its less time to code.
 Majority of Ansible roles are migrated and requires refactor and cleanup.
 Plan to write automation for Dev/semi-Prod environments. Meanwhile also playing with Golang Hexagonal Architecture.
 
@@ -37,7 +37,7 @@ UPDATE 2022 JAN:
 Looking into merging infrastructure code into this repository.
 
 UPDATE 2021 AUG:
-Currently i am discoverig integration with Kubernetes. Ultimate goal
+Currently i am discovering integration with Kubernetes. Ultimate goal
 is to let Bazel manage all image production and container provisioning. For
 local development it seems that i will utilize Minikube. For image registry -
 Project Quay. Secrets will be managed by Hashicorp Vault. While all these pieces
@@ -93,7 +93,7 @@ Recommended requirements:
 
 - TLS certificates should be valid and configured in the DNS/Proxy
 - ~~Github Personal Access `GITHUB_NPM_PAT` env. variable/token should be added to the `~/.zshenv` to be able to read and write private/public NPM packages~~
-- Quay image registry for `rules_k8s` to publish image artifacts (can be used Minikubes built-in registry). I made a gist https://gist.github.com/dzintars/c93beed43f4eb1610af8307cb235eba3
+- Quay image registry for `rules_k8s` to publish image artifacts (can be used Minikube's built-in registry). I made a gist https://gist.github.com/dzintars/c93beed43f4eb1610af8307cb235eba3
 - Minikube for local development
 - /etc/hosts DNS entries
 
@@ -115,8 +115,8 @@ I have custom CloudFlare DNS setup
 UPDATE: These instructions most likely is broken ATM
 
 - Clone this repository
-- Cofigure workstation base
-- Cofigure workstation for development
+- Configure workstation base
+- Configure workstation for development
 - Deploy Base infrastructure (MinIO, Vault, Jenkins)
 - ?
 - Check the `package.json#scripts` for the available commands.

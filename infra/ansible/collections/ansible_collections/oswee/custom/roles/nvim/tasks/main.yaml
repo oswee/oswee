@@ -1,0 +1,24 @@
+---
+# tasks file for Nvim
+
+- name: Setup
+  tags:
+    - nvim
+    - nvim.setup
+  block:
+    - name: Config
+      ansible.builtin.import_tasks: config.yaml
+      tags:
+        - nvim.config
+
+    - name: Lsp
+      ansible.builtin.import_tasks: lsp.yaml
+      tags:
+        - nvim.lsp
+
+- name: Teardown
+  ansible.builtin.import_tasks: teardown.yaml
+  tags:
+    - never
+    - nvim.teardown
+...

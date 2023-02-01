@@ -1,7 +1,7 @@
 ---
 yaml-files:
   - .yaml
-  - '*.yml'
+  - .yml
   - .yamllint
 rules:
   braces:
@@ -21,10 +21,12 @@ rules:
     min-spaces-from-content: 2
     ignore-shebangs: true
   comments-indentation: disable
-  document-end:
-    present: true
   document-start:
     level: warning
+    present: true
+  document-end:
+    level: warning
+    present: true
   empty-lines:
     max: 2
     max-start: 0
