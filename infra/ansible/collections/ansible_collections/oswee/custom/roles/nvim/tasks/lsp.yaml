@@ -53,5 +53,12 @@
     - golang.org/x/tools/gopls@latest
     - golang.org/x/tools/cmd/goimports@latest
 
+- name: lsp | Download Marksman binary
+  become: true
+  ansible.builtin.get_url:
+    url: https://github.com/artempyanykh/marksman/releases/download/2023-01-29/marksman-linux
+    dest: /home/{{ system_user }}/.local/bin/marksman
+    mode: a+x
+
 # marksman (prebuilt Go binary)
 ...
