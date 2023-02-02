@@ -3,25 +3,26 @@
 
 - name: Setup
   tags:
+    - libvirt
     - libvirt.setup
   block:
     - name: Install
-      ansible.builtin.import_tasks: install.yaml
+      ansible.builtin.include_tasks: install.yaml
       tags:
         - libvirt.install
 
     - name: Config
-      ansible.builtin.import_tasks: config.yaml
+      ansible.builtin.include_tasks: config.yaml
       tags:
         - libvirt.config
 
     - name: Network
-      ansible.builtin.import_tasks: network.yaml
+      ansible.builtin.include_tasks: network.yaml
       tags:
         - libvirt.network
 
 - name: Teardown
-  ansible.builtin.import_tasks: teardown.yaml
+  ansible.builtin.include_tasks: teardown.yaml
   tags:
     - never
     - libvirt.teardown

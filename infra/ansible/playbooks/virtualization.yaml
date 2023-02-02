@@ -14,13 +14,13 @@
         - name: Libvirt
           tags:
             - libvirt.up
-          ansible.builtin.import_role:
+          ansible.builtin.include_role:
             name: oswee.generic.libvirt
 
         - name: Libvirt
           tags:
             - libvirt.customize
-          ansible.builtin.import_role:
+          ansible.builtin.include_role:
             name: oswee.custom.libvirt
           vars:
             libvirt_dir_iso: /home/{{ ansible_user_id }}/kvm/iso
@@ -30,16 +30,16 @@
     - name: Vagrant
       tags:
         - vagrant
-      ansible.builtin.import_role:
+      ansible.builtin.include_role:
         name: oswee.generic.vagrant
       vars:
-        vagrant_version: 2.2.19
+        vagrant_version: 2.3.4
 
     - name: Packer
       tags:
         - packer
-      ansible.builtin.import_role:
+      ansible.builtin.include_role:
         name: oswee.generic.packer
       vars:
-        packer_version: 1.8.4
+        packer_version: 1.8.5
 ...
