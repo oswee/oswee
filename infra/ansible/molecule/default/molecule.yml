@@ -70,8 +70,8 @@ provisioner:
     yamllint .
     ansible-lint
     flake8
-verifier:
-  name: ansible
-  lint: |
-    set -e
-    ansible-lint
+# verifier:
+#   name: ansible
+#   lint: |
+#     set -e
+#     ansible-lint
