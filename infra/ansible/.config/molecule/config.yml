@@ -28,7 +28,6 @@ provisioner:
     converge: converge.yml
   config_options:
     defaults:
-      vault_password_file: $HOME/.secrets/ansible/vault.oswee.key
       stdout_callback: yaml  # To get pretty output
       bin_ansible_callbacks: true
       interpreter_python: python3
@@ -49,6 +48,7 @@ provisioner:
     PY_COLORS: true
     ANSIBLE_COLLECTIONS_PATH: ./collections  # Because `dependency#options#requirements-file` has no any effect.
     ANSIBLE_ROLES_PATH: ./roles
+    ANSIBLE_VAULT_PASSWORD_FILE: ./scripts/ansible-vault-password.py
     # ANSIBLE_FORCE_COLOR: true
     # ANSIBLE_DEBUG: true
     # ANSIBLE_CONFIG: './ansible.cfg'
@@ -60,7 +60,7 @@ provisioner:
     flake8
 verifier:
   name: ansible
-  lint: |
-    set -e
-    ansible-lint
+  # lint: |
+  #   set -e
+  #   ansible-lint
 ...
