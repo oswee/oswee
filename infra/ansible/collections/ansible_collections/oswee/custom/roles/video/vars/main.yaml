@@ -1,0 +1,8 @@
+---
+# vars file for Video
+
+packages:
+  redhat:
+    - ffmpeg
+    - ffmpeg-libs
+...
