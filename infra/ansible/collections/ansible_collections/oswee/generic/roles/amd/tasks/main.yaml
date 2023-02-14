@@ -18,10 +18,10 @@
         - config
         - amd.config
 
-- name: Teardown
-  ansible.builtin.import_tasks: teardown.yaml
-  tags:
-    - never
-    - teardown
-    - amd.teardown
+# - name: Teardown
+#   ansible.builtin.import_tasks: teardown.yaml
+#   tags:
+#     - never
+#     - teardown
+#     - amd.teardown
 ...
