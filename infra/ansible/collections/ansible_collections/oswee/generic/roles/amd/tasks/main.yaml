@@ -12,11 +12,11 @@
         - install
         - amd.install
 
-    - name: Config
-      ansible.builtin.import_tasks: config.yaml
-      tags:
-        - config
-        - amd.config
+    # - name: Config
+    #   ansible.builtin.import_tasks: config.yaml
+    #   tags:
+    #     - config
+    #     - amd.config
 
 # - name: Teardown
 #   ansible.builtin.import_tasks: teardown.yaml
