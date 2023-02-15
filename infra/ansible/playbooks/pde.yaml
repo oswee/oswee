@@ -3,7 +3,6 @@
   hosts: workstations
   connection: local
   become: false
-  # become_user: ansible
   gather_facts: true
 
   tasks:
