@@ -3,13 +3,11 @@
 
 - name: Setup
   tags:
-    - rust
     - rust.setup
   block:
     - name: Install
       ansible.builtin.import_tasks: install.yaml
       tags:
-        - install
         - rust.install
 
     # - name: Config
