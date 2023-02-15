@@ -9,10 +9,10 @@
         name: wheel
         state: present
 
-    - name: Add vagrant user to 'wheel' group
+    - name: Add current user to 'wheel' group
       become: true
       ansible.builtin.user:
-        name: vagrant
+        name: '{{ lookup("env", "USER") }}'
         groups: wheel
         append: true
 
