@@ -1,15 +1,23 @@
 ---
 # tasks file for Vagrant
 
-- name: Install
-  ansible.builtin.import_tasks: install.yaml
+- name: Setup
   tags:
     - vagrant.setup
-    - vagrant.setup.install
+  block:
+    - name: Install
+      ansible.builtin.import_tasks: install.yaml
+      tags:
+        - vagrant.install
 
-- name: Teardown
-  ansible.builtin.import_tasks: teardown.yaml
-  tags:
-    - never
-    - vagrant.teardown
+    - name: Environment
+      ansible.builtin.import_tasks: environment.yaml
+      tags:
+        - vagrant.environment
+
+# - name: Teardown
+#   ansible.builtin.include_tasks: teardown.yaml
+#   tags:
+#     - never
+#     - vagrant.teardown
 ...

@@ -1,32 +1,40 @@
 ---
 # tasks file for Vagrant
 
-- name: install | Install packages
+- name: install | Install Hashicorp rpm key
   become: true
-  ansible.builtin.dnf:
-    name: '{{ item }}'
+  ansible.builtin.rpm_key:
     state: present
-  loop: '{{ packages.redhat }}'
+    key: https://rpm.releases.hashicorp.com/gpg
 
-- name: install | Install Vagrant
+- name: install | Install HashiCorp repository
+  become: true
+  ansible.builtin.get_url:
+    url: https://rpm.releases.hashicorp.com/fedora/hashicorp.repo
+    dest: /etc/yum.repos.d/hashicorp.repo
+
+- name: install | Install Vagrant package
   become: true
   ansible.builtin.dnf:
-    name: '{{ vagrant_rpm }}'
+    name: vagrant
     state: present
-    disable_gpg_check: true
+
+# - name: install | Install packages
+#   become: true
+#   ansible.builtin.dnf:
+#     name: '{{ item }}'
+#     state: present
+#   loop: '{{ packages.redhat }}'
+#
+# - name: install | Install Vagrant
+#   become: true
+#   ansible.builtin.dnf:
+#     name: '{{ vagrant_rpm }}'
+#     state: present
+#     disable_gpg_check: true
 
 - name: install | Install Vagrant-Libvirt plugin
   ansible.builtin.command: vagrant plugin install vagrant-libvirt
   environment:
-    CONFIGURE_ARGS: 'with-libvirt-include=/usr/include/libvirt with-libvirt-lib=/usr/lib64'
-
-# Don't forget to `source /etc/profile.d/vagrant.sh`
-- name: install | Add Vagrant environment variables
-  become: true
-  ansible.builtin.copy:
-    dest: /etc/profile.d/vagrant.sh
-    # TODO: Read the README#ENV variables
-    mode: 0644
-    content: |
-      export VAGRANT_DEFAULT_PROVIDER=libvirt
+    CONFIGURE_ARGS: with-libvirt-include=/usr/include/libvirt with-libvirt-lib=/usr/lib64
 ...
