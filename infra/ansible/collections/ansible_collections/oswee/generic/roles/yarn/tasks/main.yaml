@@ -2,18 +2,16 @@
 # tasks file for Yarn
 
 - name: Setup
+  tags:
+    - yarn.setup
   block:
     - name: Install
-      import_tasks: install.yaml
+      ansible.builtin.import_tasks: install.yaml
       tags:
-        - install
         - yarn.install
 
     - name: Config
-      import_tasks: config.yaml
+      ansible.builtin.import_tasks: config.yaml
       tags:
-        - config
         - yarn.config
-  tags:
-    - yarn
 ...
