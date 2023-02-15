@@ -1,7 +1,0 @@
----
-# defaults file for Nodejs
-
-nodejs_version: '19.5.0'
-nodejs_dir: '/usr'
-nodejs_group: 'root'
-...

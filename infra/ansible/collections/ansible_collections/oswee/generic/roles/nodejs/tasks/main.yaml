@@ -3,18 +3,32 @@
 
 - name: Setup
   tags:
-    - nodejs
+    - nodejs.setup
   block:
+    - name: Prepare
+      ansible.builtin.import_tasks: prepare.yaml
+      tags:
+        - nodejs.prepare
+
     - name: Install
       ansible.builtin.import_tasks: install.yaml
       tags:
-        - install
         - nodejs.install
+
+    - name: Config
+      ansible.builtin.import_tasks: config.yaml
+      tags:
+        - nodejs.config
+
+    - name: Environment
+      ansible.builtin.import_tasks: environment.yaml
+      tags:
+        - nodejs.environment
+
 
 # - name: Teardown
 #   ansible.builtin.import_tasks: teardown.yaml
 #   tags:
 #     - never
-#     - teardown
 #     - nodejs.teardown
 ...
