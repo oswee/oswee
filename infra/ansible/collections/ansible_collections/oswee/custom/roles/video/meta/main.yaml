@@ -1,27 +1,28 @@
 ---
+# roles/video/meta/main.yaml
+
 galaxy_info:
   namespace: oswee
-  role_name: nvim
+  role_name: video
   version: 0.0.1
   author: Dzintars Klavins
-  description: Ansible role to install Neovim
+  description: Ansible role to maintain Video
   company: Oswee
 
   license: Apache-2.0
 
-  min_ansible_version: 2.12
+  min_ansible_version: 2.14
 
   platforms:
     - name: Fedora
       versions:
-        - 35
+        - 37
 
   galaxy_tags:
-    - nvim
+    - video
     - oswee
     - dzintars
     - fedora
 
-dependencies:
-  - role: oswee.generic.yarn
+dependencies: []
 ...

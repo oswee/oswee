@@ -1,2 +1,11 @@
 ---
 # vars file for obs
+
+packages:
+  redhat:
+    - obs-studio
+    - vlc
+    - v4l2loopback
+    - ffmpeg
+    - ffmpeg-libs
+...

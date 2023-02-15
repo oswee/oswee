@@ -1,38 +1,14 @@
 ---
 # tasks file for Nodejs
 
-- name: install | Ensure nodejs directory exists
-  ansible.builtin.file:
-    path: '{{ nodejs_dir }}'
-    state: directory
-    mode: 'u=rwx,go=rx'
-
-- name: install | Install unzip package
-  become: true
-  ansible.builtin.dnf:
-    name: unzip.x86_64
-    state: present
-
 - name: install | Download NodeJS release source
   become: true
   ansible.builtin.unarchive:
     src: '{{ nodejs_origin_url }}'
     dest: '{{ nodejs_dir }}'
-    owner: 'root'
+    owner: root
     group: '{{ nodejs_group }}'
     remote_src: true
     # Strip the top level directory
     extra_opts: [--strip-components=1]
-
-- name: install | Set NodeJS package prefix
-  ansible.builtin.copy:
-    dest: '/home/{{ ansible_user_id }}/.npmrc'
-    content: 'prefix=/home/{{ ansible_user_id }}/.local'
-
-- name: install | Add NodeJS to system-wide $PATH
-  become: true
-  ansible.builtin.copy:
-    dest: /etc/profile.d/nodejs.sh
-    content: "export PATH={{ nodejs_dir }}/bin:$PATH\n"
-    mode: '0644'
 ...

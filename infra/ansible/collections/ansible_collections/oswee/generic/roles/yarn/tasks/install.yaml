@@ -3,7 +3,6 @@
 
 - name: install | Install Yarn NPM package globally
   community.general.npm:
-    # remote_user: vagrant
     name: yarn@latest
     global: true
   # environment:

@@ -2,37 +2,32 @@
 # tasks file for Nvim
 
 - name: Setup
+  tags:
+    - nvim.setup
   block:
     - name: Build prerequisites
-      import_tasks: prepare.yaml
+      ansible.builtin.import_tasks: prepare.yaml
       tags:
-        - prepare
         - nvim.prepare
 
     - name: System packages
-      import_tasks: packages.yaml
+      ansible.builtin.import_tasks: packages.yaml
       tags:
-        - packages
         - nvim.packages
 
     - name: Build
-      import_tasks: build.yaml
+      ansible.builtin.import_tasks: build.yaml
       tags:
-        - build
         - nvim.build
 
     - name: Install
-      import_tasks: install.yaml
+      ansible.builtin.import_tasks: install.yaml
       tags:
-        - install
         - nvim.install
-  tags:
-    - nvim
 
-- name: Teardown
-  import_tasks: teardown.yaml
-  tags:
-    - never
-    - teardown
-    - nvim.teardown
+# - name: Teardown
+#   import_tasks: teardown.yaml
+#   tags:
+#     - never
+#     - nvim.teardown
 ...

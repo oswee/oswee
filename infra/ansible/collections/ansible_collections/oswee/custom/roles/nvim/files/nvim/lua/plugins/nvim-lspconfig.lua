@@ -18,7 +18,7 @@ return {
 			'pyright',
 			'rust_analyzer',
 			'marksman',
-			'sumneko_lua',
+			'lua_ls',
 			'stylelint_lsp',
 			'terraformls',
 			'tsserver',

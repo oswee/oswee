@@ -1,0 +1,24 @@
+---
+# tasks file for Nodejs
+
+# - name: install | Ensure home directory exists
+#   become: true
+#   ansible.builtin.file:
+#     path: /home/{{ nodejs_system_user }}
+#     state: directory
+#     owner: '{{ nodejs_user }}'
+#     group: '{{ nodejs_user }}'
+#     mode: 0755
+
+- name: prepare | Ensure Nodejs (/usr) directory exists
+  ansible.builtin.file:
+    path: '{{ nodejs_dir }}'
+    state: directory
+    mode: 0755
+
+- name: prepare | Install unzip package
+  become: true
+  ansible.builtin.dnf:
+    name: unzip.x86_64
+    state: present
+...

@@ -1,7 +1,18 @@
 ---
 # tasks file for Lua
 
+- name: install | Ensure lua source directory exist
+  become: true
+  ansible.builtin.file:
+    path: '{{ lua_destination_dir }}'
+    state: directory
+    owner: '{{ lua_user }}'
+    group: '{{ lua_group }}'
+    mode: 0755
+
 - name: install | Download prebuilt release artifacts
+  remote_user: '{{ lua_user }}'
+  become: true
   ansible.builtin.unarchive:
     src: '{{ lua_release_url }}'
     dest: '{{ lua_destination_dir }}'

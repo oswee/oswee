@@ -7,5 +7,5 @@
     state: absent
   loop:
     - '{{ nvim_config_path }}'
-    - /home/{{ system_user }}/.local/share/nvim
+    - /home/{{ nvim_user }}/.local/share/nvim
 ...

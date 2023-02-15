@@ -37,6 +37,9 @@ dependencies:
   - role: oswee.generic.golang
     tags:
       - deps
+  - role: oswee.generic.rust
+    tags:
+      - deps
   - role: oswee.generic.github
     tags:
       - deps

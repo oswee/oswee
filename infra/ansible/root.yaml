@@ -1,38 +1,25 @@
 ---
 # Root Playbook
+# Don't use tags there. It will break ansible_env, ansible_user_id, etc.
 
 - name: System
   ansible.builtin.import_playbook: playbooks/system.yaml
-  tags:
-    - system
 
 - name: Desktop
   ansible.builtin.import_playbook: playbooks/desktop.yaml
-  tags:
-    - desktop
 
 - name: Personal Productivity Environment
   ansible.builtin.import_playbook: playbooks/ppe.yaml
-  tags:
-    - ppe
 
 - name: Personal Development Environment
   ansible.builtin.import_playbook: playbooks/pde.yaml
-  tags:
-    - pde
 
 - name: Web
   ansible.builtin.import_playbook: playbooks/web.yaml
-  tags:
-    - web
 
 - name: Virtualization
   ansible.builtin.import_playbook: playbooks/virtualization.yaml
-  tags:
-    - virtualization
 
 - name: Containers
   ansible.builtin.import_playbook: playbooks/containers.yaml
-  tags:
-    - containers
 ...

@@ -1,0 +1,11 @@
+---
+# tasks file for Molecules
+
+- name: environment | Setup Molecule environment
+  become: true
+  ansible.builtin.copy:
+    dest: /etc/profile.d/vagrant.sh
+    mode: 0644
+    content: |
+      VAGRANT_DEFAULT_PROVIDER=libvirt
+...

@@ -1,27 +1,27 @@
 ---
-# tasks file for Amd
+# tasks file for Video
 
 - name: Setup
   tags:
-    - amd
-    - amd.setup
+    - video
+    - video.setup
   block:
     - name: Install
       ansible.builtin.import_tasks: install.yaml
       tags:
         - install
-        - amd.install
+        - video.install
 
     # - name: Config
     #   ansible.builtin.import_tasks: config.yaml
     #   tags:
     #     - config
-    #     - amd.config
+    #     - video.config
 
 # - name: Teardown
 #   ansible.builtin.import_tasks: teardown.yaml
 #   tags:
 #     - never
 #     - teardown
-#     - amd.teardown
+#     - video.teardown
 ...

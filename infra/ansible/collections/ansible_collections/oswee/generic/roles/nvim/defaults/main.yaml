@@ -1,0 +1,11 @@
+---
+# defaults file for Nvim
+
+nvim_nightly: true
+nvim_repo_url: https://github.com/neovim/neovim.git
+nvim_user: '{{ ansible_env.USER | default("root") }}'
+nvim_source_dir: /home/{{ nvim_user }}/code/github.com/neovim/neovim
+nvim_config_dir: /home/{{ nvim_user }}/.config/nvim
+nvim_vim_alias: false
+teardown: false
+...

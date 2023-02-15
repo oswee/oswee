@@ -1,27 +1,26 @@
 ---
 galaxy_info:
   namespace: oswee
-  role_name: nvim
+  role_name: nodejs
   version: 0.0.1
   author: Dzintars Klavins
-  description: Ansible role to install Neovim
+  description: Ansible Galaxy role to maintain NodeJS
   company: Oswee
 
   license: Apache-2.0
 
-  min_ansible_version: 2.12
+  min_ansible_version: 2.11
 
   platforms:
     - name: Fedora
       versions:
-        - 35
+        - 34
 
   galaxy_tags:
-    - nvim
+    - nodejs
     - oswee
     - dzintars
     - fedora
 
-dependencies:
-  - role: oswee.generic.yarn
+dependencies: []
 ...

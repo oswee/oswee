@@ -1,0 +1,8 @@
+---
+# defaults file for Nodejs
+
+nodejs_version: 19.6.0
+nodejs_dir: /usr
+nodejs_user: '{{ ansible_env.USER | default("root") }}'
+nodejs_group: '{{ ansible_env.USER | default("root") }}'
+...
