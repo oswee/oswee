@@ -41,7 +41,7 @@
     # version: ''
     # path: ''
   loop:
-    - selene
+    # - selene  # Fails to install on molecule machine
     - stylua
 
 - name: lsp | Install Go packages
@@ -54,10 +54,9 @@
     - golang.org/x/tools/cmd/goimports@latest
 
 - name: lsp | Download Marksman binary
-  become: true
   ansible.builtin.get_url:
     url: https://github.com/artempyanykh/marksman/releases/download/2023-01-29/marksman-linux
-    dest: /home/{{ system_user }}/.local/bin/marksman
+    dest: /home/{{ nvim_user }}/.local/bin/marksman
     mode: a+x
 
 # marksman (prebuilt Go binary)

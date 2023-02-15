@@ -16,9 +16,9 @@
       tags:
         - nvim.lsp
 
-- name: Teardown
-  ansible.builtin.import_tasks: teardown.yaml
-  tags:
-    - never
-    - nvim.teardown
+# - name: Teardown
+#   ansible.builtin.import_tasks: teardown.yaml
+#   tags:
+#     - never
+#     - nvim.teardown
 ...
