@@ -1,19 +1,19 @@
 ---
 # tasks file for Nvim
 
-- name: packges | Install complementary packages
+- name: packages | Install complementary packages
   become: true
   ansible.builtin.dnf:
     name: '{{ item }}'
     state: present
   loop: '{{ packages.redhat }}'
 
-- name: packges | Install NPM Neovim package globally
+- name: packages | Install NPM Neovim package globally
   community.general.yarn:
     name: neovim@latest
     global: true
 
-- name: packges | Install pynvim python package
+- name: packages | Install pynvim python package
   ansible.builtin.pip:
     name: pynvim
     state: forcereinstall

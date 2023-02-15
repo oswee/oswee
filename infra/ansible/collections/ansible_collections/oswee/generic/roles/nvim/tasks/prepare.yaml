@@ -1,7 +1,7 @@
 ---
 # tasks file for Nvim
 
-- name: prepare | Install NeoVim build prerequisites
+- name: prepare | Install Neovim build prerequisites
   become: true
   ansible.builtin.dnf:
     name: '{{ item }}'
@@ -13,7 +13,7 @@
   ansible.builtin.package_facts:
     manager: rpm
 
-- name: prepare | Remove default distribution NeoVim package if exists
+- name: prepare | Remove default distribution Neovim package if exists
   become: true
   ansible.builtin.dnf:
     name: neovim
