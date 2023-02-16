@@ -39,16 +39,15 @@ To install only `generic` collection from this repository use
 ### Skeleton (Role bootstrapping)
 
 To bootstrap new roles you can use Skeleton.
-Use `ansible-galaxy init --role-skeleton=.skeleton --init-path=./collections/ansible_collections namespace/roles/role-name` from the `./ansible/` directory.
-You can also use simple `ansible-galaxy init -p=./collections/ansible_collections namespace/roles/role-name` command.
+Use `ansible-galaxy init --role-skeleton .skeleton --init-path ./collections/ansible_collections namespace/roles/role-name` from the `./ansible/` directory.
+You can also use simple `ansible-galaxy init -p ./collections/ansible_collections namespace/roles/role-name` command.
 `namespace/role/` prefix will be stripped in the output files.
 All Skeleton template files are located in `//infra/ansible/.skeleton/*` directory.
 
 ### Molecule init
 
-UPDATE: You should not place Molecule inside of individual role. Molecule now is moved to the collection
-level.
-In general `molecule init` is not used there. You can copy `default` scenario as a base.
+UPDATE: You should not place Molecule inside of individual role. Molecule now is moved to the inventory level.
+In general `molecule init` is not used there at all. You can copy `default` scenario as a base.
 
 ### Molecule dependencies
 
@@ -61,7 +60,7 @@ all the time.
 
 UPD: Symlinking most likely is outdated at this point, but i will leave it there as a reminder for such option.
 
-Also see this discussion: https://github.com/ansible/ansible/issues/68915
+Also see this discussion: [#68915](https://github.com/ansible/ansible/issues/68915)
 
 ### Molecule testing
 
@@ -85,7 +84,7 @@ UPDATE: In case of Nvim, don't use tags. For teardown not to kick in i did imple
 
 Vagrant is the only maintained scenario if at all (too early to spend time on polishing up the roles).
 Later potentially I will introduce Podman scenario as well.
-No any plans of supporting Docker.
+No any plans to support Docker.
 
 To log in into Molecule instance use
 

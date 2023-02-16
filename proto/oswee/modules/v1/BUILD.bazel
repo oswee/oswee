@@ -20,7 +20,7 @@ proto_library(
 go_proto_library(
     name = "modules_go_proto",
     compilers = ["@io_bazel_rules_go//proto:go_grpc"],
-    importpath = "github.com/oswee/prime/proto/oswee/modules/v1",
+    importpath = "github.com/oswee/oswee/proto/oswee/modules/v1",
     proto = ":modules_proto",
     visibility = ["//visibility:public"],
     deps = [
@@ -31,7 +31,7 @@ go_proto_library(
 go_library(
     name = "modules_go_library",
     embed = [":modules_go_proto"],
-    importpath = "github.com/oswee/prime/proto/oswee/modules/v1",
+    importpath = "github.com/oswee/oswee/proto/oswee/modules/v1",
     visibility = ["//visibility:public"],
 )
 
