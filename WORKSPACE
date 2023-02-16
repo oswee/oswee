@@ -9,7 +9,6 @@ workspace(
     },
 )
 
-# buildifier: disable=load-on-top
 load("//bazel:workspace.bzl", "bazel_dependencies")
 
 bazel_dependencies()
@@ -29,15 +28,25 @@ load(
 )
 #}}}
 
+# Skylib{{{
+# ----------------------------------------------
+
+load("@bazel_skylib//:workspace.bzl", "bazel_skylib_workspace")
+
+bazel_skylib_workspace()
+
+load("@bazel_skylib//lib:versions.bzl", "versions")
+
+versions.check(minimum_bazel_version = "5.4.0")
+#}}}
+
 # Rules NodeJS{{{
 # ----------------------------------------------
 
-# buildifier: disable=load-on-top
 load("@build_bazel_rules_nodejs//:repositories.bzl", "build_bazel_rules_nodejs_dependencies")
 
 build_bazel_rules_nodejs_dependencies()
 
-# buildifier: disable=load-on-top
 load("@rules_nodejs//nodejs:repositories.bzl", "nodejs_register_toolchains")
 
 nodejs_register_toolchains(
@@ -68,7 +77,6 @@ nodejs_register_toolchains(
     # preserve_symlinks = True,
 )
 
-# buildifier: disable=load-on-top
 load("@build_bazel_rules_nodejs//:index.bzl", "yarn_install")
 
 yarn_install(
@@ -91,12 +99,10 @@ load("@build_bazel_rules_nodejs//toolchains/esbuild:esbuild_repositories.bzl", "
 
 esbuild_repositories(npm_repository = "npm")
 
-# buildifier: disable=load-on-top
 load("@io_bazel_rules_webtesting//web:repositories.bzl", "web_test_repositories")
 
 web_test_repositories()
 
-# buildifier: disable=load-on-top
 load("@io_bazel_rules_webtesting//web/versioned:browsers-0.3.3.bzl", "browser_repositories")
 
 browser_repositories(
@@ -105,28 +111,9 @@ browser_repositories(
 )
 # }}}
 
-# Rules Python{{{
-# ----------------------------------------------
-#}}}
-
-# Skylib{{{
-# ----------------------------------------------
-
-# buildifier: disable=load-on-top
-load("@bazel_skylib//:workspace.bzl", "bazel_skylib_workspace")
-
-bazel_skylib_workspace()
-
-# buildifier: disable=load-on-top
-load("@bazel_skylib//lib:versions.bzl", "versions")
-
-versions.check(minimum_bazel_version = "5.0.0")
-#}}}
-
 # Rules Proto{{{
 # ----------------------------------------------
 
-# buildifier: disable=load-on-top
 load("@rules_proto//proto:repositories.bzl", "rules_proto_dependencies", "rules_proto_toolchains")
 
 rules_proto_dependencies()
@@ -138,18 +125,13 @@ rules_proto_toolchains()
 # ----------------------------------------------
 # Check the go_rules and Gazelle version compatibility at https://github.com/bazelbuild/bazel-gazelle#id5
 
-# buildifier: disable=load-on-top
 load("@io_bazel_rules_go//go:deps.bzl", "go_register_toolchains", "go_rules_dependencies")
-
-# buildifier: disable=load-on-top
 load("@bazel_gazelle//:deps.bzl", "gazelle_dependencies")
+load("//go:repositories.bzl", "go_deps")
 
 go_rules_dependencies()
 
-go_register_toolchains(version = "1.19.1")
-
-# buildifier: disable=load-on-top
-load("//go:repositories.bzl", "go_deps")
+go_register_toolchains(version = "1.19.5")
 
 # gazelle:repository_macro go/repositories.bzl%go_deps
 go_deps()
@@ -161,7 +143,6 @@ gazelle_dependencies()
 # Rules Google Protobuf{{{
 # ----------------------------------------------
 
-# buildifier: disable=load-on-top
 load("@com_google_protobuf//:protobuf_deps.bzl", "protobuf_deps")
 
 protobuf_deps()
@@ -170,7 +151,6 @@ protobuf_deps()
 # Rules Docker{{{
 # ----------------------------------------------
 
-# buildifier: disable=load-on-top
 load("@io_bazel_rules_docker//toolchains/docker:toolchain.bzl", docker_toolchain_configure = "toolchain_configure")
 
 # Override the default docker toolchain configuration.
@@ -182,22 +162,18 @@ docker_toolchain_configure(
     docker_path = "/usr/bin/podman",
 )
 
-# buildifier: disable=load-on-top
 load("@io_bazel_rules_docker//repositories:repositories.bzl", container_repositories = "repositories")
 
 container_repositories()
 
-# buildifier: disable=load-on-top
 load("@io_bazel_rules_docker//repositories:deps.bzl", container_deps = "deps")
 
 container_deps()
 
-# buildifier: disable=load-on-top
 load("//bazel:workspace_containers.bzl", "containers")
 
 containers()
 
-# buildifier: disable=load-on-top
 load("@io_bazel_rules_docker//go:image.bzl", _go_image_repos = "repositories")
 
 _go_image_repos()
@@ -206,17 +182,15 @@ _go_image_repos()
 # Rules K8s{{{
 # ----------------------------------------------
 
-# buildifier: disable=load-on-top
 load("@io_bazel_rules_k8s//k8s:k8s.bzl", "k8s_defaults", "k8s_repositories")
 
 k8s_repositories()
 
-# buildifier: disable=load-on-top
 load("@io_bazel_rules_k8s//k8s:k8s_go_deps.bzl", k8s_go_deps = "deps")
 
 k8s_go_deps()
 
-# Minikube profile
+# Minikube profile name
 _CLUSTER = "dev"
 
 _CONTEXT = _CLUSTER
@@ -271,7 +245,6 @@ k8s_defaults(
 # Rules TypeScript Proto{{{
 # ----------------------------------------------
 
-# buildifier: disable=load-on-top
 load("@rules_typescript_proto//:index.bzl", "rules_typescript_proto_dependencies")
 
 rules_typescript_proto_dependencies()
@@ -293,7 +266,6 @@ rules_typescript_proto_dependencies()
 #     ],
 # )
 
-# buildifier: disable=load-on-top
 load("@com_github_bazelbuild_buildtools//buildifier:deps.bzl", "buildifier_dependencies")
 
 buildifier_dependencies()
@@ -312,7 +284,6 @@ buildifier_dependencies()
 # rules_sass_dependencies()
 
 # Setup the rules_sass toolchain
-# buildifier: disable=load-on-top
 load("@io_bazel_rules_sass//sass:sass_repositories.bzl", "sass_repositories")
 
 sass_repositories()
@@ -321,7 +292,6 @@ sass_repositories()
 # Rules PKG{{{
 # ----------------------------------------------
 
-# buildifier: disable=load-on-top
 load("@rules_pkg//:deps.bzl", "rules_pkg_dependencies")
 
 rules_pkg_dependencies()
@@ -330,7 +300,6 @@ rules_pkg_dependencies()
 # Rules Rust{{{
 # ----------------------------------------------
 
-# buildifier: disable=load-on-top
 load("@rules_rust//rust:repositories.bzl", "rules_rust_dependencies", "rust_register_toolchains")
 
 rules_rust_dependencies()
