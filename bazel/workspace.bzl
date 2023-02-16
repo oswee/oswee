@@ -58,6 +58,7 @@ def bazel_dependencies():
     http_archive(
         name = "rules_python",
         sha256 = RULES_PYTHON_SHA256,
+        strip_prefix = "rules_python-%s" % RULES_PYTHON_VERSION,
         urls = [
             "https://github.com/bazelbuild/rules_python/archive/refs/tags/%s.tar.gz" % RULES_PYTHON_VERSION,
         ],
