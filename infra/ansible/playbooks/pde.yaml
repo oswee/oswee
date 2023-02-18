@@ -70,4 +70,10 @@
         - cfssl
       ansible.builtin.import_role:
         name: oswee.generic.cfssl
+
+    - name: Packer
+      tags:
+        - packer
+      ansible.builtin.import_role:
+        name: oswee.generic.packer
 ...
