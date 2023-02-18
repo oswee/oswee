@@ -23,8 +23,8 @@ CONFIG_PATH=$(realpath "${1:-${SCRIPT_PATH}/config}")
 mkdir -p "$VAGRANT_BOX_PATH"
 
 menu_option_1() {
-  INPUT_PATH="$SCRIPT_PATH"/builds/fedora/35
-  echo -e "\nCONFIRM: Build a Fedora 35 Template for QEMU?"
+  INPUT_PATH="$SCRIPT_PATH"/builds/fedora/35-Server-netinst
+  echo -e "\nCONFIRM: Build a Fedora 35 Server-netinst Template for QEMU?"
   echo -e "\nContinue? (y/n)"
   read -r REPLY
   if [[ ! $REPLY =~ ^[Yy]$ ]]
@@ -32,8 +32,8 @@ menu_option_1() {
     exit 1
   fi
 
-  ### Build a Fedora 35 Template for QEMU. ###
-  echo "Building a Fedora 35 Template for QEMU..."
+  ### Build a Fedora 35 Server-netinst Template for QEMU. ###
+  echo "Building a Fedora 35 Server-netinst Template for QEMU..."
 
   ### Initialize HashiCorp Packer and required plugins. ###
   echo "Initializing HashiCorp Packer and required plugins..."
@@ -54,8 +54,8 @@ menu_option_1() {
 }
 
 menu_option_2() {
-  INPUT_PATH="$SCRIPT_PATH"/builds/fedora/37
-  echo -e "\nCONFIRM: Build a Fedora 37 Template for QEMU?"
+  INPUT_PATH="$SCRIPT_PATH"/builds/fedora/37-Server-netinst
+  echo -e "\nCONFIRM: Build a Fedora 37 Server-netinst Template for QEMU?"
   echo -e "\nContinue? (y/n)"
   read -r REPLY
   if [[ ! $REPLY =~ ^[Yy]$ ]]
@@ -64,7 +64,7 @@ menu_option_2() {
   fi
 
   ### Build a Fedora 37 Template for QEMU. ###
-  echo "Building a Fedora 37 Template for QEMU..."
+  echo "Building a Fedora 37 Server-netinst Template for QEMU..."
 
   ### Initialize HashiCorp Packer and required plugins. ###
   echo "Initializing HashiCorp Packer and required plugins..."
@@ -103,8 +103,8 @@ until [ "$selection" = "0" ]; do
   echo ""
   echo "      Linux Distribution:"
   echo ""
-  echo "        1  -  Fedora 35 (QEMU)"
-  echo "        2  -  Fedora 37 (QEMU)"
+  echo "        1  -  Fedora 35 Server-netinst (QEMU)"
+  echo "        2  -  Fedora 37 Server-netinst (QEMU)"
   echo ""
   echo "      Other:"
   echo ""
