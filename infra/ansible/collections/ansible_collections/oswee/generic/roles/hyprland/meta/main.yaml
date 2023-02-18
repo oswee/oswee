@@ -1,0 +1,31 @@
+---
+# roles/hyprland/meta/main.yaml
+
+galaxy_info:
+  namespace: oswee
+  role_name: hyprland
+  version: 0.0.1
+  author: Dzintars Klavins
+  description: Ansible role to maintain Hyprland
+  company: Oswee
+
+  license: Apache-2.0
+
+  min_ansible_version: 2.14
+
+  platforms:
+    - name: Fedora
+      versions:
+        - 37
+
+  galaxy_tags:
+    - hyprland
+    - oswee
+    - dzintars
+    - fedora
+
+dependencies:
+  - name: oswee.custom.git
+    tags:
+      - deps
+...

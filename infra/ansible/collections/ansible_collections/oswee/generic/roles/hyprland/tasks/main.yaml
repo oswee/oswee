@@ -1,0 +1,33 @@
+---
+# tasks file for Hyprland
+
+- name: Setup
+  tags:
+    - hyprland.setup
+  block:
+    - name: Prepare
+      ansible.builtin.import_tasks: prepare.yaml
+      tags:
+        - hyprland.prepare
+
+    - name: Build
+      ansible.builtin.import_tasks: build.yaml
+      tags:
+        - hyprland.build
+
+    - name: Install
+      ansible.builtin.import_tasks: install.yaml
+      tags:
+        - hyprland.install
+
+    # - name: Config
+    #   ansible.builtin.import_tasks: config.yaml
+    #   tags:
+    #     - hyprland.config
+
+# - name: Teardown
+#   ansible.builtin.import_tasks: teardown.yaml
+#   tags:
+#     - never
+#     - hyprland.teardown
+...
