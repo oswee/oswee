@@ -23,7 +23,7 @@ CONFIG_PATH=$(realpath "${1:-${SCRIPT_PATH}/config}")
 mkdir -p "$VAGRANT_BOX_PATH"
 
 menu_option_1() {
-  INPUT_PATH="$SCRIPT_PATH"/builds/fedora35/
+  INPUT_PATH="$SCRIPT_PATH"/builds/fedora/35
   echo -e "\nCONFIRM: Build a Fedora 35 Template for QEMU?"
   echo -e "\nContinue? (y/n)"
   read -r REPLY
@@ -53,6 +53,38 @@ menu_option_1() {
   echo "Done."
 }
 
+menu_option_2() {
+  INPUT_PATH="$SCRIPT_PATH"/builds/fedora/37
+  echo -e "\nCONFIRM: Build a Fedora 37 Template for QEMU?"
+  echo -e "\nContinue? (y/n)"
+  read -r REPLY
+  if [[ ! $REPLY =~ ^[Yy]$ ]]
+  then
+    exit 1
+  fi
+
+  ### Build a Fedora 37 Template for QEMU. ###
+  echo "Building a Fedora 37 Template for QEMU..."
+
+  ### Initialize HashiCorp Packer and required plugins. ###
+  echo "Initializing HashiCorp Packer and required plugins..."
+  packer init "$INPUT_PATH"
+
+  ### Start the HashiCorp Packer Build ###
+  echo "Starting the HashiCorp Packer build..."
+  PKR_VAR_VAGRANT_BOX_PATH=$VAGRANT_BOX_PATH \
+  # packer build -only=qemu.* -force \
+  packer build -force \
+      -var-file="$CONFIG_PATH/qemu.pkrvars.hcl" \
+      -var-file="$CONFIG_PATH/build.pkrvars.hcl" \
+      -var-file="$CONFIG_PATH/common.pkrvars.hcl" \
+      -var-file="$CONFIG_PATH/ansible.pkrvars.hcl" \
+      "$INPUT_PATH"
+
+  ### All done. ###
+  echo "Done."
+}
+
 press_enter() {
   cd "$SCRIPT_PATH"
   echo -n "Press Enter to continue."
@@ -72,6 +104,7 @@ until [ "$selection" = "0" ]; do
   echo "      Linux Distribution:"
   echo ""
   echo "        1  -  Fedora 35 (QEMU)"
+  echo "        2  -  Fedora 37 (QEMU)"
   echo ""
   echo "      Other:"
   echo ""
@@ -81,6 +114,7 @@ until [ "$selection" = "0" ]; do
   echo ""
   case $selection in
     1 ) clear ; menu_option_1 ; press_enter ;;
+    2 ) clear ; menu_option_2 ; press_enter ;;
     Q ) clear ; exit ;;
     * ) clear ; incorrect_selection ; press_enter ;;
   esac
