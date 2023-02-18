@@ -7,9 +7,9 @@ driver:
     driver: kvm
 platforms:
   - name: workstation
-    # box: fedora37
-    box: fedora/37-cloud-base
-    box_version: 37.20221105.0
+    # box: fedora/37-cloud-base
+    # box_version: 37.20221105.0
+    box: fedora37  # Image built by Packer
     cpus: 4
     memory: 4096
     instance_raw_config_args:
