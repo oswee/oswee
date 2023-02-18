@@ -1,14 +1,23 @@
 ---
 # tasks file for gpg
 
-- name: Install
-  import_tasks: install.yaml
+- name: Setup
   tags:
-    - gpg.install
+    - gpg.setup
+  block:
+    - name: Install
+      ansible.builtin.import_tasks: install.yaml
+      tags:
+        - gpg.install
 
-- name: Environment
-  import_tasks: environment.yaml
-  tags:
-    - gpg.install
-    - gpg.config
+    - name: Environment
+      ansible.builtin.import_tasks: environment.yaml
+      tags:
+        - gpg.environment
+
+# - name: Teardown
+#   ansible.builtin.import_tasks: teardown.yaml
+#   tags:
+#     - never
+#     - gpg.teardown
 ...

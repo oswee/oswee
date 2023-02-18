@@ -1,5 +1,5 @@
 ---
-# tasks file for gpg
+# tasks file for Gpg
 
 - name: install | Install package
   become: true
@@ -13,9 +13,15 @@
     name: pinentry-gtk  # Because it supports KeePassXC (libsecret) integration.
     state: present
 
+- name: install | Ensure config directory exist
+  ansible.builtin.file:
+    path: '{{ gpg_config_path }}'
+    state: directory
+    mode: 0755
+
 - name: install | Copy GPG Agent config
   ansible.builtin.copy:
     src: gpg-agent.conf
-    dest: /home/{{ ansible_user_id }}/.gnupg/gpg-agent.conf
-    mode: '0644'
+    dest: '{{ gpg_config_path }}/gpg-agent.conf'
+    mode: 0644
 ...
