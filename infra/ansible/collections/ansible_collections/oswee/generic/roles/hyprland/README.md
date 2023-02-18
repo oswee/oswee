@@ -1,6 +1,6 @@
-# Rpm
+# Hyprland
 
-[](https://rpm-packaging-guide.github.io)
+A brief description of the role goes here.
 
 ## Requirements
 

@@ -35,5 +35,5 @@ all:
     db:
     ci:
   vars:
-    ansible_ssh_common_args: '-F environments/development/.ssh/config'
+    ansible_ssh_common_args: -F environments/development/.ssh/config
 ...

@@ -1,2 +1,17 @@
 ---
 # vars file for rpm
+
+packages:
+  redhat:
+    - gcc
+    - rpm-build
+    - rpm-devel
+    - rpmlint
+    - make
+    - python
+    - bash
+    - coreutils
+    - diffutils
+    - patch
+    - rpmdevtools
+...

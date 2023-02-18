@@ -30,6 +30,12 @@
       tags:
         - swaylock
 
+    - name: Hyprland
+      ansible.builtin.import_role:
+        name: oswee.generic.hyprland
+      tags:
+        - hyprland
+
     - name: Kitty
       ansible.builtin.import_role:
         name: oswee.generic.kitty

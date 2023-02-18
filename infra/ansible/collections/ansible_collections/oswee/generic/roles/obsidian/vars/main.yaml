@@ -2,3 +2,4 @@
 # vars file for obsidian
 
 rpmfusion_gpg_url_template: https://rpmfusion.org/keys?action=AttachFile&do=get&target=RPM-GPG-KEY-rpmfusion-{1}-{0}-{{ ansible_distribution_major_version }}
+...

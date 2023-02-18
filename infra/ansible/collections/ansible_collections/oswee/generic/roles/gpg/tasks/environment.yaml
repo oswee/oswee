@@ -1,11 +1,11 @@
 ---
-# tasks file for gpg
+# tasks file for Gpg
 
 - name: environment | Add environment
   become: true
   ansible.builtin.copy:
     dest: /etc/profile.d/gpg2.sh
-    mode: '0644'
+    mode: 0644
     content: |
       export GPG_TTY=$(tty)  # To enable Git commit signing
 ...

@@ -1,10 +1,11 @@
 ---
 # tasks file for git
 
-- name: Copy template/s
-  template:
+- name: config | Copy template/s
+  ansible.builtin.template:
     src: '{{ item.src }}'
     dest: '{{ item.dest }}'
-    # mode: 0644
+    mode: 0644
   loop:
-    - { src: 'gitconfig.j2', dest: '$HOME/.gitconfig' }
+    - { src: gitconfig.j2, dest: $HOME/.gitconfig }
+...

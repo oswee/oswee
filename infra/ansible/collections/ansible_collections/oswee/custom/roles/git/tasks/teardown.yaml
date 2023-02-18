@@ -1,9 +1,10 @@
 ---
-# tasks file for git
+# tasks file for Git
 
-- name: Remove files and directories
+- name: teardown | Remove files and directories
   ansible.builtin.file:
     path: '{{ item }}'
     state: absent
   loop:
     - $HOME/.gitconfig
+...

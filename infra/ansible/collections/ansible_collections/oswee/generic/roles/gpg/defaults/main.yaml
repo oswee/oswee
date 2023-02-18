@@ -1,3 +1,6 @@
 ---
 # defaults file for gpg
+
+gpg_user: '{{ ansible_env.USER | default("root") }}'
+gpg_config_path: '{{ ansible_env.HOME }}/.gnupg'
 ...

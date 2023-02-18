@@ -22,4 +22,7 @@
 
 - name: Containers
   ansible.builtin.import_playbook: playbooks/containers.yaml
+
+- name: Build
+  ansible.builtin.import_playbook: playbooks/build.yaml
 ...
