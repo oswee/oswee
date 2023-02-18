@@ -1,46 +1,45 @@
 #!/bin/sh
 
 # Format this script when executing
-shfmt -i 2 -w $0
+shfmt -i 2 -w "$0"
 
 tfinit() {
-  terraform -chdir=$1 init -upgrade \
-    -backend-config "bucket=$TF_VAR_s3_bucket" \
-    -backend-config "access_key=$TF_VAR_access_key" \
-    -backend-config "secret_key=$TF_VAR_secret_key" \
-    -backend-config "endpoint=$TF_VAR_endpoint"
+  terraform -chdir="$1" init -upgrade \
+    -backend-config "bucket=${TF_VAR_s3_bucket:?}" \
+    -backend-config "access_key=${TF_VAR_access_key:?}" \
+    -backend-config "secret_key=${TF_VAR_secret_key:?}" \
+    -backend-config "endpoint=${TF_VAR_endpoint:?}"
 }
 
 tfplan() {
-  terraform -chdir=$1 plan
+  terraform -chdir="$1" plan
 }
 
 tfapply() {
-  terraform -chdir=$1 apply
+  terraform -chdir="$1" apply
 }
 
 tfdestroy() {
-  terraform -chdir=$1 destroy
+  terraform -chdir="$1" destroy
 }
 
 tflint() {
-  tflint --enable-rule=terraform_unused_declarations $1
+  command tflint --enable-rule=terraform_unused_declarations "$1"
 }
 
 environment="./project/$1"
 case $2 in
 init)
-  tfinit $environment
+  tfinit "$environment"
   ;;
 plan)
-  tfplan $environment
+  tfplan "$environment"
   ;;
 apply)
-  tfapply $environment
+  tfapply "$environment"
   ;;
 destroy)
-  tfdestroy $environment
-  break
+  tfdestroy "$environment"
   ;;
 *)
   echo "No subcommand provided"
