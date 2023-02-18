@@ -1,6 +1,6 @@
-# rpm
+# Rpm
 
-A brief description of the role goes here.
+[](https://rpm-packaging-guide.github.io)
 
 ## Requirements
 
