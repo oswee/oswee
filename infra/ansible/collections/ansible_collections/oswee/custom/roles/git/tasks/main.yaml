@@ -1,11 +1,23 @@
 ---
-# tasks file for git
+# tasks file for Git
 
-- name: Config
-  import_tasks: config.yaml
+- name: Setup
   tags:
-    - git:config
-# - name: Cleanup
-#   import_tasks: cleanup.yaml
+    - git.setup
+  block:
+    # - name: Install
+    #   ansible.builtin.import_tasks: install.yaml
+    #   tags:
+    #     - git.install
+
+    - name: Config
+      ansible.builtin.import_tasks: config.yaml
+      tags:
+        - git.config
+
+# - name: Teardown
+#   ansible.builtin.import_tasks: teardown.yaml
 #   tags:
-#     - git:cleanup
+#     - never
+#     - git.teardown
+...
