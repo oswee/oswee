@@ -1,3 +1,6 @@
 ---
 # defaults file for Vifm
+
+vifm_user: '{{ ansible_env.USER | default("root") }}'
+vifm_group: '{{ ansible_env.USER | default("root") }}'
 ...

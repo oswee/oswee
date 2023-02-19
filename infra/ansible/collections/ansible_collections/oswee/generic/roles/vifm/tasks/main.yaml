@@ -2,25 +2,22 @@
 # tasks file for Vifm
 
 - name: Setup
+  tags:
+    - vifm.setup
   block:
     - name: Install
-      import_tasks: install.yaml
+      ansible.builtin.import_tasks: install.yaml
       tags:
-        - install
         - vifm.install
 
     - name: Config
-      import_tasks: config.yaml
+      ansible.builtin.import_tasks: config.yaml
       tags:
-        - config
         - vifm.config
-  tags:
-    - vifm
 
 # - name: Teardown
 #   import_tasks: teardown.yaml
 #   tags:
 #     - never
-#     - teardown
 #     - vifm.teardown
 ...
