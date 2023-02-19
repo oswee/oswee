@@ -1,5 +1,5 @@
 ---
-# roles/{{ role_name | regex_replace('.*roles\/') }}/meta/main.yaml
+# meta/main.yaml file for oswee.{{ role_name | regex_replace('\/', '.') | regex_replace('.roles')}} role
 
 galaxy_info:
   namespace: oswee

@@ -1,4 +1,4 @@
-# {{ role_name | regex_replace('.*roles\/') | capitalize }}
+# oswee.{{ role_name | regex_replace('\/', '.') | regex_replace('.roles')}}
 
 A brief description of the role goes here.
 
@@ -20,7 +20,7 @@ Including an example of how to use your role (for instance, with variables passe
 
     - hosts: servers
       roles:
-         - { role: username.rolename, x: 42 }
+         - { role: oswee.{{ role_name | regex_replace('\/', '.') | regex_replace('.roles')}}, x: 42 }
 
 ## License
 
