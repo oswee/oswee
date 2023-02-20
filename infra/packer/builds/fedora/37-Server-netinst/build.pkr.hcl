@@ -1,6 +1,6 @@
 build {
   sources = [
-    "source.qemu.fedora37",
+    "source.qemu.fedora-Server-netinst-37",
   ]
 
   provisioner "shell" {
