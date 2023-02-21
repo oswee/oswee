@@ -1,5 +1,5 @@
 ---
-# roles/hyprland/meta/main.yaml
+# meta/main.yaml file for oswee.generic.hyprland role
 
 galaxy_info:
   namespace: oswee
@@ -25,7 +25,12 @@ galaxy_info:
     - fedora
 
 dependencies:
-  - name: oswee.custom.git
+  - role: oswee.custom.git
     tags:
       - deps
+  - role: oswee.generic.wlroots
+    tags:
+      - deps
+    vars:
+      wlroots_commit_hash: 677a3f2f8847ed2de49dd60868f9d9487a546f58
 ...

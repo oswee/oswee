@@ -1,0 +1,22 @@
+---
+# tasks/hyprland.yaml file for oswee.generic.hyprland role
+
+- name: build | Meson build hyprland
+  ansible.builtin.command: meson setup _build
+  args:
+    chdir: '{{ hyprland_source_path }}'
+  # when: hyprland_repo.changed
+
+- name: build | Ninja build hyprland
+  ansible.builtin.command: ninja -C _build
+  args:
+    chdir: '{{ hyprland_source_path }}'
+  # when: hyprland_repo.changed
+
+- name: build | Ninja install
+  become: true
+  ansible.builtin.command: ninja -C _build install
+  args:
+    chdir: '{{ hyprland_source_path }}'
+  # when: hyprland_repo.changed
+...

@@ -1,9 +1,13 @@
 ---
-# defaults file for Hyprland
+# defaults/main.yaml file for oswee.generic.hyprland role
 
+hyprland_source_build: true
 hyprland_user: '{{ ansible_env.USER | default("root") }}'
 hyprland_group: '{{ ansible_env.USER | default("root") }}'
 hyprland_source_path: /home/{{ hyprland_user }}/code/github.com/hyprwm/Hyprland
 hyprland_prebuilt_url: https://github.com/hyprwm/Hyprland/releases/download/v0.21.0beta/v0.21.0beta.tar.gz
+
+# libxcb-errors variables
 libxcb_source_path: /home/{{ hyprland_user }}/code/gitlab.freedesktop.org/xorg/lib/libxcb-errors
+libxcb_source_build: false
 ...

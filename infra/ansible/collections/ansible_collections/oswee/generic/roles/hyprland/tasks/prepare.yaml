@@ -1,15 +1,5 @@
 ---
-# tasks file for Hyprland
-
-- name: prepare | Enable Dturner (for pixman 0.42) copr repository
-  become: true
-  community.general.copr:
-    host: copr.fedorainfracloud.org
-    state: enabled
-    name: dturner/pixman
-    # chroot: fedora-37-x86_64
-
-# sudo dnf update --refresh --enablerepo=updates-testing pixman
+# tasks/prepare.yaml file for oswee.generic.hyprland role
 
 - name: prepare | Install prerequisites
   become: true
@@ -17,13 +7,4 @@
     name: '{{ item }}'
     state: present
   loop: '{{ packages.redhat }}'
-
-- name: prepare | Install latest pixman
-  become: true
-  ansible.builtin.dnf:
-    name: pixman
-    state: latest
-
-# wget https://ftp.lysator.liu.se/pub/opensuse/tumbleweed/repo/oss/x86_64/libxcb-errors0-1.0.1-1.1.x86_64.rpm
-# sudo dnf install libxcb-errors0-1.0.1-1.1.x86_64.rpm
 ...

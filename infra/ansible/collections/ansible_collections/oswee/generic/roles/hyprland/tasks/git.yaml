@@ -1,0 +1,16 @@
+---
+# tasks/git.yaml file for oswee.generic.hyprland role
+
+- name: git | Clone repository
+  ansible.builtin.git:
+    repo: https://github.com/hyprwm/Hyprland
+    dest: '{{ hyprland_source_path }}'
+    # version: main
+  register: hyprland_repo
+
+# - name: git | Cleanup build artifacts
+#   ansible.builtin.command: meson setup --wipe _build
+#   args:
+#     chdir: '{{ hyprland_source_path }}'
+  # when: hyprland_repo.changed
+...
