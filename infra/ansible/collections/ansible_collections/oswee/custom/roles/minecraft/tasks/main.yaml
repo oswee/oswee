@@ -1,14 +1,14 @@
 ---
-# tasks file for minecraft
+# tasks/main.yaml file for oswee.custom.minecraft role
 
 - name: Install
-  import_tasks: install.yaml
+  ansible.builtin.import_tasks: install.yaml
   tags:
     - minecraft.setup
     - minecraft.setup.install
 
 - name: Mods
-  import_tasks: mods.yaml
+  ansible.builtin.import_tasks: mods.yaml
   tags:
     - minecraft.setup
     - minecraft.setup.mods

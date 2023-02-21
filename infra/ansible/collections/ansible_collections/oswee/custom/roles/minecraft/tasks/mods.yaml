@@ -1,31 +1,33 @@
 ---
+# tasks/mods.yaml file for oswee.custom.minecraft role
+
 - name: mods | Download Minecraft Forge
   ansible.builtin.get_url:
     url: https://files.minecraftforge.net/maven/net/minecraftforge/forge/1.12.2-14.23.5.2854/forge-1.12.2-14.23.5.2854-installer.jar
-    dest: '/home/{{ ansible_user_id }}/Downloads/'
-    mode: '0700'
+    dest: /home/{{ minecraft_user }}/Downloads/
+    mode: 0700
 
 - name: mods | Create mods directory
   ansible.builtin.file:
-    path: '/home/{{ ansible_user_id }}/.minecraft/mods'
+    path: /home/{{ minecraft_user }}/.minecraft/mods
     state: directory
-    mode: '0755'
+    mode: 0755
 
 - name: mods | Download Kami Blue client (Highway Worker Tools)
   ansible.builtin.get_url:
     url: https://github.com/Avanatiker/client/releases/download/2.02.xx-dev-ht-v09.7/client-2.02.xx-dev-ht-v09.7.jar
-    dest: '/home/{{ ansible_user_id }}/.minecraft/mods/'
-    mode: '0700'
+    dest: /home/{{ minecraft_user }}/.minecraft/mods/
+    mode: 0700
 
 - name: mods | Download Impact client
   ansible.builtin.get_url:
-    url: 'https://impactclient.net/ImpactInstaller.jar'
-    dest: '/home/{{ ansible_user_id }}/.minecraft/mods/'
-    mode: '0700'
+    url: https://impactclient.net/ImpactInstaller.jar
+    dest: /home/{{ minecraft_user }}/.minecraft/mods/
+    mode: 0700
 
 - name: mods | Download OptiFine mod
   ansible.builtin.get_url:
-    url: 'https://optifine.net/downloadx?f=OptiFine_1.12.2_HD_U_G5.jar&x=c8c960781cbdfe2a8d383f5dccda4874'
-    dest: '/home/{{ ansible_user_id }}/.minecraft/mods/'
-    mode: '0700'
+    url: https://optifine.net/downloadx?f=OptiFine_1.12.2_HD_U_G5.jar&x=c8c960781cbdfe2a8d383f5dccda4874
+    dest: /home/{{ minecraft_user }}/.minecraft/mods/
+    mode: 0700
 ...
