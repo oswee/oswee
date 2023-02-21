@@ -1,0 +1,28 @@
+---
+# tasks/main.yaml file for oswee.generic.wlroots role
+
+- name: Setup
+  tags:
+    - wlroots.setup
+  block:
+    - name: Prepare
+      ansible.builtin.import_tasks: prepare.yaml
+      tags:
+        - wlroots.prepare
+
+    - name: Pixman
+      ansible.builtin.import_tasks: pixman.yaml
+      tags:
+        - wlroots.pixman
+
+    - name: Build
+      ansible.builtin.import_tasks: build.yaml
+      tags:
+        - wlroots.build
+
+# - name: Teardown
+#   ansible.builtin.import_tasks: teardown.yaml
+#   tags:
+#     - never
+#     - wlroots.teardown
+...

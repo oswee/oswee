@@ -1,0 +1,23 @@
+---
+# tasks/prepare.yaml file for oswee.generic.wlroots role
+
+- name: prepare | Install prerequisites
+  become: true
+  ansible.builtin.dnf:
+    name: '{{ item }}'
+    state: present
+  loop: '{{ packages.redhat }}'
+
+- name: prepare | Install Wayland Wlroots dependencies
+  become: true
+  ansible.builtin.dnf:
+    name: '{{ item }}'
+    state: present
+  loop: '{{ wlroots_wayland_deps.redhat }}'
+
+- name: prepare | Clone wlroots repository
+  ansible.builtin.git:
+    repo: '{{ wlroots_repo }}'
+    dest: '{{ wlroots_source_path }}'
+    version: '{{ wlroots_commit_hash | default("master") }}'
+...
