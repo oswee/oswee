@@ -7,4 +7,11 @@
     name: '{{ item }}'
     state: present
   loop: '{{ packages.redhat }}'
+
+- name: prepare | Install hyprland dependencies
+  become: true
+  ansible.builtin.dnf:
+    name: '{{ item }}'
+    state: present
+  loop: '{{ hyprland_deps.redhat }}'
 ...

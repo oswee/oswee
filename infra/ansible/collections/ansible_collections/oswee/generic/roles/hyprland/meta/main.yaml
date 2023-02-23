@@ -25,7 +25,7 @@ galaxy_info:
     - fedora
 
 dependencies:
-  - role: oswee.custom.git
+  - role: oswee.generic.git
     tags:
       - deps
   - role: oswee.generic.wlroots

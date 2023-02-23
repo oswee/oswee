@@ -40,7 +40,9 @@
   become: true
   ansible.builtin.copy:
     src: /tmp/hyprland/libwlroots.so.12032
-    dest: /usr/lib
+    dest: /usr/local/lib
+    owner: root
+    group: root
     mode: 0755
     remote_src: true
 
@@ -57,11 +59,4 @@
     path: '{{ ansible_env.HOME }}/.config/hypr/'
     state: directory
     mode: 0755
-
-- name: release-install | Copy Hyprland example config
-  ansible.builtin.copy:
-    src: /tmp/hyprland/example/hyprland.conf
-    dest: '{{ ansible_env.HOME }}/.config/hypr/'
-    mode: 0644
-    remote_src: true
 ...

@@ -1,7 +1,7 @@
 ---
 # defaults/main.yaml file for oswee.generic.hyprland role
 
-hyprland_source_build: true
+hyprland_source_build: false
 hyprland_user: '{{ ansible_env.USER | default("root") }}'
 hyprland_group: '{{ ansible_env.USER | default("root") }}'
 hyprland_source_path: /home/{{ hyprland_user }}/code/github.com/hyprwm/Hyprland

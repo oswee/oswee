@@ -47,11 +47,13 @@
       block:
         - name: Release install
           ansible.builtin.import_tasks: release-install.yaml
+        - name: Libxcb-errors install
+          ansible.builtin.import_tasks: libxcb-errors.yaml
 
-    # - name: Config
-    #   ansible.builtin.import_tasks: config.yaml
-    #   tags:
-    #     - hyprland.config
+    - name: Config
+      ansible.builtin.import_tasks: config.yaml
+      tags:
+        - hyprland.config
 
 # - name: Teardown
 #   ansible.builtin.import_tasks: teardown.yaml
