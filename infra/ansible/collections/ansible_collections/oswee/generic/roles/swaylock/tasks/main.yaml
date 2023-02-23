@@ -1,15 +1,13 @@
 ---
-# tasks file for Swaylock
+# tasks/main.yaml file for oswee.generic.swaylock role
 
 - name: Setup
   tags:
-    - swaylock
     - swaylock.setup
   block:
     - name: Install
       ansible.builtin.import_tasks: install.yaml
       tags:
-        - install
         - swaylock.install
 
 # - name: Teardown

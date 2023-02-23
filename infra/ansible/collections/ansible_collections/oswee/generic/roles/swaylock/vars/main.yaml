@@ -1,5 +1,5 @@
 ---
-# vars file for Swaylock
+# vars/main.yaml file for oswee.generic.swaylock role
 
 packages:
   redhat:
