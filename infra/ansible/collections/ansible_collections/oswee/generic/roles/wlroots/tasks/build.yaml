@@ -1,0 +1,19 @@
+---
+# tasks/build.yaml file for oswee.generic.wlroots role
+
+- name: build | Meson build wlroots
+  ansible.builtin.command: meson setup build/
+  args:
+    chdir: '{{ wlroots_source_path }}'
+
+- name: build | Ninja build wlroots
+  ansible.builtin.command: ninja -C build/
+  args:
+    chdir: '{{ wlroots_source_path }}'
+
+- name: build | Ninja install wlroots
+  become: true
+  ansible.builtin.command: ninja -C build/ install
+  args:
+    chdir: '{{ wlroots_source_path }}'
+...

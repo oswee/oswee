@@ -14,9 +14,9 @@ return {
 			-- 	in_custom = true,
 			-- },
 			-- diagnostic_header = { " ", " ", " ", "ﴞ " },
-			-- ui = {
-			-- 	code_action = " ",
-			-- },
+			ui = {
+				code_action = " ",
+			},
 		})
 	end,
 	keys = {

@@ -1,3 +1,5 @@
 ---
-# defaults file for minecraft
+# defaults/main.yaml file for oswee.custom.minecraft role
+
+minecraft_user: '{{ ansible_env.USER }}'
 ...

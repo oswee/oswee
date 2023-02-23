@@ -2,8 +2,8 @@ vim.filetype.add({
 	extension = {
 		j2 = "jinja",
 		Vagrantfile = "ruby",
-		tf = "terraform",
-		tfvars = "terraform",
+		tf = "hcl",
+		tfvars = "hcl",
 		tfstate = "json",
 		terraformrc = "hcl",
 		["terraform.rc"] = "hcl",

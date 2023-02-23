@@ -1,40 +1,27 @@
 ---
-# vars file for Hyprland
+# vars/main.yaml file for oswee.generic.hyprland role
 
 packages:
   redhat:
     - ninja-build
-    - cmake
     - meson
+    - cmake
     - gcc-c++
-    - libxcb-devel
-    - libX11-devel
-    - wayland-protocols-devel
+
+hyprland_deps:
+  redhat:
     - cairo-devel
     - pango-devel
 
-    - wayland-devel
-    - libdrm-devel
-    - libxkbcommon-devel
-    - libinput-devel
-    - pkgconfig(egl)
-    - pkgconfig(libudev)
-
-    - systemd-devel
-    - libseat-devel
-    - mesa-libEGL-devel
-    - xcb-util-wm-devel
-    - xorg-x11-server-Xwayland-devel
-    - mesa-libgbm-devel
-    - xcb-util-renderutil-devel
-
     - pkgconfig(cairo)
+    - pkgconfig(egl)
     - pkgconfig(gbm)
     - pkgconfig(gl)
     - pkgconfig(glesv2)
     - pkgconfig(libdrm)
     - pkgconfig(libinput)
     - pkgconfig(libseat)
+    - pkgconfig(libudev)
     - pkgconfig(pango)
     - pkgconfig(pangocairo)
     - pkgconfig(pixman-1)
@@ -49,20 +36,4 @@ packages:
     - pkgconfig(xkbcommon)
     - pkgconfig(xwayland)
     - glslang-devel
-
-# Wlroots deps
-    # - meson
-    # - wayland
-    # - wayland-protocols
-
-    # - EGL and GLESv2 (optional, for the GLES2 renderer)
-    # - Vulkan loader, headers and glslang (optional, for the Vulkan renderer)
-    # - libdrm
-    # - GBM (optional, for the GBM allocator)
-    # - libinput (optional, for the libinput backend)
-    # - xkbcommon
-    # - udev (optional, for the session)
-    # - pixman
-    # - libseat (optional, for the session)
-    # - hwdata (optional, for the DRM backend)
 ...

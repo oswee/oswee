@@ -1,0 +1,17 @@
+---
+# tasks/pixman.yaml file for oswee.generic.wlroots role
+
+- name: pixman | Enable Dturner (for pixman 0.42) Copr repository
+  become: true
+  community.general.copr:
+    host: copr.fedorainfracloud.org
+    state: enabled
+    name: dturner/pixman
+    # chroot: fedora-37-x86_64
+
+- name: pixman | Install latest pixman from Copr repository
+  become: true
+  ansible.builtin.dnf:
+    name: pixman-devel
+    state: latest
+...

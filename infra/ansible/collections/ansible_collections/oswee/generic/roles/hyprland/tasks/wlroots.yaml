@@ -1,0 +1,22 @@
+---
+# tasks/wlroots.yaml file for oswee.generic.hyprland role
+
+- name: wlroots | Meson build wlroots
+  ansible.builtin.command: meson setup build/
+  args:
+    chdir: '{{ hyprland_source_path }}/subprojects/wlroots'
+  # when: hyprland_repo.changed
+
+- name: wlroots | Ninja build wlroots
+  ansible.builtin.command: ninja -C build/
+  args:
+    chdir: '{{ hyprland_source_path }}/subprojects/wlroots'
+  # when: hyprland_repo.changed
+
+- name: wlroots | Ninja install wlroots
+  become: true
+  ansible.builtin.command: ninja -C build/ install
+  args:
+    chdir: '{{ hyprland_source_path }}/subprojects/wlroots'
+  # when: hyprland_repo.changed
+...

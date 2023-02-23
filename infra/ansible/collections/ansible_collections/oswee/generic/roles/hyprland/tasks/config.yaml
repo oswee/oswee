@@ -1,4 +1,9 @@
 ---
-# tasks file for Hyprland
+# tasks/config.yaml file for oswee.generic.hyprland role
 
+- name: config | Copy Hyprland example config
+  ansible.builtin.copy:
+    src: hypr/hyprland.conf
+    dest: '{{ ansible_env.HOME }}/.config/hypr/'
+    mode: 0644
 ...

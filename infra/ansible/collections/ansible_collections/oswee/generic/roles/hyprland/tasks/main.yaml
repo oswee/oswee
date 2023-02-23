@@ -1,5 +1,5 @@
 ---
-# tasks file for Hyprland
+# tasks/main.yaml file for oswee.generic.hyprland role
 
 - name: Setup
   tags:
@@ -10,20 +10,50 @@
       tags:
         - hyprland.prepare
 
-    - name: Build
-      ansible.builtin.import_tasks: build.yaml
-      tags:
-        - hyprland.build
-
-    - name: Install
-      ansible.builtin.import_tasks: install.yaml
-      tags:
-        - hyprland.install
-
-    # - name: Config
-    #   ansible.builtin.import_tasks: config.yaml
+    # - name: Pixman
+    #   ansible.builtin.import_tasks: pixman.yaml
     #   tags:
-    #     - hyprland.config
+    #     - hyprland.pixman
+
+    - name: Source build
+      when: hyprland_source_build | default(true) | bool
+      tags:
+        - hyprland.source-build
+      block:
+        - name: Git
+          ansible.builtin.import_tasks: git.yaml
+          tags:
+            - hyprland.git
+
+        - name: Protocols
+          ansible.builtin.import_tasks: protocols.yaml
+          tags:
+            - hyprland.protocols
+
+        # - name: Wlroots
+        #   ansible.builtin.import_tasks: wlroots.yaml
+        #   tags:
+        #     - hyprland.wlroots
+
+        - name: Hyprland
+          ansible.builtin.import_tasks: hyprland.yaml
+          tags:
+            - hyprland.hyprland
+
+    - name: Release install
+      when: not (hyprland_source_build | default(false) | bool)
+      tags:
+        - hyprland.release-install
+      block:
+        - name: Release install
+          ansible.builtin.import_tasks: release-install.yaml
+        - name: Libxcb-errors install
+          ansible.builtin.import_tasks: libxcb-errors.yaml
+
+    - name: Config
+      ansible.builtin.import_tasks: config.yaml
+      tags:
+        - hyprland.config
 
 # - name: Teardown
 #   ansible.builtin.import_tasks: teardown.yaml
