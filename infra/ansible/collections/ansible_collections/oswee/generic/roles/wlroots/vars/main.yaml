@@ -3,9 +3,10 @@
 
 packages:
   redhat:
+    - ninja-build
     - meson
-    - gcc-c++
     - cmake
+    - gcc-c++
 
 wlroots_wayland_deps:
   redhat:
