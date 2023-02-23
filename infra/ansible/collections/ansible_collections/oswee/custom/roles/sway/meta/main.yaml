@@ -1,5 +1,5 @@
 ---
-# roles/sway/meta/main.yaml
+# meta/main.yaml file for oswee.custom.sway role
 
 galaxy_info:
   namespace: oswee
@@ -24,5 +24,6 @@ galaxy_info:
     - dzintars
     - fedora
 
-dependencies: []
+dependencies:
+  - role: oswee.generic.swaylock
 ...
