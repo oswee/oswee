@@ -1,0 +1,29 @@
+{
+	"language": "en",
+	"dictionaryDefinitions": [
+		{
+			"name": "oswee-words",
+			"path": ".config\/cspell-dictionary.txt",
+			"addWords": true
+		}
+	],
+	"ignorePaths": [
+		"node_modules",
+		".config\/cspell-dictionary.txt"
+	],
+	"version": "0.2",
+	"dictionaries": [
+		"bash",
+		"css",
+		"en_US",
+		"go",
+		"html",
+		"oswee-words",
+		"python",
+		"typescript"
+	],
+	"flagWords": [],
+	"words": [
+		"sandboxing"
+	]
+}
