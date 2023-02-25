@@ -1,5 +1,5 @@
 ---
-# tasks file for Nvim
+# tasks/lsp.yaml file for oswee.custom.nvim role
 
 - name: lsp | Install Pip packages
   ansible.builtin.pip:
