@@ -1,5 +1,5 @@
 # The token from your Buildkite "Agents" page
-token="{{ lookup('hashi_vault', 'secret=infra/data/build:buildkite_agent_token')}}"
+token="{{ buildkite_agent_token }}"
 
 # The name of the agent
 name="%hostname-%spawn"
