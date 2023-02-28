@@ -16,7 +16,8 @@ follow_link() {
   echo "$FILE"
 }
 
-VAGRANT_BOX_PATH=$HOME/vagrant/boxes
+# TODO: How to abstract home path?
+VAGRANT_BOX_PATH=/home/dzintars/vagrant/boxes
 SCRIPT_PATH=$(realpath "$(dirname "$(follow_link "$0")")")
 CONFIG_PATH=$(realpath "${1:-${SCRIPT_PATH}/config}")
 
@@ -83,6 +84,35 @@ menu_option_2() {
   echo "Done."
 }
 
+menu_option_3() {
+  INPUT_PATH="$SCRIPT_PATH"/builds/fedora/Server
+  echo -e "\nCONFIRM: Build a Fedora Server Template for QEMU?"
+  echo -e "\nContinue? (y/n)"
+  read -r REPLY
+  if [[ ! $REPLY =~ ^[Yy]$ ]]
+  then
+    exit 1
+  fi
+
+  echo "Building a Fedora Server Template for QEMU..."
+
+  ### Initialize HashiCorp Packer and required plugins. ###
+  echo "Initializing HashiCorp Packer and required plugins..."
+  packer init "$INPUT_PATH"
+
+  echo "Starting the HashiCorp Packer build..."
+  PKR_VAR_VAGRANT_BOX_PATH=$VAGRANT_BOX_PATH \
+  # packer build -only=qemu.* -force \
+  packer build -force \
+      -var-file="$CONFIG_PATH/qemu.pkrvars.hcl" \
+      -var-file="$CONFIG_PATH/build.pkrvars.hcl" \
+      -var-file="$CONFIG_PATH/common.pkrvars.hcl" \
+      -var-file="$CONFIG_PATH/ansible.pkrvars.hcl" \
+      "$INPUT_PATH"
+
+  echo "Done."
+}
+
 press_enter() {
   cd "$SCRIPT_PATH"
   echo -n "Press Enter to continue."
@@ -103,6 +133,7 @@ until [ "$selection" = "0" ]; do
   echo ""
   echo "        1  -  Fedora 35 Server-netinst (QEMU)"
   echo "        2  -  Fedora 37 Server-netinst (QEMU)"
+  echo "        3  -  Fedora Server (QEMU)"
   echo ""
   echo "      Other:"
   echo ""
@@ -113,6 +144,7 @@ until [ "$selection" = "0" ]; do
   case $selection in
     1 ) clear ; menu_option_1 ; press_enter ;;
     2 ) clear ; menu_option_2 ; press_enter ;;
+    3 ) clear ; menu_option_3 ; press_enter ;;
     Q ) clear ; exit ;;
     * ) clear ; incorrect_selection ; press_enter ;;
   esac
