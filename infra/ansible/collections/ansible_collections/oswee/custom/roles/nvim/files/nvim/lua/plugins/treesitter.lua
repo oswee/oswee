@@ -17,7 +17,6 @@ return {
 		plugin.setup({
 			ensure_installed = {
 				'bash',
-				-- 'comment',  -- Some are indicating that this slows down TS big time
 				'css',
 				'go',
 				'gomod',
@@ -37,10 +36,12 @@ return {
 				'regex',
 				'rust',
 				'scss',
+				'starlark',
 				'toml',
 				'typescript',
 				'vim',
 				'yaml',
+				-- 'comment',  -- Some are indicating that this slows down TS big time
 			},
 			sync_install = false,
 			ignore_install = {},

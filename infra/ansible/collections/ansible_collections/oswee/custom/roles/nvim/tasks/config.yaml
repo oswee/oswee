@@ -1,5 +1,5 @@
 ---
-# tasks file for Nvim
+# tasks/config.yaml file for oswee.custom.nvim role
 
 - name: config | Copy all configuration files
   ansible.builtin.copy:

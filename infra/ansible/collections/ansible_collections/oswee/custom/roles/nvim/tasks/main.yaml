@@ -1,9 +1,8 @@
 ---
-# tasks file for Nvim
+# tasks/main.yaml file for oswee.custom.nvim role
 
 - name: Setup
   tags:
-    - nvim
     - nvim.setup
   block:
     - name: Config

@@ -1,4 +1,4 @@
-source "qemu" "fedora35" {
+source "qemu" "fedora-Server-netinst-35" {
   // Virtual Machine Settings
   vm_name              = "${var.vm_guest_os_name}-${var.vm_guest_os_version}"
   cpus                 = var.vm_cpus

@@ -3,25 +3,21 @@
 
 - name: Setup
   tags:
-    - {{ role_name | regex_replace('.*roles\/')}}
     - {{ role_name | regex_replace('.*roles\/')}}.setup
   block:
     - name: Install
       ansible.builtin.import_tasks: install.yaml
       tags:
-        - install
         - {{ role_name | regex_replace('.*roles\/')}}.install
 
     - name: Config
       ansible.builtin.import_tasks: config.yaml
       tags:
-        - config
         - {{ role_name | regex_replace('.*roles\/')}}.config
 
 - name: Teardown
   ansible.builtin.import_tasks: teardown.yaml
   tags:
     - never
-    - teardown
     - {{ role_name | regex_replace('.*roles\/')}}.teardown
 ...

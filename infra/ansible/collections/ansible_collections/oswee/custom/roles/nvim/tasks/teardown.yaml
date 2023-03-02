@@ -1,5 +1,5 @@
 ---
-# tasks file for Nvim
+# tasks/teardown.yaml file for oswee.custom.nvim role
 
 - name: teardown | Remove Neovim directories
   ansible.builtin.file:

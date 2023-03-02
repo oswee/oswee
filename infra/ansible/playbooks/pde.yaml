@@ -76,4 +76,10 @@
         - packer
       ansible.builtin.import_role:
         name: oswee.generic.packer
+
+    - name: OVMF
+      tags:
+        - ovmf
+      ansible.builtin.import_role:
+        name: oswee.generic.ovmf
 ...

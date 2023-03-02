@@ -1,5 +1,5 @@
 ---
-# tasks file for Swaylock
+# tasks/install.yaml file for oswee.generic.swaylock role
 
 - name: install | Install prerequisites
   become: true
@@ -22,7 +22,7 @@
 - name: install | Clone swaylock-effects repository
   ansible.builtin.git:
     repo: https://github.com/mortie/swaylock-effects.git
-    dest: '/home/{{ ansible_user_id }}/code/github.com/mortie/swaylock-effects/'
+    dest: /home/{{ swaylock_user }}/code/github.com/mortie/swaylock-effects/
     version: master
     depth: 1
   register: swaylock_effects_repo
@@ -32,32 +32,33 @@
     path: '{{ item }}'
     state: absent
   loop:
-    - '/home/{{ ansible_user_id }}/code/github.com/mortie/swaylock-effects/.deps'
-    - '/home/{{ ansible_user_id }}/code/github.com/mortie/swaylock-effects/build'
+    - /home/{{ swaylock_user }}/code/github.com/mortie/swaylock-effects/.deps
+    - /home/{{ swaylock_user }}/code/github.com/mortie/swaylock-effects/build
   when: swaylock_effects_repo.changed
 
 - name: install | Meson build swaylock-effects
   ansible.builtin.command: meson --prefix=/usr build/
   args:
-    chdir: '/home/{{ ansible_user_id }}/code/github.com/mortie/swaylock-effects'
+    chdir: /home/{{ swaylock_user }}/code/github.com/mortie/swaylock-effects
   when: swaylock_effects_repo.changed
 
 - name: install | Build swaylock-effects
   ansible.builtin.command: ninja -C build
   args:
-    chdir: '/home/{{ ansible_user_id }}/code/github.com/mortie/swaylock-effects'
+    chdir: /home/{{ swaylock_user }}/code/github.com/mortie/swaylock-effects
   when: swaylock_effects_repo.changed
 
 - name: install | Install swaylock-effects
   become: true
   ansible.builtin.command: ninja -C build install
   args:
-    chdir: '/home/{{ ansible_user_id }}/code/github.com/mortie/swaylock-effects'
+    chdir: /home/{{ swaylock_user }}/code/github.com/mortie/swaylock-effects
   when: swaylock_effects_repo.changed
 
 - name: install | Change swaylock binary permissions
   become: true
   ansible.builtin.file:
     path: /usr/bin/swaylock
-    mode: 'a+s'
+    # [pam.c:16] swaylock is setuid, but was compiled with the PAM backend. Run 'chmod a-s swaylock' to fix. Aborting.
+    mode: a-s
 ...

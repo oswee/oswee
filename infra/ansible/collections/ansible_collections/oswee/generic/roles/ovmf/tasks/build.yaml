@@ -1,0 +1,49 @@
+---
+# tasks/build.yaml file for oswee.generic.ovmf role
+
+- name: build | Clone OVMF repository
+  ansible.builtin.git:
+    repo: '{{ ovmf_repo_url }}'
+    dest: '{{ ovmf_source_dir }}'
+    recursive: true
+    update: true
+    version: master
+  register: ovmf_repo
+
+- name: build | Cleanup build artifacts
+  community.general.make:
+    chdir: '{{ ovmf_source_dir }}/BaseTools'
+    target: clean
+  when: ovmf_repo.changed
+
+- name: build | Source the environment
+  ansible.builtin.shell: |
+    source edksetup.sh
+  args:
+    chdir: '{{ ovmf_source_dir }}'
+    executable: /bin/bash
+
+# make -C BaseTools/Source/C
+
+- name: build | Build Source C
+  community.general.make:
+    chdir: '{{ ovmf_source_dir }}/BaseTools/Source/C'
+    target: all
+  # when: ovmf_repo.changed
+
+- name: build | Build for x64 Qemu
+  # TODO: Kind of stupid workaround to load environment before building
+  ansible.builtin.shell: |
+    source edksetup.sh
+    build -t GCC5 -a X64 -p OvmfPkg/OvmfPkgX64.dsc
+  args:
+    chdir: '{{ ovmf_source_dir }}'
+    executable: /bin/bash
+  environment:
+    PYTHONHASHSEED: '1'
+    WORKSPACE: '{{ ovmf_source_dir }}'
+    EDK_TOOLS_PATH: '{{ ovmf_source_dir }}/BaseTools'
+    CONF_PATH: '{{ ovmf_source_dir }}/Conf'
+    # TARGET: RELEASE  # This does not work. Need to change manually (ATM) in Conf/tools_def.txt
+  # when: ovmf_repo.changed
+...

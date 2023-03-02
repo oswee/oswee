@@ -1,4 +1,5 @@
 ---
-# defaults file for Swaylock
+# defaults/main.yaml file for oswee.generic.swaylock role
 
+swaylock_user: '{{ ansible_env.USER }}'
 ...
