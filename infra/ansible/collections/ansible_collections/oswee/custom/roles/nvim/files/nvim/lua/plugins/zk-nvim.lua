@@ -63,11 +63,13 @@ return {
 		-- 	zk.new({ group = "daily", dir = "Daily" })
 		-- end)
 
-		require('zk.commands').add('ZkNewFleeting', make_new_fn({ dir = 'base/memex' }))
+		local memex = 'base/memex'
+
 		require('zk.commands').add('ZkNewDaily', make_new_fn({ group = 'daily', dir = 'base/daily' }))
-		require('zk.commands').add('ZkNewZettel', make_new_fn({ group = 'zettel', dir = 'base/memex' }))
-		require('zk.commands').add('ZkNewLiterature', make_new_fn({ group = 'literature', dir = 'base/memex' }))
-		require('zk.commands').add('ZkNewIndex', make_new_fn({ group = 'index', dir = 'base/memex' }))
+		require('zk.commands').add('ZkNewFleeting', make_new_fn({ dir = memex, template = 'fleeting.md' }))
+		require('zk.commands').add('ZkNewZettel', make_new_fn({ group = 'zettel', dir = memex }))
+		require('zk.commands').add('ZkNewLiterature', make_new_fn({ group = 'literature', dir = memex }))
+		require('zk.commands').add('ZkNewIndex', make_new_fn({ group = 'index', dir = memex }))
 		require('zk.commands').add('ZkNewFromTitleSelection', make_new_fn({ dir = vim.fn.expand('%:p:h') }))
 		require('zk.commands').add('ZkNewFromContentSelection', make_new_fn({ dir = vim.fn.expand('%:p:h') }))
 
