@@ -38,4 +38,21 @@
     line: group = "{{ libvirt_system_user }}"
     state: present
   notify: restart libvirtd
+
+  # locate the "nvram" stanza in "/etc/libvirt/qemu.conf", and edit it as follows:
+  # nvram = [ "/usr/share/OVMF/OVMF_CODE.fd:/usr/share/OVMF/OVMF_VARS.fd" ]
+
+# - name: config | Enable OVMF
+#   ansible.builtin.blockinfile:
+#     path: /etc/libvirt/qemu.conf
+#     marker: {mark}
+#     marker_begin: #nvram = [
+#     marker_end: #]
+#     block: |-
+        # nvram = [
+        #   "/usr/share/edk2/ovmf/OVMF_CODE.fd:/usr/share/edk2/ovmf/OVMF_VARS.fd",
+        #   "/usr/share/edk2/ovmf/OVMF_CODE.secboot.fd:/usr/share/edk2/ovmf/OVMF_VARS.secboot.fd",
+        # ]
+#     state: present
+  # notify: restart libvirtd
 ...
