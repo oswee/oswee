@@ -1,0 +1,27 @@
+---
+# tasks/main.yaml file for oswee.generic.waybar role
+
+- name: Setup
+  tags:
+    - waybar
+    - waybar.setup
+  block:
+    - name: Install
+      ansible.builtin.import_tasks: install.yaml
+      tags:
+        - install
+        - waybar.install
+
+    - name: Config
+      ansible.builtin.import_tasks: config.yaml
+      tags:
+        - config
+        - waybar.config
+
+- name: Teardown
+  ansible.builtin.import_tasks: teardown.yaml
+  tags:
+    - never
+    - teardown
+    - waybar.teardown
+...
