@@ -12,7 +12,7 @@ build {
   /* } */
 
   /* post-processor "vagrant" { */
-		/* # TODO: Should be an variable */
+  /* # TODO: Should be an variable */
   /*   output = "/home/dzintars/vagrant/boxes/${source.name}.box" */
   /*   output = "/var/lib/libvirt/images/${source.name}-test.qcow2" */
   /* } */
@@ -24,14 +24,31 @@ build {
   /*   ] */
   /* } */
 
+  provisioner "ansible" {
+    only                = ["qemu.fedora_base_image"]
+    playbook_file       = "${local.ansible_dir}/root.yaml"
+    galaxy_file         = "${local.ansible_dir}/requirements.yaml"
+    inventory_directory = "${local.ansible_dir}/environments/development"
+    command             = "ansible-playbook"
+    user                = "vagrant"
+    extra_arguments = [
+      "--diff",
+      "--limit", "workstations",
+      "--tags", "nvim"
+    ]
+  }
 
-  /*  provisioner "ansible" { */
-  /*   only            = ["qemu.base"] */
-  /*   playbook_file   = "./provisioners/postinstall.yml" */
-  /*   extra_arguments = ["--diff"] */
-  /*   max_retries     = 30 # for opensuse */
+  /* provisioner "ansible-local" { */
+  /*   only = ["qemu.fedora_base_image"] */
+  /*   // Use temporary installed ansible */
+  /*   playbook_dir  = ${local.ansible_dir} */
+  /*   playbook_file = "${local.ansible_dir}/root.yaml" */
+  /*   command       = "/tmp/ansible/venv/bin/ansible-playbook" */
+  /*   extra_arguments = [ */
+  /*     "--extra-vars", "ansible_python_interpreter=/tmp/ansible/venv/bin/python" */
+  /*   ] */
   /* } */
-  /**/
+
   /* provisioner "ansible" { */
   /*   except        = ["qemu.base"] */
   /*   playbook_file = "./provisioners/postinstall.yml" */
@@ -47,7 +64,7 @@ build {
   /*     } */
   /*   } */
   /* } */
-  /**/
+
   /* post-processor "shell-local" { */
   /*   only = ["qemu.base"] */
   /*   inline = [ */
@@ -56,7 +73,7 @@ build {
   /*     "rm -rf ${local.output_directory}" */
   /*   ] */
   /* } */
-  /**/
+
   /* post-processor "shell-local" { */
   /*   only   = ["qemu.vmware"] */
   /*   script = "scripts/convert-diskimage.sh" */

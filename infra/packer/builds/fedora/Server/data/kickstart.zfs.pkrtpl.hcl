@@ -6,9 +6,6 @@ repo --name="updates" --mirrorlist=https://mirrors.fedoraproject.org/mirrorlist?
 ### By default, kickstart installations are performed in graphical mode.
 text
 
-# Do not configure the X Window System
-skipx
-
 ### Sets the language to use during installation and the default language to use on the installed system.
 lang ${vm_guest_os_language}
 
@@ -16,29 +13,29 @@ lang ${vm_guest_os_language}
 keyboard ${vm_guest_os_keyboard}
 
 ### Lock the root account.
-# rootpw --lock
+rootpw --lock
 
 ### The selected profile will restrict root login.
 ### Add a user that can login and escalate privileges.
 user --name=${build_username} --iscrypted --password=${build_password_encrypted} --groups=wheel
-sshkey --username vagrant "ecdsa-sha2-nistp521 AAAAE2VjZHNhLXNoYTItbmlzdHA1MjEAAAAIbmlzdHA1MjEAAACFBAGwrvCrJyfP38lM6YpF49d95ReVT5MYhG9CjkxPidKgpYUI/Lmr8kZ132aEGuugnFOzzol/aPmAIjuXtmzsg8zrSAFuTM3rZY88ZebiNeg+Ywwwsz4/BP8aYXRtiZ/FGcjpVsp+cihiX7rVx5PNFxHcrPdI+aqfcPS5MYxm7ZrRzyaT6w== dzintars@workstation"
 
-firewall --enabled --service=sshd
-services --enabled=sshd --disabled=libvrtd,docker,docker-engine
-selinux --enforcing
+# Firewall configuration
+firewall --disabled
 
 timezone ${vm_guest_os_timezone}
 
+
 ### https://github.com/sej7278/virt-installs/blob/master/rhel9_cis.cfg#L50
 ### https://github.com/claudiusask/foreman-katello/blob/edef3fc1f9ce083e67d521a90be6180883ff987f/Packer/scripts/kickstart.cfg
+ignoredisk --only-use=sda
 zerombr
-bootloader --location=mbr --append="audit=1 selinux=1 enforcing=1 page_poison=1 vsyscall=none slub_debug=P pti=on"
-clearpart --all --initlabel
+bootloader --location=mbr --boot-drive=sda --driveorder=sda --append="audit=1 selinux=1 enforcing=1 page_poison=1 vsyscall=none slub_debug=P pti=on"
+clearpart --all --initlabel --drives=sda
 
-part /boot      --fstype xfs  --size=1024  --fsoptions="nodev,nosuid,noexec"
-part /boot/efi  --fstype efi  --size=600   --fsoptions="umask=0077,shortname=fedora"
+part /boot      --fstype xfs   --ondisk=sda  --size=1024  --fsoptions="nodev,nosuid,noexec"
+part /boot/efi  --fstype efi   --ondisk=sda  --size=600   --fsoptions="umask=0077,shortname=fedora"
 
-part pv.0 --size=1 --grow --asprimary
+part pv.0 --size=1 --grow --ondisk=sda --asprimary
 
 volgroup vgroot pv.0
 
@@ -49,6 +46,9 @@ logvol /var/tmp        --fstype xfs   --vgname=vgroot  --name=vartmp  --size=102
 logvol /var/log        --fstype xfs   --vgname=vgroot  --name=log     --size=1024  --fsoptions="nodev,nosuid,noexec"
 logvol /var/log/audit  --fstype xfs   --vgname=vgroot  --name=audit   --size=1024  --fsoptions="nodev,nosuid,noexec"
 logvol /home           --fstype xfs   --vgname=vgroot  --name=home    --size=1024  --fsoptions="quota,usrquota,grpquota,nodev,nosuid,noexec"
+
+### System services
+services --disabled="cloud-init,cloud-init-local,cloud-config,cloud-final" --enabled="sshd,cloud-init,cloud-init-local,cloud-config,cloud-final"
 
 %post
 # Remove root password
