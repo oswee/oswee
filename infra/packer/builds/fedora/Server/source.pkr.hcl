@@ -40,8 +40,9 @@ source "qemu" "fedora_base_image" {
     "text inst.ks=http://{{ .HTTPIP }}:{{ .HTTPPort }}/ks.cfg",
     "<leftCtrlOn>x<leftCtrlOff>"
   ]
-  ssh_password = var.ssh_password
   ssh_username = var.ssh_username
+  /* ssh_password = var.ssh_password */
+	ssh_private_key_file = "~/.ssh/id_ecdsa_packer"
   ssh_timeout  = var.ssh_timeout
   // ssh_wait_timeout       = var.ssh_wait_timeout
   // ssh_handshake_attempts = "500"   # required for ubuntu 20.04

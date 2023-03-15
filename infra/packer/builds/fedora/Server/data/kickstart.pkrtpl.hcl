@@ -15,6 +15,8 @@ lang ${vm_guest_os_language}
 ### Sets the default keyboard type for the system.
 keyboard ${vm_guest_os_keyboard}
 
+network --onboot yes --hostname workstation.oswee.local
+
 ### Lock the root account.
 # rootpw --lock
 
@@ -23,9 +25,9 @@ keyboard ${vm_guest_os_keyboard}
 user --name=${build_username} --iscrypted --password=${build_password_encrypted} --groups=wheel
 sshkey --username vagrant "ecdsa-sha2-nistp521 AAAAE2VjZHNhLXNoYTItbmlzdHA1MjEAAAAIbmlzdHA1MjEAAACFBAGwrvCrJyfP38lM6YpF49d95ReVT5MYhG9CjkxPidKgpYUI/Lmr8kZ132aEGuugnFOzzol/aPmAIjuXtmzsg8zrSAFuTM3rZY88ZebiNeg+Ywwwsz4/BP8aYXRtiZ/FGcjpVsp+cihiX7rVx5PNFxHcrPdI+aqfcPS5MYxm7ZrRzyaT6w== dzintars@workstation"
 
-firewall --enabled --service=sshd
-services --enabled=sshd --disabled=libvrtd,docker,docker-engine
-selinux --enforcing
+#firewall --enabled --service=sshd
+#services --enabled=sshd --disabled=libvrtd,docker,docker-engine
+#selinux --enforcing
 
 timezone ${vm_guest_os_timezone}
 
@@ -50,28 +52,28 @@ logvol /var/log        --fstype xfs   --vgname=vgroot  --name=log     --size=102
 logvol /var/log/audit  --fstype xfs   --vgname=vgroot  --name=audit   --size=1024  --fsoptions="nodev,nosuid,noexec"
 logvol /home           --fstype xfs   --vgname=vgroot  --name=home    --size=1024  --fsoptions="quota,usrquota,grpquota,nodev,nosuid,noexec"
 
-%post
+#%post
 # Remove root password
 #passwd -d root > /dev/null
 
 # Remove random-seed
 #rm /var/lib/systemd/random-seed
-%end
+#%end
 
 ### Packages selection.
 %packages --inst-langs=en
-@^cloud-server-environment
+#@^cloud-server-environment
 dnf-yum
-fuse-sshfs
+#fuse-sshfs
 kernel-core
-rsync
--dracut-config-rescue
--firewalld
--geolite2-city
--geolite2-country
+#rsync
 -kernel
--plymouth
 -zram-generator-defaults
+#-plymouth
+#-dracut-config-rescue
+#-firewalld
+#-geolite2-city
+#-geolite2-country
 %end
 
 ### Reboot after the installation is complete.

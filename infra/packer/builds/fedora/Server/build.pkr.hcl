@@ -24,17 +24,34 @@ build {
   /*   ] */
   /* } */
 
+  post-processor "shell-local" {
+    /* only = ["qemu.fedora_base_image"] */
+    inline = [
+      "uname -a"
+    ]
+  }
+
   provisioner "ansible" {
-    only                = ["qemu.fedora_base_image"]
-    playbook_file       = "${local.ansible_dir}/root.yaml"
-    galaxy_file         = "${local.ansible_dir}/requirements.yaml"
+    /* only                = ["qemu.fedora_base_image"] */
+    user          = "vagrant"
+    use_proxy     = false
+    playbook_file = "${local.ansible_dir}/playbooks/base.yaml"
+    /* galaxy_file         = "${local.ansible_dir}/requirements.yaml" */
     inventory_directory = "${local.ansible_dir}/environments/development"
-    command             = "ansible-playbook"
-    user                = "vagrant"
+    collections_path    = "${local.ansible_dir}/collections"
+    roles_path          = "${local.ansible_dir}/roles"
+    # Setting these should fix some of the (false alarm) warnings
+    ansible_env_vars = [
+      "ANSIBLE_HOST_KEY_CHECKING=False",
+      "ANSIBLE_COLLECTIONS_PATH=${local.ansible_dir}/collections",
+      "ANSIBLE_ROLES_PATH=${local.ansible_dir}/roles",
+			"ANSIBLE_BECOME_PASS=vagrant",
+    ]
     extra_arguments = [
       "--diff",
-      "--limit", "workstations",
-      "--tags", "nvim"
+      "--vault-password-file", "${local.ansible_dir}/scripts/ansible-vault-password.py",
+      /* "--limit", "workstations", */
+      /* "--tags", "nvim" */
     ]
   }
 
