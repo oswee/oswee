@@ -187,58 +187,62 @@ variable "vm_firmware" {
   type        = string
   default     = "bios"
   description = "The boot method is either 'bios' (default) or 'efi'."
+
+  validation {
+    condition     = contains(["bios", "uefi"], var.vm_firmware)
+    error_message = "The vm_firmware value must be one of the following: 'bios', 'uefi'."
+  }
 }
 
 variable "vm_firmware_path" {
-  type        = object({
+  type = object({
     bios = string
-    efi  = string
+    uefi = string
   })
   description = "Path to firmware blob."
-  # ["-bios", "/usr/share/qemu/OVMF.fd"] ]
-  default     = {
-    bios      = ""
-    efi       = "/usr/share/qemu/OVMF.fd"
+  default = {
+    bios = ""
+    /* uefi       = "/usr/share/qemu/OVMF.fd" */
+    uefi = "/usr/share/edk2/ovmf/OVMF_CODE.fd"
   }
 }
 
 variable "bios_boot_command" {
   type        = list(string)
   description = "A list of commands to be executed during BIOS ISO boot."
-  default     = [
-    "<up><wait><tab><wait> ",
-    "net.ifnames=0 ",
-    "biosdevname=0 ",
-    "text ",
-    "inst.ks=http://{{ .HTTPIP }}:{{ .HTTPPort }}/%s",
-    "<enter><wait>"
+  default = [
+    "<up><wait>",
+    "e<wait>",
+    "<down><down><end><wait> ",
+    "text inst.ks=http://{{ .HTTPIP }}:{{ .HTTPPort }}/ks.cfg",
+    "<leftCtrlOn>x<leftCtrlOff>"
   ]
 }
 
-variable "efi_boot_command" {
+variable "uefi_boot_command" {
   type        = list(string)
-  description = "A list of commands to be executed during EFI ISO boot."
-  default     = [
-    "c<enter><wait>",
-    "linuxefi /images/pxeboot/vmlinuz ",
-    "quiet ",
-    "net.ifnames=0 ",
-    "biosdevname=0 ",
-    "text ",
-    "inst.ks=http://{{ .HTTPIP }}:{{ .HTTPPort }}/%s ",
-    "inst.stage2=hd:LABEL=%s ",
-    "<enter><wait2>",
-    "initrdefi /images/pxeboot/initrd.img",
-    "<enter><wait2>",
-    "boot<enter><wait>"
+  description = "A list of commands to be executed during UEFI ISO boot."
+  default = [
+    "<up><wait>",
+    "e<wait>",
+    "<down><down><end><wait> ",
+    "vmlinuz initrd=initrd.img ",
+    "quiet inst.ks=http://{{ .HTTPIP }}:{{ .HTTPPort }}/ks.cfg",
+    "<leftCtrlOn>x<leftCtrlOff>"
   ]
+
 }
 
 variable "qemuargs" {
   type        = list(list(string))
   description = "Default qemuargs for the build"
-  default     = [ [ "-vga", "qxl" ] ]
+  default     = [["-vga", "qxl"]]
+}
 
+variable "qemuargs2" {
+  type        = list(list(string))
+  description = "Default qemuargs for the build"
+  default     = [["-vga", "qxl"]]
 }
 
 variable "build_username" {

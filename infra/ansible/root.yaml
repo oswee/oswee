@@ -5,6 +5,9 @@
 - name: System
   ansible.builtin.import_playbook: playbooks/system.yaml
 
+- name: Bastion
+  ansible.builtin.import_playbook: playbooks/bastion.yaml
+
 - name: Desktop
   ansible.builtin.import_playbook: playbooks/desktop.yaml
 

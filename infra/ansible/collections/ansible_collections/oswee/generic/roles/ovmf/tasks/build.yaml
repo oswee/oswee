@@ -44,6 +44,12 @@
     WORKSPACE: '{{ ovmf_source_dir }}'
     EDK_TOOLS_PATH: '{{ ovmf_source_dir }}/BaseTools'
     CONF_PATH: '{{ ovmf_source_dir }}/Conf'
-    # TARGET: RELEASE  # This does not work. Need to change manually (ATM) in Conf/tools_def.txt
   # when: ovmf_repo.changed
+
+# TODO: Move artifacts to the Qemu host
+  # /usr/share/OVMF/OVMF_CODE.fd
+  # /usr/share/OVMF/OVMF_VARS.fd
+# locate the "nvram" stanza in "/etc/libvirt/qemu.conf", and edit it as follows:
+# nvram = [ "/usr/share/OVMF/OVMF_CODE.fd:/usr/share/OVMF/OVMF_VARS.fd" ]
+# systemctl restart libvirtd
 ...

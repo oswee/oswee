@@ -137,7 +137,7 @@ until [ "$selection" = "0" ]; do
   echo ""
   echo "      Other:"
   echo ""
-  echo "        Q   -  Quit"
+  echo "        q   -  Quit"
   echo ""
   read -r selection
   echo ""
@@ -145,7 +145,7 @@ until [ "$selection" = "0" ]; do
     1 ) clear ; menu_option_1 ; press_enter ;;
     2 ) clear ; menu_option_2 ; press_enter ;;
     3 ) clear ; menu_option_3 ; press_enter ;;
-    Q ) clear ; exit ;;
+    q ) clear ; exit ;;
     * ) clear ; incorrect_selection ; press_enter ;;
   esac
 done

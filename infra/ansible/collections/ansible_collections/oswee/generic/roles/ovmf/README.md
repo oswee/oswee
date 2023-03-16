@@ -5,13 +5,15 @@
 
 Make sure you have at least 10G storage. It fails to build with 5G storage VM.
 
+It is not strictly required to build this from scratch.
+
+You can use `edk2-ovmf` and `edk2.git-ovmf-x64` packages from Fedora.
+
+[Fetching OVMF UEFI from the correct source](https://developer.fedoraproject.org/tools/virtualization/fetching-ovmf-uefi-from-the-correct-source.html)
+
 ## Role Variables
 
-A description of the settable variables for this role should go here, including any variables that are in defaults/main.yml, vars/main.yml, and any variables that can/should be set via parameters to the role. Any variables that are read from other roles and/or the global scope (ie. hostvars, group vars, etc.) should be mentioned here as well.
-
 ## Dependencies
-
-A list of other roles hosted on Galaxy should go here, plus any details in regards to parameters that may need to be set for other roles, or variables that are used from other roles.
 
 ## Example Playbook)
 

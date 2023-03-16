@@ -45,6 +45,7 @@ return {
 				formatting.goimports,
 				formatting.gofmt,
 				formatting.terraform_fmt,
+				formatting.packer,
 				formatting.buildifier,
 				-- formatting.stylelint,
 				-- formatting.yamlfmt, -- Google tool. Quite limited experience (document_end, spaces for inline comments, etc)

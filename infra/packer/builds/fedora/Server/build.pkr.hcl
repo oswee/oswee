@@ -12,7 +12,7 @@ build {
   /* } */
 
   /* post-processor "vagrant" { */
-		/* # TODO: Should be an variable */
+  /* # TODO: Should be an variable */
   /*   output = "/home/dzintars/vagrant/boxes/${source.name}.box" */
   /*   output = "/var/lib/libvirt/images/${source.name}-test.qcow2" */
   /* } */
@@ -24,14 +24,48 @@ build {
   /*   ] */
   /* } */
 
+  post-processor "shell-local" {
+    /* only = ["qemu.fedora_base_image"] */
+    inline = [
+      "uname -a"
+    ]
+  }
 
-  /*  provisioner "ansible" { */
-  /*   only            = ["qemu.base"] */
-  /*   playbook_file   = "./provisioners/postinstall.yml" */
-  /*   extra_arguments = ["--diff"] */
-  /*   max_retries     = 30 # for opensuse */
+  provisioner "ansible" {
+    /* only                = ["qemu.fedora_base_image"] */
+    user          = "vagrant"
+    use_proxy     = false
+    playbook_file = "${local.ansible_dir}/playbooks/base.yaml"
+    /* galaxy_file         = "${local.ansible_dir}/requirements.yaml" */
+    inventory_directory = "${local.ansible_dir}/environments/development"
+    collections_path    = "${local.ansible_dir}/collections"
+    roles_path          = "${local.ansible_dir}/roles"
+    # Setting these should fix some of the (false alarm) warnings
+    ansible_env_vars = [
+      "ANSIBLE_HOST_KEY_CHECKING=False",
+      "ANSIBLE_COLLECTIONS_PATH=${local.ansible_dir}/collections",
+      "ANSIBLE_ROLES_PATH=${local.ansible_dir}/roles",
+			"ANSIBLE_BECOME_PASS=vagrant",
+    ]
+    extra_arguments = [
+      "--diff",
+      "--vault-password-file", "${local.ansible_dir}/scripts/ansible-vault-password.py",
+      /* "--limit", "workstations", */
+      /* "--tags", "nvim" */
+    ]
+  }
+
+  /* provisioner "ansible-local" { */
+  /*   only = ["qemu.fedora_base_image"] */
+  /*   // Use temporary installed ansible */
+  /*   playbook_dir  = ${local.ansible_dir} */
+  /*   playbook_file = "${local.ansible_dir}/root.yaml" */
+  /*   command       = "/tmp/ansible/venv/bin/ansible-playbook" */
+  /*   extra_arguments = [ */
+  /*     "--extra-vars", "ansible_python_interpreter=/tmp/ansible/venv/bin/python" */
+  /*   ] */
   /* } */
-  /**/
+
   /* provisioner "ansible" { */
   /*   except        = ["qemu.base"] */
   /*   playbook_file = "./provisioners/postinstall.yml" */
@@ -47,7 +81,7 @@ build {
   /*     } */
   /*   } */
   /* } */
-  /**/
+
   /* post-processor "shell-local" { */
   /*   only = ["qemu.base"] */
   /*   inline = [ */
@@ -56,7 +90,7 @@ build {
   /*     "rm -rf ${local.output_directory}" */
   /*   ] */
   /* } */
-  /**/
+
   /* post-processor "shell-local" { */
   /*   only   = ["qemu.vmware"] */
   /*   script = "scripts/convert-diskimage.sh" */

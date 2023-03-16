@@ -192,7 +192,7 @@ backend my.{{ dns_prod_domain_name }}.backend
   compression type text/html text/plain text/css
   # https://serverfault.com/a/887396/440073
   # option httpchk HEAD / HTTP/1.1\r\nHost:\ my.{{ dns_prod_domain_name }}
-  server {{ hostname }} 127.0.0.1:8081 check
+  server {{ haproxy_hostname }} 127.0.0.1:8081 check
 
 backend my.{{ dns_dev_domain_name }}.backend
   balance roundrobin
@@ -201,21 +201,21 @@ backend my.{{ dns_dev_domain_name }}.backend
   compression type text/html text/plain text/css
   # https://serverfault.com/a/887396/440073
   # option httpchk HEAD / HTTP/1.1\r\nHost:\ my.{{ dns_dev_domain_name }}
-  server {{ hostname }} 127.0.0.1:8081 check
+  server {{ haproxy_hostname }} 127.0.0.1:8081 check
 
 backend front.{{ dns_dev_domain_name }}.backend
   balance roundrobin
   http-request add-header X-Forwarded-Proto https
   # option httpchk HEAD / h2,HTTP/1.1\r\nHost:\ dev.{{ dns_prod_domain_name }}
   # option httpchk HEAD / HTTP/1.1\r\nHost:\ dev.{{ dns_prod_domain_name }}
-  server {{ hostname }} 127.0.0.1:3000 check
-  # server {{ hostname }} 127.0.0.1:3000 ssl verify none alpn h2,HTTP/1.1 check
+  server {{ haproxy_hostname }} 127.0.0.1:3000 check
+  # server {{ haproxy_hostname }} 127.0.0.1:3000 ssl verify none alpn h2,HTTP/1.1 check
 
 backend api.{{ dns_prod_domain_name }}.backend
   balance roundrobin
   http-request add-header X-Forwarded-Proto https
   # option httpchk HEAD / HTTP/1.1\r\nHost:\ api.{{ dns_prod_domain_name }}
-  server {{ hostname }} 127.0.0.1:9090 check
+  server {{ haproxy_hostname }} 127.0.0.1:9090 check
 
 backend jenkins.{{ dns_prod_domain_name }}.backend
   balance roundrobin
@@ -224,7 +224,7 @@ backend jenkins.{{ dns_prod_domain_name }}.backend
   compression type text/html text/plain text/css
   # https://serverfault.com/a/887396/440073
   # option httpchk HEAD / HTTP/1.1\r\nHost:\ jenkins.{{ dns_prod_domain_name }}
-  server {{ hostname }} {{ network }}.{{ host_octet }}:9093 check
+  server {{ haproxy_hostname }} {{ haproxy_network }}.{{ haproxy_host_octet }}:9093 check
 
 backend vault.{{ dns_prod_domain_name }}.backend
   balance roundrobin
@@ -233,7 +233,7 @@ backend vault.{{ dns_prod_domain_name }}.backend
   compression type text/html text/plain text/css
   # https://serverfault.com/a/887396/440073
   # option httpchk HEAD / HTTP/1.1\r\nHost:\ vault.{{ dns_prod_domain_name }}
-  server {{ hostname }} {{ network }}.{{ host_octet }}:8200 ssl verify none alpn h2,HTTP/1.1 check
+  server {{ haproxy_hostname }} {{ haproxy_network }}.{{ haproxy_host_octet }}:8200 ssl verify none alpn h2,HTTP/1.1 check
 
 backend s3.{{ dns_prod_domain_name }}.backend
   balance roundrobin
@@ -242,8 +242,8 @@ backend s3.{{ dns_prod_domain_name }}.backend
   compression type text/html text/plain text/css
   # https://serverfault.com/a/887396/440073
   # option httpchk HEAD / HTTP/1.1\r\nHost:\ s3.{{ dns_prod_domain_name }}
-  #server {{ hostname }} {{ network }}.{{ host_octet }}:8001 ssl verify none alpn h2,HTTP/1.1 check
-  server {{ hostname }} {{ network }}.{{ host_octet }}:8001 check
+  #server {{ haproxy_hostname }} {{ haproxy_network }}.{{ haproxy_host_octet }}:8001 ssl verify none alpn h2,HTTP/1.1 check
+  server {{ haproxy_hostname }} {{ haproxy_network }}.{{ haproxy_host_octet }}:8001 check
 
 backend cloud.{{ dns_prod_domain_name }}.backend
   balance roundrobin
@@ -252,7 +252,7 @@ backend cloud.{{ dns_prod_domain_name }}.backend
   compression type text/html text/plain text/css
   # https://serverfault.com/a/887396/440073
   # option httpchk HEAD / HTTP/1.1\r\nHost:\ cloud.{{ dns_prod_domain_name }}
-  server {{ hostname }} {{ network }}.{{ host_octet }}:8085 check
+  server {{ haproxy_hostname }} {{ haproxy_network }}.{{ haproxy_host_octet }}:8085 check
 
 backend office.{{ dns_prod_domain_name }}.backend
   balance roundrobin
@@ -261,7 +261,7 @@ backend office.{{ dns_prod_domain_name }}.backend
   compression type text/html text/plain text/css
   # https://serverfault.com/a/887396/440073
   # option httpchk HEAD / HTTP/1.1\r\nHost:\ office.{{ dns_prod_domain_name }}
-  server {{ hostname }} {{ network }}.{{ host_octet }}:9980 check
+  server {{ haproxy_hostname }} {{ haproxy_network }}.{{ haproxy_host_octet }}:9980 check
 
 backend registry.{{ dns_prod_domain_name }}.backend
   balance roundrobin
@@ -270,7 +270,7 @@ backend registry.{{ dns_prod_domain_name }}.backend
   compression type text/html text/plain text/css
   # https://serverfault.com/a/887396/440073
   # option httpchk HEAD / HTTP/1.1\r\nHost:\ registry.{{ dns_prod_domain_name }}
-  server {{ hostname }} {{ network }}.{{ host_octet }}:9981 check
+  server {{ haproxy_hostname }} {{ haproxy_network }}.{{ haproxy_host_octet }}:9981 check
 
 backend dzintars.dev.backend
   balance roundrobin
@@ -278,7 +278,7 @@ backend dzintars.dev.backend
   compression algo gzip
   compression type text/html text/plain text/css
   # option httpchk HEAD / HTTP/1.1\r\nHost:\ dzintars.dev
-  server {{ hostname }} {{ network }}.{{ host_octet }}:8084 check
+  server {{ haproxy_hostname }} {{ haproxy_network }}.{{ haproxy_host_octet }}:8084 check
 
 backend merumore.com.backend
   balance roundrobin
@@ -287,7 +287,7 @@ backend merumore.com.backend
   compression type text/html text/plain text/css
   # https://serverfault.com/a/887396/440073
   # option httpchk HEAD / HTTP/1.1\r\nHost:\ my.{{ dns_prod_domain_name }}
-  server {{ hostname }} {{ network }}.{{ host_octet }}:8082 check
+  server {{ haproxy_hostname }} {{ haproxy_network }}.{{ haproxy_host_octet }}:8082 check
 
 backend websocket.backend
   balance roundrobin
@@ -305,14 +305,14 @@ backend websocket.backend
   ## websocket health checking
   option httpchk GET / HTTP/1.1\r\nHost:\ api.{{ dns_prod_domain_name }}\r\nConnection:\ Upgrade\r\nUpgrade:\ websocket\r\nSec-WebSocket-Key:\ haproxy\r\nSec-WebSocket-Version:\ 13\r\nSec-WebSocket-Protocol:\ echo-protocol
   http-check expect status 101
-  server {{ hostname }} 127.0.0.1:9090 maxconn 30000 weight 10 cookie {{ hostname }} check
+  server {{ haproxy_hostname }} 127.0.0.1:9090 maxconn 30000 weight 10 cookie {{ haproxy_hostname }} check
   #server websrv2 192.168.10.12:8080 maxconn 30000 weight 10 cookie websrv2 check
 
 backend letsencrypt.backend
   server letsencrypt 127.0.0.1:8888
 
 backend default.backend
-  server {{ hostname }} 127.0.0.1:8888 maxconn 50 check
+  server {{ haproxy_hostname }} 127.0.0.1:8888 maxconn 50 check
   http-request set-header Host Default
 
   # Set custom response headers

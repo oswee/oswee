@@ -1,7 +1,10 @@
 ---
-# defaults file for Haproxy
+# defaults/main.yaml file for custom.oswee.haproxy role
 
 haproxy_user: haproxy
 haproxy_group: haproxy
 haproxy_cluster_setup: false
+haproxy_hostname: '{{ hostname | default("workstation") }}'
+haproxy_network: '{{ network | default("192.168.100") }}'
+haproxy_host_octet: '{{ host_octet | default("1") }}'
 ...

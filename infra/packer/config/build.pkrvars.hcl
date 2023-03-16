@@ -1,11 +1,3 @@
-/*
-    DESCRIPTION:
-    Build account variables used for all builds.
-    - Variables are passed to and used by guest operating system configuration files (e.g., ks.cfg, autounattend.xml).
-    - Variables are passed to and used by configuration scripts.
-*/
-
-// Default Account Credentials
 build_username           = "vagrant"
 build_password           = "vagrant"
 build_password_encrypted = "$6$Ml8N/SkD3.YhRRZ9$vYzPJ/r.JaDRsELhVIqsuGSiGOwR16.ei/MXCsK5bT0QeuTUMa3TV5BNkotU88xTPx7MR8pCNF6GXEqcLTfUJ1"
