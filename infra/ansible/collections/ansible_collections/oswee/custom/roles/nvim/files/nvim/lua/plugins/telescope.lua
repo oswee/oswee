@@ -19,7 +19,13 @@ return {
 		plugin.load_extension("zoxide")
 		plugin.load_extension("file_browser")
 
-		plugin.setup({})
+		plugin.setup({
+			pickers = {
+				find_files = {
+					hidden = true
+				}
+			}
+		})
 		vim.keymap.set("n", "<leader>ff", builtin.find_files, { desc = "telescope | Find files" })
 		vim.keymap.set("n", "<leader>fg", builtin.live_grep, { desc = "telescope | Live grep" })
 		vim.keymap.set("n", "<leader>fb", builtin.buffers, { desc = "telescope | Find buffers" })
