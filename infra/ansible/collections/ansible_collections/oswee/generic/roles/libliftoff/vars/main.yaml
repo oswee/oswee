@@ -1,0 +1,8 @@
+---
+# vars/main.yaml file for oswee.generic.libliftoff role
+
+libliftoff_deps:
+  redhat:
+    - ninja-build
+    - meson
+...

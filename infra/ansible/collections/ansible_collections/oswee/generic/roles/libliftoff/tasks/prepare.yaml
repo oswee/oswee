@@ -1,0 +1,16 @@
+---
+# tasks/prepare.yaml file for oswee.generic.libliftoff role
+
+- name: prepare | Install prerequisites
+  become: true
+  ansible.builtin.dnf:
+    name: '{{ item }}'
+    state: present
+  loop: '{{ libliftoff_deps.redhat }}'
+
+- name: prepare | Clone libliftoff repository
+  ansible.builtin.git:
+    repo: '{{ libliftoff_repo }}'
+    dest: '{{ libliftoff_source_path }}'
+    version: '{{ libliftoff_commit_hash | default("main") }}'
+...

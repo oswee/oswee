@@ -1,0 +1,23 @@
+---
+# tasks/main.yaml file for oswee.generic.libliftoff role
+
+- name: Setup
+  tags:
+    - libliftoff.setup
+  block:
+    - name: Prepare
+      ansible.builtin.import_tasks: prepare.yaml
+      tags:
+        - libliftoff.prepare
+
+    - name: Build
+      ansible.builtin.import_tasks: build.yaml
+      tags:
+        - libliftoff.build
+
+- name: Teardown
+  ansible.builtin.import_tasks: teardown.yaml
+  tags:
+    - never
+    - libliftoff.teardown
+...
