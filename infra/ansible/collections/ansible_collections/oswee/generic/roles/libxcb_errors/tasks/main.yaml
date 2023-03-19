@@ -1,0 +1,38 @@
+---
+# tasks/main.yaml file for oswee.generic.libxcb_errors role
+
+- name: Setup
+  tags:
+    - libxcb_errors.setup
+  block:
+    - name: Source build
+      when: libxcb_errors_source_build | default(true) | bool
+      tags:
+        - libxcb_errors.source-build
+      block:
+        - name: Prepare
+          ansible.builtin.import_tasks: prepare.yaml
+          tags:
+            - libxcb_errors.prepare
+
+        - name: Build
+          ansible.builtin.import_tasks: build.yaml
+          tags:
+            - libxcb_errors.build
+
+    - name: OpenSuse install
+      when: not (libxcb_errors_source_build | default(false) | bool)
+      tags:
+        - libxcb_error.release-install
+      block:
+        - name: Install
+          ansible.builtin.import_tasks: install.yaml
+          tags:
+            - libxcb_errors.install
+
+- name: Teardown
+  ansible.builtin.import_tasks: teardown.yaml
+  tags:
+    - never
+    - libxcb_errors.teardown
+...

@@ -1,0 +1,31 @@
+---
+# meta/main.yaml file for oswee.generic.libxcb_errors role
+
+galaxy_info:
+  namespace: oswee
+  role_name: libxcb_errors
+  version: 0.0.1
+  author: Dzintars Klavins
+  description: Ansible role to maintain Libxcb_errors
+  company: Oswee
+
+  license: Apache-2.0
+
+  min_ansible_version: 2.14
+
+  platforms:
+    - name: Fedora
+      versions:
+        - 37
+
+  galaxy_tags:
+    - libxcb_errors
+    - oswee
+    - dzintars
+    - fedora
+
+dependencies:
+  - role: oswee.generic.git
+    tags:
+      - deps
+...
