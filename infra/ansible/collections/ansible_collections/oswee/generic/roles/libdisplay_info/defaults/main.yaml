@@ -1,0 +1,7 @@
+---
+# defaults/main.yaml file for oswee.generic.libdisplay_info role
+
+libdisplay_info_repo: https://gitlab.freedesktop.org/emersion/libdisplay-info
+libdisplay_info_commit_hash: 0.1.0
+libdisplay_info_source_path: '{{ ansible_env.HOME }}/code/gitlab.freedesktop.org/emersion/libdisplay-info'
+...

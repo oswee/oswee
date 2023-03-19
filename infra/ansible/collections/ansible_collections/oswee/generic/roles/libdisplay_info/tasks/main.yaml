@@ -1,23 +1,23 @@
 ---
-# tasks/main.yaml file for oswee.generic.libdisplay role
+# tasks/main.yaml file for oswee.generic.libdisplay_info role
 
 - name: Setup
   tags:
-    - libdisplay.setup
+    - libdisplay_info.setup
   block:
     - name: Prepare
       ansible.builtin.import_tasks: prepare.yaml
       tags:
-        - libdisplay.prepare
+        - libdisplay_info.prepare
 
     - name: Build
       ansible.builtin.import_tasks: build.yaml
       tags:
-        - libdisplay.build
+        - libdisplay_info.build
 
 - name: Teardown
   ansible.builtin.import_tasks: teardown.yaml
   tags:
     - never
-    - libdisplay.teardown
+    - libdisplay_info.teardown
 ...

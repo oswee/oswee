@@ -1,12 +1,12 @@
 ---
-# meta/main.yaml file for oswee.generic.libdisplay role
+# meta/main.yaml file for oswee.generic.libdisplay_info role
 
 galaxy_info:
   namespace: oswee
-  role_name: libdisplay
+  role_name: libdisplay_info
   version: 0.0.1
   author: Dzintars Klavins
-  description: Ansible role to maintain Libdisplay
+  description: Ansible role to maintain Libdisplay-info
   company: Oswee
 
   license: Apache-2.0
@@ -19,7 +19,7 @@ galaxy_info:
         - 37
 
   galaxy_tags:
-    - libdisplay
+    - libdisplay_info
     - oswee
     - dzintars
     - fedora
