@@ -1,0 +1,16 @@
+---
+# tasks/prepare.yaml file for oswee.generic.libdisplay role
+
+- name: prepare | Install prerequisites
+  become: true
+  ansible.builtin.dnf:
+    name: '{{ item }}'
+    state: present
+  loop: '{{ libdisplay_deps.redhat }}'
+
+- name: prepare | Clone libdisplay-info repository
+  ansible.builtin.git:
+    repo: '{{ libdisplay_repo }}'
+    dest: '{{ libdisplay_source_path }}'
+    version: '{{ libdisplay_commit_hash | default("main") }}'
+...

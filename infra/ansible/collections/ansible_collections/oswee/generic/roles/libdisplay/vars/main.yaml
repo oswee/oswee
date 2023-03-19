@@ -1,0 +1,9 @@
+---
+# vars/main.yaml file for oswee.generic.libdisplay role
+
+libdisplay_deps:
+  redhat:
+    - ninja-build
+    - meson
+    - hwdata-devel
+...
