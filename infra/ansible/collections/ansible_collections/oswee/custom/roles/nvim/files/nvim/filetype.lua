@@ -29,5 +29,6 @@ vim.filetype.add({
 		["tmux.conf.j2"] = "tmux",
 		["terraform.rc"] = "terraform",
 		["kitty.conf"] = "kitty",
+		[".envrc"] = "bash",
 	},
 })
