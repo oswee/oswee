@@ -1,0 +1,32 @@
+---
+# prepare playbook called to provision an instance
+# use this to bring instance to a testable state
+- name: Prepare
+  hosts: all
+  tasks:
+    - name: Make sure we have a 'wheel' group
+      ansible.builtin.group:
+        name: wheel
+        state: present
+
+    - name: Add current user to 'wheel' group
+      become: true
+      ansible.builtin.user:
+        name: '{{ lookup("env", "USER") }}'
+        groups: wheel
+        append: true
+
+    - name: Add ansible user to 'wheel' group
+      become: true
+      ansible.builtin.user:
+        name: ansible
+        groups: wheel
+        append: true
+
+    - name: Enable passwordless sudo for 'wheel' group
+      become: true
+      ansible.builtin.copy:
+        dest: /etc/sudoers.d/wheel
+        content: '%wheel ALL=(ALL) NOPASSWD: ALL'
+        validate: visudo -cf %s
+...
