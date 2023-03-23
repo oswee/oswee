@@ -15,6 +15,9 @@
       tags:
         - libliftoff.build
 
+    - name: Flush handlers
+      ansible.builtin.meta: flush_handlers
+
 - name: Teardown
   ansible.builtin.import_tasks: teardown.yaml
   tags:

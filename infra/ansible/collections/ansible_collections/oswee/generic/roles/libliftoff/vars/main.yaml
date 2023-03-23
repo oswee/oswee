@@ -5,4 +5,7 @@ libliftoff_deps:
   redhat:
     - ninja-build
     - meson
+    - cmake
+    - gcc-c++
+    - libdrm-devel
 ...

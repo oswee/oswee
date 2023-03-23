@@ -1,0 +1,7 @@
+---
+# handlers/main.yaml file for oswee.generic.libliftoff role
+
+- name: Run ldconfig
+  become: true
+  ansible.builtin.command: ldconfig
+...
