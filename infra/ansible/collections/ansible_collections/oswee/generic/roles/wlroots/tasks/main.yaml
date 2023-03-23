@@ -10,11 +10,6 @@
       tags:
         - wlroots.prepare
 
-    - name: Pixman
-      ansible.builtin.import_tasks: pixman.yaml
-      tags:
-        - wlroots.pixman
-
     - name: Build
       ansible.builtin.import_tasks: build.yaml
       tags:

@@ -8,12 +8,30 @@
     state: present
   loop: '{{ packages.redhat }}'
 
-- name: prepare | Install Wayland Wlroots dependencies
+- name: prepare | Install Wlroots dependencies for Wayland
   become: true
   ansible.builtin.dnf:
     name: '{{ item }}'
     state: present
   loop: '{{ wlroots_wayland_deps.redhat }}'
+
+- name: prepare | Install Wlroots dependencies for X11
+  when: (wlroots_x11_compatible | default(false) | bool)
+  become: true
+  ansible.builtin.dnf:
+    name: '{{ item }}'
+    state: present
+  loop: '{{ wlroots_x11_deps.redhat }}'
+
+- name: prepare | OpenSUSE version install
+  when: not (libxcb_source_build | default(true) | bool)
+  block:
+    - name: prepare | Install OpenSuse version of libxcb-errors
+      become: true
+      ansible.builtin.dnf:
+        name: https://ftp.lysator.liu.se/pub/opensuse/tumbleweed/repo/oss/x86_64/libxcb-errors0-1.0.1-1.1.x86_64.rpm
+        state: present
+        disable_gpg_check: true
 
 - name: prepare | Clone wlroots repository
   ansible.builtin.git:

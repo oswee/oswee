@@ -28,4 +28,16 @@ dependencies:
   - role: oswee.generic.git
     tags:
       - deps
+  - role: oswee.generic.libdisplay_info
+    tags:
+      - deps
+  - role: oswee.generic.libliftoff
+    tags:
+      - deps
+  - role: oswee.generic.libxcb_errors
+    tags:
+      - deps
+  - role: oswee.generic.pixman
+    tags:
+      - deps
 ...
