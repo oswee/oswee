@@ -1,0 +1,7 @@
+---
+# handlers/main.yaml file for oswee.generic.libdisplay_info role
+
+- name: Run ldconfig
+  become: true
+  ansible.builtin.command: ldconfig
+...
