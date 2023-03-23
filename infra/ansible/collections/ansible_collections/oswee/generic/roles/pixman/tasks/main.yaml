@@ -1,0 +1,28 @@
+---
+# tasks/main.yaml file for oswee.generic.pixman role
+
+- name: Setup
+  tags:
+    - pixman.setup
+  block:
+    - name: Prepare
+      ansible.builtin.import_tasks: prepare.yaml
+      tags:
+        - pixman.prepare
+
+    - name: Build
+      ansible.builtin.import_tasks: build.yaml
+      tags:
+        - pixman.build
+
+    # - name: Install
+    #   ansible.builtin.import_tasks: install.yaml
+    #   tags:
+    #     - pixman.install
+
+- name: Teardown
+  ansible.builtin.import_tasks: teardown.yaml
+  tags:
+    - never
+    - pixman.teardown
+...

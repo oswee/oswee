@@ -1,0 +1,11 @@
+---
+# vars/main.yaml file for oswee.generic.pixman role
+
+pixman_deps:
+  redhat:
+    - ninja-build
+    - meson
+    # - cmake
+    - gcc-c++
+    # - libdrm-devel
+...

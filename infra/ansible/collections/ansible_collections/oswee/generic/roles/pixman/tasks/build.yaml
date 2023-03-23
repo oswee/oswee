@@ -1,0 +1,62 @@
+---
+# tasks/build.yaml file for oswee.generic.pixman role
+
+- name: build | Meson wipe
+  when: (pixman_meson_wipe | default(false) | bool)
+  ansible.builtin.command: meson setup --wipe build/
+  args:
+    chdir: '{{ pixman_source_path }}'
+
+- name: build | Meson build
+  ansible.builtin.command: meson setup build/
+  args:
+    chdir: '{{ pixman_source_path }}'
+
+- name: build | Ninja build
+  ansible.builtin.command: ninja -C build/
+  args:
+    chdir: '{{ pixman_source_path }}'
+    creates:
+      - '{{ pixman_source_path }}/build/pixman/libpixman-1.so'
+
+- name: build | Ninja install
+  become: true
+  ansible.builtin.command: ninja -C build/ install
+  args:
+    chdir: '{{ pixman_source_path }}'
+
+- name: build | Ensure library directory exists
+  become: true
+  ansible.builtin.file:
+    path: /usr/local/lib/wlroots
+    state: directory
+    mode: 0755
+
+- name: build | Copy shared library module to ldpath
+  become: true
+  ansible.builtin.copy:
+    src: '{{ item }}'
+    dest: /usr/local/lib/wlroots
+    mode: 0755
+    remote_src: true
+  loop:
+    - '{{ pixman_source_path }}/build/pixman/libpixman-1.so'
+
+- name: build | Create custom libs file
+  become: true
+  ansible.builtin.copy:
+    content: ''
+    dest: /etc/ld.so.conf.d/wlroots.conf
+    mode: 0644
+    force: false
+
+- name: build | Add local libs to ld config
+  become: true
+  ansible.builtin.lineinfile:
+    dest: /etc/ld.so.conf.d/wlroots.conf
+    line: /usr/local/lib/wlroots
+
+- name: build | Run ldconfig
+  become: true
+  ansible.builtin.command: ldconfig
+...
