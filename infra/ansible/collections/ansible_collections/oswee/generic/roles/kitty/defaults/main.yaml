@@ -1,3 +1,7 @@
 ---
-# defaults file for Kitty
+# defaults/main.yaml file for oswee.generic.kitty role
+
+kitty_config_path: '{{ ansible_env.HOME }}/.config'
+kitty_user: '{{ ansible_env.USER }}'
+kitty_group: '{{ ansible_env.USER }}'
 ...
