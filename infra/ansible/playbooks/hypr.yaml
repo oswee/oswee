@@ -6,6 +6,30 @@
 
 
   tasks:
+    - name: Libdisplay-info
+      ansible.builtin.import_role:
+        name: oswee.generic.libdisplay_info
+      tags:
+        - libdisplay_info
+
+    - name: Libliftoff
+      ansible.builtin.import_role:
+        name: oswee.generic.libliftoff
+      tags:
+        - libliftoff
+
+    - name: Libxcb-errors
+      ansible.builtin.import_role:
+        name: oswee.generic.libxcb_errors
+      tags:
+        - libxcb_errors
+
+    - name: Pixman
+      ansible.builtin.import_role:
+        name: oswee.generic.pixman
+      tags:
+        - pixman
+
     - name: Wlroots
       ansible.builtin.import_role:
         name: oswee.generic.wlroots
