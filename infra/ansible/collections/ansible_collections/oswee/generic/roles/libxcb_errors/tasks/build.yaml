@@ -1,12 +1,12 @@
 ---
 # tasks/build.yaml file for oswee.generic.libxcb_errors role
 
-- name: build | Build libxcb-errors
+- name: build | Build
   ansible.builtin.command: ./autogen.sh --prefix=/usr
   args:
     chdir: '{{ libxcb_errors_source_path }}'
 
-- name: build | Install libxcb-errors build version
+- name: build | Install build version
   become: true
   community.general.make:
     chdir: '{{ libxcb_errors_source_path }}'
