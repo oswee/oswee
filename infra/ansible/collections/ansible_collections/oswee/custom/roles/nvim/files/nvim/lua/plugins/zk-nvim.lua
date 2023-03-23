@@ -99,7 +99,7 @@ return {
 		)
 		-- vim.keymap.set("n", "<leader>zc", "<cmd>ZkCd<cr>", { desc = "zk-nvim | CD into notebook root" })
 		-- vim.keymap.set("n", "<leader>zi", "<cmd>ZkIndex<cr>", { desc = "zk-nvim | Index the notebook" })
-		vim.keymap.set('n', '<leader>zb', '<cmd>ZkBackLinks<cr>', { desc = 'zk-nvim | Open backlinks' })
+		vim.keymap.set('n', '<leader>zb', '<cmd>ZkBacklinks<cr>', { desc = 'zk-nvim | Open backlinks' })
 		vim.keymap.set('n', '<leader>zd', '<cmd>ZkNewDaily<cr>', { desc = 'zk-nvim | New daily note' })
 		vim.keymap.set('n', '<leader>zo', "<cmd>ZkNotes { sort = {'modified'}}<cr>", { desc = 'zk-nvim | Open notes' })
 		vim.keymap.set('n', '<leader>zt', '<cmd>ZkTags<cr>', { desc = 'zk-nvim | Filter notes by tag' })
@@ -131,7 +131,7 @@ return {
 		)
 
 		-- Alternative for backlinks using pure LSP and showing the source context.
-		vim.keymap.set('n', '<leader>zb', '<cmd>lua vim.lsp.buf.references()<cr>', { desc = 'zk-nvim | Open backlinks' })
+		-- vim.keymap.set('n', '<leader>zb', '<cmd>lua vim.lsp.buf.references()<cr>', { desc = 'zk-nvim | Open backlinks' })
 
 		-- Open notes linked by the current buffer.
 		vim.keymap.set('n', '<leader>zl', '<cmd>ZkLinks<cr>', { desc = 'zk-nvim | Open linked notes' })

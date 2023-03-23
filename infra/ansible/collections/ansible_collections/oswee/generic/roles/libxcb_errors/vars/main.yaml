@@ -1,0 +1,12 @@
+---
+# vars/main.yaml file for oswee.generic.libxcb_errors role
+
+libxcb_errors_deps:
+  redhat:
+    # - dh-autoreconf
+    - xorg-x11-util-macros
+    - xcb-proto
+    - autoconf
+    - automake
+    - libxcb-devel
+...

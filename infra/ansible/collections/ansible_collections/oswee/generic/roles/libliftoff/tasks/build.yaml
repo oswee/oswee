@@ -1,0 +1,62 @@
+---
+# tasks/build.yaml file for oswee.generic.libliftoff role
+
+- name: build | Meson wipe
+  when: libliftoff_meson_wipe | default(false) | bool
+  ansible.builtin.command: meson setup --wipe build/
+  args:
+    chdir: '{{ libliftoff_source_path }}'
+
+- name: build | Meson build
+  ansible.builtin.command: meson setup build/
+  args:
+    chdir: '{{ libliftoff_source_path }}'
+
+- name: build | Ninja build
+  ansible.builtin.command: ninja -C build/
+  args:
+    chdir: '{{ libliftoff_source_path }}'
+    creates:
+      - '{{ libliftoff_source_path }}/build/libliftoff.so'
+
+- name: build | Ninja install
+  become: true
+  ansible.builtin.command: ninja -C build/ install
+  args:
+    chdir: '{{ libliftoff_source_path }}'
+
+- name: build | Ensure library directory exists
+  become: true
+  ansible.builtin.file:
+    path: /usr/local/lib/wlroots
+    state: directory
+    mode: 0755
+
+- name: build | Copy library module to the ldpath
+  become: true
+  ansible.builtin.copy:
+    src: '{{ item }}'
+    dest: /usr/local/lib/wlroots
+    mode: 0755
+    remote_src: true
+  loop:
+    - '{{ libliftoff_source_path }}/build/libliftoff.so'
+
+- name: build | Create ldconfig wlroots config file
+  become: true
+  ansible.builtin.copy:
+    content: ''
+    dest: /etc/ld.so.conf.d/wlroots.conf
+    mode: 0644
+    force: false
+
+- name: build | Add local libs to ldconfig
+  become: true
+  ansible.builtin.lineinfile:
+    dest: /etc/ld.so.conf.d/wlroots.conf
+    line: /usr/local/lib/wlroots
+
+- name: build | Run ldconfig
+  become: true
+  ansible.builtin.command: ldconfig
+...

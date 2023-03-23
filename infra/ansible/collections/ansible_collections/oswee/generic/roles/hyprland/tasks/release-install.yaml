@@ -11,7 +11,7 @@
 
 - name: release-install | Download Hyprland prebuilt release source
   ansible.builtin.unarchive:
-    src: https://github.com/hyprwm/Hyprland/releases/download/v0.21.0beta/v0.21.0beta.tar.gz
+    src: https://github.com/hyprwm/Hyprland/releases/download/v0.23.0beta/v0.23.0beta.tar.gz
     # src: '{{ hyprland_prebuilt_url }}'
     dest: /tmp
     # owner: '{{ hyprland_user }}'

@@ -10,7 +10,11 @@ return {
 		local plugin = require('gruvbox')
 		plugin.setup({
 			contrast = 'hard',
-			italic = false,
+			italic = {
+				strings = true,
+				operators = true,
+				comments = true,
+			}
 		})
 
 		vim.opt.background = 'dark'

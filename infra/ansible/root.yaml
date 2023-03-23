@@ -8,6 +8,9 @@
 - name: Bastion
   ansible.builtin.import_playbook: playbooks/bastion.yaml
 
+- name: Hypr
+  ansible.builtin.import_playbook: playbooks/hypr.yaml
+
 - name: Desktop
   ansible.builtin.import_playbook: playbooks/desktop.yaml
 

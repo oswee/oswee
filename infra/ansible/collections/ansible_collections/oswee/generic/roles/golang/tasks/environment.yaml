@@ -7,9 +7,8 @@
     dest: /etc/profile.d/golang.sh
     mode: 0644
     content: |
-      # GOROOT=/usr/local/go
-      GOBIN=/usr/local/go/bin
-      GOPATH=$HOME/go
-      # GOCACHE=$HOME/go/.cache/go-build
-      PATH=$PATH:$GOBIN:$GOPATH/bin
+      export GOPATH=$HOME/go
+      export GOBIN=$GOPATH/bin
+      export GOROOT=/usr/local/go
+      PATH=$GOBIN:$GOROOT/bin:$PATH
 ...

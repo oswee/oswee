@@ -1,0 +1,10 @@
+---
+# tasks/install.yaml file for oswee.generic.libxcb_errors role
+
+- name: install | Install OpenSuse version of libxcb-errors
+  become: true
+  ansible.builtin.dnf:
+    name: https://ftp.lysator.liu.se/pub/opensuse/tumbleweed/repo/oss/x86_64/libxcb-errors0-1.0.1-1.1.x86_64.rpm
+    state: present
+    disable_gpg_check: true
+...

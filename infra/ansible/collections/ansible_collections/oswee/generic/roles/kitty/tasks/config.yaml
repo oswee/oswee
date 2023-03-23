@@ -1,15 +1,23 @@
 ---
-# tasks file for Kitty
+# tasks/config.yaml file for oswee.generic.kitty role
+
+- name: config | Ensure .config directory exists
+  ansible.builtin.file:
+    path: '{{ kitty_config_path }}/kitty'
+    state: directory
+    owner: '{{ kitty_user }}'
+    group: '{{ kitty_group }}'
+    mode: 0755
 
 - name: config | Copy config template
   ansible.builtin.template:
     src: kitty.conf.j2
-    dest: $HOME/.config/kitty/kitty.conf
+    dest: '{{ kitty_config_path }}/kitty/kitty.conf'
     mode: 0644
 
 - name: config | Copy theme template
   ansible.builtin.template:
     src: theme.conf.j2
-    dest: $HOME/.config/kitty/theme.conf
+    dest: '{{ kitty_config_path }}/kitty/theme.conf'
     mode: 0644
 ...
