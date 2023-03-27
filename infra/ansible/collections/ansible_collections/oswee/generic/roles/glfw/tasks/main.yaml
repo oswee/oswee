@@ -1,0 +1,33 @@
+---
+# tasks/main.yaml file for oswee.generic.glfw role
+
+- name: Setup
+  tags:
+    - glfw.setup
+  block:
+    - name: Prepare
+      ansible.builtin.import_tasks: prepare.yaml
+      tags:
+        - glfw.prepare
+
+    - name: Build
+      ansible.builtin.import_tasks: build.yaml
+      tags:
+        - glfw.build
+
+    - name: Install
+      ansible.builtin.import_tasks: install.yaml
+      tags:
+        - glfw.install
+
+    - name: Config
+      ansible.builtin.import_tasks: config.yaml
+      tags:
+        - glfw.config
+
+- name: Teardown
+  ansible.builtin.import_tasks: teardown.yaml
+  tags:
+    - never
+    - glfw.teardown
+...
