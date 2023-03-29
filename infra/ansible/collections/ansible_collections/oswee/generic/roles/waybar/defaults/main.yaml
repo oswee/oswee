@@ -1,4 +1,9 @@
 ---
 # defaults/main.yaml file for oswee.generic.waybar role
 
+waybar_meson_wipe: false  # Make clean build every time
+waybar_repo: https://github.com/Alexays/Waybar
+waybar_commit_hash: master
+waybar_source_path: '{{ ansible_env.HOME }}/code/github.com/Alexays/Waybar'
+waybar_config_path: '{{ ansible_env.HOME }}/.config/waybar'
 ...
