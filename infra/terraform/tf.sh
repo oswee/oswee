@@ -1,5 +1,8 @@
 #!/bin/sh
 
+# Usage:
+# `./tf.sh 04-vault apply`
+
 # Format this script when executing
 shfmt -i 2 -w "$0"
 
