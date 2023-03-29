@@ -5,6 +5,9 @@
 - name: System
   ansible.builtin.import_playbook: playbooks/system.yaml
 
+- name: Build
+  ansible.builtin.import_playbook: playbooks/build.yaml
+
 - name: Bastion
   ansible.builtin.import_playbook: playbooks/bastion.yaml
 
@@ -17,6 +20,9 @@
 - name: Personal Productivity Environment
   ansible.builtin.import_playbook: playbooks/ppe.yaml
 
+- name: Entertainment
+  ansible.builtin.import_playbook: playbooks/entertainment.yaml
+
 - name: Personal Development Environment
   ansible.builtin.import_playbook: playbooks/pde.yaml
 
@@ -28,7 +34,4 @@
 
 - name: Containers
   ansible.builtin.import_playbook: playbooks/containers.yaml
-
-- name: Build
-  ansible.builtin.import_playbook: playbooks/build.yaml
 ...
