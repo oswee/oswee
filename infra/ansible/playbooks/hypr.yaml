@@ -47,4 +47,10 @@
         name: oswee.generic.kitty
       tags:
         - kitty
+
+    - name: Waybar
+      ansible.builtin.import_role:
+        name: oswee.generic.waybar
+      tags:
+        - waybar
 ...
