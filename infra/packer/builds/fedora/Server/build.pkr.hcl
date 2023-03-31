@@ -38,20 +38,13 @@ build {
     playbook_file = "${local.ansible_dir}/playbooks/base.yaml"
     /* galaxy_file         = "${local.ansible_dir}/requirements.yaml" */
     inventory_directory = "${local.ansible_dir}/environments/development"
-    collections_path    = "${local.ansible_dir}/collections"
-    roles_path          = "${local.ansible_dir}/roles"
     # Setting these should fix some of the (false alarm) warnings
     ansible_env_vars = [
-      "ANSIBLE_HOST_KEY_CHECKING=False",
-      "ANSIBLE_COLLECTIONS_PATH=${local.ansible_dir}/collections",
-      "ANSIBLE_ROLES_PATH=${local.ansible_dir}/roles",
-			"ANSIBLE_BECOME_PASS=vagrant",
+      "ANSIBLE_CONFIG=${local.ansible_dir}/ansible.cfg",
+      "ANSIBLE_BECOME_PASS=${var.build_password}",
     ]
     extra_arguments = [
       "--diff",
-      "--vault-password-file", "${local.ansible_dir}/scripts/ansible-vault-password.py",
-      /* "--limit", "workstations", */
-      /* "--tags", "nvim" */
     ]
   }
 

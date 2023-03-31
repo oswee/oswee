@@ -6,6 +6,7 @@ locals {
   kickstart_content = {
     "/ks.cfg" = templatefile("${abspath(path.root)}/data/kickstart.pkrtpl.hcl", {
       build_username           = var.build_username
+      build_ssh_key            = var.build_ssh_key
       build_password_encrypted = var.build_password_encrypted
       vm_guest_os_language     = var.vm_guest_os_language
       vm_guest_os_keyboard     = var.vm_guest_os_keyboard

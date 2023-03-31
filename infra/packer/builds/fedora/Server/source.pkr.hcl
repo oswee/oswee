@@ -40,16 +40,16 @@ source "qemu" "fedora_base_image" {
     "text inst.ks=http://{{ .HTTPIP }}:{{ .HTTPPort }}/ks.cfg",
     "<leftCtrlOn>x<leftCtrlOff>"
   ]
-  ssh_username = var.ssh_username
-  /* ssh_password = var.ssh_password */
-	ssh_private_key_file = "~/.ssh/id_ecdsa_packer"
-  ssh_timeout  = var.ssh_timeout
+  ssh_username         = var.ssh_username
+  ssh_private_key_file = "~/.ssh/id_ecdsa_packer"
+  ssh_timeout          = var.ssh_timeout
   // ssh_wait_timeout       = var.ssh_wait_timeout
   // ssh_handshake_attempts = "500"   # required for ubuntu 20.04
   // ssh_pty                = "false" # required for ansible to work
   shutdown_command = "echo '${var.build_password}' | sudo -S -E shutdown -P now"
   shutdown_timeout = var.common_shutdown_timeout
-  output_directory = "${var.output_directory}/${local.dist_name}-${var.target}"
+  /* output_directory = "${var.output_directory}/${local.dist_name}-${var.target}" */
+  output_directory = "/tmp/${local.dist_name}-${var.target}"
 }
 
 # Qcow2 Image

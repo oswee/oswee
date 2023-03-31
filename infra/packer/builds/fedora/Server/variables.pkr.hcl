@@ -257,6 +257,12 @@ variable "build_password" {
   sensitive   = true
 }
 
+variable "build_ssh_key" {
+  type        = string
+  description = "The public SSH key to login to the guest operating system."
+  sensitive   = true
+}
+
 variable "build_password_encrypted" {
   type        = string
   description = "The encrypted password to login to the guest operating system."
@@ -295,12 +301,6 @@ variable "volume_id" {
   default     = ""
   description = "The volume id of the iso file"
 }
-
-/* variable "build_key" { */
-/*   type        = string */
-/*   description = "The public key to login to the guest operating system." */
-/*   sensitive   = true */
-/* } */
 
 /* variable "ansible_user" { */
 /*   type        = string */

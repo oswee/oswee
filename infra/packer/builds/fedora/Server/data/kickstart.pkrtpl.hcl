@@ -2,37 +2,25 @@ url --mirrorlist="https://mirrors.fedoraproject.org/mirrorlist?repo=fedora-$rele
 repo --name="fedora" --mirrorlist=https://mirrors.fedoraproject.org/mirrorlist?repo=fedora-$releasever&arch=$basearch
 repo --name="updates" --mirrorlist=https://mirrors.fedoraproject.org/mirrorlist?repo=updates-released-f$releasever&arch=$basearch
 
-### Performs the kickstart installation in text mode.
-### By default, kickstart installations are performed in graphical mode.
 text
-
-# Do not configure the X Window System
 skipx
+reboot --eject
 
-### Sets the language to use during installation and the default language to use on the installed system.
-lang ${vm_guest_os_language}
-
-### Sets the default keyboard type for the system.
 keyboard ${vm_guest_os_keyboard}
+lang ${vm_guest_os_language}
+timezone ${vm_guest_os_timezone} --utc
+timesource --ntp-server lv.pool.ntp.org
 
-network --onboot yes --hostname workstation.oswee.local
+network --onboot yes --noipv6 --activate
+network --hostname fedora37
 
-### Lock the root account.
-# rootpw --lock
+# users
+group --name=admin
+group --name=wheel
+rootpw --lock
+user --name=${build_username} --iscrypted --password=${build_password_encrypted} --shell=/bin/bash --groups=admin,wheel
+sshkey --username ${build_username} "${build_ssh_key}"
 
-### The selected profile will restrict root login.
-### Add a user that can login and escalate privileges.
-user --name=${build_username} --iscrypted --password=${build_password_encrypted} --groups=wheel
-sshkey --username vagrant "ecdsa-sha2-nistp521 AAAAE2VjZHNhLXNoYTItbmlzdHA1MjEAAAAIbmlzdHA1MjEAAACFBAGwrvCrJyfP38lM6YpF49d95ReVT5MYhG9CjkxPidKgpYUI/Lmr8kZ132aEGuugnFOzzol/aPmAIjuXtmzsg8zrSAFuTM3rZY88ZebiNeg+Ywwwsz4/BP8aYXRtiZ/FGcjpVsp+cihiX7rVx5PNFxHcrPdI+aqfcPS5MYxm7ZrRzyaT6w== dzintars@workstation"
-
-#firewall --enabled --service=sshd
-#services --enabled=sshd --disabled=libvrtd,docker,docker-engine
-#selinux --enforcing
-
-timezone ${vm_guest_os_timezone}
-
-### https://github.com/sej7278/virt-installs/blob/master/rhel9_cis.cfg#L50
-### https://github.com/claudiusask/foreman-katello/blob/edef3fc1f9ce083e67d521a90be6180883ff987f/Packer/scripts/kickstart.cfg
 zerombr
 bootloader --location=mbr --append="audit=1 selinux=1 enforcing=1 page_poison=1 vsyscall=none slub_debug=P pti=on"
 clearpart --all --initlabel
@@ -52,6 +40,81 @@ logvol /var/log        --fstype xfs   --vgname=vgroot  --name=log     --size=102
 logvol /var/log/audit  --fstype xfs   --vgname=vgroot  --name=audit   --size=1024  --fsoptions="nodev,nosuid,noexec"
 logvol /home           --fstype xfs   --vgname=vgroot  --name=home    --size=1024  --fsoptions="quota,usrquota,grpquota,nodev,nosuid,noexec"
 
+%packages --inst-langs=en
+@core
+aide
+audit
+audit-libs
+bzip2
+chrony
+curl
+firewalld
+libselinux
+net-tools
+nftables
+opensc
+openssl-pkcs11
+policycoreutils-python-utils
+rsyslog
+rsyslog-gnutls
+sudo
+tar
+unzip
+-kernel-modules-extra
+-tigervnc-server*
+-gdm
+-httpd
+-nginx
+-tuned
+-iprutils
+-sssd*
+-gtk3
+-libreswan
+-setroubleshoot
+-mcstrans
+-prelink
+-xorg-x11-server-common
+-avahi-daemon
+-avahi
+-net-snmp
+-cups
+-dhcp
+-dhcp-server
+-openldap-clients
+-bind
+-dnsmasq
+-ftp
+-vsftpd
+-dovecot
+-cyrus-imapd
+-samba
+-squid
+-telnet*
+-autofs
+-wpa_supplicant
+-b43-openfwwf
+-iwl*
+-tcpdump
+-wireshark*
+-nmap*
+-iscsi-initiator-utils*
+-fxload
+-lsscsi
+-ivtv*
+-kernel-headers
+-rsync
+-nfs-utils
+-rpcbind
+%end
+
+services --enabled=sshd
+services --disabled=libvrtd,docker,docker-engine
+firewall --enabled --service=sshd
+selinux --enforcing
+%addon com_redhat_kdump --disable --reserve-mb='auto'
+%end
+
+
 #%post
 # Remove root password
 #passwd -d root > /dev/null
@@ -59,23 +122,3 @@ logvol /home           --fstype xfs   --vgname=vgroot  --name=home    --size=102
 # Remove random-seed
 #rm /var/lib/systemd/random-seed
 #%end
-
-### Packages selection.
-%packages --inst-langs=en
-#@^cloud-server-environment
-dnf-yum
-#fuse-sshfs
-kernel-core
-#rsync
--kernel
--zram-generator-defaults
-#-plymouth
-#-dracut-config-rescue
-#-firewalld
-#-geolite2-city
-#-geolite2-country
-%end
-
-### Reboot after the installation is complete.
-### --eject attempt to eject the media before rebooting.
-reboot --eject
