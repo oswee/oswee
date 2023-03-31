@@ -1,0 +1,104 @@
+// -*- mode: json -*-
+
+{
+  "layer": "top",
+  "position": "top",
+  "height": 25,
+
+  "modules-left": [
+    "custom/arch",
+    "sway/workspaces",
+    "sway/mode"
+  ],
+
+  "modules-center": [
+    "tray"
+  ],
+
+  "modules-right": [
+    "cpu",
+    "memory",
+    "disk",
+    "pulseaudio",
+    "custom/keyboard_layout",
+    "clock",
+  ],
+
+  "sway/window": {
+    "max-length": 50
+  },
+
+  "clock": {
+    "format": "{:%H:%M:%S}",
+    "format-alt": "{:%A, %d. %B  %H:%M:%S}",
+    "tooltip": false,
+    "interval": 1,
+  },
+
+  "clock#1": {
+    "format": "{:%a}",
+    "tooltip": false
+  },
+
+  "clock#2": {
+    "format": "{:%H:%M:%S}",
+    "tooltip": false,
+    "interval": 1
+  },
+
+  "clock#3": {
+    "format": "{:%m-%d}",
+    "tooltip": false
+  },
+
+  "tray": {
+    "icon-size": 15,
+    "spacing": 10
+  },
+
+  "custom/keyboard_layout": {
+    "format": "  {}",
+    "exec": "swaymsg -t get_inputs | grep -m1 'xkb_active_layout_name' | cut -d '\"' -f4",
+    "interval": 5,
+    "signal": 1,
+    "tooltip": false,
+    "on-click": "keyboard_layout_switcher"
+  },
+
+  "pulseaudio": {
+    "format": "{icon} {volume:2}% {format_source}",
+    "format-muted": " {format_source}",
+    "format-bluetooth": "{icon}  {volume}% {format_source}",
+    "format-bluetooth-muted": " {icon}  {format_source}",
+    "format-source": " {volume}%",
+    "format-source-muted": "",
+    "format-icons": {
+      "headphones": "",
+      "headset": "",
+      "default": ["", "", ""]
+    },
+    "scroll-step": 5,
+    "on-click-right": "pavucontrol"
+  },
+
+  "custom/arch": {
+    "format": ""
+  },
+
+  "memory": {
+    "interval": 5,
+    "format": " {used:0.1f}/{total:0.1f}G"
+  },
+
+  "cpu": {
+    "interval": 5,
+    "format": " {usage:2}%",
+    "on-click": "alacritty -e htop"
+  },
+
+  "disk": {
+    "interval": 5,
+    "format": "Disk {percentage_used:2}%",
+    "path": "/"
+  },
+}

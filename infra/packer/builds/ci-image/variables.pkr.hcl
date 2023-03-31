@@ -15,6 +15,12 @@ variable "vg_name" {
   description = "LVM volume group name to use for the installation."
 }
 
+variable "vm_name" {
+  type        = string
+  default     = "image"
+  description = "Image name"
+}
+
 variable "vm_guest_os_language" {
   type        = string
   description = "The guest operating system language."
@@ -58,11 +64,17 @@ variable "vm_disk_size" {
   description = "The size for the virtual disk in MB. (e.g. '40960')"
 }
 
-/* variable "qemu_machine_type" { */
-/*   type        = string */
-/*   description = "The type of machine emulation to use." */
-/*   default     = "q35" */
-/* } */
+variable "qemu_binary" {
+  type        = string
+  description = "Qemu binary."
+  default     = "qemu-system-x86_64"
+}
+
+variable "qemu_machine_type" {
+  type        = string
+  description = "The type of machine emulation to use."
+  default     = "q35"
+}
 
 variable "qemu_format" {
   type        = string
@@ -86,6 +98,12 @@ variable "qemu_disk_interface" {
   type        = string
   description = "The interface to use for the disk."
   default     = "virtio"
+}
+
+variable "qemu_registry_path" {
+  type        = string
+  description = "Location where the artifacts will be stored"
+  default     = "/tmp"
 }
 
 /* variable "qemu_disk_cache" { */
@@ -150,6 +168,11 @@ variable "http_directory" {
 variable "common_data_source" {
   type        = string
   description = "The provisioning data source ('http' or 'disk')."
+}
+
+variable "common_base_image_name" {
+  type        = string
+  description = "Base image name."
 }
 
 /* variable "common_http_ip" { */

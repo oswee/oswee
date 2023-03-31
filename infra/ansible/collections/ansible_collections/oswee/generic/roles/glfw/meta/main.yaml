@@ -1,12 +1,12 @@
 ---
-# meta/main.yaml file for oswee.generic.waybar role
+# meta/main.yaml file for oswee.generic.glfw role
 
 galaxy_info:
   namespace: oswee
-  role_name: waybar
+  role_name: glfw
   version: 0.0.1
   author: Dzintars Klavins
-  description: Ansible role to maintain Waybar
+  description: Ansible role to maintain Glfw
   company: Oswee
 
   license: Apache-2.0
@@ -19,7 +19,7 @@ galaxy_info:
         - 37
 
   galaxy_tags:
-    - waybar
+    - glfw
     - oswee
     - dzintars
     - fedora

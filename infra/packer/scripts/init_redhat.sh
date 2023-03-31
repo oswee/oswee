@@ -13,10 +13,13 @@ export BUILD_KEY
 ### Update the default local user. ###
 echo '> Updating the default local user ...'
 echo '> Adding authorized_keys for the default local user ...'
+
 sudo mkdir -p /home/$BUILD_USERNAME/.ssh
+
 sudo cat << EOF > /home/$BUILD_USERNAME/.ssh/authorized_keys
 $BUILD_KEY
 EOF
+
 sudo chown -R $BUILD_USERNAME /home/$BUILD_USERNAME/.ssh
 sudo chmod 700 /home/$BUILD_USERNAME/.ssh
 sudo chmod 644 /home/$BUILD_USERNAME/.ssh/authorized_keys

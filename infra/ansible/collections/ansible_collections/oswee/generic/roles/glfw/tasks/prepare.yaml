@@ -1,0 +1,31 @@
+---
+# tasks/prepare.yaml file for oswee.generic.glfw role
+
+- name: prepare | Install system packages
+  become: true
+  ansible.builtin.dnf:
+    name: '{{ item }}'
+    state: present
+  loop: '{{ glfw_packages.redhat }}'
+
+- name: prepare | Install Wayland dependencies
+  become: true
+  ansible.builtin.dnf:
+    name: '{{ item }}'
+    state: present
+  loop: '{{ glfw_deps_wayland.redhat }}'
+
+- name: prepare | Install X11 dependencies
+  become: true
+  ansible.builtin.dnf:
+    name: '{{ item }}'
+    state: present
+  loop: '{{ glfw_deps_x11.redhat }}'
+
+- name: prepare | Clone source code repository
+  ansible.builtin.git:
+    repo: '{{ glfw_repo }}'
+    dest: '{{ glfw_source_path }}'
+    version: '{{ glfw_commit_hash | default("main") }}'
+...
+

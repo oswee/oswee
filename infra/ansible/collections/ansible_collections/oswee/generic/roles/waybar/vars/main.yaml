@@ -1,4 +1,32 @@
 ---
 # vars/main.yaml file for oswee.generic.waybar role
 
+# dnf provides 'pkgconfig(*libnl*)'
+waybar_deps:
+  redhat:
+    - cmake
+    - meson
+    - scdoc
+    - gcc-c++
+    - wayland-protocols-devel
+
+    - pkgconfig(gtkmm-3.0)
+    - jsoncpp
+    - libsigc++
+    - fmt
+    - wayland-devel
+    # - chrono-date
+    - spdlog
+    # - libgtk-3-dev
+    - gobject-introspection
+    # - libgirepository1.0-dev
+    - pulseaudio-libs-devel
+    - libnl3-devel
+    - libappindicator-gtk3
+    - libdbusmenu-gtk3
+    - libmpdclient
+    # - libsndio
+    - libevdev
+    - pkgconfig(xkbregistry)
+    - upower
 ...

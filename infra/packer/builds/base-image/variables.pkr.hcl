@@ -15,6 +15,12 @@ variable "vg_name" {
   description = "LVM volume group name to use for the installation."
 }
 
+variable "vm_name" {
+  type        = string
+  default     = "image"
+  description = "Image name"
+}
+
 variable "vm_guest_os_language" {
   type        = string
   description = "The guest operating system language."
@@ -58,11 +64,17 @@ variable "vm_disk_size" {
   description = "The size for the virtual disk in MB. (e.g. '40960')"
 }
 
-/* variable "qemu_machine_type" { */
-/*   type        = string */
-/*   description = "The type of machine emulation to use." */
-/*   default     = "q35" */
-/* } */
+variable "qemu_machine_type" {
+  type        = string
+  description = "The type of machine emulation to use."
+  default     = "q35"
+}
+
+variable "qemu_binary" {
+  type        = string
+  description = "Qemu binary."
+  default     = "qemu-system-x86_64"
+}
 
 variable "qemu_format" {
   type        = string
@@ -86,6 +98,18 @@ variable "qemu_disk_interface" {
   type        = string
   description = "The interface to use for the disk."
   default     = "virtio"
+}
+
+variable "qemu_registry_path" {
+  type        = string
+  description = "Location where the Qemu artifacts will be stored"
+  default     = "/tmp"
+}
+
+variable "vagrant_registry_path" {
+  type        = string
+  description = "Location where the Vagrant artifacts will be stored"
+  default     = "/tmp"
 }
 
 /* variable "qemu_disk_cache" { */
@@ -152,6 +176,11 @@ variable "common_data_source" {
   description = "The provisioning data source ('http' or 'disk')."
 }
 
+variable "common_base_image_name" {
+  type        = string
+  description = "Base image name."
+}
+
 /* variable "common_http_ip" { */
 /*   type        = string */
 /*   description = "Define an IP address on the host to use for the HTTP server." */
@@ -188,10 +217,10 @@ variable "vm_firmware" {
   default     = "bios"
   description = "The boot method is either 'bios' (default) or 'efi'."
 
-  validation {
-    condition     = contains(["bios", "uefi"], var.vm_firmware)
-    error_message = "The vm_firmware value must be one of the following: 'bios', 'uefi'."
-  }
+  /* validation { */
+  /*   condition     = contains(["bios", "uefi"], var.vm_firmware) */
+  /*   error_message = "The vm_firmware value must be one of the following: 'bios', 'uefi'." */
+  /* } */
 }
 
 variable "vm_firmware_path" {
@@ -205,6 +234,19 @@ variable "vm_firmware_path" {
     /* uefi       = "/usr/share/qemu/OVMF.fd" */
     uefi = "/usr/share/edk2/ovmf/OVMF_CODE.fd"
   }
+}
+
+variable "boot_command" {
+  type        = list(string)
+  description = "A list of commands to be executed during UEFI ISO boot."
+  default = [
+    "<up><wait>",
+    "e<wait>",
+    "<down><down><end><wait> ",
+    "vmlinuz initrd=initrd.img ",
+    "quiet inst.ks=http://{{ .HTTPIP }}:{{ .HTTPPort }}/ks.cfg",
+    "<leftCtrlOn>x<leftCtrlOff>"
+  ]
 }
 
 variable "bios_boot_command" {
@@ -230,7 +272,6 @@ variable "uefi_boot_command" {
     "quiet inst.ks=http://{{ .HTTPIP }}:{{ .HTTPPort }}/ks.cfg",
     "<leftCtrlOn>x<leftCtrlOff>"
   ]
-
 }
 
 variable "qemuargs" {
@@ -239,11 +280,11 @@ variable "qemuargs" {
   default     = [["-vga", "qxl"]]
 }
 
-variable "qemuargs2" {
-  type        = list(list(string))
-  description = "Default qemuargs for the build"
-  default     = [["-vga", "qxl"]]
-}
+/* variable "qemuargs2" { */
+/*   type        = list(list(string)) */
+/*   description = "Default qemuargs for the build" */
+/*   default     = [["-vga", "qxl"]] */
+/* } */
 
 variable "build_username" {
   type        = string
@@ -306,13 +347,13 @@ variable "volume_id" {
 /*   type        = string */
 /*   description = "The username used for the Ansible provisioner." */
 /* } */
-/**/
-/* variable "scripts" { */
-/*   type        = list(string) */
-/*   description = "A list of scripts and their relative paths to transfer and execute." */
-/*   default     = [] */
-/* } */
-/**/
+
+variable "scripts" {
+  type        = list(string)
+  description = "A list of scripts and their relative paths to transfer and execute."
+  default     = []
+}
+
 /* variable "inline" { */
 /*   type        = list(string) */
 /*   description = "A list of commands to execute." */

@@ -1,33 +1,33 @@
 ---
-# tasks/main.yaml file for oswee.generic.waybar role
+# tasks/main.yaml file for oswee.generic.glfw role
 
 - name: Setup
   tags:
-    - waybar.setup
+    - glfw.setup
   block:
     - name: Prepare
       ansible.builtin.import_tasks: prepare.yaml
       tags:
-        - waybar.prepare
+        - glfw.prepare
 
     - name: Build
       ansible.builtin.import_tasks: build.yaml
       tags:
-        - waybar.build
+        - glfw.build
 
     - name: Install
       ansible.builtin.import_tasks: install.yaml
       tags:
-        - waybar.install
+        - glfw.install
 
     - name: Config
       ansible.builtin.import_tasks: config.yaml
       tags:
-        - waybar.config
+        - glfw.config
 
 - name: Teardown
   ansible.builtin.import_tasks: teardown.yaml
   tags:
     - never
-    - waybar.teardown
+    - glfw.teardown
 ...

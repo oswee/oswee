@@ -1,0 +1,20 @@
+---
+- name: Entertainment
+  hosts: workstations
+  connection: local
+  become: false
+  gather_facts: true
+
+  tasks:
+    - name: Glfw
+      ansible.builtin.import_role:
+        name: oswee.generic.glfw
+      tags:
+        - glfw
+
+    - name: Minecraft
+      ansible.builtin.import_role:
+        name: oswee.custom.minecraft
+      tags:
+        - minecraft
+...
