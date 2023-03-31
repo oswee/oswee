@@ -4,3 +4,4 @@ common_http_port_min    = 8000
 common_http_port_max    = 8099
 common_ip_wait_timeout  = "20m"
 common_shutdown_timeout = "15m"
+common_base_image_name  = "base-image"
