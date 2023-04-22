@@ -11,12 +11,6 @@
       tags:
         - firewalld
 
-    - name: Vifm
-      ansible.builtin.import_role:
-        name: oswee.generic.vifm
-      tags:
-        - vifm
-
 # Base tools
   # Firewall
   # SSH

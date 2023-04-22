@@ -6,20 +6,6 @@
   gather_facts: true
 
   tasks:
-    - name: Nushell
-      tags:
-        - nushell
-      block:
-        # - name: Install Nushell
-        #   ansible.builtin.import_role:
-        #     name: yethal.nushell
-        #     vars:
-        #       set_shell: false
-        #       install_configs: false
-        - name: Configure Nushell
-          ansible.builtin.import_role:
-            name: oswee.custom.nushell
-
     - name: Neovim
       ansible.builtin.import_role:
         name: oswee.custom.nvim
