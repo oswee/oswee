@@ -1,9 +1,10 @@
 ---
-# tasks file for zsh
+# tasks/teardown.yaml file for oswee.generic.zsh role
 
-- name: Remove packages
+- name: teardown | Remove packages
   become: true
   ansible.builtin.dnf:
     name: '{{ item }}'
     state: absent
   loop: '{{ packages.redhat }}'
+...

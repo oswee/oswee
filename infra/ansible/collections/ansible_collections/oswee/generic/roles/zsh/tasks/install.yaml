@@ -1,27 +1,28 @@
 ---
-# tasks file for zsh
+# tasks/install.yaml file for oswee.generic.zsh role
 
-- name: Install packages
+- name: install | Install packages
   become: true
   ansible.builtin.dnf:
     name: '{{ item }}'
     state: present
   loop: '{{ packages.redhat }}'
 
-- name: Clone oh-my-zsh
+- name: install | Clone oh-my-zsh
   ansible.builtin.git:
     repo: https://github.com/robbyrussell/oh-my-zsh.git
-    dest: $HOME/.oh-my-zsh
+    dest: '{{ ansible_env.HOME }}/.oh-my-zsh'
     version: master
 
-- name: Clone powerlevel10k theme
-  ansible.builtin.git:
-    repo: https://github.com/romkatv/powerlevel10k.git
-    dest: $HOME/.oh-my-zsh/custom/themes/powerlevel10k
-    version: master
-
-- name: Clone zsh-autosuggestions plugin
+# - name: install | Clone PowerLevel10k theme
+#   ansible.builtin.git:
+#     repo: https://github.com/romkatv/powerlevel10k.git
+#     dest: '{{ ansible_env.HOME }}/.oh-my-zsh/custom/themes/powerlevel10k'
+#     version: master
+#
+- name: install | Clone zsh-autosuggestions plugin
   ansible.builtin.git:
     repo: https://github.com/zsh-users/zsh-autosuggestions.git
-    dest: $HOME/.oh-my-zsh/custom/plugins/zsh-autosuggestions
+    dest: '{{ ansible_env.HOME }}/.oh-my-zsh/custom/plugins/zsh-autosuggestions'
     version: master
+...

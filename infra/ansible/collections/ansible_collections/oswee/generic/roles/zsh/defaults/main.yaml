@@ -1,2 +1,6 @@
 ---
-# defaults file for zsh
+# defaults/main.yaml file for oswee.generic.zsh role
+
+zsh_user: '{{ ansible_env.USER }}'
+zsh_group: '{{ ansible_env.USER }}'
+...
