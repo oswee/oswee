@@ -1,0 +1,5 @@
+---
+# defaults/main.yaml file for oswee.generic.starship role
+
+starship_environment_path: /etc/profile.d
+...
