@@ -1,5 +1,5 @@
 ---
-# vars file for Zoxide
+# vars/main.yaml file for oswee.generic.zoxide role
 
 packages:
   redhat:

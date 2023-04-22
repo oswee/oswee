@@ -1,26 +1,24 @@
 ---
-# tasks file for Zoxide
+# tasks/main.yaml file for oswee.generic.zoxide role
 
 - name: Setup
+  tags:
+    - zoxide.setup
   block:
     - name: Install
-      import_tasks: install.yaml
+      ansible.builtin.import_tasks: install.yaml
       tags:
-        - install
         - zoxide.install
 
-    - name: Config
-      import_tasks: config.yaml
+    - name: Environment
+      ansible.builtin.import_tasks: environment.yaml
       tags:
-        - config
-        - zoxide.config
-  tags:
-    - zoxide
+        - zoxide.environment
+
 
 - name: Teardown
-  import_tasks: teardown.yaml
+  ansible.builtin.import_tasks: teardown.yaml
   tags:
-    - teardown
-    - zoxide.teardown
     - never
+    - zoxide.teardown
 ...
