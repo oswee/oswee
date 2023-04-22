@@ -20,9 +20,9 @@
     #   tags:
     #     - pixman.install
 
-- name: Teardown
-  ansible.builtin.import_tasks: teardown.yaml
-  tags:
-    - never
-    - pixman.teardown
+# - name: Teardown
+#   ansible.builtin.import_tasks: teardown.yaml
+#   tags:
+#     - never
+#     - pixman.teardown
 ...
