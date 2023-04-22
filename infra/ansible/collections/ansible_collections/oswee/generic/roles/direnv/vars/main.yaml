@@ -1,0 +1,7 @@
+---
+# vars/main.yaml file for oswee.generic.direnv role
+
+packages:
+  redhat:
+    - direnv
+...
