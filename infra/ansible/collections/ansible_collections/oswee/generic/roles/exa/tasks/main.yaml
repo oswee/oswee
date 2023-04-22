@@ -1,10 +1,23 @@
 ---
-# tasks file for Exa
+# tasks/main.yaml file for oswee.generic.exa role
 
-- name: install | Install system packages
-  become: true
-  ansible.builtin.dnf:
-    name: '{{ item }}'
-    state: present
-  loop: '{{ packages.redhat }}'
+- name: Setup
+  tags:
+    - exa.setup
+  block:
+    - name: Install
+      ansible.builtin.import_tasks: install.yaml
+      tags:
+        - exa.install
+
+    - name: Environment
+      ansible.builtin.import_tasks: environment.yaml
+      tags:
+        - exa.environment
+
+# - name: Teardown
+#   ansible.builtin.import_tasks: teardown.yaml
+#   tags:
+#     - never
+#     - exa.teardown
 ...

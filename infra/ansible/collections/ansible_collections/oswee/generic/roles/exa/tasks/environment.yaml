@@ -1,0 +1,13 @@
+---
+# tasks/environment.yaml file for oswee.generic.starship role
+
+- name: environment | Add environment
+  become: true
+  ansible.builtin.copy:
+    dest: '{{ exa_environment_path }}/exa.sh'
+    mode: '0644'
+    content: |
+      alias ls="exa"
+      alias ll="exa -alh"
+      alias tree="exa --tree"
+...

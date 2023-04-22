@@ -1,3 +1,5 @@
 ---
-# defaults file for exa
+# defaults/main.yaml file for oswee.generic.exa role
+
+exa_environment_path: /etc/profile.d
 ...
