@@ -1,8 +1,13 @@
 # source "/usr/share/tmux/powerline.conf"
 
+# remap prefix from 'C-b' to 'C-t'
 unbind C-b
 set-option -g prefix C-t
 bind-key C-t send-prefix
+bind-key C-l last-window
+
+# Source config file (r/s will conflict with resurrect plugin)
+# bind r source-file ~/.tmux.conf
 
 # Start windows index at 1 instead of 0
 set -g base-index 1
@@ -14,20 +19,18 @@ setw -g pane-base-index 1
 setw -g monitor-activity on
 set -g visual-activity off
 
-# Source config file (r/s will conflict with ressurect plugin)
-# bind r source-file ~/.tmux.conf
-
-# split panes using | and -
 unbind '"'
 unbind %
 bind = split-window -h
 bind - split-window -v
 
+bind-key -n C-M-Space display-popup -E "nvim ~/code/github.com/dzintars/obsidian/ -c ZkNew --dir=daily"
+
 # switch panes using Alt-arrow without prefix
-bind -n M-Left select-pane -L
-bind -n M-Right select-pane -R
-bind -n M-Up select-pane -U
-bind -n M-Down select-pane -D
+# bind -n M-Left select-pane -L
+# bind -n M-Right select-pane -R
+# bind -n M-Up select-pane -U
+# bind -n M-Down select-pane -D
 
 # Switch panes using Alt-hjkl without prefix
 # bind -n M-h select-pane -L
@@ -35,37 +38,52 @@ bind -n M-Down select-pane -D
 # bind -n M-k select-pane -U
 # bind -n M-l select-pane -R
 
+# Change active pane
+# bind-key h select-pane -L
+# bind-key j select-pane -D
+# bind-key k select-pane -U
+# bind-key l select-pane -R
+
+# Resize pane
+# bind-key -r H resize-pane -L 5
+# bind-key -r J resize-pane -D 5
+# bind-key -r K resize-pane -U 5
+# bind-key -r L resize-pane -R 5
+
 # Shift arrow to switch windows
-bind -n S-Left  previous-window
-bind -n S-Right next-window
-# loop between last 2 windows
-bind -n l last-window
+# bind -n S-Left  previous-window
+# bind -n S-Right next-window
+# `-r` a
+# bind-key -r C-h select-window -t :-
+# bind-key -r C-l select-window -t :+
 
 # Enable mouse mode
 set -g mouse on
 
 set-option -g focus-events on
+set-option -g visual-bell on
 
 # NeoVim ERROR: escape-time (500) is higher than 300ms
 # set-option -sg escape-time 10
 
 # True color for the Vim
 set-option  -g default-terminal "tmux-256color"
-set-option -gas terminal-overrides ',alacritty:RGB'
-set -g @tmux_power_theme '#ebdbb2'
+set-option -gas terminal-overrides ',kitty:RGB'
+# Added next 2 lines because of folke/lsp-colors readme
+# set -as terminal-overrides ',*:Smulx=\E[4::%p1%dm'  # undercurl support
+# set -as terminal-overrides ',*:Setulc=\E[58::2::%p1%{65536}%/%d::%p1%{256}%/%{255}%&%d::%p1%{255}%&%d%;m'  # underscore colours - needs tmux-3.0
+
+set -g @tmux_power_theme 'default'
+# set -g @tmux_power_theme 'snow'
+# set -g @tmux_power_theme '#ebdbb2'
 
 # List of plugins
 set -g @plugin 'tmux-plugins/tpm'
 set -g @plugin 'wfxr/tmux-power'
-set -g @plugin 'tmux-plugins/tmux-sensible'
 set -g @plugin 'tmux-plugins/tmux-yank'
+set -g @plugin 'tmux-plugins/tmux-sensible'
 set -g @plugin 'tmux-plugins/tmux-resurrect'
 set -g @plugin 'tmux-plugins/tmux-continuum'
-
-# Other examples:
-# set -g @plugin 'github_username/plugin_name'
-# set -g @plugin 'git@github.com:user/plugin'
-# set -g @plugin 'git@bitbucket.com:user/plugin'
 
 # Initialize TMUX plugin manager (keep this line at the very bottom of tmux.conf)
 run -b '~/.tmux/plugins/tpm/tpm'

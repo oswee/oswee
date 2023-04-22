@@ -1,5 +1,5 @@
 ---
-# vars file for Tmux
+# vars/main.yaml file for oswee.generic.tmux role
 
 packages:
   redhat:
