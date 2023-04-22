@@ -17,13 +17,22 @@
 - name: Desktop
   ansible.builtin.import_playbook: playbooks/desktop.yaml
 
+- name: Shell
+  tags:
+    - shell
+  ansible.builtin.import_playbook: playbooks/shell.yaml
+
 - name: Personal Productivity Environment
+  tags:
+    - ppe
   ansible.builtin.import_playbook: playbooks/ppe.yaml
 
 - name: Entertainment
   ansible.builtin.import_playbook: playbooks/entertainment.yaml
 
 - name: Personal Development Environment
+  tags:
+    - pde
   ansible.builtin.import_playbook: playbooks/pde.yaml
 
 - name: Web

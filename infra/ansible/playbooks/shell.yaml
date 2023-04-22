@@ -1,0 +1,80 @@
+---
+- name: Shell
+  hosts: workstations
+  become: false
+  gather_facts: true
+
+
+  tasks:
+    - name: Kitty
+      ansible.builtin.import_role:
+        name: oswee.generic.kitty
+      tags:
+        - kitty
+
+    - name: Alacritty
+      ansible.builtin.import_role:
+        name: oswee.generic.alacritty
+      tags:
+        - alacritty
+
+    # - name: Nushell
+    #   tags:
+    #     - nushell
+    #   block:
+    #     # - name: Install Nushell
+    #     #   ansible.builtin.import_role:
+    #     #     name: yethal.nushell
+    #     #     vars:
+    #     #       set_shell: false
+    #     #       install_configs: false
+    #     - name: Configure Nushell
+    #       ansible.builtin.import_role:
+    #         name: oswee.custom.nushell
+
+    - name: Zsh
+      ansible.builtin.import_role:
+        name: oswee.generic.zsh
+      tags:
+        - zsh
+
+    # Modern shell prompt
+    - name: Starship
+      ansible.builtin.import_role:
+        name: oswee.generic.starship
+      tags:
+        - starship
+
+    - name: Tmux
+      ansible.builtin.import_role:
+        name: oswee.generic.tmux
+      tags:
+        - tmux
+
+    - name: Vifm
+      ansible.builtin.import_role:
+        name: oswee.generic.vifm
+      tags:
+        - vifm
+
+    # Automatically load/unload environment variables when CD into directory.
+    - name: Direnv
+      ansible.builtin.import_role:
+        name: oswee.generic.direnv
+      tags:
+        - direnv
+
+    # Smarter CD alternative
+    - name: Zoxide
+      ansible.builtin.import_role:
+        name: oswee.generic.zoxide
+      tags:
+        - zoxide
+
+    # Smarter LS alterntive
+    - name: Exa
+      ansible.builtin.import_role:
+        name: oswee.generic.exa
+      tags:
+        - exa
+...
