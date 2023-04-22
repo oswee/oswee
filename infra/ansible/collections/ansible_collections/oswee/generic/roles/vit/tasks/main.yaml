@@ -1,26 +1,22 @@
 ---
-# tasks file for Vit
+# tasks/main.yaml file for oswee.generic.vit role
 
 - name: Setup
   tags:
-    - vit
     - vit.setup
   block:
     - name: Install
       ansible.builtin.import_tasks: install.yaml
       tags:
-        - install
         - vit.install
     - name: Config
       ansible.builtin.import_tasks: config.yaml
       tags:
-        - config
         - vit.config
 
 # - name: Teardown
 #   ansible.builtin.import_tasks: teardown.yaml
 #   tags:
 #     - never
-#     - teardown
 #     - vit.teardown
 ...
