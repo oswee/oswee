@@ -25,5 +25,6 @@ galaxy_info:
     - fedora
 
 dependencies:
+  - role: oswee.generic.sway
   - role: oswee.generic.swaylock
 ...
