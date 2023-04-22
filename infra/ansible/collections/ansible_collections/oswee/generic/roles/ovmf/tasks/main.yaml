@@ -15,14 +15,14 @@
       tags:
         - ovmf.build
 
-    - name: Config
-      ansible.builtin.import_tasks: config.yaml
-      tags:
-        - ovmf.config
+    # - name: Config
+    #   ansible.builtin.import_tasks: config.yaml
+    #   tags:
+    #     - ovmf.config
 
-- name: Teardown
-  ansible.builtin.import_tasks: teardown.yaml
-  tags:
-    - never
-    - ovmf.teardown
+# - name: Teardown
+#   ansible.builtin.import_tasks: teardown.yaml
+#   tags:
+#     - never
+#     - ovmf.teardown
 ...
