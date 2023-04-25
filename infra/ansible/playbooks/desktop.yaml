@@ -18,18 +18,6 @@
       tags:
         - fonts
 
-    - name: Sway
-      ansible.builtin.import_role:
-        name: oswee.custom.sway
-      tags:
-        - sway
-
-    - name: Swaylock
-      ansible.builtin.import_role:
-        name: oswee.generic.swaylock
-      tags:
-        - swaylock
-
     - name: Kitty
       ansible.builtin.import_role:
         name: oswee.generic.kitty
