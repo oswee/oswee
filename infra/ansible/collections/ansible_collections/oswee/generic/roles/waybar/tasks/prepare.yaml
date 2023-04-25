@@ -1,12 +1,23 @@
 ---
 # tasks/prepare.yaml file for oswee.generic.waybar role
 
+- name: prepare | Get package facts
+  ansible.builtin.package_facts:
+    manager: rpm
+
+- name: prepare | Remove default waybar package if exists
+  become: true
+  ansible.builtin.dnf:
+    name: waybar
+    state: absent
+  when: '"waybar" in ansible_facts.packages'
+
 - name: prepare | Install prerequisites
   become: true
   ansible.builtin.dnf:
     name: '{{ item }}'
     state: present
-  loop: '{{ waybar_deps.redhat }}'
+  loop: '{{ waybar_build_deps.redhat }}'
 
 - name: prepare | Clone source repository
   ansible.builtin.git:

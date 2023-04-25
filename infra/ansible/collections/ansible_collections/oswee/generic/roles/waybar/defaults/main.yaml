@@ -6,4 +6,5 @@ waybar_repo: https://github.com/Alexays/Waybar
 waybar_commit_hash: master
 waybar_source_path: '{{ ansible_env.HOME }}/code/github.com/Alexays/Waybar'
 waybar_config_path: '{{ ansible_env.HOME }}/.config/waybar'
+waybar_window_manager: ''
 ...

@@ -28,4 +28,7 @@ dependencies:
   - role: oswee.generic.git
     tags:
       - deps
+  - role: oswee.generic.sndio
+    tags:
+      - deps
 ...

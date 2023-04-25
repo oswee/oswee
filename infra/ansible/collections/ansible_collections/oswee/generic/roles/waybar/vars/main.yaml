@@ -6,27 +6,67 @@ waybar_deps:
   redhat:
     - cmake
     - meson
+    - fmt-devel
     - scdoc
     - gcc-c++
     - wayland-protocols-devel
 
     - pkgconfig(gtkmm-3.0)
-    - jsoncpp
+    - jsoncpp-devel
     - libsigc++
-    - fmt
     - wayland-devel
     # - chrono-date
-    - spdlog
+    - spdlog-devel
     # - libgtk-3-dev
     - gobject-introspection
     # - libgirepository1.0-dev
     - pulseaudio-libs-devel
     - libnl3-devel
     - libappindicator-gtk3
-    - libdbusmenu-gtk3
-    - libmpdclient
+    - libdbusmenu-gtk3-devel
+    - libmpdclient-devel
+    - libinput-devel
     # - libsndio
-    - libevdev
+    - libevdev-devel
     - pkgconfig(xkbregistry)
-    - upower
+    - upower-devel
+    - playerctl-devel
+    - systemd-devel  # libudev
+    - pkgconfig(jack)
+
+# https://github.com/Alexays/Waybar/blob/69b95e6d71f883c6aecf6d0ebbba90579f817191/Dockerfiles/fedora
+waybar_build_deps:
+  redhat:
+    - '@c-development'
+    - git-core
+    - glibc-langpack-en
+    - meson
+    - scdoc
+    - pkgconfig(catch2)
+    - pkgconfig(date)
+    - pkgconfig(dbusmenu-gtk3-0.4)
+    - pkgconfig(fmt)
+    - pkgconfig(gdk-pixbuf-2.0)
+    - pkgconfig(gio-unix-2.0)
+    - pkgconfig(gtk-layer-shell-0)
+    - pkgconfig(gtkmm-3.0)
+    - pkgconfig(jack)
+    - pkgconfig(jsoncpp)
+    - pkgconfig(libevdev)
+    - pkgconfig(libinput)
+    - pkgconfig(libmpdclient)
+    - pkgconfig(libnl-3.0)
+    - pkgconfig(libnl-genl-3.0)
+    - pkgconfig(libpulse)
+    - pkgconfig(libudev)
+    - pkgconfig(playerctl)
+    - pkgconfig(pugixml)
+    - pkgconfig(sigc++-2.0)
+    - pkgconfig(spdlog)
+    - pkgconfig(upower-glib)
+    - pkgconfig(wayland-client)
+    - pkgconfig(wayland-cursor)
+    - pkgconfig(wayland-protocols)
+    - pkgconfig(wireplumber-0.4)
+    - pkgconfig(xkbregistry)
 ...
