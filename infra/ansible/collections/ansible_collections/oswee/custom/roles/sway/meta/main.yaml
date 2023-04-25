@@ -26,5 +26,7 @@ galaxy_info:
 
 dependencies:
   - role: oswee.generic.sway
-  - role: oswee.generic.swaylock
+  - role: oswee.generic.waybar
+  - role: oswee.custom.wlogout
+  - role: oswee.custom.swaylock
 ...
