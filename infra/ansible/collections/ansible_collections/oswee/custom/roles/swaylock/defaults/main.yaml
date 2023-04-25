@@ -1,0 +1,5 @@
+---
+# defaults/main.yaml file for oswee.custom.swaylock role
+
+swaylock_environment_path: /etc/profile.d
+...

@@ -1,0 +1,23 @@
+---
+# tasks/main.yaml file for oswee.custom.swaylock role
+
+- name: Setup
+  tags:
+    - swaylock.setup
+  block:
+    - name: Config
+      ansible.builtin.import_tasks: config.yaml
+      tags:
+        - swaylock.config
+
+    - name: Environment
+      ansible.builtin.import_tasks: environment.yaml
+      tags:
+        - swaylock.environment
+
+# - name: Teardown
+#   ansible.builtin.import_tasks: teardown.yaml
+#   tags:
+#     - never
+#     - swaylock.teardown
+...

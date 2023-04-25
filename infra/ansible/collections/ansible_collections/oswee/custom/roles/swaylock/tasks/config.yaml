@@ -1,0 +1,9 @@
+---
+# tasks/config.yaml file for oswee.custom.swaylock role
+
+- name: config | Write wrapper script
+  ansible.builtin.template:
+    src: swaylock.j2
+    dest: '{{ ansible_env.HOME }}/.local/bin/swaylock'
+    mode: '0755'
+...
