@@ -33,6 +33,8 @@
   ansible.builtin.import_playbook: playbooks/ppe.yaml
 
 - name: Entertainment
+  tags:
+    - entertainment
   ansible.builtin.import_playbook: playbooks/entertainment.yaml
 
 - name: Personal Development Environment
