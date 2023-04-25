@@ -1,0 +1,14 @@
+---
+# tasks/config.yaml file for oswee.generic.sndio role
+
+- name: build | Configure
+  ansible.builtin.command: ./configure
+  args:
+    chdir: '{{ sndio_source_path }}'
+
+- name: build | Build from sourch
+  become: true
+  community.general.make:
+    chdir: '{{ sndio_source_path }}'
+    target: all
+...

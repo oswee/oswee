@@ -1,0 +1,72 @@
+---
+# tasks/install.yaml file for oswee.generic.sndio role
+
+- name: config | Ensure library directory exists
+  become: true
+  ansible.builtin.file:
+    path: /var/run/sndiod
+    state: directory
+    mode: 0755
+
+# - name: install | Add sndiod user
+#   become: true
+#   ansible.builtin.user:
+#     name: sndiod
+#     comment: Sndiod user
+#     system: true
+#     shell: /sbin/nologin
+#     home: /var/run/sndiod
+#     group: audio
+
+# TODO: This step installs shared objects directly into /usr/local/lib but does not load into ldconfig cache
+# - name: install | Install build version
+#   become: true
+#   community.general.make:
+#     chdir: '{{ sndio_source_path }}'
+#     target: install
+
+- name: build | Ensure library directory exists
+  become: true
+  ansible.builtin.file:
+    path: /usr/local/lib/sndio
+    state: directory
+    mode: 0755
+
+- name: build | Copy sndio shared library to ldpath
+  become: true
+  ansible.builtin.copy:
+    src: '{{ sndio_source_path }}/libsndio/libsndio.so'
+    dest: /usr/local/lib/sndio
+    mode: 0755
+    remote_src: true
+
+- name: install | Create shared library version symlinks
+  become: true
+  ansible.builtin.file:
+    src: '{{ item.src }}'
+    path: '{{ item.path }}'
+    state: link
+    force: true
+  loop:
+    - { src: /usr/local/lib/sndio/libsndio.so, path: /usr/local/lib/sndio/libsndio.so.7 }
+    - { src: /usr/local/lib/sndio/libsndio.so.7, path: /usr/local/lib/sndio/libsndio.so.7.0 }
+    - { src: /usr/local/lib/sndio/libsndio.so.7.0, path: /usr/local/lib/sndio/libsndio.so.7.2 }
+
+- name: install | Create ldconfig sndio config file
+  become: true
+  ansible.builtin.copy:
+    content: ''
+    dest: /etc/ld.so.conf.d/sndio.conf
+    mode: 0644
+    force: false
+
+- name: install | Add local libs to ldconfig
+  become: true
+  ansible.builtin.lineinfile:
+    dest: /etc/ld.so.conf.d/sndio.conf
+    line: /usr/local/lib/sndio
+
+- name: install | Run ldconfig
+  become: true
+  ansible.builtin.command: ldconfig
+...
