@@ -12,5 +12,4 @@ packages:
     - gdk-pixbuf2
     - pam
     - scdoc
-    - git
 ...
