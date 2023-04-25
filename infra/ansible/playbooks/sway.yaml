@@ -1,0 +1,14 @@
+---
+- name: Sway Window Manager
+  hosts: workstations
+  become: false
+  gather_facts: true
+
+
+  tasks:
+    - name: Sway
+      ansible.builtin.import_role:
+        name: oswee.custom.sway
+      tags:
+        - sway
+...
