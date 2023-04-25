@@ -1,0 +1,21 @@
+---
+# tasks/config.yaml file for oswee.custom.wlogout role
+
+- name: config | Create config directory
+  ansible.builtin.file:
+    path: '{{ wlogout_config_path }}'
+    state: directory
+    mode: '0755'
+
+- name: config | Copy layout config
+  ansible.builtin.copy:
+    src: wlogout/layout
+    dest: '{{ wlogout_config_path }}/'
+    mode: '0644'
+
+- name: config | Copy styles
+  ansible.builtin.copy:
+    src: wlogout/style.css
+    dest: '{{ wlogout_config_path }}/'
+    mode: '0644'
+...

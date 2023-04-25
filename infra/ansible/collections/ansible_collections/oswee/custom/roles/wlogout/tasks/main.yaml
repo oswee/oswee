@@ -1,0 +1,23 @@
+---
+# tasks/main.yaml file for oswee.custom.wlogout role
+
+- name: Setup
+  tags:
+    - wlogout.setup
+  block:
+    - name: Install
+      ansible.builtin.import_tasks: install.yaml
+      tags:
+        - wlogout.install
+
+    - name: Config
+      ansible.builtin.import_tasks: config.yaml
+      tags:
+        - wlogout.config
+
+# - name: Teardown
+#   ansible.builtin.import_tasks: teardown.yaml
+#   tags:
+#     - never
+#     - wlogout.teardown
+...

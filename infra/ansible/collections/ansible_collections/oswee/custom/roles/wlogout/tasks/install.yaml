@@ -1,0 +1,10 @@
+---
+# tasks/install.yaml file for oswee.custom.wlogout role
+
+- name: install | Install packages
+  become: true
+  ansible.builtin.dnf:
+    name: '{{ item }}'
+    state: present
+  loop: '{{ packages.redhat }}'
+...
