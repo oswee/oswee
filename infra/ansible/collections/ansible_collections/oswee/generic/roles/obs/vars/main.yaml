@@ -1,11 +1,11 @@
 ---
-# vars file for obs
+# vars/main.yaml file for oswee.generic.obs role
 
 packages:
   redhat:
     - obs-studio
     - vlc
-    - v4l2loopback
+    - kmod-v4l2loopback
     - ffmpeg
     - ffmpeg-libs
 ...

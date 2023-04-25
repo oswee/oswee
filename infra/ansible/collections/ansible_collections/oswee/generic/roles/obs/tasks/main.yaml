@@ -1,23 +1,19 @@
 ---
-# tasks file for obs
+# tasks/main.yaml file for oswee.generic.obs role
 
-# - name: Add RPM Fusion repository
-#   become: true
-#   ansible.builtin.yum_repository:
-#     name: RPM Fusion
-#     description: RPM Fusion
-#     baseurl: "{{ repo_url_centos }}"
-#     enabled: true
-#     gpgcheck: true
-#     repo_gpgcheck: true
-#     gpgkey: "{{ repo_gpg_centos }}"
+- name: Setup
+  tags:
+    - obs.setup
+  block:
+    - name: Install
+      ansible.builtin.import_tasks: install.yaml
+      tags:
+        - obs.install
 
-- name: Install the nginx rpm from a remote repo
-  become: true
-  ansible.builtin.dnf:
-    name: 'https://download1.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-34.noarch.rpm'
-    state: present
-# - name: Update cache centos
-#   become: true
-#   ansible.builtin.dnf:
-#     update_cache: true
+# - name: Teardown
+#   ansible.builtin.import_tasks: teardown.yaml
+#   tags:
+#     - never
+#     - tmux.teardown
+
+...
