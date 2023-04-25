@@ -1,8 +1,0 @@
----
-# tasks file for git
-
-- name: Remove package
-  become: true
-  ansible.builtin.dnf:
-    name: git
-    state: absent

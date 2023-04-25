@@ -1,5 +1,5 @@
 ---
-# tasks file for Git
+# tasks/teardown.yaml file for oswee.custom.git role
 
 - name: teardown | Remove files and directories
   ansible.builtin.file:

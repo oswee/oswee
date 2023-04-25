@@ -1,4 +1,4 @@
 ---
-# vars file for roles/git
+# vars/main.yaml file for oswee.custom.git role
 
 ...

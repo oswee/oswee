@@ -1,5 +1,5 @@
 ---
-# tasks file for git
+# tasks/config.yaml file for oswee.custom.git role
 
 - name: config | Copy template/s
   ansible.builtin.template:

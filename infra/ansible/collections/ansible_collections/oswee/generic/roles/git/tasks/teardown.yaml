@@ -1,0 +1,9 @@
+---
+# tasks/teardown.yaml file for oswee.generic.git role
+
+- name: teardown | Remove package
+  become: true
+  ansible.builtin.dnf:
+    name: git
+    state: absent
+...

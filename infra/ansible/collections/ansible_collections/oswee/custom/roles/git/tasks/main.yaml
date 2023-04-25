@@ -1,5 +1,5 @@
 ---
-# tasks file for Git
+# tasks/main.yaml file for oswee.custom.git role
 
 - name: Setup
   tags:
