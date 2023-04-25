@@ -1,0 +1,11 @@
+---
+# tasks/config.yaml file for oswee.custom.ssh role
+
+# ~/.config/systemd/user/backup.service
+
+- name: config | Copy ssh-agent user unit template
+  ansible.builtin.template:
+    src: ssh-agent.service.j2
+    dest: '{{ ansible_env.HOME }}/.config/systemd/user/ssh-agent.service'
+    mode: '0644'
+...
