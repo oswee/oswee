@@ -11,6 +11,11 @@
 - name: Bastion
   ansible.builtin.import_playbook: playbooks/bastion.yaml
 
+- name: Sway
+  tags:
+    - sway
+  ansible.builtin.import_playbook: playbooks/sway.yaml
+
 - name: Hypr
   ansible.builtin.import_playbook: playbooks/hypr.yaml
 
