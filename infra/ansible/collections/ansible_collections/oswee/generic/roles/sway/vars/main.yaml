@@ -1,13 +1,10 @@
 ---
-# vars file for sway
+# vars/main.yaml file for oswee.generic.sway role
 
 packages:
   redhat:
     - sway
-    - waybar
-    - wlogout
     - wdisplays
-    - swayidle
     - mako
     - wofi
     - wl-clipboard
@@ -16,9 +13,5 @@ packages:
     - swappy
     - breeze-cursor-theme
     - breeze-icon-theme
-
-mountpoints:
-  - /mnt/external
-  - /mnt/backups
-  - /mnt/nextcloud
+    - xdg-desktop-portal-wlr
 ...

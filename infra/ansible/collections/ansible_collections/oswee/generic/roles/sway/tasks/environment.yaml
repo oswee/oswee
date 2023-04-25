@@ -1,5 +1,5 @@
 ---
-# tasks file for sway
+# tasks/environment.yaml file for oswee.generic.sway role
 
 - name: environment | Create Sway environment
   become: true
@@ -24,5 +24,4 @@
       export XDG_SESSION_TYPE=wayland  # Do i need this?
       export XDG_CURRENT_SESSION_TYPE=wayland
       export GDG_BACKEND="wayland"
-      export MOZ_ENABLE_WAYLAND=1
 ...

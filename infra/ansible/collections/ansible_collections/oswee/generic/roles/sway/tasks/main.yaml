@@ -1,26 +1,28 @@
 ---
-# tasks file for sway
+# tasks/main.yaml file for oswee.generic.sway role
 
-- name: Install
-  import_tasks: install.yaml
+- name: Setup
   tags:
     - sway.setup
-    - sway.setup.install
+  block:
+    - name: Install
+      ansible.builtin.import_tasks: install.yaml
+      tags:
+        - sway.install
 
-- name: Environment
-  import_tasks: environment.yaml
-  tags:
-    - sway.setup
-    - sway.setup.environment
+    - name: Config
+      ansible.builtin.import_tasks: install.yaml
+      tags:
+        - sway.config
 
-- name: Config
-  import_tasks: config.yaml
-  tags:
-    - sway.setup
-    - sway.setup.config
+    - name: Environment
+      ansible.builtin.import_tasks: environment.yaml
+      tags:
+        - sway.environment
 
-# - name: Cleanup
-#   import_tasks: cleanup.yaml
+# - name: Teardown
+#   ansible.builtin.import_tasks: teardown.yaml
 #   tags:
-#     - sway.cleanup
+#     - never
+#     - sway.teardown
 ...
