@@ -1,0 +1,23 @@
+---
+# tasks/main.yaml file for oswee.custom.swayidle role
+
+- name: Setup
+  tags:
+    - swayidle.setup
+  block:
+    - name: Install
+      ansible.builtin.import_tasks: install.yaml
+      tags:
+        - swayidle.install
+
+    - name: Config
+      ansible.builtin.import_tasks: config.yaml
+      tags:
+        - swayidle.config
+
+- name: Teardown
+  ansible.builtin.import_tasks: teardown.yaml
+  tags:
+    - never
+    - swayidle.teardown
+...

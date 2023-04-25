@@ -1,0 +1,7 @@
+---
+# vars/main.yaml file for oswee.custom.swayidle role
+
+packages:
+  redhat:
+    - swayidle
+...
