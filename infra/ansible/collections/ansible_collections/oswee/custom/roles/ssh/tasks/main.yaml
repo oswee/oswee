@@ -5,19 +5,14 @@
   tags:
     - ssh.setup
   block:
-    - name: Install
-      ansible.builtin.import_tasks: install.yaml
-      tags:
-        - ssh.install
-
     - name: Config
       ansible.builtin.import_tasks: config.yaml
       tags:
         - ssh.config
 
-- name: Teardown
-  ansible.builtin.import_tasks: teardown.yaml
-  tags:
-    - never
-    - ssh.teardown
+# - name: Teardown
+#   ansible.builtin.import_tasks: teardown.yaml
+#   tags:
+#     - never
+#     - ssh.teardown
 ...

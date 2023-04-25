@@ -32,6 +32,12 @@
     #       ansible.builtin.import_role:
     #         name: oswee.custom.nushell
 
+    - name: SSH
+      tags:
+        - ssh
+      ansible.builtin.import_role:
+        name: oswee.custom.ssh
+
     - name: Git
       tags:
         - git
