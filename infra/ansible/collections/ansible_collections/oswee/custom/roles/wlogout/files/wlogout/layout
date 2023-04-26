@@ -1,6 +1,6 @@
 {
     "label" : "lock",
-    "action" : "~/.config/sway/lock.sh",
+    "action" : "$HOME/.local/bin/swaylock",
     "text" : "Lock",
     "keybind" : "l"
 }
