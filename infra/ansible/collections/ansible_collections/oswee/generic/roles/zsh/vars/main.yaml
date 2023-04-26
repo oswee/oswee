@@ -1,8 +1,8 @@
 ---
-# vars file for zsh
+# vars/main.yaml file for oswee.generic.zsh role
 
 packages:
   redhat:
-    - zsh
-    # Tar is required by powerlevel10k gitstatus module
     - tar
+    - zsh
+...

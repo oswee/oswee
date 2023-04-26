@@ -1,20 +1,22 @@
 ---
-# tasks file for Tmux
+# tasks/main.yaml file for oswee.generic.tmux role
 
-- name: Install
-  import_tasks: install.yaml
+- name: Setup
   tags:
     - tmux.setup
-    - tmux.setup.install
+  block:
+    - name: Install
+      ansible.builtin.import_tasks: install.yaml
+      tags:
+        - tmux.install
+    - name: Config
+      ansible.builtin.import_tasks: config.yaml
+      tags:
+        - tmux.config
 
-- name: Config
-  import_tasks: config.yaml
-  tags:
-    - tmux.setup
-    - tmux.setup.config
-
-- name: Teardown
-  import_tasks: teardown.yaml
-  tags:
-    - tmux.teardown
+# - name: Teardown
+#   ansible.builtin.import_tasks: teardown.yaml
+#   tags:
+#     - never
+#     - tmux.teardown
 ...

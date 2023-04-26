@@ -1,0 +1,7 @@
+---
+# vars/main.yaml file for oswee.custom.wlogout role
+
+packages:
+  redhat:
+    - wlogout
+...

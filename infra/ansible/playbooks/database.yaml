@@ -1,11 +1,13 @@
 ---
 - name: Setup database server
-  hosts: db
+  hosts: workstations
   become: false
   gather_facts: true
 
   tasks:
     - name: MariaDB
+      tags:
+        - mariadb
       block:
         - name: Install MariaDB
           ansible.builtin.import_role:

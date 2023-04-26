@@ -1,4 +1,6 @@
 ---
+# meta/main.yaml file for oswee.custom.git role
+
 galaxy_info:
   namespace: oswee
   role_name: git

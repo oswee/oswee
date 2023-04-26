@@ -22,5 +22,8 @@ galaxy_info:
     - dzintars
     - fedora
 
-dependencies: []
+dependencies:
+  - role: oswee.generic.git
+    tags:
+      - deps
 ...

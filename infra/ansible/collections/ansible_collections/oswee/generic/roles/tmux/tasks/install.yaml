@@ -1,5 +1,5 @@
 ---
-# tasks file for Tmux
+# tasks/install.yaml file for oswee.generic.tmux role
 
 - name: install | Install packages
   become: true
@@ -11,6 +11,6 @@
 - name: install | Clone Tmux Plugin Manager
   ansible.builtin.git:
     repo: https://github.com/tmux-plugins/tpm.git
-    dest: $HOME/.tmux/plugins/tpm
+    dest: '{{ ansible_env.HOME }}/.tmux/plugins/tpm'
     version: master
 ...

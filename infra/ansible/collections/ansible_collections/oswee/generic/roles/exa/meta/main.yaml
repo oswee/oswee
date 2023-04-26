@@ -1,17 +1,17 @@
 ---
-# roles/exa/meta/main.yml
+# meta/main.yaml file for oswee.generic.exa role
 
 galaxy_info:
-  namespace: 'oswee'
-  role_name: 'exa'
-  version: '0.0.1'
-  author: 'Dzintars Klavins'
-  description: 'Ansible role to maintain exa.'
-  company: 'Oswee'
+  namespace: oswee
+  role_name: exa
+  version: 0.0.1
+  author: Dzintars Klavins
+  description: Ansible role to maintain exa.
+  company: Oswee
 
-  license: 'Apache-2.0'
+  license: Apache-2.0
 
-  min_ansible_version: '2.12'
+  min_ansible_version: 2.12
 
   platforms:
     - name: Fedora
@@ -19,10 +19,10 @@ galaxy_info:
         - 35
 
   galaxy_tags:
-    - 'exa'
-    - 'oswee'
-    - 'dzintars'
-    - 'fedora'
+    - exa
+    - oswee
+    - dzintars
+    - fedora
 
 dependencies: []
 ...

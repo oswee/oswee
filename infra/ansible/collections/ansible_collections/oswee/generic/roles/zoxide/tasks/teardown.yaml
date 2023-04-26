@@ -1,10 +1,10 @@
 ---
-# tasks file for Zoxide
+# tasks/teardown.yaml file for oswee.generic.zoxide role
 
 - name: teardown | Remove system package
   become: true
   ansible.builtin.dnf:
-    name: 'zoxide'
+    name: zoxide
     state: absent
 
 - name: teardown | Remove environment

@@ -1,5 +1,5 @@
 ---
-# defaults file for Zoxide
+# defaults/main.yaml file for oswee.generic.zoxide role
 
-zoxide_environment_path: /etc/profile.d/zoxide.sh
+zoxide_environment_path: /etc/profile.d
 ...

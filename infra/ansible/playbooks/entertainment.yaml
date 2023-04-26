@@ -6,6 +6,12 @@
   gather_facts: true
 
   tasks:
+    - name: OBS
+      ansible.builtin.import_role:
+        name: oswee.generic.obs
+      tags:
+        - obs
+
     - name: Glfw
       ansible.builtin.import_role:
         name: oswee.generic.glfw

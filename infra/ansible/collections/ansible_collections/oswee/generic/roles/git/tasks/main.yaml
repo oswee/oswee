@@ -1,11 +1,18 @@
 ---
-# tasks file for git
+# tasks/main.yaml file for oswee.generic.git role
 
-- name: Install
-  import_tasks: install.yaml
+- name: Setup
   tags:
-    - git:install
-# - name: Cleanup
-#   import_tasks: cleanup.yaml
-#   tags:
-#     - git:cleanup
+    - git.setup
+  block:
+    - name: Install
+      ansible.builtin.import_tasks: install.yaml
+      tags:
+        - git.install
+
+- name: Teardown
+  ansible.builtin.import_tasks: teardown.yaml
+  tags:
+    - never
+    - git.teardown
+...

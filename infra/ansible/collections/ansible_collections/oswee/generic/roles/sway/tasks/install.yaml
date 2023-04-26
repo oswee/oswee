@@ -1,9 +1,21 @@
 ---
-# tasks file for sway
+# tasks/install.yaml file for oswee.generic.sway role
 
-- name: Install packages
+- name: prepare | Get package facts
+  ansible.builtin.package_facts:
+    manager: rpm
+
+- name: install | Remove default xdg-desktop-portal-gtk package if exists
+  become: true
+  ansible.builtin.dnf:
+    name: xdg-desktop-portal-gtk
+    state: absent
+  when: '"xdg-desktop-portal-gtk" in ansible_facts.packages'
+
+- name: install | Install packages
   become: true
   ansible.builtin.dnf:
     name: '{{ item }}'
     state: present
   loop: '{{ packages.redhat }}'
+...

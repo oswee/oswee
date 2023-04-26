@@ -1,9 +1,0 @@
----
-# tasks file for zsh
-
-- name: Remove packages
-  become: true
-  ansible.builtin.dnf:
-    name: '{{ item }}'
-    state: absent
-  loop: '{{ packages.redhat }}'

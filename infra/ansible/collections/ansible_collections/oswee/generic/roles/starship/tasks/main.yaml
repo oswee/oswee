@@ -1,0 +1,28 @@
+---
+# tasks/main.yaml file for oswee.generic.starship role
+
+- name: Setup
+  tags:
+    - starship.setup
+  block:
+    - name: Install
+      ansible.builtin.import_tasks: install.yaml
+      tags:
+        - starship.install
+
+    - name: Config
+      ansible.builtin.import_tasks: config.yaml
+      tags:
+        - starship.config
+
+    - name: Environment
+      ansible.builtin.import_tasks: environment.yaml
+      tags:
+        - starship.environment
+
+# - name: Teardown
+#   ansible.builtin.import_tasks: teardown.yaml
+#   tags:
+#     - never
+#     - starship.teardown
+...

@@ -1,0 +1,11 @@
+---
+# tasks/environment.yaml file for oswee.generic.sway role
+
+- name: environment | Create Sway environment
+  become: true
+  ansible.builtin.copy:
+    dest: '{{ swaylock_environment_path }}/swaylock.sh'
+    mode: '0644'
+    content: |
+      alias swaylock="$HOME/.local/bin/swaylock"
+...

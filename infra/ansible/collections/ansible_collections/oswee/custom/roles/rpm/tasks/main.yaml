@@ -1,5 +1,5 @@
 ---
-# tasks file for rpm
+# tasks/main.yaml file for oswee.custom.rpm role
 
 - name: RPM Fusion
   when:
@@ -24,6 +24,7 @@
         name:
           - 'https://mirrors.rpmfusion.org/free/{{ redhat_os }}/rpmfusion-free-release-{{ redhat_version }}.noarch.rpm'
           - 'https://mirrors.rpmfusion.org/nonfree/{{ redhat_os }}/rpmfusion-nonfree-release-{{ redhat_version }}.noarch.rpm'
+
 # - name: Add RPM Fusion repository
 #   ansible.builtin.yum_repository:
 #     name: RPM Fusion
@@ -33,4 +34,4 @@
 #     gpgcheck: true
 #     repo_gpgcheck: true
 #     gpgkey: ''
-
+...

@@ -1,5 +1,5 @@
 ---
-# tasks file for Tmux
+# tasks/teardown.yaml file for oswee.generic.tmux role
 
 - name: teardown | Remove packages
   become: true

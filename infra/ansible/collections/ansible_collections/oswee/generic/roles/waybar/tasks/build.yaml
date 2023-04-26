@@ -5,11 +5,11 @@
 # meson --prefix=/usr --buildtype=plain --auto-features=enabled --wrap-mode=nodownload build
 # meson configure -Dexperimental=true build
 
-- name: build | Replace text in workspace_manager.cpp
-  ansible.builtin.lineinfile:
-    path: '{{ waybar_source_path }}/src/modules/wlr/workspace_manager.cpp'
-    regexp: zext_workspace_handle_v1_activate\(workspace_handle_\);
-    line: const std::string command = "hyprctl dispatch workspace " + name_;\n\tsystem(command.c_str());
+# - name: build | Replace text in workspace_manager.cpp
+#   ansible.builtin.lineinfile:
+#     path: '{{ waybar_source_path }}/src/modules/wlr/workspace_manager.cpp'
+#     regexp: zext_workspace_handle_v1_activate\(workspace_handle_\);
+#     line: const std::string command = "hyprctl dispatch workspace " + name_;\n\tsystem(command.c_str());
 
 # - name: build | Meson wipe
 #   when: (waybar_meson_wipe | default(false) | bool)
@@ -17,25 +17,29 @@
 #   args:
 #     chdir: '{{ waybar_source_path }}'
 
-- name: build | Meson build
-  ansible.builtin.command: meson setup --prefix=/usr --buildtype=plain --auto-features=enabled --wrap-mode=nodownload build
-  args:
-    chdir: '{{ waybar_source_path }}'
-
-- name: build | Meson build
-  ansible.builtin.command: meson configure -Dexperimental=true build
-  args:
-    chdir: '{{ waybar_source_path }}'
-
-# - name: build | Ninja build
-#   ansible.builtin.command: ninja -C build
+# - name: build | Meson setup
+#   ansible.builtin.command: meson setup --prefix=/usr --buildtype=plain --auto-features=enabled --wrap-mode=nodownload build
 #   args:
 #     chdir: '{{ waybar_source_path }}'
+
+# - name: build | Meson configure
+#   ansible.builtin.command: meson configure -Dexperimental=true build
+#   args:
+#     chdir: '{{ waybar_source_path }}'
+
+- name: build | Meson build
+  ansible.builtin.command: meson build
+  args:
+    chdir: '{{ waybar_source_path }}'
+
+- name: build | Ninja build
+  ansible.builtin.command: ninja -C build
+  args:
+    chdir: '{{ waybar_source_path }}'
 
 - name: build | Ninja install
   become: true
   ansible.builtin.command: ninja -C build install
   args:
     chdir: '{{ waybar_source_path }}'
-
 ...

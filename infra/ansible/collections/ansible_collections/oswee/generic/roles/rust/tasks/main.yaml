@@ -10,6 +10,11 @@
       tags:
         - rust.install
 
+    - name: Environment
+      ansible.builtin.import_tasks: environment.yaml
+      tags:
+        - rust.environment
+
     # - name: Config
     #   ansible.builtin.import_tasks: config.yaml
     #   tags:

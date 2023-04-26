@@ -1,8 +1,9 @@
 ---
-# tasks file for git
+# tasks/install.yaml file for oswee.generic.git role
 
-- name: Install package
+- name: install | Install packages
   become: true
   ansible.builtin.dnf:
     name: git
     state: present
+...

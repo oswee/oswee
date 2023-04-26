@@ -15,19 +15,19 @@
       tags:
         - glfw.build
 
-    - name: Install
-      ansible.builtin.import_tasks: install.yaml
-      tags:
-        - glfw.install
+    # - name: Install
+    #   ansible.builtin.import_tasks: install.yaml
+    #   tags:
+    #     - glfw.install
 
-    - name: Config
-      ansible.builtin.import_tasks: config.yaml
-      tags:
-        - glfw.config
+    # - name: Config
+    #   ansible.builtin.import_tasks: config.yaml
+    #   tags:
+    #     - glfw.config
 
-- name: Teardown
-  ansible.builtin.import_tasks: teardown.yaml
-  tags:
-    - never
-    - glfw.teardown
+# - name: Teardown
+#   ansible.builtin.import_tasks: teardown.yaml
+#   tags:
+#     - never
+#     - glfw.teardown
 ...

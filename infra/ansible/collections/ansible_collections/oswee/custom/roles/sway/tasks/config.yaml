@@ -1,9 +1,31 @@
 ---
-# tasks file for Sway
+# tasks/config.yaml file for oswee.custom.sway role
 
 - name: config | Copy all configuration files
   ansible.builtin.copy:
     src: sway/
     dest: '{{ sway_config_path }}'
-    mode: 0755
+    mode: '0755'
+
+- name: config | Create Pictures directories
+  ansible.builtin.file:
+    path: '{{ item }}'
+    state: directory
+    owner: '{{ ansible_user_id }}'
+    group: '{{ ansible_user_id }}'
+    mode: '0755'
+  loop:
+    - '{{ ansible_env.HOME }}/Pictures/Wallpapers'
+    - '{{ ansible_env.HOME }}/Pictures/Printscreens'
+
+- name: config | Copy background image
+  become: true
+  ansible.builtin.copy:
+    src: '{{ item.src }}'
+    dest: '{{ item.dest }}'
+    owner: '{{ ansible_user_id }}'
+    group: '{{ ansible_user_id }}'
+    mode: '0644'
+  loop:
+    - { src: wallpapers/tharsus.jpg, dest: /usr/share/backgrounds/ }
 ...

@@ -18,9 +18,9 @@
     - name: Flush handlers
       ansible.builtin.meta: flush_handlers
 
-- name: Teardown
-  ansible.builtin.import_tasks: teardown.yaml
-  tags:
-    - never
-    - libdisplay_info.teardown
+# - name: Teardown
+#   ansible.builtin.import_tasks: teardown.yaml
+#   tags:
+#     - never
+#     - libdisplay_info.teardown
 ...

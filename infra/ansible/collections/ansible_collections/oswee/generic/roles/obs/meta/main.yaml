@@ -1,15 +1,17 @@
 ---
+# meta/main.yaml file for oswee.generic.obs role
+
 galaxy_info:
-  namespace: 'oswee'
-  role_name: 'obs'
-  version: '0.0.1'
-  author: 'Dzintars Klavins'
-  description: 'Ansible role to install OBS Studio'
-  company: 'Oswee'
+  namespace: oswee
+  role_name: obs
+  version: 0.0.1
+  author: Dzintars Klavins
+  description: Ansible role to install OBS Studio
+  company: Oswee
 
-  license: 'Apache-2.0'
+  license: Apache-2.0
 
-  min_ansible_version: '2.12'
+  min_ansible_version: 2.12
 
   platforms:
     - name: Fedora
@@ -17,9 +19,11 @@ galaxy_info:
         - 35
 
   galaxy_tags:
-    - 'obs'
-    - 'oswee'
-    - 'dzintars'
-    - 'fedora'
+    - obs
+    - oswee
+    - dzintars
+    - fedora
 
-dependencies: []
+dependencies:
+  - role: oswee.custom.rpm
+...

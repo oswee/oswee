@@ -15,19 +15,19 @@
       tags:
         - waybar.build
 
-    - name: Install
-      ansible.builtin.import_tasks: install.yaml
-      tags:
-        - waybar.install
+    # - name: Install
+    #   ansible.builtin.import_tasks: install.yaml
+    #   tags:
+    #     - waybar.install
 
     - name: Config
       ansible.builtin.import_tasks: config.yaml
       tags:
         - waybar.config
 
-- name: Teardown
-  ansible.builtin.import_tasks: teardown.yaml
-  tags:
-    - never
-    - waybar.teardown
+# - name: Teardown
+#   ansible.builtin.import_tasks: teardown.yaml
+#   tags:
+#     - never
+#     - waybar.teardown
 ...

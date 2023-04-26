@@ -1,18 +1,23 @@
 ---
-# tasks file for zsh
+# tasks/main.yaml file for oswee.generic.zsh role
 
-- name: Install
-  import_tasks: install.yaml
+- name: Setup
   tags:
-    - zsh:setup
-    - zsh:setup:install
+    - zsh.setup
+  block:
+    - name: Install
+      ansible.builtin.import_tasks: install.yaml
+      tags:
+        - zsh.install
 
-- name: Config
-  import_tasks: configure.yaml
+    - name: Config
+      ansible.builtin.import_tasks: config.yaml
+      tags:
+        - zsh.config
+
+- name: Teardown
+  ansible.builtin.import_tasks: teardown.yaml
   tags:
-    - zsh:setup
-    - zsh:setup:config
-# - name: Remove
-#   import_tasks: remove.yaml
-#   tags:
-#     - zsh:remove
+    - never
+    - zsh.teardown
+...

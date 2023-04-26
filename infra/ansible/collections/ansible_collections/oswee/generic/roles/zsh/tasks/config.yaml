@@ -1,0 +1,31 @@
+---
+# tasks/config.yaml file for oswee.generic.zsh role
+
+- name: config | Write .zshrc config
+  ansible.builtin.template:
+    src: '{{ item.src }}'
+    dest: '{{ item.dest }}'
+    owner: '{{ zsh_user }}'
+    group: '{{ zsh_group }}'
+    mode: '{{ item.mode }}'
+    backup: true
+  loop:
+    - { src: zprofile.j2, dest: '{{ ansible_env.HOME }}/.zprofile', mode: '0644' }
+    - { src: zshrc.j2, dest: '{{ ansible_env.HOME }}/.zshrc', mode: '0644' }
+
+- name: config | Set ZSH as default shell
+  become: true
+  ansible.builtin.user:
+    name: '{{ zsh_user }}'
+    shell: /bin/zsh
+
+- name: config | Copy environment variables
+  ansible.builtin.copy:
+    src: '{{ item.src }}'
+    dest: '{{ item.dest }}'
+    owner: '{{ zsh_user }}'
+    group: '{{ zsh_group }}'
+    mode: '0644'
+  loop:
+    - { src: .zshenv, dest: '{{ ansible_env.HOME }}/' }
+...

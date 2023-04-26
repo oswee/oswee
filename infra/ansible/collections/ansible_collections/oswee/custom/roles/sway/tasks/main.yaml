@@ -1,5 +1,5 @@
 ---
-# tasks file for Sway
+# tasks/main.yaml file for oswee.custom.sway role
 
 - name: Setup
   tags:
