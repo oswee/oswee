@@ -157,6 +157,9 @@ frontend https-in
   # acl api.{{ dns_prod_domain_name }}.host hdr(Host) -i api.{{ dns_prod_domain_name }}
   # use_backend api.{{ dns_prod_domain_name }}.backend if api.{{ dns_prod_domain_name }}.host
 
+  acl gerrit.{{ dns_dev_domain_name }}.host hdr(Host) -i gerrit.{{ dns_dev_domain_name }}
+  use_backend gerrit.{{ dns_dev_domain_name }}.backend if gerrit.{{ dns_dev_domain_name }}.host
+
   acl jenkins.{{ dns_prod_domain_name }}.host hdr(Host) -i jenkins.{{ dns_prod_domain_name }}
   use_backend jenkins.{{ dns_prod_domain_name }}.backend if jenkins.{{ dns_prod_domain_name }}.host
 
@@ -216,6 +219,12 @@ backend api.{{ dns_prod_domain_name }}.backend
   http-request add-header X-Forwarded-Proto https
   # option httpchk HEAD / HTTP/1.1\r\nHost:\ api.{{ dns_prod_domain_name }}
   server {{ haproxy_hostname }} 127.0.0.1:9090 check
+
+backend gerrit.{{ dns_dev_domain_name }}.backend
+  balance roundrobin
+  http-request add-header X-Forwarded-Proto https
+  # option httpchk HEAD / HTTP/1.1\r\nHost:\ gerrit.{{ dns_dev_domain_name }}
+  server {{ haproxy_hostname }} 127.0.0.1:8080 check
 
 backend jenkins.{{ dns_prod_domain_name }}.backend
   balance roundrobin
