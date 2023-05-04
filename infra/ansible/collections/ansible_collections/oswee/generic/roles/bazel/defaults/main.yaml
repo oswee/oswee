@@ -1,7 +1,7 @@
 ---
-# defaults file for Bazel
+# defaults/main.yaml file for oswee.generic.bazel role
 
-bazel_bazelisk_version: 1.15.0
-bazel_ibazel_version: 0.21.4
-bazel_buildifier_version: 6.0.0
+bazel_bazelisk_version: 1.16.0
+bazel_ibazel_version: 0.22.0
+bazel_buildifier_version: 6.1.2
 ...

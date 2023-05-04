@@ -1,5 +1,5 @@
 ---
-# tasks file for Bazel
+# tasks/install.yaml file for oswee.generic.bazel role
 
 - name: install | Install system packages
   become: true
@@ -42,7 +42,7 @@
 - name: install | Download buildifier
   become: true
   ansible.builtin.get_url:
-    url: https://github.com/bazelbuild/buildtools/releases/download/{{ bazel_buildifier_version }}/buildifier-linux-amd64
+    url: https://github.com/bazelbuild/buildtools/releases/download/v{{ bazel_buildifier_version }}/buildifier-linux-amd64
     dest: /usr/local/bin/buildifier
     mode: a+x
 ...
