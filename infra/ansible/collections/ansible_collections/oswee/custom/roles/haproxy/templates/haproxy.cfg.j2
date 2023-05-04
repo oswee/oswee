@@ -2,13 +2,18 @@
 
 global
   log 127.0.0.1 local2
-  chroot /var/lib/haproxy
+	chroot /var/lib/haproxy
   pidfile /var/run/haproxy.pid
+	stats socket /var/lib/haproxy/stats
+
+  #chroot {{ haproxy_chroot_dir }}
+	#pidfile /var/run/haproxy/haproxy.pid
+  #stats socket /var/run/haproxy/admin.sock mode 660 level admin
+
   maxconn 4096
   user {{ haproxy_user }}
   group {{ haproxy_group }}
   daemon
-  stats socket /var/lib/haproxy/stats
   # intermediate configuration, tweak to your needs
   ssl-default-bind-ciphers ECDHE-ECDSA-AES128-GCM-SHA256:ECDHE-RSA-AES128-GCM-SHA256:ECDHE-ECDSA-AES256-GCM-SHA384:ECDHE-RSA-AES256-GCM-SHA384:ECDHE-ECDSA-CHACHA20-POLY1305:ECDHE-RSA-CHACHA20-POLY1305:DHE-RSA-AES128-GCM-SHA256:DHE-RSA-AES256-GCM-SHA384
   ssl-default-bind-ciphersuites TLS_AES_128_GCM_SHA256:TLS_AES_256_GCM_SHA384:TLS_CHACHA20_POLY1305_SHA256
@@ -52,6 +57,11 @@ defaults
   errorfile 502 /etc/haproxy/errors/502.http
   errorfile 503 /etc/haproxy/errors/503.http
   errorfile 504 /etc/haproxy/errors/504.http
+
+cache main
+  total-max-size 1000  # MB
+	max-object-size 1000 # bytes
+  max-age 600  # seconds
 
 listen stats # Define a listen section called "stats"
   bind :9000 # Listen on localhost:9000/stats
@@ -108,6 +118,10 @@ frontend https-in
   bind *:443 ssl alpn h2,http/1.1 crt-list /etc/letsencrypt/live/cert-list.txt ecdhe secp384r1
   http-response replace-header Location ^http://(.*)$ https://\1
   maxconn 60000
+
+	# Use the main cache for static content
+  http-request cache-use main
+  http-response cache-store main
 
   http-request set-header X-Forwarded-Proto https
   http-request set-header X-Forwarded-Port 443
@@ -172,10 +186,6 @@ frontend https-in
 
   acl dzintars.dev.host hdr(host) -i dzintars.dev
   use_backend dzintars.dev.backend if dzintars.dev.host
-
-  acl hdr_connection_upgrade hdr(Connection)  -i upgrade
-  acl hdr_upgrade_websocket  hdr(Upgrade)     -i websocket
-  use_backend websocket.backend if hdr_connection_upgrade hdr_upgrade_websocket
 
   default_backend default.backend
 
@@ -269,25 +279,6 @@ backend dzintars.dev.backend
   compression type text/html text/plain text/css
   # option httpchk HEAD / HTTP/1.1\r\nHost:\ dzintars.dev
   server {{ haproxy_hostname }} {{ haproxy_network }}.{{ haproxy_host_octet }}:8084 check
-
-backend websocket.backend
-  balance roundrobin
-  ## websocket protocol validation
-  acl hdr_connection_upgrade hdr(Connection)                 -i upgrade
-  acl hdr_upgrade_websocket  hdr(Upgrade)                    -i websocket
-  acl hdr_websocket_key      hdr_cnt(Sec-WebSocket-Key)      eq 1
-  acl hdr_websocket_version  hdr_cnt(Sec-WebSocket-Version)  eq 1
-  http-request deny if ! hdr_connection_upgrade || ! hdr_upgrade_websocket || ! hdr_websocket_key || ! hdr_websocket_version
-  ## ensure our application protocol name is valid
-  ## (don't forget to update the list each time you publish new applications)
-  ## !!!! Note also that HTTP/2 explicitly disallows the use of this mechanism; it is specific to HTTP/1.1.
-  #   acl ws_valid_protocol hdr(Sec-WebSocket-Protocol) echo-protocol
-  #   http-request deny if ! ws_valid_protocol
-  ## websocket health checking
-  option httpchk GET / HTTP/1.1\r\nHost:\ api.{{ dns_prod_domain_name }}\r\nConnection:\ Upgrade\r\nUpgrade:\ websocket\r\nSec-WebSocket-Key:\ haproxy\r\nSec-WebSocket-Version:\ 13\r\nSec-WebSocket-Protocol:\ echo-protocol
-  http-check expect status 101
-  server {{ haproxy_hostname }} 127.0.0.1:9090 maxconn 30000 weight 10 cookie {{ haproxy_hostname }} check
-  #server websrv2 192.168.10.12:8080 maxconn 30000 weight 10 cookie websrv2 check
 
 backend letsencrypt.backend
   server letsencrypt 127.0.0.1:8888

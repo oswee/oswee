@@ -3,6 +3,7 @@
 
 haproxy_user: haproxy
 haproxy_group: haproxy
+haproxy_chroot_dir: /var/empty/haproxy
 haproxy_cluster_setup: false
 haproxy_hostname: '{{ hostname | default("workstation") }}'
 haproxy_network: '{{ network | default("192.168.100") }}'
