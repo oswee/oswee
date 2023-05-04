@@ -36,9 +36,9 @@ spec:
           imagePullPolicy: IfNotPresent
           env:
             - name: CANONICAL_WEB_URL
-              value: http://gerrit.oswee.dev
+              value: https://gerrit.oswee.dev
             - name: HTTPD_LISTEN_URL
-              value: http://*:8080/
+              value: proxy-https://*:8080
           ports:
             - name: http
               containerPort: 8080
