@@ -16,7 +16,7 @@ galaxy_info:
   platforms:
     - name: Fedora
       versions:
-        - 35
+        - 37
 
   galaxy_tags:
     - sway
@@ -28,5 +28,6 @@ dependencies:
   - role: oswee.generic.sway
   - role: oswee.generic.waybar
   - role: oswee.custom.wlogout
+  - role: oswee.custom.swayidle
   - role: oswee.custom.swaylock
 ...

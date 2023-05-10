@@ -1,5 +1,5 @@
 ---
-# defaults file for Sway
+# defaults/main.yaml file for oswee.custom.sway role
 
-sway_config_path: /home/{{ system_user }}/.config/sway
+sway_config_path: '{{ ansible_env.HOME }}/.config/sway'
 ...
