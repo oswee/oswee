@@ -1,6 +1,6 @@
 {
     "label" : "lock",
-    "action" : "$HOME/.local/bin/swaylock",
+    "action" : "swaylock",
     "text" : "Lock",
     "keybind" : "l"
 }
