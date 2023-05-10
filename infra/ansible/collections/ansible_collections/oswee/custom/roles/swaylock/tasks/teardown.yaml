@@ -1,4 +1,8 @@
 ---
 # tasks/teardown.yaml file for oswee.custom.swaylock role
 
+- name: teardown | Remove config directory
+  ansible.builtin.file:
+    path: '{{ swaylock_config_path }}'
+    state: absent
 ...

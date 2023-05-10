@@ -1,5 +1,5 @@
 ---
 # defaults/main.yaml file for oswee.custom.swaylock role
 
-swaylock_environment_path: /etc/profile.d
+swaylock_config_path: '{{ ansible_env.HOME }}/.config/swaylock'
 ...
