@@ -169,6 +169,9 @@ frontend https-in
   # use_backend sso.{{ dns_dev_domain_name }}.backend if sso.{{ dns_dev_domain_name }}.host
   use_backend be_keycloak if sso.{{ dns_dev_domain_name }}.host
 
+  acl registry.{{ dns_dev_domain_name }}.host hdr(Host) -i registry.{{ dns_dev_domain_name }}
+  use_backend registry.{{ dns_dev_domain_name }}.backend if registry.{{ dns_dev_domain_name }}.host
+
   acl gerrit.{{ dns_dev_domain_name }}.host hdr(Host) -i gerrit.{{ dns_dev_domain_name }}
   use_backend gerrit.{{ dns_dev_domain_name }}.backend if gerrit.{{ dns_dev_domain_name }}.host
 
@@ -228,6 +231,12 @@ backend api.{{ dns_prod_domain_name }}.backend
 backend sso.{{ dns_dev_domain_name }}.backend
   balance roundrobin
   server {{ haproxy_hostname }} 127.0.0.1:8082 check
+
+backend registry.{{ dns_dev_domain_name }}.backend
+  balance roundrobin
+  http-request add-header X-Forwarded-Proto https
+  # option httpchk HEAD / HTTP/1.1\r\nHost:\ registry.{{ dns_dev_domain_name }}
+  server {{ haproxy_hostname }} 127.0.0.1:9981 check
 
 backend gerrit.{{ dns_dev_domain_name }}.backend
   balance roundrobin
