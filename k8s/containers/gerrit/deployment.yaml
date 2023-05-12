@@ -17,23 +17,26 @@ spec:
         app: ci
     spec:
       restartPolicy: Never
-      initContainers:
-        - name: init-mkdir
-          image: busybox
-          imagePullPolicy: IfNotPresent
-          securityContext:
-            runAsUser: 1000
-          command:
-            - /bin/sh
-            - -c
-            - mkdir -p /data/gerrit/etc /data/gerrit/etc/mail /data/gerrit/git /data/gerrit/db /data/gerrit/index /data/gerrit/cache /data/gerrit/data /data/gerrit/logs /data/gerrit/plugins
-          volumeMounts:
-            - name: ci-pvc
-              mountPath: /data
+      # initContainers:
+      #   - name: init-mkdir
+      #     image: busybox
+      #     imagePullPolicy: IfNotPresent
+      #     securityContext:
+      #       runAsUser: 1000
+      #     command:
+      #       - /bin/sh
+      #       - -c
+      #       - mkdir -p /data/gerrit/etc /data/gerrit/etc/mail /data/gerrit/git /data/gerrit/db /data/gerrit/index /data/gerrit/cache /data/gerrit/data /data/gerrit/logs /data/gerrit/plugins
+      #     volumeMounts:
+      #       - name: ci-pvc
+      #         mountPath: /data
       containers:
         - name: gerrit
           image: docker.io/gerritcodereview/gerrit:latest
           imagePullPolicy: IfNotPresent
+          workingDir: /var/gerrit
+          depends_on:
+            - mariadb
           env:
             - name: CANONICAL_WEB_URL
               value: https://gerrit.oswee.dev
@@ -48,37 +51,98 @@ spec:
               containerPort: 29418
               hostPort: 29418
               protocol: TCP
-          # command:
-          #   - init
-          volumeMounts:
-            - name: ci-pvc
-              subPath: gerrit/etc
-              mountPath: /var/gerrit/etc:z
-            - name: ci-pvc
-              subPath: gerrit/git
-              mountPath: /var/gerrit/git:z
-            - name: ci-pvc
-              subPath: gerrit/db
-              mountPath: /var/gerrit/db:z
-            - name: ci-pvc
-              subPath: gerrit/index
-              mountPath: /var/gerrit/index:z
-            - name: ci-pvc
-              subPath: gerrit/cache
-              mountPath: /var/gerrit/cache:z
-            - name: ci-pvc
-              subPath: gerrit/data
-              mountPath: /var/gerrit/data:z
-            - name: ci-pvc
-              subPath: gerrit/logs
-              mountPath: /var/gerrit/logs:z
-            - name: ci-pvc
-              subPath: gerrit/plugins
-              mountPath: /var/gerrit/plugins:z
-          workingDir: /var/gerrit
+          # args:
+          #   - java -jar /var/gerrit/bin/gerrit.war reindex --index changes
+          command:
+            - init
+          # volumeMounts:
+          #   - name: ci-pvc
+          #     subPath: gerrit/etc
+          #     mountPath: /var/gerrit/etc:z
+          #   - name: ci-pvc
+          #     subPath: gerrit/git
+          #     mountPath: /var/gerrit/git:z
+          #   - name: ci-pvc
+          #     subPath: gerrit/db
+          #     mountPath: /var/gerrit/db:z
+          #   - name: ci-pvc
+          #     subPath: gerrit/index
+          #     mountPath: /var/gerrit/index:z
+          #   - name: ci-pvc
+          #     subPath: gerrit/cache
+          #     mountPath: /var/gerrit/cache:z
+          #   - name: ci-pvc
+          #     subPath: gerrit/data
+          #     mountPath: /var/gerrit/data:z
+          #   - name: ci-pvc
+          #     subPath: gerrit/logs
+          #     mountPath: /var/gerrit/logs:z
+          #   - name: ci-pvc
+          #     subPath: gerrit/plugins
+          #     mountPath: /var/gerrit/plugins:z
 
+          volumeMounts:
+            - name: ci-pvc-gerrit-etc
+              mountPath: /var/gerrit/etc
+            - name: ci-pvc-gerrit-git
+              mountPath: /var/gerrit/git
+            - name: ci-pvc-gerrit-db
+              mountPath: /var/gerrit/db
+            - name: ci-pvc-gerrit-index
+              mountPath: /var/gerrit/index
+            - name: ci-pvc-gerrit-cache
+              mountPath: /var/gerrit/cache
+            - name: ci-pvc-gerrit-data
+              mountPath: /var/gerrit/data
+            - name: ci-pvc-gerrit-logs
+              mountPath: /var/gerrit/logs
+            - name: ci-pvc-gerrit-plugins
+              mountPath: /var/gerrit/plugins
+
+        - name: mariadb
+          image: docker.io/mariadb:latest
+          imagePullPolicy: IfNotPresent
+          env:
+            - name: MYSQL_ROOT_PASSWORD
+              value: secret
+            - name: MYSQL_USER
+              value: gerrit
+            - name: MYSQL_PASSWORD
+              value: gerritsecret
+            - name: MYSQL_DATABASE
+              value: gerritdb
+          volumeMounts:
+            - name: ci-pvc-mysql
+              mountPath: /var/lib/mysql
       volumes:
-        - name: ci-pvc
+        # - name: ci-pvc
+        #   persistentVolumeClaim:
+        #     claimName: ci-pvc
+        - name: ci-pvc-gerrit-etc
           persistentVolumeClaim:
-            claimName: ci-pvc
+            claimName: ci-pvc-gerrit-etc
+        - name: ci-pvc-gerrit-git
+          persistentVolumeClaim:
+            claimName: ci-pvc-gerrit-git
+        - name: ci-pvc-gerrit-db
+          persistentVolumeClaim:
+            claimName: ci-pvc-gerrit-db
+        - name: ci-pvc-gerrit-index
+          persistentVolumeClaim:
+            claimName: ci-pvc-gerrit-index
+        - name: ci-pvc-gerrit-cache
+          persistentVolumeClaim:
+            claimName: ci-pvc-gerrit-cache
+        - name: ci-pvc-gerrit-data
+          persistentVolumeClaim:
+            claimName: ci-pvc-gerrit-data
+        - name: ci-pvc-gerrit-logs
+          persistentVolumeClaim:
+            claimName: ci-pvc-gerrit-logs
+        - name: ci-pvc-gerrit-plugins
+          persistentVolumeClaim:
+            claimName: ci-pvc-gerrit-plugins
+        - name: ci-pvc-mysql
+          persistentVolumeClaim:
+            claimName: ci-pvc-mysql
 ...
