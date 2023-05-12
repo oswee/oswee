@@ -1,5 +1,9 @@
 # Quay
 
+## TODO
+
+- I could use `initContainers` to run the config stage?
+
 ## Setup
 
 For the first run please comment out the Registry container as it should be created separately.
