@@ -5,6 +5,8 @@ Description=SSH Agent
 Type=simple
 Environment=SSH_AUTH_SOCK=%t/ssh-agent.sock
 ExecStart=/usr/bin/ssh-agent -D -a $SSH_AUTH_SOCK
+# DISPLAY required for ssh-askpass to work
+# Environment=DISPLAY=:0
 Restart=always
 
 [Install]
