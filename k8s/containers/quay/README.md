@@ -19,13 +19,13 @@ TODO: Write 1st run instructions and consecvent run instructions.
 - Make sure to execute
 
 ```bash
-  sudo podman exec -it quay-postgres /bin/bash -c 'echo "CREATE EXTENSION IF NOT EXISTS pg_trgm" | psql -d quay -U quayuser'
+sudo podman exec -it quay-postgres /bin/bash -c 'echo "CREATE EXTENSION IF NOT EXISTS pg_trgm" | psql -d quay -U quayuser'
 ```
 
 - Run the config container
 
 ```bash
-  sudo podman run --rm -it --name quay_config -p 80:8080 -p 443:8443 quay.io/projectquay/quay:latest config secret
+sudo podman run --rm -it --name quay_config -p 80:8080 -p 443:8443 quay.io/projectquay/quay:latest config secret
 ```
 
 - Follow the instructions at [Configuring Project Quay](https://docs.projectquay.io/deploy_quay.html#_configuring_project_quay)
