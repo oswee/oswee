@@ -1,61 +1,105 @@
 # Quay
 
-## TODO
+This is for TESTING ONLY!
 
-- I could use `initContainers` to run the config stage?
+## Rootless Deployment Setup
 
-## Setup
+Add CNAME record of `registry.oswee.dev` in the CloudFlare DNS or use `/etc/hosts`.
 
-For the first run please comment out the Registry container as it should be created separately.
-That also means, that in order for Quay Config container to communicate with Postgresql and Redis,
-the Redis and PG ports should be open in the firewall, those ports should be exposed in the containers
-and appropriate host addresses should be used in order to Config communicate with them.
+Add front-end and back-end in the HAProxy.
 
-TODO: Write 1st run instructions and consecvent run instructions.
+Ensure LVM is configured and image storage volume is mounted. Use/create SystemD mount unit to control that.
 
-- Stop the HAproxy to free up the `80` port
-- Add the `<host-ip> registry.oswee.com` to the `/etc/hosts`
-- Run `sudo podman play kube ./containers/quay/play.yaml`
-- Make sure to execute
+Run the deployment:
 
 ```bash
-sudo podman exec -it quay-postgres /bin/bash -c 'echo "CREATE EXTENSION IF NOT EXISTS pg_trgm" | psql -d quay -U quayuser'
+podman kube play deployment.yaml
 ```
 
-- Run the config container
+Check does the all containers run successfully:
 
 ```bash
-sudo podman run --rm -it --name quay_config -p 80:8080 -p 443:8443 quay.io/projectquay/quay:latest config secret
+podman ps -a
+podman logs registry-pod-quay  # or any other container within `registry-pod`
 ```
 
-- Follow the instructions at [Configuring Project Quay](https://docs.projectquay.io/deploy_quay.html#_configuring_project_quay)
-- Because Quay, Redis and Postgresql are running inside of single POD use the `127.0.0.1` as their host adresses
-- Kill the config container once config file is downloaded
-- Export the environment variable `export QUAY=/home/dzintars/containers/github.com/dzintars/prime/volumes/quay/data`
-- Place the config files at `tar -xvf ~/Downloads/quay-config.tar.gz -C $QUAY/config`
-- Open the firewall port `sudo firewall-cmd --add-port=9981/tcp --zone=public --permanent` (no need to pen PG and Redis ports as those are not exposed)
-- Reload the firewall `sudo firewall-cmd --reload`
-- Run the registry container
+Enable TRGM for `quay` database:
 
 ```bash
-  sudo podman run -d -p 9981:8080 -p 8443:8443 \
-  --name=registry \
+podman exec -it registry-pod-postgres /bin/bash -c 'echo "CREATE EXTENSION IF NOT EXISTS pg_trgm" | psql -d quay -U quayuser'
+```
+
+Open [registry configurator](https://registry.oswee.dev)
+
+Use default credentials:
+
+Username: `quayconfig`
+Password `secret`
+
+Fill the details:
+
+Server Hostname: `localhost:8080`
+Database Type: `Postgres`
+Database Server: `localhost:5432`
+Username: `quayuser`
+Password: `quaypass`
+Database Name: `quay`
+Redis Hostname: `localhost`
+Redis port: `6379`
+Redis password: `strongpassword`
+Super Users: `dzintars`
+
+Validate and download the config bundle.
+
+Extract downloaded config bundle into Quay config volume:
+
+```bash
+QUAY=/home/dzintars/.local/share/containers/storage/volumes/registry-pvc-quay-config/_data
+mkdir $QUAY/config
+tar -xvf ~/Downloads/quay-config.tar.gz -C $QUAY/config
+rm ~/Downloads/quay-config.tar.gz
+```
+
+Remove config container from the Pod
+
+```bash
+podman container rm -f registry-pod-quay
+```
+
+Replace Quay config container with the registry container within the same `registry-pod`:
+
+TODO: How to replace/execute this manual step within deployment manifest (I can replace `config secret` args with `registry`)?
+
+```bash
+podman run --pod registry-pod -d  \
+  --name=registry-pod-quay \
   -v $QUAY/config:/quay-registry/conf/stack:Z \
-  -v $QUAY/storage:/datastorage:Z \
-  quay.io/projectquay/quay:latest
+  -v /mnt/data/registry/quay/storage:/datastorage:z \
+  quay.io/projectquay/quay:3.8.6
 ```
 
-- Access the registry by browser at `http://registry.oswee.com:9981`
-- If willing, you can start the HAproxy and if backend is configured then access registry by [](https://registry.oswee.com)
-- Probably you want to make new organization like `oswee` to hold your images.
+Wait a bit until the registry will bootstrap itself.
+
+Use `podman logs registry-pod-quay` to see the logs of containers.
+
+See the running [registry](https://registry.oswee.dev) container.
+
+Create the first user with the same user name you added to Super Users.
 
 ## Things to enhance
 
-- Create new PG base image with TRGM enabled
-- Persistence
-- Single pod of all components
+- Create new PG base image with the database and TRGM enabled
+- Persistence and backups
 - Probably shell script to automate all this setup
 - Variables
+
+## Notes
+
+- You need to `podman login registry.redhat.io` in order to download the images
+- Most likely config should be re-generated for each new setup, because Quay uses some unique values
+- TRGM should be enabled for the `quay` database
+- I had some issues by using `:latest` Quay image
+- `docker.io/redis` requires some other configuration.
 
 ## References
 

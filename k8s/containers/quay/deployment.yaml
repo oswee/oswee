@@ -17,6 +17,15 @@ spec:
         app: registry
     spec:
       restartPolicy: Never
+      # initContainers:
+      #   # The problem is that this container depends_on Postgres and Redis for validation to succeed,
+      #   # but initContainers do not support depends_on.
+      #   - name: quay-config
+      #     image: quay.io/projectquay/quay:3.8.6
+      #     command: ["sh", "-c", "while ! ls /quay-registry/conf/stack/* >/dev/null 2>&1; do sleep 5; done"]
+      #     volumeMounts:
+      #       - name: registry-pvc-quay-config
+      #         mountPath: /quay-registry/conf/stack:Z
       containers:
         - name: postgres
           image: docker.io/postgres:latest
@@ -27,6 +36,10 @@ spec:
               value: quaypass
             - name: POSTGRES_DB
               value: quay
+          # args:
+          #   - /bin/bash
+          #   - -c
+          #   - echo "CREATE EXTENSION IF NOT EXISTS pg_trgm" | psql -d quay -U quayuser
           ports:
             - containerPort: 5432
               hostPort: 5432
@@ -38,8 +51,8 @@ spec:
               mountPath: /var/lib/postgresql/data:z
 
         - name: redis
+          # You need to `podman login -u <your-username> -p <your-password> registry.redhat.io` in order to pull this exact image.
           image: registry.redhat.io/rhel8/redis-5:1
-          # image: docker.io/redis:latest
           env:
             - name: REDIS_PASSWORD
               value: strongpassword
@@ -65,19 +78,19 @@ spec:
             # - containerPort: 8443
             #   hostPort: 7443
             #   protocol: TCP
-          # args:
-          #   - config
-          #   - secret
+          args:
+            - config
+            - secret
           # command:
-          #   - cat
-          #   - /quay-registry/conf/stack/config.yaml
+          #   - ls
+          #   - /quay-registry/conf/stack
           networks:
             - name: registry
           volumeMounts:
             - name: registry-pvc-quay-config
-              mountPath: /quay-registry/conf/stack:z
+              mountPath: /quay-registry/conf/stack:Z
             - name: registry-quay-storage
-              mountPath: /datastorage:z
+              mountPath: /datastorage:Z
 
       networks:
         - name: registry
@@ -93,8 +106,9 @@ spec:
         - name: registry-pvc-quay-config
           persistentVolumeClaim:
             claimName: registry-pvc-quay-config
+        # Separate path, so that images are stored on a separate drive.
         - name: registry-quay-storage
           hostPath:
-            path: /mnt/registry/quay/storage
+            path: /mnt/data/registry/quay
             type: Directory
 ...
