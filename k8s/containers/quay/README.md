@@ -39,7 +39,7 @@ Password `secret`
 Fill the details:
 
 Server Hostname: `registry.oswee.dev`
-TLS: `My proxy handles TLS termintation` # Something along these lines (this is important to be able to `podman login`.
+TLS: `My own load balancer handles TLS` # this is important to be able to `podman login`
 Database Type: `Postgres`
 Database Server: `localhost:5432`
 Username: `quayuser`
