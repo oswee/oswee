@@ -17,15 +17,6 @@ spec:
         app: registry
     spec:
       restartPolicy: Never
-      # initContainers:
-      #   # The problem is that this container depends_on Postgres and Redis for validation to succeed,
-      #   # but initContainers do not support depends_on.
-      #   - name: quay-config
-      #     image: quay.io/projectquay/quay:3.8.6
-      #     command: ["sh", "-c", "while ! ls /quay-registry/conf/stack/* >/dev/null 2>&1; do sleep 5; done"]
-      #     volumeMounts:
-      #       - name: registry-pvc-quay-config
-      #         mountPath: /quay-registry/conf/stack:Z
       containers:
         - name: postgres
           image: docker.io/postgres:latest
@@ -36,10 +27,6 @@ spec:
               value: quaypass
             - name: POSTGRES_DB
               value: quay
-          # args:
-          #   - /bin/bash
-          #   - -c
-          #   - echo "CREATE EXTENSION IF NOT EXISTS pg_trgm" | psql -d quay -U quayuser
           ports:
             - containerPort: 5432
               hostPort: 5432
@@ -73,17 +60,14 @@ spec:
             - redis
           ports:
             - containerPort: 8080
-              hostPort: 9981
+              hostPort: 9980
               protocol: TCP
             # - containerPort: 8443
-            #   hostPort: 7443
+            #   hostPort: 9943
             #   protocol: TCP
           args:
             - config
-            - secret
-          # command:
-          #   - ls
-          #   - /quay-registry/conf/stack
+            - secret  # this is the password to log into configurator page
           networks:
             - name: registry
           volumeMounts:

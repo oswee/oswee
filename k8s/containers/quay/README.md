@@ -38,7 +38,8 @@ Password `secret`
 
 Fill the details:
 
-Server Hostname: `localhost:8080`
+Server Hostname: `registry.oswee.dev`
+TLS: `My proxy handles TLS termintation` # Something along these lines (this is important to be able to `podman login`.
 Database Type: `Postgres`
 Database Server: `localhost:5432`
 Username: `quayuser`
@@ -86,12 +87,56 @@ See the running [registry](https://registry.oswee.dev) container.
 
 Create the first user with the same user name you added to Super Users.
 
+Create Application Token and use it to `podman login`.
+
+WORKAROUND: Fix the issue with `podman push` failing [issue #379](https://github.com/oswee/oswee/issues/379)
+
+```bash
+podman exec -u 0 -it registry-pod-quay /bin/bash
+```
+
+Change storage ownership (don't use `unshare`).
+
+```bash
+chown -R 1001:root /datastorage
+```
+
 ## Things to enhance
 
 - Create new PG base image with the database and TRGM enabled
 - Persistence and backups
 - Probably shell script to automate all this setup
 - Variables
+- Keycloak OICD authentication
+
+### TLS
+
+NOT REQUIRED if using TLS termination!
+
+NOTE: Doing this because `podman login` is failing.
+
+If you want to enable TLS copy your existing `cert1.pem` and `privkey1.pem` to `$QUAY/config` directory (not `extra_ca_certs`).
+Rename them to `ssl.cert` and `ssl.key` respectively.
+Make sure you have right file permissions.
+
+```bash
+sudo cp /etc/letsencrypt/archive/oswee.dev/{cert1.pem,privkey1.pem} $QUAY/config/
+sudo chown -R dzintars:dzintars $QUAY/config/{cert1.pem,privkey1.pem}
+mv $QUAY/config/cert1.pem $QUAY/config/ssl.cert
+mv $QUAY/config/privkey1.pem $QUAY/config/ssl.key
+chmod -R 0644 $QUAY/config/{ssl.cert,ssl.key}
+```
+
+Turns out this is not the proper solution for the failing `podman login`.
+Instead, enable TLS termination at the configurator stage. I updated instructions above.
+Also see the `EXTERNAL_TLS_TERMINATION: true` config setting.
+
+## Cleanup
+
+```bash
+podman pod rm -f registry-pod
+podman volume rm registry-pvc-quay-config registry-pvc-postgres registry-pvc-redis
+```
 
 ## Notes
 
