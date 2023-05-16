@@ -67,7 +67,7 @@ spec:
             #   protocol: TCP
           args:
             - config
-            - secret  # this is the password to log into configurator page
+            - configsecret  # this is the password to log into configurator page
           networks:
             - name: registry
           volumeMounts:
