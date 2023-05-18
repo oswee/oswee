@@ -13,12 +13,12 @@ then
 fi
 
 git config -f /var/gerrit/etc/gerrit.config gerrit.canonicalWebUrl "${CANONICAL_WEB_URL:-http://$HOSTNAME}"
+
 if [ ${HTTPD_LISTEN_URL} ];
 then
   git config -f /var/gerrit/etc/gerrit.config httpd.listenUrl ${HTTPD_LISTEN_URL}
 fi
 
-# git config -f /var/gerrit/etc/gerrit.config auth.type "${AUTH_TYPE:-LDAP}"
 # if [ ${AUTH_TYPE} ];
 # then
 #   git config -f /var/gerrit/etc/gerrit.config auth.type ${AUTH_TYPE}
