@@ -1,6 +1,9 @@
 ---
 # tasks/state.yaml file for oswee.custom.systemd role
 
+# WIP Reference!!!
+# NON-INTEGRATED! Don't use until this message is removed!
+
 - name: state | Create a logical volume
   become: true
   community.general.lvol:
@@ -17,13 +20,13 @@
 - name: state | Ensure Terraform state directory/mount point exists
   become: true
   ansible.builtin.file:
-    path: '/mnt/data/terraform'
+    path: /mnt/data/terraform
     state: directory
     mode: '0755'
     group: dzintars
     owner: dzintars
 
-- name: state | Create SystemD mount unit file
+- name: state | Create SystemD mount unit file for Terraform
   become: true
   ansible.builtin.copy:
     dest: /etc/systemd/system/mnt-data-terraform.mount
@@ -35,6 +38,23 @@
       [Mount]
       What=/dev/vgdata/lvterraform
       Where=/mnt/data/terraform
+      Type=ext4
+
+      [Install]
+      WantedBy=local-fs.target
+
+- name: state | Create SystemD mount unit file for registries
+  become: true
+  ansible.builtin.copy:
+    dest: /etc/systemd/system/mnt-data-terraform.mount
+    content: |
+      [Unit]
+      Description=Registries Store
+      Before=local-fs.target
+
+      [Mount]
+      What=/dev/vgdata/lvregistry
+      Where=/mnt/data/registry
       Type=ext4
 
       [Install]
