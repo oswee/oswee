@@ -1,4 +1,22 @@
 ---
 # tasks/config.yaml file for oswee.custom.lvm role
 
+# TODO:
+# /dev/disk/by-id
+
+# Create PV on /dev/sda
+# Create PV on /dev/sdb
+
+# Create vgraptor VG on /dev/sda
+# Create vgdata VG on /dev/sdb
+
+# I need these ^ to be created before Terraform, Podman, Vagrant and such can use them as storage.
+
+# /dev/sda - ata-WDC_WD1000DHTZ-04N21V0_WD-WXK1E32APFDC
+# /dev/sdb - ata-WDC_WD1000DHTZ-04N21V0_WD-WXN1E32MMYPU
+# /dev/sdc - ata-KINGSTON_SH103S3240G_50026B724B04A931
+# /dev/sde - ata-KINGSTON_SH103S3240G_50026B72511363A1
+# /dev/sdf - ata-KINGSTON_SH103S3240G_50026B7245029874
+# /dev/sdg
+# /dev/sdd - ata-KINGSTON_SH103S3240G_50026B724B04A8D3
 ...
