@@ -5,11 +5,6 @@
   tags:
     - swayidle.setup
   block:
-    - name: Install
-      ansible.builtin.import_tasks: install.yaml
-      tags:
-        - swayidle.install
-
     - name: Config
       ansible.builtin.import_tasks: config.yaml
       tags:

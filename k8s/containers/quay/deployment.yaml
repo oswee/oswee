@@ -1,0 +1,98 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: registry
+  namespace: oswee
+  labels:
+    app: registry
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: registry
+  template:
+    metadata:
+      labels:
+        app: registry
+    spec:
+      restartPolicy: Never
+      containers:
+        - name: postgres
+          image: docker.io/postgres:latest
+          env:
+            - name: POSTGRES_USER
+              value: quayuser
+            - name: POSTGRES_PASSWORD
+              value: quaypass
+            - name: POSTGRES_DB
+              value: quay
+          ports:
+            - containerPort: 5432
+              hostPort: 5432
+              protocol: TCP
+          networks:
+            - name: registry
+          volumeMounts:
+            - name: registry-pvc-postgres
+              mountPath: /var/lib/postgresql/data:z
+
+        - name: redis
+          # You need to `podman login -u <your-username> -p <your-password> registry.redhat.io` in order to pull this exact image.
+          image: registry.redhat.io/rhel8/redis-5:1
+          env:
+            - name: REDIS_PASSWORD
+              value: strongpassword
+          ports:
+            - containerPort: 6379
+              hostPort: 6379
+              protocol: TCP
+          networks:
+            - name: registry
+          volumeMounts:
+            - name: registry-pvc-redis
+              mountPath: /var/lib/redis/data:z
+
+        - name: quay
+          image: quay.io/projectquay/quay:3.8.6
+          depends_on:
+            - postgres
+            - redis
+          ports:
+            - containerPort: 8080
+              hostPort: 9980
+              protocol: TCP
+            # - containerPort: 8443
+            #   hostPort: 9943
+            #   protocol: TCP
+          args:
+            - config
+            - configsecret  # this is the password to log into configurator page
+          networks:
+            - name: registry
+          volumeMounts:
+            - name: registry-pvc-quay-config
+              mountPath: /quay-registry/conf/stack:Z
+            - name: registry-quay-storage
+              mountPath: /datastorage:Z
+
+      networks:
+        - name: registry
+          driver: bridge
+
+      volumes:
+        - name: registry-pvc-postgres
+          persistentVolumeClaim:
+            claimName: registry-pvc-postgres
+        - name: registry-pvc-redis
+          persistentVolumeClaim:
+            claimName: registry-pvc-redis
+        - name: registry-pvc-quay-config
+          persistentVolumeClaim:
+            claimName: registry-pvc-quay-config
+        # Separate path, so that images are stored on a separate drive.
+        - name: registry-quay-storage
+          hostPath:
+            path: /mnt/data/registry/quay
+            type: Directory
+...

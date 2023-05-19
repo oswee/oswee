@@ -1,5 +1,6 @@
 #!/bin/sh
 
+# Ideally you should avoid using ssh-agent. Look towards YubiKey GPG solution.
 export SSH_AUTH_SOCK="${XDG_RUNTIME_DIR}/ssh-agent.socket"  # You can try to export thin. SSH agent should run before KeePass can inject keys.
 
 ## TODO: This should not be there. You can also use `LD_LIBRARY_PATH=/usr/local/lib/wlroots hyprwm`

@@ -12,4 +12,7 @@
     src: ssh-agent.service.j2
     dest: '{{ ansible_env.HOME }}/.config/systemd/user/ssh-agent.service'
     mode: '0644'
+
+# TODO: Add SSH_AUTH_SOCK variable to ~/.config/environment.d/01-ssh-agent.conf
+# SSH_AUTH_SOCK=${XDG_RUNTIME_DIR}/ssh-agent.socket
 ...

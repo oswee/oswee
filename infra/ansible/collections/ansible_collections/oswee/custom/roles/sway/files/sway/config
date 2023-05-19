@@ -1,8 +1,9 @@
 #include "/etc/sway/config.d/*"
 #\ include "./config.d/*"
 
+include "./config.d/systemd.conf"
 include "./config.d/variables.conf"
-include "./config.d/xwayland.conf"
+include "./config.d/wayland.conf"
 include "./config.d/swaybar.conf"
 include "./config.d/input.conf"
 include "./config.d/rules.conf"

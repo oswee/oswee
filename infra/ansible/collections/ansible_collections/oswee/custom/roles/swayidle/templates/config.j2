@@ -1,0 +1,9 @@
+# {{ ansible_managed }}
+
+lock "swaylock -f --grace 10 --fade-in 8"
+unlock "pkill -9 swaylock"
+idlehint 580
+timeout 600 "swaylock -f --grace 10 --fade-in 8"
+timeout 960 "swaymsg 'output * dpms off'" resume "swaymsg 'output * dpms on'"
+before-sleep "swaylock -f --grace 10 --fade-in 8"
+after-resume "swaymsg 'output * dpms on'"

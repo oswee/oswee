@@ -1,0 +1,97 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: cix
+  namespace: oswee
+  labels:
+    app: cix
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: cix
+  template:
+    metadata:
+      labels:
+        app: cix
+    spec:
+      restartPolicy: Never
+      containers:
+        - name: gerrit
+          image: registry.oswee.dev/oswee/gerrit:latest
+          imagePullPolicy: Always
+          workingDir: /var/gerrit
+          depends_on:
+            - mariadb
+          env:
+            - name: CANONICAL_WEB_URL
+              value: https://gerrit.oswee.dev
+            - name: HTTPD_LISTEN_URL
+              value: proxy-https://*:8080
+            # - name: AUTH_TYPE
+            #   value: OPENID
+            #   # value: DEVELOPMENT_BECOME_ANY_ACCOUNT
+            - name: DATABASE_TYPE
+              value: mysql
+            - name: DATABASE_HOST
+              value: localhost
+            - name: DATABASE_HOSTNAME
+              value: mariadb
+            - name: DATABASE_NAME
+              value: gerritdb
+            - name: DATABASE_USERNAME
+              value: gerrit
+            - name: DATABASE_PASSWORD
+              value: gerritsecret
+          ports:
+            - name: http
+              containerPort: 8080
+              hostPort: 8080
+              protocol: TCP
+            - name: ssh
+              containerPort: 29418
+              hostPort: 29418
+              protocol: TCP
+          # args:
+          #   - java -jar /var/gerrit/bin/gerrit.war reindex --index changes
+          # command:
+          #   - init
+          networks:
+            - name: ci
+          volumeMounts:
+            - name: cix-pvc-gerrit
+              mountPath: /var/gerrit:z
+
+        - name: mariadb
+          image: docker.io/mariadb:latest
+          imagePullPolicy: IfNotPresent
+          env:
+            - name: MYSQL_ROOT_PASSWORD
+              value: secret
+            - name: MYSQL_USER
+              value: gerrit
+            - name: MYSQL_PASSWORD
+              value: gerritsecret
+            - name: MYSQL_DATABASE
+              value: gerritdb
+            # - name: MYSQL_DATABASE
+            #   value: cidata
+          networks:
+            - name: ci
+          volumeMounts:
+            - name: cix-pvc-mysql
+              mountPath: /var/lib/mysql
+
+      networks:
+        - name: ci
+          driver: bridge
+
+      volumes:
+        - name: cix-pvc-gerrit
+          persistentVolumeClaim:
+            claimName: cix-pvc-gerrit
+        - name: cix-pvc-mysql
+          persistentVolumeClaim:
+            claimName: cix-pvc-mysql
+...

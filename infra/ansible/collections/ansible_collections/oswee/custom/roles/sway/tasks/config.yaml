@@ -11,8 +11,8 @@
   ansible.builtin.file:
     path: '{{ item }}'
     state: directory
-    owner: '{{ ansible_user_id }}'
-    group: '{{ ansible_user_id }}'
+    owner: '{{ ansible_env.USER }}'
+    group: '{{ ansible_env.USER }}'
     mode: '0755'
   loop:
     - '{{ ansible_env.HOME }}/Pictures/Wallpapers'
@@ -23,8 +23,8 @@
   ansible.builtin.copy:
     src: '{{ item.src }}'
     dest: '{{ item.dest }}'
-    owner: '{{ ansible_user_id }}'
-    group: '{{ ansible_user_id }}'
+    owner: '{{ ansible_env.USER }}'
+    group: '{{ ansible_env.USER }}'
     mode: '0644'
   loop:
     - { src: wallpapers/tharsus.jpg, dest: /usr/share/backgrounds/ }

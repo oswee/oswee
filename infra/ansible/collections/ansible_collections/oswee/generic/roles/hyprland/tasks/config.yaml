@@ -18,6 +18,7 @@
 - name: config | Add .local/bin dir to system-wide $PATH.
   become: true
   ansible.builtin.copy:
+    # TODO: I really don't like this location
     dest: /etc/profile.d/system-path.sh
     content: PATH=$HOME/.local/bin:$PATH
     mode: 0755

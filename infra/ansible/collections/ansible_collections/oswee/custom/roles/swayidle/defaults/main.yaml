@@ -1,4 +1,5 @@
 ---
 # defaults/main.yaml file for oswee.custom.swayidle role
 
+swayidle_config_path: '{{ ansible_env.HOME }}/.config/swayidle'
 ...

@@ -1,0 +1,40 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: db
+  namespace: oswee
+  labels:
+    app: db
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: db
+  template:
+    metadata:
+      labels:
+        app: db
+    spec:
+      restartPolicy: Never
+      containers:
+        - name: mariadb
+          image: docker.io/mariadb:latest
+          imagePullPolicy: IfNotPresent
+          env:
+            - name: MYSQL_ROOT_PASSWORD
+              value: secret
+            - name: MYSQL_USER
+              value: gerrit
+            - name: MYSQL_PASSWORD
+              value: gerritsecret
+            - name: MYSQL_DATABASE
+              value: gerritdb
+          volumeMounts:
+            - name: db-pvc-mysql
+              mountPath: /var/lib/mysql
+      volumes:
+        - name: db-pvc-mysql
+          persistentVolumeClaim:
+            claimName: db-pvc-mysql
+...

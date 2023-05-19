@@ -6,7 +6,7 @@ galaxy_info:
   role_name: swaylock
   version: 0.0.1
   author: Dzintars Klavins
-  description: Ansible role to maintain Swaylock
+  description: Ansible role to maintain Swaylock-effects
   company: Oswee
 
   license: Apache-2.0

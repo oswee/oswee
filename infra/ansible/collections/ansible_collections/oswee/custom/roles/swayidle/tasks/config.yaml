@@ -1,4 +1,15 @@
 ---
 # tasks/config.yaml file for oswee.custom.swayidle role
 
+- name: config | Ensure config directory exists
+  ansible.builtin.file:
+    path: '{{ swayidle_config_path }}'
+    state: directory
+    mode: '0755'
+
+- name: config | Write config file
+  ansible.builtin.template:
+    src: config.j2
+    dest: '{{ swayidle_config_path }}/config'
+    mode: '0600'
 ...

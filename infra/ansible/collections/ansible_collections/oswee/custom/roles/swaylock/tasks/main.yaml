@@ -10,11 +10,6 @@
       tags:
         - swaylock.config
 
-    - name: Environment
-      ansible.builtin.import_tasks: environment.yaml
-      tags:
-        - swaylock.environment
-
 # - name: Teardown
 #   ansible.builtin.import_tasks: teardown.yaml
 #   tags:
