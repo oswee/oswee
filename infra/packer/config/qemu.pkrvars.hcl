@@ -1,5 +1,5 @@
 qemu_binary            = "/usr/bin/qemu-system-x86_64"
-qemu_registry_path     = "/media/registry/qemu"
+qemu_registry_path     = "/mnt/data/registry/qemu"
 qemu_machine_type      = "q35"
 qemu_format            = "qcow2"
 qemu_accelerator       = "kvm"

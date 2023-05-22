@@ -1,1 +1,1 @@
-vagrant_registry_path     = "/media/registry/vagrant"
+vagrant_registry_path     = "/mnt/data/registry/vagrant"
