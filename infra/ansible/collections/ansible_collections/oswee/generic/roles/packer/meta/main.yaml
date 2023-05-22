@@ -24,6 +24,6 @@ galaxy_info:
     - dzintars
     - fedora
 
-dependencies:
-  - role: oswee.generic.ovmf
+# dependencies:
+#   - role: oswee.generic.ovmf
 ...
