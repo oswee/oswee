@@ -27,4 +27,4 @@ WLR_DRM_NO_MODIFIERS=1
 
 _JAVA_AWT_WM_NONREPARENTING=1
 
-
+ZK_NOTEBOOK_DIR=$HOME/code/github.com/dzintars/agora
