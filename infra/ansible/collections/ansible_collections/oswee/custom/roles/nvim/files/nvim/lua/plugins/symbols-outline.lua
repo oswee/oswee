@@ -10,6 +10,8 @@ return {
 	config = function()
 		local plugin = require('symbols-outline')
 
-		plugin.setup({})
+		plugin.setup({
+			show_numbers = true,
+		})
 	end,
 }
