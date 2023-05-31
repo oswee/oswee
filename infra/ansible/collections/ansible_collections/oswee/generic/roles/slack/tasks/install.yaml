@@ -1,0 +1,15 @@
+---
+# tasks/install.yaml file for oswee.generic.slack role
+
+# https://slack.com/intl/en-lv/downloads/instructions/fedora
+- name: install | Install Slack
+  ansible.builtin.dnf:
+    name: https://downloads.slack-edge.com/linux_releases/slack-4.32.122-0.1.el8.x86_64.rpm
+    state: present
+
+- name: install | Copy Slack desktop entry
+  ansible.builtin.copy:
+    src: slack.desktop
+    dest: /home/{{ ansible_env.USER }}/.local/share/applications/slack.desktop
+    mode: '0644'
+...
