@@ -1,0 +1,73 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: zuul
+  namespace: oswee
+  labels:
+    app: zuul
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: zuul
+  template:
+    metadata:
+      labels:
+        app: zuul
+    spec:
+      restartPolicy: Never
+      containers:
+        - name: gerrit
+          image: registry.oswee.dev/oswee/gerrit:latest
+          imagePullPolicy: Always
+          workingDir: /var/gerrit
+          env:
+            - name: CANONICAL_WEB_URL
+              value: https://gerrit.oswee.dev
+            - name: HTTPD_LISTEN_URL
+              value: proxy-https://*:8080
+          ports:
+            - name: http
+              containerPort: 8080
+              hostPort: 8080
+              protocol: TCP
+            - name: ssh
+              containerPort: 29418
+              hostPort: 29418
+              protocol: TCP
+          networks:
+            - name: zuul
+          volumeMounts:
+            - name: zuul-pvc-gerrit
+              mountPath: /var/gerrit:z
+
+        - name: gerritconfig
+          image: quay.io/zuul-ci/zuul-executor
+          env:
+            - http_proxy
+            - https_proxy
+            - no_proxy=${no_proxy},gerrit
+          depends_on:
+            - gerrit
+          volumes:
+            - "sshkey:/var/ssh:z"
+            - "nodessh:/var/node:z"
+            - "./playbooks/:/var/playbooks/:z"
+            - "certs:/var/certs:z"
+            - "../../../tools/:/var/zuul-tools/:z"
+          # NOTE(pabelanger): Be sure to update this line each time we change the
+          # default version of ansible for Zuul.
+          command: "/usr/local/lib/zuul/ansible/6/bin/ansible-playbook /var/playbooks/setup.yaml"
+          networks:
+            - zuul
+
+      networks:
+        - name: zuul
+          driver: bridge
+
+      volumes:
+        - name: zuul-pvc-gerrit
+          persistentVolumeClaim:
+            claimName: zuul-pvc-gerrit
+...
