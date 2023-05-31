@@ -16,5 +16,5 @@ spec:
         mode: SIMPLE
         credentialName: kiali-cert
       hosts:
-        - "kiali.oswee.local"
+        - kiali.oswee.local
 ...
