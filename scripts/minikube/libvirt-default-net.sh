@@ -22,4 +22,7 @@ virsh net-autostart default
 
 virsh net-start default
 
+sudo virsh net-start virbr1
+sudo virsh net-autostart virbr1
+
 # virsh net-list --all
