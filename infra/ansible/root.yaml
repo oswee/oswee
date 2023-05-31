@@ -46,8 +46,12 @@
   ansible.builtin.import_playbook: playbooks/web.yaml
 
 - name: Virtualization
+  tags:
+    - virtualization
   ansible.builtin.import_playbook: playbooks/virtualization.yaml
 
 - name: Containers
+  tags:
+    - containers
   ansible.builtin.import_playbook: playbooks/containers.yaml
 ...
