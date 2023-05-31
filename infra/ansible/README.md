@@ -10,10 +10,10 @@ ATM I don't care about role reusability. It works only on my hardware and setup 
 
 ## Usage
 
-**DOT'T ATTEMPT TO RUN __ROOT__ PLAYBOOK IN A SINGLE PLAY!**
+**DOT'T ATTEMPT TO RUN **ROOT** PLAYBOOK IN A SINGLE PLAY!**
 
 Root playbook is **massive** and highly specific for my own requirements.
-Instead, rely on __tag__ filtering if you want to play just some parts.
+Instead, rely on **tag** filtering if you want to play just some parts.
 
 Include the collection in your project collections.yml file and import it.
 
@@ -51,7 +51,7 @@ In general `molecule init` is not used there at all. You can copy `default` scen
 
 ### Molecule dependencies
 
-To resolve Molecule dependencies in local development follow this (discussion)[https://github.com/oswee/ansible/discussions/73].
+To resolve Molecule dependencies in local development follow this [discussion](https://github.com/oswee/ansible/discussions/73).
 
 Make sure you have namespace created `mkdir -p ~/.ansible/collections/ansible_collections/oswee/`
 Then from each collection create symlink like `ln -s $PWD ~/.ansible/collections/ansible_collections/oswee/`
