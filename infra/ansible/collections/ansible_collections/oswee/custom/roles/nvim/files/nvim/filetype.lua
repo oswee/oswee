@@ -8,6 +8,7 @@ vim.filetype.add({
 		tfvars = 'terraform-vars',
 		terraformrc = "terraform",
 		sh = "bash",
+		Containerfile = "dockerfile",
 	},
 	pattern = {
 		["*/ansible/**/*.{yaml,yml}"] = "yaml.ansible",
