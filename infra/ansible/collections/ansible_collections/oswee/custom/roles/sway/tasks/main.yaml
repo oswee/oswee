@@ -3,7 +3,7 @@
 
 - name: Setup
   tags:
-    - sway.setup
+    - sway.custom
   block:
     - name: Config
       ansible.builtin.import_tasks: config.yaml
