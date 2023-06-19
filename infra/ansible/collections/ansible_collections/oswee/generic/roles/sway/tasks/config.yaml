@@ -1,9 +1,0 @@
----
-# tasks/config.yaml file for oswee.generic.sway role
-
-- name: config | Create sway directory
-  ansible.builtin.file:
-    path: '{{ sway_config_path }}'
-    state: directory
-    mode: '0755'
-...

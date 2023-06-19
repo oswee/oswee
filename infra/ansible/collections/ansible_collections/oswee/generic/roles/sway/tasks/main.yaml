@@ -3,17 +3,12 @@
 
 - name: Setup
   tags:
-    - sway.setup
+    - sway.generic
   block:
     - name: Install
       ansible.builtin.import_tasks: install.yaml
       tags:
         - sway.install
-
-    - name: Config
-      ansible.builtin.import_tasks: install.yaml
-      tags:
-        - sway.config
 
     - name: Environment
       ansible.builtin.import_tasks: environment.yaml
