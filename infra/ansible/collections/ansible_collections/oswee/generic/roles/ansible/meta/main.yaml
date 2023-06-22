@@ -1,17 +1,17 @@
 ---
-# roles/ansible/meta/main.yaml
+# meta/main.yaml file for oswee.generic.ansible role
 
 galaxy_info:
-  namespace: 'oswee'
-  role_name: 'ansible'
-  version: '0.0.1'
-  author: 'Dzintars Klavins'
-  description: 'Ansible role to maintain Ansible'
-  company: 'Oswee'
+  namespace: oswee
+  role_name: ansible
+  version: 0.0.1
+  author: Dzintars Klavins
+  description: Ansible role to maintain Ansible
+  company: Oswee
 
-  license: 'Apache-2.0'
+  license: Apache-2.0
 
-  min_ansible_version: '2.12'
+  min_ansible_version: 2.12
 
   platforms:
     - name: Fedora
@@ -19,10 +19,11 @@ galaxy_info:
         - 35
 
   galaxy_tags:
-    - 'ansible'
-    - 'oswee'
-    - 'dzintars'
-    - 'fedora'
+    - ansible
+    - oswee
+    - dzintars
+    - fedora
 
-dependencies: []
+dependencies:
+  - role: oswee.generic.zsh
 ...
