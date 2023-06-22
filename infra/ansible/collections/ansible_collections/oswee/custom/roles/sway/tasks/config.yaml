@@ -34,4 +34,9 @@
     mode: '0644'
   loop:
     - { src: wallpapers/tharsus.jpg, dest: /usr/share/backgrounds/ }
+
+- name: config | Add TTY start command to .zlogin
+  ansible.builtin.lineinfile:
+    dest: '{{ ansible_env.HOME }}/.zlogin'
+    line: '[ "$(tty)" = "/dev/tty1" ] && exec sway'
 ...

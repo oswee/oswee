@@ -25,6 +25,7 @@ galaxy_info:
     - fedora
 
 dependencies:
+  - role: oswee.generic.zsh
   - role: oswee.generic.sway
   - role: oswee.generic.waybar
   - role: oswee.custom.wlogout
