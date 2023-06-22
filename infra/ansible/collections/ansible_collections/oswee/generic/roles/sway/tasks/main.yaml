@@ -10,11 +10,6 @@
       tags:
         - sway.install
 
-    - name: Environment
-      ansible.builtin.import_tasks: environment.yaml
-      tags:
-        - sway.environment
-
 # - name: Teardown
 #   ansible.builtin.import_tasks: teardown.yaml
 #   tags:
