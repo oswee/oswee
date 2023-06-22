@@ -7,4 +7,14 @@
     name: '{{ item }}'
     state: absent
   loop: '{{ packages.redhat }}'
+
+- name: teardown | Remove root .zshenv
+  ansible.builtin.file:
+    path: '{{ ansible_env.HOME }}/.zshenv'
+    state: absent
+
+- name: teardown | Remove config files
+  ansible.builtin.file:
+    path: '{{ zsh_config_path }}'
+    state: absent
 ...

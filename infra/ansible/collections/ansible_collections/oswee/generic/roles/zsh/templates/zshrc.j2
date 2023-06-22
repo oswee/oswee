@@ -1,10 +1,11 @@
+# Loaded at every shell session
+
 export ZSH="/home/dzintars/.oh-my-zsh"
 plugins=(git zsh-autosuggestions vi-mode)
 source $ZSH/oh-my-zsh.sh
 
 # Aliases
 alias luamake=/home/dzintars/code/github.com/sumneko/lua-language-server/3rd/luamake/luamake
-# alias emacs="emacsclient -c -a 'emacs'"
 
 # https://youtu.be/1a5NiMhqAR0?t=101
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
@@ -15,8 +16,4 @@ autoload -U +X bashcompinit && bashcompinit
 # Enable vi mode
 bindkey -v
 
-# pnpm
-export PNPM_HOME="/home/dzintars/.local/share/pnpm"
-export PATH="$PNPM_HOME:$PATH"
-# pnpm end
 source /home/dzintars/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh

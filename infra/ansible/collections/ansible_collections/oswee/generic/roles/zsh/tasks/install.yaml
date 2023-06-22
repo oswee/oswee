@@ -14,12 +14,6 @@
     dest: '{{ ansible_env.HOME }}/.oh-my-zsh'
     version: master
 
-# - name: install | Clone PowerLevel10k theme
-#   ansible.builtin.git:
-#     repo: https://github.com/romkatv/powerlevel10k.git
-#     dest: '{{ ansible_env.HOME }}/.oh-my-zsh/custom/themes/powerlevel10k'
-#     version: master
-#
 - name: install | Clone zsh-autosuggestions plugin
   ansible.builtin.git:
     repo: https://github.com/zsh-users/zsh-autosuggestions.git
