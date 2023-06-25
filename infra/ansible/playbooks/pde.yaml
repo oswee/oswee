@@ -42,8 +42,8 @@
       ansible.builtin.import_role:
         name: oswee.generic.terraform
       vars:
-        terraform_version: 1.3.7
-        terraform_ls_version: 0.30.1
+        terraform_version: 1.5.1
+        terraform_ls_version: 0.31.3
 
     # - role: oswee.custom.terraform
 
