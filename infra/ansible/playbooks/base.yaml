@@ -5,15 +5,9 @@
   gather_facts: true
 
   tasks:
-    - name: Haproxy
-      tags:
-        - haproxy
-      ansible.builtin.import_role:
-        name: oswee.generic.haproxy
-
-    - name: Haproxy
-      tags:
-        - haproxy
-      ansible.builtin.import_role:
-        name: oswee.custom.haproxy
+    # - name: Haproxy
+    #   tags:
+    #     - haproxy
+    #   ansible.builtin.import_role:
+    #     name: oswee.generic.haproxy
 ...
