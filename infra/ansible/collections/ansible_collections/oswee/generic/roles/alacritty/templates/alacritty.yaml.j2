@@ -1,5 +1,10 @@
 # Configuration for Alacritty, the GPU enhanced terminal emulator.
 
+# All imports must either be absolute paths starting with `/`, or paths relative
+# to the user's home directory starting with `~/`.
+#import:
+# - ~/.local/share/alacritty/gruvbox.yaml
+
 # Any items in the `env` entry below will be added as
 # environment variables. Some entries may override variables
 # set by alacritty itself.
@@ -67,6 +72,8 @@ window:
   # Scroll to the bottom when new text is written to the terminal.
   auto_scroll: false
 
+	draw_bold_text_with_bright_colors: true
+
   # Colors (Gruvbox dark)
 colors:
   # Default colors
@@ -133,3 +140,8 @@ font:
   glyph_offset:
     x: 0
     y: 0
+
+key_bindings:
+  - { key: Key0,           mods: Control,                 action: ResetFontSize    }
+  - { key: Equals,         mods: Control,                 action: IncreaseFontSize }
+  - { key: Minus,          mods: Control,                 action: DecreaseFontSize }
