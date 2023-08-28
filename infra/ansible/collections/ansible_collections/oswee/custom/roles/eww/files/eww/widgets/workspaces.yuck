@@ -1,0 +1,17 @@
+(defwidget workspaces []
+  (box :class "workspaces"
+       :orientation "h"
+       :space-evenly true
+       :halign "start"
+       :spacing 4
+    (button :onclick "sway workspace 1" 1)
+    (button :onclick "sway workspace 2" 2)
+    (button :onclick "sway workspace 3" 3)
+    (button :onclick "sway workspace 4" 4)
+    (button :onclick "sway workspace 5" 5)
+    (button :onclick "sway workspace 6" 6)
+    (button :onclick "sway workspace 7" 7)
+    (button :onclick "sway workspace 8" 8)
+    (button :onclick "sway workspace 9" 9)
+    (button :onclick "sway workspace 10" 10)))
+

@@ -1,0 +1,28 @@
+---
+# meta/main.yaml file for oswee.generic.eww role
+
+galaxy_info:
+  namespace: oswee
+  role_name: eww
+  version: 0.0.1
+  author: Dzintars Klavins
+  description: Ansible role to maintain Eww
+  company: Oswee
+
+  license: Apache-2.0
+
+  min_ansible_version: 2.14
+
+  platforms:
+    - name: Fedora
+      versions:
+        - 37
+
+  galaxy_tags:
+    - eww
+    - oswee
+    - dzintars
+    - fedora
+
+dependencies: []
+...

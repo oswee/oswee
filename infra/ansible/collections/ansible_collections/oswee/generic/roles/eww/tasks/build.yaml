@@ -1,0 +1,18 @@
+---
+# tasks/build.yaml file for oswee.generic.eww role
+
+- name: build | Clone repository
+  ansible.builtin.git:
+    repo: '{{ eww_repo_url }}'
+    dest: '{{ eww_source_dir }}'
+    version: master
+    depth: 1
+  register: eww_repo
+
+- name: build | Build Eww
+  ansible.builtin.command: cargo build --release --no-default-features --features=wayland
+  args:
+    chdir: '{{ eww_source_dir }}'
+  when: eww_repo.changed
+  register: eww_build
+...

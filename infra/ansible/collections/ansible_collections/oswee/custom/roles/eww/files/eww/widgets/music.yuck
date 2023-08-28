@@ -1,0 +1,7 @@
+(defwidget music []
+  (box :class "music"
+       :orientation "h"
+       :space-evenly false
+       :halign "center"
+    {music != "" ? "🎵${music}" : ""}))
+
