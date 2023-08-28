@@ -11,6 +11,6 @@
 - name: install | Clone Tmux Plugin Manager
   ansible.builtin.git:
     repo: https://github.com/tmux-plugins/tpm.git
-    dest: '{{ ansible_env.HOME }}/.tmux/plugins/tpm'
+    dest: '{{ tmux_config_path }}/plugins/tpm'
     version: master
 ...
