@@ -1,11 +1,27 @@
 ---
 # tasks/config.yaml file for oswee.custom.git role
 
-- name: config | Copy template/s
+- name: config | Ensure config directory exists
+  ansible.builtin.file:
+    path: '{{ git_config_path }}'
+    state: directory
+    mode: '0755'
+
+- name: config | Copy Git config template
   ansible.builtin.template:
-    src: '{{ item.src }}'
-    dest: '{{ item.dest }}'
-    mode: 0644
-  loop:
-    - { src: gitconfig.j2, dest: $HOME/.gitconfig }
+    src: config.j2
+    dest: '{{ git_config_path }}/config'
+    mode: '0644'
+
+- name: config | Ensure hooks directory exists
+  ansible.builtin.file:
+    path: '{{ git_config_path }}/hooks'
+    state: directory
+    mode: '0755'
+
+- name: config | Copy pre-commit hook template
+  ansible.builtin.template:
+    src: pre-commit.j2
+    dest: '{{ git_config_path }}/hooks/pre-commit'
+    mode: '0755'
 ...

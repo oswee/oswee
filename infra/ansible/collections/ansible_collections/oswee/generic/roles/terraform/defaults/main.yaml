@@ -3,8 +3,8 @@
 
 binary_path: /usr/local/bin
 
-terraform_version: 1.5.1
+terraform_version: 1.5.6
 terraform_url: https://releases.hashicorp.com/terraform/{{ terraform_version }}/terraform_{{ terraform_version }}_linux_amd64.zip
-terraform_ls_version: 0.31.3
+terraform_ls_version: 0.31.4
 terraform_ls_url: https://releases.hashicorp.com/terraform-ls/{{ terraform_ls_version }}/terraform-ls_{{ terraform_ls_version }}_linux_amd64.zip
 ...

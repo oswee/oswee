@@ -1,3 +1,5 @@
+# {{ ansible_managed }}
+
 [user]
   name = {{ git_user_full_name }}
   email = {{ git_user_email }}
@@ -24,6 +26,7 @@
 
 [core]
   editor = nvim
+	hooksPath = {{ ansible_env.HOME }}/.config/git/hooks
 
 [commit]
   gpgsign = true

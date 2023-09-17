@@ -1,7 +1,8 @@
 ---
 # defaults/main.yaml file for oswee.custom.git role
 
+git_config_path: '{{ ansible_env.HOME }}/.config/git'
 git_user_full_name: Dzintars Klavins
 git_user_email: dzintars.klavins@gmail.com
-git_gpg_key_fingerprint: C97D0274C5DC06C169463694C1D8E7C9DC570A10
+git_gpg_key_fingerprint: 356A2247D7C602CF
 ...
