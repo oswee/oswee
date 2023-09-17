@@ -14,6 +14,7 @@ return {
 			'golangci_lint_ls',
 			'gopls',
 			'html',
+			'helm_ls',
 			'jsonls',
 			'lua_ls',
 			'marksman',
