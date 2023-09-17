@@ -9,7 +9,7 @@ return {
 	config = function()
 		local plugin = require('gruvbox')
 		plugin.setup({
-			contrast = 'hard',
+			contrast = 'hard', -- or "soft"
 			italic = {
 				strings = true,
 				operators = true,
@@ -17,7 +17,7 @@ return {
 			}
 		})
 
-		vim.opt.background = 'dark'
+		vim.opt.background = 'light'
 		vim.cmd([[colorscheme gruvbox]])
 	end,
 }
