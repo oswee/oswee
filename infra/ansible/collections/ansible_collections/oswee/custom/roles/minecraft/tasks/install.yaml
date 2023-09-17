@@ -8,6 +8,25 @@
     state: present
   loop: '{{ packages.redhat }}'
 
+# TODO: This will not work!
+- name: config | Ensure Games directory exists
+  ansible.builtin.file:
+    path: '{{ item }}'
+    state: directory
+    mode: '0755'
+  loop:
+   - { '{{ ansible_env.HOME }}/Games'}
+   - { '{{ ansible_env.HOME }}/.local/share/icons/hicolor/16x16/apps'}
+   - { '{{ ansible_env.HOME }}/.local/share/icons/hicolor/24x24/apps'}
+   - { '{{ ansible_env.HOME }}/.local/share/icons/hicolor/32x32/apps'}
+   - { '{{ ansible_env.HOME }}/.local/share/icons/hicolor/48x48/apps'}
+   - { '{{ ansible_env.HOME }}/.local/share/icons/hicolor/64x64/apps'}
+   - { '{{ ansible_env.HOME }}/.local/share/icons/hicolor/96x96/apps'}
+   - { '{{ ansible_env.HOME }}/.local/share/icons/hicolor/128x128/apps'}
+   - { '{{ ansible_env.HOME }}/.local/share/icons/hicolor/256x256/apps'}
+   - { '{{ ansible_env.HOME }}/.local/share/icons/hicolor/512x512/apps'}
+   - { '{{ ansible_env.HOME }}/.local/share/icons/hicolor/1024x1024/apps'}
+
 - name: install | Download Minecraft launcher
   ansible.builtin.unarchive:
     src: https://launcher.mojang.com/download/Minecraft.tar.gz
@@ -33,7 +52,7 @@
   ansible.builtin.copy:
     src: '{{ item.src }}'
     dest: /home/{{ minecraft_user }}/.local/share/icons/hicolor/{{ item.dest }}
-    mode: 0777
+    mode: '0777'
   loop:
     - { src: icons/minecraft-16.png, dest: 16x16/apps/minecraft.png }
     - { src: icons/minecraft-24.png, dest: 24x24/apps/minecraft.png }
