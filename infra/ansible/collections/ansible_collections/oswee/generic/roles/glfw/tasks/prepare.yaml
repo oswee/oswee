@@ -15,12 +15,12 @@
     state: present
   loop: '{{ glfw_deps_wayland.redhat }}'
 
-- name: prepare | Install X11 dependencies
-  become: true
-  ansible.builtin.dnf:
-    name: '{{ item }}'
-    state: present
-  loop: '{{ glfw_deps_x11.redhat }}'
+# - name: prepare | Install X11 dependencies
+#   become: true
+#   ansible.builtin.dnf:
+#     name: '{{ item }}'
+#     state: present
+#   loop: '{{ glfw_deps_x11.redhat }}'
 
 - name: prepare | Clone source code repository
   ansible.builtin.git:
@@ -28,4 +28,3 @@
     dest: '{{ glfw_source_path }}'
     version: '{{ glfw_commit_hash | default("main") }}'
 ...
-
