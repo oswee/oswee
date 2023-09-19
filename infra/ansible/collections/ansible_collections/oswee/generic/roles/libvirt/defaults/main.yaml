@@ -2,5 +2,5 @@
 # defaults file for Libvirt
 
 libvirt_group: libvirt
-libvirt_system_user: '{{ system_user }}'
+libvirt_system_user: '{{ ansible_env.USER }}'
 ...

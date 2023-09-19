@@ -2,5 +2,4 @@
 # defaults/main.yaml file for oswee.generic.sway role
 
 sway_config_path: '{{ ansible_env.HOME }}/.config/sway'
-sway_environment_path: /etc/profile.d/sway.sh
 ...

@@ -1,4 +1,5 @@
 ---
 # defaults/main.yaml file for oswee.generic.tmux role
 
+tmux_config_path: '{{ ansible_env.HOME }}/.config/tmux '
 ...

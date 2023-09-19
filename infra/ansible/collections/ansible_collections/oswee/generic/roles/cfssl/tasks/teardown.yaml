@@ -1,5 +1,5 @@
 ---
-# tasks file for Cfssl
+# tasks/teardown.yaml file for oswee.generic.cfssl role
 
 - name: teardown | Remove CFSSL repository
   ansible.builtin.file:
@@ -9,12 +9,12 @@
 - name: teardown | Remove CFSSL binaries
   become: true
   ansible.builtin.file:
-    path: '/opt/cfssl'
+    path: /opt/cfssl
     state: absent
 
 - name: teardown | Remove CFSSL from System $PATH
   become: true
   ansible.builtin.file:
-    path: '/etc/profile.d/cfssl.sh'
+    path: /etc/profile.d/cfssl.sh
     state: absent
 ...

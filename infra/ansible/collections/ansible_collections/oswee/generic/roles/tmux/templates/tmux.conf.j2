@@ -1,10 +1,25 @@
-# source "/usr/share/tmux/powerline.conf"
+# {{ ansible_managed }}
+
+# List of plugins
+set -g @plugin 'tmux-plugins/tpm'
+set -g @plugin 'tmux-plugins/tmux-yank'
+set -g @plugin 'tmux-plugins/tmux-sensible'
+set -g @plugin 'tmux-plugins/tmux-resurrect'
+set -g @plugin 'tmux-plugins/tmux-continuum'
+set -g @plugin 'christoomey/vim-tmux-navigator'
+set -g @plugin 'egel/tmux-gruvbox'
 
 # remap prefix from 'C-b' to 'C-t'
 unbind C-b
-set-option -g prefix C-t
+set -g prefix C-t
 bind-key C-t send-prefix
+# Switch to last session
+bind-key C-t switch-client -l
+# Switch to last window (this is the default binding)
 bind-key C-l last-window
+
+# Workaround to clear the screen (this is because of vim-tmux-navigator)
+bind C-l send-keys 'C-l'
 
 # Source config file (r/s will conflict with resurrect plugin)
 # bind r source-file ~/.tmux.conf
@@ -15,16 +30,20 @@ set -g base-index 1
 # Start pane index at 1 instead of 0
 setw -g pane-base-index 1
 
+set -g renumber-windows on
+
 # Highlight window when it has new activity
 setw -g monitor-activity on
 set -g visual-activity off
 
 unbind '"'
 unbind %
-bind = split-window -h
-bind - split-window -v
+bind = split-window -h -c "#{pane_current_path}"
+bind - split-window -v -c "#{pane_current_path}"
 
-bind-key -n C-M-Space display-popup -E "nvim ~/code/github.com/dzintars/obsidian/ -c ZkNew --dir=daily"
+# Popup binding specifically for Alacritty. For Kitty use -E
+# bind-key -n C-u display-popup -e "nvim /code/dzintars/agora/ -c ZkNew --dir=daily"
+bind -n C-u display-popup -e "echo #{pane_current_path}"
 
 # switch panes using Alt-arrow without prefix
 # bind -n M-Left select-pane -L
@@ -60,30 +79,21 @@ bind-key -n C-M-Space display-popup -E "nvim ~/code/github.com/dzintars/obsidian
 # Enable mouse mode
 set -g mouse on
 
-set-option -g focus-events on
-set-option -g visual-bell on
+set -g focus-events on
+set -g visual-bell on
 
 # NeoVim ERROR: escape-time (500) is higher than 300ms
 # set-option -sg escape-time 10
 
 # True color for the Vim
-set-option  -g default-terminal "tmux-256color"
-set-option -gas terminal-overrides ',kitty:RGB'
+set  -g default-terminal "tmux-256color"
+# set -gas terminal-overrides ',alacritty:RGB'
+set -sa terminal-features ',alacritty:RGB'
 # Added next 2 lines because of folke/lsp-colors readme
 # set -as terminal-overrides ',*:Smulx=\E[4::%p1%dm'  # undercurl support
 # set -as terminal-overrides ',*:Setulc=\E[58::2::%p1%{65536}%/%d::%p1%{256}%/%{255}%&%d::%p1%{255}%&%d%;m'  # underscore colours - needs tmux-3.0
 
-set -g @tmux_power_theme 'default'
-# set -g @tmux_power_theme 'snow'
-# set -g @tmux_power_theme '#ebdbb2'
-
-# List of plugins
-set -g @plugin 'tmux-plugins/tpm'
-set -g @plugin 'wfxr/tmux-power'
-set -g @plugin 'tmux-plugins/tmux-yank'
-set -g @plugin 'tmux-plugins/tmux-sensible'
-set -g @plugin 'tmux-plugins/tmux-resurrect'
-set -g @plugin 'tmux-plugins/tmux-continuum'
+set -g @tmux-gruvbox 'light' # or 'light'
 
 # Initialize TMUX plugin manager (keep this line at the very bottom of tmux.conf)
-run -b '~/.tmux/plugins/tpm/tpm'
+run -b '{{ tmux_config_path }}/plugins/tpm/tpm'

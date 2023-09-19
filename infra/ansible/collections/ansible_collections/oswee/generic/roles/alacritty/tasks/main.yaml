@@ -1,18 +1,23 @@
 ---
-# tasks file for alacritty
+# tasks/main.yaml file for oswee.generic.alacritty role
 
-- name: Install
-  import_tasks: install.yaml
+- name: Setup
   tags:
-    - alacritty:setup
-    - alacritty:setup:install
+    - alacritty.setup
+  block:
+    - name: Install
+      ansible.builtin.import_tasks: install.yaml
+      tags:
+        - alacritty.install
 
-- name: Config
-  import_tasks: configure.yaml
+    - name: Config
+      ansible.builtin.import_tasks: config.yaml
+      tags:
+        - alacritty.config
+
+- name: Teardown
+  ansible.builtin.import_tasks: teardown.yaml
   tags:
-    - alacritty:setup
-    - alacritty:setup:config
-# - name: Remove
-#   import_tasks: remove.yaml
-#   tags:
-#     - alacritty:remove
+    - never
+    - alacritty.teardown
+...

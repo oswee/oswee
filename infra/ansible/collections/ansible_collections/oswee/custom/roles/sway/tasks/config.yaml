@@ -1,11 +1,17 @@
 ---
 # tasks/config.yaml file for oswee.custom.sway role
 
+- name: config | Ensure config directory exists
+  ansible.builtin.file:
+    path: '{{ sway_config_path }}'
+    state: directory
+    mode: '0755'
+
 - name: config | Copy all configuration files
-  ansible.builtin.copy:
+  ansible.posix.synchronize:
     src: sway/
     dest: '{{ sway_config_path }}'
-    mode: '0755'
+    archive: true
 
 - name: config | Create Pictures directories
   ansible.builtin.file:
@@ -28,4 +34,9 @@
     mode: '0644'
   loop:
     - { src: wallpapers/tharsus.jpg, dest: /usr/share/backgrounds/ }
+
+- name: config | Add TTY start command to .zlogin
+  ansible.builtin.lineinfile:
+    dest: '{{ ansible_env.HOME }}/.zlogin'
+    line: '[ "$(tty)" = "/dev/tty1" ] && exec sway'
 ...

@@ -1,8 +1,11 @@
+---
+# {{ ansible_managed }}
+
 # Configuration for Alacritty, the GPU enhanced terminal emulator.
 
-# Any items in the `env` entry below will be added as
-# environment variables. Some entries may override variables
-# set by alacritty itself.
+import:
+ - '{{ alacritty_config_path }}/themes/{{ alacritty_theme }}.yaml'
+
 env:
   # TERM variable
   #
@@ -67,36 +70,7 @@ window:
   # Scroll to the bottom when new text is written to the terminal.
   auto_scroll: false
 
-  # Colors (Gruvbox dark)
-colors:
-  # Default colors
-  primary:
-    # hard contrast: background = '#1d2021'
-    background: '#282828'
-    # soft contrast: background = '#32302f'
-    foreground: '#ebdbb2'
-
-  # Normal colors
-  normal:
-    black:   '#282828'
-    red:     '#cc241d'
-    green:   '#98971a'
-    yellow:  '#d79921'
-    blue:    '#458588'
-    magenta: '#b16286'
-    cyan:    '#689d6a'
-    white:   '#a89984'
-
-  # Bright colors
-  bright:
-    black:   '#928374'
-    red:     '#fb4934'
-    green:   '#b8bb26'
-    yellow:  '#fabd2f'
-    blue:    '#83a598'
-    magenta: '#d3869b'
-    cyan:    '#8ec07c'
-    white:   '#ebdbb2'
+  draw_bold_text_with_bright_colors: true
 
     # Spaces per Tab (changes require restart)
 #
@@ -105,31 +79,37 @@ colors:
 # Some applications, like Emacs, rely on knowing about the width of a tab.
 # To prevent unexpected behavior in these applications, it's also required to
 # change the `it` value in terminfo when altering this setting.
-#tabspaces: 2
+tabspaces: 2
+
+# cursor:
+#   style:
+#     shape: Beam
+#     blinking: Always
+#   blink_interval: 500
+#   unfocused_hollow: true
+#   thickness: 0.15
 
 # Font configuration (changes require restart)
 font:
   normal:
-    family: COMIC CODE  # Paid font located at ~/.fonts/
+    family: ComicCode Nerd Font
     style: Regular
-  # bold:
-  #   family: monospace
-  #   style: Bold
-  # italic:
-  #   family: monospace
-  #   style: Italic
-  # Point size
+  bold:
+    family: Comic Code Nerd Font
+    style: Bold
+  italic:
+    family: Comic Code Nerd Font
+    style: Italic
   size: 9
-
-  # Offset is the extra space around each character. `offset.y` can be thought of
-  # as modifying the line spacing, and `offset.x` as modifying the letter spacing.
   offset:
     x: 0
     y: 0
-
-  # Glyph offset determines the locations of the glyphs within their cells with
-  # the default being at the bottom. Increasing `x` moves the glyph to the right,
-  # increasing `y` moves the glyph upwards.
   glyph_offset:
     x: 0
     y: 0
+
+key_bindings:
+  - { key: Key0,           mods: Control,                 action: ResetFontSize    }
+  - { key: Equals,         mods: Control,                 action: IncreaseFontSize }
+  - { key: Minus,          mods: Control,                 action: DecreaseFontSize }
+...

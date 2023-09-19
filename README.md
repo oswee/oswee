@@ -13,6 +13,14 @@ This is sandbox monorepository to test Bazel in action to build "microservices" 
 
 Until this message is removed, the status is WIP.
 
+UPDATE: 2023 JUN:
+Looking into Gerrit, Zuul CI, Keycloak, Quay and other tools to incorporate.
+In my initial simple tests it seems that Zuul CI workflow is bit slow to "kick in".
+My ultimate goal is to run full pipeline within couple of seconds. Not sure is it possible there.
+Also, most likely this repository will be split into multitude of smaller projects/repositories under single private Gerrit instance.
+Probably I will just mirror it to GitHub.
+I don't like the idea of "feeding the GitHub beast".
+
 UPDATE: 2022 JUN:
 Did some Neovim configuration.
 Mostly looking into changes at Bazel ecosystem.

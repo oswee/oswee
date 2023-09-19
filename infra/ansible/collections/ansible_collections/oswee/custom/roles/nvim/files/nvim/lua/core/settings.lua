@@ -23,7 +23,8 @@ vim.opt.signcolumn = 'yes' -- Always show the signcolum, otherwise it would shif
 vim.opt.clipboard = 'unnamedplus' -- Copy into primary clipboard
 vim.opt.mouse = 'a' -- Enables mouse support
 vim.opt.number = true -- Show line numbers for current line in the gutter
-vim.opt.relativenumber = false -- Enable relative line numbers
+vim.opt.relativenumber = true -- Enable relative line numbers
+vim.opt.scrolloff = 4 -- Minimal number of screen lines to keep above and below the cursor
 
 -- Undo
 vim.opt.undolevels = 1000 -- Maximum number of changes that can be undone

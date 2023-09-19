@@ -35,7 +35,7 @@ source "qemu" "ci_image" {
   /*   "<leftCtrlOn>x<leftCtrlOff>" */
   /* ] */
   ssh_username         = var.ssh_username
-  ssh_private_key_file = "~/.ssh/id_ecdsa_packer"
+  ssh_private_key_file = "~/.ssh/id_ed25519-packer"
   ssh_timeout          = var.ssh_timeout
   shutdown_command     = "echo '${var.build_password}' | sudo -S -E shutdown -P now"
   shutdown_timeout     = var.common_shutdown_timeout

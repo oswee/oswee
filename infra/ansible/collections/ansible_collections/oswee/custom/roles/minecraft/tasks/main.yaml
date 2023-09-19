@@ -7,11 +7,11 @@
     - minecraft.setup
     - minecraft.setup.install
 
-- name: Mods
-  ansible.builtin.import_tasks: mods.yaml
-  tags:
-    - minecraft.setup
-    - minecraft.setup.mods
+# - name: Mods
+#   ansible.builtin.import_tasks: mods.yaml
+#   tags:
+#     - minecraft.setup
+#     - minecraft.setup.mods
 
 # - name: Config
 #   import_tasks: config.yaml

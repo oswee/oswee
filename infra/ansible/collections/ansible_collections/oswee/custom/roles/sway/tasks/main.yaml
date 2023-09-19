@@ -3,16 +3,21 @@
 
 - name: Setup
   tags:
-    - sway.setup
+    - sway.custom
   block:
     - name: Config
       ansible.builtin.import_tasks: config.yaml
       tags:
         - sway.config
 
-# - name: Teardown
-#   ansible.builtin.import_tasks: teardown.yaml
-#   tags:
-#     - never
-#     - sway.teardown
+    - name: Environment
+      ansible.builtin.import_tasks: environment.yaml
+      tags:
+        - sway.environment
+
+- name: Teardown
+  ansible.builtin.import_tasks: teardown.yaml
+  tags:
+    - never
+    - sway.teardown
 ...

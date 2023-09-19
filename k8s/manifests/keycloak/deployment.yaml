@@ -1,0 +1,73 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: iam
+  namespace: oswee
+  labels:
+    app: iam
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: iam
+  template:
+    metadata:
+      labels:
+        app: iam
+    spec:
+      restartPolicy: Never
+      containers:
+        - name: keycloak
+          image: quay.io/keycloak/keycloak:21.1
+          imagePullPolicy: IfNotPresent
+          env:
+            - name: KC_HOSTNAME
+              value: sso.oswee.dev
+            # - name: KEYCLOAK_FRONTEND_URL
+            #   value: sso.oswee.dev
+            - name: KC_LOG_LEVEL
+              value: DEBUG
+            - name: KEYCLOAK_ADMIN
+              value: admin
+            - name: KEYCLOAK_ADMIN_PASSWORD
+              value: admin
+            - name: KC_PROXY_ADDRESS_FORWARDING
+              value: false
+            - name: KC_PROXY
+              value: passthrough
+            - name: TZ
+              value: Europe/Riga
+            - name: KC_HTTP_PORT
+              value: 8080
+            # - name: KC_FRONTEND_URL
+            #   value: ''
+            # - name: KEYCLOAK_HTTPS_PORT
+            #   value: 8443
+            # - name: ROOT_LOGLEVEL
+            #   value: "DEBUG"
+          #           - name: https
+          ports:
+            - name: http
+              containerPort: 8080
+              hostPort: 8082
+              protocol: TCP
+            # - name: https
+            #   containerPort: 8443
+            #   hostPort: 8083
+            #   protocol: TCP
+          args:
+            - start-dev
+          # volumeMounts:
+          #   - name: iam-pvc
+          #     subPath: gerrit/etc
+          #     mountPath: /var/gerrit/etc:z
+          # workingDir: /var/gerrit
+          networks:
+            - keycloak
+
+      volumes:
+        - name: iam-pvc
+          persistentVolumeClaim:
+            claimName: iam-pvc
+...

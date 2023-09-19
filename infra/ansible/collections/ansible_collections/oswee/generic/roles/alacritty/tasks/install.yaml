@@ -1,18 +1,19 @@
 ---
-# tasks file for alacritty
+# tasks/install.yaml file for oswee.generic.alacritty role
 
 # TODO: https://github.com/devnullcake/ansible-role-copr-repository/blob/master/tasks/fedora/install-dnf.yml
-- name: Install fedora copr repository (dnf)
+- name: install | Install fedora copr repository (dnf)
   become: true
-  ansible.builtin.command: 'dnf -y copr enable pschyska/alacritty'
+  ansible.builtin.command: dnf -y copr enable pschyska/alacritty
   args:
     # creates: "{{ copr_repository_repofile }}"
     warn: false
 
-- name: Install packages
+- name: install | Install packages
   become: true
   ansible.builtin.dnf:
     name: '{{ item }}'
     state: present
   loop:
     - '{{ packages }}'
+...

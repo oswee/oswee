@@ -23,9 +23,9 @@
           ansible.builtin.include_role:
             name: oswee.custom.libvirt
           vars:
-            libvirt_dir_iso: /home/{{ ansible_user_id }}/kvm/iso
-            libvirt_dir_pools: /home/{{ ansible_user_id }}/kvm/pools
-            libvirt_dir_images: /home/{{ ansible_user_id }}/kvm/images
+            libvirt_dir_iso: /mnt/data/registry/iso
+            libvirt_dir_images: /mnt/data/registry/qemu/artifacts
+            libvirt_dir_pools: /home/{{ ansible_env.USER }}/kvm/pools
 
     - name: Vagrant
       tags:
@@ -33,7 +33,7 @@
       ansible.builtin.include_role:
         name: oswee.generic.vagrant
       vars:
-        vagrant_version: 2.3.4
+        vagrant_version: 2.3.6
 
     - name: Packer
       tags:
@@ -41,5 +41,5 @@
       ansible.builtin.include_role:
         name: oswee.generic.packer
       vars:
-        packer_version: 1.8.5
+        packer_version: 1.8.7
 ...

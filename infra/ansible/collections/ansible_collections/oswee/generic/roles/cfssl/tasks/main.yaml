@@ -1,5 +1,5 @@
 ---
-# tasks file for Cfssl
+# tasks/main.yaml file for oswee.generic.cfssl role
 
 - name: Setup
   tags:

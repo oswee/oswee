@@ -11,4 +11,10 @@
         name: oswee.custom.sway
       tags:
         - sway
+
+    - name: Eww
+      ansible.builtin.import_role:
+        name: oswee.custom.eww
+      tags:
+        - eww
 ...

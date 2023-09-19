@@ -1,5 +1,5 @@
 ---
-# tasks file for Ansible
+# tasks/config.yaml file for oswee.generic.ansible role
 
 - name: config | Create Ansible system group
   become: true
@@ -34,4 +34,9 @@
     owner: '{{ ansible_user }}'
     group: '{{ ansible_group }}'
     mode: '0644'
+
+- name: config | Add PY_COLORS env to .zshenv
+  ansible.builtin.lineinfile:
+    dest: '{{ ansible_env.HOME }}/.config/zsh/.zshenv'
+    line: export PY_COLORS=1
 ...

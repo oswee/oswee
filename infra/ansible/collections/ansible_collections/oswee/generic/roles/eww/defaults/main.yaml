@@ -1,0 +1,6 @@
+---
+# defaults/main.yaml file for oswee.generic.eww role
+
+eww_repo_url: https://github.com/elkowar/eww.git
+eww_source_dir: /code/github.com/elkowar/eww
+...

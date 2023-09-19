@@ -1,0 +1,17 @@
+<network>
+  <name>minikube</name>
+  <uuid>6956869b-9b0d-4020-8807-bc42cbf967f7</uuid>
+  <forward mode="nat">
+    <nat>
+      <port start="1024" end="65535"/>
+    </nat>
+  </forward>
+  <!--bridge name should be non-used-->
+  <bridge name="virbr1" stp="on" delay="0"/>
+  <mac address="1A:2B:3C:4D:5E:6F"/>
+  <ip address="192.168.100.1" netmask="255.255.255.0">
+    <dhcp>
+      <range start="192.168.100.128" end="192.168.100.254"/>
+    </dhcp>
+  </ip>
+</network>

@@ -1,11 +1,11 @@
 ---
-# tasks file for Zk
+# tasks/environment.yaml file for oswee.generic.zk role
 
-- name: environment | Create environment
-  become: true
-  ansible.builtin.copy:
-    dest: '{{ zk_environment_path }}'
-    mode: '0644'
-    content: |
-      ZK_NOTEBOOK_DIR="{{ zk_notebook_dir }}"
+# TODO: Should not be there, but I'm lazy ATM to create separate role or playbook
+- name: environment | Add ZK notebook dir location
+  ansible.builtin.lineinfile:
+    # This is "kind-off" custom location, too specific to ZSH. I don't like this.
+    # Placing it into /etc/profile.d feels also wrong as this is user space variable
+    dest: '{{ ansible_env.HOME }}/.config/zsh/.zshenv'
+    line: export ZK_NOTEBOOK_DIR={{ zk_notebook_dir }}
 ...

@@ -17,7 +17,7 @@ follow_link() {
 }
 
 # TODO: How to abstract home path?
-VAGRANT_BOX_PATH=/media/registry/vagrant/boxes
+VAGRANT_BOX_PATH=/mnt/data/registry/vagrant/boxes
 SCRIPT_PATH=$(realpath "$(dirname "$(follow_link "$0")")")
 CONFIG_PATH=$(realpath "${1:-${SCRIPT_PATH}/config}")
 

@@ -1,0 +1,15 @@
+(defwidget bar0 []
+  (box :class "bar"
+    (centerbox :orientation "h"
+    	(workspaces)
+    	(music)
+    	(sidestuff)))
+	)
+
+(defwidget bar1 []
+  (box :class "bar"
+  	(centerbox :orientation "h"
+    	(workspaces)
+    	(music)
+    	(sidestuff)))
+	)

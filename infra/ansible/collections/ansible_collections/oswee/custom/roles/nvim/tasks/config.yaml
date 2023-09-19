@@ -2,8 +2,8 @@
 # tasks/config.yaml file for oswee.custom.nvim role
 
 - name: config | Copy all configuration files
-  ansible.builtin.copy:
+  ansible.posix.synchronize:
     src: nvim/
     dest: '{{ nvim_config_path }}'
-    mode: 0755
+    archive: true
 ...

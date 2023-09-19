@@ -14,6 +14,7 @@
     state: present
   loop: '{{ packages.redhat }}'
 
+# TODO: Is this a good security practice?
 - name: install | Turn On packet forwarding in order HAProxy to start
   become: true
   ansible.posix.sysctl:

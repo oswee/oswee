@@ -1,0 +1,6 @@
+---
+# defaults/main.yaml file for oswee.custom.eww role
+
+eww_user: '{{ ansible_env.USER }}'
+eww_config_path: /home/{{ eww_user }}/.config/eww
+...

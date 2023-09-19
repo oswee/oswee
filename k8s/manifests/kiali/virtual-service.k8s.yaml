@@ -6,7 +6,7 @@ metadata:
   namespace: istio-system
 spec:
   hosts:
-    - "kiali.oswee.local"
+    - kiali.oswee.local
   gateways:
     - kiali-gateway
   http:

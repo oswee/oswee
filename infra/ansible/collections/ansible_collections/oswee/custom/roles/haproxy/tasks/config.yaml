@@ -21,4 +21,13 @@
     validate: haproxy -f %s
   notify:
     - Restart HAProxy
+
+- name: config | Copy Data Plane API config
+  become: true
+  ansible.builtin.template:
+    src: dataplaneapi.hcl.j2
+    dest: /etc/haproxy/dataplaneapi.hcl
+    owner: '{{ haproxy_user }}'
+    group: '{{ haproxy_group }}'
+    mode: '0400'
 ...

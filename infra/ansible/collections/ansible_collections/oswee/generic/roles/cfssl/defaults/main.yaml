@@ -1,7 +1,7 @@
 ---
-# defaults file for Cfssl
+# defaults/main.yaml file for oswee.generic.cfssl role
 
 cfssl_repo_url: https://github.com/cloudflare/cfssl.git
-cfssl_source_dir: /home/{{ ansible_user_id }}/code/github.com/cloudflare/cfssl
-cfssl_config_dir: $HOME/.config/cfssl
+cfssl_source_dir: /code/github.com/cloudflare/cfssl
+cfssl_config_dir: '{{ ansible_env.HOME }}/.config/cfssl'
 ...

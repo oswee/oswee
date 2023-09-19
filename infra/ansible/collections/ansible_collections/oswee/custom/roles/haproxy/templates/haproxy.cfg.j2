@@ -1,14 +1,11 @@
 # This configuration is for my personal local dev-test needs only.
 
 global
+  master-worker
   log 127.0.0.1 local2
-	chroot /var/lib/haproxy
-  pidfile /var/run/haproxy.pid
-	stats socket /var/lib/haproxy/stats
-
-  #chroot {{ haproxy_chroot_dir }}
-	#pidfile /var/run/haproxy/haproxy.pid
-  #stats socket /var/run/haproxy/admin.sock mode 660 level admin
+	#chroot {{ haproxy_chroot_dir }}
+  # Make sure you have /run/haproxy directory with haproxy:haproxy and 0755
+  stats socket /var/run/haproxy.sock user haproxy group haproxy mode 660 level admin expose-fd listeners
 
   maxconn 4096
   user {{ haproxy_user }}
@@ -62,20 +59,6 @@ cache main
   total-max-size 1000  # MB
 	max-object-size 1000 # bytes
   max-age 600  # seconds
-
-listen stats # Define a listen section called "stats"
-  bind :9000 # Listen on localhost:9000/stats
-  mode http
-  option forwardfor
-  option httpclose
-  stats enable  # Enable stats page
-  stats show-legends
-  stats refresh 10s
-  stats hide-version  # Hide HAProxy version
-  stats realm Haproxy\ Statistics  # Title text for popup window
-  stats uri /stats  # Stats URI
-  stats auth admin:password  # Authentication credentials
-  monitor-uri /healthz
 
 #===========================================================
 
@@ -152,6 +135,8 @@ frontend https-in
   # http-response set-header Content-Security-Policy-Report-Only "default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self'; connect-src 'self'; font-src 'self'; object-src 'self'; media-src 'self'; child-src 'self'; sandbox 'self'; report-uri 'self'; form-action 'self'; frame-ancestors 'self'"
   # http-response set-header Feature-Policy "geolocation 'none'; midi 'none'; notifications 'none'; push 'none'; sync-xhr 'none'; microphone 'none'; camera 'none'; magnetometer 'none'; gyroscope 'none'; speaker 'none'; vibrate 'none'; fullscreen 'none'; payment 'none'"
 
+  default_backend default.backend
+
   # https://serverfault.com/a/677060/440073
   acl front.{{ dns_dev_domain_name }}.host hdr(host) -i front.{{ dns_dev_domain_name }}
   use_backend front.{{ dns_dev_domain_name }}.backend if front.{{ dns_dev_domain_name }}.host
@@ -190,7 +175,14 @@ frontend https-in
   acl dzintars.dev.host hdr(host) -i dzintars.dev
   use_backend dzintars.dev.backend if dzintars.dev.host
 
-  default_backend default.backend
+frontend stats
+  mode http
+  bind *:8404
+  # option http-use-htx
+  http-request use-service prometheus-exporter if { path /metrics }
+  stats enable
+  stats uri /stats
+  stats refresh 10s
 
 # **************************************************************
 # Backends

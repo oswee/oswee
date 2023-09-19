@@ -27,7 +27,7 @@ source "qemu" "base_image" {
   boot_wait            = var.vm_boot_wait
   boot_command         = var.boot_command
   ssh_username         = var.ssh_username
-  ssh_private_key_file = "~/.ssh/id_ecdsa_packer"
+  ssh_private_key_file = "~/.ssh/id_ed25519-packer"
   ssh_timeout          = var.ssh_timeout
   // ssh_wait_timeout       = var.ssh_wait_timeout
   // ssh_handshake_attempts = "500"   # required for ubuntu 20.04

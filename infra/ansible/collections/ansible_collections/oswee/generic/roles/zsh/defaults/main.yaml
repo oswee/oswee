@@ -3,4 +3,5 @@
 
 zsh_user: '{{ ansible_env.USER }}'
 zsh_group: '{{ ansible_env.USER }}'
+zsh_config_path: '{{ ansible_env.HOME }}/.config/zsh'
 ...
