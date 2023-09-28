@@ -1,6 +1,0 @@
----
-# defaults file for Packer
-
-packer_version: 1.8.6
-packer_url: https://releases.hashicorp.com/packer/{{ packer_version }}/packer_{{ packer_version }}_linux_amd64.zip
-...

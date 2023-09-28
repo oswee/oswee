@@ -1,4 +1,0 @@
-File name matters!
-These files is used to control indentation for specific file types.
-You can put the indentation options in `ftplugin/*` file, but that is considered to be a config smell.
-Community convention is to use dedicated file for that. Be a good citizen! :)

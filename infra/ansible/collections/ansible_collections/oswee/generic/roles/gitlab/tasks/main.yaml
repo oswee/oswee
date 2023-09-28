@@ -1,8 +1,0 @@
----
-# tasks file for Gitlab
-
-- name: Install
-  import_tasks: install.yaml
-  tags:
-    - gitlab.setup
-...

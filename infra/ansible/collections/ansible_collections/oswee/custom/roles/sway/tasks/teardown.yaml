@@ -1,8 +1,0 @@
----
-# tasks/teardown.yaml file for oswee.custom.sway role
-
-- name: teardown | Remove config files
-  ansible.builtin.file:
-    path: '{{ sway_config_path }}'
-    state: absent
-...

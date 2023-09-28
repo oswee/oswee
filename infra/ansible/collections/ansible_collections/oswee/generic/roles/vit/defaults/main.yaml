@@ -1,5 +1,0 @@
----
-# defaults/main.yaml file for oswee.generic.vit role
-
-vit_config_path: '{{ ansible_env.HOME }}/.vit'
-...

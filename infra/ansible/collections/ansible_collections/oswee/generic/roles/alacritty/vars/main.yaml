@@ -1,7 +1,0 @@
----
-# vars/main.yaml file for oswee.generic.alacritty role
-
-packages:
-  redhat:
-    - alacritty
-...

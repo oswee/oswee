@@ -1,8 +1,0 @@
----
-# defaults/main.yaml file for oswee.generic.glfw role
-
-glfw_meson_wipe: false  # Make clean build every time
-glfw_repo: https://github.com/glfw/glfw
-glfw_commit_hash: master
-glfw_source_path: '{{ ansible_env.HOME }}/code/github.com/glfw/glfw'
-...

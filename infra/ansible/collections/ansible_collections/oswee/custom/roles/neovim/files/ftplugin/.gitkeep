@@ -1,8 +1,0 @@
-Naming of these files matters!
-After setting `ftdetect` for a file, Vim will lookup for corresponding `ftplugin` by the filename matching the filetype.
-You can also create the directories there. For example you could have `lua` directory there with bunch of files.
-Every time Vim will detect `lua` filetype it will execute all *.vim files in this `lua` directory.
-Most likely you will use it for some exotic languages.
-
-These files should contain only "buffer scoped" options.
-If you will set some global options, then Vim will owerride them for all open buffers which most likely is not what you want.

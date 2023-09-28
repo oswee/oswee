@@ -1,9 +1,0 @@
----
-# vars file for Rust
-
-packages:
-  redhat:
-    - curl
-    - gcc
-    - make
-...

@@ -1,9 +1,0 @@
----
-# defaults file for Vault
-
-root_domain: example.com
-vault_url: "https://vault.example.com"
-vault_secrets_path: "/home/dzintars/.secrets/vault"
-vault_unseal_keys_path: "{{ vault_secrets_path }}/unseal"
-vault_root_token_path: "{{ vault_secrets_path }}/root"
-...

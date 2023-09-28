@@ -1,6 +1,0 @@
----
-# defaults file for Nvim
-
-nvim_user: '{{ ansible_env.USER | default("root") }}'
-nvim_config_path: /home/{{ nvim_user }}/.config/nvim
-...

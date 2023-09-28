@@ -1,5 +1,0 @@
----
-# defaults/main.yaml file for oswee.generic.direnv role
-
-direnv_environment_path: /etc/profile.d
-...

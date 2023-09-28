@@ -1,5 +1,0 @@
----
-# defaults/main.yaml file for oswee.custom.swaylock role
-
-swaylock_config_path: '{{ ansible_env.HOME }}/.config/swaylock'
-...

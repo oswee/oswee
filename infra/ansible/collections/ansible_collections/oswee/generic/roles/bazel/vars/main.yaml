@@ -1,7 +1,0 @@
----
-# vars file for Bazel
-
-packages:
-  redhat:
-    - gcc
-...

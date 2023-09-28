@@ -1,8 +1,0 @@
----
-# vars file for minecraft
-
-packages:
-  redhat:
-    - java-1.8.0-openjdk  # Required by Minecraft 1.12.2
-    - java-17-openjdk.x86_64  # Required by MultiMC
-...

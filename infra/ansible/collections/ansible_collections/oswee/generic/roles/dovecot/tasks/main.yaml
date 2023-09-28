@@ -1,8 +1,0 @@
----
-# tasks file for Dovecot
-
-- name: Install
-  import_tasks: install.yaml
-  tags:
-    - dovecot.setup
-...

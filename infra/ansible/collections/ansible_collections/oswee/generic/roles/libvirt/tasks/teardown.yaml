@@ -1,9 +1,0 @@
----
-- name: teardown | Remove libvirt and it's dependencies
-  become: true
-  ansible.builtin.dnf:
-    name: '{{ item }}'
-    state: absent
-  loop:
-    - '{{ packages.redhat }}'
-...

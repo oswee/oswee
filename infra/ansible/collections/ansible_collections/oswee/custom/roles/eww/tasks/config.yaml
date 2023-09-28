@@ -1,9 +1,0 @@
----
-# tasks/config.yaml file for oswee.custom.eww role
-
-- name: config | Copy all configuration files
-  ansible.posix.synchronize:
-    src: eww/
-    dest: '{{ eww_config_path }}'
-    archive: true
-...

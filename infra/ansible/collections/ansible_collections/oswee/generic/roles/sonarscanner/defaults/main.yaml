@@ -1,8 +1,0 @@
----
-# defaults file for Sonarscanner
-
-sonar_scanner_version: "4.7.0.2747"
-sonar_scanner_source_url: "https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-{{ sonar_scanner_version }}-linux.zip"
-sonarqube_host_url: "http://localhost"
-sonarqube_port: "9100"
-...

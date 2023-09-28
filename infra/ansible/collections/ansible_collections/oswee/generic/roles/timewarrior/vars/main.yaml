@@ -1,7 +1,0 @@
----
-# vars file for Timewarrior
-
-packages:
-  redhat:
-    - timew
-...

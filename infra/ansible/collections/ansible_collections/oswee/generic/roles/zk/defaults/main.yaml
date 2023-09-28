@@ -1,7 +1,0 @@
----
-# defaults/main.yaml file for oswee.generic.zk role
-
-zk_repo_url: https://github.com/mickael-menu/zk.git
-zk_source_dir: '{{ ansible_env.HOME }}/code/github.com/mickael-menu/zk'
-zk_notebook_dir: '{{ ansible_env.HOME }}/code/github.com/dzintars/agora'
-...
