@@ -1,5 +1,0 @@
-Host ns1
-  HostName ns1.oswee.dev
-  IdentityFile ~/.ssh/ansible_ns1_dev_ed25519
-  CertificateFile ~/.ssh/ansible_ns1_dev_ed25519-cert.pub
-  User ansible
