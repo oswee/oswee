@@ -1,5 +1,0 @@
----
-# defaults/main.yaml file for oswee.custom.wlogout role
-
-wlogout_config_path: '{{ ansible_env.HOME }}/.config/wlogout'
-...

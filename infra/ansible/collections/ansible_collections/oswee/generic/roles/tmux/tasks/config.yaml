@@ -1,9 +1,0 @@
----
-# tasks/config.yaml file for oswee.generic.tmux role
-
-- name: config | Copy configuration template
-  ansible.builtin.template:
-    src: tmux.conf.j2
-    dest: '{{ tmux_config_path }}/tmux.conf'
-    mode: '0644'
-...

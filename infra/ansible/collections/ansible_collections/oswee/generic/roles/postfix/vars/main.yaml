@@ -1,8 +1,0 @@
----
-# vars file for postfix
-
-postfix_config_dir: '/etc/postfix'
-postfix_service: 'postfix'
-packages:
-  redhat:
-    - postfix

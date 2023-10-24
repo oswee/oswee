@@ -1,5 +1,0 @@
----
-# defaults/main.yaml file for oswee.generic.helm role
-
-helm_version: 3.10.0
-...

@@ -1,3 +1,0 @@
-File Type Detection
-Mostly should contain autocommand to detect filetype for unrecognized or incorrectly recognized files.
-Most of the times these files should contain few lines of autocommands.

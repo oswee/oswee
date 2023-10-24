@@ -1,9 +1,0 @@
----
-- name: Configure DNS server
-  hosts: nameservers
-  become: false
-  gather_facts: true
-
-  roles:
-    - role: oswee.generic.bind
-...

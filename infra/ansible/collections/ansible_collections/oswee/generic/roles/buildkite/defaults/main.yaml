@@ -1,6 +1,0 @@
----
-# defaults/main.yaml file for oswee.generic.buildkite role
-
-buildkite_agent_token: '{{ lookup("hashi_vault", "secret=infra/data/build:buildkite_agent_token") | default("")}}'
-buildkite_agent_service_name: buildkite-agent
-...

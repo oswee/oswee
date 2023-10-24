@@ -1,7 +1,0 @@
----
-# defaults/main.yaml file for oswee.generic.alacritty role
-
-alacritty_user: '{{ ansible_env.USER | default("root") }}'
-alacritty_config_path: /home/{{ alacritty_user }}/.config/alacritty
-alacritty_theme: '{{ gruvbox_light | default("gruvbox_light") }}'
-...

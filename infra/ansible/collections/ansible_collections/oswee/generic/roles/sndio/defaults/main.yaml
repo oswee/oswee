@@ -1,7 +1,0 @@
----
-# defaults/main.yaml file for oswee.generic.sndio role
-
-sndio_repo: https://caoua.org/git/sndio
-sndio_commit_hash: master
-sndio_source_path: '{{ ansible_env.HOME }}/code/caoua.org/git/sndio'
-...

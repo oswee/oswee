@@ -1,3 +1,0 @@
----
-become_user: '{{ vault_become_user }}'
-ansible_become_pass: '{{ vault_ansible_become_pass }}'

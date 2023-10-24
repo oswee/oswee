@@ -1,6 +1,0 @@
-require("modules.core")
-require("modules.editor")
-require("modules.ui")
-require("modules.completion")
-require("modules.lsp")
-require("modules.dap")

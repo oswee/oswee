@@ -1,6 +1,0 @@
----
-# defaults/main.yaml file for oswee.generic.ovmf role
-
-ovmf_repo_url: https://github.com/tianocore/edk2.git
-ovmf_source_dir: '{{ ansible_env.HOME }}/code/github.com/tianocore/edk2'
-...

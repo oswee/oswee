@@ -1,3 +1,0 @@
----
-buildkite_agent_token: '{{ vault_buildkite_agent_token }}'
-...

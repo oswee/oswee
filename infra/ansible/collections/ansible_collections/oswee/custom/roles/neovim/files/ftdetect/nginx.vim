@@ -1,1 +1,0 @@
--- autocmd! BufNewFile,Bufread */nginx{,-*}/*,{,*.}nginx{,.*}.conf set filetype nginx

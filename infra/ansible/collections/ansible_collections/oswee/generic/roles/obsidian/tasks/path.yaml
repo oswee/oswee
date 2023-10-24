@@ -1,9 +1,0 @@
----
-# tasks file for obsidian
-
-# TODO: This should not be there!
-- name: Add .local/bin dir to system-wide $PATH.
-  become: true
-  ansible.builtin.copy:
-    dest: /etc/profile.d/system-path.sh
-    content: 'PATH=$PATH:$HOME/.local/bin'

@@ -1,9 +1,0 @@
----
-- name: Configure DHCP server
-  hosts: dhcpservers
-  become: false
-  gather_facts: true
-
-  roles:
-    - role: oswee.custom.dhcpd
-...

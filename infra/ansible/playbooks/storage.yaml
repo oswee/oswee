@@ -1,9 +1,0 @@
----
-- name: Configure storage
-  hosts: storage
-  become: false
-  gather_facts: true
-
-  roles:
-    - role: oswee.custom.minio
-...

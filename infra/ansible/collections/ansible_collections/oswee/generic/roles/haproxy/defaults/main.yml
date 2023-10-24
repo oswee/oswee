@@ -1,6 +1,0 @@
----
-# defaults/main.yaml file for oswee.generic.haproxy role
-
-haproxy_user: haproxy
-haproxy_group: haproxy
-...

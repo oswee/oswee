@@ -1,9 +1,0 @@
----
-# defaults file for Nushell
-
-user_home_dir: '{{ ansible_env.HOME }}'
-
-nushell_config_path: '{{ user_home_dir }}/.config/nushell'
-nushell_user: '{{ ansible_user_id }}'
-nushell_group: '{{ ansible_user_id }}'
-...

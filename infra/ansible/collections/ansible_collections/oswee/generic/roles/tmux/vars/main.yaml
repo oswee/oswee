@@ -1,9 +1,0 @@
----
-# vars/main.yaml file for oswee.generic.tmux role
-
-packages:
-  redhat:
-    - tmux
-    - tmux-powerline
-    - powerline-fonts
-...

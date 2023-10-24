@@ -1,5 +1,0 @@
----
-# defaults file for firewalld
-
-firewalld_service_name: firewalld
-...

@@ -1,7 +1,0 @@
----
-# vars/main.yaml file for oswee.generic.exa role
-
-packages:
-  redhat:
-    - exa
-...

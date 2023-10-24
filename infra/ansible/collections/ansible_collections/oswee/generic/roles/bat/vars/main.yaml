@@ -1,7 +1,0 @@
----
-# vars file for Bat
-
-packages:
-  redhat:
-    - bat
-...

@@ -1,5 +1,0 @@
----
-# defaults file for Golang
-
-golang_version: 1.19.5
-...

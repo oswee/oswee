@@ -1,7 +1,0 @@
----
-# tasks file for matchbox
-
-- name: Install Matchbox
-  import_tasks: install.yaml
-  tags:
-    - matchbox:install

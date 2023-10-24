@@ -1,9 +1,0 @@
----
-# tasks/config.yaml file for oswee.generic.starship role
-
-- name: config | Copy config file
-  ansible.builtin.copy:
-    src: starship.toml
-    dest: '{{ ansible_env.HOME }}/.config/'
-    mode: '0644'
-...

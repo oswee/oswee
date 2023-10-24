@@ -1,8 +1,0 @@
----
-# tasks file for Vault
-
-- name: teardown | Remove secrets
-  ansible.builtin.file:
-    path: '{{ vault_secrets_path }}'
-    state: absent
-...

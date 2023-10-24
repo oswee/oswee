@@ -1,7 +1,0 @@
----
-# vars/main.yaml file for oswee.generic.sndio role
-
-sndio_build_deps:
-  redhat:
-    - alsa-lib-devel
-...
